@@ -243,6 +243,7 @@ INSTALLED_APPS = (
     'guardian',
     'south',
     'honeypot',
+    'eav',
 
     # Our apps
     'versionutils.versioning',
@@ -257,6 +258,7 @@ INSTALLED_APPS = (
     'dashboard',
     'utils',
     'tags',
+    'infobox',
 )
 
 LOCAL_INSTALLED_APPS = ()
