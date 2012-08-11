@@ -1,6 +1,10 @@
 <form action="{% url pages:infobox slug=form.instance.pretty_slug %}" method="POST">
     {% csrf_token %}
-    {{ form }}
+    <table>
+        <tbody>
+            {{ form.as_table }}
+        </tbody>
+    </table>
     <input type="hidden" name="next" value="{{ request.path }}"/>
     <br/>
     <input type="submit" name="save" class="little" value="Save"/>

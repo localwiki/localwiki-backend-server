@@ -1,3 +1,15 @@
-<ul>
-    <li>attributes here</li>
-</ul>
+<table>
+    <tbody>
+        {% for a in attributes %}
+          {% if a.value %}
+            <tr>
+                <td style="background-color: rgb(232, 236, 239);">
+                    <strong>{{ a.name }}</strong></td>
+            </tr>
+            <tr>
+                <td>{{ a.value }}</td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
