@@ -10,9 +10,14 @@ register = template.Library()
 def infobox(instance):
     config_cls = instance._eav_config_cls
     entity = getattr(instance, config_cls.eav_attr)
-    attributes = [{ 'name': a.name,
-                    'value': getattr(entity, a.slug)
-                   } for a in entity.get_all_attributes()]
+    attributes = []
+    for a in entity.get_all_attributes():
+        value = getattr(entity, a.slug)
+        if value is None:
+            continue
+        attributes.append({ 'name': a.name,
+                            'value': value
+                          })
     return render_to_string('infobox/infobox_snippet.html',
                             { 'attributes': attributes })
 
