@@ -1,0 +1,23 @@
+{% extends "infobox/base.html" %}
+{% load i18n %}
+
+{% block title %} {{ attribute.name }} - {{ block.super }}{% endblock %}
+{% block header_title %}{{ attribute.name }}{% endblock %}
+
+{% block media %}
+  {{ block.super }}
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery-1.7.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery-ui-1.8.16.custom.min.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div style="display: block">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <ul>
+                {{ form.as_ul }}
+            </ul>
+        <input type="submit" value="Save"/>
+        </form>
+    </div>
+{% endblock %}
