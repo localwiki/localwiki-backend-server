@@ -154,7 +154,7 @@ setup(
     dependency_links=[
         'https://github.com/philipn/olwidget/tarball/custom_base_layers_fixed#egg=django-olwidget-0.46-custom1',
         'https://github.com/mivanov/django-honeypot/tarball/master#egg=django-honeypot-0.3.0-custom',
-        'https://github.com/mivanov/django-eav/tarball/master#egg=django-eav-0.9.5',
+        'https://github.com/mivanov/django-eav/tarball/unique_enum_values#egg=django-eav-0.9.5',
         'https://github.com/mivanov/django-extra-views/tarball/master#egg=django-extra-views-0.2.5',
     ],
     entry_points={
