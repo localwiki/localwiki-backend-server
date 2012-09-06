@@ -1,0 +1,30 @@
+{% extends "infobox/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Attributes" %} - {{ block.super }}{% endblock %}
+{% block header_title %}{% trans "Attributes" %}{% endblock %}
+
+{% block media %}
+  {{ block.super }}
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery-1.7.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery-ui-1.8.16.custom.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<ul>
+    {% for a in attribute_list %}
+    <li>
+        {{ a.name }}
+    </li>
+    {% endfor %}
+    <li>
+        <div style="display: block">
+            {% csrf_token %}
+            <form action="create" method="POST">
+                {{ form }}
+            <input type="submit" value="Save"/>
+            </form>
+        </div>
+    </li>
+</ul>
+{% endblock %}
