@@ -1,6 +1,6 @@
 from django import template
 from django.template.loader import render_to_string
-from infobox.forms import InfoboxForm
+from infobox.forms import InfoboxForm, AddAttributeForm
 
 
 register = template.Library()
@@ -26,6 +26,7 @@ def infobox(instance):
 def infobox_form(context, entity):
     context.push()
     context['form'] = InfoboxForm(instance=entity)
+    context['add_attribute_form'] = AddAttributeForm(instance=entity)
     rendered = render_to_string('infobox/infobox_form_snippet.html', context)
     return rendered
 
