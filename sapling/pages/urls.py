@@ -14,7 +14,7 @@ from infobox.views import InfoboxUpdateView, InfoboxAddAttributeView
 page_list_info = {
     'model': Page,
     'context_object_name': 'page_list',
-    'queryset': Page.objects.all().order_by('name'),
+    'queryset': Page.objects.all().defer('content').order_by('name'),
 }
 
 
@@ -143,8 +143,8 @@ urlpatterns = patterns('',
     ##########################################################
     # API
     ##########################################################
-    url(r'^api/pages/suggest', suggest),
-    url(r'^api/tags/suggest', suggest_tags),
+    url(r'^_api/pages/suggest', suggest),
+    url(r'^_api/tags/suggest', suggest_tags),
 
     ##########################################################
     # Basic page URLs.
