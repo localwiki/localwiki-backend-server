@@ -7,13 +7,32 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.views.generic.list import ListView
 from eav.models import Attribute
-from forms import AttributeCreateForm, AttributeUpdateForm
+from forms import AttributeCreateForm, AttributeUpdateForm, AddAttributeForm
 from django.views.generic.edit import CreateView
 
 
 class InfoboxUpdateView(PageNotFoundMixin, PermissionRequiredMixin,
         CreateObjectMixin, UpdateView):
     form_class = InfoboxForm
+    permission = 'pages.change_page'
+
+    def get_object(self):
+        page_slug = self.kwargs.get('slug')
+        return get_object_or_404(Page, slug=page_slug)
+
+    def get_success_url(self):
+        next = self.request.POST.get('next', None)
+        if next:
+            return next
+        return reverse('pages:infobox', args=[self.kwargs.get('slug')])
+
+    def get_protected_object(self):
+        return self.object
+
+
+class InfoboxAddAttributeView(PageNotFoundMixin, PermissionRequiredMixin,
+                              UpdateView):
+    form_class = AddAttributeForm
     permission = 'pages.change_page'
 
     def get_object(self):

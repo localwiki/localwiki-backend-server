@@ -9,7 +9,7 @@ from models import Page
 from views import PageFilebrowserView
 from tags.views import PageTagSetUpdateView, suggest_tags, PageTagSetVersions,\
     PageTagSetVersionDetailView, PageTagSetCompareView, PageTagSetRevertView
-from infobox.views import InfoboxUpdateView
+from infobox.views import InfoboxUpdateView, InfoboxAddAttributeView
 
 page_list_info = {
     'model': Page,
@@ -95,8 +95,12 @@ urlpatterns = patterns('',
     ##########################################################
     # Page infobox
     ##########################################################
-    url(r'^(?P<slug>.+)/_infobox/$', slugify(InfoboxUpdateView.as_view()),
+    url(r'^(?P<slug>.+)/_infobox/$',
+        slugify(InfoboxUpdateView.as_view()),
         name='infobox'),
+    url(r'^(?P<slug>.+)/_infobox/add$',
+        slugify(InfoboxAddAttributeView.as_view()),
+        name='add_attribute'),
 
     #########################################################
     # History URLs.
