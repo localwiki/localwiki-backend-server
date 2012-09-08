@@ -7,17 +7,7 @@ from pages.api import PageURLMixin
 from sapling.api import api
 from sapling.api.resources import ModelHistoryResource
 from sapling.api.authentication import ApiKeyWriteAuthentication
-from sapling.api.authorization import ExtendedDjangoAuthorization
-
-
-# Tags can be edited if the page can be edited.
-class ChangePageAuthorization(ExtendedDjangoAuthorization):
-    permission_map = {
-        'POST': ['pages.change_page'],
-        'PUT': ['pages.change_page'],
-        'DELETE': ['pages.change_page'],
-        'PATCH': ['pages.change_page']
-    }
+from sapling.api.authorization import ChangePageAuthorization
 
 
 class TagResource(ModelResource):
@@ -31,6 +21,7 @@ class TagResource(ModelResource):
         }
         list_allowed_methods = ['get', 'post']
         authentication = ApiKeyWriteAuthentication()
+        # Tags can be edited if the page can be edited.
         authorization = ChangePageAuthorization()
 
 api.register(TagResource())
@@ -50,6 +41,7 @@ class PageTagSetResource(PageURLMixin, ModelResource):
         }
         list_allowed_methods = ['get', 'post']
         authentication = ApiKeyWriteAuthentication()
+        # Tags can be edited if the page can be edited.
         authorization = ChangePageAuthorization()
 
 

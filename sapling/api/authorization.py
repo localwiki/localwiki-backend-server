@@ -55,3 +55,19 @@ class ExtendedDjangoAuthorization(Authorization):
                 '%s.delete_%s' % app_model],
         }
         return permission_map
+
+
+class ChangePageAuthorization(ExtendedDjangoAuthorization):
+    """
+    We use 'can you edit/delete/etc the associated page' as
+    a permission check for a variety of objects, e.g. tags.
+
+    This class gives authorization if the user can edit/delete/etc
+    a page.
+    """
+    permission_map = {
+        'POST': ['pages.change_page'],
+        'PUT': ['pages.change_page'],
+        'DELETE': ['pages.change_page'],
+        'PATCH': ['pages.change_page']
+    }
