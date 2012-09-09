@@ -12,8 +12,7 @@ from django.contrib.admin.widgets import AdminSplitDateTime
 class InfoboxForm(BaseDynamicEntityForm):
     def __init__(self, data=None, *args, **kwargs):
         super(BaseDynamicEntityForm, self).__init__(data, *args, **kwargs)
-        config_cls = self.instance._eav_config_cls
-        self.entity = getattr(self.instance, config_cls.eav_attr)
+        self.entity = self.instance.eav
         self._build_dynamic_fields()
 
     def _build_dynamic_fields(self):
@@ -69,8 +68,7 @@ class AddAttributeForm(ModelForm):
     def __init__(self, *args, **kwargs):
         # we want to exclude attributes the entity already has
         super(AddAttributeForm, self).__init__(*args, **kwargs)
-        config_cls = self.instance._eav_config_cls
-        self.entity = getattr(self.instance, config_cls.eav_attr)
+        self.entity = self.instance.eav
         already_has = [v.attribute.pk for v in self.entity.get_values()]
         self.fields['attribute'].queryset = Attribute.objects.exclude(
                                                             pk__in=already_has)

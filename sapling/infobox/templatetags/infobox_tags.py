@@ -8,11 +8,9 @@ register = template.Library()
 
 @register.simple_tag
 def infobox(instance):
-    config_cls = instance._eav_config_cls
-    entity = getattr(instance, config_cls.eav_attr)
     attributes = [
         {'name': v.attribute.name, 'value': v.value}
-        for v in entity.get_values() if v.value is not None
+        for v in instance.eav.get_values() if v.value is not None
     ]
     return render_to_string('infobox/infobox_snippet.html',
         {'attributes': attributes})
