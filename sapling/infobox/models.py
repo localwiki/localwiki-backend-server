@@ -5,3 +5,7 @@ from eav.registry import EavConfig
 from eav.models import Attribute
 
 eav.register(Page)
+
+
+# For registration calls
+import api
