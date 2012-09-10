@@ -66,7 +66,8 @@ GET /page_info_attribute/
 
 """
 
-from tastypie.resources import Resource, Bundle, ModelResource
+from tastypie.resources import (Resource, Bundle, ModelResource,
+    ALL, ALL_WITH_RELATIONS)
 from tastypie import fields
 from tastypie.authentication import Authentication
 from tastypie.authorization import Authorization
@@ -200,10 +201,23 @@ class InfoResource(Resource):
 
 
 class InfoAttributeResource(ModelResource):
+    attribute = fields.CharField(attribute='slug')
+
     class Meta:
         queryset = Attribute.objects.all()
         resource_name = 'page_info_attribute'
         list_allowed_methods = ['get', 'post']
+
+        excludes = [
+            'slug', # hide slug because we re-introduce it as 'attribute'
+            # created, modified aren't useful to expose.
+            # searchable, display_in_list are useless right now, so hide
+            # them.
+            'created', 'modified', 'searchable', 'display_in_list']
+
+        filtering = {
+            'attribute': ALL,
+        }
         #authentication = ApiKeyWriteAuthentication()
         #authorization = ChangePageAuthorization() or ????
         authentication = Authentication()
