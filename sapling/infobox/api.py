@@ -216,7 +216,11 @@ class InfoAttributeResource(ModelResource):
             'created', 'modified', 'searchable', 'display_in_list']
 
         filtering = {
+            'name': ALL,
             'attribute': ALL,
+            'site': ALL_WITH_RELATIONS,
+            'datatype': ALL,
+            'required': ALL,
         }
         #authentication = ApiKeyWriteAuthentication()
         #authorization = ChangePageAuthorization() or ????
