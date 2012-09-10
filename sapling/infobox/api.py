@@ -83,6 +83,7 @@ class InfoValue(object):
         if value is None:
             return
 
+        self.id = value.id
         self.value = value
         self.attribute = self.value.attribute.slug
         self.page = self.value.entity
@@ -118,6 +119,7 @@ def to_attr_datatype(o, attribute):
 
 
 class InfoResource(Resource):
+    id = fields.IntegerField(attribute='id')
     attribute = fields.CharField(attribute='attribute')
     page = fields.ToOneField('pages.api.PageResource', 'page')
 
@@ -181,6 +183,8 @@ class InfoResource(Resource):
         return bundle
 
     def obj_update(self, bundle, request=None, **kwargs):
+        # Same as create, because our create method updates in addition to
+        # creating.
         return self.obj_create(bundle, request, **kwargs)
 
     def obj_delete_list(self, request=None, **kwargs):
