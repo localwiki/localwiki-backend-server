@@ -54,10 +54,22 @@ GET /page_info/
 /page_info/?attribute=has_wifi&value=value1
 
 
+GET /page_info_attribute/
+
+{
+    'id': 89,
+    'attribute': 'has_wifi',
+    'type': 'boolean',
+    'name': 'Has wifi?',
+    ...
+}
+
 """
 
 from tastypie.resources import Resource, Bundle
 from tastypie import fields
+from tastypie.authentication import Authentication
+from tastypie.authorization import Authorization
 
 from eav.models import Attribute, Value
 
@@ -67,10 +79,42 @@ from sapling.api.authorization import ChangePageAuthorization
 
 
 class InfoValue(object):
-    def __init__(self, value):
+    def __init__(self, value=None):
+        if value is None:
+            return
+
         self.value = value
         self.attribute = self.value.attribute.slug
         self.page = self.value.entity
+
+
+AUTOMATIC_DATATYPES = [
+    Attribute.TYPE_TEXT,
+    Attribute.TYPE_FLOAT,
+    Attribute.TYPE_INT,
+    Attribute.TYPE_BOOLEAN,
+    Attribute.TYPE_BOOLEAN,
+]
+
+
+def to_attr_datatype(o, attribute):
+    """
+    Args:
+        o: a JSON-like object.
+        attribute: an Attribute instance.
+
+    Returns:
+        o cast to the datatype of the provided attribute.
+    """
+    if attribute.datatype in AUTOMATIC_DATATYPES:
+        return o
+
+    if attribute.datatype is Attribute.TYPE_DATE:
+        f = fields.DateTimeField()
+        return f.convert(o)
+
+    raise TypeError("The datatype %s is not supported via the API yet" %
+        attribute.datatype)
 
 
 class InfoResource(Resource):
@@ -80,14 +124,19 @@ class InfoResource(Resource):
     class Meta:
         resource_name = 'page_info'
         object_class = InfoValue
-        authentication = ApiKeyWriteAuthentication()
-        authorization = ChangePageAuthorization()
+        #authentication = ApiKeyWriteAuthentication()
+        #authorization = ChangePageAuthorization()
+        authentication = Authentication()
+        authorization = Authorization()
 
     def detail_uri_kwargs(self, bundle_or_obj):
         kwargs = {}
 
         if isinstance(bundle_or_obj, Bundle):
-            kwargs['pk'] = bundle_or_obj.obj.value.id
+            obj = bundle_or_obj.obj
+            attribute = Attribute.objects.get(slug=obj.attribute)
+            value = Value.objects.get(entity=obj.page, attribute=attribute)
+            kwargs['pk'] = value.id
         else:
             kwargs['pk'] = bundle_or_obj.value.id
 
@@ -95,6 +144,11 @@ class InfoResource(Resource):
 
     def dehydrate(self, bundle):
         bundle.data['value'] = bundle.obj.value.value
+        return bundle
+
+    def full_hydrate(self, bundle):
+        bundle = super(InfoResource, self).full_hydrate(bundle)
+        bundle.obj.value = bundle.data['value']
         return bundle
 
     def get_object_list(self, request):
@@ -113,13 +167,16 @@ class InfoResource(Resource):
         return InfoValue(value)
 
     def obj_create(self, bundle, request=None, **kwargs):
-        # How do we turn the kwargs into the right thing here?
-        bundle.obj = InfoValue(initial=kwargs)
         bundle = self.full_hydrate(bundle)
+        obj = bundle.obj
 
-        # create new Value here, potentially create new Attribute as
-        # well.  Tie it to the page
-        pass
+        # Get the associated Attribute object.
+        attribute = Attribute.objects.get(slug=obj.attribute)
+
+        setattr(obj.page.eav, attribute.slug,
+            to_attr_datatype(obj.value, attribute))
+
+        obj.page.eav.save()
 
         return bundle
 
