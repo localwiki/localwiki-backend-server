@@ -69,8 +69,12 @@ GET /page_info_attribute/
 from tastypie.resources import (Resource, Bundle, ModelResource,
     ALL, ALL_WITH_RELATIONS)
 from tastypie import fields
+from tastypie.utils import dict_strip_unicode_keys
+from tastypie.exceptions import InvalidFilterError
 from tastypie.authentication import Authentication
 from tastypie.authorization import Authorization
+
+from django.db.models.sql.constants import QUERY_TERMS, LOOKUP_SEP
 
 from eav.models import Attribute, Value
 
@@ -119,7 +123,51 @@ def to_attr_datatype(o, attribute):
         attribute.datatype)
 
 
-class InfoResource(Resource):
+class FilteringAndSortingMixin(object):
+    def build_filters(self, filters=None):
+        """
+        This is essential ModelResource.build_filters, except we don't check
+        for the existance of the queryset meta attribute (which is the thing
+        that prevents us from using ModelResource.build_filters directly.
+        """
+        # Accepts the filters as a dict. None by default, meaning no filters.
+        if filters is None:
+            filters = {}
+
+        qs_filters = {}
+
+        query_terms = QUERY_TERMS.keys()
+
+        for filter_expr, value in filters.items():
+            filter_bits = filter_expr.split(LOOKUP_SEP)
+            field_name = filter_bits.pop(0)
+            filter_type = 'exact'
+
+            if not field_name in self.fields:
+                # It's not a field we know about. Move along citizen.
+                continue
+
+            if len(filter_bits) and filter_bits[-1] in query_terms:
+                filter_type = filter_bits.pop()
+
+            lookup_bits = self.check_filtering(field_name, filter_type, filter_bits)
+            value = self.filter_value_to_python(value, field_name, filters, filter_expr, filter_type)
+
+            db_field_name = LOOKUP_SEP.join(lookup_bits)
+            qs_filter = "%s%s%s" % (db_field_name, LOOKUP_SEP, filter_type)
+            qs_filters[qs_filter] = value
+
+        return dict_strip_unicode_keys(qs_filters)
+
+    def check_filtering(self, *args, **kwargs):
+        return ModelResource.check_filtering.__func__(self, *args, **kwargs)
+
+    def filter_value_to_python(self, *args, **kwargs):
+        return ModelResource.filter_value_to_python.__func__(
+            self, *args, **kwargs)
+
+
+class InfoResource(FilteringAndSortingMixin, Resource):
     id = fields.IntegerField(attribute='id')
     attribute = fields.CharField(attribute='attribute')
     page = fields.ToOneField('pages.api.PageResource', 'page')
@@ -127,6 +175,10 @@ class InfoResource(Resource):
     class Meta:
         resource_name = 'page_info'
         object_class = InfoValue
+        list_allowed_methods = ['get', 'post']
+        filtering = {
+            'attribute': ALL,
+        }
         #authentication = ApiKeyWriteAuthentication()
         #authorization = ChangePageAuthorization()
         authentication = Authentication()
@@ -154,16 +206,27 @@ class InfoResource(Resource):
         bundle.obj.value = bundle.data['value']
         return bundle
 
-    def get_object_list(self, request):
+    def get_object_list(self, request, filters={}):
+        print filters
         results = []
-        for value in Value.objects.all():
+        for value in Value.objects.filter(**filters):
             results.append(InfoValue(value))
 
         return results
 
     def obj_get_list(self, request=None, **kwargs):
-        # Filtering disabled for brevity...
-        return self.get_object_list(request)
+        filters = {}
+
+        if hasattr(request, 'GET'):
+            # Grab a mutable copy.
+            filters = request.GET.copy()
+
+        # Update with the provided kwargs.
+        filters.update(kwargs)
+
+        applicable_filters = self.build_filters(filters=filters)
+        print 'applicable', applicable_filters
+        return self.get_object_list(request, filters=applicable_filters)
 
     def obj_get(self, request=None, **kwargs):
         value = Value.objects.get(**kwargs)
@@ -187,13 +250,6 @@ class InfoResource(Resource):
         # Same as create, because our create method updates in addition to
         # creating.
         return self.obj_create(bundle, request, **kwargs)
-
-    def obj_delete_list(self, request=None, **kwargs):
-        bucket = self._bucket()
-
-        for key in bucket.get_keys():
-            obj = bucket.get(key)
-            obj.delete()
 
     def obj_delete(self, request=None, **kwargs):
         value = Value.objects.get(kwargs['pk'])
