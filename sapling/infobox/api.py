@@ -66,7 +66,7 @@ GET /page_info_attribute/
 
 """
 
-from tastypie.resources import Resource, Bundle
+from tastypie.resources import Resource, Bundle, ModelResource
 from tastypie import fields
 from tastypie.authentication import Authentication
 from tastypie.authorization import Authorization
@@ -199,4 +199,16 @@ class InfoResource(Resource):
         value.delete()
 
 
+class InfoAttributeResource(ModelResource):
+    class Meta:
+        queryset = Attribute.objects.all()
+        resource_name = 'page_info_attribute'
+        list_allowed_methods = ['get', 'post']
+        #authentication = ApiKeyWriteAuthentication()
+        #authorization = ChangePageAuthorization() or ????
+        authentication = Authentication()
+        authorization = Authorization()
+
+
 api.register(InfoResource())
+api.register(InfoAttributeResource())
