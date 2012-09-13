@@ -12,7 +12,7 @@ def infobox(instance):
     entity = getattr(instance, config_cls.eav_attr)
     attributes = []
     for a in entity.get_all_attributes():
-        value = getattr(entity, a.slug)
+        value = getattr(entity, a.slug, None)
         if value is None:
             continue
         attributes.append({ 'name': a.name,
