@@ -56,6 +56,8 @@ def copy_related_objects(related_objs, slug_related_objs, page, comment=""):
                 obj.pk = None  # Reset the primary key before saving.
                 try:
                     getattr(page, attname).add(obj)
+                    # XXX TODO: pass in comment=comment here when versioning is working on
+                    # eav
                     obj.save()
                     # Restore any m2m fields now that we have a new pk
                     for name, value in obj._m2m_values.items():
@@ -69,6 +71,8 @@ def copy_related_objects(related_objs, slug_related_objs, page, comment=""):
             # This is an easy way to set obj to point to new_p.
             setattr(page, attname, rel_obj)
             rel_obj.pk = None  # Reset the primary key before saving.
+            # XXX TODO: pass in comment=comment here when versioning is working on
+            # eav
             rel_obj.save()
             # Restore any m2m fields now that we have a new pk
             for name, value in rel_obj._m2m_values.items():
@@ -88,4 +92,6 @@ def copy_related_objects(related_objs, slug_related_objs, page, comment=""):
                 continue
             obj.slug = page.slug
             obj.pk = None  # Reset the primary key before saving.
+            # XXX TODO: pass in comment=comment here when versioning is working on
+            # eav   
             obj.save()
