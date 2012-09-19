@@ -1023,6 +1023,28 @@ form #content_footer {
     padding-right: 5em;
     margin-top: 0.16em;
 }
+/*
+=======================================
+ Infobox
+=======================================
+*/
+#infobox {
+    margin-bottom: 10px;
+}
+#infobox .edit_infobox {
+    float: none;
+    width: 60px;
+    text-align: center;
+}
+#infobox .weekly_time_block p {
+    display: inline-block;
+}
+#infobox .weekly_time_block input {
+    max-width: 100px;
+}
+#infobox .weekly_time_block select {
+    max-width: 120px;
+}
 
 /*
 =======================================
