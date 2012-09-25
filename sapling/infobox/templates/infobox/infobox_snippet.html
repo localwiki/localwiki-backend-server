@@ -1,3 +1,4 @@
+{% load infobox_tags %}
 <table>
     <tbody>
         {% for a in attributes %}
@@ -6,7 +7,7 @@
                     <strong>{{ a.name }}</strong></td>
             </tr>
             <tr>
-                <td>{{ a.value }}</td>
+                <td>{{ a.value|render_attribute }}</td>
             </tr>
         {% endfor %}
     </tbody>

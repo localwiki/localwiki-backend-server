@@ -1,6 +1,7 @@
 from django import template
 from django.template.loader import render_to_string
 from infobox.forms import InfoboxForm, AddAttributeForm
+from eav.models import WeeklySchedule
 
 
 register = template.Library()
@@ -30,3 +31,9 @@ def infobox_form(context, entity):
     rendered = render_to_string('infobox/infobox_form_snippet.html', context)
     return rendered
 
+
+@register.filter
+def render_attribute(value):
+#    if issubclass(value, WeeklySchedule):
+#        return 'schedule'
+    return value

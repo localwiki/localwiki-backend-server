@@ -7,6 +7,7 @@ from eav.models import Attribute, EnumGroup, EnumValue
 from django.contrib.contenttypes.models import ContentType
 from pages.models import Page
 from django.contrib.admin.widgets import AdminSplitDateTime
+from infobox.models import WeeklySchedule, WeeklyTimeBlock, PageLink
 
 
 class InfoboxForm(BaseDynamicEntityForm):
@@ -14,6 +15,22 @@ class InfoboxForm(BaseDynamicEntityForm):
         # we don't want to save the model instance, just the EAV attributes
         super(InfoboxForm, self).save(commit=False)
         self.entity.save()
+
+
+class PageLinkForm(ModelForm):
+    class Meta:
+        model = PageLink
+
+
+WeeklyTimeBlockFormSet = inlineformset_factory(WeeklySchedule, WeeklyTimeBlock,
+                                               extra=7)
+
+
+class WeeklyScheduleForm(WeeklyTimeBlockFormSet):
+    def save(self, commit=True):
+        self.instance.save()
+        super(WeeklyScheduleForm, self).save(commit)
+        return self.instance
 
 
 class AddAttributeForm(ModelForm):
