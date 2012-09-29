@@ -2,7 +2,7 @@ from django.db import models
 from pages.models import Page
 import eav
 from eav.registry import EavConfig
-from eav.models import Attribute, BaseValue
+from eav.models import BaseAttribute, BaseValue
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -42,11 +42,23 @@ class WeeklyTimeBlock(models.Model):
             raise ValidationError('Starting time should be before ending time')
 
 
-class PageValue(BaseValue):
-    entity = models.ForeignKey(Page, blank=False, null=False)
-    value_page = models.OneToOneField(PageLink, blank=True, null=True,
-                                      related_name='eav_value')
-    value_schedule = models.OneToOneField(WeeklySchedule, blank=True,
-                                          null=True, related_name='eav_value')
+class PageAttribute(BaseAttribute):
+    pass
 
-eav.register(Page, PageValue)
+
+class PageValue(BaseValue):
+    attribute = models.ForeignKey(PageAttribute, db_index=True,
+                                  verbose_name=_(u"attribute"))
+    entity = models.ForeignKey(Page, blank=False, null=False)
+
+    value_page = models.OneToOneField(PageLink, blank=True,
+                                      null=True,
+                                      verbose_name=_(u"page link"),
+                                      related_name='eav_value')
+    value_schedule = models.OneToOneField(WeeklySchedule,
+                                          blank=True, null=True,
+                                          verbose_name=_(u"weekly schedule"),
+                                          related_name='eav_value')
+
+
+eav.register(Page, PageAttribute, PageValue)

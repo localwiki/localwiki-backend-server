@@ -3,19 +3,11 @@ from django import forms
 from eav.forms import BaseDynamicEntityForm
 from django.forms.models import ModelForm, inlineformset_factory,\
     ModelChoiceField
-from eav.models import Attribute, EnumGroup, EnumValue
 from django.contrib.contenttypes.models import ContentType
 from pages.models import Page
 from django.contrib.admin.widgets import AdminSplitDateTime
 from infobox.models import WeeklySchedule, WeeklyTimeBlock, PageLink
-
-
-class InfoboxForm(BaseDynamicEntityForm):
-    def save(self, commit=True):
-        # we don't want to save the model instance, just the EAV attributes
-        super(InfoboxForm, self).save(commit=False)
-        self.entity.save()
-
+from models import PageAttribute
 
 class PageLinkForm(ModelForm):
     class Meta:
@@ -33,8 +25,20 @@ class WeeklyScheduleForm(WeeklyTimeBlockFormSet):
         return self.instance
 
 
+class InfoboxForm(BaseDynamicEntityForm):
+    CUSTOM_FIELD_CLASSES = {
+        'schedule': WeeklyScheduleForm,
+        'page': PageLinkForm,
+    }
+
+    def save(self, commit=True):
+        # we don't want to save the model instance, just the EAV attributes
+        super(InfoboxForm, self).save(commit=False)
+        self.entity.save()
+
+
 class AddAttributeForm(ModelForm):
-    attribute = ModelChoiceField(queryset=Attribute.objects.all())
+    attribute = ModelChoiceField(queryset=PageAttribute.objects.all())
 
     def __init__(self, *args, **kwargs):
         # we want to exclude attributes the entity already has
@@ -42,7 +46,7 @@ class AddAttributeForm(ModelForm):
         config_cls = self.instance._eav_config_cls
         self.entity = getattr(self.instance, config_cls.eav_attr)
         already_has = [v.attribute.pk for v in self.entity.get_values()]
-        self.fields['attribute'].queryset = Attribute.objects.exclude(
+        self.fields['attribute'].queryset = PageAttribute.objects.exclude(
                                                             pk__in=already_has)
 
     def save(self, commit=False):
@@ -52,7 +56,7 @@ class AddAttributeForm(ModelForm):
 
 class AttributeCreateForm(ModelForm):
     class Meta:
-        model = Attribute
+        model = PageAttribute
         fields = ('name', 'description', 'datatype', 'enum_group')
         exclude = ('site','slug',)
 
@@ -64,5 +68,5 @@ class AttributeCreateForm(ModelForm):
 
 class AttributeUpdateForm(ModelForm):
     class Meta:
-        model = Attribute
+        model = PageAttribute
         fields = ('name', 'description')

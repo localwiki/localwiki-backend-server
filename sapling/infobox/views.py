@@ -6,10 +6,9 @@ from pages.models import Page
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.views.generic.list import ListView
-from eav.models import Attribute
 from forms import AttributeCreateForm, AttributeUpdateForm, AddAttributeForm
 from django.views.generic.edit import CreateView
-
+from models import PageAttribute
 
 class InfoboxUpdateView(PageNotFoundMixin, PermissionRequiredMixin,
         CreateObjectMixin, UpdateView):
@@ -54,11 +53,11 @@ class AttributeListView(ListView):
     template_name = 'infobox/attribute_list.html'
 
     def get_queryset(self):
-        return Attribute.get_for_model(Page)
+        return PageAttribute.get_for_model(Page)
 
 
 class AttributeUpdateView(UpdateView):
-    model = Attribute
+    model = PageAttribute
     form_class = AttributeUpdateForm
     context_object_name = 'attribute'
     template_name = 'infobox/attribute_form.html'
@@ -68,7 +67,7 @@ class AttributeUpdateView(UpdateView):
 
 
 class AttributeCreateView(CreateView):
-    model = Attribute
+    model = PageAttribute
     form_class = AttributeCreateForm
     context_object_name = 'attribute'
     template_name = 'infobox/attribute_form.html'

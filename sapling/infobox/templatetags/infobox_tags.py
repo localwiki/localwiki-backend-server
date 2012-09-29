@@ -1,7 +1,6 @@
 from django import template
 from django.template.loader import render_to_string
 from infobox.forms import InfoboxForm, AddAttributeForm
-from eav.models import WeeklySchedule
 
 
 register = template.Library()
