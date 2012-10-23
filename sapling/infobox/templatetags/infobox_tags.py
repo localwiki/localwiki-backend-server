@@ -31,6 +31,7 @@ def infobox_form(context, entity):
     context['form'] = InfoboxForm(instance=entity)
     context['add_attribute_form'] = AddAttributeForm(instance=entity)
     rendered = render_to_string('infobox/infobox_form_snippet.html', context)
+    rendered = str(context['form'].media) + rendered
     return rendered
 
 

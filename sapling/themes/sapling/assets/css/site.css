@@ -1046,6 +1046,11 @@ form #content_footer {
     max-width: 120px;
 }
 
+#infobox .datetime input {
+    display: inline;
+    width: 116px;
+}
+
 /*
 =======================================
  Page specific (not stuff in page css)

@@ -8,6 +8,7 @@ from pages.models import Page
 from django.contrib.admin.widgets import AdminSplitDateTime
 from infobox.models import WeeklySchedule, WeeklyTimeBlock, PageLink
 from models import PageAttribute
+from widgets import DateTimeWidget
 
 class PageLinkForm(ModelForm):
     class Meta:
@@ -25,11 +26,19 @@ class WeeklyScheduleForm(WeeklyTimeBlockFormSet):
         return self.instance
 
 
+class DateTimeField(forms.DateTimeField):
+    widget = DateTimeWidget
+
+
 class InfoboxForm(BaseDynamicEntityForm):
     CUSTOM_FIELD_CLASSES = {
+        'date': DateTimeField,
         'schedule': WeeklyScheduleForm,
         'page': PageLinkForm,
     }
+    
+    def get_field_class_for_type(self, type):
+        return BaseDynamicEntityForm.get_field_class_for_type(self, type)
 
     def save(self, commit=True):
         # we don't want to save the model instance, just the EAV attributes
