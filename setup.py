@@ -130,7 +130,7 @@ install_requires = [
     'django-olwidget==0.46-custom1',
     'django-honeypot==0.3.0-custom',
     'django-qsstats-magic==0.7',
-    'django-eav==0.9.9',
+    'django-eav==0.9.10',
     'django-extra-views==0.2.5'
 ]
 if int(os.getenv('DISABLE_INSTALL_REQUIRES', '0')):
@@ -154,7 +154,7 @@ setup(
     dependency_links=[
         'https://github.com/philipn/olwidget/tarball/custom_base_layers_fixed#egg=django-olwidget-0.46-custom1',
         'https://github.com/mivanov/django-honeypot/tarball/master#egg=django-honeypot-0.3.0-custom',
-        'https://github.com/mivanov/django-eav/tarball/v0.9.9#egg=django-eav-0.9.9',
+        'https://github.com/mivanov/django-eav/tarball/v0.9.10#egg=django-eav-0.9.10',
     ],
     entry_points={
         'console_scripts': ['localwiki-manage=sapling.manage:main'],
