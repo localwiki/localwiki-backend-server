@@ -31,6 +31,7 @@ from maps.widgets import InfoMap
 from models import slugify, clean_name
 from exceptions import PageExistsError
 from users.decorators import permission_required
+from page_utils import get_all_related_objects_full, copy_related_objects
 
 # Where possible, we subclass similar generic views here.
 
@@ -130,6 +131,7 @@ class PageUpdateView(PermissionRequiredMixin, CreateObjectMixin, UpdateView):
         pagename = clean_name(self.kwargs['original_slug'])
         content = _('<p>Describe %s here</p>') % pagename
         if 'template' in self.request.GET:
+            # Initialize page text from the template page.
             try:
                 p = Page.objects.get(slug=self.request.GET['template'])
                 content = p.content
@@ -137,6 +139,24 @@ class PageUpdateView(PermissionRequiredMixin, CreateObjectMixin, UpdateView):
                 pass
         return Page(name=url_to_name(self.kwargs['original_slug']),
                     content=content)
+
+    def form_valid(self, form):
+        new_page = not self.object.pk
+        val = super(PageUpdateView, self).form_valid(form)
+        # If we initialized the page from a Template, copy the related
+        # objects from the Template to the new page.
+        if new_page and 'template' in self.request.GET:
+            try:
+                template_page = Page.objects.get(
+                    slug=self.request.GET['template'])
+            except Page.DoesNotExist:
+                return val
+            related_objs = get_all_related_objects_full(template_page)
+            slug_related_objs = template_page._get_slug_related_objs()
+            copy_related_objects(related_objs, slug_related_objs, self.object,
+                _("Created from template"))
+
+        return val
 
 
 class PageDeleteView(PermissionRequiredMixin, DeleteView):

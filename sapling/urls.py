@@ -17,8 +17,7 @@ urlpatterns = patterns('',
     (r'^map/', include(maps.site.urls)),
     (r'^tags$', redirect_to, {'url': '/tags/'}),
     (r'^tags/', include('sapling.tags.urls', 'tags', 'tags')),
-    (r'^attributes$', redirect_to, {'url': '/attributes/'}),
-    (r'^attributes/', include('sapling.infobox.urls', 'infobox', 'infobox')),
+    (r'^_infobox/', include('sapling.infobox.urls', 'infobox', 'infobox')),
     (r'^_redirect/', include(redirects.site.urls)),
     (r'^(?i)Users/', include('sapling.users.urls')),
     (r'^search/', include('sapling.search.urls')),
@@ -42,6 +41,7 @@ if not settings.DEBUG:
         (r'^media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': settings.MEDIA_ROOT}),
     )
+
 
 # Fall back to pages.
 urlpatterns += patterns('',
