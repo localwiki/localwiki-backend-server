@@ -3,6 +3,8 @@ from django.template.loader import render_to_string
 from infobox.forms import InfoboxForm, AddAttributeForm
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
+from django.utils.html import escape
+from django.utils.dates import WEEKDAYS
 
 
 register = template.Library()
@@ -35,8 +37,27 @@ def infobox_form(context, entity):
     return rendered
 
 
+def render_schedule(schedule):
+    """
+    Render the schedule as HTML, grouping time blocks by day of the week.
+    """
+    if schedule is None:
+        return '<p></p>'
+    params = {'time_blocks': schedule.time_blocks.all()}
+    return render_to_string('infobox/weekly_schedule.html', params)
+
+
 def render_attribute(attribute, value):
+    """
+    Render the attribute value nicely, taking into account its type. Returns a
+    safe HTML string.
+    """
+    rendered = '<p></p>'  # default if no value
     if attribute.datatype == attribute.TYPE_ENUM:
-        value_list = ['<li>%s</li>' % v for v in value.all()]
-        return mark_safe('<ul>%s</ul>' % ''.join(value_list))
-    return value or _('Please edit and fill in!')
+        value_list = ['<li>%s</li>' % escape(v.value) for v in value.all()]
+        rendered = '<ul>%s</ul>' % ''.join(value_list)
+    elif attribute.datatype == attribute.TYPE_SCHEDULE:
+        rendered = render_schedule(value)
+    elif value:
+        rendered = escape(value)
+    return mark_safe(rendered)

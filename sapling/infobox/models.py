@@ -4,21 +4,11 @@ import eav
 from eav.registry import EavConfig
 from eav.models import BaseAttribute, BaseValue
 from django.utils.translation import ugettext_lazy as _
+from django.utils.dates import WEEKDAYS
 
 
 class PageLink(models.Model):
     page_name = models.CharField(max_length=255, blank=True, null=True)
-
-
-DAYS_OF_WEEK = (
-    ('1', _(u'Sunday')),
-    ('2', _(u'Monday')),
-    ('3', _(u'Tuesday')),
-    ('4', _(u'Wednesday')),
-    ('5', _(u'Thursday')),
-    ('6', _(u'Friday')),
-    ('7', _(u'Saturday')), 
-)
 
 
 class WeeklySchedule(models.Model):
@@ -28,8 +18,11 @@ class WeeklySchedule(models.Model):
     pass
 
 
+WEEKDAY_CHOICES = [(str(n), d) for n, d in WEEKDAYS.items()]
+
+
 class WeeklyTimeBlock(models.Model):
-    week_day = models.CharField(max_length=1, choices=DAYS_OF_WEEK,
+    week_day = models.CharField(max_length=1, choices=WEEKDAY_CHOICES,
                                 blank=False, null=False)
     start_time = models.TimeField(blank=False, null=False)
     end_time = models.TimeField(blank=False, null=False)
@@ -41,9 +34,13 @@ class WeeklyTimeBlock(models.Model):
         if self.start_time >= self.end_time:
             raise ValidationError('Starting time should be before ending time')
 
+    def week_day_name(self):
+        return WEEKDAYS[int(self.week_day)]
+
 
 class PageAttribute(BaseAttribute):
-    pass
+    TYPE_PAGE = 'page'
+    TYPE_SCHEDULE = 'schedule'
 
 
 class PageValue(BaseValue):
