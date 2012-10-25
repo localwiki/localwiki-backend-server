@@ -1051,6 +1051,19 @@ form #content_footer {
     width: 116px;
 }
 
+#infobox td label {
+    font-weight: normal;
+}
+
+#infobox ul {
+    margin: 0;
+}
+
+#infobox form li {
+    list-style: none;
+    margin-left: 0;
+}
+
 /*
 =======================================
  Page specific (not stuff in page css)

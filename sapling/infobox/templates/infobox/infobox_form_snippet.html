@@ -2,9 +2,18 @@
     {% csrf_token %}
     <table>
         <tbody>
-            {{ form.as_table }}
+        {% for field in form %}
+            <tr>
+                <td style="background-color: rgb(232, 236, 239);">
+                    <strong>{{ field.label }}</strong></td>
+            </tr>
+            <tr>
+                <td>{{ field }}</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
+
     <input type="hidden" name="next" value="{{ request.path }}"/>
     <input type="submit" name="save" class="little" value="Save"/>
 </form>
