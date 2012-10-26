@@ -1057,7 +1057,7 @@ form #content_footer {
 }
 .infobox li {
     list-style: none;
-    margin-left: 0;
+    margin: 0;
 }
 table.infobox th {
     background-color: rgb(232, 236, 239);

@@ -55,7 +55,8 @@ def render_attribute(attribute, value):
     rendered = '<p></p>'  # default if no value
     if attribute.datatype == attribute.TYPE_ENUM:
         value_list = ['<li>%s</li>' % escape(v.value) for v in value.all()]
-        rendered = '<ul>%s</ul>' % ''.join(value_list)
+        if value_list:
+            rendered = '<ul>%s</ul>' % ''.join(value_list)
     elif attribute.datatype == attribute.TYPE_SCHEDULE:
         rendered = render_schedule(value)
     elif value:
