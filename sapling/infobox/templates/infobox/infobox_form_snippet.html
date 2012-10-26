@@ -1,11 +1,10 @@
 <form action="{% url infobox:infobox slug=form.instance.pretty_slug %}" method="POST">
     {% csrf_token %}
-    <table>
+    <table class="infobox">
         <tbody>
         {% for field in form %}
             <tr>
-                <td style="background-color: rgb(232, 236, 239);">
-                    <strong>{{ field.label }}</strong></td>
+                <th>{{ field.label }}</th>
             </tr>
             <tr>
                 <td>{{ field }}</td>

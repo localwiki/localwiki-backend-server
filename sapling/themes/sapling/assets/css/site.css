@@ -1036,32 +1036,32 @@ form #content_footer {
     width: 60px;
     text-align: center;
 }
-#infobox .weekly_time_block p {
+.infobox .weekly_time_block p {
     display: inline-block;
 }
-#infobox .weekly_time_block input {
+.infobox .weekly_time_block input {
     max-width: 100px;
 }
-#infobox .weekly_time_block select {
+.infobox .weekly_time_block select {
     max-width: 120px;
 }
-
-#infobox .datetime input {
+.infobox .datetime input {
     display: inline;
     width: 116px;
 }
-
-#infobox td label {
+.infobox label {
     font-weight: normal;
 }
-
-#infobox ul {
+.infobox ul {
     margin: 0;
 }
-
-#infobox form li {
+.infobox li {
     list-style: none;
     margin-left: 0;
+}
+table.infobox th {
+    background-color: rgb(232, 236, 239);
+    text-align: left;
 }
 
 /*

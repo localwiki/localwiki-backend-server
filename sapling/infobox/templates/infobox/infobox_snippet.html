@@ -1,10 +1,9 @@
 {% load infobox_tags %}
-<table>
+<table class="infobox">
     <tbody>
         {% for a in attributes %}
             <tr>
-                <td style="background-color: rgb(232, 236, 239);">
-                    <strong>{{ a.name }}</strong></td>
+                <th>{{ a.name }}</th>
             </tr>
             <tr>
                 <td>{{ a.html }}</td>
