@@ -8,14 +8,25 @@ from pages.models import Page
 from django.contrib.admin.widgets import AdminSplitDateTime
 from infobox.models import WeeklySchedule, WeeklyTimeBlock, PageLink
 from models import PageAttribute
-from widgets import DateTimeWidget
+from widgets import DateTimeWidget, TimeWidget
 
 class PageLinkForm(ModelForm):
     class Meta:
         model = PageLink
 
 
+class WeeklyTimeBlockForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        ModelForm.__init__(self, *args, **kwargs)
+        self.fields['start_time'].widget = TimeWidget()
+        self.fields['end_time'].widget = TimeWidget()
+
+    class Meta:
+        model = WeeklyTimeBlock
+
+
 WeeklyTimeBlockFormSet = inlineformset_factory(WeeklySchedule, WeeklyTimeBlock,
+                                               form=WeeklyTimeBlockForm,
                                                extra=7)
 
 

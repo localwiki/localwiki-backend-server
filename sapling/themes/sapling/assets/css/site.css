@@ -1030,6 +1030,7 @@ form #content_footer {
 */
 #infobox {
     margin-bottom: 10px;
+    float: left;
 }
 #infobox .edit_infobox {
     float: none;

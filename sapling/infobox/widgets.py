@@ -1,16 +1,37 @@
-from django.forms.widgets import SplitDateTimeWidget, TimeInput, DateInput,\
-    MultiWidget
+import datetime
+import time
+
+from django.forms.widgets import TimeInput, DateInput, MultiWidget
 from django.utils.translation import gettext_lazy as _
 from utils.static import static_url
 from django.utils.safestring import mark_safe
 
 
 def _date_format_for_javascript(format):
-    # TODO convert instead of hardcoding
-    return 'yyyy-mm-dd'
+    js_format = format
+    format_map = {'%Y': 'yyyy',  # year: 2014
+                  '%y': 'yy',    # year: 14
+                  '%m': 'mm',    # month: 09
+                  '%B': 'MM',    # month: September
+                  '%b': 'M',     # month: Sep
+                  '%d': 'dd',    # day: 31
+                 }
+    for py, js in format_map.items():
+        js_format = js_format.replace(py, js)
+    return js_format
+
 
 def _time_format_for_javascript(format):
-    return 'H:i:s'
+    js_format = format
+    format_map = {'%H': 'H',  # hour (24-hour)
+                  '%I': 'h',  # hour (12-hour)
+                  '%M': 'i',  # minutes
+                  '%S': 's',  # seconds
+                  '%p': 'A',  # AM/PM
+                 }
+    for py, js in format_map.items():
+        js_format = js_format.replace(py, js)
+    return js_format
 
 
 class DateWidget(DateInput):
@@ -35,7 +56,7 @@ class DateWidget(DateInput):
 
 class TimeWidget(TimeInput):
     def __init__(self):
-        TimeInput.__init__(self, {'class': 'time'}, format = self.format)
+        TimeInput.__init__(self, {'class': 'time'})
 
     def render(self, name, value, attrs=None):
         input = TimeInput.render(self, name, value, attrs=attrs)
@@ -43,12 +64,6 @@ class TimeWidget(TimeInput):
         script = '<script>$("#%s").timepicker(%s);</script>' % (attrs['id'],
                                                                 opts)
         return input + script
-
-    def value_from_datadict(self, data, files, name):
-        time = data.get(name, None)
-        if time is not None:
-            time = time.upper()
-        return time
 
     class Media:
         js = (
@@ -59,7 +74,7 @@ class TimeWidget(TimeInput):
         }
 
 
-class DateTimeWidget(SplitDateTimeWidget):
+class DateTimeWidget(MultiWidget):
     def __init__(self, attrs=None):
         widgets = [DateWidget, TimeWidget]
         MultiWidget.__init__(self, widgets, attrs=attrs)
@@ -67,3 +82,17 @@ class DateTimeWidget(SplitDateTimeWidget):
     def format_output(self, rendered_widgets):
         return mark_safe(u'<div class="datetime">%s %s</div>' % \
             (rendered_widgets[0], rendered_widgets[1]))
+
+    def value_from_datadict(self, data, files, name):
+        dt = MultiWidget.value_from_datadict(self, data, files, name)
+        format = '%s %s' % (self.widgets[0].format, self.widgets[1].format)
+        value = '%s %s' % (dt[0], dt[1])
+        try:
+            return datetime.datetime(*time.strptime(value, format)[:6])
+        except ValueError:
+            return None
+
+    def decompress(self, value):
+        if value:
+            return [value.date(), value.time().replace(microsecond=0)]
+        return [None, None]
