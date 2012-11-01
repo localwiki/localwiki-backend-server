@@ -1,6 +1,6 @@
 from tags.views import PageNotFoundMixin
 from utils.views import PermissionRequiredMixin, CreateObjectMixin
-from versionutils.versioning.views import UpdateView
+from versionutils.versioning.views import UpdateView, VersionsList
 from infobox.forms import InfoboxForm
 from pages.models import Page
 from django.core.urlresolvers import reverse
@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.list import ListView
 from forms import AttributeCreateForm, AttributeUpdateForm, AddAttributeForm
 from django.views.generic.edit import CreateView
-from models import PageAttribute
+from models import PageAttribute, PageValue
 
 class InfoboxUpdateView(PageNotFoundMixin, PermissionRequiredMixin,
         CreateObjectMixin, UpdateView):
@@ -74,4 +74,20 @@ class AttributeCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('infobox:attribute-list')
+
+
+class InfoboxVersions(VersionsList):
+    def get_queryset(self):
+        page_slug = self.kwargs.get('slug')
+        try:
+            self.page = get_object_or_404(Page, slug=page_slug)
+            # Page is versioned, so we have to do a join query
+            return PageValue.versions.filter(entity__id=self.page.id)
+        except PageValue.DoesNotExist:
+            return PageValue.versions.none()
+
+    def get_context_data(self, **kwargs):
+        context = super(InfoboxVersions, self).get_context_data(**kwargs)
+        context['page'] = self.page
+        return context
     

@@ -2,10 +2,10 @@ from django.db import models
 from pages.models import Page
 import eav
 from eav.registry import EavConfig
-from eav.models import BaseAttribute, BaseValue
+from eav.models import BaseAttribute, BaseValue, EnumValue, EnumGroup
 from django.utils.translation import ugettext_lazy as _
 from django.utils.dates import WEEKDAYS
-
+from versionutils import versioning, diff
 
 class PageLink(models.Model):
     page_name = models.CharField(max_length=255, blank=True, null=True)
@@ -59,3 +59,11 @@ class PageValue(BaseValue):
 
 
 eav.register(Page, PageAttribute, PageValue)
+
+versioning.register(EnumGroup)
+versioning.register(EnumValue)
+versioning.register(PageLink)
+versioning.register(WeeklySchedule)
+versioning.register(WeeklyTimeBlock)
+versioning.register(PageAttribute)
+versioning.register(PageValue)

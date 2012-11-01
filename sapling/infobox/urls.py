@@ -3,6 +3,10 @@ from views import *
 from pages.urls import slugify
 
 urlpatterns = patterns('',
+    # version history views
+    url(r'^(?P<slug>.+)/_history/$', slugify(InfoboxVersions.as_view()),
+        name='infobox-history'),
+
     url(r'^(?P<slug>.+)/$', slugify(InfoboxUpdateView.as_view()),
         name='infobox'),
     url(r'^(?P<slug>.+)/add$', slugify(InfoboxAddAttributeView.as_view()),
