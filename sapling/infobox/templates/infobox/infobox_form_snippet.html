@@ -16,3 +16,15 @@
     <input type="hidden" name="next" value="{{ request.path }}"/>
     <input type="submit" name="save" class="little" value="Save"/>
 </form>
+<br/>
+Add another attribute to this page:
+<form action="{% url infobox:add_attribute slug=form.instance.pretty_slug %}" method="POST">
+    {% csrf_token %}
+    <table>
+        <tbody>
+            {{ add_attribute_form.as_table }}
+        </tbody>
+    </table>
+    <input type="hidden" name="next" value="{{ request.path }}"/>
+    <input type="submit" name="save" class="little" value="Add"/>
+</form>

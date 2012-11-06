@@ -2,7 +2,7 @@ from django.db import models
 from pages.models import Page
 import eav
 from eav.registry import EavConfig
-from eav.models import BaseAttribute, BaseValue, EnumValue, EnumGroup
+from eav.models import BaseAttribute, BaseValue, EnumValue, EnumGroup, Entity
 from django.utils.translation import ugettext_lazy as _
 from django.utils.dates import WEEKDAYS
 from versionutils import versioning, diff
@@ -56,6 +56,29 @@ class PageValue(BaseValue):
                                           blank=True, null=True,
                                           verbose_name=_(u"weekly schedule"),
                                           related_name='eav_value')
+
+
+class EntityAsOf(Entity):
+    """
+    Reconstructs an entity's attribute values as of the given date.
+    """
+    def __init__(self, date, instance):
+        super(EntityAsOf, self).__init__(instance)
+        attribute_cls = instance._eav_config_cls.attribute_cls
+        value_cls = instance._eav_config_cls.value_cls
+        all_versions = value_cls.versions.filter(entity__id=instance.id)
+        versions_before_date = all_versions.filter(history_date__lte=date)
+        self.version_number = len(versions_before_date)
+        self.version_info = versions_before_date[0].version_info
+        for a in attribute_cls.objects.all():
+            try:
+                value = versions_before_date.filter(attribute=a)[0:1].get()
+                self.eav_attributes[a.slug] = value
+            except versions_before_date.model.DoesNotExist:
+                pass
+
+    def __getitem__(self, name):
+        return self.eav_attributes[name]
 
 
 eav.register(Page, PageAttribute, PageValue)

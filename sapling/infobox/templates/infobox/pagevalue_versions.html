@@ -1,0 +1,10 @@
+{% extends "site/base.html" %}
+{% load i18n %}
+
+
+{% block title %}{% trans "Previous versions of" %} {{ page.name }} - {{ block.super }}{% endblock %}
+{% block header_title %}<a href="{% url pages:show slug=page.slug %}">{{ page.name }}</a>{% endblock %}
+
+{% block content %}
+  {% include "utils/history/form.html" %}
+{% endblock %}

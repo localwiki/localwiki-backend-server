@@ -1,0 +1,15 @@
+{% extends "infobox/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Info for " %} {{ page.name }} - {{ block.super }}{% endblock %}
+{% block header_title %}{% trans "Info for" %} <a href="{% url pages:show slug=page.pretty_slug %}">{{ page.name }}</a>{% endblock %}
+
+{% block content %}
+    {% if show_revision %}
+      <em class="revision_details">
+          {% trans "Revision" %} {{ infobox.version_number }}
+          ({{ infobox.version_info.date }} {% trans "by" %} {{ infobox.version_info.user_link|safe }})
+      </em>
+    {% endif %}
+    {% include "infobox/infobox_snippet.html" %}
+{% endblock %}

@@ -43,6 +43,7 @@ def render_schedule(schedule):
     """
     if schedule is None:
         return '<p></p>'
+    # TODO: doesn't work with historical instances!!
     params = {'time_blocks': schedule.time_blocks.all()}
     return render_to_string('infobox/weekly_schedule.html', params)
 
