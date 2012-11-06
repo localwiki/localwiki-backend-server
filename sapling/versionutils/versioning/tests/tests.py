@@ -1214,3 +1214,12 @@ class ChangesTrackingTest(TestCase):
         m1_hs = M1.versions.all().defer('a')
         m = m1_hs.get(d="D2!")
         self.assertEqual(m.a, "A2!")
+
+    def test_inherited_custom_attributes(self):
+        # historical object should expose inherited attributes, methods, and
+        # properties on the model
+        m29 = M29SConcreteCustomAttributes(a='a', e='e')
+        m29.save()
+        self.assertEqual(m29.versions.all()[0].b, 'magic b')
+        self.assertEqual(m29.versions.all()[0].c, 'magic c')
+        self.assertEqual(m29.versions.all()[0].d(), 'magic d')
