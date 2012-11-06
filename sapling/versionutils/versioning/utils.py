@@ -173,6 +173,10 @@ def unique_lookup_values_for(m):
                     **{pk_name: getattr(m, field.attname)})[0]
                 parent_instance = parent_hist_instance.version_info._object
 
+            # philipn: pls check this, any better way to avoid this condition?
+            if parent_instance is None:
+                continue
+
             parent_unique = unique_lookup_values_for(parent_instance)
             if not parent_unique:
                 # E.g. {'id': 3}
