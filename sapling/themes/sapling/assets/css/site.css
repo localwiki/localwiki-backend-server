@@ -619,10 +619,15 @@ label {
 }
 div.templates {
     clear: both;
+    margin-bottom: 6em;
 }
 div.templates li {
     list-style: none;
     margin-left: 1em;
+    clear: both;
+}
+div.templates li .button {
+    margin: 0.5em;
 }
 /* textarea { background: #fff; width: 435px; height: 150px; } */
 
@@ -731,6 +736,12 @@ div.templates li {
 }
 #create_page_dialog div {
     min-height: 3em;
+}
+#create_page p{
+    margin: 0;
+}
+#create_page .button {
+    margin-left: 1.5em;
 }
 .create_map {
     padding-top: 1em;
@@ -1072,6 +1083,7 @@ table.infobox th {
 */
 #create_page {
     min-height: 4em;
+    clear: both;
 }
 
 
