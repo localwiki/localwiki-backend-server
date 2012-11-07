@@ -826,6 +826,19 @@ class ChangesTrackingTest(TestCase):
         tags = m19_h.tags.all()
         self.assertEqual(set([t.name for t in tags]), set(["T1", "T2"]))
 
+        # change tags
+        m19.tags = [t1]
+        m19.save() # not necessary?
+
+        # most recent should have the new tags
+        tags = m19.versions.as_of(version=2).tags.all()
+        self.assertEqual(set([t.name for t in tags]), set(["T1!"]))
+
+        # historic should still have the old tags
+        tags = m19.versions.as_of(version=1).tags.all()
+        self.assertEqual(set([t.name for t in tags]), set(["T1", "T2"]))
+
+
     def test_fk_to_self_hist_lookup(self):
         m = M13ForeignKeySelf(a=None, b="Yo!")
         m.save()
