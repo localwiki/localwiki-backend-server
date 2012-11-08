@@ -60,6 +60,8 @@ def render_attribute(attribute, value):
             rendered = '<ul>%s</ul>' % ''.join(value_list)
     elif attribute.datatype == attribute.TYPE_SCHEDULE:
         rendered = render_schedule(value)
+    elif attribute.datatype == attribute.TYPE_BOOLEAN:
+        rendered = {True: _('Yes'), False: _('No'), None: rendered}.get(value)
     elif value:
         rendered = escape(value)
     return mark_safe(rendered)

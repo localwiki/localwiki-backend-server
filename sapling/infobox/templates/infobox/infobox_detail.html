@@ -4,6 +4,19 @@
 {% block title %}{% trans "Info for " %} {{ page.name }} - {{ block.super }}{% endblock %}
 {% block header_title %}{% trans "Info for" %} <a href="{% url pages:show slug=page.pretty_slug %}">{{ page.name }}</a>{% endblock %}
 
+{% block messages %}
+  {% if form.errors %}
+    <ul class="messages">
+      {% for errors in form.errors.values %}
+        {% for msg in errors %}
+          <li>{{ msg }}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {{ block.super }}
+{% endblock %}
+
 {% block content %}
     {% include "infobox/infobox_form_snippet.html" %}
 {% endblock %}
