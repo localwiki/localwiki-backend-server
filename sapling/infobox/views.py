@@ -17,6 +17,7 @@ class InfoboxUpdateView(PageNotFoundMixin, PermissionRequiredMixin,
         CreateObjectMixin, UpdateView):
     form_class = InfoboxForm
     permission = 'pages.change_page'
+    template_name = 'infobox/infobox_detail.html'
 
     def get_object(self):
         page_slug = self.kwargs.get('slug')

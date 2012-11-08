@@ -14,10 +14,10 @@ urlpatterns = patterns('',
         % DATETIME_REGEXP, slugify(InfoboxVersionDetailView.as_view()),
         name='infobox-as_of_date'),
 
-    url(r'^(?P<slug>.+)/$', slugify(InfoboxUpdateView.as_view()),
-        name='infobox'),
-    url(r'^(?P<slug>.+)/add$', slugify(InfoboxAddAttributeView.as_view()),
+    url(r'^(?P<slug>.+)/_add$', slugify(InfoboxAddAttributeView.as_view()),
         name='add_attribute'),
+    url(r'^(?P<slug>.+)/', slugify(InfoboxUpdateView.as_view()),
+        name='infobox-edit'),
 
 #    url(r'^(?P<slug>.+)/_history/compare',
 #        slugify(InfoboxCompareView.as_view())),

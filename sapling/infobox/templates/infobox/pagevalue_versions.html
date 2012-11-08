@@ -1,10 +1,18 @@
 {% extends "site/base.html" %}
 {% load i18n %}
+{% load infobox_tags %}
 
+{% block media %}
+{{ block.super }}
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery-1.7.min.js"></script>
+{% endblock %}
 
-{% block title %}{% trans "Previous versions of" %} {{ page.name }} - {{ block.super }}{% endblock %}
-{% block header_title %}<a href="{% url pages:show slug=page.slug %}">{{ page.name }}</a>{% endblock %}
+{% block title %}{% trans "Info for" %} {{ page.name }} - {{ block.super }}{% endblock %}
+{% block header_title %}{% trans "Info for" %} <a href="{% url pages:show slug=page.slug %}">{{ page.name }}</a>{% endblock %}
 
 {% block content %}
+  {% infobox_form page %}
+  <br/>
+  <p>Previous versions:</p>
   {% include "utils/history/form.html" %}
 {% endblock %}

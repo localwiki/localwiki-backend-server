@@ -1,4 +1,4 @@
-<form action="{% url infobox:infobox slug=form.instance.pretty_slug %}" method="POST">
+<form action="{% url infobox:infobox-edit slug=form.instance.pretty_slug %}" method="POST">
     {% csrf_token %}
     <table class="infobox">
         <tbody>
