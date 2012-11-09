@@ -1,11 +1,14 @@
 from django.db import models
-from pages.models import Page
-import eav
-from eav.registry import EavConfig
-from eav.models import BaseAttribute, BaseValue, EnumValue, EnumGroup, Entity
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ValidationError
 from django.utils.dates import WEEKDAYS
-from versionutils import versioning, diff
+
+import eav
+from eav.models import BaseAttribute, BaseValue, EnumValue, EnumGroup, Entity
+
+from versionutils import versioning
+from pages.models import Page
+
 
 class PageLink(models.Model):
     page_name = models.CharField(max_length=255, blank=True, null=True)
@@ -13,7 +16,7 @@ class PageLink(models.Model):
 
 class WeeklySchedule(models.Model):
     """
-    Has many WeeklyTimeBlock 
+    Has many WeeklyTimeBlock.
     """
     pass
 
@@ -23,12 +26,12 @@ WEEKDAY_CHOICES = [(str(n), d) for n, d in WEEKDAYS.items()]
 
 class WeeklyTimeBlock(models.Model):
     week_day = models.CharField(max_length=1, choices=WEEKDAY_CHOICES,
-                                blank=False, null=False)
+        blank=False, null=False)
     start_time = models.TimeField(blank=False, null=False)
     end_time = models.TimeField(blank=False, null=False)
 
     schedule = models.ForeignKey(WeeklySchedule, blank=False, null=False,
-                                 related_name='time_blocks')
+        related_name='time_blocks')
 
     def clean(self):
         if self.start_time >= self.end_time:
@@ -45,17 +48,14 @@ class PageAttribute(BaseAttribute):
 
 class PageValue(BaseValue):
     attribute = models.ForeignKey(PageAttribute, db_index=True,
-                                  verbose_name=_(u"attribute"))
+        verbose_name=_(u"attribute"))
     entity = models.ForeignKey(Page, blank=False, null=False)
 
     value_page = models.OneToOneField(PageLink, blank=True,
-                                      null=True,
-                                      verbose_name=_(u"page link"),
-                                      related_name='eav_value')
-    value_schedule = models.OneToOneField(WeeklySchedule,
-                                          blank=True, null=True,
-                                          verbose_name=_(u"weekly schedule"),
-                                          related_name='eav_value')
+        null=True, verbose_name=_(u"page link"), related_name='eav_value')
+    value_schedule = models.OneToOneField(WeeklySchedule, blank=True,
+        null=True, verbose_name=_(u"weekly schedule"),
+        related_name='eav_value')
 
 
 class EntityAsOf(Entity):

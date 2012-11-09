@@ -1,7 +1,9 @@
 from django.conf.urls.defaults import *
+
 from views import *
 from pages.urls import slugify
 from utils.constants import DATETIME_REGEXP
+
 
 urlpatterns = patterns('',
     # version history views

@@ -8,7 +8,7 @@ from html5lib.constants import tokenTypes
 from xml.sax.saxutils import escape, unescape
 
 from django.db import models
-from django.core import exceptions
+from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
 import widgets
@@ -27,7 +27,7 @@ class XMLValidator(object):
                 return
         except:
             pass
-        raise exceptions.ValidationError(_('This field contains invalid data.'))
+        raise ValidationError(_('This field contains invalid data.'))
 
 
 class HTMLSanitizer(sanitizer.HTMLSanitizer):
