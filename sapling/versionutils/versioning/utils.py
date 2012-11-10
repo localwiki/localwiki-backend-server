@@ -130,6 +130,70 @@ def get_parent_instance(m, parent):
     return None
 
 
+def _onetoone_unique_fields(m, field):
+    # If the OneToOneField is versioned then we return something
+    # along the lines of fieldname__pk=m.pk.  We do this
+    # because on historical models, foreign keys to versioned
+    # models point right to their historical model form.  So we
+    # normally do things like
+    # p.versions.filter(fk=historical_fk).  To build this unique
+    # dictionary we need to use the pk of the provided
+    # NON-historical object, m.
+
+    # Get the unique fields of the related model.
+    parent_model = field.related.parent_model
+    try:
+        parent_instance = getattr(m, field.name)
+    except parent_model.DoesNotExist:
+        # parent_instance is currently deleted.  Let's look up
+        # the most recent historical version and use that to get
+        # the unique fields.
+        pk_name = parent_model._meta.pk.name
+        hist_name = getattr(parent_model, '_history_manager_name')
+        versions = getattr(parent_model, hist_name)
+        parent_hist_instance = versions.filter(
+            **{pk_name: getattr(m, field.attname)})[0]
+        parent_instance = parent_hist_instance.version_info._object
+
+    parent_unique = unique_lookup_values_for(parent_instance)
+    if not parent_unique:
+        # E.g. {'id': 3}
+        parent_pk_name = parent_instance._meta.pk.name
+        parent_unique = {parent_pk_name: parent_instance.pk}
+
+    uniques = {}
+    for parent_k, parent_v in parent_unique.iteritems():
+        # Create something like {'page__id': 3} or
+        # {'page__slug': 'front page'}
+        k = "%s%s%s" % (field.name, LOOKUP_SEP, parent_k)
+        uniques[k] = parent_v
+    return uniques
+
+
+def _unique_together_fields(m):
+    unique_fields = {}
+    # See note about OneToOneFields above.
+    onetoone_versioned = []
+    for field in m._meta.fields:
+        is_onetoone = (
+            hasattr(field, 'related') and
+            field.related.field.__class__ == models.OneToOneField
+        )
+        if is_onetoone and is_versioned(field.related.model):
+            onetoone_versioned.append(field.name)
+
+    # Tuple of field names, e.g. ('email', 'cellphone')
+    for k in m._meta.unique_together[0]:
+        # Do fancy lookup for versioned OneToOneFields.
+        if k in onetoone_versioned:
+            k = "%s%sid" % (field.name, LOOKUP_SEP)
+            v = getattr(m, field.name).pk
+            unique_fields[k] = v
+        else:
+            unique_fields[k] = getattr(m, k)
+    return unique_fields
+
+
 def unique_lookup_values_for(m):
     """
     Args:
@@ -137,7 +201,7 @@ def unique_lookup_values_for(m):
 
     Returns:
         A {name: value} dictionary of the unique fields of the
-        model instance m.
+        model instance m, excluding the pk field.
     """
     for field in m._meta.fields:
         if field.primary_key or field.auto_created:
@@ -149,72 +213,14 @@ def unique_lookup_values_for(m):
             field.related.field.__class__ == models.OneToOneField
         )
         if is_onetoone and is_versioned(field.related.parent_model):
-            # If the OneToOneField is versioned then we return something
-            # along the lines of fieldname__pk=m.pk.  We do this
-            # because on historical models, foreign keys to versioned
-            # models point right to their historical model form.  So we
-            # normally do things like
-            # p.versions.filter(fk=historical_fk).  To build this unique
-            # dictionary we need to use the pk of the provided
-            # NON-historical object, m.
-
-            # Get the unique fields of the related model.
-            parent_model = field.related.parent_model
-            try:
-                parent_instance = getattr(m, field.name)
-            except parent_model.DoesNotExist:
-                # parent_instance is currently deleted.  Let's look up
-                # the most recent historical version and use that to get
-                # the unique fields.
-                pk_name = parent_model._meta.pk.name
-                hist_name = getattr(parent_model, '_history_manager_name')
-                versions = getattr(parent_model, hist_name)
-                parent_hist_instance = versions.filter(
-                    **{pk_name: getattr(m, field.attname)})[0]
-                parent_instance = parent_hist_instance.version_info._object
-
-            # philipn: pls check this, any better way to avoid this condition?
-            if parent_instance is None:
-                continue
-
-            parent_unique = unique_lookup_values_for(parent_instance)
-            if not parent_unique:
-                # E.g. {'id': 3}
-                parent_pk_name = parent_instance._meta.pk.name
-                parent_unique = {parent_pk_name: parent_instance.pk}
-
-            uniques = {}
-            for parent_k, parent_v in parent_unique.iteritems():
-                # Create something like {'page__id': 3} or
-                # {'page__slug': 'front page'}
-                k = "%s%s%s" % (field.name, LOOKUP_SEP, parent_k)
-                uniques[k] = parent_v
-            return uniques
+            return _onetoone_unique_fields(m, field)
 
         return {field.name: getattr(m, field.name)}
 
     if m._meta.unique_together:
-        unique_fields = {}
-        # See note about OneToOneFields above.
-        onetoone_versioned = []
-        for field in m._meta.fields:
-            is_onetoone = (
-                hasattr(field, 'related') and
-                field.related.field.__class__ == models.OneToOneField
-            )
-            if is_onetoone and is_versioned(field.related.model):
-                onetoone_versioned.append(field.name)
+        return _unique_together_fields(m)
 
-        # Tuple of field names, e.g. ('email', 'cellphone')
-        for k in m._meta.unique_together[0]:
-            # Do fancy lookup for versioned OneToOneFields.
-            if k in onetoone_versioned:
-                k = "%s%sid" % (field.name, LOOKUP_SEP)
-                v = getattr(m, field.name).pk
-                unique_fields[k] = v
-            else:
-                unique_fields[k] = getattr(m, k)
-        return unique_fields
+    return {}
 
 
 def is_pk_recycle_a_problem(instance):
