@@ -1,14 +1,15 @@
-from copy import deepcopy
 from django import forms
-from eav.forms import BaseDynamicEntityForm
 from django.forms.models import ModelForm, inlineformset_factory,\
     ModelChoiceField
 from django.contrib.contenttypes.models import ContentType
+
+from eav.forms import BaseDynamicEntityForm
+
 from pages.models import Page
-from django.contrib.admin.widgets import AdminSplitDateTime
 from infobox.models import WeeklySchedule, WeeklyTimeBlock, PageLink
 from models import PageAttribute
 from widgets import DateTimeWidget, TimeWidget
+
 
 class PageLinkForm(ModelForm):
     class Meta:
@@ -26,8 +27,7 @@ class WeeklyTimeBlockForm(ModelForm):
 
 
 WeeklyTimeBlockFormSet = inlineformset_factory(WeeklySchedule, WeeklyTimeBlock,
-                                               form=WeeklyTimeBlockForm,
-                                               extra=7)
+    form=WeeklyTimeBlockForm, extra=7)
 
 
 class WeeklyScheduleForm(WeeklyTimeBlockFormSet):
@@ -47,7 +47,7 @@ class InfoboxForm(BaseDynamicEntityForm):
         'schedule': WeeklyScheduleForm,
         'page': PageLinkForm,
     }
-    
+
     def get_field_class_for_type(self, type):
         return BaseDynamicEntityForm.get_field_class_for_type(self, type)
 
@@ -78,7 +78,7 @@ class AttributeCreateForm(ModelForm):
     class Meta:
         model = PageAttribute
         fields = ('name', 'description', 'datatype', 'enum_group')
-        exclude = ('site','slug',)
+        exclude = ('site', 'slug',)
 
     def save(self, *args, **kwargs):
         # tie attributes to Page model on save

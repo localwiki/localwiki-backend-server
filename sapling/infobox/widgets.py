@@ -3,8 +3,9 @@ import time
 
 from django.forms.widgets import TimeInput, DateInput, MultiWidget
 from django.utils.translation import gettext_lazy as _
-from utils.static import static_url
 from django.utils.safestring import mark_safe
+
+from utils.static import static_url
 
 
 def _date_format_for_javascript(format):
@@ -40,7 +41,7 @@ class DateWidget(DateInput):
 
     def render(self, name, value, attrs=None):
         input = DateInput.render(self, name, value, attrs=attrs)
-        opts = { 'format': _date_format_for_javascript(self.format) }
+        opts = {'format': _date_format_for_javascript(self.format)}
         script = '<script>$("#%s").datepicker(%s);</script>' % (attrs['id'],
                                                                 opts)
         return input + script
@@ -60,7 +61,7 @@ class TimeWidget(TimeInput):
 
     def render(self, name, value, attrs=None):
         input = TimeInput.render(self, name, value, attrs=attrs)
-        opts = { 'timeFormat': _time_format_for_javascript(self.format) }
+        opts = {'timeFormat': _time_format_for_javascript(self.format)}
         script = '<script>$("#%s").timepicker(%s);</script>' % (attrs['id'],
                                                                 opts)
         return input + script
