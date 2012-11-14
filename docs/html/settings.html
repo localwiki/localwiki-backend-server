@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Settings &mdash; LocalWiki 0.4.2 documentation</title>
+    <title>Settings &mdash; LocalWiki 0.4.3 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.4.2',
+        VERSION:     '0.4.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="LocalWiki 0.4.2 documentation" href="index.html" />
+    <link rel="top" title="LocalWiki 0.4.3 documentation" href="index.html" />
     <link rel="next" title="Permissions" href="permissions.html" />
     <link rel="prev" title="Web server configuration" href="configure.html" /> 
   </head>
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="configure.html" title="Web server configuration"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">LocalWiki 0.4.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">LocalWiki 0.4.3 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -111,6 +111,16 @@ number of languages.  To change your instance&#8217;s language, set this
 to one of: <tt class="docutils literal"><span class="pre">en-us</span></tt> (for English), <tt class="docutils literal"><span class="pre">ja</span></tt> (Japanese),
 <tt class="docutils literal"><span class="pre">it_IT</span></tt> (Italian), <tt class="docutils literal"><span class="pre">pt_PT</span></tt> (Portuguese), <tt class="docutils literal"><span class="pre">ru_RU</span></tt> (Russian),
 <tt class="docutils literal"><span class="pre">de_CH</span></tt> (German, CH), <tt class="docutils literal"><span class="pre">es_AR</span></tt> (Spanish, Argentina), <tt class="docutils literal"><span class="pre">da_DK</span></tt> (Danish).</dd>
+<dt><tt class="docutils literal"><span class="pre">DATE_INPUT_FORMATS</span></tt> and <tt class="docutils literal"><span class="pre">TIME_INPUT_FORMATS</span></tt></dt>
+<dd><p class="first">Preferred input formats for dates and times enforced in forms. The defaults
+are set to the formats used in the United States. For elsewhere in the
+world, you may wish to use the following:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">DATE_INPUT_FORMATS</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;</span><span class="si">%d</span><span class="s">/%m/%Y&#39;</span><span class="p">,)</span>  <span class="c"># for dates like 31/12/2012 and</span>
+<span class="n">TIME_INPUT_FORMATS</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;%H:%M&#39;</span><span class="p">,)</span>     <span class="c"># for times like 13:35</span>
+</pre></div>
+</div>
+<p class="last">You can see all possible options in the <a class="reference external" href="http://docs.python.org/2/library/datetime.html#strftime-strptime-behavior">Python documentation</a></p>
+</dd>
 </dl>
 <p>After changing settings you&#8217;ll need to restart Apache.  On most systems
 you can do this by running <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">/etc/init.d/apache2</span> <span class="pre">restart</span></tt>.</p>
@@ -174,7 +184,7 @@ you can do this by running <tt class="docutils literal"><span class="pre">sudo</
         <li class="right" >
           <a href="configure.html" title="Web server configuration"
              >previous</a> |</li>
-        <li><a href="index.html">LocalWiki 0.4.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">LocalWiki 0.4.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
