@@ -808,6 +808,14 @@ class ChangesTrackingTest(TestCase):
         self.assertEqual(m18_h.m2.c, 3)
 
         ###############################
+        # Null OneToOne
+        ###############################
+        m15 = M15OneToOneNull(a="hi")
+        m15.save()
+        # Just a basic sanity test.
+        self.assertEqual(len(m15.versions.all()), 1)
+
+        ###############################
         # ManyToMany attribute
         ###############################
         t1 = LameTag(name="T1")

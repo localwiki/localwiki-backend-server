@@ -155,6 +155,11 @@ def _onetoone_unique_fields(m, field):
             **{pk_name: getattr(m, field.attname)})[0]
         parent_instance = parent_hist_instance.version_info._object
 
+    if parent_instance is None:
+        # A null OneToOne value means we want something
+        # like {'page': None}
+        return {field.name: None}
+
     parent_unique = unique_lookup_values_for(parent_instance)
     if not parent_unique:
         # E.g. {'id': 3}
