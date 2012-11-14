@@ -762,6 +762,10 @@ div.templates li .button {
     background: url(../img/arrow-turn-left.png) 2px 2px no-repeat;
     padding-left: 20px;
 }
+.button.infobox .text {
+    background: url(../img/infobox-icon-small.png) 0px 64% no-repeat;
+    padding-left: 23px;
+}
 
 /*
 ====================================
