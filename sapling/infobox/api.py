@@ -76,11 +76,11 @@ from tastypie.authorization import Authorization
 
 from django.db.models.sql.constants import QUERY_TERMS, LOOKUP_SEP
 
-from eav.models import Attribute, Value
-
 from sapling.api import api
 from sapling.api.authentication import ApiKeyWriteAuthentication
 from sapling.api.authorization import ChangePageAuthorization
+
+from models import PageAttribute, PageValue
 
 
 class InfoValue(object):
@@ -95,11 +95,11 @@ class InfoValue(object):
 
 
 AUTOMATIC_DATATYPES = [
-    Attribute.TYPE_TEXT,
-    Attribute.TYPE_FLOAT,
-    Attribute.TYPE_INT,
-    Attribute.TYPE_BOOLEAN,
-    Attribute.TYPE_BOOLEAN,
+    PageAttribute.TYPE_TEXT,
+    PageAttribute.TYPE_FLOAT,
+    PageAttribute.TYPE_INT,
+    PageAttribute.TYPE_BOOLEAN,
+    PageAttribute.TYPE_BOOLEAN,
 ]
 
 
@@ -115,7 +115,7 @@ def to_attr_datatype(o, attribute):
     if attribute.datatype in AUTOMATIC_DATATYPES:
         return o
 
-    if attribute.datatype is Attribute.TYPE_DATE:
+    if attribute.datatype is PageAttribute.TYPE_DATE:
         f = fields.DateTimeField()
         return f.convert(o)
 
@@ -189,8 +189,8 @@ class InfoResource(FilteringAndSortingMixin, Resource):
 
         if isinstance(bundle_or_obj, Bundle):
             obj = bundle_or_obj.obj
-            attribute = Attribute.objects.get(slug=obj.attribute)
-            value = Value.objects.get(entity=obj.page, attribute=attribute)
+            attribute = PageAttribute.objects.get(slug=obj.attribute)
+            value = PageValue.objects.get(entity=obj.page, attribute=attribute)
             kwargs['pk'] = value.id
         else:
             kwargs['pk'] = bundle_or_obj.value.id
@@ -209,7 +209,7 @@ class InfoResource(FilteringAndSortingMixin, Resource):
     def get_object_list(self, request, filters={}):
         print filters
         results = []
-        for value in Value.objects.filter(**filters):
+        for value in PageValue.objects.filter(**filters):
             results.append(InfoValue(value))
 
         return results
@@ -229,7 +229,7 @@ class InfoResource(FilteringAndSortingMixin, Resource):
         return self.get_object_list(request, filters=applicable_filters)
 
     def obj_get(self, request=None, **kwargs):
-        value = Value.objects.get(**kwargs)
+        value = PageValue.objects.get(**kwargs)
         return InfoValue(value)
 
     def obj_create(self, bundle, request=None, **kwargs):
@@ -237,7 +237,7 @@ class InfoResource(FilteringAndSortingMixin, Resource):
         obj = bundle.obj
 
         # Get the associated Attribute object.
-        attribute = Attribute.objects.get(slug=obj.attribute)
+        attribute = PageAttribute.objects.get(slug=obj.attribute)
 
         setattr(obj.page.eav, attribute.slug,
             to_attr_datatype(obj.value, attribute))
@@ -252,7 +252,7 @@ class InfoResource(FilteringAndSortingMixin, Resource):
         return self.obj_create(bundle, request, **kwargs)
 
     def obj_delete(self, request=None, **kwargs):
-        value = Value.objects.get(kwargs['pk'])
+        value = PageValue.objects.get(kwargs['pk'])
         value.delete()
 
 
@@ -260,7 +260,7 @@ class InfoAttributeResource(ModelResource):
     attribute = fields.CharField(attribute='slug')
 
     class Meta:
-        queryset = Attribute.objects.all()
+        queryset = PageAttribute.objects.all()
         resource_name = 'page_info_attribute'
         list_allowed_methods = ['get', 'post']
 
