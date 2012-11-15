@@ -1,5 +1,4 @@
-"""
-Ideal infobox API interaction:
+""" Ideal infobox API interaction:
 
 /api/page_info/
 
@@ -64,6 +63,16 @@ GET /page_info_attribute/
     ...
 }
 
+
+Filtering on custom values-
+
+How would we find all places open between 5 and 6pm on Wednesday?
+
+/info/?
+    hours_open__day=wednesday&
+    hours_open__start_time__gte=5pm&
+    hours_open__end_time__gte=6pm
+
 """
 
 from tastypie.resources import (Resource, Bundle, ModelResource,
@@ -98,7 +107,6 @@ AUTOMATIC_DATATYPES = [
     PageAttribute.TYPE_TEXT,
     PageAttribute.TYPE_FLOAT,
     PageAttribute.TYPE_INT,
-    PageAttribute.TYPE_BOOLEAN,
     PageAttribute.TYPE_BOOLEAN,
 ]
 
@@ -174,6 +182,8 @@ class InfoResource(FilteringAndSortingMixin, Resource):
     # We manage the setting/getting of 'value' by hand, but we'll set
     # value to a CharField here just to add 'value' as a concrete field.
     # This is needed in build_filters().
+    # XXX TODO: remove this nonsense once we're using /info/?has_wifi=True
+    # style & not using build_filters as a mixin
     value = fields.CharField(attribute='value')
 
     class Meta:
@@ -212,6 +222,9 @@ class InfoResource(FilteringAndSortingMixin, Resource):
         return bundle
 
     def get_object_list(self, request, filters={}):
+        # XXX TODO: remove this nonsense once we're using /info/?has_wifi=True
+        # style & not using build_filters as a mixin
+
         # We use 'attribute' as a shortcut for 'attribute.slug', so let's sub
         # that in here.
         slug = filters.get('attribute__exact')
@@ -219,9 +232,9 @@ class InfoResource(FilteringAndSortingMixin, Resource):
             filters['attribute__slug'] = filters['attribute__exact']
             del filters['attribute__exact']
 
-        # use attribute type to get value type         
-        attribute = PageAttribute.objects.get(slug=slug)
-        datatype = attribute.datatype
+            # use attribute type to get value type         
+            attribute = PageAttribute.objects.get(slug=slug)
+            datatype = attribute.datatype
 
         for k in filters.keys():
             if k.startswith('value__'):
@@ -230,7 +243,8 @@ class InfoResource(FilteringAndSortingMixin, Resource):
                 # the datatype of the attribute to determine which to
                 # map this to.
                 rest = k[7:]  # len 'value__' = 7
-                filters['value_%s__%s' % (datatype, rest)] = filters[k]
+                value = to_attr_datatype(filters[k], attribute)
+                filters['value_%s__%s' % (datatype, rest)] = value
                 del filters[k]
 
         results = []
