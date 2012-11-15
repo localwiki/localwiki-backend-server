@@ -510,21 +510,35 @@ class ChangesTracker(object):
         Args:
             attname: Attribute name of the m2m field on the base model.
         """
-        if pk_set:
-            changed_ms = [model.objects.get(pk=pk) for pk in pk_set]
-            hist_changed_ms = []
-            for m in changed_ms:
-                hist_changed_ms.append(get_versions(m).most_recent())
+        def _get_unique_filter(m):
+            pk_att = m._meta.pk.attname
+            pk_val = getattr(m, pk_att)
+            return unique_lookup_values_for(m) or {pk_att: pk_val}
 
         hist_instance = get_versions(instance).most_recent()
         hist_through = getattr(hist_instance, attname)
-        if action == 'post_add':
-            for hist_m in hist_changed_ms:
-                hist_through.add(hist_m)
-        elif action == 'post_remove':
-            for hist_m in hist_changed_ms:
-                hist_through.remove(hist_m)
-        elif action == 'post_clear':
+
+        pk_set = pk_set or []
+
+        for pk in pk_set:
+            m = model.objects.get(pk=pk)
+            most_recent = get_versions(m).most_recent()
+
+            set_has_obj = hist_through.filter(**_get_unique_filter(m))
+            if action == 'post_add':
+                if set_has_obj:
+                    if obj == most_recent:
+                        # Is the current version, so let's not re-add it
+                        continue
+                    else:
+                        # Let's remove the old version
+                        hist_through.remove(obj)
+                hist_through.add(most_recent)
+            elif action == 'post_remove':
+                if set_has_obj:
+                    hist_through.remove(obj)
+
+        if action == 'post_clear':
             hist_through.clear()
 
     def create_historical_record(self, instance, type):

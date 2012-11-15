@@ -1,16 +1,24 @@
-<form action="{% url pages:infobox slug=form.instance.pretty_slug %}" method="POST">
+<form action="{% url infobox:infobox-edit slug=form.instance.pretty_slug %}" method="POST">
     {% csrf_token %}
-    <table>
+    <table class="infobox">
         <tbody>
-            {{ form.as_table }}
+        {% for field in form %}
+            <tr>
+                <th>{{ field.label }}</th>
+            </tr>
+            <tr>
+                <td>{{ field }}</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
+
     <input type="hidden" name="next" value="{{ request.path }}"/>
     <input type="submit" name="save" class="little" value="Save"/>
 </form>
 <br/>
 Add another attribute to this page:
-<form action="{% url pages:add_attribute slug=form.instance.pretty_slug %}" method="POST">
+<form action="{% url infobox:add_attribute slug=form.instance.pretty_slug %}" method="POST">
     {% csrf_token %}
     <table>
         <tbody>

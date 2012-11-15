@@ -808,14 +808,26 @@ class ChangesTrackingTest(TestCase):
         self.assertEqual(m18_h.m2.c, 3)
 
         ###############################
+        # Null OneToOne
+        ###############################
+        m15 = M15OneToOneNull(a="hi")
+        m15.save()
+        # Just a basic sanity test.
+        self.assertEqual(len(m15.versions.all()), 1)
+
+        ###############################
         # ManyToMany attribute
         ###############################
         t1 = LameTag(name="T1")
         t1.save()
         t2 = LameTag(name="T2")
         t2.save()
+        t3 = LameTag(name="T3")
+        t3.save()
+
         m19 = M19ManyToManyFieldVersioned(a="m19 woo")
-        m19.save()
+        m19.save()  # version == 1
+
         m19.tags.add(t1, t2)
         t1.name += "!"
         t1.save()
@@ -824,6 +836,38 @@ class ChangesTrackingTest(TestCase):
 
         m19_h = m19.versions.most_recent()
         tags = m19_h.tags.all()
+        self.assertEqual(set([t.name for t in tags]), set(["T1", "T2"]))
+
+        m19.save()  # version == 2
+        m19.tags = [t1]
+
+        m19.save()  # version == 3
+        m19.tags = [t1, t3]
+
+        m19.save()  # version == 4
+        m19.tags = [t3]
+
+        m19.save()  # version == 5
+        m19.tags.add(t1)
+
+        # version 5 should have t1, t3
+        tags = m19.versions.as_of(version=5).tags.all()
+        self.assertEqual(set([t.name for t in tags]), set(["T1!", "T3"]))
+
+        # version 4 should have just t3
+        tags = m19.versions.as_of(version=4).tags.all()
+        self.assertEqual(set([t.name for t in tags]), set(["T3"]))
+
+        # version 3 should have t1, t3
+        tags = m19.versions.as_of(version=3).tags.all()
+        self.assertEqual(set([t.name for t in tags]), set(["T1!", "T3"]))
+
+        # version 2 should have just the t1 tag
+        tags = m19.versions.as_of(version=2).tags.all()
+        self.assertEqual(set([t.name for t in tags]), set(["T1!"]))
+
+        # oldest should have the t1, t2 tags
+        tags = m19.versions.as_of(version=1).tags.all()
         self.assertEqual(set([t.name for t in tags]), set(["T1", "T2"]))
 
     def test_fk_to_self_hist_lookup(self):
@@ -1199,18 +1243,18 @@ class ChangesTrackingTest(TestCase):
         self.assertEqual(set([t.name for t in tags]), set(["tag1", "tag2", "tag3"]))
 
 ##
-#    def test_reverse_related_name(self):
-#        # custom ForeignKey related_name
+#   # def test_reverse_related_name(self):
+#   #     # custom ForeignKey related_name
 #
-#        # custom OneToOneField related_name
+#   #     # custom OneToOneField related_name
 #
-#        # custom ManyToManyField related_name
+#   #     # custom ManyToManyField related_name
 #
-#        pass
+#   #     pass
 #
 
-    def tests_defer_queryset(self):
-        # defer() should work on versioned querysets
-        m1_hs = M1.versions.all().defer('a')
-        m = m1_hs.get(d="D2!")
-        self.assertEqual(m.a, "A2!")
+    #def tests_defer_queryset(self):
+    #    # defer() should work on versioned querysets
+    #    m1_hs = M1.versions.all().defer('a')
+    #    m = m1_hs.get(d="D2!")
+    #    self.assertEqual(m.a, "A2!")

@@ -128,10 +128,10 @@ install_requires = [
     'django-staticfiles==1.2.1',
     'django-registration==0.8.0',
     'django-olwidget==0.46-custom1',
-    'django-honeypot==0.3.0-custom3',
+    'django-honeypot==0.3.0-custom4',
     'django-tastypie==0.9.12-custom5',
     'django-qsstats-magic==0.7',
-    'django-eav==0.9.5',
+    'django-eav==0.9.13',
     'django-extra-views==0.2.5'
 ]
 if int(os.getenv('DISABLE_INSTALL_REQUIRES', '0')):
@@ -154,10 +154,9 @@ setup(
     install_requires=install_requires,
     dependency_links=[
         'https://github.com/philipn/olwidget/tarball/custom_base_layers_fixed#egg=django-olwidget-0.46-custom1',
-        'https://github.com/philipn/django-honeypot/tarball/master#egg=django-honeypot-0.3.0-custom3',
+        'https://github.com/philipn/django-honeypot/tarball/b4991c140849901d2f8842df2c4672813e73381b#egg=django-honeypot-0.3.0-custom4',
         'https://github.com/philipn/django-tastypie/tarball/localwiki_master#egg=django-tastypie-0.9.12-custom5',
-        'https://github.com/mivanov/django-eav/tarball/unique_enum_values#egg=django-eav-0.9.5',
-        'https://github.com/mivanov/django-extra-views/tarball/master#egg=django-extra-views-0.2.5',
+        'https://github.com/mivanov/django-eav/tarball/v0.9.13#egg=django-eav-0.9.13',
     ],
     entry_points={
         'console_scripts': ['localwiki-manage=sapling.manage:main'],

@@ -619,10 +619,15 @@ label {
 }
 div.templates {
     clear: both;
+    margin-bottom: 6em;
 }
 div.templates li {
     list-style: none;
     margin-left: 1em;
+    clear: both;
+}
+div.templates li .button {
+    margin: 0.5em;
 }
 /* textarea { background: #fff; width: 435px; height: 150px; } */
 
@@ -732,6 +737,12 @@ div.templates li {
 #create_page_dialog div {
     min-height: 3em;
 }
+#create_page p{
+    margin: 0;
+}
+#create_page .button {
+    margin-left: 1.5em;
+}
 .create_map {
     padding-top: 1em;
     min-width: 30px;
@@ -750,6 +761,10 @@ div.templates li {
 .button.redirect .text {
     background: url(../img/arrow-turn-left.png) 2px 2px no-repeat;
     padding-left: 20px;
+}
+.button.infobox .text {
+    background: url(../img/infobox-icon-small.png) 0px 64% no-repeat;
+    padding-left: 23px;
 }
 
 /*
@@ -1023,6 +1038,47 @@ form #content_footer {
     padding-right: 5em;
     margin-top: 0.16em;
 }
+/*
+=======================================
+ Infobox
+=======================================
+*/
+#infobox {
+    margin-bottom: 10px;
+    float: left;
+}
+#infobox .edit_infobox {
+    float: none;
+    width: 60px;
+    text-align: center;
+}
+.infobox .weekly_time_block p {
+    display: inline-block;
+}
+.infobox .weekly_time_block input {
+    max-width: 100px;
+}
+.infobox .weekly_time_block select {
+    max-width: 120px;
+}
+.infobox .datetime input {
+    display: inline;
+    width: 116px;
+}
+.infobox label {
+    font-weight: normal;
+}
+.infobox ul {
+    margin: 0;
+}
+.infobox li {
+    list-style: none;
+    margin: 0;
+}
+table.infobox th {
+    background-color: rgb(232, 236, 239);
+    text-align: left;
+}
 
 /*
 =======================================
@@ -1031,6 +1087,7 @@ form #content_footer {
 */
 #create_page {
     min-height: 4em;
+    clear: both;
 }
 
 

@@ -31,6 +31,7 @@ from maps.widgets import InfoMap
 from models import slugify, clean_name
 from exceptions import PageExistsError
 from users.decorators import permission_required
+from page_utils import get_all_related_objects_full, copy_related_objects
 
 # Where possible, we subclass similar generic views here.
 
@@ -65,6 +66,8 @@ class PageDetailView(Custom404Mixin, DetailView):
             map_controls = map_opts.get('controls', [])
             if 'PanZoomBar' in map_controls:
                 map_controls.remove('PanZoomBar')
+            if 'KeyboardDefaults' in map_controls:
+                map_controls.remove('KeyboardDefaults')
             olwidget_options['map_options'] = map_opts
             olwidget_options['map_div_class'] = 'mapwidget small'
             context['map'] = InfoMap(
@@ -130,6 +133,7 @@ class PageUpdateView(PermissionRequiredMixin, CreateObjectMixin, UpdateView):
         pagename = clean_name(self.kwargs['original_slug'])
         content = _('<p>Describe %s here</p>') % pagename
         if 'template' in self.request.GET:
+            # Initialize page text from the template page.
             try:
                 p = Page.objects.get(slug=self.request.GET['template'])
                 content = p.content
@@ -137,6 +141,24 @@ class PageUpdateView(PermissionRequiredMixin, CreateObjectMixin, UpdateView):
                 pass
         return Page(name=url_to_name(self.kwargs['original_slug']),
                     content=content)
+
+    def form_valid(self, form):
+        new_page = not self.object.pk
+        val = super(PageUpdateView, self).form_valid(form)
+        # If we initialized the page from a Template, copy the related
+        # objects from the Template to the new page.
+        if new_page and 'template' in self.request.GET:
+            try:
+                template_page = Page.objects.get(
+                    slug=self.request.GET['template'])
+            except Page.DoesNotExist:
+                return val
+            related_objs = get_all_related_objects_full(template_page)
+            slug_related_objs = template_page._get_slug_related_objs()
+            copy_related_objects(related_objs, slug_related_objs, self.object,
+                _("Created from template"))
+
+        return val
 
 
 class PageDeleteView(PermissionRequiredMixin, DeleteView):
@@ -306,6 +328,18 @@ class PageCreateView(RedirectView):
             return reverse('pages:edit', args=[pagename])
 
 
+def _find_available_filename(filename, slug):
+    """
+    Returns a filename that isn't taken for the given page slug.
+    """
+    basename, ext = filename.rsplit(".", 1)
+    suffix_count = 1
+    while PageFile.objects.filter(name=filename, slug=slug).exists():
+        suffix_count += 1
+        filename = "%s %d.%s" % (basename, suffix_count, ext)
+    return filename
+
+
 @permission_required('pages.change_page', (Page, 'slug', 'slug'))
 def upload(request, slug, **kwargs):
     # For GET, just return blank response. See issue #327.
@@ -335,9 +369,10 @@ def upload(request, slug, **kwargs):
                                             args=[slug, kwargs['file']]))
 
     # uploaded from ckeditor
-    relative_url = '_files/' + urlquote(uploaded.name)
+    filename = _find_available_filename(uploaded.name, slug)
+    relative_url = '_files/' + urlquote(filename)
     try:
-        file = PageFile(file=uploaded, name=uploaded.name, slug=slug)
+        file = PageFile(file=uploaded, name=filename, slug=slug)
         file.save()
         return ck_upload_result(request, url=relative_url)
     except IntegrityError:

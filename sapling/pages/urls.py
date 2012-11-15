@@ -9,7 +9,6 @@ from models import Page
 from views import PageFilebrowserView
 from tags.views import PageTagSetUpdateView, suggest_tags, PageTagSetVersions,\
     PageTagSetVersionDetailView, PageTagSetCompareView, PageTagSetRevertView
-from infobox.views import InfoboxUpdateView, InfoboxAddAttributeView
 
 page_list_info = {
     'model': Page,
@@ -91,16 +90,6 @@ urlpatterns = patterns('',
         slugify(PageTagSetCompareView.as_view()), name='tags-compare-dates'),
      url(r'^(?P<slug>.+)/_tags/_revert/(?P<version>[0-9]+)$',
         slugify(PageTagSetRevertView.as_view()), name='tags-revert'),
-
-    ##########################################################
-    # Page infobox
-    ##########################################################
-    url(r'^(?P<slug>.+)/_infobox/$',
-        slugify(InfoboxUpdateView.as_view()),
-        name='infobox'),
-    url(r'^(?P<slug>.+)/_infobox/add$',
-        slugify(InfoboxAddAttributeView.as_view()),
-        name='add_attribute'),
 
     #########################################################
     # History URLs.

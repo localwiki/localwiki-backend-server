@@ -71,5 +71,13 @@ things you may need or wish to modify:
     ``it_IT`` (Italian), ``pt_PT`` (Portuguese), ``ru_RU`` (Russian),
     ``de_CH`` (German, CH), ``es_AR`` (Spanish, Argentina), ``da_DK`` (Danish).
 
+``DATE_INPUT_FORMATS`` and ``TIME_INPUT_FORMATS``
+    Preferred input formats for dates and times enforced in forms. The defaults
+    are set to the formats used in the United States. For elsewhere in the
+    world, you may wish to use the following::
+        DATE_INPUT_FORMATS = ('%d/%m/%Y',)  # for dates like 31/12/2012 and
+        TIME_INPUT_FORMATS = ('%H:%M',)     # for times like 13:35
+    You can see all possible options in the `Python documentation <http://docs.python.org/2/library/datetime.html#strftime-strptime-behavior>`_
+
 After changing settings you'll need to restart Apache.  On most systems
 you can do this by running ``sudo /etc/init.d/apache2 restart``.
