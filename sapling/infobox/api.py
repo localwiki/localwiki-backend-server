@@ -171,6 +171,10 @@ class InfoResource(FilteringAndSortingMixin, Resource):
     id = fields.IntegerField(attribute='id')
     attribute = fields.CharField(attribute='attribute')
     page = fields.ToOneField('pages.api.PageResource', 'page')
+    # We manage the setting/getting of 'value' by hand, but we'll set
+    # value to a CharField here just to add 'value' as a concrete field.
+    # This is needed in build_filters().
+    value = fields.CharField(attribute='value')
 
     class Meta:
         resource_name = 'page_info'
@@ -178,6 +182,7 @@ class InfoResource(FilteringAndSortingMixin, Resource):
         list_allowed_methods = ['get', 'post']
         filtering = {
             'attribute': ALL,
+            'value': ALL_WITH_RELATIONS,
         }
         #authentication = ApiKeyWriteAuthentication()
         #authorization = ChangePageAuthorization()
@@ -207,7 +212,27 @@ class InfoResource(FilteringAndSortingMixin, Resource):
         return bundle
 
     def get_object_list(self, request, filters={}):
-        print filters
+        # We use 'attribute' as a shortcut for 'attribute.slug', so let's sub
+        # that in here.
+        slug = filters.get('attribute__exact')
+        if slug:
+            filters['attribute__slug'] = filters['attribute__exact']
+            del filters['attribute__exact']
+
+        # use attribute type to get value type         
+        attribute = PageAttribute.objects.get(slug=slug)
+        datatype = attribute.datatype
+
+        for k in filters.keys():
+            if k.startswith('value__'):
+                # The 'value' attribute is actually one of many possible
+                # value types (value_text, value_date, etc).  So we use
+                # the datatype of the attribute to determine which to
+                # map this to.
+                rest = k[7:]  # len 'value__' = 7
+                filters['value_%s__%s' % (datatype, rest)] = filters[k]
+                del filters[k]
+
         results = []
         for value in PageValue.objects.filter(**filters):
             results.append(InfoValue(value))
