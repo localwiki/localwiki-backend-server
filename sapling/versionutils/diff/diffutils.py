@@ -198,7 +198,7 @@ class BaseModelDiff(object):
             if not isinstance(name, basestring):
                 name = name[0]
             if diffs[name].get_diff():
-                diff_str.append('<tr><td colspan="2">%s</td></tr>' % (name, ))
+                diff_str.append('<tr><th colspan="2">%s</th></tr>' % (name, ))
                 diff_str.append('%s' % (diffs[name], ))
         if diff_str:
             return '\n'.join(diff_str)

@@ -1,0 +1,53 @@
+{% extends "infobox/base.html" %}
+{% load i18n %}
+{% load diff_tags %}
+
+{% block search_robots %}
+<meta name="robots" content="noindex,nofollow">
+{% endblock %}
+
+{% block media %}
+  {{ block.super }}
+  <style>
+    del {
+      background: #FDC6C6;
+      text-decoration: none;
+    }
+    ins {
+      background: #b4ff78;
+      text-decoration: none;
+    }
+    td.revision_details {
+      font-style: italic;
+    }
+  </style>
+{% endblock %}
+
+{% block title %}{% blocktrans with new_name=new.page.name %}Differences for tag versions for {{ new_name }}{% endblocktrans %}{% endblock %}
+{% block header_title %}{% blocktrans with new_name=new.page.name %}Differences for tag versions for {{ new_name }}{% endblocktrans %}{% endblock %}
+
+{% block content %}
+  <table class="infobox" width="100%">
+    <thead>
+        <tr>
+            <td class="revision_details">
+                {% if old %}
+                  {% trans "Revision" %} {{ old.version_number }}
+                  ({{ old.version_info.date }} {% trans "by" %} {{ old.version_info.user_link|safe }})
+                {% endif %}
+            </td>
+            <td class="revision_details">
+                {% trans "Revision" %} {{ new.version_number }}
+                ({{ new.version_info.date }} {% trans "by" %} {{ new.version_info.user_link|safe }})
+            </td>
+        </tr>
+    </thead>
+    <tbody valign="top">
+        {% diff old new as infobox_diff %}
+        {{ infobox_diff }}
+    </tbody>
+  </table>
+  <p>
+      <a href="{% url infobox:infobox-history slug=slug %}">{% trans "Info history" %}</a>
+  </p>
+{% endblock %}

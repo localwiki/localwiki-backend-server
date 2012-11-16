@@ -60,14 +60,16 @@ class PageValue(BaseValue):
 
 class EntityAsOf(Entity):
     """
-    Reconstructs an entity's attribute values as of the given date.
+    Reconstructs an entity's attribute values as of the given date or version.
     """
-    def __init__(self, date, instance):
+    def __init__(self, instance, date=None, version=None):
         super(EntityAsOf, self).__init__(instance)
         attribute_cls = instance._eav_config_cls.attribute_cls
         value_cls = instance._eav_config_cls.value_cls
-        all_versions = value_cls.versions.filter(entity__id=instance.id)
-        versions_before_date = all_versions.filter(history_date__lte=date)
+        self.all_versions = value_cls.versions.filter(entity__id=instance.id)
+        if version is not None:
+            date = self._version_to_date(version)
+        versions_before_date = self.all_versions.filter(history_date__lte=date)
         self.version_number = len(versions_before_date)
         self.version_info = versions_before_date[0].version_info
         for a in attribute_cls.objects.all():
@@ -76,6 +78,10 @@ class EntityAsOf(Entity):
                 self.eav_attributes[a.slug] = value
             except versions_before_date.model.DoesNotExist:
                 pass
+
+    def _version_to_date(self, version):
+        v = self.all_versions.order_by('history_date')[int(version) - 1]
+        return v.history_date
 
     def __getitem__(self, name):
         return self.eav_attributes[name]
@@ -90,3 +96,5 @@ versioning.register(WeeklySchedule)
 versioning.register(WeeklyTimeBlock)
 versioning.register(PageAttribute)
 versioning.register(PageValue)
+
+import diff  # to register diffs

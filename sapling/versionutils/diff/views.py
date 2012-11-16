@@ -17,6 +17,9 @@ class CompareView(DetailView):
     """
     template_name_suffix = '_diff'
 
+    def get_object_as_of(self, version=None, date=None):
+        return get_versions(self.object).as_of(date=date, version=version)
+
     def get_context_data(self, **kwargs):
         context = super(CompareView, self).get_context_data(**kwargs)
 
@@ -31,15 +34,14 @@ class CompareView(DetailView):
             dates = [dateparser(v) for v in dates]
             old = min(dates)
             new = max(dates)
-            new_version = get_versions(self.object).as_of(date=new)
+            new_version = self.get_object_as_of(date=new)
             prev_version = new_version.version_info.version_number() - 1
             if len(dates) == 1 and prev_version > 0:
-                old_version = get_versions(self.object).as_of(
-                    version=prev_version)
+                old_version = self.get_object_as_of(version=prev_version)
             elif prev_version <= 0:
                 old_version = None
             else:
-                old_version = get_versions(self.object).as_of(date=old)
+                old_version = self.get_object_as_of(date=old)
         else:
             # Using version numbers to display diff.
             version1 = self.kwargs.get('version1')
@@ -56,10 +58,10 @@ class CompareView(DetailView):
             if len(versions) == 1:
                 old = max(new - 1, 1)
             if old > 0:
-                old_version = get_versions(self.object).as_of(version=old)
+                old_version = self.get_object_as_of(version=old)
             else:
                 old_version = None
-            new_version = get_versions(self.object).as_of(version=new)
+            new_version = self.get_object_as_of(version=new)
 
         context.update({'old': old_version, 'new': new_version})
         return context
