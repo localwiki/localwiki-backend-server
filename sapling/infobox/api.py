@@ -73,6 +73,9 @@ How would we find all places open between 5 and 6pm on Wednesday?
     hours_open__start_time__gte=5pm&
     hours_open__end_time__gte=6pm
 
+
+new datatypes could be required to register with tastypie
+
 """
 
 from tastypie.resources import (Resource, Bundle, ModelResource,
@@ -89,7 +92,7 @@ from sapling.api import api
 from sapling.api.authentication import ApiKeyWriteAuthentication
 from sapling.api.authorization import ChangePageAuthorization
 
-from models import PageAttribute, PageValue
+from models import PageAttribute, PageValue, WeeklyTimeBlock, WeeklySchedule
 
 
 class InfoValue(object):
@@ -120,12 +123,16 @@ def to_attr_datatype(o, attribute):
     Returns:
         o cast to the datatype of the provided attribute.
     """
+    # TODO: A way to easily extend this when adding new data types.
     if attribute.datatype in AUTOMATIC_DATATYPES:
         return o
 
-    if attribute.datatype is PageAttribute.TYPE_DATE:
+    if attribute.datatype == PageAttribute.TYPE_DATE:
         f = fields.DateTimeField()
         return f.convert(o)
+
+    if attribute.datatype == PageAttribute.TYPE_SCHEDULE:
+        pass
 
     raise TypeError("The datatype %s is not supported via the API yet" %
         attribute.datatype)
@@ -323,5 +330,109 @@ class InfoAttributeResource(ModelResource):
         authorization = Authorization()
 
 
+class WeeklyTimeBlockResource(ModelResource):
+    class Meta:
+        queryset = WeeklyTimeBlock.objects.all()
+        resource_name = 'page_info_weekly_time_block'
+        filtering = {
+            'start_time': ALL,
+            'end_time': ALL,
+            'week_day': ALL,
+        }
+
+
+class WeeklyScheduleResource(ModelResource):
+    time_blocks = fields.ToManyField('infobox.api.WeeklyTimeBlockResource',
+        'time_blocks', full=True)
+
+    class Meta:
+        queryset = WeeklySchedule.objects.all()
+        resource_name = 'page_info_weekly_schedule'
+        filtering = {
+            'time_blocks': ALL_WITH_RELATIONS,
+        }
+
+        #authentication = ApiKeyWriteAuthentication()
+        #authorization = ChangePageAuthorization() or ????
+        authentication = Authentication()
+        authorization = Authorization()
+
+
+# Allow filtering on all fields of PageValue.  We construct this
+# dynamically because of all the possible value_* fields.
+FILTERING_FIELDS = {}
+for f in PageValue._meta.fields:
+    FILTERING_FIELDS[f.name] = ALL_WITH_RELATIONS
+
+
+class InfoValueResource(ModelResource):
+    attribute = fields.ForeignKey(InfoAttributeResource, 'attribute', full=True)
+    value_schedule = fields.ToOneField(WeeklyScheduleResource,
+        'value_schedule', null=True, full=True)
+
+    class Meta:
+        queryset = PageValue.objects.all()
+        resource_name = 'page_info_value'
+        list_allowed_methods = ['get', 'post']
+
+        filtering = FILTERING_FIELDS
+
+        #authentication = ApiKeyWriteAuthentication()
+        #authorization = ChangePageAuthorization() or ????
+        authentication = Authentication()
+        authorization = Authorization()
+
+    def dehydrate(self, bundle):
+        # Over-ride 'attribute' to be just the attribute slug for easy-of-use.
+        bundle.data['attribute'] = bundle.obj.attribute.slug
+
+        datatype = bundle.obj.attribute.datatype
+        bundle.data['value'] = bundle.data['value_%s' % datatype]
+        # Hide all other value_ fields
+        for field in bundle.data.keys():
+            if field.startswith('value_'):
+                del bundle.data[field]
+
+        return bundle
+
+    def full_hydrate(self, bundle):
+        bundle = super(InfoValueResource, self).full_hydrate(bundle)
+
+        # Over-ride 'attribute' to be just the attribute slug for easy-of-use.
+        attribute = PageAttribute.objects.get(attribute=bundle.data['attribute'])
+        bundle.obj.attribute = attribute
+
+        # Take the provided 'value' and stuff it into the associated
+        # 'value_<datatype>' field.
+        # XXX TODO
+        raise Exception
+
+        return bundle
+
+    def build_filters(self, filters=None):
+        # Because we over-ride 'attribute' we need to set it to the
+        # correct, deeper lookup here.
+        if filters.get('attribute'):
+            slug = filters['attribute']
+            filters['attribute__attribute'] = slug
+            del filters['attribute']
+            attribute = PageAttribute.objects.get(slug=slug)
+            datatype = attribute.datatype
+
+        for k in filters.keys():
+            # Set the generic 'value' filter to the correct datatype value.
+            if k.startswith('value'):
+                rest = k[5:]  # len('value') == 5
+                filters['value_%s%s' % (datatype, rest)] = filters[k]
+                del filters[k]
+
+        return super(InfoValueResource, self).build_filters(filters)
+
+
 api.register(InfoResource())
 api.register(InfoAttributeResource())
+
+api.register(WeeklyTimeBlockResource())
+api.register(WeeklyScheduleResource())
+
+api.register(InfoValueResource())
