@@ -1,6 +1,7 @@
 from tags.views import PageNotFoundMixin
 from utils.views import PermissionRequiredMixin, CreateObjectMixin
 from versionutils.versioning.views import UpdateView, VersionsList
+from versionutils.diff.views import CompareView
 from infobox.forms import InfoboxForm
 from pages.models import Page
 from django.core.urlresolvers import reverse
@@ -11,6 +12,7 @@ from django.views.generic.edit import CreateView
 from models import PageAttribute, PageValue, EntityAsOf
 from templatetags.infobox_tags import render_attribute
 from django.views.generic.detail import DetailView
+from eav.models import Entity
 
 
 class InfoboxUpdateView(PageNotFoundMixin, PermissionRequiredMixin,
@@ -109,12 +111,7 @@ class InfoboxVersionDetailView(DetailView):
             self.page = Page.objects.get(slug=page_slug)
             version = self.kwargs.get('version')
             date = self.kwargs.get('date')
-            if version:
-                versions = PageValue.versions.filter(entity__id=self.page.id)
-                ordered_versions = versions.order_by('history_date')
-                date = ordered_versions[int(version) - 1].history_date
-            self.history_date = date
-            return EntityAsOf(date, self.page)
+            return EntityAsOf(self.page, date=date, version=version)
         except (Page.DoesNotExist, IndexError):
             return None
 
@@ -136,4 +133,20 @@ class InfoboxVersionDetailView(DetailView):
                                  })
         context['attributes'] = attributes
         return context
-    
+
+
+class InfoboxCompareView(CompareView):
+    template_name = 'infobox/infobox_diff.html'
+
+    def get_object(self):
+        page_slug = self.kwargs.get('slug')
+        page = Page.objects.get(slug=page_slug)
+        return Entity(page)
+
+    def get_object_as_of(self, version=None, date=None):
+        return EntityAsOf(self.object.model, version=version, date=date)
+
+    def get_context_data(self, **kwargs):
+        context = super(InfoboxCompareView, self).get_context_data(**kwargs)
+        context['slug'] = self.kwargs['original_slug']
+        return context

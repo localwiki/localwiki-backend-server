@@ -54,6 +54,8 @@ def render_attribute(attribute, value):
     safe HTML string.
     """
     rendered = '<p></p>'  # default if no value
+    if value is None:
+        return mark_safe(rendered)
     if attribute.datatype == attribute.TYPE_ENUM:
         value_list = ['<li>%s</li>' % escape(v.value) for v in value.all()]
         if value_list:
