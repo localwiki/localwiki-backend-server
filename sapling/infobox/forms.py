@@ -32,8 +32,11 @@ WeeklyTimeBlockFormSet = inlineformset_factory(WeeklySchedule, WeeklyTimeBlock,
 
 class WeeklyScheduleForm(WeeklyTimeBlockFormSet):
     def save(self, commit=True):
-        self.instance.save()
+        if not self.instance.pk:
+            self.instance.save()
         super(WeeklyScheduleForm, self).save(commit)
+        # For compatibility with versioning, we save instance last.
+        self.instance.save()
         return self.instance
 
 
