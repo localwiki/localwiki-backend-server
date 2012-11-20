@@ -357,6 +357,25 @@ class M29SConcreteCustomAttributes(M29AbstractCustomAttributes):
 versioning.register(M29SConcreteCustomAttributes)
 
 
+class M30CustomAttribute(models.Model):
+    a = models.CharField(max_length=100)
+    b = 'magic b'
+
+    def _get_c(self):
+        return 'magic c'
+    c = property(_get_c)
+
+    def d(self):
+        return 'magic d'
+
+
+class M30CustomAttributeSubclass(M30CustomAttribute):
+    e = models.CharField(max_length=100)
+
+
+versioning.register(M30CustomAttributeSubclass)
+
+
 TEST_MODELS = [
     M1, M2, M3BigInteger, M4Date, M5Decimal, M6Email, M7Numbers,
     M8Time, M9URL, M10File, M11Image, M12ForeignKey, M13ForeignKeySelf,
@@ -370,5 +389,5 @@ TEST_MODELS = [
     MUniqueAndFK, MUniqueAndFK2,
     NonVersionedModel, M27FKToNonVersioned,
     M28OneToOneNonVersioned,
-    M29SConcreteCustomAttributes,
+    M29SConcreteCustomAttributes, M30CustomAttributeSubclass,
 ]
