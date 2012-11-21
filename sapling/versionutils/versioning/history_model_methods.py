@@ -368,6 +368,8 @@ def revert_to(hm, delete_newer_versions=False, **kws):
         # currently deleted.
         for field in get_related_versioned_fields(m):
             rel_hist = getattr(hm, field.name)
+            if rel_hist is None:
+                continue
             rel_o = rel_hist.version_info._object
             latest_version = get_versions(rel_o).most_recent()
             if latest_version.version_info.type in DELETED_TYPES:

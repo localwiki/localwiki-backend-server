@@ -24,14 +24,13 @@ urlpatterns = patterns('',
         r'(?P<date1>%s)\.\.\.(?P<date2>%s)?$'
         % (DATETIME_REGEXP, DATETIME_REGEXP),
         slugify(InfoboxCompareView.as_view()), name='infobox-compare-dates'),
+    url(r'^(?P<slug>.+)/_revert/(?P<version>[0-9]+)$',
+        slugify(InfoboxRevertView.as_view()), name='infobox-revert'),
     url(r'^(?P<slug>.+)/_add$', slugify(InfoboxAddAttributeView.as_view()),
         name='add_attribute'),
     url(r'^(?P<slug>.+)/', slugify(InfoboxUpdateView.as_view()),
         name='infobox-edit'),
 
-
-#     url(r'^(?P<slug>.+)/_revert/(?P<version>[0-9]+)$',
-#        slugify(InfoboxRevertView.as_view()), name='infobox-revert'),
 
     # TODO: the following patterns need updating or removal
     #url(r'^$', AttributeListView.as_view(), name='attribute-list'),
