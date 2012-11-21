@@ -148,6 +148,10 @@ textarea, input, select {
     padding-left: 3.5em;
     background: url(../img/tag-icon.png) 0.75em 45% no-repeat;
 }
+.infoboxpage #header_bar {
+    padding-left: 3.5em;
+    background: url(../img/infobox-icon.png) 0.65em 45% no-repeat;
+}
 
 #object_title {
     padding: 0;
