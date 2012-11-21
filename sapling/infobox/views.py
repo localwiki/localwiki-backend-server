@@ -1,6 +1,6 @@
 from tags.views import PageNotFoundMixin
 from utils.views import PermissionRequiredMixin, CreateObjectMixin
-from versionutils.versioning.views import UpdateView, VersionsList
+from versionutils.versioning.views import UpdateView, VersionsList, RevertView
 from versionutils.diff.views import CompareView
 from infobox.forms import InfoboxForm
 from pages.models import Page
@@ -102,7 +102,6 @@ class InfoboxVersions(VersionsList):
 
 class InfoboxVersionDetailView(DetailView):
     context_object_name = 'infobox'
-
     template_name = 'infobox/infobox_version_detail.html'
 
     def get_object(self):
@@ -150,3 +149,15 @@ class InfoboxCompareView(CompareView):
         context = super(InfoboxCompareView, self).get_context_data(**kwargs)
         context['slug'] = self.kwargs['original_slug']
         return context
+
+
+class InfoboxRevertView(PermissionRequiredMixin, InfoboxVersionDetailView,
+                        RevertView):
+    template_name = 'infobox/infobox_confirm_revert.html'
+    permission = 'pages.change_page'
+
+    def get_protected_object(self):
+        return self.object.model
+
+    def get_success_url(self):
+        return reverse('infobox:infobox-history', args=[self.kwargs['slug']])

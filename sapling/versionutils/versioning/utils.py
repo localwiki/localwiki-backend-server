@@ -158,7 +158,7 @@ def _onetoone_unique_fields(m, field):
     if parent_instance is None:
         # A null OneToOne value means we want something
         # like {'page': None}
-        return {field.name: None}
+        return {}
 
     parent_unique = unique_lookup_values_for(parent_instance)
     if not parent_unique:

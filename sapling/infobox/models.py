@@ -86,6 +86,13 @@ class EntityAsOf(Entity):
     def __getitem__(self, name):
         return self.eav_attributes[name]
 
+    def revert_to(self, **kwargs):
+        '''
+        Reverts all of this Entity's values to the versions currently selected.
+        '''
+        map(lambda value: value.revert_to(**kwargs),
+            self.eav_attributes.values())
+
 
 eav.register(Page, PageAttribute, PageValue)
 
