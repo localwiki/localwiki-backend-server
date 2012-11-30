@@ -31,9 +31,23 @@ def infobox(instance):
 def infobox_form(context, entity):
     context.push()
     context['form'] = InfoboxForm(instance=entity)
-    context['add_attribute_form'] = AddAttributeForm(instance=entity)
     rendered = render_to_string('infobox/infobox_form_snippet.html', context)
     rendered = str(context['form'].media) + rendered
+    context.pop()
+    return rendered
+
+
+@register.simple_tag(takes_context=True)
+def add_attribute_form(context, entity):
+    form = AddAttributeForm(instance=entity)
+    if len(form['attribute'].field.choices) == 0:
+        rendered = ""
+    else:
+        context.push()
+        context['form'] = form
+        rendered = render_to_string('infobox/infobox_add_attribute_form.html',
+                                    context)
+        context.pop()
     return rendered
 
 
