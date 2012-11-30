@@ -46,7 +46,27 @@ class PageAttribute(BaseAttribute):
     TYPE_SCHEDULE = 'schedule'
 
 
-class PageValue(BaseValue):
+class CommentMixin(object):
+    """
+    Versioning-related mixin for adding a comment to a model instance on save.
+    If a comment has already been set higher up the chain, it will not be
+    changed.
+    Override get_save_comment() to return a comment string.
+    """
+    def get_save_comment(self):
+        return None
+
+    def save(self, *args, **argv):
+        save_with = getattr(self, "_save_with", {})
+        if not "comment" in save_with:
+            comment = self.get_save_comment()
+            if comment is not None:
+                save_with["comment"] = comment
+                setattr(self, "_save_with", save_with)
+        super(CommentMixin, self).save(*args, **argv)
+
+
+class PageValue(CommentMixin, BaseValue):
     attribute = models.ForeignKey(PageAttribute, db_index=True,
         verbose_name=_(u"attribute"))
     entity = models.ForeignKey(Page, blank=False, null=False)
@@ -56,6 +76,9 @@ class PageValue(BaseValue):
     value_schedule = models.OneToOneField(WeeklySchedule, blank=True,
         null=True, verbose_name=_(u"weekly schedule"),
         related_name='eav_value')
+
+    def get_save_comment(self):
+        return u"%s %s" % (_(u"Updated"), self.attribute.name)
 
 
 class EntityAsOf(Entity):
