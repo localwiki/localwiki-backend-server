@@ -104,4 +104,6 @@ versioning.register(WeeklyTimeBlock)
 versioning.register(PageAttribute)
 versioning.register(PageValue)
 
-import diff  # to register diffs
+# register diffs and feeds
+import diff
+import feeds
