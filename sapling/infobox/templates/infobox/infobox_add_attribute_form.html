@@ -1,0 +1,9 @@
+{% if form %}
+    Add another attribute to this page:
+    <form action="{% url infobox:add_attribute slug=form.instance.pretty_slug %}" method="POST">
+        {% csrf_token %}
+        {{ form.attribute }}
+        <input type="hidden" name="next" value="{{ request.path }}"/>
+        <input type="submit" name="save" class="little" value="Add"/>
+    </form>
+{% endif %}
