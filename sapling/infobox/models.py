@@ -63,10 +63,11 @@ class CommentMixin(object):
             if comment is not None:
                 save_with["comment"] = comment
                 setattr(self, "_save_with", save_with)
-        super(CommentMixin, self).save(*args, **argv)
+        # versioning doesn't work with mixins, uncomment when fixed 
+        #super(CommentMixin, self).save(*args, **argv)
 
 
-class PageValue(CommentMixin, BaseValue):
+class PageValue(BaseValue, CommentMixin): ## workaround, mixin should be first
     attribute = models.ForeignKey(PageAttribute, db_index=True,
         verbose_name=_(u"attribute"))
     entity = models.ForeignKey(Page, blank=False, null=False)
@@ -76,6 +77,11 @@ class PageValue(CommentMixin, BaseValue):
     value_schedule = models.OneToOneField(WeeklySchedule, blank=True,
         null=True, verbose_name=_(u"weekly schedule"),
         related_name='eav_value')
+
+    ## workaround for versionutils not working with model mixins
+    def save(self, *args, **kwargs):
+        CommentMixin.save(self, *args, **kwargs)
+        BaseValue.save(self, *args, **kwargs)
 
     def get_save_comment(self):
         return u"%s %s" % (_(u"Updated"), self.attribute.name)
