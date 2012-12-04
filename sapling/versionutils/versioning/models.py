@@ -63,7 +63,7 @@ class ChangesTracker(object):
         models.signals.post_save.connect(_post_save, weak=False)
         models.signals.pre_delete.connect(_pre_delete, weak=False)
         models.signals.post_delete.connect(_post_delete, weak=False)
-	self.setup_m2m_signals(m)
+        self.setup_m2m_signals(m)
 
         self.wrap_model_fields(m)
 
@@ -506,9 +506,9 @@ class ChangesTracker(object):
                 models.signals.pre_delete.disconnect(method, model, weak=False)
 
     def setup_m2m_signals(self, model):
-	"""
-	Enables the m2m signal handlers on versioned M2M relations.
-	"""
+    """
+    Enables the m2m signal handlers on versioned M2M relations.
+    """
         for field in model._meta.local_many_to_many:
             parent_model = field.rel.to
 
@@ -519,7 +519,7 @@ class ChangesTracker(object):
                     # versioned.  In this case, we subclass the
                     # parent historical model and use that parent
                     # related field instead -- so we skip setting
-		    # this signal handler.
+                    # this signal handler.
                     continue
 
                 _m2m_changed = partial(self.m2m_changed, field.name)
