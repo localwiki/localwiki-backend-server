@@ -63,6 +63,7 @@ class ChangesTracker(object):
         models.signals.post_save.connect(_post_save, weak=False)
         models.signals.pre_delete.connect(_pre_delete, weak=False)
         models.signals.post_delete.connect(_post_delete, weak=False)
+	self.setup_m2m_signals(m)
 
         self.wrap_model_fields(m)
 
@@ -307,11 +308,7 @@ class ChangesTracker(object):
                     else:
                         model_type = models.ManyToManyField
                         options = _get_m2m_opts(field)
-                        _m2m_changed = partial(self.m2m_changed, field.name)
-                        models.signals.m2m_changed.connect(_m2m_changed,
-                            sender=getattr(model, field.name).through,
-                            weak=False,
-                        )
+
                     if is_to_self:
                         # Fix related name conflict. We set this manually
                         # elsewhere so giving this a funky name isn't a
@@ -441,7 +438,7 @@ class ChangesTracker(object):
             else:
                 history_type = history_type or TYPE_UPDATED
         hist_instance = self.create_historical_record(instance, history_type)
-        self.m2m_init(instance, hist_instance)
+        self.create_m2m_set(instance, hist_instance)
 
     def pre_delete(self, parent, instance, **kws):
         # To support subclassing.
@@ -501,14 +498,37 @@ class ChangesTracker(object):
         if not is_pk_recycle_a_problem(instance) and instance._track_changes:
             hist_instance = self.create_historical_record(
                 instance, history_type)
-            self.m2m_init(instance, hist_instance)
+            self.create_m2m_set(instance, hist_instance)
 
         # Disconnect the related objects signals
         if hasattr(instance, '_rel_objs_methods'):
             for model, method in instance._rel_objs_methods.iteritems():
                 models.signals.pre_delete.disconnect(method, model, weak=False)
 
-    def m2m_init(self, instance, hist_instance):
+    def setup_m2m_signals(self, model):
+	"""
+	Enables the m2m signal handlers on versioned M2M relations.
+	"""
+        for field in model._meta.local_many_to_many:
+            parent_model = field.rel.to
+
+            # We only set up m2m signal handlers on versioned models.
+            if is_versioned(parent_model) or model == parent_model:
+                if getattr(field.rel, 'parent_link', None):
+                    # Concrete model inheritance and the parent is
+                    # versioned.  In this case, we subclass the
+                    # parent historical model and use that parent
+                    # related field instead -- so we skip setting
+		    # this signal handler.
+                    continue
+
+                _m2m_changed = partial(self.m2m_changed, field.name)
+                models.signals.m2m_changed.connect(_m2m_changed,
+                    sender=getattr(model, field.name).through,
+                    weak=False,
+                )
+
+    def create_m2m_set(self, instance, hist_instance):
         """
         Initialize the ManyToMany sets on a historical instance.
         """
