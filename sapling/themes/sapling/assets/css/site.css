@@ -1047,6 +1047,13 @@ form #content_footer {
     margin-bottom: 10px;
     float: left;
 }
+#infobox form {
+    display: inline;
+}
+#infobox input[type="submit"] {
+    display: inline;
+    margin-right: 0.5em;
+}
 #infobox .edit_infobox {
     float: none;
     width: 60px;
