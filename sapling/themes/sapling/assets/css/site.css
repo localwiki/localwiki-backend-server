@@ -1045,6 +1045,7 @@ form #content_footer {
 */
 #infobox {
     margin-bottom: 10px;
+    margin-right: 1em;
     float: left;
 }
 #infobox form {
