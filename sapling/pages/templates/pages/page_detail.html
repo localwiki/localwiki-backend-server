@@ -27,8 +27,8 @@
   {% else %}
     <div id="content">
   {% endif %}
+  {% if not page.version_info and page.eav.get_values %}
   <div id="infobox">
-  {% if not page.version_info %}
     <div class="infobox_show">
       {% infobox page %}
       <a class="tiny button edit_infobox" href="{% url infobox:infobox-history slug=page.pretty_slug %}" onclick="$(this).closest('div').hide().next().show(); return false;">
@@ -39,8 +39,8 @@
       {% infobox_form page %}
       <a class="edit_infobox_cancel" href="{% url pages:show slug=page.pretty_slug %}">{% trans "Cancel" %}</a>
     </div>
-  {% endif %}
   </div>
+  {% endif %}
   {% block content %}
     {% if show_revision %}
       <em class="revision_details">
