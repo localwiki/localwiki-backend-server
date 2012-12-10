@@ -56,12 +56,16 @@ class DateWidget(DateInput):
 
 
 class TimeWidget(TimeInput):
-    def __init__(self):
+    def __init__(self, scroll_default_time=None):
         TimeInput.__init__(self, {'class': 'time'})
+        self.scroll_default_time = scroll_default_time
 
     def render(self, name, value, attrs=None):
         input = TimeInput.render(self, name, value, attrs=attrs)
-        opts = {'timeFormat': _time_format_for_javascript(self.format)}
+        print self.scroll_default_time
+        opts = {'timeFormat': _time_format_for_javascript(self.format),
+                'scrollDefaultTime': self.scroll_default_time or False,
+                }
         script = '<script>$("#%s").timepicker(%s);</script>' % (attrs['id'],
                                                                 opts)
         return input + script

@@ -19,8 +19,10 @@ class PageLinkForm(ModelForm):
 class WeeklyTimeBlockForm(ModelForm):
     def __init__(self, *args, **kwargs):
         ModelForm.__init__(self, *args, **kwargs)
-        self.fields['start_time'].widget = TimeWidget()
-        self.fields['end_time'].widget = TimeWidget()
+        self.fields['start_time'].widget = TimeWidget(
+                                            scroll_default_time='9:00am')
+        self.fields['end_time'].widget = TimeWidget(
+                                            scroll_default_time='5:00pm')
 
     class Meta:
         model = WeeklyTimeBlock

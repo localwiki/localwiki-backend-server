@@ -2,7 +2,7 @@
     {% regroup time_blocks|dictsort:"week_day" by week_day_name as weekday_list %}
     {% for weekday in weekday_list%}
         <li><b>{{ weekday.grouper }}:</b>
-            {% for block in weekday.list %}
+            {% for block in weekday.list|dictsort:"start_time" %}
                 {{ block.start_time }}-{{ block.end_time }}{% if not forloop.last %},{% endif %}
             {% endfor %}
         </li>
