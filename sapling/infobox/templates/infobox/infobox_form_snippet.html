@@ -1,10 +1,16 @@
+{% load i18n %}
+{% load infobox_tags %}
 <form action="{% url infobox:infobox-edit slug=form.instance.pretty_slug %}" method="POST">
     {% csrf_token %}
     <table class="infobox">
         <tbody>
         {% for field in form %}
             <tr>
-                <th>{{ field.label }}</th>
+                <th>{{ field.label }}
+                    {% if allowdelete %}
+                        <a href="{% url infobox:delete_attribute slug=form.instance.pretty_slug %}?attribute={{ field.name }}" title="{% trans "Delete" %}" class="delete_attribute">Delete</a>
+                    {% endif %}
+                </th>
             </tr>
             <tr>
                 <td>{{ field }}</td>

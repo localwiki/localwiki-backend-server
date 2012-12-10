@@ -11,7 +11,7 @@
 {% block header_title %}{% trans "Info for" %} <a href="{% url pages:show slug=page.slug %}">{{ page.name }}</a>{% endblock %}
 
 {% block content %}
-  {% infobox_form page %}
+  {% infobox_form page "allowdelete" %}
   <br/>
   {% add_attribute_form page %}
   <br/>

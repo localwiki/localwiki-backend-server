@@ -1,0 +1,22 @@
+{% extends "infobox/base.html" %}
+{% load i18n %}
+{% load infobox_tags %}
+
+{% block search_robots %}
+<meta name="robots" content="noindex,nofollow">
+{% endblock %}
+
+
+{% block title %}{% trans "Delete" %} "{{ pagevalue.attribute.name }}" - {{ block.super }}{% endblock %}
+{% block header_title %}{% trans "Delete" %} "{{ pagevalue.attribute.name }}" {% trans "on" %} <a href="{% url pages:show slug=pagevalue.entity.pretty_slug %}">{{ pagevalue.entity.name }}</a>{% endblock %}
+
+{% block dialog %}
+<div id="dialog">
+ <form method="post" action="">{% csrf_token %}
+    <ul>
+      {{ form.as_ul }}
+    </ul>
+    <input type="submit" value="{% trans "Delete" %}"/>
+ </form>
+</div>
+{% endblock %}

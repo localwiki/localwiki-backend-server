@@ -1,6 +1,7 @@
 from tags.views import PageNotFoundMixin
 from utils.views import PermissionRequiredMixin, CreateObjectMixin
-from versionutils.versioning.views import UpdateView, VersionsList, RevertView
+from versionutils.versioning.views import UpdateView, VersionsList, RevertView,\
+    DeleteView
 from versionutils.diff.views import CompareView
 from infobox.forms import InfoboxForm
 from pages.models import Page
@@ -54,6 +55,27 @@ class InfoboxAddAttributeView(PageNotFoundMixin, PermissionRequiredMixin,
         return self.object
 
 
+class InfoboxDeleteAttributeView(PermissionRequiredMixin, DeleteView):
+    model = PageValue
+    context_object_name = 'pagevalue'
+    permission = 'pages.change_page'
+
+    def get_object(self):
+        page_slug = self.kwargs.get('slug')
+        self.page = get_object_or_404(Page, slug=page_slug)
+        attribute_slug = self.request.GET['attribute']
+        return PageValue.objects.get(entity=self.page,
+                                     attribute__slug=attribute_slug)
+
+    def get_protected_object(self):
+        return self.page
+
+    def get_success_url(self):
+        # Redirect back to the infobox view
+        return reverse('infobox:infobox-history',
+                       args=[self.kwargs.get('original_slug')])
+
+
 class AttributeListView(ListView):
     context_object_name = 'attribute_list'
     template_name = 'infobox/attribute_list.html'
@@ -83,8 +105,6 @@ class AttributeCreateView(CreateView):
 
 
 class InfoboxVersions(VersionsList):
-    template_name = 'infobox/infobox_versions.html'
-
     def get_queryset(self):
         page_slug = self.kwargs.get('slug')
         try:

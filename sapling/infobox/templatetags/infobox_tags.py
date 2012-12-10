@@ -28,9 +28,11 @@ def infobox(instance):
 
 
 @register.simple_tag(takes_context=True)
-def infobox_form(context, entity):
+def infobox_form(context, entity, extra=None):
     context.push()
     context['form'] = InfoboxForm(instance=entity)
+    if extra == "allowdelete":
+        context['allowdelete'] = True
     rendered = render_to_string('infobox/infobox_form_snippet.html', context)
     rendered = str(context['form'].media) + rendered
     context.pop()
