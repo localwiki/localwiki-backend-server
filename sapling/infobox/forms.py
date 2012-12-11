@@ -2,6 +2,7 @@ from django import forms
 from django.forms.models import ModelForm, inlineformset_factory,\
     ModelChoiceField
 from django.contrib.contenttypes.models import ContentType
+from django.utils.translation import ugettext_lazy as _
 
 from eav.forms import BaseDynamicEntityForm
 
@@ -9,6 +10,7 @@ from pages.models import Page
 from infobox.models import WeeklySchedule, WeeklyTimeBlock, PageLink,\
     PageAttribute
 from widgets import DateTimeWidget, TimeWidget
+from django.forms.fields import TimeField
 
 
 class PageLinkForm(ModelForm):
@@ -17,11 +19,13 @@ class PageLinkForm(ModelForm):
 
 
 class WeeklyTimeBlockForm(ModelForm):
+    start_time = TimeField(label=_('From'),
+                           widget=TimeWidget(scroll_default_time='9:00am'))
+    end_time = TimeField(label=_('To'),
+                         widget=TimeWidget(scroll_default_time='5:00pm'))
+
     class Meta:
         model = WeeklyTimeBlock
-        widgets = { 'start_time': TimeWidget(scroll_default_time='9:00am'),
-                    'end_time': TimeWidget(scroll_default_time='5:00pm')
-                   }
 
 
 WeeklyTimeBlockFormSet = inlineformset_factory(WeeklySchedule, WeeklyTimeBlock,

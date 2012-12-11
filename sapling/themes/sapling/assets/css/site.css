@@ -1060,14 +1060,22 @@ form #content_footer {
     width: 60px;
     text-align: center;
 }
+.infobox div.weekly_time_block {
+    clear: both;
+}
+.infobox .weekly_time_block input[name$='DELETE'] {
+    /* align Delete checkbox */
+    margin-top: 2em;
+}
 .infobox .weekly_time_block p {
-    display: inline-block;
+    float: left;
+    margin: 0.2em;
 }
 .infobox .weekly_time_block input {
     max-width: 100px;
 }
 .infobox .weekly_time_block select {
-    max-width: 120px;
+    max-width: 140px;
 }
 .infobox .datetime input {
     display: inline;

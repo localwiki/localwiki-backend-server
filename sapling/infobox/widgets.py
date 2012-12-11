@@ -1,5 +1,6 @@
 import datetime
 import time
+import simplejson as json
 
 from django.forms.widgets import TimeInput, DateInput, MultiWidget
 from django.utils.translation import gettext_lazy as _
@@ -66,7 +67,7 @@ class TimeWidget(TimeInput):
                 'scrollDefaultTime': self.scroll_default_time or False,
                 }
         script = '<script>$("#%s").timepicker(%s);</script>' % (attrs['id'],
-                                                                opts)
+                                                            json.dumps(opts))
         return input + script
 
     class Media:
