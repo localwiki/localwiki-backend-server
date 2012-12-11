@@ -1,9 +1,11 @@
+{% load i18n %}
+
 {% if form %}
-    Add another attribute to this page:
+   {% trans "Add an attribute to this page" %}:
     <form action="{% url infobox:add_attribute slug=form.instance.pretty_slug %}" method="POST">
         {% csrf_token %}
         {{ form.attribute }}
         <input type="hidden" name="next" value="{{ request.path }}"/>
-        <input type="submit" name="save" class="little" value="Add"/>
+        <input type="submit" name="save" class="little" value="{% trans "Add" %}"/>
     </form>
 {% endif %}
