@@ -1056,9 +1056,14 @@ form #content_footer {
     margin-right: 0.5em;
 }
 #infobox .edit_infobox {
-    float: none;
-    width: 60px;
-    text-align: center;
+    display: block;
+    padding: 13px 10px 14px 8px;
+    font-weight: normal;
+    margin-bottom: 1em;
+}
+#infobox .edit_infobox span {
+    background: url(../img/infobox-icon-small.png) 0 0 no-repeat;
+    padding-left: 22px;
 }
 .infobox div.weekly_time_block {
     clear: both;
