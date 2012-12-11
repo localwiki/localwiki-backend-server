@@ -62,7 +62,6 @@ class TimeWidget(TimeInput):
 
     def render(self, name, value, attrs=None):
         input = TimeInput.render(self, name, value, attrs=attrs)
-        print self.scroll_default_time
         opts = {'timeFormat': _time_format_for_javascript(self.format),
                 'scrollDefaultTime': self.scroll_default_time or False,
                 }
