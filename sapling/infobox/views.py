@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.list import ListView
 from forms import AttributeCreateForm, AttributeUpdateForm, AddAttributeForm
 from django.views.generic.edit import CreateView
-from models import PageAttribute, PageValue, EntityAsOf
+from infobox.models import PageAttribute, PageValue, EntityAsOf
 from templatetags.infobox_tags import render_attribute
 from django.views.generic.detail import DetailView
 from eav.models import Entity

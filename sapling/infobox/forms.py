@@ -6,8 +6,8 @@ from django.contrib.contenttypes.models import ContentType
 from eav.forms import BaseDynamicEntityForm
 
 from pages.models import Page
-from infobox.models import WeeklySchedule, WeeklyTimeBlock, PageLink
-from models import PageAttribute
+from infobox.models import WeeklySchedule, WeeklyTimeBlock, PageLink,\
+    PageAttribute
 from widgets import DateTimeWidget, TimeWidget
 
 
