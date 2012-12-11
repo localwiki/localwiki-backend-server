@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load infobox_tags %}
+{% if form.fields %}
 <form action="{% url infobox:infobox-edit slug=form.instance.pretty_slug %}" method="POST">
     {% csrf_token %}
     <table class="infobox">
@@ -22,3 +23,4 @@
     <input type="hidden" name="next" value="{{ request.path }}"/>
     <input type="submit" name="save" class="little" value="{% trans "Save" %}"/>
 </form>
+{% endif %}
