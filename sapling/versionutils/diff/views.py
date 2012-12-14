@@ -20,6 +20,9 @@ class CompareView(DetailView):
     def get_object_as_of(self, version=None, date=None):
         return get_versions(self.object).as_of(date=date, version=version)
 
+    def get_version_number(self, hist_object):
+        return hist_object.version_info.version_number()
+
     def get_context_data(self, **kwargs):
         context = super(CompareView, self).get_context_data(**kwargs)
 
@@ -35,7 +38,8 @@ class CompareView(DetailView):
             old = min(dates)
             new = max(dates)
             new_version = self.get_object_as_of(date=new)
-            prev_version = new_version.version_info.version_number() - 1
+            version_number = self.get_version_number(new_version)
+            prev_version = version_number - 1
             if len(dates) == 1 and prev_version > 0:
                 old_version = self.get_object_as_of(version=prev_version)
             elif prev_version <= 0:

@@ -165,6 +165,9 @@ class InfoboxCompareView(CompareView):
     def get_object_as_of(self, version=None, date=None):
         return EntityAsOf(self.object.model, version=version, date=date)
 
+    def get_version_number(self, hist_object):
+        return hist_object.version_number
+
     def get_context_data(self, **kwargs):
         context = super(InfoboxCompareView, self).get_context_data(**kwargs)
         context['slug'] = self.kwargs['original_slug']
