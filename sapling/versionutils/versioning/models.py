@@ -63,6 +63,7 @@ class ChangesTracker(object):
         models.signals.post_save.connect(_post_save, weak=False)
         models.signals.pre_delete.connect(_pre_delete, weak=False)
         models.signals.post_delete.connect(_post_delete, weak=False)
+        self.setup_m2m_signals(m)
 
         self.wrap_model_fields(m)
 
@@ -100,12 +101,29 @@ class ChangesTracker(object):
             '__module__': model.__module__,
         }
 
+        base_is_abstract = (
+            hasattr(model.__base__, '_meta') and model.__base__._meta.abstract)
+        if not base_is_abstract:
+            use_subclass_directly = True
+        else:
+            use_subclass_directly = False
+
         attrs.update(get_history_methods(self, model))
         # Store _misc_members for later lookup.
+<<<<<<< HEAD
         misc_members = self.get_misc_members(model)
         attrs.update(misc_members)
         attrs.update({'_original_callables':
             self.get_callables(model, skip=misc_members)})
+=======
+        misc_members = self.get_misc_members(model,
+            use_subclass_directly=use_subclass_directly)
+        attrs.update(misc_members)
+        attrs.update({
+            '_original_callables':
+                self.get_callables(model, skip=misc_members,
+                    use_subclass_directly=use_subclass_directly)})
+>>>>>>> infobox
         attrs.update(Meta=type('Meta', (), self.get_meta_options(model)))
 
         if not is_versioned(model.__base__):
@@ -114,19 +132,37 @@ class ChangesTracker(object):
             attrs.update(get_history_fields(self, model))
             attrs.update(self.get_extra_history_fields(model))
 
+<<<<<<< HEAD
         attrs.update(self.get_fields(model))
 
         name = '%s_hist' % model._meta.object_name
         # Let's have our historical object subclass the parent
         # model's historical model, if the parent model is versioned.
+=======
+        attrs.update(self.get_fields(model,
+            use_subclass_directly=use_subclass_directly))
+
+        name = '%s_hist' % model._meta.object_name
+>>>>>>> infobox
         # Concretely subclassed models keep some of their information in
         # their parent model's table, and so if we subclass then we can
         # mirror this DB relationship for our historical models.
         # Migrations are easier this way -- you migrate historical
         # models in the exact same fashion as non-historical models.
+<<<<<<< HEAD
         if is_versioned(model.__base__):
             return type(name, (get_versions(model.__base__).model,), attrs)
         return type(name, (model.__base__,), attrs)
+=======
+        if use_subclass_directly:
+            if is_versioned(model.__base__):
+                # We subclass the versioned *parent* model here so that
+                # we can maintain the same kind of API for versioned
+                # models as non-versioned models.
+                return type(name, (get_versions(model.__base__).model,), attrs)
+            return type(name, (model.__base__,), attrs)
+        return type(name, (models.Model,), attrs)
+>>>>>>> infobox
 
     def wrap_model_fields(self, model):
         """
@@ -166,7 +202,11 @@ class ChangesTracker(object):
         'db_tablespace',
     ]
 
+<<<<<<< HEAD
     def get_misc_members(self, model, ignore_subclass_members=True):
+=======
+    def get_misc_members(self, model, use_subclass_directly=False):
+>>>>>>> infobox
         # Would like to know a better way to do this.
         # Ideally we would subclass the model and then extend it,
         # but Django won't let us replace a field (in our case, a
@@ -184,6 +224,7 @@ class ChangesTracker(object):
         # we can swap out our call to type() in create_history_model()
         # for a call to a metaclass with __instancecheck__ /
         # __subclasscheck__ defined (a'la python 2.6)
+
         d = copy.copy(dict(model.__dict__))
         for k in ChangesTracker.MEMBERS_TO_SKIP:
             if d.get(k, None) is not None:
@@ -206,6 +247,7 @@ class ChangesTracker(object):
                 del d[k]
                 continue
 
+<<<<<<< HEAD
         if ignore_subclass_members and model.__base__ != models.Model:
             base_misc_members = self.get_misc_members(model.__base__,
                 ignore_subclass_members=False)
@@ -216,6 +258,30 @@ class ChangesTracker(object):
         return d
 
     def get_callables(self, model, skip=None, ignore_subclass_callables=True):
+=======
+        # Recurse to get, or exclude, items from the base class.  We
+        # want to /ignore/ members on the subclass when we're
+        # subclassing directly, as they're provided by the subclass.
+        # When we're not subclassing directly we want to sort of grab
+        # all the subclass items and mash them together.
+        if model.__base__ != models.Model:
+            if use_subclass_directly:
+                base_misc_members = self.get_misc_members(model.__base__,
+                    use_subclass_directly=False)
+                # Let's not duplicate members on the base class.
+                for k in d.keys():
+                    if k in base_misc_members:
+                        del d[k]
+            else:
+                base_members = self.get_misc_members(model.__base__,
+                    use_subclass_directly=False)
+                for k in base_members:
+                    if k not in d:
+                        d[k] = base_members[k]
+        return d
+
+    def get_callables(self, model, skip=None, use_subclass_directly=False):
+>>>>>>> infobox
         if skip is None:
             skip = {}
 
@@ -227,6 +293,7 @@ class ChangesTracker(object):
             if callable(attrs[k]):
                 d[k] = attrs[k]
 
+<<<<<<< HEAD
         if ignore_subclass_callables and model.__base__ != models.Model:
             base_callables = self.get_callables(model.__base__, skip=skip,
                 ignore_subclass_callables=False)
@@ -237,6 +304,30 @@ class ChangesTracker(object):
         return d
 
     def get_fields(self, model, ignore_subclass_fields=True):
+=======
+        # Recurse to get, or exclude, items from the base class.  We
+        # want to /ignore/ members on the subclass when we're
+        # subclassing directly, as they're provided by the subclass.
+        # When we're not subclassing directly we want to sort of grab
+        # all the subclass items and mash them together.
+        if model.__base__ != models.Model:
+            if use_subclass_directly:
+                base_callables = self.get_callables(model.__base__,
+                    use_subclass_directly=False)
+                # Let's not duplicate callables on the base class.
+                for k in d.keys():
+                    if k in base_callables:
+                        del d[k]
+            else:
+                base_callables = self.get_callables(model.__base__,
+                    use_subclass_directly=False)
+                for k in base_callables:
+                    if k not in d:
+                        d[k] = base_callables[k]
+        return d
+
+    def get_fields(self, model, use_subclass_directly=False):
+>>>>>>> infobox
         """
         Creates copies of the model's original fields.
 
@@ -307,11 +398,7 @@ class ChangesTracker(object):
                     else:
                         model_type = models.ManyToManyField
                         options = _get_m2m_opts(field)
-                        _m2m_changed = partial(self.m2m_changed, field.name)
-                        models.signals.m2m_changed.connect(_m2m_changed,
-                            sender=getattr(model, field.name).through,
-                            weak=False,
-                        )
+
                     if is_to_self:
                         # Fix related name conflict. We set this manually
                         # elsewhere so giving this a funky name isn't a
@@ -346,6 +433,7 @@ class ChangesTracker(object):
 
             attrs[field.name] = field
 
+<<<<<<< HEAD
         if ignore_subclass_fields and model.__base__ != models.Model:
             base_fields = self.get_fields(model.__base__,
                 ignore_subclass_fields=False)
@@ -353,6 +441,27 @@ class ChangesTracker(object):
             for k in base_fields:
                 if k in attrs.keys():
                     del attrs[k]
+=======
+        # Recurse to get, or exclude, items from the base class.  We
+        # want to /ignore/ members on the subclass when we're
+        # subclassing directly, as they're provided by the subclass.
+        # When we're not subclassing directly we want to sort of grab
+        # all the subclass items and mash them together.
+        if model.__base__ != models.Model:
+            if use_subclass_directly:
+                base_fields = self.get_fields(model.__base__,
+                    use_subclass_directly=False)
+                # Let's not duplicate members on the base class.
+                for k in attrs.keys():
+                    if k in base_fields:
+                        del attrs[k]
+            else:
+                base_fields = self.get_fields(model.__base__,
+                    use_subclass_directly=False)
+                for k in base_fields:
+                    if k not in attrs:
+                        attrs[k] = base_fields[k]
+>>>>>>> infobox
 
         return attrs
 
@@ -441,7 +550,7 @@ class ChangesTracker(object):
             else:
                 history_type = history_type or TYPE_UPDATED
         hist_instance = self.create_historical_record(instance, history_type)
-        self.m2m_init(instance, hist_instance)
+        self.create_m2m_set(instance, hist_instance)
 
     def pre_delete(self, parent, instance, **kws):
         # To support subclassing.
@@ -501,14 +610,37 @@ class ChangesTracker(object):
         if not is_pk_recycle_a_problem(instance) and instance._track_changes:
             hist_instance = self.create_historical_record(
                 instance, history_type)
-            self.m2m_init(instance, hist_instance)
+            self.create_m2m_set(instance, hist_instance)
 
         # Disconnect the related objects signals
         if hasattr(instance, '_rel_objs_methods'):
             for model, method in instance._rel_objs_methods.iteritems():
                 models.signals.pre_delete.disconnect(method, model, weak=False)
 
-    def m2m_init(self, instance, hist_instance):
+    def setup_m2m_signals(self, model):
+        """
+        Enables the m2m signal handlers on versioned M2M relations.
+        """
+        for field in model._meta.local_many_to_many:
+            parent_model = field.rel.to
+
+            # We only set up m2m signal handlers on versioned models.
+            if is_versioned(parent_model) or model == parent_model:
+                if getattr(field.rel, 'parent_link', None):
+                    # Concrete model inheritance and the parent is
+                    # versioned.  In this case, we subclass the
+                    # parent historical model and use that parent
+                    # related field instead -- so we skip setting
+                    # this signal handler.
+                    continue
+
+                _m2m_changed = partial(self.m2m_changed, field.name)
+                models.signals.m2m_changed.connect(_m2m_changed,
+                    sender=getattr(model, field.name).through,
+                    weak=False,
+                )
+
+    def create_m2m_set(self, instance, hist_instance):
         """
         Initialize the ManyToMany sets on a historical instance.
         """
@@ -519,6 +651,7 @@ class ChangesTracker(object):
                 m2m_items = []
                 for o in current_objs:
                     m2m_items.append(get_versions(o).most_recent())
+                print hist_instance._meta.many_to_many[0].m2m_reverse_name()
                 setattr(hist_instance, field.name, m2m_items)
 
     def m2m_changed(self, attname, sender, instance, action, reverse,

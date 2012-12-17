@@ -1,10 +1,17 @@
+{% load i18n %}
+{% load infobox_tags %}
+{% if form.fields %}
 <form action="{% url infobox:infobox-edit slug=form.instance.pretty_slug %}" method="POST">
     {% csrf_token %}
     <table class="infobox">
         <tbody>
         {% for field in form %}
             <tr>
-                <th>{{ field.label }}</th>
+                <th>{{ field.label }}
+                    {% if allowdelete %}
+                        <a href="{% url infobox:delete_attribute slug=form.instance.pretty_slug %}?attribute={{ field.name }}" title="{% trans "Delete" %}" class="delete_attribute">Delete</a>
+                    {% endif %}
+                </th>
             </tr>
             <tr>
                 <td>{{ field }}</td>
@@ -14,17 +21,6 @@
     </table>
 
     <input type="hidden" name="next" value="{{ request.path }}"/>
-    <input type="submit" name="save" class="little" value="Save"/>
+    <input type="submit" name="save" class="little" value="{% trans "Save" %}"/>
 </form>
-<br/>
-Add another attribute to this page:
-<form action="{% url infobox:add_attribute slug=form.instance.pretty_slug %}" method="POST">
-    {% csrf_token %}
-    <table>
-        <tbody>
-            {{ add_attribute_form.as_table }}
-        </tbody>
-    </table>
-    <input type="hidden" name="next" value="{{ request.path }}"/>
-    <input type="submit" name="save" class="little" value="Add"/>
-</form>
+{% endif %}

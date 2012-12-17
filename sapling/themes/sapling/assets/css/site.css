@@ -1049,21 +1049,42 @@ form #content_footer {
 */
 #infobox {
     margin-bottom: 10px;
+    margin-right: 1em;
     float: left;
 }
+#infobox form {
+    display: inline;
+}
+#infobox input[type="submit"] {
+    display: inline;
+    margin-right: 0.5em;
+}
 #infobox .edit_infobox {
-    float: none;
-    width: 60px;
-    text-align: center;
+    display: block;
+    padding: 13px 10px 14px 8px;
+    font-weight: normal;
+    margin-bottom: 1em;
+}
+#infobox .edit_infobox span {
+    background: url(../img/infobox-icon-small.png) 0 0 no-repeat;
+    padding-left: 22px;
+}
+.infobox div.weekly_time_block {
+    clear: both;
+}
+.infobox .weekly_time_block input[name$='DELETE'] {
+    /* align Delete checkbox */
+    margin-top: 2em;
 }
 .infobox .weekly_time_block p {
-    display: inline-block;
+    float: left;
+    margin: 0.2em;
 }
 .infobox .weekly_time_block input {
     max-width: 100px;
 }
 .infobox .weekly_time_block select {
-    max-width: 120px;
+    max-width: 140px;
 }
 .infobox .datetime input {
     display: inline;
@@ -1082,6 +1103,15 @@ form #content_footer {
 table.infobox th {
     background-color: rgb(232, 236, 239);
     text-align: left;
+}
+.infobox .delete_attribute {
+    text-indent: -9999px;
+    float: right;
+    font-weight: normal;
+    background-image: url(../img/cross.png);
+    margin: 3px;
+    width: 16px;
+    height: 16px;
 }
 
 /*

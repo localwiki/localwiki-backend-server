@@ -26,7 +26,7 @@ def get_history_methods(self, model):
     fields = {
         # lookup function for cleaniness. Instead of doing
         # h.history_ip_address we can write h.version_info.ip_address
-        'version_info': HistoricalMetaInfo(),
+        'version_info': HistoricalMetaDescriptor(),
         'revert_to': revert_to,
         '__init__': historical_record_init,
         '__getattribute__':
@@ -368,6 +368,8 @@ def revert_to(hm, delete_newer_versions=False, **kws):
         # currently deleted.
         for field in get_related_versioned_fields(m):
             rel_hist = getattr(hm, field.name)
+            if rel_hist is None:
+                continue
             rel_o = rel_hist.version_info._object
             latest_version = get_versions(rel_o).most_recent()
             if latest_version.version_info.type in DELETED_TYPES:
@@ -440,10 +442,14 @@ def version_number_of(hm):
     return hm.version_info.instance._version_number
 
 
-class HistoricalMetaInfo(object):
+class HistoricalMetaDescriptor(object):
     def __get__(self, instance, owner):
+        return HistoricalMetaInfo(instance)
+
+
+class HistoricalMetaInfo(object):
+    def __init__(self, instance):
         self.instance = instance
-        return self
 
     def __getattr__(self, name):
         return getattr(self.__dict__['instance'], 'history_%s' % name)

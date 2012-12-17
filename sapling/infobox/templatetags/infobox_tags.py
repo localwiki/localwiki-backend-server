@@ -28,12 +28,28 @@ def infobox(instance):
 
 
 @register.simple_tag(takes_context=True)
-def infobox_form(context, entity):
+def infobox_form(context, entity, extra=None):
     context.push()
     context['form'] = InfoboxForm(instance=entity)
-    context['add_attribute_form'] = AddAttributeForm(instance=entity)
+    if extra == "allowdelete":
+        context['allowdelete'] = True
     rendered = render_to_string('infobox/infobox_form_snippet.html', context)
     rendered = str(context['form'].media) + rendered
+    context.pop()
+    return rendered
+
+
+@register.simple_tag(takes_context=True)
+def add_attribute_form(context, entity):
+    form = AddAttributeForm(instance=entity)
+    if len(form['attribute'].field.choices) == 0:
+        rendered = ""
+    else:
+        context.push()
+        context['form'] = form
+        rendered = render_to_string('infobox/infobox_add_attribute_form.html',
+                                    context)
+        context.pop()
     return rendered
 
 
@@ -54,6 +70,8 @@ def render_attribute(attribute, value):
     safe HTML string.
     """
     rendered = '<p></p>'  # default if no value
+    if value is None:
+        return mark_safe(rendered)
     if attribute.datatype == attribute.TYPE_ENUM:
         value_list = ['<li>%s</li>' % escape(v.value) for v in value.all()]
         if value_list:

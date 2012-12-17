@@ -1,6 +1,8 @@
 from tags.views import PageNotFoundMixin
 from utils.views import PermissionRequiredMixin, CreateObjectMixin
-from versionutils.versioning.views import UpdateView, VersionsList
+from versionutils.versioning.views import UpdateView, VersionsList, RevertView,\
+    DeleteView
+from versionutils.diff.views import CompareView
 from infobox.forms import InfoboxForm
 from pages.models import Page
 from django.core.urlresolvers import reverse
@@ -8,9 +10,10 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.list import ListView
 from forms import AttributeCreateForm, AttributeUpdateForm, AddAttributeForm
 from django.views.generic.edit import CreateView
-from models import PageAttribute, PageValue, EntityAsOf
+from infobox.models import PageAttribute, PageValue, EntityAsOf
 from templatetags.infobox_tags import render_attribute
 from django.views.generic.detail import DetailView
+from eav.models import Entity
 
 
 class InfoboxUpdateView(PageNotFoundMixin, PermissionRequiredMixin,
@@ -52,6 +55,27 @@ class InfoboxAddAttributeView(PageNotFoundMixin, PermissionRequiredMixin,
         return self.object
 
 
+class InfoboxDeleteAttributeView(PermissionRequiredMixin, DeleteView):
+    model = PageValue
+    context_object_name = 'pagevalue'
+    permission = 'pages.change_page'
+
+    def get_object(self):
+        page_slug = self.kwargs.get('slug')
+        self.page = get_object_or_404(Page, slug=page_slug)
+        attribute_slug = self.request.GET['attribute']
+        return PageValue.objects.get(entity=self.page,
+                                     attribute__slug=attribute_slug)
+
+    def get_protected_object(self):
+        return self.page
+
+    def get_success_url(self):
+        # Redirect back to the infobox view
+        return reverse('infobox:infobox-history',
+                       args=[self.kwargs.get('original_slug')])
+
+
 class AttributeListView(ListView):
     context_object_name = 'attribute_list'
     template_name = 'infobox/attribute_list.html'
@@ -81,8 +105,6 @@ class AttributeCreateView(CreateView):
 
 
 class InfoboxVersions(VersionsList):
-    template_name = 'infobox/infobox_versions.html'
-
     def get_queryset(self):
         page_slug = self.kwargs.get('slug')
         try:
@@ -100,7 +122,6 @@ class InfoboxVersions(VersionsList):
 
 class InfoboxVersionDetailView(DetailView):
     context_object_name = 'infobox'
-
     template_name = 'infobox/infobox_version_detail.html'
 
     def get_object(self):
@@ -109,12 +130,7 @@ class InfoboxVersionDetailView(DetailView):
             self.page = Page.objects.get(slug=page_slug)
             version = self.kwargs.get('version')
             date = self.kwargs.get('date')
-            if version:
-                versions = PageValue.versions.filter(entity__id=self.page.id)
-                ordered_versions = versions.order_by('history_date')
-                date = ordered_versions[int(version) - 1].history_date
-            self.history_date = date
-            return EntityAsOf(date, self.page)
+            return EntityAsOf(self.page, date=date, version=version)
         except (Page.DoesNotExist, IndexError):
             return None
 
@@ -136,3 +152,35 @@ class InfoboxVersionDetailView(DetailView):
                                  })
         context['attributes'] = attributes
         return context
+
+
+class InfoboxCompareView(CompareView):
+    template_name = 'infobox/infobox_diff.html'
+
+    def get_object(self):
+        page_slug = self.kwargs.get('slug')
+        page = Page.objects.get(slug=page_slug)
+        return Entity(page)
+
+    def get_object_as_of(self, version=None, date=None):
+        return EntityAsOf(self.object.model, version=version, date=date)
+
+    def get_version_number(self, hist_object):
+        return hist_object.version_number
+
+    def get_context_data(self, **kwargs):
+        context = super(InfoboxCompareView, self).get_context_data(**kwargs)
+        context['slug'] = self.kwargs['original_slug']
+        return context
+
+
+class InfoboxRevertView(PermissionRequiredMixin, InfoboxVersionDetailView,
+                        RevertView):
+    template_name = 'infobox/infobox_confirm_revert.html'
+    permission = 'pages.change_page'
+
+    def get_protected_object(self):
+        return self.object.model
+
+    def get_success_url(self):
+        return reverse('infobox:infobox-history', args=[self.kwargs['slug']])

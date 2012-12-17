@@ -11,8 +11,10 @@
 {% block header_title %}{% trans "Info for" %} <a href="{% url pages:show slug=page.slug %}">{{ page.name }}</a>{% endblock %}
 
 {% block content %}
-  {% infobox_form page %}
+  {% infobox_form page "allowdelete" %}
   <br/>
-  <p>Previous versions:</p>
+  {% add_attribute_form page %}
+  <br/>
+  <p>{% trans "Previous versions:" %}</p>
   {% include "utils/history/form.html" %}
 {% endblock %}

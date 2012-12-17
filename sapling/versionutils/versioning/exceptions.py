@@ -1,0 +1,2 @@
+class ModelNotVersioned(Exception):
+    pass

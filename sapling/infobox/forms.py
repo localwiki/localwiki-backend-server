@@ -2,13 +2,15 @@ from django import forms
 from django.forms.models import ModelForm, inlineformset_factory,\
     ModelChoiceField
 from django.contrib.contenttypes.models import ContentType
+from django.utils.translation import ugettext_lazy as _
 
 from eav.forms import BaseDynamicEntityForm
 
 from pages.models import Page
-from infobox.models import WeeklySchedule, WeeklyTimeBlock, PageLink
-from models import PageAttribute
+from infobox.models import WeeklySchedule, WeeklyTimeBlock, PageLink,\
+    PageAttribute
 from widgets import DateTimeWidget, TimeWidget
+from django.forms.fields import TimeField
 
 
 class PageLinkForm(ModelForm):
@@ -17,10 +19,10 @@ class PageLinkForm(ModelForm):
 
 
 class WeeklyTimeBlockForm(ModelForm):
-    def __init__(self, *args, **kwargs):
-        ModelForm.__init__(self, *args, **kwargs)
-        self.fields['start_time'].widget = TimeWidget()
-        self.fields['end_time'].widget = TimeWidget()
+    start_time = TimeField(label=_('From'),
+                           widget=TimeWidget(scroll_default_time='9:00am'))
+    end_time = TimeField(label=_('To'),
+                         widget=TimeWidget(scroll_default_time='5:00pm'))
 
     class Meta:
         model = WeeklyTimeBlock
@@ -32,8 +34,11 @@ WeeklyTimeBlockFormSet = inlineformset_factory(WeeklySchedule, WeeklyTimeBlock,
 
 class WeeklyScheduleForm(WeeklyTimeBlockFormSet):
     def save(self, commit=True):
-        self.instance.save()
+        if not self.instance.pk:
+            self.instance.save()
         super(WeeklyScheduleForm, self).save(commit)
+        # For compatibility with versioning, we save instance last.
+        self.instance.save()
         return self.instance
 
 

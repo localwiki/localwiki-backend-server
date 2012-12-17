@@ -46,7 +46,28 @@ class PageAttribute(BaseAttribute):
     TYPE_SCHEDULE = 'schedule'
 
 
-class PageValue(BaseValue):
+class CommentMixin(object):
+    """
+    Versioning-related mixin for adding a comment to a model instance on save.
+    If a comment has already been set higher up the chain, it will not be
+    changed.
+    Override get_save_comment() to return a comment string.
+    """
+    def get_save_comment(self):
+        return None
+
+    def save(self, *args, **argv):
+        save_with = getattr(self, "_save_with", {})
+        if not "comment" in save_with:
+            comment = self.get_save_comment()
+            if comment is not None:
+                save_with["comment"] = comment
+                setattr(self, "_save_with", save_with)
+        # versioning doesn't work with mixins, uncomment when fixed 
+        #super(CommentMixin, self).save(*args, **argv)
+
+
+class PageValue(BaseValue, CommentMixin): ## workaround, mixin should be first
     attribute = models.ForeignKey(PageAttribute, db_index=True,
         verbose_name=_(u"attribute"))
     entity = models.ForeignKey(Page, blank=False, null=False)
@@ -57,17 +78,27 @@ class PageValue(BaseValue):
         null=True, verbose_name=_(u"weekly schedule"),
         related_name='eav_value')
 
+    ## workaround for versionutils not working with model mixins
+    def save(self, *args, **kwargs):
+        CommentMixin.save(self, *args, **kwargs)
+        BaseValue.save(self, *args, **kwargs)
+
+    def get_save_comment(self):
+        return u"%s %s" % (_(u"Updated"), self.attribute.name)
+
 
 class EntityAsOf(Entity):
     """
-    Reconstructs an entity's attribute values as of the given date.
+    Reconstructs an entity's attribute values as of the given date or version.
     """
-    def __init__(self, date, instance):
+    def __init__(self, instance, date=None, version=None):
         super(EntityAsOf, self).__init__(instance)
         attribute_cls = instance._eav_config_cls.attribute_cls
         value_cls = instance._eav_config_cls.value_cls
-        all_versions = value_cls.versions.filter(entity__id=instance.id)
-        versions_before_date = all_versions.filter(history_date__lte=date)
+        self.all_versions = value_cls.versions.filter(entity__id=instance.id)
+        if version is not None:
+            date = self._version_to_date(version)
+        versions_before_date = self.all_versions.filter(history_date__lte=date)
         self.version_number = len(versions_before_date)
         self.version_info = versions_before_date[0].version_info
         for a in attribute_cls.objects.all():
@@ -77,8 +108,19 @@ class EntityAsOf(Entity):
             except versions_before_date.model.DoesNotExist:
                 pass
 
+    def _version_to_date(self, version):
+        v = self.all_versions.order_by('history_date')[int(version) - 1]
+        return v.history_date
+
     def __getitem__(self, name):
         return self.eav_attributes[name]
+
+    def revert_to(self, **kwargs):
+        '''
+        Reverts all of this Entity's values to the versions currently selected.
+        '''
+        map(lambda value: value.revert_to(**kwargs),
+            self.eav_attributes.values())
 
 
 eav.register(Page, PageAttribute, PageValue)
@@ -91,6 +133,7 @@ versioning.register(WeeklyTimeBlock)
 versioning.register(PageAttribute)
 versioning.register(PageValue)
 
-
 # For registration calls
 import api
+import diff
+import feeds
