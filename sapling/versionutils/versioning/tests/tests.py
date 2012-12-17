@@ -1253,8 +1253,27 @@ class ChangesTrackingTest(TestCase):
 #   #     pass
 #
 
-    #def tests_defer_queryset(self):
-    #    # defer() should work on versioned querysets
-    #    m1_hs = M1.versions.all().defer('a')
-    #    m = m1_hs.get(d="D2!")
-    #    self.assertEqual(m.a, "A2!")
+    def tests_defer_queryset(self):
+        # defer() should work on versioned querysets
+        m1_hs = M1.versions.all().defer('a')
+        m = m1_hs.get(d="D2!")
+        self.assertEqual(m.a, "A2!")
+
+    def test_inherited_custom_attributes(self):
+        # historical object should expose inherited attributes, methods, and
+        # properties on the model
+
+        # Abstract base class
+        m29 = M29SConcreteCustomAttributes(a='a', e='e')
+        m29.save()
+        self.assertEqual(m29.versions.all()[0].b, 'magic b')
+        self.assertEqual(m29.versions.all()[0].c, 'magic c')
+        self.assertEqual(m29.versions.all()[0].d(), 'magic d')
+
+        # Concrete base class
+        m30 = M30CustomAttributeSubclass(a='a', e='e')
+        m30.save()
+        self.assertEqual(m30.versions.all()[0].b, 'magic b')
+        self.assertEqual(m30.versions.all()[0].c, 'magic c')
+        self.assertEqual(m30.versions.all()[0].d(), 'magic d')
+
