@@ -74,7 +74,7 @@ How would we find all places open between 5 and 6pm on Wednesday?
     hours_open__end_time__gte=6pm
 
 
-new datatypes could be required to register with tastypie
+new types could be required to register with tastypie
 
 """
 
@@ -114,28 +114,28 @@ AUTOMATIC_DATATYPES = [
 ]
 
 
-def to_attr_datatype(o, attribute):
+def to_attr_type(o, attribute):
     """
     Args:
         o: a JSON-like object.
         attribute: an Attribute instance.
 
     Returns:
-        o cast to the datatype of the provided attribute.
+        o cast to the type of the provided attribute.
     """
     # TODO: A way to easily extend this when adding new data types.
-    if attribute.datatype in AUTOMATIC_DATATYPES:
+    if attribute.type in AUTOMATIC_DATATYPES:
         return o
 
-    if attribute.datatype == PageAttribute.TYPE_DATE:
+    if attribute.type == PageAttribute.TYPE_DATE:
         f = fields.DateTimeField()
         return f.convert(o)
 
-    if attribute.datatype == PageAttribute.TYPE_SCHEDULE:
+    if attribute.type == PageAttribute.TYPE_SCHEDULE:
         pass
 
-    raise TypeError("The datatype %s is not supported via the API yet" %
-        attribute.datatype)
+    raise TypeError("The type %s is not supported via the API yet" %
+        attribute.type)
 
 
 class FilteringAndSortingMixin(object):
@@ -241,17 +241,17 @@ class InfoResource(FilteringAndSortingMixin, Resource):
 
             # use attribute type to get value type         
             attribute = PageAttribute.objects.get(slug=slug)
-            datatype = attribute.datatype
+            type = attribute.type
 
         for k in filters.keys():
             if k.startswith('value__'):
                 # The 'value' attribute is actually one of many possible
                 # value types (value_text, value_date, etc).  So we use
-                # the datatype of the attribute to determine which to
+                # the type of the attribute to determine which to
                 # map this to.
                 rest = k[7:]  # len 'value__' = 7
-                value = to_attr_datatype(filters[k], attribute)
-                filters['value_%s__%s' % (datatype, rest)] = value
+                value = to_attr_type(filters[k], attribute)
+                filters['value_%s__%s' % (type, rest)] = value
                 del filters[k]
 
         results = []
@@ -286,7 +286,7 @@ class InfoResource(FilteringAndSortingMixin, Resource):
         attribute = PageAttribute.objects.get(slug=obj.attribute)
 
         setattr(obj.page.eav, attribute.slug,
-            to_attr_datatype(obj.value, attribute))
+            to_attr_type(obj.value, attribute))
 
         obj.page.eav.save()
 
@@ -321,7 +321,7 @@ class InfoAttributeResource(ModelResource):
             'name': ALL,
             'attribute': ALL,
             'site': ALL_WITH_RELATIONS,
-            'datatype': ALL,
+            'type': ALL,
             'required': ALL,
         }
         #authentication = ApiKeyWriteAuthentication()
@@ -385,8 +385,9 @@ class InfoValueResource(ModelResource):
     def dehydrate(self, bundle):
         # Over-ride 'attribute' to be just the attribute slug for easy-of-use.
         bundle.data['attribute'] = bundle.obj.attribute.slug
+        bundle.data['type'] = bundle.obj.attribute.type
 
-        datatype = bundle.obj.attribute.datatype
+        datatype = bundle.obj.attribute.type
         bundle.data['value'] = bundle.data['value_%s' % datatype]
         # Hide all other value_ fields
         for field in bundle.data.keys():
@@ -403,7 +404,7 @@ class InfoValueResource(ModelResource):
         bundle.obj.attribute = attribute
 
         # Take the provided 'value' and stuff it into the associated
-        # 'value_<datatype>' field.
+        # 'value_<type>' field.
         # XXX TODO
         raise Exception
 
@@ -417,10 +418,17 @@ class InfoValueResource(ModelResource):
             filters['attribute__attribute'] = slug
             del filters['attribute']
             attribute = PageAttribute.objects.get(slug=slug)
-            datatype = attribute.datatype
+            datatype = attribute.type
+
+        # Because we over-ride 'type' we need to set it to the correct,
+        # deeper lookup here.
+        if filters.get('type'):
+            datatype = filters['type']
+            filters['attribute__type'] = datatype
+            del filters['type']
 
         for k in filters.keys():
-            # Set the generic 'value' filter to the correct datatype value.
+            # Set the generic 'value' filter to the correct type value.
             if k.startswith('value'):
                 rest = k[5:]  # len('value') == 5
                 filters['value_%s%s' % (datatype, rest)] = filters[k]

@@ -23,7 +23,7 @@ class PageValueDiff(diff.BaseFieldDiff):
         self.attribute = attribute
 
     def get_diff(self):
-        field_name = 'value_%s' % self.attribute.datatype
+        field_name = 'value_%s' % self.attribute.type
         left_value = getattr(self.field1, field_name, None)
         right_value = getattr(self.field2, field_name, None)
         return {'deleted': left_value, 'inserted': right_value}

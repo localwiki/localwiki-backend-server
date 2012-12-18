@@ -146,7 +146,7 @@ class InfoboxVersionDetailView(DetailView):
                 value_version = infobox_dict[a.slug]
                 # value is a property, not accessible through the historical
                 # instance, so we have to derive it again
-                value = getattr(value_version, 'value_%s' % a.datatype)
+                value = getattr(value_version, 'value_%s' % a.type)
                 attributes.append({ 'name': a.name,
                                     'html': render_attribute(a, value),
                                  })

@@ -72,13 +72,13 @@ def render_attribute(attribute, value):
     rendered = '<p></p>'  # default if no value
     if value is None:
         return mark_safe(rendered)
-    if attribute.datatype == attribute.TYPE_ENUM:
+    if attribute.type == attribute.TYPE_ENUM:
         value_list = ['<li>%s</li>' % escape(v.value) for v in value.all()]
         if value_list:
             rendered = '<ul>%s</ul>' % ''.join(value_list)
-    elif attribute.datatype == attribute.TYPE_SCHEDULE:
+    elif attribute.type == attribute.TYPE_SCHEDULE:
         rendered = render_schedule(value)
-    elif attribute.datatype == attribute.TYPE_BOOLEAN:
+    elif attribute.type == attribute.TYPE_BOOLEAN:
         rendered = {True: _('Yes'), False: _('No'), None: rendered}.get(value)
     elif value:
         rendered = escape(value)

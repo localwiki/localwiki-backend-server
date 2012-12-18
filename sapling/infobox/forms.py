@@ -81,7 +81,7 @@ class AddAttributeForm(ModelForm):
 class AttributeCreateForm(ModelForm):
     class Meta:
         model = PageAttribute
-        fields = ('name', 'description', 'datatype', 'enum_group')
+        fields = ('name', 'description', 'type', 'enum_group')
         exclude = ('site', 'slug')
 
     def save(self, *args, **kwargs):
