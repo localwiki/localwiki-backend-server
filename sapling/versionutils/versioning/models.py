@@ -590,7 +590,6 @@ class ChangesTracker(object):
                 m2m_items = []
                 for o in current_objs:
                     m2m_items.append(get_versions(o).most_recent())
-                print hist_instance._meta.many_to_many[0].m2m_reverse_name()
                 setattr(hist_instance, field.name, m2m_items)
 
     def m2m_changed(self, attname, sender, instance, action, reverse,
