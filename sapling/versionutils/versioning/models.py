@@ -110,12 +110,6 @@ class ChangesTracker(object):
 
         attrs.update(get_history_methods(self, model))
         # Store _misc_members for later lookup.
-<<<<<<< HEAD
-        misc_members = self.get_misc_members(model)
-        attrs.update(misc_members)
-        attrs.update({'_original_callables':
-            self.get_callables(model, skip=misc_members)})
-=======
         misc_members = self.get_misc_members(model,
             use_subclass_directly=use_subclass_directly)
         attrs.update(misc_members)
@@ -123,7 +117,6 @@ class ChangesTracker(object):
             '_original_callables':
                 self.get_callables(model, skip=misc_members,
                     use_subclass_directly=use_subclass_directly)})
->>>>>>> infobox
         attrs.update(Meta=type('Meta', (), self.get_meta_options(model)))
 
         if not is_versioned(model.__base__):
@@ -132,28 +125,15 @@ class ChangesTracker(object):
             attrs.update(get_history_fields(self, model))
             attrs.update(self.get_extra_history_fields(model))
 
-<<<<<<< HEAD
-        attrs.update(self.get_fields(model))
-
-        name = '%s_hist' % model._meta.object_name
-        # Let's have our historical object subclass the parent
-        # model's historical model, if the parent model is versioned.
-=======
         attrs.update(self.get_fields(model,
             use_subclass_directly=use_subclass_directly))
 
         name = '%s_hist' % model._meta.object_name
->>>>>>> infobox
         # Concretely subclassed models keep some of their information in
         # their parent model's table, and so if we subclass then we can
         # mirror this DB relationship for our historical models.
         # Migrations are easier this way -- you migrate historical
         # models in the exact same fashion as non-historical models.
-<<<<<<< HEAD
-        if is_versioned(model.__base__):
-            return type(name, (get_versions(model.__base__).model,), attrs)
-        return type(name, (model.__base__,), attrs)
-=======
         if use_subclass_directly:
             if is_versioned(model.__base__):
                 # We subclass the versioned *parent* model here so that
@@ -162,7 +142,6 @@ class ChangesTracker(object):
                 return type(name, (get_versions(model.__base__).model,), attrs)
             return type(name, (model.__base__,), attrs)
         return type(name, (models.Model,), attrs)
->>>>>>> infobox
 
     def wrap_model_fields(self, model):
         """
@@ -202,11 +181,7 @@ class ChangesTracker(object):
         'db_tablespace',
     ]
 
-<<<<<<< HEAD
-    def get_misc_members(self, model, ignore_subclass_members=True):
-=======
     def get_misc_members(self, model, use_subclass_directly=False):
->>>>>>> infobox
         # Would like to know a better way to do this.
         # Ideally we would subclass the model and then extend it,
         # but Django won't let us replace a field (in our case, a
@@ -247,18 +222,6 @@ class ChangesTracker(object):
                 del d[k]
                 continue
 
-<<<<<<< HEAD
-        if ignore_subclass_members and model.__base__ != models.Model:
-            base_misc_members = self.get_misc_members(model.__base__,
-                ignore_subclass_members=False)
-            # Let's not duplicate members on the base class.
-            for k in d.keys():
-                if k in base_misc_members:
-                    del d[k]
-        return d
-
-    def get_callables(self, model, skip=None, ignore_subclass_callables=True):
-=======
         # Recurse to get, or exclude, items from the base class.  We
         # want to /ignore/ members on the subclass when we're
         # subclassing directly, as they're provided by the subclass.
@@ -281,7 +244,6 @@ class ChangesTracker(object):
         return d
 
     def get_callables(self, model, skip=None, use_subclass_directly=False):
->>>>>>> infobox
         if skip is None:
             skip = {}
 
@@ -293,18 +255,6 @@ class ChangesTracker(object):
             if callable(attrs[k]):
                 d[k] = attrs[k]
 
-<<<<<<< HEAD
-        if ignore_subclass_callables and model.__base__ != models.Model:
-            base_callables = self.get_callables(model.__base__, skip=skip,
-                ignore_subclass_callables=False)
-            # Let's not duplicate callables on the base class.
-            for k in base_callables:
-                if k in d.keys():
-                    del d[k]
-        return d
-
-    def get_fields(self, model, ignore_subclass_fields=True):
-=======
         # Recurse to get, or exclude, items from the base class.  We
         # want to /ignore/ members on the subclass when we're
         # subclassing directly, as they're provided by the subclass.
@@ -327,7 +277,6 @@ class ChangesTracker(object):
         return d
 
     def get_fields(self, model, use_subclass_directly=False):
->>>>>>> infobox
         """
         Creates copies of the model's original fields.
 
@@ -433,15 +382,6 @@ class ChangesTracker(object):
 
             attrs[field.name] = field
 
-<<<<<<< HEAD
-        if ignore_subclass_fields and model.__base__ != models.Model:
-            base_fields = self.get_fields(model.__base__,
-                ignore_subclass_fields=False)
-            # Let's not duplicate fields on the base class.
-            for k in base_fields:
-                if k in attrs.keys():
-                    del attrs[k]
-=======
         # Recurse to get, or exclude, items from the base class.  We
         # want to /ignore/ members on the subclass when we're
         # subclassing directly, as they're provided by the subclass.
@@ -461,7 +401,6 @@ class ChangesTracker(object):
                 for k in base_fields:
                     if k not in attrs:
                         attrs[k] = base_fields[k]
->>>>>>> infobox
 
         return attrs
 
