@@ -311,7 +311,7 @@ class InfoAttributeResource(ModelResource):
         list_allowed_methods = ['get', 'post']
 
         excludes = [
-            'slug', # hide slug because we re-introduce it as 'attribute'
+            'slug',  # hide slug because we re-introduce it as 'attribute'
             # created, modified aren't useful to expose.
             # searchable, display_in_list are useless right now, so hide
             # them.
@@ -360,12 +360,13 @@ class WeeklyScheduleResource(ModelResource):
 
 # Allow filtering on all fields of PageValue.  We construct this
 # dynamically because of all the possible value_* fields.
-FILTERING_FIELDS = {}
+FILTERING_FIELDS = {'page': ALL_WITH_RELATIONS}
 for f in PageValue._meta.fields:
     FILTERING_FIELDS[f.name] = ALL_WITH_RELATIONS
 
 
 class InfoValueResource(ModelResource):
+    page = fields.ToOneField('pages.api.PageResource', 'entity')
     attribute = fields.ForeignKey(InfoAttributeResource, 'attribute', full=True)
     value_schedule = fields.ToOneField(WeeklyScheduleResource,
         'value_schedule', null=True, full=True)
