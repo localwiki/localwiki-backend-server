@@ -3,6 +3,12 @@
     border-bottom: 1px dashed;
 }
 
+.tag_link {
+    border: 1px solid rgb(202, 216, 243);
+    border-radius: 5px 1px 1px 5px;
+    padding: 1px 3px 1px 5px;
+}
+
 /* File icons */
 .no_icon {
    background: inherit !important;
