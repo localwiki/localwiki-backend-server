@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import time
 
 from django.utils.translation import ugettext as _
 from django.views.generic.edit import FormView
@@ -32,16 +33,16 @@ class AddCommentView(FormView):
 
         new_page_content = u"""%(current_html)s
 <hr><p>
-<em>%(datetime)s</em>   %(comment)s —%(user_info)s
+<em>%(datetime)s</em> &nbsp; %(comment)s —%(user_info)s
 </p>""" % {
             'current_html': page.content,
-            'datetime': '',
+            'datetime': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
             'comment': comment,
             'user_info': user_info,
         }
 
         page.content = new_page_content
-        page.save()
+        page.save(comment=_("Comment added"))
         messages.add_message(self.request, messages.SUCCESS, self.success_msg())
 
         return super(AddCommentView, self).form_valid(form)
