@@ -8,6 +8,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 import pages
 import maps
 import redirects
+import crap_comments
 import dashboard
 from users.admin import SubscribedList
 
@@ -23,6 +24,7 @@ urlpatterns = patterns('',
     (r'^tags$', redirect_to, {'url': '/tags/'}),
     (r'^tags/', include('sapling.tags.urls', 'tags', 'tags')),
     (r'^_redirect/', include(redirects.site.urls)),
+    (r'^_comment/', include(crap_comments.site.urls)),
     (r'^(?i)Users/', include('sapling.users.urls')),
     (r'^search/', include('sapling.search.urls')),
     (r'^', include('sapling.recentchanges.urls')),

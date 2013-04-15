@@ -1,0 +1,15 @@
+{% load i18n %}
+
+<h2>{{ title }}</h2>
+{% if can_comment %}
+    <form method="post" action="{% url comments:add slug=page.slug %}">{% csrf_token %}
+        {{ form.as_p }}
+        <p><input class="button" type="submit" value="{% trans "Add Comment" %}"/></p>
+    </form>
+{% else %}
+    {% if request.user.is_authenticated %}
+        <p>{% trans "You are not allowed to comment on this page." %}</p>
+    {% else %}
+        <p>{% blocktrans %}You must be logged in to comment on this page.  Please <a href="/Users/login/">log in</a>.{% endblocktrans %}</p>
+    {% endif %}
+{% endif %}
