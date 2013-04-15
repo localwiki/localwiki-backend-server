@@ -4,9 +4,8 @@ import templatetags
 import site
 
 def comments(elem, context=None):
-    value = elem.attrib.get('value', '')
-    before = '{%% comments "%s" %%} %s' % (value,
-                                            elem.tail or '')
+    title = elem.text
+    before = '{%% comments "%s" %%} %s' % (title, elem.tail or '')
     insert_text_before(before, elem)
     elem.getparent().remove(elem)
 

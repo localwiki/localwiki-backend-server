@@ -56,7 +56,7 @@ class WikiEditor(CKEditor):
                    'simpletable', 'simpletabletools', 'customenterkey',
                    'pagelink', 'inheritcss', 'customstylescombo',
                    'customsourcearea', 'ckfixes', 'wikiplugins', 'includepage',
-                   'includetag', 'embed', 'searchbox']
+                   'includetag', 'embed', 'searchbox', 'commentbox']
         return ','.join(plugins)
 
     def get_toolbar(self):

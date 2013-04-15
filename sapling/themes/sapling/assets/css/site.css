@@ -1055,6 +1055,17 @@ form #content_footer {
 
 /*
 =======================================
+ Page comments
+=======================================
+*/
+
+.comments_section textarea {
+    width: 100%;
+    height: 3em;
+}
+
+/*
+=======================================
  Page specific (not stuff in page css)
 =======================================
 */

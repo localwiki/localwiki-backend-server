@@ -1,9 +1,11 @@
 {% load i18n %}
 
+<div class="comments_section">
 <h2>{{ title }}</h2>
 {% if can_comment %}
+    {{ form.errors }}
     <form method="post" action="{% url comments:add slug=page.slug %}">{% csrf_token %}
-        {{ form.as_p }}
+        {{ form.content }}
         <p><input class="button" type="submit" value="{% trans "Add Comment" %}"/></p>
     </form>
 {% else %}
@@ -13,3 +15,5 @@
         <p>{% blocktrans %}You must be logged in to comment on this page.  Please <a href="/Users/login/">log in</a>.{% endblocktrans %}</p>
     {% endif %}
 {% endif %}
+</div>
+<div style="clear: both;"></div>
