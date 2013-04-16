@@ -1,4 +1,5 @@
 from pages.plugins import register, insert_text_before
+from pages.widgets import register_editor_plugin
 
 import templatetags
 import site
@@ -10,3 +11,4 @@ def comments(elem, context=None):
     elem.getparent().remove(elem)
 
 register('comments', comments)
+register_editor_plugin('commentbox')
