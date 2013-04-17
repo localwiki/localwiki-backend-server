@@ -265,6 +265,7 @@ INSTALLED_APPS = (
     'recentchanges',
     'search',
     'dashboard',
+    'crap_events',
     'api',
     'utils',
 )

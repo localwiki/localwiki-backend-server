@@ -1,0 +1,28 @@
+{% extends "crap_events/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Events Board" %} - {{ block.super }}{% endblock %}
+{% block header_title %}{% trans "Events Board" %}{% endblock %}
+
+{% block media %}
+  {{ block.super }}
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery-1.7.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery-ui-1.8.16.custom.min.js"></script>
+{% endblock %}
+
+{% block content %}
+{% for event in event_list %}
+    <div class="event">
+        <h3>{{ event.title }}</h3>
+        <div class="time"><span>{% trans "Time:" %}</span> {{ event.time_start }}</div>
+        <div class="location"><span>{% trans "Location:" %}</span> {{ event.location }}</div>
+        <div class="descripton">{{ event.description }}</div>
+        <div class="posted_by">(Posted by {{ event.posted_by }})</div>
+    </div>
+{% endfor %}
+
+<div id="add_event">
+    <h2>{% trans "Post a new event" %}</h2>
+    <a class="button" href="_new">Add Event</a>
+</div>
+{% endblock %}

@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     (r'^_redirect/', include(redirects.site.urls)),
     (r'^(?i)Users/', include('sapling.users.urls')),
     (r'^search/', include('sapling.search.urls')),
+    (r'^Events_Board/', include('sapling.crap_events.urls', 'events', 'events')),
     (r'^', include('sapling.recentchanges.urls')),
     (r'^tools/', include(dashboard.site.urls)),
 
