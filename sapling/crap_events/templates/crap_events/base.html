@@ -1,5 +1,10 @@
 {% extends "site/base.html" %}
 
+{% block media %}
+{{ block.super }}
+{% if form %}{{ form.media }}{% endif %}
+{% endblock %}
+
 {% block body %}
 <body>
    <div class="eventpage">

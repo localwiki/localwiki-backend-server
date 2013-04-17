@@ -11,14 +11,17 @@
 {% endblock %}
 
 {% block content %}
-{% for event in event_list %}
-    <div class="event">
-        <h3>{{ event.title }}</h3>
-        <div class="time"><span>{% trans "Time:" %}</span> {{ event.time_start }}</div>
-        <div class="location"><span>{% trans "Location:" %}</span> {{ event.location }}</div>
-        <div class="descripton">{{ event.description }}</div>
-        <div class="posted_by">(Posted by {{ event.posted_by }})</div>
-    </div>
+{% for day, events in events_by_day %}
+    <h2>{{ day|date:"l, F j" }}</h2>
+    {% for event in events %}
+        <div class="event">
+            <h3>{{ event.title }}</h3>
+            <div class="time"><span>{% trans "Time:" %}</span> {{ event.time_start }}</div>
+            <div class="location"><span>{% trans "Location:" %}</span> {{ event.location }}</div>
+            <div class="descripton">{{ event.description|safe }}</div>
+            <div class="posted_by">(Posted by {{ event.posted_by }})</div>
+        </div>
+    {% endfor %}
 {% endfor %}
 
 <div id="add_event">
