@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from pages.fields import WikiHTMLField
-
 from versionutils import versioning
+
+from pages.fields import WikiHTMLField
 
 
 class SimpleWikiHTMLField(WikiHTMLField):

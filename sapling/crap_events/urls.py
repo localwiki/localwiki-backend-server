@@ -4,6 +4,6 @@ from views import EventListView, EventUpdateView
 
 
 urlpatterns = patterns('',
-    url(r'^$', EventListView.as_view(), name='list'),
-    url(r'^_new', EventUpdateView.as_view(), name='new'),
+    url(r'^/{0,1}$', EventListView.as_view(), name='list'),
+    url(r'^/_new', EventUpdateView.as_view(), name='new'),
 )
