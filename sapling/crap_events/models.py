@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 
 from pages.fields import WikiHTMLField
 
+from versionutils import versioning
+
 
 class SimpleWikiHTMLField(WikiHTMLField):
     allowed_elements = [
@@ -17,7 +19,12 @@ class Event(models.Model):
     time_start = models.DateTimeField()
     location = models.CharField(max_length=250)
     description = SimpleWikiHTMLField()
-    posted_by = models.ForeignKey(User)
     
     class Meta:
         ordering = ['time_start']
+
+versioning.register(Event)
+
+
+# For registration calls
+import feeds

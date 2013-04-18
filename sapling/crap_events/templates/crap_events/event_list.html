@@ -19,7 +19,7 @@
             <div class="time"><span>{% trans "Time:" %}</span> {{ event.time_start }}</div>
             <div class="location"><span>{% trans "Location:" %}</span> {{ event.location }}</div>
             <div class="descripton">{{ event.description|safe }}</div>
-            <div class="posted_by">(Posted by {{ event.posted_by }})</div>
+            <div class="posted_by">(Posted by {{ event.user_link|safe }})</div>
         </div>
     {% endfor %}
 {% endfor %}

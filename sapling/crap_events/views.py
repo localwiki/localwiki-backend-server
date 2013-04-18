@@ -3,7 +3,7 @@ from itertools import groupby
 
 from django.core.urlresolvers import reverse
 from django.views.generic.list import ListView
-from django.views.generic.edit import UpdateView
+from versionutils.versioning.views import UpdateView
 
 from utils.views import CreateObjectMixin, PermissionRequiredMixin
 
@@ -26,8 +26,15 @@ class EventListView(ListView):
             return (e.time_start.year, e.time_start.month, e.time_start.day)
 
         context = super(EventListView, self).get_context_data(*args, **kwargs)
-        by_day = [ (datetime(*d), list(events)) for d, events in
-                   groupby(self.get_queryset(), _the_day) ]
+        by_day = []
+        for d, events in groupby(self.get_queryset(), _the_day):
+            # Add a user link attribute for use in the template.
+            es = []
+            for e in events:
+                user_link = e.versions.as_of(version=1).version_info.user_link()
+                e.user_link = user_link
+                es.append(e)
+            by_day.append((datetime(*d), es))
         context['events_by_day'] = by_day
 
         return context
