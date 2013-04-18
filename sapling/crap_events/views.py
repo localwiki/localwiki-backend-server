@@ -40,9 +40,11 @@ class EventListView(ListView):
         return context
 
 
-class EventUpdateView(CreateObjectMixin, UpdateView):
+class EventUpdateView(PermissionRequiredMixin, CreateObjectMixin, UpdateView):
     model = Event
     form_class = EventForm
+    # TODO: Add event permission
+    permission = 'pages.change_page'
 
     def get_object(self):
         return Event()

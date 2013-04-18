@@ -23,6 +23,9 @@ class Event(models.Model):
     class Meta:
         ordering = ['time_start']
 
+    def __unicode__(self):
+        return "%s - %s" % (self.title, self.time_start)
+
 versioning.register(Event)
 
 

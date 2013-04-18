@@ -16,6 +16,7 @@
     {% for event in events %}
         <div class="event">
             <h3>{{ event.title }}</h3>
+            {% if request.user.is_staff %}<div><a class="button tiny" href="/admin/crap_events/event/{{ event.id }}/">edit</a></div><div style="clear:both;"></div>{% endif %}
             <div class="time"><span>{% trans "Time:" %}</span> {{ event.time_start }}</div>
             <div class="location"><span>{% trans "Location:" %}</span> {{ event.location }}</div>
             <div class="descripton">{{ event.description|safe }}</div>
