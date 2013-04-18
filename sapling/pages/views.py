@@ -24,13 +24,14 @@ from versionutils.versioning.views import UpdateView, DeleteView
 from versionutils.versioning.views import RevertView, VersionsList
 from utils.views import (Custom404Mixin, CreateObjectMixin,
     PermissionRequiredMixin)
-from models import Page, PageFile, url_to_name
-from forms import PageForm, PageFileForm
 from maps.widgets import InfoMap
-
-from models import slugify, clean_name
-from exceptions import PageExistsError
 from users.decorators import permission_required
+from annotation import get_annotation_token
+
+from models import Page, PageFile, url_to_name
+from models import slugify, clean_name
+from forms import PageForm, PageFileForm
+from exceptions import PageExistsError
 
 # Where possible, we subclass similar generic views here.
 
@@ -56,6 +57,7 @@ class PageDetailView(Custom404Mixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PageDetailView, self).get_context_data(**kwargs)
+        context['annotation_token'] = get_annotation_token(self.request)
         context['date'] = self.object.versions.most_recent().version_info.date
         if hasattr(self.object, 'mapdata'):
             # Remove the PanZoomBar on normal page views.

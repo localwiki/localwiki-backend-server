@@ -265,6 +265,7 @@ INSTALLED_APPS = (
     'recentchanges',
     'search',
     'dashboard',
+    'annotation',
     'api',
     'utils',
 )
@@ -304,6 +305,9 @@ OLWIDGET_DEFAULT_OPTIONS = {
 
 DAISYDIFF_URL = 'http://localhost:8080/daisydiff/diff'
 DAISYDIFF_MERGE_URL = 'http://localhost:8080/daisydiff/merge'
+
+HYPOTHESIS_CONSUMER_KEY = '11111111-1111-1111-1111-111111111111'
+HYPOTHESIS_SECRET_KEY = '22222222-2222-2222-2222-222222222222'
 
 # list of regular expressions for white listing embedded URLs
 EMBED_ALLOWED_SRC = ['.*']
