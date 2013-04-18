@@ -720,7 +720,7 @@ div.templates li {
     margin-bottom: 1em;
 }
 
-#dialog {
+#dialog, .dialog {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0.05);
     border-radius: 5px 5px 5px 5px;
     -moz-border-radius: 5px 5px 5px 5px;
@@ -731,10 +731,10 @@ div.templates li {
     margin-bottom: 1em;
     margin-top: 0.8em;
 }
-#dialog ul {
+#dialog ul, .dialog ul {
     list-style-type: none;
 }
-#dialog ul li {
+#dialog ul li, .dialog ul li {
     margin-left: 0;
 }
 
@@ -1055,6 +1055,34 @@ form #content_footer {
     padding-right: 5em;
     margin-top: 0.16em;
 }
+
+/*
+=======================================
+ Events Board
+=======================================
+*/
+.eventpage .event {
+    margin-bottom: 1em;
+}
+.eventpage hr {
+    height: 5px;
+    border: none;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.1);
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+
+    /* Copied from #main margin: */
+    margin-left: -5em;
+    margin-right: -8em;
+}
+.eventpage .dialog .button {
+    float: none;
+    display: inline;
+}
+.eventpage .dialog h2 {
+    margin-bottom: 1em;
+}
+
 
 /*
 =======================================

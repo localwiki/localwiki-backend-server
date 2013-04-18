@@ -23,10 +23,11 @@
             <div class="posted_by">(Posted by {{ event.user_link|safe }})</div>
         </div>
     {% endfor %}
+    <hr/>
 {% endfor %}
 
-<div id="add_event">
+<div id="add_event" class="dialog">
     <h2>{% trans "Post a new event" %}</h2>
-    <a class="button" href="_new">Add Event</a>
+    <p><a class="button" href="_new">Add Event</a></p>
 </div>
 {% endblock %}
