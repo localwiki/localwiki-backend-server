@@ -912,10 +912,13 @@ div.templates li {
     background: url(../img/arrow-turn-left.png) 2px 2px no-repeat;
     padding-left: 20px;
 }
-
 #recentchanges .tags .changelabel span {
     background: url(../img/tag-icon-small.png) 0 0 no-repeat;
     padding-left: 20px;
+}
+#recentchanges .event .changelabel span {
+    background: url(../img/calendar-month.png) 0 1px no-repeat;
+    padding-left: 22px;
 }
 
 .see_also {
