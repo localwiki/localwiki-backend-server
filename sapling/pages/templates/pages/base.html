@@ -1,5 +1,4 @@
-{% extends "site/base.html" %}
-{% load i18n %}
+{% extends "site/base.html" %} {% load i18n %}
 {% load static from staticfiles %}
 
 {% block head_extra %}{% if page %}<link rel="alternate" href="{% url pages:changes-feed slug=page.pretty_slug %}" type="application/rss+xml" title="{% trans "Recent changes on this Page" %}"/>{% endif %}{% endblock %}
@@ -13,14 +12,13 @@
     $(document).ready(function() {
         $('#annotate').click(function() {
             // aaahhhhrhughhh
-            //alert('hff');
             var s = document.createElement("script");
             s.type = 'text/javascript';
             s.src = 'http://dev.hypothes.is/app/embed.js';
             $('head')[0].appendChild(s);
             setTimeout(function() {
                 annotator.addToken('{{ annotation_token }}');
-            }, 15000);
+            }, 2000);
         });
     });
 </script>
