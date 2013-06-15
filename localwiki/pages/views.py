@@ -24,6 +24,7 @@ from versionutils.versioning.views import UpdateView, DeleteView
 from versionutils.versioning.views import RevertView, VersionsList
 from localwiki.utils.views import (Custom404Mixin, CreateObjectMixin,
     PermissionRequiredMixin)
+
 from models import Page, PageFile, url_to_name
 from forms import PageForm, PageFileForm
 from maps.widgets import InfoMap
@@ -36,9 +37,10 @@ from users.decorators import permission_required
 # Where possible, we subclass similar generic views here.
 
 
-class PageDetailView(Custom404Mixin, DetailView):
+class PageDetailView(PermissionRequiredMixin, Custom404Mixin, DetailView):
     model = Page
     context_object_name = 'page'
+    permission = 'pages.view_page'
 
     def get(self, request, **kwargs):
         self.object = self.get_object()
@@ -166,7 +168,9 @@ class PageRevertView(PermissionRequiredMixin, RevertView):
         return reverse('pages:show', args=[self.kwargs.get('original_slug')])
 
 
-class PageVersionsList(VersionsList):
+class PageVersionsList(PermissionRequiredMixin, VersionsList):
+    permission = 'pages.view_page'
+
     def get_queryset(self):
         all_page_versions = Page(slug=self.kwargs['slug']).versions.all()
         # We set self.page to the most recent historical instance of the
@@ -183,10 +187,17 @@ class PageVersionsList(VersionsList):
         context['page'] = self.page
         return context
 
+    def get_protected_object(self):
+        try:
+            return Page.objects.get(slug=self.kwargs['slug'])
+        except Page.DoesNotExist:
+            return None  # This will check the general permission
 
-class PageFileListView(ListView):
+
+class PageFileListView(PermissionRequiredMixin, ListView):
     context_object_name = "file_list"
     template_name = "pages/page_files.html"
+    permission = 'pages.view_page'
 
     def get_queryset(self):
         return PageFile.objects.filter(slug__exact=self.kwargs['slug'])
@@ -195,6 +206,12 @@ class PageFileListView(ListView):
         context = super(PageFileListView, self).get_context_data(**kwargs)
         context['slug'] = self.kwargs['original_slug']
         return context
+
+    def get_protected_object(self):
+        try:
+            return Page.objects.get(slug=self.kwargs['slug'])
+        except Page.DoesNotExist:
+            return None  # This will check the general permission
 
 
 class PageFilebrowserView(PageFileListView):
@@ -209,16 +226,25 @@ class PageFilebrowserView(PageFileListView):
         return context
 
 
-class PageFileView(RedirectView):
+class PageFileView(PermissionRequiredMixin, RedirectView):
     permanent = False
+    permission = 'page.view_page'
 
     def get_redirect_url(self, slug, file, **kwargs):
         page_file = get_object_or_404(PageFile, slug__exact=slug,
                                       name__exact=file)
         return page_file.file.url
 
+    def get_protected_object(self):
+        try:
+            return Page.objects.get(slug=self.kwargs['slug'])
+        except Page.DoesNotExist:
+            return None  # This will check the general permission.
 
-class PageFileVersionDetailView(RedirectView):
+
+class PageFileVersionDetailView(PageFileView):
+    permanent = True
+
     def get_redirect_url(self, slug, file, **kwargs):
         page_file = PageFile(slug=slug, name=file)
         version = self.kwargs.get('version')
@@ -232,8 +258,9 @@ class PageFileVersionDetailView(RedirectView):
         return page_file.file.url
 
 
-class PageFileCompareView(diff.views.CompareView):
+class PageFileCompareView(PermissionRequiredMixin, diff.views.CompareView):
     model = PageFile
+    permission = 'pages.view_page'
 
     def get_object(self):
         return PageFile(slug=self.kwargs['slug'], name=self.kwargs['file'])
@@ -242,6 +269,12 @@ class PageFileCompareView(diff.views.CompareView):
         context = super(PageFileCompareView, self).get_context_data(**kwargs)
         context['slug'] = self.kwargs['original_slug']
         return context
+
+    def get_protected_object(self):
+        try:
+            return Page.objects.get(slug=self.kwargs['slug'])
+        except Page.DoesNotExist:
+            return None  # This will check the general permission.
 
 
 class PageFileRevertView(PermissionRequiredMixin, RevertView):
@@ -262,8 +295,9 @@ class PageFileRevertView(PermissionRequiredMixin, RevertView):
                                                 self.kwargs['file']])
 
 
-class PageFileInfo(VersionsList):
+class PageFileInfo(PermissionRequiredMixin, VersionsList):
     template_name_suffix = '_info'
+    permission = 'pages.view_page'
 
     def get_queryset(self):
         all_file_versions = PageFile(slug=self.kwargs['slug'],
@@ -283,9 +317,16 @@ class PageFileInfo(VersionsList):
         context['form'] = PageFileForm()
         return context
 
+    def get_protected_object(self):
+        try:
+            return Page.objects.get(slug=self.kwargs['slug'])
+        except Page.DoesNotExist:
+            return None  # This will check the general permission.
 
-class PageCompareView(diff.views.CompareView):
+
+class PageCompareView(PermissionRequiredMixin, diff.views.CompareView):
     model = Page
+    permission = 'pages.view_page'
 
     def get_object(self):
         return Page(slug=self.kwargs['slug'])
@@ -294,6 +335,12 @@ class PageCompareView(diff.views.CompareView):
         context = super(PageCompareView, self).get_context_data(**kwargs)
         context['page_diff'] = diff.diff(context['old'], context['new'])
         return context
+
+    def get_protected_object(self):
+        try:
+            return Page.objects.get(slug=self.kwargs['slug'])
+        except Page.DoesNotExist:
+            return None  # This will check the general permission.
 
 
 class PageCreateView(RedirectView):
@@ -371,9 +418,10 @@ class RenameForm(forms.Form):
     comment = forms.CharField(max_length=150, required=False, label=ugettext_lazy("Comment"))
 
 
-class PageRenameView(FormView):
+class PageRenameView(PermissionRequiredMixin, FormView):
     form_class = RenameForm
     template_name = 'pages/page_rename.html'
+    permission = 'pages.change_page'
 
     def form_valid(self, form):
         try:
@@ -401,6 +449,12 @@ class PageRenameView(FormView):
             self.success_msg())
         # Redirect back to the page.
         return reverse('pages:show', args=[self.new_pagename])
+
+    def get_protected_object(self):
+        try:
+            return Page.objects.get(slug=self.kwargs['slug'])
+        except Page.DoesNotExist:
+            return None  # This will check the general permission.
 
 
 def suggest(request):
