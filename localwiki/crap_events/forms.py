@@ -1,6 +1,6 @@
 from django import forms
 
-from pages.widgets import WikiEditor
+from widgets import EventWikiEditor
 
 from models import Event
 
@@ -8,4 +8,4 @@ from models import Event
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        widgets = {'description': WikiEditor()}
+        widgets = {'description': EventWikiEditor()}
