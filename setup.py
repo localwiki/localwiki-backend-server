@@ -4,8 +4,7 @@ import sys
 from fnmatch import fnmatchcase
 from distutils.util import convert_path
 
-from sapling import get_version
-
+from localwiki import get_version
 
 # Provided as an attribute, so you can append to these instead
 # of replicating them:
@@ -113,24 +112,40 @@ def gen_data_files(*dirs):
     return results
 
 
+def find_packages_in(dirs):
+    """
+    Given a list of directories, `dirs`, we use `find_packages()` on each and
+    return the result as a list of qualified packages, e.g.
+
+    find_packages_in(['localwiki']) -> ['localwiki', 'localwiki.pages', ...]
+    """
+    packages = []
+    for dir in dirs:
+        packages.append(dir)
+        packages += [ '%s.%s' % (dir, p) for p in find_packages(dir) ]
+    return packages
+
+
 install_requires = [
     'setuptools',
-    'django==1.3',
+    'django==1.4',
     'html5lib==0.95',
     'sorl-thumbnail==11.12',
     'python-dateutil==1.5',
     'pysolr==2.1.0-beta',
-    'django-haystack==1.2.6',
+    'django-haystack==1.2.7',
     'django-randomfilenamestorage==1.1',
     'django-guardian==1.0.4',
     'South==0.7.4',
     'python-flot-utils==0.2.1',
     'django-staticfiles==1.2.1',
     'django-registration==0.8.0',
-    'django-olwidget==0.46-custom1',
+    'django-olwidget==0.46-custom2',
     'django-honeypot==0.3.0-custom4',
     'django-tastypie==0.9.12-custom5',
     'django-qsstats-magic==0.7',
+    'django-picklefield==0.3.0',
+    'django-constance==0.6.0',
 ]
 if int(os.getenv('DISABLE_INSTALL_REQUIRES', '0')):
     install_requires = None
@@ -143,20 +158,20 @@ setup(
     author='Mike Ivanov',
     author_email='mivanov@gmail.com',
     url='http://localwiki.org',
-    packages=find_packages(),
-    package_dir={'sapling': 'sapling'},
+    packages=find_packages_in(['localwiki']),
+    package_dir={'localwiki': 'localwiki'},
     data_files=gen_data_files(
         ('docs', 'share/localwiki/docs'),
     ),
     package_data=find_package_data(exclude_directories=standard_exclude_directories + ('deb_utils',) ),
     install_requires=install_requires,
     dependency_links=[
-        'https://github.com/philipn/olwidget/tarball/custom_base_layers_fixed#egg=django-olwidget-0.46-custom1',
+        'https://github.com/philipn/olwidget/tarball/custom_base_layers_fixed#egg=django-olwidget-0.46-custom2',
         'https://github.com/philipn/django-honeypot/tarball/b4991c140849901d2f8842df2c4672813e73381b#egg=django-honeypot-0.3.0-custom4',
         'https://github.com/philipn/django-tastypie/tarball/localwiki_master#egg=django-tastypie-0.9.12-custom5',
     ],
     entry_points={
-        'console_scripts': ['localwiki-manage=sapling.manage:main'],
+        'console_scripts': ['localwiki-manage=localwiki.manage:main'],
     },
     classifiers=[
         'Development Status :: 3 - Alpha',
