@@ -1082,7 +1082,12 @@ form #content_footer {
 .eventpage .dialog h2 {
     margin-bottom: 1em;
 }
-
+.eventpage .datetime {
+}
+.eventpage .datetime input {
+    display: inline;
+    width: 116px;
+}
 
 /*
 =======================================
