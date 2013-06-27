@@ -58,6 +58,11 @@ TIME_ZONE = 'America/Chicago'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
+# Input formats for dates and times enforced in form fields. For all possible
+# options see  http://docs.python.org/2/library/datetime.html#strftime-strptime-behavior 
+DATE_INPUT_FORMATS = ('%m/%d/%Y',)  # dates like 12/31/2012
+TIME_INPUT_FORMATS = ('%I:%M %p',)  # times like 01:35 PM
+
 LOCALE_PATHS = (
     os.path.join(PROJECT_ROOT, 'locale'),
 )
@@ -269,6 +274,7 @@ INSTALLED_APPS = (
     'search',
     'crap_comments',
     'dashboard',
+    'crap_events',
     'main.api',
     'utils',
 )

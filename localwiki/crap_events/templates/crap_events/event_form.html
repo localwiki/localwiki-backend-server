@@ -1,0 +1,12 @@
+{% extends "crap_events/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Events Board" %} - {{ block.super }}{% endblock %}
+{% block header_title %}{% trans "Events Board" %}{% endblock %}
+
+{% block content %}
+<form method="post" action="">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add Event"/>
+</form>
+{% endblock %}

@@ -24,6 +24,6 @@ class TagEdit(forms.TextInput):
         )
         css = { 'all':
             (static_url('tagedit/css/jquery.tagedit.css'),
-             static_url('tagedit/css/ui-lightness/jquery-ui-1.8.6.custom.css'),
+             static_url('tagedit/css/ui-lightness/jquery-ui-1.8.16.custom.css'),
             ),
         }

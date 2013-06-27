@@ -27,6 +27,7 @@ urlpatterns = patterns('',
     (r'^_comment/', include(crap_comments.site.urls)),
     (r'^(?i)Users/', include('users.urls')),
     (r'^search/', include('search.urls')),
+    (r'^Events_Board', include('crap_events.urls', 'events', 'events')),
     (r'^', include('recentchanges.urls')),
     (r'^tools/', include(dashboard.site.urls)),
 
