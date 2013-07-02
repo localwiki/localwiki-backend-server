@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     (r'^_redirect/', include(redirects.site.urls)),
     (r'^(?i)Users/', include('users.urls')),
     (r'^search/', include('search.urls')),
-    (r'^Events_Board', include('crap_events.urls', 'events', 'events')),
+    (r'^Events_Board', include('crap_events.urls', 'crap_events', 'crap_events')),
     (r'^', include('recentchanges.urls')),
     (r'^tools/', include(dashboard.site.urls)),
 

@@ -50,4 +50,4 @@ class EventUpdateView(PermissionRequiredMixin, CreateObjectMixin, UpdateView):
         return Event()
 
     def get_success_url(self):
-        return reverse('events:list')
+        return reverse('crap_events:list')
