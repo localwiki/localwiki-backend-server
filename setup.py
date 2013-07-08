@@ -133,6 +133,7 @@ install_requires = [
     'django-qsstats-magic==0.7',
     'django-eav==0.9.19',
     'django-extra-views==0.2.5'
+    'simplejson==3.3.0',
 ]
 if int(os.getenv('DISABLE_INSTALL_REQUIRES', '0')):
     install_requires = None
