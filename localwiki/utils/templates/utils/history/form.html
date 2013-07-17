@@ -5,7 +5,6 @@
 {% block version_info_extras %}
   {{ version_info.comment|default:'' }}
   </label>
-  </td>
   <td>
     {% if not forloop.first %}
     {% ifnotequal version_info.type_verbose "Deleted" %}

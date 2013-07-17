@@ -255,6 +255,7 @@ INSTALLED_APPS = (
     'honeypot',
     'constance.backends.database',
     'constance',
+    'endless_pagination',
 
     # Our apps
     'versionutils.versioning',

@@ -6,14 +6,16 @@ class-based generic views.
 
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from django.views.generic import DeleteView, UpdateView, ListView
+from django.views.generic import DeleteView, UpdateView
 from django.views.generic.edit import FormMixin
 from django.utils.translation import ugettext as _
+
+from endless_pagination.views import AjaxListView
 
 from forms import DeleteForm, RevertForm
 
 
-class VersionsList(ListView):
+class VersionsList(AjaxListView):
     """
     A subclass of django.views.generic.ListView.
 
@@ -30,6 +32,7 @@ class VersionsList(ListView):
     """
     context_object_name = 'versions_list'
     template_name_suffix = '_versions'
+    page_template = 'versionutils/history/form_page.html'  # for endless pagination
     revert_view_name = None
 
     def get_context_data(self, **kwargs):

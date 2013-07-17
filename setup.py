@@ -146,6 +146,7 @@ install_requires = [
     'django-qsstats-magic==0.7',
     'django-picklefield==0.3.0',
     'django-constance==0.6.0',
+    'django-endless-pagination==2.0',
 ]
 if int(os.getenv('DISABLE_INSTALL_REQUIRES', '0')):
     install_requires = None
