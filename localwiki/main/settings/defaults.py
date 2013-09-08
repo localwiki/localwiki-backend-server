@@ -306,6 +306,7 @@ INSTALLED_APPS = (
     'pages',
     'maps',
     'redirects',
+    'links',
     'tags',
     'users',
     'activity',
