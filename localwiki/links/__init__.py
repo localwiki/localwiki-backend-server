@@ -1,3 +1,15 @@
+import html5lib
+import urlparse
+
+from pages.models import slugify, url_to_name
+
+
+def _is_absolute(href):
+    return bool(urlparse.urlparse(href).scheme)
+
+def _is_anchor_link(href):
+    return href.startswith('#')
+    
 def extract_internal_links(html):
     """
     Args:
@@ -8,4 +20,26 @@ def extract_internal_links(html):
         link has been made in this HTML.  E.g.
         {'Downtown Park': 3, 'Rollercoaster': 1}
     """
-    return {}
+    parser = html5lib.HTMLParser(
+        tree=html5lib.treebuilders.getTreeBuilder("lxml"),
+        namespaceHTMLElements=False)
+    # Wrap to make the tree lookup easier
+    tree = parser.parseFragment('<div>%s</div>' % html)[0]
+    hrefs = tree.xpath('//a/@href')
+
+    # Grab the links if they're not anchors or external.
+    d = {}
+    for href in hrefs:
+        if not _is_absolute(href) and not _is_anchor_link(href):
+            if not slugify(href) in d:
+                d[slugify(href)] = (url_to_name(href), 1)
+            else:
+                name, count = d[slugify(href)]
+                d[slugify(href)] = (name, count + 1)
+
+    # Format the result correctly.
+    links = {}
+    for _, (name, count) in d.iteritems():
+        links[name] = count
+    
+    return links
