@@ -33,3 +33,22 @@ class ExtractLinkTest(TestCase):
         links = extract_internal_links(html)
         self.assertTrue('Cats and dogs' in links)
         self.assertFalse('Cats%20and%20dogs' in links)
+
+    def test_ignore_external_links(self):
+        html = """
+<p>I love <a href="Parks">outside</a>.</p>
+<p>I love <a href="http://example.org/Night">test</a>.</p>
+        """
+        links = extract_internal_links(html)
+        self.assertTrue('Parks' in links)
+        self.assertEqual(len(links.keys()), 1)
+
+    def test_ignore_anchors(self):
+        html = """
+<p>I love <a href="Parks">outside</a>.</p>
+<p>I love <a href="#gohere">test</a>.</p>
+<p>I love <a>test now</a>.</p>
+        """
+        links = extract_internal_links(html)
+        self.assertTrue('Parks' in links)
+        self.assertEqual(len(links.keys()), 1)
