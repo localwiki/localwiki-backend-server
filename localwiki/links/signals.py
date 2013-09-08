@@ -1,12 +1,14 @@
 from django.db.models.signals import post_save
 from pages.models import Page
 
+from links import extract_internal_links
 
-def extract_links(sender, instance, raw, **kws):
+
+def _create_page_links(sender, instance, raw, **kws):
     # Don't create Links when importing via loaddata - they're already
     # being imported.
     if raw:
         return
-    import pdb;pdb.set_trace()
 
-post_save.connect(extract_links, sender=Page)
+
+post_save.connect(_create_page_links, sender=Page)
