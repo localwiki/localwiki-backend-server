@@ -14,6 +14,7 @@ class Migration(SchemaMigration):
             ('source', self.gf('django.db.models.fields.related.ForeignKey')(related_name='links_to_here', to=orm['pages.Page'])),
             ('destination', self.gf('django.db.models.fields.related.ForeignKey')(related_name='links', null=True, to=orm['pages.Page'])),
             ('destination_name', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('count', self.gf('django.db.models.fields.PositiveSmallIntegerField')()),
             ('region', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['regions.Region'])),
         ))
         db.send_create_signal('links', ['Link'])
@@ -33,6 +34,7 @@ class Migration(SchemaMigration):
     models = {
         'links.link': {
             'Meta': {'unique_together': "(('source', 'destination'),)", 'object_name': 'Link'},
+            'count': ('django.db.models.fields.PositiveSmallIntegerField', [], {}),
             'destination': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'links'", 'null': 'True', 'to': "orm['pages.Page']"}),
             'destination_name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
