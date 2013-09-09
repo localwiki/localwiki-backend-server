@@ -6,8 +6,8 @@ from regions.models import Region
 
 
 class Link(models.Model):
-    source = models.ForeignKey(Page, related_name='links_to_here')
-    destination = models.ForeignKey(Page, related_name='links', null=True)
+    source = models.ForeignKey(Page, related_name='links')
+    destination = models.ForeignKey(Page, related_name='links_to_here', null=True)
     # We can link to pages that don't yet exist, so we record the page name as well.
     destination_name = models.CharField(max_length=255, editable=False, blank=False)
     count = models.PositiveSmallIntegerField(
@@ -19,7 +19,7 @@ class Link(models.Model):
         unique_together = ('source', 'destination')
 
     def __unicode__(self):
-        return "%s ---> %s" % (self.source, self.destination)
+        return "%s ---> %s" % (self.source, self.destination_name)
 
 
 # For registration calls
