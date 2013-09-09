@@ -1,35 +1,38 @@
 # -*- coding: utf-8 -*-
 import datetime
 from south.db import db
-from south.v2 import SchemaMigration
+from south.v2 import DataMigration
 from django.db import models
+from django.utils.encoding import smart_str
 
 
-class Migration(SchemaMigration):
+class Migration(DataMigration):
 
     def forwards(self, orm):
-        # Adding model 'Link'
-        db.create_table('links_link', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('source', self.gf('django.db.models.fields.related.ForeignKey')(related_name='links', to=orm['pages.Page'])),
-            ('destination', self.gf('django.db.models.fields.related.ForeignKey')(related_name='links_to_here', null=True, to=orm['pages.Page'])),
-            ('destination_name', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('count', self.gf('django.db.models.fields.PositiveSmallIntegerField')()),
-            ('region', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['regions.Region'])),
-        ))
-        db.send_create_signal('links', ['Link'])
+        from pages.models import slugify
+        from links import extract_internal_links
 
-        # Adding unique constraint on 'Link', fields ['source', 'destination']
-        db.create_unique('links_link', ['source_id', 'destination_id'])
-
+        for page in orm['pages.Page'].objects.all():
+            region = page.region
+            links = extract_internal_links(page.content)
+            for pagename, count in links.iteritems():
+                page_exists = orm['pages.Page'].objects.filter(slug=slugify(pagename), region=region)
+                if page_exists:
+                    destination = page_exists[0]
+                else:
+                    destination = None
+                print "..recording page links on %s" % smart_str(pagename)
+                link = orm.Link(
+                    source=page,
+                    region=region,
+                    destination=destination,
+                    destination_name=pagename,
+                    count=count,
+                )
+                link.save()
 
     def backwards(self, orm):
-        # Removing unique constraint on 'Link', fields ['source', 'destination']
-        db.delete_unique('links_link', ['source_id', 'destination_id'])
-
-        # Deleting model 'Link'
-        db.delete_table('links_link')
-
+        orm.Link.objects.all().delete()
 
     models = {
         'links.link': {
@@ -59,3 +62,4 @@ class Migration(SchemaMigration):
     }
 
     complete_apps = ['links']
+    symmetrical = True
