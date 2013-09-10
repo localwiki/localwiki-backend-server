@@ -187,12 +187,14 @@ def do_link(parser, token):
         tag, href = token.split_contents()
     except ValueError:
         raise template.TemplateSyntaxError("%r tag requires one argument" %
-                                           token.contents.split()[0])
-    if not is_quoted(href):
-        raise template.TemplateSyntaxError(
-                                    "%r tag's argument should be in quotes" %
-                                     token.contents.split()[0])
+            token.contents.split()[0])
+    if is_quoted(href):
+        href = unescape_string_literal(href)
+    else:
+        # It's probably a variable in this case.
+        href = template.Variable(href) 
 
     nodelist = parser.parse(('endlink',))
     parser.delete_first_token()
-    return LinkNode(unescape_string_literal(href), nodelist)
+
+    return LinkNode(href, nodelist)

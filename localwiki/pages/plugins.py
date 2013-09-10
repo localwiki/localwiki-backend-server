@@ -50,6 +50,7 @@ from urlparse import urlparse
 from copy import copy
 
 from django.template import Node
+from django.template import Variable
 from django.core.urlresolvers import reverse
 from django.utils.text import unescape_entities
 from django.utils.translation import  ugettext as _
@@ -326,6 +327,8 @@ class LinkNode(Node):
         try:
             cls = ''
             url = self.href
+            if isinstance(url, Variable):
+                url = url.resolve(context)
             page = context['page']
             if self.is_relative_link(url):
                 if url.startswith('_files/'):
