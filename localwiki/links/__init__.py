@@ -3,7 +3,6 @@ import urlparse
 
 from pages.models import slugify, url_to_name
 
-
 def _is_absolute(href):
     return bool(urlparse.urlparse(href).scheme)
 
@@ -43,3 +42,6 @@ def extract_internal_links(html):
         links[name] = count
     
     return links
+
+
+import site

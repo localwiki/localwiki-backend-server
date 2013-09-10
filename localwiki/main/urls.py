@@ -9,6 +9,7 @@ import pages
 import maps
 import redirects
 import dashboard
+import links
 from regions.views import MainPageView, RegionCreateView, RegionListView
 from users.admin import SubscribedList
 
@@ -28,6 +29,7 @@ urlpatterns = patterns('',
     (r'^(?P<region>[^/]+?)/tags$', RedirectView.as_view(url='/tags/')),
     (r'^(?P<region>[^/]+?)/tags/', include('tags.urls', 'tags', 'tags')),
     (r'^_redirect/', include(redirects.site.urls)),
+    (r'^_links/', include(links.site.urls)),
     (r'^(?i)Users/', include('users.urls')),
     (r'^(?P<region>[^/]+?)/search/', include('search.urls')),
     (r'^', include('recentchanges.urls')),

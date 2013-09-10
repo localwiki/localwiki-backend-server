@@ -28,6 +28,9 @@ urlpatterns = patterns('',
     ###########################################################
     # Files URLs
     # TODO: break out into separate files app with own URLs
+    #       and/or put at top level, e.g. /_tags/<region>/<slug>
+    #       versus /<region>/<slug>/_tags/ for ease of
+    #       implementation?
     # TODO: shouldn't some of these be _history and not _info?
     ###########################################################
     url(r'^(?P<region>[^/]+?)/(?P<slug>.+)/_files/$', slugify(PageFileListView.as_view()),
