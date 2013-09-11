@@ -4,6 +4,10 @@
 {% load i18n %}
 {% load pages_tags %}
 
+{% block search_robots %}
+<meta name="robots" content="noindex,nofollow">
+{% endblock %}
+
 {% block header_title %}
     {% blocktrans with page_url=page.get_absolute_url page_name=page.name %}
         Links for <a href="{{ page_url }}">{{ page_name }}</a>
