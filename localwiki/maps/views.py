@@ -230,9 +230,12 @@ class MapObjectsForBounds(JSONResponseMixin, RegionMixin, BaseListView):
 class OSMGeometryLookup(RegionMixin, JSONView):
     def get_context_data(self, **kwargs):
         display_name = self.request.GET.get('display_name')
-        osm_id = int(self.request.GET.get('osm_id'))
+        osm_id = self.request.GET.get('osm_id')
         osm_type = self.request.GET.get('osm_type')
-        return {'geom': get_osm_geom(osm_id, osm_type, display_name, self.get_region()).ewkt}
+        lat = self.request.GET.get('lat')
+        lon = self.request.GET.get('lon')
+        zoom = self.request.GET.get('zoom')
+        return {'geom': get_osm_geom(osm_id, osm_type, display_name, lat, lon, zoom, self.get_region()).ewkt}
 
 
 class MapVersionDetailView(MapDetailView):

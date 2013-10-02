@@ -475,6 +475,41 @@ SaplingMap = {
         map.addControl(new KeyboardDefaults());
     },
 
+    _add_custom_buttons: function(map, layer) {
+        var panel = null;
+        for (i=0;i < map.controls.length ;i++) {
+            if (map.controls[i].displayClass == 'olControlEditingToolbar') {
+                console.log('woo' +  map.controls[i]);
+                panel = map.controls[i];
+            }
+        };
+        var controls = panel.controls;
+        controls.unshift(new OpenLayers.Control.Button({
+            displayClass: 'olControlClearFeatures', 
+            trigger: function() {
+                $('.mapwidget').css('cursor', 'crosshair');
+                map.events.register('click', map, function (e) {
+                    var xys = map.getLonLatFromViewPortPx(e.xy);
+                    xys.transform( map.projection,map.displayProjection);
+                    $.get('../_get_osm/', { 'lat': xys.lat, 'lon': xys.lon, 'zoom': map.getZoom() }, function(data){
+                        var temp = new olwidget.InfoLayer([[data.geom, 'osm', 'osm']]);
+                        temp.visibility = false;
+                        map.addLayer(temp);
+                        layer.removeAllFeatures();
+                        layer.addFeatures(temp.features);
+                        map.removeLayer(temp);
+                        map.zoomToExtent(layer.getDataExtent());
+                        $('.mapwidget .loading').remove();
+                  });
+                });
+            },
+            title: "Grab geography from base map"
+        }));
+        panel.deactivate();
+        panel.addControls(controls);
+        panel.activate();
+    },
+
     _get_undo_button: function(controls) {
         for (var i = 0; i < controls.length; i++) {
             if (controls[i].title == 'Undo') {
@@ -578,6 +613,7 @@ SaplingMap = {
                     this._setup_map_search(map, layer);
                     this._remove_unneeded_controls(layer);
                     map.controls[i].setEditing(layer);
+                    this._add_custom_buttons(map, layer);
 
                     this._set_modify_control(layer);
                     this._register_edit_events(map, layer);
