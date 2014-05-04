@@ -26,8 +26,8 @@
 {% block object_actions %}
   <ul>
     {% if page %}
-        <li><a href="{% url 'pages:edit' slug=page.pretty_slug region=page.region.slug %}" class="button">{% trans "Edit" %}</a></li>
-        <li><a href="{% url 'pages:history' slug=page.pretty_slug region=page.region.slug %}" class="button">{% trans "Info" %}</a></li>
+        <li><a href="{% url 'pages:edit' slug=page.pretty_slug region=page.region.slug %}" rel="nofollow" class="button">{% trans "Edit" %}</a></li>
+        <li><a href="{% url 'pages:history' slug=page.pretty_slug region=page.region.slug %}" rel="nofollow" class="button">{% trans "Info" %}</a></li>
     {% endif %}
   </ul>
 {% endblock %}
