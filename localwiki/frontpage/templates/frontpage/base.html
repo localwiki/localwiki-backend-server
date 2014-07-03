@@ -89,7 +89,7 @@ and submit using #cover_form.
         {% endif %}
 
         {% render_plugins page.content %}
-        <div id="interesting_pages">
+        <div class="interesting_cards">
             <h2>{% trans "Some interesting pages" %}</h2>
             {% cache 300 int_frnt_pg request.META.HTTP_HOST region.slug %}
               {% if pages_for_cards %}

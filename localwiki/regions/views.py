@@ -130,22 +130,6 @@ class RegionListView(ListView):
         return context
 
 
-class MainPageView(View):
-    def get(self, request):
-        from activity.views import FollowedActivity
-
-        if request.user.is_authenticated():
-            view_func = FollowedActivity.as_view()
-        else:
-            view_func = SplashPageView.as_view()
-        return view_func(request)
-
-
-class SplashPageView(RegionListView):
-    template_name = 'regions/main.html'
-    zoom_to_data = False
-
-
 class RegionCreateView(AuthenticationRequired, CreateView):
     model = Region
     form_class = RegionForm

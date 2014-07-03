@@ -10,7 +10,6 @@ import maps
 import redirects
 import dashboard
 import regions
-from regions.views import MainPageView
 from users.views import GlobalUserpageRedirectView
 from utils.views import NamedRedirectView
 from users.admin import SubscribedList
@@ -27,7 +26,8 @@ admin.autodiscover()
 
 
 urlpatterns = patterns('',
-    url(r'^/*$', MainPageView.as_view(), name='main-page'),
+    # Mostly-static-ish content & the main page ("/")
+    (r'^', include('main_content.urls')),
 
     # Users / registration URLs
     (r'^(?i)Users/', include('users.urls')),

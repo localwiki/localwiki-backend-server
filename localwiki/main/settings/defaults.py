@@ -320,6 +320,7 @@ INSTALLED_APPS = (
     'dashboard',
     'stars',
     'explore',
+    'main_content',
     'main.api',
     'main',
     'utils',

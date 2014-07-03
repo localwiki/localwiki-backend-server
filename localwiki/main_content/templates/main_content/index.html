@@ -1,20 +1,50 @@
 {% extends "pages/base.html" %}
 
-
 {% load i18n %}
+{% load cache %}
+{% load cards_tags %}
 
 {% block title %}{% trans "LocalWiki" %}{% endblock %}
 
 {% block header_title %}{% trans "LocalWiki" %}{% endblock %}
 
+{% block everything_wrapper %}
+  <div id="splash_page">
+    {{ block.super }}
+  </div>
+{% endblock %}
+
 {% block header_bar_wrapper %}
-{{ map.media }}
-<div id="map_header_bar">
-    <div id="map">
-    {{ map }}
-    <div class="info"><a class="edit tiny button" href="{% url 'regions:add' %}">{% trans "Add region" %}</a></div>
-    </div>    
-</div>
+  {{ map.media }}
+  <div id="map_header_bar">
+      <div id="map">
+      {{ map }}
+      </div>    
+  </div>
+{% endblock %}
+
+{% block main_wrapper %}
+  <div class="callout">
+      <h1>{% trans "LocalWiki is a grassroots effort to collect, share and open the world's local knowledge" %}</h1>
+  </div>
+  <div class="bring_localwiki">
+      <a href="{% url 'regions:add' %}" class="button">{% trans "Bring LocalWiki to your community" %}</a>
+  </div>
+  <div class="interesting_cards">
+      <h2>{% trans "Explore LocalWiki communities" %}</h2>
+      {% cache 300 int_main_regions request.META.HTTP_HOST 'gr' %}
+          <div class="cards">
+          {% for page in pages_for_cards %}
+            {% page_card page %}
+          {% endfor %}
+          </div>
+          <div class="explore_more">
+            <a class="button" href="{% url 'regions:list' %}">{% trans "Explore all communities" %}</a>
+          </div>
+      {% endcache %}
+  </div>
+
+  {{ block.super }}
 {% endblock %}
 
 {% block content_wrapper %}

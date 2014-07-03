@@ -2065,6 +2065,54 @@ input:focus {
   cursor: pointer;
 }
 
+.interesting_cards {
+    clear: both;
+    margin-bottom: 1em;
+}
+.interesting_cards .cards {
+    text-align: center;
+}
+.interesting_cards .no_pages a {
+    float: none;
+    display: inline-block;
+    background-image: url(../theme/img/edit_icon.png);
+
+    font-weight: normal;
+    padding-left: 28px;
+    font-size: 90%;
+    background-repeat: no-repeat;
+    background-position: 9px 50%;
+}
+.interesting_cards .explore_more {
+    padding-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.interesting_cards .explore_more a {
+    float: none;
+    width: auto;
+    display: inline-block;
+    margin-top: 0;
+}
+
+/* Some kinda specific tweaks to make cards flow correctly */
+
+@media screen and (max-width: 1314px) {
+    .interesting_cards .cards .card:nth-child(n+5) {
+        display: none;
+    }
+}
+@media screen and (max-width: 880px) {
+    .interesting_cards .cards {
+    }
+}
+@media screen and (max-width: 473px) {
+    .interesting_cards .cards .card:nth-child(n+4) {
+        display: none;
+    }
+}
+
 /*
 ====================================
  Explore page
@@ -2375,33 +2423,6 @@ table.noborder, table.noborder td {
     }
 }
 
-/*
-====================================
- Main page
-====================================
-*/
-
-#map_header_bar #map {
-    float: none;
-    margin: 0;
-}
-#map_header_bar .mapwidget {
-    width: 100%!important;
-    float: none;
-    margin: 0;
-    height: 340px!important;
-    display: inline-block;
-}
-@media screen and (max-width: 700px) {
-    #map_header_bar .mapwidget {
-        height: 200px!important;
-    }
-}
-@media screen and (max-width: 500px) {
-    #map_header_bar #map {
-        padding-top: 0; 
-    }
-}
 
 /*
 ====================================
@@ -2465,4 +2486,100 @@ table.noborder, table.noborder td {
 }
 .divider_list .follow_item {
     margin-top: -0.1em;
+}
+
+/*
+====================================
+ Main (splash) page
+====================================
+*/
+
+/* !!!!!! */
+/* XXX TODO: REMOVE BEFORE DEPLOY */
+/* !!!!!! */
+#preview_banner {
+    display: none;
+}
+
+#splash_page #region_header {
+    display: none;
+}
+
+#splash_page #header {
+    border-bottom: 0;
+}
+
+#splash_page #map_header_bar #map {
+    float: none;
+    margin: 0;
+    border: none;
+    padding: 0;
+    
+
+    display: none;
+}
+
+/* TEMP */
+#splash_page #map_header_bar {
+    background-color: #c3ccde;
+    height: 400px!important;
+}
+
+#splash_page #map_header_bar .mapwidget {
+    display: none!important;
+
+
+    width: 100%!important;
+    float: none;
+    margin: 0;
+    height: 400px!important;
+    display: block;
+    border: none;
+}
+
+#splash_page .callout {
+    text-align: center;
+    background-color: #f3f3f3;
+    padding: 3em 0 3em 0;
+}
+#splash_page .callout h1 {
+    max-width: 600px;
+    display: inline-block;
+    margin: 0;
+    color: #505050;
+    font-size: 30px;
+}
+
+#splash_page .bring_localwiki {
+    text-align: center;
+    display: block;
+    background-color: white;
+}
+#splash_page .bring_localwiki .button {
+    float: none;
+    display: inline-block;
+    margin-top: 2.5em;
+    margin-bottom: 2.5em;
+}
+#splash_page .interesting_cards {
+    padding-top: 2em;
+}
+#splash_page .interesting_cards h2 {
+    text-align: center; 
+}
+
+/* TEMP TEMP TEMP */
+#splash_page #main {
+    background-color: white!important;
+}
+
+@media screen and (max-width: 700px) {
+    #splash_page #map_header_bar .mapwidget {
+        height: 200px!important;
+    }
+}
+@media screen and (max-width: 500px) {
+    #splash_page #map_header_bar #map {
+        padding-top: 0; 
+    }
 }
