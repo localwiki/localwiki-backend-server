@@ -225,6 +225,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'honeypot.middleware.HoneypotMiddleware',
     'versionutils.versioning.middleware.AutoTrackUserInfoMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'redirects.middleware.RedirectFallbackMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
@@ -275,6 +276,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
+    'django.contrib.flatpages',
     #'django.contrib.staticfiles',
 
     # Other third-party apps

@@ -24,4 +24,8 @@ urlpatterns = patterns('views',
         name='blog_index',
     ),
     (r'^feed/$', FullBodyFeed()),
+
+    # Hardcode this particular post
+    # XXX INCLUDE THIS
+    #(r'^2012/oct/10/localwiki-antarctica/', blog_antarctica),
 )
