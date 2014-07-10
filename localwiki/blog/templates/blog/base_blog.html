@@ -1,0 +1,11 @@
+{% extends "site/base.html" %}
+
+{% block head_extra %}
+<link rel=alternate type="application/rss+xml" href="/blog/feed/" title="LocalWiki blog RSS feed">
+{% endblock %}
+
+{% block body_class %}blog{% endblock %}
+
+{% block content %}
+{% block blog_content %}{% endblock %}
+{% endblock %}

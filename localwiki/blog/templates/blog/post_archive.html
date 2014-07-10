@@ -1,0 +1,41 @@
+{% extends "blog/base_blog.html" %}
+
+{% load i18n %}
+{% load gravatar %}
+
+{% block title %}{% trans "LocalWiki blog" %}{% endblock %}
+{% block body_class %}{{ block.super }} post_list{% endblock %}
+
+
+{% block content_title %}
+{% endblock %}
+
+
+{% block blog_content %}
+  <div class="list post_list">
+    {% for post in object_list %}
+    <div class="item">
+      {% if post.author %}
+        <p class="user"><img src="{% gravatar_url post.author.email 25 %}"/>By <a href="{{ post.author.userprofile.twitter_url }}" target="_blank">{{ post.author.first_name }} {{ post.author.last_name }}</a></p>
+      {% endif %}
+      <h3 class="title"><a href="{{ post.get_absolute_url }}" title="{% trans "View this post" %}">{{ post.title }}</a></h3>
+      <p class="date">{{ post.publish|date:"j F Y" }}</p>
+      <div class="body">{{ post.body|safe }}</div>
+    </div>
+    {% if not forloop.last %}
+       <hr/>
+    {% endif %}
+    {% endfor %}
+  </div>
+  
+  {% if is_paginated %}
+  <p class="pagination">
+    {% if page_obj.has_next %}
+    <a class="older" href="?page={{ page_obj.next_page_number }}" title="{% trans "View older posts" %}">&lArr; {% trans "Older" %}</a>
+    {% endif %}
+    {% if page_obj.has_previous %}
+    <a class="newer" href="?page={{ page_obj.previous_page_number }}" title="{% trans "View newer posts" %}">{% trans "Newer" %} &rArr;</a>
+    {% endif %}
+  </p>
+  {% endif %}
+{% endblock %}

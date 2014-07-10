@@ -313,6 +313,7 @@ INSTALLED_APPS = (
     'redirects',
     'tags',
     'users',
+    'blog',
     'activity',
     'page_scores',
     'search',
@@ -368,6 +369,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_URLS_REGEX = r'^/api/.*$'
 
 ENDLESS_PAGINATION_PER_PAGE = 50
+
+BLOG_PAGESIZE = 5
 
 STATICSITEMAPS_ROOT_SITEMAP = 'localwiki.main.sitemaps.sitemaps'
 STATICSITEMAPS_REFRESH_AFTER = 60 * 1

@@ -2075,7 +2075,7 @@ input:focus {
 .interesting_cards .no_pages a {
     float: none;
     display: inline-block;
-    background-image: url(../theme/img/edit_icon.png);
+    background-image: url(../img/edit_icon.png);
 
     font-weight: normal;
     padding-left: 28px;

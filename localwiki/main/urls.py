@@ -29,6 +29,14 @@ urlpatterns = patterns('',
     # Mostly-static-ish content & the main page ("/")
     (r'^', include('main_content.urls')),
 
+    # Blog
+
+    # Hardcode this particular post
+    # XXX INCLUDE THIS
+    #(r'^blog/2012/oct/10/localwiki-antarctica/', blog_antarctica),
+
+    (r'^blog/', include('blog.urls')),
+
     # Users / registration URLs
     (r'^(?i)Users/', include('users.urls')),
 

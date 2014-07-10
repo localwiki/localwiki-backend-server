@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 
 from regions.models import Region
 from pages.models import Page, page_url
+from blog.sitemap import BlogSitemap
 
 
 def pages_with_last_mod():
@@ -68,5 +69,6 @@ class StaticViewSitemap(Sitemap):
 sitemaps = {
     'pages': PageSitemap,
     'regions': RegionSitemap,
+    'blogs': BlogSitemap,
     'misc_static': StaticViewSitemap,
 }
