@@ -2568,6 +2568,38 @@ table.noborder, table.noborder td {
     text-align: center; 
 }
 
+#splash_page .recent_blogs {
+    margin-left: 4em;
+    margin-right: 4em;
+}
+#splash_page .recent_blogs li {
+   list-style-type: none;
+   margin-left: 0;
+   margin-bottom: 1em;
+   background-color: #e9e9e9;
+   padding: 1em;
+   line-height: 1.1;
+   clear: both;
+}
+#splash_page .recent_blogs li:hover {
+    background-color: #dcdcdc;
+    color: #111;
+    cursor: pointer;
+}
+#splash_page .blog_content_wrapper {
+   display: table;
+}
+#splash_page .recent_blogs .image_frame {
+   float: left;
+}
+#splash_page .blog_content {
+   vertical-align: top;
+   padding-top: 2px;
+   display: table-cell;
+   width: 100%;
+   padding-left: 1em;
+}
+
 /* TEMP TEMP TEMP */
 #splash_page #main {
     background-color: white!important;

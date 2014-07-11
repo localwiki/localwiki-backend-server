@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load cache %}
 {% load cards_tags %}
+{% load thumbnail %}
 
 {% block title %}{% trans "LocalWiki" %}{% endblock %}
 
@@ -44,34 +45,28 @@
       {% endcache %}
   </div>
 
-  {{ block.super }}
-{% endblock %}
-
-{% block content_wrapper %}
-<div id="content_wrapper">
-  <div id="content" class="has_map">
-  {% block content %}
-  <div id="page">
-    {% url 'frontpage' region='main' as guide_url %}
-    {% blocktrans %}
-    <p>Welcome to the <strong>insanely</strong> early preview of the <a href="http://localwiki.org/blog/2013/jul/25/big-news-future-localwiki/" target="_blank">new version of LocalWiki</a>. We are experimenting with ways to make it easier for people to share knowledge about their community. Please check out the existing projects below, but be warned that all of these are in the very earliest stages of development!</p>
-
-    <p>If you've come here to create a new LocalWiki, welcome! It only takes a few minutes to set one up. All you have to do is click the "Add a Region" button at the bottom of the screen.</p>
-
-    <p>Finally, check out the <strong><a href="{{ guide_url }}">LocalWiki Guide</a></strong> for more information about the project and help using the site.</p>
-    {% endblocktrans %}
-
-    <h2>{% trans "Regions" %}</h2>
-    <span style="" class="image_frame image_frame_border image_right"><img  src="http://localwiki.org/static/img/jobs/edit_your_city_crowd.jpg"></span>
+  <div class="recent_blogs">
+    <h2>{% trans "Recent blog posts" %}</h2>
     <ul>
-    {% for region in regions %}
-      <li><a href="{% url 'frontpage' region=region.slug %}">{{ region.full_name }}</a></li>
+    {% for blog in blogs %}
+        <li onclick="location.href='{{ blog.get_absolute_url }}'">
+            <h4><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></h4>
+            <div class="blog_content_wrapper">
+            {% if blog.highlight_image %}
+                {% thumbnail blog.highlight_image "80" as im %}
+                <div class="image_frame image_frame_border">
+                    <img src="{{ im.url }}" srcset="{{ im.url|resolution:"2x" }} 2x, {{ im.url|resolution:"1.5x" }} 1.5x" />
+                </div>
+                {% endthumbnail %}
+            {% endif %}
+            <div class="blog_content">{{ blog.body|striptags|truncatewords:40|safe }}</div>
+            </div>
+        </li>
     {% endfor %}
     </ul>
-    <p><a href="{% url 'regions:add' %}" class="button">{% trans "Add region" %}</a></p>
-    {% endblock %}
-  </div>
+    <p><a class="button" href="/blog/">{% trans "Read the blog" %} &rArr;</a></p>
 
-  </div>
 </div>
+
+  {{ block.super }}
 {% endblock %}

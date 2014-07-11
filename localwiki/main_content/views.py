@@ -2,6 +2,7 @@ from django.views.generic import View
 
 from pages.models import Page
 from regions.views import RegionListView
+from blog.models import Post
 
 
 class SplashPageView(RegionListView):
@@ -26,6 +27,7 @@ class SplashPageView(RegionListView):
         qs = qs[:5]
 
         context['pages_for_cards'] = qs
+        context['blogs'] = Post.objects.filter(status=2).order_by('-created')[:4]
         return context
 
 
