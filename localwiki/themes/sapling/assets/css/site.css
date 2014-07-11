@@ -2568,6 +2568,32 @@ table.noborder, table.noborder td {
     text-align: center; 
 }
 
+#splash_page .highlights .item {
+    clear: both;
+    width: 100%;
+    display: table;
+}
+#splash_page .highlights .item > div {
+    width: 100%;
+    display: table-cell;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 4em;
+    padding-right: 4em;
+}
+#splash_page .highlights img {
+    margin-right: 4em;
+}
+#splash_page .highlights .item:nth-child(odd) {
+    background-color: white;
+}
+#splash_page .highlights .item:nth-child(odd) img {
+    float: left;
+}
+#splash_page .highlights .item:nth-child(even) img {
+    float: right;
+}
+
 #splash_page .recent_blogs {
     margin-left: 4em;
     margin-right: 4em;
