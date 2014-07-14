@@ -2001,8 +2001,9 @@ input:focus {
   margin-right: 1em;
   margin-top: 1em;
   border: 1px solid #d8d8d8;
-  box-shadow: 2px 2px 2px #cdcdcd;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 1px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.06);
+  -moz-box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.06);
+  -webkit-box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.06);
   text-align: center;
 }
 .card:hover {
@@ -2010,7 +2011,7 @@ input:focus {
 }
 .card a {
   text-decoration: none;
-  color: #4d4d4d;
+  color: #484848;
 }
 .card img {
   display: block;
