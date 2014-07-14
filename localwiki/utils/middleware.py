@@ -112,7 +112,20 @@ class UpdateCacheMiddlewareNoEdit(UpdateCacheMiddleware):
 
 
 class UpdateCacheMiddleware(UpdateCacheMiddlewareHostHeader, UpdateCacheMiddlewareNoEdit, UpdateCacheMiddlewareNoHeaders):
-    pass
+    ######################################
+    # XXX TODO remove once using varnish.
+    ######################################
+    def _should_update_cache(self, request, response):
+        """
+        Let's not cache file objects.
+        """
+        should = super(UpdateCacheMiddleware, self)._should_update_cache(request, response)
+        if not should:
+            return should
+
+        if hasattr(response, '_iterator') and isinstance(response._iterator, file):
+            # Can't pickle file objects
+            return False
 
 
 class FetchFromCacheMiddleware(DefaultFetchFromCacheMiddleware):

@@ -10,7 +10,6 @@ import maps
 import redirects
 import dashboard
 import regions
-from regions.views import MainPageView
 from users.views import GlobalUserpageRedirectView
 from utils.views import NamedRedirectView
 from users.admin import SubscribedList
