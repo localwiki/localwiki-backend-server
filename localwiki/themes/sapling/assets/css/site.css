@@ -2549,12 +2549,24 @@ table.noborder, table.noborder td {
     text-align: center;
     display: block;
     background-color: white;
+    background-image: url('http://localwiki.org/static/img/bg_map.png');
+    background-repeat: repeat;
 }
 #splash_page .bring_localwiki .button {
     float: none;
     display: inline-block;
     margin-top: 2.5em;
     margin-bottom: 2.5em;
+    color: white!important;
+    text-shadow: 0px 1px 0px rgba(120, 120, 120, 1);
+    padding: 0.8em 1.1em 0.8em 1.1em;
+    background-image: none;
+    background-color: #5C6;
+}
+#splash_page .bring_localwiki .button:hover {
+    background-image: none;
+    background-color: rgba(80, 198, 97, 1)!important;
+    color: #F5F5F5!important;
 }
 #splash_page .interesting_cards {
     padding-top: 3em;
@@ -2602,6 +2614,7 @@ table.noborder, table.noborder td {
     margin-left: 10em;
     margin-right: 10em;
     padding-top: 3em;
+    padding-bottom: 4em;
 }
 #splash_page .recent_blogs h2 {
     margin-bottom: 1.5em;
@@ -2614,6 +2627,9 @@ table.noborder, table.noborder td {
    padding: 1.5em 2em;
    line-height: 1.1;
    clear: both;
+}
+#splash_page .recent_blogs li:last-child {
+   margin-bottom: 0;
 }
 #splash_page .recent_blogs li:hover {
     background-color: #ebebeb;

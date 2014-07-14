@@ -154,6 +154,10 @@
       </div>
   </div>
 
+  <div class="bring_localwiki">
+      <a href="{% url 'regions:add' %}" class="button">{% trans "Bring LocalWiki to your community" %}</a>
+  </div>
+
   <div class="recent_blogs">
     <h2>{% trans "Recent blog posts" %}</h2>
     <ul>
@@ -173,7 +177,7 @@
         </li>
     {% endfor %}
     </ul>
-    <p><a class="button" href="/blog/">{% trans "Read the blog" %} &rArr;</a></p>
+    <p><a class="button" href="/blog/">{% trans "More blog posts" %}</a></p>
 
 </div>
 
