@@ -238,7 +238,6 @@ textarea, input, select {
         display: block;
     }
     #map_header_bar {
-        margin-top: -2px;
     }
 }
 
@@ -2492,11 +2491,30 @@ table.noborder, table.noborder td {
 }
 
 #splash_page #region_header {
-    display: none;
+    margin: 0;
+    padding: 0;
 }
 
 #splash_page #header {
     border-bottom: 0;
+}
+
+/* We do the nav a little differently on the splash page */
+#splash_page #nav {
+    position: absolute;
+    right: 0px;
+    margin-top: -41px;
+    margin-right: 240px;
+}
+#splash_page #nav li a {
+    border: none;
+    background: none;
+    font-size: 90%;
+    color: #666;
+}
+#splash_page #nav li a:hover {
+    color: black;
+    background-color: #d7d7d7;
 }
 
 #splash_page #map_header_bar #map {
@@ -2513,6 +2531,7 @@ table.noborder, table.noborder td {
 #splash_page #map_header_bar {
     background-color: #c3ccde;
     height: 400px!important;
+    margin-top: -1px;
 }
 
 #splash_page #map_header_bar .mapwidget {
@@ -2665,5 +2684,11 @@ table.noborder, table.noborder td {
 @media screen and (max-width: 500px) {
     #splash_page #map_header_bar #map {
         padding-top: 0; 
+    }
+    #splash_page #nav {
+        position: static;
+        right: inherit;
+        margin-top: inherit;
+        margin-right: inherit;
     }
 }
