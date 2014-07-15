@@ -2676,12 +2676,52 @@ table.noborder, table.noborder td {
     background-color: white!important;
 }
 
+@media screen and (max-width: 1000px) {
+    #login_info .actions .button {
+        font-size: 70%;
+    }
+    #splash_page #nav {
+        margin-right: 200px;
+        margin-top: -39px;
+    }
+    #splash_page #nav li a {
+        font-size: 80%;
+    }
+}
+@media screen and (max-width: 914px) {
+
+}
+
 @media screen and (max-width: 700px) {
     #splash_page #map_header_bar .mapwidget {
         height: 200px!important;
     }
+    #splash_page .highlights .item > div {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    #splash_page .recent_blogs {
+        display: none;
+    }
 }
 @media screen and (max-width: 500px) {
+    /* Fix the pull-down menu */
+    #splash_page #nav li a {
+        border-bottom: 2px solid #576979;
+        font-size: 100%;
+        text-shadow: none;
+        -moz-text-shadow: none;
+        -webkit-text-shadow: none;
+        font-weight: bold;
+    }
+    #splash_page #nav .button {
+        box-shadow: none;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+    #region_header.not_in_region #nav {
+        padding-left: 0;
+    }
     #splash_page #map_header_bar #map {
         padding-top: 0; 
     }
