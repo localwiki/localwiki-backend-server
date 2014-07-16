@@ -2603,21 +2603,38 @@ table.noborder, table.noborder td {
     clear: both;
     width: 100%;
     display: table;
+    text-align: center;
 }
+
 #splash_page .highlights p {
     padding-right: 4em;
     display: inline;
 }
 #splash_page .highlights .item > div {
+    text-align: left;
     width: 100%;
-    display: table-cell;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    display: inline-block;
+
     padding-top: 100px;
     padding-bottom: 100px;
-    padding-left: 10em;
-    padding-right: 10em;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    max-width: 800px;
 }
 #splash_page .highlights img {
     margin-right: 4em;
+}
+#splash_page .highlights .description {
+}
+#splash_page .highlights .item:nth-child(odd) .description {
+    padding-left: 363px;
+}
+#splash_page .highlights .item:nth-child(even) .description {
+    padding-right: 363px;
 }
 #splash_page .highlights .item:nth-child(odd) {
     background-color: white;
@@ -2688,17 +2705,49 @@ table.noborder, table.noborder td {
         font-size: 80%;
     }
 }
+@media screen and (max-width: 940px) {
+    #splash_page .highlights .item > div {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+}
 
 @media screen and (max-width: 700px) {
     #splash_page #map_header_bar .mapwidget {
         height: 200px!important;
     }
-    #splash_page .highlights .item > div {
-        padding-left: 0;
-        padding-right: 0;
-    }
     #splash_page .recent_blogs {
         display: none;
+    }
+    #splash_page .callout h1 {
+        font-size: 20px;
+        max-width: 400px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    #splash_page .interesting_cards h2 {
+        font-size: 140%;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+    }
+}
+
+@media screen and (max-width: 660px) {
+    #splash_page .highlights .item img {
+        float: none!important;
+        margin-right: 0!important;
+        margin-bottom: 15px;
+    }
+    #splash_page .highlights .item > div {
+        text-align: center;
+    }
+    #splash_page .highlights .item .description {
+        text-align: left;
+        padding-left: 0!important;
+        padding-right: 0!important;
+    }
+    #splash_page .highlights p {
+        padding-right: 0;
     }
 }
 
