@@ -2688,9 +2688,6 @@ table.noborder, table.noborder td {
         font-size: 80%;
     }
 }
-@media screen and (max-width: 914px) {
-
-}
 
 @media screen and (max-width: 700px) {
     #splash_page #map_header_bar .mapwidget {
@@ -2704,8 +2701,8 @@ table.noborder, table.noborder td {
         display: none;
     }
 }
+
 @media screen and (max-width: 500px) {
-    /* Fix the pull-down menu */
     #splash_page #nav li a {
         border-bottom: 2px solid #576979;
         font-size: 100%;
@@ -2731,4 +2728,257 @@ table.noborder, table.noborder td {
         margin-top: inherit;
         margin-right: inherit;
     }
+}
+
+@media screen and (max-width: 914px) {
+    /* *************************************************
+     * We set up the mobile-y nav bar at 914px here.
+     * Because we're doing this at 914px rather than
+     * 500px, we have to duplicate a bunch of CSS here.
+     * The rules below are copy/pasted from the above
+     * 500px nav/header-related rules:
+     * *************************************************
+     * */
+    #header {
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+    }
+    #header_bar {
+        margin-top: 0;
+        padding: 0.5em 1em 0.5em 1em;
+    }
+    #header_bar .inner {
+        display: block;
+    }
+    #map_header_bar {
+    }
+   #region_header {
+        padding: 0;
+    }
+    #common_header #common_title {
+        display: none;
+    }
+    #common_header { 
+        position: absolute;
+        margin-top: 0px;
+        display: block;
+        background: none;
+        border: 0;
+    }
+    #region_header #new_page_button {
+        display: none;
+    }
+    #region_title {
+        display: none;
+    }
+    #login_info {
+        display: none;
+    }
+    #header .site_search {
+        width: auto;
+        float: none;
+        margin: 0;
+        margin-right: 80px;
+        padding: 0;
+        /*padding-left: 65px;*/
+        padding-left: 5px;
+        padding-top: 5px;
+        height: 27px;
+        display: block;
+    }
+    .site_search form {
+        height: 100%;
+    }
+    #header .site_search input {
+        float: none;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+    }
+    #header .site_search input[type="text"], #header .site_search #id_q {
+        height: 100%;
+        width: 100%;
+        background-position: 10px 8px;
+        font-size: 13px;
+        line-height: 14px;
+    }
+    #nav {
+        color: #666!important;
+        font-weight: bold;
+        border: none;
+        margin-bottom: 0;
+        /* TODO: explore using purely CSS gradients */
+        background: #e6e6e6 url(../img/gradient.png) repeat-x bottom left;
+        border-bottom: 1px solid #bfbfbf;
+        text-decoration: none;
+        display: block;
+        padding-left: 0;
+    }
+    #nav ul {
+        margin: 0;
+        padding: 0;
+        top: 0;
+        display: none;
+        border: none;
+    }
+    #nav li, #nav li a {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        float: none;
+        font-size: 110%;
+        background-color: #455868;
+        color: #f4f4f4!important;
+	    display: table;
+	    text-align: center;
+	    text-decoration: none;
+	    line-height: 40px;
+    }
+    #nav li a {
+        border: none;
+        border-bottom: 2px solid #576979;
+        border-radius: 0;
+        -moz-border-radius: 0;
+        -webkit-border-radius: 0;
+    }
+    #nav li:last-child a {
+        border-bottom: none;
+    }
+    #nav li a:hover, #nav li a:active {
+        background-color: #8c99a4;
+        border: none;
+        border-bottom: 2px solid #576979;
+    }
+    #nav li:last-child a:hover, #nav li:last-child a:active {
+        border-bottom: none;
+    }
+    #nav #pull {  
+        display: block;  
+        height: 40px;
+    }  
+    #nav #pull .button {
+        float: none;
+    }
+    #nav #pull:after {  
+        content:"";  
+        background: url('../img/nav-icon.png') no-repeat;  
+        width: 30px;  
+        height: 30px;  
+        display: block;  
+        position: absolute;
+        margin-top: 11px;  
+        right: 5px;  
+    }
+    #nav li {
+        text-transform: capitalize;
+    }
+    #nav {
+        color: #666!important;
+        font-weight: bold;
+        border: none;
+        margin-bottom: 0;
+        /* TODO: explore using purely CSS gradients */
+        background: #e6e6e6 url(../img/gradient.png) repeat-x bottom left;
+        border-bottom: 1px solid #bfbfbf;
+        text-decoration: none;
+        display: block;
+        padding-left: 0;
+    }
+    #nav ul {
+        margin: 0;
+        padding: 0;
+        top: 0;
+        display: none;
+        border: none;
+    }
+    #nav li, #nav li a {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        float: none;
+        font-size: 110%;
+        background-color: #455868;
+        color: #f4f4f4!important;
+	    display: table;
+	    text-align: center;
+	    text-decoration: none;
+	    line-height: 40px;
+    }
+    #nav li a {
+        border: none;
+        border-bottom: 2px solid #576979;
+        border-radius: 0;
+        -moz-border-radius: 0;
+        -webkit-border-radius: 0;
+    }
+    #nav li:last-child a {
+        border-bottom: none;
+    }
+    #nav li a:hover, #nav li a:active {
+        background-color: #8c99a4;
+        border: none;
+        border-bottom: 2px solid #576979;
+    }
+    #nav li:last-child a:hover, #nav li:last-child a:active {
+        border-bottom: none;
+    }
+    #nav #pull {  
+        display: block;  
+        height: 40px;
+    }  
+    #nav #pull .button {
+        float: none;
+    }
+    #nav #pull:after {  
+        content:"";  
+        background: url('../img/nav-icon.png') no-repeat;  
+        width: 30px;  
+        height: 30px;  
+        display: block;  
+        position: absolute;
+        margin-top: 11px;  
+        right: 5px;  
+    }
+    #nav li {
+        text-transform: capitalize;
+    }
+
+    .twitter-typeahead {
+        width: 100%;
+    }
+
+
+    /* **************************************************
+     * Now we fix up the nav & bar based on #splash_page
+     * specific customizations we made earlier.
+     * **************************************************
+     */
+
+    #splash_page #nav li a {
+        border-bottom: 2px solid #576979;
+        font-size: 100%;
+        text-shadow: none;
+        -moz-text-shadow: none;
+        -webkit-text-shadow: none;
+        font-weight: bold;
+    }
+    #splash_page #nav .button {
+        box-shadow: none;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+    #region_header.not_in_region #nav {
+        padding-left: 0;
+    }
+    #splash_page #map_header_bar #map {
+        padding-top: 0; 
+    }
+    #splash_page #nav {
+        position: static;
+        right: inherit;
+        margin-top: inherit;
+        margin-right: inherit;
+    }
+
 }
