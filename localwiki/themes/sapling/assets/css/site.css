@@ -793,6 +793,7 @@ textarea, input, select {
   padding-right: 0.8em;
   font-weight: normal;
   margin-right: 0.5em;
+  float: left;
 }
 #map .info a.view {
   background-image: url(../img/magnifying_glass.png);
@@ -2498,6 +2499,9 @@ table.noborder, table.noborder td {
 #splash_page #header {
     border-bottom: 0;
 }
+#splash_page a, #splash_page a:link {
+    text-decoration: none;
+}
 
 /* We do the nav a little differently on the splash page */
 #splash_page #nav {
@@ -2685,6 +2689,67 @@ table.noborder, table.noborder td {
    max-height: 60px;
    height: 60px;
    overflow: hidden;
+}
+
+/* Blog pages */
+#splash_page #blog_page .title {
+    text-align: center;
+    margin-bottom: 0;
+}
+#splash_page #blog_page .info {
+    color: #8F8F8F;
+    font-size: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.6em;
+    display: table;
+}
+#splash_page #blog_page .info a, 
+#splash_page #blog_page .info a:link {
+    color: #8F8F8F;
+}
+#splash_page #blog_page .info a:hover {
+    color: black;
+}
+#splash_page #blog_page .info > div {
+    display: inline-block;
+    margin-left: 0.1em;
+}
+#splash_page #blog_page .info img {
+    vertical-align: middle;
+    margin-right: 0.2em;
+    margin-bottom: 4px;
+}
+#splash_page #blog_page .body {
+    margin-top: 1em;
+}
+#splash_page #blog_page .body a, #splash_page #blog_page .body a:link {
+    text-decoration: underline;
+}
+
+/* For a flat page on the main site, or for the blog, we use the splash_page styles. */
+#splash_page #content {
+  margin: 0;
+}
+#splash_page #header_title {
+   text-align: center;
+   padding-top: 3em;
+   padding-bottom: 3em;
+}
+#splash_page #header_title h1 {
+    margin: 0;
+    font-size: 250%;
+}
+#splash_page #main {
+    margin: 0;
+}
+#splash_page #content_wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 700px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 2.5em;
 }
 
 /* TEMP TEMP TEMP */

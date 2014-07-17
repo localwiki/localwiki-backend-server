@@ -1,11 +1,16 @@
-{% extends "site/base.html" %}
+{% extends "main_content/default.html" %}
+
+{% load i18n %}
 
 {% block head_extra %}
+{{ block.super }}
 <link rel=alternate type="application/rss+xml" href="/blog/feed/" title="LocalWiki blog RSS feed">
 {% endblock %}
 
-{% block body_class %}blog{% endblock %}
-
 {% block content %}
-{% block blog_content %}{% endblock %}
+  <div id="blog_page">
+    {% block blog_content %}{% endblock %}
+  </div>
 {% endblock %}
+
+{% block header_title %}{% trans "Blog" %}{% endblock %}

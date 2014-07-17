@@ -6,20 +6,20 @@
 {% block title %}{% trans "LocalWiki blog" %}{% endblock %}
 {% block body_class %}{{ block.super }} post_list{% endblock %}
 
-
 {% block content_title %}
 {% endblock %}
-
 
 {% block blog_content %}
   <div class="list post_list">
     {% for post in object_list %}
     <div class="item">
-      {% if post.author %}
-        <p class="user"><img src="{% gravatar_url post.author.email 25 %}"/>By <a href="{{ post.author.userprofile.twitter_url }}" target="_blank">{{ post.author.first_name }} {{ post.author.last_name }}</a></p>
-      {% endif %}
-      <h3 class="title"><a href="{{ post.get_absolute_url }}" title="{% trans "View this post" %}">{{ post.title }}</a></h3>
-      <p class="date">{{ post.publish|date:"j F Y" }}</p>
+      <h2 class="title"><a href="{{ post.get_absolute_url }}" title="{% trans "View this post" %}">{{ post.title }}</a></h2>
+      <div class="info">
+        <div class="date">{{ post.publish|date:"j F Y" }}</div>
+        {% if post.author %}
+          <div class="user">{% trans "by" %} <a href="{{ post.author.userprofile.twitter_url }}" target="_blank"><img src="{% gravatar_url post.author.userprofile.gravatar_email 25 %}"/>{{ post.author.first_name }} {{ post.author.last_name }}</a></div>
+        {% endif %}
+      </div>
       <div class="body">{{ post.body|safe }}</div>
     </div>
     {% if not forloop.last %}

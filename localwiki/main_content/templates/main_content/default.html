@@ -1,0 +1,29 @@
+{% extends "pages/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "LocalWiki" %}{% endblock %}
+
+{% block head_extra %}
+<script type="text/javascript">
+    $(function() {
+        enquire.register("screen and (max-width:917px) and (min-width:500px)", {
+            match: add_login_info_actions,
+            unmatch: hide_login_info_actions,
+        });
+        enquire.listen(); 
+    });
+</script>
+{% endblock %}
+
+{% block everything_wrapper %}
+  <div id="splash_page">
+    {{ block.super }}
+  </div>
+{% endblock %}
+
+{% block header_bar_wrapper %}
+    <div id="header_title">
+      <h1>{% block header_title %}{% trans "LocalWiki" %}{% endblock %}</h1>
+    </div>
+{% endblock %}
