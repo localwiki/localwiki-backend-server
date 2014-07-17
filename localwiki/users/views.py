@@ -54,7 +54,7 @@ def humanize_int(n):
 
 
 def pretty_url(url):
-    if urlparse(url).path == '/':
+    if urllib_parse.urlparse(url).path == '/':
         # Strip trailing slash
         url = url[:-1]
     if url.startswith('http://'):
