@@ -2554,6 +2554,11 @@ table.noborder, table.noborder td {
 #splash_page h1, #splash_page h2, #splash_page h3, #splash_page h4 {
     color: #3f3f3f;
 }
+#splash_page a[href^="http:"],
+#splash_page a[href^="https:"] {
+    background: none;
+    padding-left: 0;
+}
 
 #splash_page .callout {
     text-align: center;
@@ -2702,11 +2707,17 @@ table.noborder, table.noborder td {
     margin-left: auto;
     margin-right: auto;
     margin-top: 0.6em;
+    margin-bottom: 1.5em;
     display: table;
 }
 #splash_page #blog_page .info a, 
 #splash_page #blog_page .info a:link {
     color: #8F8F8F;
+}
+#splash_page #blog_page .pagination {
+    float: none;
+    display: inline-block;
+    margin-top: 2em;
 }
 #splash_page #blog_page .info a:hover {
     color: black;
@@ -2720,8 +2731,24 @@ table.noborder, table.noborder td {
     margin-right: 0.2em;
     margin-bottom: 4px;
 }
+#splash_page #blog_page .item {
+    border-bottom: 1px solid #E4E4E4;
+    padding-bottom: 1em;
+    margin-bottom: 4em;
+}
+#splash_page #blog_page .item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
 #splash_page #blog_page .body {
     margin-top: 1em;
+}
+#splash_page #blog_page .body .image_frame,
+#splash_page #blog_page .body iframe {
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
 }
 #splash_page #blog_page .body a, #splash_page #blog_page .body a:link {
     text-decoration: underline;
@@ -2743,10 +2770,11 @@ table.noborder, table.noborder td {
 #splash_page #main {
     margin: 0;
 }
+
 #splash_page #content_wrapper {
     margin-left: auto;
     margin-right: auto;
-    max-width: 700px;
+    max-width: 600px;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 2.5em;
