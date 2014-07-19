@@ -2502,6 +2502,12 @@ table.noborder, table.noborder td {
 #splash_page a, #splash_page a:link {
     text-decoration: none;
 }
+#splash_page .simple_pagination a {
+    float: none;
+    display: inline-block;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
 
 /* We do the nav a little differently on the splash page */
 #splash_page #nav {

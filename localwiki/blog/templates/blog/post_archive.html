@@ -26,13 +26,13 @@
   </div>
   
   {% if is_paginated %}
-  <p class="pagination">
+  <div class="simple_pagination">
     {% if page_obj.has_next %}
-    <a class="older" href="?page={{ page_obj.next_page_number }}" title="{% trans "View older posts" %}">&lArr; {% trans "Older" %}</a>
+    <a class="older button" href="?page={{ page_obj.next_page_number }}" title="{% trans "View older posts" %}">&lArr; {% trans "Older" %}</a>
     {% endif %}
     {% if page_obj.has_previous %}
-    <a class="newer" href="?page={{ page_obj.previous_page_number }}" title="{% trans "View newer posts" %}">{% trans "Newer" %} &rArr;</a>
+    <a class="newer button" href="?page={{ page_obj.previous_page_number }}" title="{% trans "View newer posts" %}">{% trans "Newer" %} &rArr;</a>
     {% endif %}
-  </p>
+  </div>
   {% endif %}
 {% endblock %}
