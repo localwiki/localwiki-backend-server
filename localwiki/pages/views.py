@@ -137,7 +137,7 @@ class PageUpdateView(PermissionRequiredMixin, CreateObjectMixin,
             default_message = '<div>%s</div>' % (_('Changes saved! To use your name when editing, please '
                 '<a href="%(login_url)s?next=%(current_path)s"><strong>log in</strong></a> or '
                 '<a href="%(register_url)s?next=%(current_path)s"><strong>create an account</strong></a>.')
-                % {'login_url': reverse('django.contrib.auth.views.login'),
+                % {'login_url': reverse('auth_login'),
                    'current_path' :self.request.path,
                    'register_url': reverse('registration_register')
                    }

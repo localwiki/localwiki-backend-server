@@ -102,6 +102,7 @@
         <div id="common_title">{% include "site/common_title.html" %}</div>
         <div class="site_search search">{% include "site/search_form.html" %}</div>
         <div id="login_info">{% include "site/login_info.html" %}</div>
+        <div id="common_nav"><ul>{% include "site/common_nav.html" %}</ul></div>
       </div>
       <div id="region_header"
         {% if not region %}class="not_in_region"{% else %}{% if region.regionsettings.logo %}class="with_logo"{% endif %}{% endif %}>

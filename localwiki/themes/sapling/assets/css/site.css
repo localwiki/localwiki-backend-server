@@ -490,15 +490,19 @@ textarea, input, select {
 
 #login_info {
     padding-right: 2em;
-    display: table-cell;
-    vertical-align: middle;
+    height: 54px;
+    width: auto;
+    display: table;
+    float: right;
 }
 #login_info > div {
-    float: right;
+    display: table-cell;
+    vertical-align: middle;
 }
 #login_info .welcome {
     float: left;
     margin-right: 0.8em;
+    font-size: 90%;
 }
 #login_info .actions {
     color: #868686;
@@ -2509,23 +2513,79 @@ table.noborder, table.noborder td {
     margin-bottom: 2em;
 }
 
-/* We do the nav a little differently on the splash page */
-#splash_page #nav {
-    position: absolute;
-    right: 0px;
-    margin-top: -41px;
-    margin-right: 240px;
+
+
+
+/* XX */
+/* XX */
+
+/* XXX TODO
+ * MOVE TO #NAV definition area */
+
+/* XX */
+/* XX */
+/* XX */
+
+#common_nav {
+    display: table;
+    padding-left: 1em;
+    float: right;
+    height: 54px;
 }
-#splash_page #nav li a {
-    border: none;
-    background: none;
-    font-size: 90%;
+#common_nav ul {
+    list-style-type: none;
+    display: table-cell;
+    vertical-align: middle;
+    margin: 0;
+}
+#common_nav li {
+    margin: 0;
+    margin-right: 0.4em;
+    float: left;
+}
+#common_nav li a, #common_nav li a:link {
     color: #666;
+    text-align: center;
+
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0 0.5em 0 0.5em;
+    height: 1.7em;
+    line-height: 100%;
+    margin: 0;
+    text-decoration: none;
+    font-size: 90%;
 }
-#splash_page #nav li a:hover {
+#common_nav li a:hover {
     color: black;
     background-color: #d7d7d7;
 }
+
+@media screen and (max-width: 1175px) {
+    #common_nav .hide1 {
+        display: none;
+    }
+}
+@media screen and (max-width: 1135px) {
+    #common_nav .hide2 {
+        display: none;
+    }
+}
+@media screen and (max-width: 1070px) {
+    #common_nav .hide3 {
+        display: none;
+    }
+}
+@media screen and (max-width: 1011px) {
+    #common_nav .hide4 {
+        display: none;
+    }
+}
+
+
+
+
+
 
 #splash_page #map_header_bar #map {
     float: none;
@@ -2855,6 +2915,9 @@ table.noborder, table.noborder td {
 }
 
 @media screen and (max-width: 500px) {
+
+
+   /*
     #splash_page #nav li a {
         border-bottom: 2px solid #576979;
         font-size: 100%;
@@ -2880,6 +2943,8 @@ table.noborder, table.noborder td {
         margin-top: inherit;
         margin-right: inherit;
     }
+
+    */
 }
 
 @media screen and (max-width: 914px) {
@@ -3107,6 +3172,9 @@ table.noborder, table.noborder td {
      * **************************************************
      */
 
+
+    /*
+     *
     #splash_page #nav li a {
         border-bottom: 2px solid #576979;
         font-size: 100%;
@@ -3132,5 +3200,8 @@ table.noborder, table.noborder td {
         margin-top: inherit;
         margin-right: inherit;
     }
+
+
+    */
 
 }

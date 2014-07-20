@@ -4,7 +4,7 @@
 <div>
 {% if request.user.is_authenticated %}
     <span class="welcome">
-        {% trans "Welcome" %}, {% user_link request.user region=region %}
+        {% user_link request.user region=region %}
     </span>
     <span class="actions">
         <a href="{% url 'user-settings' %}" class="tiny button">{% trans "settings" %}</a>
