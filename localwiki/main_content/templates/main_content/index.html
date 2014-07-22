@@ -23,7 +23,7 @@
   </div>
   <div class="interesting_cards">
       <h2>{% trans "Explore LocalWiki communities" %}</h2>
-      {# {% cache 300 int_main_regions request.META.HTTP_HOST 'gr' %} #}
+      {% cache 300 int_main_regions request.META.HTTP_HOST %}
           <div class="cards">
           {% for region in regions_for_cards %}
             {% show_card region %}
@@ -33,7 +33,7 @@
           <div class="explore_more">
             <a class="button" href="{% url 'regions:list' %}">{% trans "Explore all communities" %}</a>
           </div>
-      {# {% endcache %} #}
+      {% endcache %}
   </div>
 
   <div class="highlights">

@@ -21,7 +21,7 @@ class SplashPageView(RegionListView):
         qs = qs.order_by('-score__score', '?')
 
         ## Just grab 5 items
-        #qs = qs[:5]
+        qs = qs[:5]
 
         context['regions_for_cards'] = qs
         context['blogs'] = Post.objects.filter(status=2).order_by('-created')[:4]

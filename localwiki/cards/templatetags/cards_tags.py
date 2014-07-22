@@ -98,9 +98,11 @@ def render_region_card(context, region):
 
     # Otherwise, try and get a map
     if not _file and not is_meta_region and region.geom:
-        olwidget_options.update(map_options_for_region(region))
+        map_opts = map_options_for_region(region)
+        map_opts['default_zoom'] -= 1
+        olwidget_options.update(map_opts)
         _map = InfoMap(
-            [(region.geom, '')],
+            [(None, '')],
             options=olwidget_options
         ).render(None, None, {'id': 'map_region_id_%s' % region.id})
 

@@ -19,6 +19,22 @@ class RegionScore(models.Model):
         return _("Region score %s: %s") % (self.region, self.score)
 
 
+def normalize_score(score):
+    if score > 2000:
+       score = 2000
+    elif score > 1000:
+       score = 1000
+    elif score > 100:
+       score = 100
+    elif score > 50:
+       score = 50
+    elif score > 30:
+       score = 30
+    elif score > 10:
+       score = 10
+    return score
+
+
 @shared_task(ignore_result=True)
 def _calculate_region_score(region_id):
     from maps.models import MapData
@@ -35,6 +51,7 @@ def _calculate_region_score(region_id):
     num_maps = MapData.objects.filter(region=region).count()
 
     score = int(num_pages*1.5 + num_files*1.3 + num_maps)
+    score = normalize_score(score)
 
     score_obj = RegionScore.objects.filter(region=region)
     if not score_obj.exists():
