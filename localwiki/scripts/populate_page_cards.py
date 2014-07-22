@@ -23,7 +23,7 @@ def run(*args, **kwargs):
         try:
             t = Template("""{% load thumbnail %}
 {% load cards_tags %}
-{% page_card page %}
+{% show_card page %}
 """)
             t.render(Context({'page': p}))
         except:

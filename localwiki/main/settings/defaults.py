@@ -317,11 +317,17 @@ INSTALLED_APPS = (
     'users',
     'blog',
     'activity',
+    # TODO XXX: merge these apps
+    # once we're on Django 1.7 with new
+    # migration framework
     'page_scores',
+    'region_scores',
+    # end TODO
     'search',
     'frontpage',
     'dashboard',
     'stars',
+    'cards',
     'explore',
     'main_content',
     'main.api',

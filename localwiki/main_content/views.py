@@ -1,6 +1,6 @@
 from django.views.generic import View
 
-from pages.models import Page
+from regions.models import Region
 from regions.views import RegionListView
 from blog.models import Post
 
@@ -12,21 +12,18 @@ class SplashPageView(RegionListView):
     def get_context_data(self, *args, **kwargs):
         context = super(SplashPageView, self).get_context_data(*args, **kwargs)
 
-        # Exclude meta stuff
-        qs = Page.objects.all()
-        qs = qs.exclude(slug__startswith='templates/')
-        qs = qs.exclude(slug='templates')
-        qs = qs.exclude(slug='front page')
+        qs = Region.objects.exclude(regionsettings__is_meta_region=True)
+        qs = qs.exclude(is_active=False)
 
         # Exclude ones with empty scores
         qs = qs.exclude(score=None)
 
-        qs = qs.defer('content').select_related('region').order_by('-score__score', '?')
+        qs = qs.order_by('-score__score', '?')
 
-        # Just grab 5 items
-        qs = qs[:5]
+        ## Just grab 5 items
+        #qs = qs[:5]
 
-        context['pages_for_cards'] = qs
+        context['regions_for_cards'] = qs
         context['blogs'] = Post.objects.filter(status=2).order_by('-created')[:4]
         return context
 

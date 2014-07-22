@@ -23,90 +23,17 @@
   </div>
   <div class="interesting_cards">
       <h2>{% trans "Explore LocalWiki communities" %}</h2>
-      {% cache 300 int_main_regions request.META.HTTP_HOST 'gr' %}
-          {% comment %}
+      {# {% cache 300 int_main_regions request.META.HTTP_HOST 'gr' %} #}
           <div class="cards">
-          {% for page in pages_for_cards %}
-            {% page_card page %}
+          {% for region in regions_for_cards %}
+            {% show_card region %}
           {% endfor %}
           </div>
-          {% endcomment %}
-                  <div class="cards">
-                  
-                    
-
-<div class="card">
-  <a href="/santacruz/Poet_%26_Patriot_Irish_Pub">
-    
-      
-	    <img src="http://localwiki.net/media/cache/a2/34/a2343e0f066ea1f5aeae231e818bbfda.jpg"/>
-      
-    
-    <div class="info"><span class="title">Poet &amp; Patriot Irish Pub</span></div>
-  </a>
-</div>
-
-                  
-                    
-
-<div class="card">
-  <a href="/santacruz/Murray_Street">
-    
-      
-	    <img src="http://localwiki.net/media/cache/ba/73/ba7340a75623ad81e0d9e1d50d49b540.jpg"/>
-      
-    
-    <div class="info"><span class="title">Murray Street</span></div>
-  </a>
-</div>
-
-                  
-                    
-
-<div class="card">
-  <a href="/santacruz/Wilder_Ranch_State_Park">
-    
-      
-	    <img src="http://localwiki.net/media/cache/6f/d6/6fd68457c72c1fa7a9322a911c65a19e.jpg"/>
-      
-    
-    <div class="info"><span class="title">Wilder Ranch State Park</span></div>
-  </a>
-</div>
-
-                  
-                    
-
-<div class="card">
-  <a href="/santacruz/Tea_House_Spa">
-    
-      
-	    <img src="http://localwiki.net/media/cache/56/02/5602dfce7cbfbb967c4d55ee70558de8.jpg"/>
-      
-    
-    <div class="info"><span class="title">Tea House Spa</span></div>
-  </a>
-</div>
-
-                  
-                    
-
-<div class="card">
-  <a href="/santacruz/Monterey_Bay_National_Marine_Sanctuary_Exploration_Center">
-    
-      
-	    <img src="http://localwiki.net/media/cache/5a/1d/5a1d02b8ae155054bc0cbd050bd3c6c8.jpg"/>
-      
-    
-    <div class="info"><span class="title">Monterey Bay National Marine Sanctuary Exploration Center</span></div>
-  </a>
-</div>
-</div>
 
           <div class="explore_more">
             <a class="button" href="{% url 'regions:list' %}">{% trans "Explore all communities" %}</a>
           </div>
-      {% endcache %}
+      {# {% endcache %} #}
   </div>
 
   <div class="highlights">

@@ -5,7 +5,7 @@
 {% cache 600 explore_page request.META.HTTP_HOST region.slug page_type pagination_next %}
 
   {% for page in pages %}
-    {% page_card page %}
+    {% show_card page %}
   {% endfor %}
   
   {% if pagination_has_more_left %}
