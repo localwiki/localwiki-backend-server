@@ -25,7 +25,12 @@
 {% endblock %}
 
 {% block content %}
-  <div class="site_search search">{% include "site/search_form.html" %}</div>
+  <div class="search">
+    <form method="GET" action="{% url 'global_search' %}">
+    <input type="text" name="q" placeholder="{% trans 'Search for LocalWiki regions'%}" value="{% if query and form.q.value %}{{ form.q.value }}{% endif %}" id="id_region_q" />
+    <input type="submit" class="little">
+    </form> 
+  </div>
 
   <div class="cards">
     {% for region in regions %}

@@ -180,6 +180,36 @@ $(document).ready(function() {
             document.location = datum.url;
         });
     }
+
+    /* Just-region pull-down / search selector */
+    if ($('#id_region_q')) {
+       $('#id_region_q').typeahead(null,
+            {
+              name: 'regions',
+              source: autoRegions.ttAdapter(),
+              templates: {
+                suggestion: Handlebars.compile("<p><strong>{{ value }}</strong> &mdash; {{ slug }}</p>"),
+              }
+            },
+            {
+                // Footer: Do search as usual
+                source: function(q, cb) {
+                    return cb([{'value': q, 'url': '/_search/?q=' + q}]);
+                },
+                templates: {
+                    header: Handlebars.compile('<div class="autocomplete_divider"></div>'),
+                    suggestion: Handlebars.compile(
+                        "<p>" +
+                        gettext("Search all of LocalWiki") +
+                        "</p>"
+                    )
+                }
+            }
+        )
+        .on('typeahead:selected', function(e, datum) {
+            document.location = datum.url;
+        });
+    }
     
 });
 

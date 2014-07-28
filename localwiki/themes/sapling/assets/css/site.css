@@ -1924,6 +1924,7 @@ input:focus {
     -webkit-border-radius: 3px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2)
 }
+
 .twitter-typeahead {
     float: left;
     height: 100%;
@@ -2857,8 +2858,8 @@ table.noborder, table.noborder td {
 }
 .fixed_header #content_wrapper {
     margin-top: 0!important;
-    padding-top: 0!important;
     margin-top: 54px!important;
+    padding-top: 1em!important;
 }
 
 
@@ -2873,7 +2874,7 @@ table.noborder, table.noborder td {
     padding: 0;
     margin: 0;
     position: fixed;
-    z-index: 2;
+    z-index: 1;
     width: 40%;
     height: 100%;
     left: 0;
@@ -2887,6 +2888,10 @@ table.noborder, table.noborder td {
 #region_explore_page #main, #region_explore_page #footer, #region_explore_page #attributions {
     width: 60%;
     float: right;
+}
+
+#region_explore_page #content .search .twitter-typeahead {
+    float: none;
 }
 
 
