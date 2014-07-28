@@ -90,4 +90,4 @@ class ExploreJustList(RegionMixin, ListView):
         qs = qs.exclude(slug='templates')
         qs = qs.exclude(slug='front page')
 
-        return qs.defer('content').select_related('region')
+        return qs.defer('content').select_related('region').order_by('name')

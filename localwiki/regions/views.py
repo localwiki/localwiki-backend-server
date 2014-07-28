@@ -93,8 +93,7 @@ class TemplateView(RegionMixin, DjangoTemplateView):
 
 class RegionListView(ListView):
     model = Region
-    context_object_name = 'regions'
-    zoom_to_data = True
+    zoom_to_data = False
 
     def get_queryset(self):
         return Region.objects.filter(is_active=True).exclude(regionsettings__is_meta_region=True).order_by('full_name')
@@ -126,6 +125,22 @@ class RegionListView(ListView):
         context['map'] = InfoMap(
             map_objects,
             options=olwidget_options)
+
+        # Get the list of regions, ordered by score
+        qs = Region.objects.exclude(regionsettings__is_meta_region=True)
+        qs = qs.exclude(is_active=False)
+
+        # Exclude ones with empty scores
+        qs = qs.exclude(score=None)
+
+        qs = qs.order_by('-score__score', '?')
+
+
+        qs = qs[:20]
+
+
+        context['regions'] = qs
+
 
         return context
 

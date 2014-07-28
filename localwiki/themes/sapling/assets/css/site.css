@@ -169,6 +169,7 @@ textarea, input, select {
     padding: 0;
     margin: 0;
     border: 1px solid #E8ECEF;
+    border-top: 0px;
     border-bottom: 1px solid #DAE1E5;
 }
 #header_bar {
@@ -2594,7 +2595,6 @@ table.noborder, table.noborder td {
     padding: 0;
     
 
-    display: none;
 }
 
 /* TEMP */
@@ -2605,7 +2605,6 @@ table.noborder, table.noborder td {
 }
 
 #splash_page #map_header_bar .mapwidget {
-    display: none!important;
 
 
     width: 100%!important;
@@ -2820,6 +2819,8 @@ table.noborder, table.noborder td {
     text-decoration: underline;
 }
 
+
+
 /* For a flat page on the main site, or for the blog, we use the splash_page styles. */
 #splash_page #content {
   margin: 0;
@@ -2845,6 +2846,50 @@ table.noborder, table.noborder td {
     padding-right: 20px;
     padding-top: 2.5em;
 }
+
+
+/* For some pages, e.g. the region explore page, we want the main
+ * header to remain fixed */
+.fixed_header #common_header {
+    position: fixed;
+    z-index: 2;
+    margin-top: 0;
+}
+.fixed_header #content_wrapper {
+    margin-top: 0!important;
+    padding-top: 0!important;
+    margin-top: 54px!important;
+}
+
+
+/* Region explore page */
+#region_explore_page #content_wrapper {
+    max-width: 900px;
+}
+
+#region_explore_page #map {
+    float: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    z-index: 2;
+    width: 40%;
+    height: 100%;
+    left: 0;
+    margin-top: 54px;
+}
+#region_explore_page #map .mapwidget {
+    width: 100%!important;
+    height: 100%!important;
+    border: none;
+}
+#region_explore_page #main, #region_explore_page #footer, #region_explore_page #attributions {
+    width: 60%;
+    float: right;
+}
+
+
 
 /* TEMP TEMP TEMP */
 #splash_page #main {

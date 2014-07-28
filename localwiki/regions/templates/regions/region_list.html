@@ -1,29 +1,38 @@
-{% extends "pages/base.html" %}
+{% extends "main_content/default.html" %}
 
 {% load i18n %}
+{% load cards_tags %}
 
-{% block title %}{% trans "Regions - LocalWiki" %}{% endblock %}
+{% block media %}{{block.super}}{{ map.media }}<script type="text/javascript">SaplingMap.show_links_on_hover = false;</script>{% endblock %}
 
-{% block header_title %}{% trans "Regions" %}{% endblock %}
+{% block title %}{% trans "Communities - LocalWiki" %}{% endblock %}
 
-{% block content_wrapper %}
-<div id="content_wrapper">
-    <div id="content" class="has_map">
-    {% block content %}
-      {{ map.media }}
-      <div id="map">
-        {{ map }}
-        <div class="info"><a class="edit tiny button" href="{% url 'regions:add' %}">{% trans "Add region" %}</a></div>
-      </div>
-      <div id="regions">
-        <ul>
-        {% for region in regions %}
-          <li><a href="{% url 'frontpage' region=region.slug %}">{{ region.full_name }}</a></li>
-        {% endfor %}
-        </ul>
-        <p><a href="{% url 'regions:add' %}" class="button">Add region</a></p>
-      </div>
-    {% endblock %}
-    </div>
-</div>
+{% block everything_wrapper %}
+  <div id="region_explore_page" class="fixed_header">
+    {{ block.super }}
+  </div>
 {% endblock %}
+
+{% block header_bar_wrapper %}
+{% endblock %}
+
+{% block main_wrapper %}
+  {{ map.media }}
+  <div id="map">
+    {{ map }}
+  </div>    
+  {{ block.super }}
+{% endblock %}
+
+{% block content %}
+  <div class="site_search search">{% include "site/search_form.html" %}</div>
+
+  <div class="cards">
+    {% for region in regions %}
+      {% show_card region %}
+    {% endfor %}
+  </div>
+  <p><a href="{% url 'regions:add' %}" class="button">Add region</a></p>
+{% endblock %}
+
+{% block header_title %}{% trans "Explore Communities" %}{% endblock %}
