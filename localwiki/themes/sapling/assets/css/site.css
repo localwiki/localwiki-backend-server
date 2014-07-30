@@ -2868,6 +2868,13 @@ table.noborder, table.noborder td {
     max-width: 900px;
 }
 
+/* Hide this but allow Enter-to-submit */
+#region_explore_page .search input[type="submit"] {
+    position: absolute;
+    z-index: -1000;
+    left: -1000px;
+}
+
 #region_explore_page #map {
     float: none;
     border: 0;
