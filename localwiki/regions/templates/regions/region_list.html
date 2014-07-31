@@ -14,6 +14,15 @@
 {% endblock %}
 
 {% block header_bar_wrapper %}
+    <div id="header_title">
+      <h1>{% block header_title %}{% trans "Explore Communities" %}{% endblock %}</h1>
+      <div class="search">
+        <form method="GET" action="{% url 'global_search' %}">
+        <input type="text" name="q" placeholder="{% trans 'Search for LocalWiki regions'%}" value="{% if query and form.q.value %}{{ form.q.value }}{% endif %}" id="id_region_q" />
+        <input type="submit" class="little">
+        </form> 
+      </div>
+  </div>
 {% endblock %}
 
 {% block main_wrapper %}
@@ -25,11 +34,11 @@
 {% endblock %}
 
 {% block content %}
-  <div class="search">
-    <form method="GET" action="{% url 'global_search' %}">
-    <input type="text" name="q" placeholder="{% trans 'Search for LocalWiki regions'%}" value="{% if query and form.q.value %}{{ form.q.value }}{% endif %}" id="id_region_q" />
-    <input type="submit" class="little">
-    </form> 
+  
+
+  <div class="option_toggle minimal" style="float: right;">
+    <a class="current" href="#">Default</a>
+    <a href="/seattle/_explore/list">As List</a>
   </div>
 
   <div class="cards">
@@ -37,7 +46,14 @@
       {% show_card region %}
     {% endfor %}
   </div>
+
+  <p><a href="{% url 'regions:add' %}" class="button">View more</a></p>
+
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+
   <p><a href="{% url 'regions:add' %}" class="button">Add region</a></p>
 {% endblock %}
-
-{% block header_title %}{% trans "Explore Communities" %}{% endblock %}
