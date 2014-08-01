@@ -151,6 +151,9 @@ class RegionListView(MultipleTypesPaginatedView):
             map_objects,
             options=olwidget_options)
 
+        context['page_type'] = 'random'
+        context['random_seed'] = self.random_seed
+
         return context
 
 

@@ -2,7 +2,7 @@
 
 {% load i18n %}
 
-{% block media %}{{block.super}}{{ map.media }}<script type="text/javascript">SaplingMap.show_links_on_hover = false;</script>{% endblock %}
+{% block media %}{{block.super}}{{ map.media }}{% endblock %}
 
 {% block head_extra %}
   <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>

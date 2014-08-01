@@ -2906,6 +2906,11 @@ table.noborder, table.noborder td {
     display: block;
     margin-bottom: 1em;
 }
+#region_explore_page .endless_loading {
+    float: none;
+    display: block;
+    margin-bottom: 1em;
+}
 
 /* Hide this but allow Enter-to-submit */
 #region_explore_page #header_title .search input[type="submit"] {
