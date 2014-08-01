@@ -1,6 +1,5 @@
 {% extends "pages/base.html" %}
 
-
 {% load i18n %}
 {% load cache %}
 
@@ -16,7 +15,6 @@
   {% if pagination_has_more_left %}
   <link rel="next" href="{{ pagination_next }}&amp;s={{ random_seed }}">
   {% endif %}
-
 {% endblock %}
 
 {% block media %}{{block.super}}{{ map_media }}<script type="text/javascript">SaplingMap.show_links_on_hover = false;</script>{% endblock %}

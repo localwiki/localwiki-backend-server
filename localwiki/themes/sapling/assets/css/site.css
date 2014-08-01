@@ -2901,6 +2901,11 @@ table.noborder, table.noborder td {
     display: inline;
     margin-left: 0.3em;
 }
+#region_explore_page .cards .endless_container .button {
+    float: none;
+    display: block;
+    margin-bottom: 1em;
+}
 
 /* Hide this but allow Enter-to-submit */
 #region_explore_page #header_title .search input[type="submit"] {
@@ -2935,7 +2940,7 @@ table.noborder, table.noborder td {
     width: 60%;
     margin-top: 54px!important;
     padding-top: 1.7em;
-    padding-bottom: 1.7em;
+    padding-bottom: 1.8em;
 }
 #region_explore_page #header_title h1 {
     font-size: 200%;

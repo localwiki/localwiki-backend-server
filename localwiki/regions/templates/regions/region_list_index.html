@@ -1,9 +1,18 @@
 {% extends "main_content/default.html" %}
 
 {% load i18n %}
-{% load cards_tags %}
 
 {% block media %}{{block.super}}{{ map.media }}<script type="text/javascript">SaplingMap.show_links_on_hover = false;</script>{% endblock %}
+
+{% block head_extra %}
+  <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
+  <script>$(document).ready(function() {
+  $.endlessPaginate();
+  });</script>
+  {% if pagination_has_more_left %}
+  <link rel="next" href="{{ pagination_next }}&amp;s={{ random_seed }}">
+  {% endif %}
+{% endblock %}
 
 {% block title %}{% trans "Communities - LocalWiki" %}{% endblock %}
 
@@ -51,10 +60,6 @@
   </div>
 
   <div class="cards">
-    {% for region in regions %}
-      {% show_card region %}
-    {% endfor %}
+    {% include "regions/region_list_page.html" %}
   </div>
-
-  <p><a href="{% url 'regions:add' %}" style="display: block; float: none;" class="button">View more</a></p>
 {% endblock %}

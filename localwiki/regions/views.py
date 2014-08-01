@@ -1,8 +1,10 @@
 import copy
+import random
 
 from django.conf import settings
 from django.views.generic import TemplateView as DjangoTemplateView
 from django.views.generic import View, ListView
+from django.db import connection
 from django.http import Http404, HttpResponseNotFound
 from django.views.generic.edit import CreateView, FormView, UpdateView
 from django.http import HttpResponseForbidden, HttpResponse
@@ -17,7 +19,7 @@ from django.utils.translation import ugettext_lazy
 from follow.utils import follow as do_follow
 from actstream import action
 
-from localwiki.utils.views import CreateObjectMixin, AuthenticationRequired
+from localwiki.utils.views import CreateObjectMixin, AuthenticationRequired, MultipleTypesPaginatedView
 from localwiki.utils.urlresolvers import reverse
 
 from .models import Region, RegionSettings, BannedFromRegion, slugify
@@ -91,12 +93,32 @@ class TemplateView(RegionMixin, DjangoTemplateView):
     pass
 
 
-class RegionListView(ListView):
-    model = Region
+class RegionListView(MultipleTypesPaginatedView):
+    context_object_name = 'regions'
     zoom_to_data = False
+    items_per_page = 27
 
-    def get_queryset(self):
-        return Region.objects.filter(is_active=True).exclude(regionsettings__is_meta_region=True).order_by('full_name')
+    def get_template_names(self):
+        if self.request.is_ajax():
+            return ['regions/region_list_page.html']
+        return ['regions/region_list_index.html']
+
+    def get_object_lists(self):
+        # Get the list of regions, ordered by score
+        qs = Region.objects.filter(is_active=True).exclude(regionsettings__is_meta_region=True)
+
+        # Exclude those with empty scores
+        qs = qs.exclude(score=None)
+
+        # We're paginating a random sort, so let's make sure it's
+        # deterministic here to avoid duplicate results.
+        self.random_seed = float(self.request.GET.get('s', random.random()))
+        cursor = connection.cursor()
+        cursor.execute("SELECT setseed(%s);" % self.random_seed)
+
+        qs = qs.order_by('-score__score', '?')
+
+        return [qs]
 
     def get_context_data(self, *args, **kwargs):
         from maps.widgets import InfoMap
@@ -106,7 +128,10 @@ class RegionListView(ListView):
             return '<a href="%s">%s</a>' % (url, obj.full_name)
 
         context = super(RegionListView, self).get_context_data(*args, **kwargs)
-        map_objects = [(obj.geom.centroid, popup_html(obj)) for obj in self.get_queryset() if obj.geom]
+
+        # Add a map of every single region:
+        all_regions = Region.objects.filter(is_active=True).exclude(regionsettings__is_meta_region=True)
+        map_objects = [(obj.geom.centroid, popup_html(obj)) for obj in all_regions if obj.geom]
 
         olwidget_options = copy.deepcopy(getattr(settings,
             'OLWIDGET_DEFAULT_OPTIONS', {}))
@@ -125,22 +150,6 @@ class RegionListView(ListView):
         context['map'] = InfoMap(
             map_objects,
             options=olwidget_options)
-
-        # Get the list of regions, ordered by score
-        qs = Region.objects.exclude(regionsettings__is_meta_region=True)
-        qs = qs.exclude(is_active=False)
-
-        # Exclude ones with empty scores
-        qs = qs.exclude(score=None)
-
-        qs = qs.order_by('-score__score', '?')
-
-
-        qs = qs[:20]
-
-
-        context['regions'] = qs
-
 
         return context
 
