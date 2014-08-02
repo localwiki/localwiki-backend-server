@@ -928,8 +928,11 @@ textarea, input, select {
 #footer {
     background: #e1e1e1 url(../img/footer-bg.png) top left repeat;
     padding: 1.2em;
+    min-height: 4.5em;
     clear: both;
-    min-height: 30px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 #footer p { margin: 0; padding: 0; color: #999;}
 #footer a {
@@ -2902,6 +2905,7 @@ table.noborder, table.noborder td {
 }
 #region_explore_page .cards {
     display: table-cell;
+    text-align: center;
 }
 #region_explore_page .cards .card {
     margin-left: 0.5em;
@@ -2990,7 +2994,13 @@ table.noborder, table.noborder td {
     #region_explore_page .option_toggle.minimal {
         float: none!important;
         margin-left: 0.5em;
-        display: table;
+        display: inline-block;
+    }
+    #region_explore_page #content {
+        text-align: center;
+    }
+    #region_explore_page #main {
+        border-top: 1px solid #FFF;
     }
     #region_explore_page #content_wrapper {
         padding-top: 0!important;
