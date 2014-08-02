@@ -1,6 +1,7 @@
 {% extends "main_content/default.html" %}
 
 {% load i18n %}
+{% load cache %}
 
 {% block media %}{{block.super}}{{ map.media }}{% endblock %}
 
@@ -29,11 +30,13 @@
 {% endblock %}
 
 {% block main_wrapper %}
-  {{ map.media }}
-  <div id="map">
-    {{ map }}
-  </div>
-  {{ block.super }}
+  {% cache 600 region_just_list %}
+    {{ map.media }}
+    <div id="map">
+      {{ map }}
+    </div>
+    {{ block.super }}
+  {% endcache %}
 {% endblock %}
 
 {% block content_wrapper %}
@@ -44,14 +47,14 @@
 {% endblock %}
 
 {% block content %}
-  <div class="option_toggle minimal" style="float: right;">
-    <a href="{% url 'regions:list' %}">Default</a>
-    <a class="current" href="{% url 'regions:as-list' %}">As List</a>
-  </div>
-
-  <ul>
-  {% for region in regions %}
-    <li><a href="{% url 'frontpage' region=region.slug %}">{{ region.full_name }}</a></li>
-  {% endfor %}
-  </ul>
+    <div class="option_toggle minimal" style="float: right;">
+      <a href="{% url 'regions:list' %}">Default</a>
+      <a class="current" href="{% url 'regions:as-list' %}">As List</a>
+    </div>
+  
+    <ul>
+    {% for region in regions %}
+      <li><a href="{% url 'frontpage' region=region.slug %}">{{ region.full_name }}</a></li>
+    {% endfor %}
+    </ul>
 {% endblock %}

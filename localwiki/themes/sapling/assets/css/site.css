@@ -2863,7 +2863,6 @@ table.noborder, table.noborder td {
     margin-top: 0;
 }
 .fixed_header #content_wrapper {
-    margin-top: 0!important;
     margin-top: 54px!important;
     padding-top: 1em!important;
 }
@@ -2960,6 +2959,37 @@ table.noborder, table.noborder td {
 
 #region_explore_page #header_title .search .twitter-typeahead {
     float: none;
+}
+
+@media screen and (max-width: 994px) {
+    #region_explore_page #header_title {
+        width: 100%;
+        float: none;
+        margin-top: 0!important;
+    }
+    #region_explore_page #main, #region_explore_page #footer, #region_explore_page #attributions, #region_explore_page #about {
+        width: 100%;
+        float: none;
+    }
+    #region_explore_page #map {
+        position: static;
+        width: 100%;
+        height: 300px;
+        margin-top: 15px;
+    }
+    .fixed_header #common_header {
+        position: static;
+    }
+}
+@media screen and (max-width: 600px) {
+    #region_explore_page .option_toggle.minimal {
+        float: none!important;
+        margin-left: 0.5em;
+        display: table;
+    }
+    #region_explore_page #content_wrapper {
+        padding-top: 0!important;
+    }
 }
 
 

@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load cache %}
 
-{# {% cache 600 explore_page request.META.HTTP_HOST region.slug page_type pagination_next %} #}
+{% cache 600 region_explore request.META.HTTP_HOST page_type pagination_next %}
 
   {% for region in regions %}
     {% show_card region %}
@@ -16,4 +16,4 @@
       </div>
   {% endif %}
 
-{# {% endcache %} #}
+{% endcache %}
