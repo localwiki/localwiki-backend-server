@@ -2981,6 +2981,11 @@ table.noborder, table.noborder td {
         position: static;
     }
 }
+@media screen and (max-width: 700px) {
+    #region_explore_page #header_title .search input {
+        width: auto!important;
+    }
+}
 @media screen and (max-width: 600px) {
     #region_explore_page .option_toggle.minimal {
         float: none!important;
@@ -2991,7 +2996,23 @@ table.noborder, table.noborder td {
         padding-top: 0!important;
     }
 }
-
+@media screen and (max-width: 417px) {
+    #region_explore_page #header_title .add_region {
+        display: block;
+        font-size: 90%;
+    }
+    #region_explore_page #header_title .add_region .button {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 236px;
+        margin-top: 0.1em;
+        font-size: 100%;
+    }
+    #region_explore_page #map {
+        margin-top: 0;
+    }
+}
 
 
 /* TEMP TEMP TEMP */
