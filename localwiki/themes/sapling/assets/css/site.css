@@ -2901,6 +2901,13 @@ table.noborder, table.noborder td {
     display: inline;
     margin-left: 0.3em;
 }
+#region_explore_page .cards {
+    display: table-cell;
+}
+#region_explore_page .cards .card {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
 #region_explore_page .cards .endless_container .button {
     float: none;
     display: block;

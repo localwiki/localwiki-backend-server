@@ -4,16 +4,6 @@
 
 {% block media %}{{block.super}}{{ map.media }}{% endblock %}
 
-{% block head_extra %}
-  <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
-  <script>$(document).ready(function() {
-  $.endlessPaginate();
-  });</script>
-  {% if pagination_has_more_left %}
-  <link rel="next" href="{{ pagination_next }}&amp;s={{ random_seed }}">
-  {% endif %}
-{% endblock %}
-
 {% block title %}{% trans "Communities - LocalWiki" %}{% endblock %}
 
 {% block everything_wrapper %}
@@ -55,11 +45,13 @@
 
 {% block content %}
   <div class="option_toggle minimal" style="float: right;">
-    <a class="current" href="#">Default</a>
-    <a href="/seattle/_explore/list">As List</a>
+    <a href="{% url 'regions:list' %}">Default</a>
+    <a class="current" href="{% url 'regions:as-list' %}">As List</a>
   </div>
 
-  <div class="cards">
-    {% include "regions/region_list_page.html" %}
-  </div>
+  <ul>
+  {% for region in regions %}
+    <li><a href="{% url 'frontpage' region=region.slug %}">{{ region.full_name }}</a></li>
+  {% endfor %}
+  </ul>
 {% endblock %}

@@ -1,0 +1,65 @@
+{% extends "main_content/default.html" %}
+
+{% load i18n %}
+
+{% block media %}{{block.super}}{{ map.media }}{% endblock %}
+
+{% block head_extra %}
+  <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
+  <script>$(document).ready(function() {
+  $.endlessPaginate();
+  });</script>
+  {% if pagination_has_more_left %}
+  <link rel="next" href="{{ pagination_next }}&amp;s={{ random_seed }}">
+  {% endif %}
+{% endblock %}
+
+{% block title %}{% trans "Communities - LocalWiki" %}{% endblock %}
+
+{% block everything_wrapper %}
+  <div id="region_explore_page" class="fixed_header">
+    {{ block.super }}
+  </div>
+{% endblock %}
+
+{% block header_bar_wrapper %}
+    <div id="header_title">
+      <h1>{% block header_title %}{% trans "Explore Communities" %}{% endblock %}</h1>
+      <div class="search">
+        <form method="GET" action="{% url 'global_search' %}">
+        <input type="text" name="q" placeholder="{% trans 'Find a LocalWiki region'%}" value="{% if query and form.q.value %}{{ form.q.value }}{% endif %}" id="id_region_q" />
+        <input type="submit" class="little">
+        </form> 
+      </div>
+      <div class="add_region">
+        {% url 'regions:add' as region_add_url %}
+        {% blocktrans %}or <a href="{{ region_add_url }}" class="button little">add a new region</a>{% endblocktrans %}
+      </div>
+  </div>
+{% endblock %}
+
+{% block main_wrapper %}
+  {{ map.media }}
+  <div id="map">
+    {{ map }}
+  </div>
+  {{ block.super }}
+{% endblock %}
+
+{% block content_wrapper %}
+{{ block.super }}
+<div class="bring_localwiki">
+    <a href="{% url 'regions:add' %}" class="button">{% trans "Add a new LocalWiki region" %}</a>
+</div>
+{% endblock %}
+
+{% block content %}
+  <div class="option_toggle minimal" style="float: right;">
+    <a class="current" href="#">Default</a>
+    <a href="{% url 'regions:as-list' %}">As List</a>
+  </div>
+
+  <div class="cards">
+    {% include "regions/region_explore_page.html" %}
+  </div>
+{% endblock %}

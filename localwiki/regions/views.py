@@ -93,15 +93,54 @@ class TemplateView(RegionMixin, DjangoTemplateView):
     pass
 
 
-class RegionListView(MultipleTypesPaginatedView):
+class RegionListView(ListView):
+    model = Region
+    context_object_name = 'regions'
+    zoom_to_data = False
+
+    def get_queryset(self):
+        return Region.objects.filter(is_active=True).exclude(regionsettings__is_meta_region=True).order_by('full_name')
+
+    def get_context_data(self, *args, **kwargs):
+        from maps.widgets import InfoMap
+
+        def popup_html(obj):
+            url = reverse('frontpage', kwargs={'region': obj.slug})
+            return '<a href="%s">%s</a>' % (url, obj.full_name)
+
+        context = super(RegionListView, self).get_context_data(*args, **kwargs)
+        map_objects = [(obj.geom.centroid, popup_html(obj)) for obj in self.get_queryset() if obj.geom]
+
+        olwidget_options = copy.deepcopy(getattr(settings,
+            'OLWIDGET_DEFAULT_OPTIONS', {}))
+
+        # Center to show most of the US'ish
+        olwidget_options['default_lat'] = 39.79
+        olwidget_options['default_lon'] = -100.99
+        olwidget_options['zoomToDataExtent'] = self.zoom_to_data
+
+        map_opts = olwidget_options.get('map_options', {})
+        map_controls = map_opts.get('controls', [])
+        if 'KeyboardDefaults' in map_controls:
+            map_controls.remove('KeyboardDefaults')
+        olwidget_options['map_options'] = map_opts
+        olwidget_options['map_div_class'] = 'mapwidget small'
+        context['map'] = InfoMap(
+            map_objects,
+            options=olwidget_options)
+
+        return context
+
+
+class RegionExploreView(MultipleTypesPaginatedView):
     context_object_name = 'regions'
     zoom_to_data = False
     items_per_page = 27
 
     def get_template_names(self):
         if self.request.is_ajax():
-            return ['regions/region_list_page.html']
-        return ['regions/region_list_index.html']
+            return ['regions/region_explore_page.html']
+        return ['regions/region_explore_index.html']
 
     def get_object_lists(self):
         # Get the list of regions, ordered by score
@@ -127,7 +166,7 @@ class RegionListView(MultipleTypesPaginatedView):
             url = reverse('frontpage', kwargs={'region': obj.slug}) 
             return '<a href="%s">%s</a>' % (url, obj.full_name)
 
-        context = super(RegionListView, self).get_context_data(*args, **kwargs)
+        context = super(RegionExploreView, self).get_context_data(*args, **kwargs)
 
         # Add a map of every single region:
         all_regions = Region.objects.filter(is_active=True).exclude(regionsettings__is_meta_region=True)
