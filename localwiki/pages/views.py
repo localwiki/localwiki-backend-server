@@ -85,6 +85,8 @@ class PageDetailView(Custom404Mixin, AddContributorsMixin, RegionMixin, DetailVi
                 map_controls.remove('PanZoomBar')
             if 'KeyboardDefaults' in map_controls:
                 map_controls.remove('KeyboardDefaults')
+            if 'Navigation' in map_controls:
+                map_controls.remove('Navigation')
             olwidget_options['map_options'] = map_opts
             olwidget_options['map_div_class'] = 'mapwidget small'
             olwidget_options.update(map_options_for_region(self.object.region))

@@ -780,6 +780,13 @@ textarea, input, select {
 #map a:hover {
     color: #111;
 }
+#map .map_cover.small {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  width: 400px;
+  height: 300px;
+}
 /* Just the widget. Contained in #map. */
 .mapwidget.small {
   border: 1px solid #b5b5b5;
