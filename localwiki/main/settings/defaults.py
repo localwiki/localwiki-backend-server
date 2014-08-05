@@ -410,7 +410,7 @@ OLWIDGET_DEFAULT_OPTIONS = {
 
     'layers': ['mblw', 've.aerial'],
     'map_options': {
-        'controls': ['TouchNavigation', 'PanZoom', 'KeyboardDefaults'],
+        'controls': ['TouchNavigation', 'PanZoom'],
         'theme': '/static/openlayers/theme/sapling/style.css',
     },
     'overlay_style': {'fillColor': '#ffc868',
