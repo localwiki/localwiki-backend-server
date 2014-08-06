@@ -11,6 +11,7 @@
     <div id="search_results">
       {% if map %}
         <div id="map">
+          <a class="map_cover small" href="{% url 'map_for_global_search' %}?{{ request.GET.urlencode }}"></a>
           {{ map }}
           <div class="info">
             <a class="view tiny button" href="{% url 'map_for_global_search' %}?{{ request.GET.urlencode }}">{% trans "View" %}</a>

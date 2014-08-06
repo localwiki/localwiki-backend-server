@@ -250,10 +250,6 @@ textarea, input, select {
 #object_title a {
     text-decoration: none;
 }
-#object_title .simple_pagination {
-    float: none;
-    display: inline-block;
-}
 #object_subtitle {
     position: relative;
     margin-top: 0.3em;
@@ -798,8 +794,9 @@ textarea, input, select {
   height: 300px!important;
 }
 #map .info {
-  display: table-cell;
+  display: table;
   padding-top: 10px;
+  width: 100%;
 }
 #map .info a {
   padding-left: 25px;
@@ -822,7 +819,7 @@ textarea, input, select {
 }
 #map .simple_pagination {
   height: 1.5em!important;
-  float: left;
+  float: right;
 }
 #map .simple_pagination a {
   float: left;
