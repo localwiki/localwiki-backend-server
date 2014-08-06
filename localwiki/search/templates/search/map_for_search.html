@@ -15,6 +15,17 @@
    {% endif %}
 {% endblock %}
 
+{% block object_actions %}
+<ul>
+   {% if page.has_previous or page.has_next %}
+     <a href="?q={{ query }}&amp;page={{ page.previous_page_number }}" class="button">&laquo; {% trans "Previous" %}</a>
+   {% endif %}
+   {% if page.has_next %}
+     <a href="?q={{ query }}&amp;page={{ page.next_page_number }}" class="button">{% trans "Next" %} &raquo;</a>
+   {% endif %}
+</ul>
+{% endblock %}
+
 {% block title %}
    {% trans "Search results for" %} "{{ query }}" - {{ block.super }}
 {% endblock %}

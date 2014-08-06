@@ -250,6 +250,10 @@ textarea, input, select {
 #object_title a {
     text-decoration: none;
 }
+#object_title .simple_pagination {
+    float: none;
+    display: inline-block;
+}
 #object_subtitle {
     position: relative;
     margin-top: 0.3em;
