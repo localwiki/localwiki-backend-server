@@ -817,12 +817,14 @@ textarea, input, select {
   background-image: url(../img/edit_icon.png);
 }
 #map .simple_pagination {
-  padding-top: 0.4em;
   height: 1.5em!important;
+  float: left;
 }
 #map .simple_pagination a {
+  float: left;
   margin-right: 0.5em;
   font-size: 90%;
+  padding-left: 0.8em;
   padding-top: 12px;
   padding-bottom: 13px;
   padding-right: 0.8em;
