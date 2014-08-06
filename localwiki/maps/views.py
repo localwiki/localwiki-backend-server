@@ -205,6 +205,46 @@ class MapForTag(MapGlobalView):
         return context
 
 
+class MapForSearch(MapGlobalView):
+    """
+    All objects whose pages match a search result.
+    """
+    dynamic = False
+    zoom_to_data = True
+
+    def get_queryset(self):
+        import tags.models as tags
+
+        qs = super(MapGlobalView, self).get_queryset()
+        region = self.get_region()
+        self.tag = tags.Tag.objects.get(
+            slug=tags.slugify(self.kwargs['tag']),
+            region=region
+        )
+        tagsets = tags.PageTagSet.objects.filter(tags=self.tag, region=region)
+        pages = Page.objects.filter(pagetagset__in=tagsets, region=region)
+        return MapData.objects.filter(page__in=pages).order_by('-length')
+
+    def get_map_title(self):
+        region = self.get_region()
+        d = {
+            'map_url': reverse('maps:global', kwargs={'region' : region.slug}),
+            'tag_url': reverse('tags:list', kwargs={'region': region.slug}),
+            'page_tag_url': reverse('tags:tagged',
+                kwargs={'slug': self.tag.slug, 'region': region.slug}),
+            'tag_name': escape(self.tag.name)
+        }
+        return (
+            '<a href="%(map_url)s">Map</a> / '
+            '<a href="%(tag_url)s">Tags</a> / '
+            '<a href="%(page_tag_url)s">%(tag_name)s</a>' % d)
+
+    def get_context_data(self, **kwargs):
+        context = super(MapForTag, self).get_context_data(**kwargs)
+        context['map_title'] = self.get_map_title()
+        return context
+
+
 class MapObjectsForBounds(JSONResponseMixin, RegionMixin, BaseListView):
     model = MapData
 

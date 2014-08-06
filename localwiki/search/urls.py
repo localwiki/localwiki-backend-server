@@ -15,12 +15,7 @@ from regions.views import RegionMixin
 
 
 class WithMapSearchView(SearchView):
-    def get_map(self):
-        (paginator, page) = self.build_page()
-        result_pks = [p.pk for p in page.object_list if p]
-        maps = MapData.objects.filter(page__pk__in=result_pks)
-        if not maps:
-            return None
+    def get_map_options(self):
         widget_options = copy.deepcopy(getattr(settings,
             'OLWIDGET_DEFAULT_OPTIONS', {}))
         map_opts = widget_options.get('map_options', {})
@@ -30,16 +25,22 @@ class WithMapSearchView(SearchView):
             map_controls.remove('PanZoomBar')
         if 'PanZoom' in map_controls:
             map_controls.remove('PanZoom')
-        # Remove the Keyboard scrolling behavior.
-        if 'KeyboardDefaults' in map_controls:
-            map_controls.remove('KeyboardDefaults')
         if 'TouchNavigation' in map_controls:
             map_controls.remove('TouchNavigation')
         widget_options['map_options'] = map_opts
         widget_options['map_div_class'] = 'mapwidget small'
-        map = InfoMap([(obj.geom, popup_html(obj)) for obj in maps],
-            options=widget_options)
-        return map
+        return widget_options
+
+    def get_map(self):
+        (paginator, page) = self.build_page()
+        result_pks = [p.pk for p in page.object_list if p]
+        maps = MapData.objects.filter(page__pk__in=result_pks)
+        if not maps:
+            return None
+
+        _map = InfoMap([(obj.geom, popup_html(obj)) for obj in maps],
+            options=self.get_map_options())
+        return _map
 
     def extra_context(self):
         context = super(WithMapSearchView, self).extra_context()
@@ -70,6 +71,28 @@ class CreatePageSearchView(WithMapSearchView, RegionMixin):
             slug=slugify(self.query), region=self.region).exists()
         context['region'] = self.region
         return context
+
+
+class MapForInRegionSearchView(CreatePageSearchView):
+    template = 'search/map_for_search.html'
+
+    def get_map_options(self):
+        widget_options = copy.deepcopy(getattr(settings,
+            'OLWIDGET_DEFAULT_OPTIONS', {}))
+        map_opts = widget_options.get('map_options', {})
+        widget_options['map_options'] = map_opts
+        return widget_options
+
+
+class MapForGlobalSearchView(GlobalSearchView):
+    template = 'search/map_for_search.html'
+
+    def get_map_options(self):
+        widget_options = copy.deepcopy(getattr(settings,
+            'OLWIDGET_DEFAULT_OPTIONS', {}))
+        map_opts = widget_options.get('map_options', {})
+        widget_options['map_options'] = map_opts
+        return widget_options
 
 
 def popup_html(map_data):
@@ -115,16 +138,27 @@ haystack_search = search_view_factory(
     view_class=CreatePageSearchView,
     form_class=InRegionSearchForm
 ) 
+map_for_haystack_search = search_view_factory(
+    view_class=MapForInRegionSearchView,
+    form_class=InRegionSearchForm
+)
 
 global_search = search_view_factory(
     view_class=GlobalSearchView,
     form_class=SearchForm
 )
+map_for_global_search = search_view_factory(
+    view_class=MapForGlobalSearchView,
+    form_class=SearchForm
+)
+
 
 urlpatterns_no_region = patterns('',
     url(r'^_rsearch/(?P<region>[^/]+)?/?$', haystack_search , name='haystack_search'),
+    url(r'^_rsearch/_map/(?P<region>[^/]+)?/?$', map_for_haystack_search , name='map_for_haystack_search'),
 )
 
 urlpatterns = urlpatterns_no_region + patterns('',
     url(r'^_search/$', global_search, name='global_search'),
+    url(r'^_search/_map/$', map_for_global_search, name='map_for_global_search'),
 )

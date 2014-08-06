@@ -1,0 +1,24 @@
+{% extends "maps/mapdata_list.html" %}
+
+{% load i18n %}
+
+{% block search_robots %}
+<meta name="robots" content="noindex,nofollow">
+{% endblock %}
+
+{% block header_title %}
+   {% trans "Search results for" %}
+   {% if region %}
+     <a href="{% url 'haystack_search' region=region.slug %}?{{ request.GET.urlencode }}">"{{ query }}"</a>
+   {% else %}
+     <a href="{% url 'global_search' %}?{{ request.GET.urlencode }}">"{{ query }}"</a>
+   {% endif %}
+{% endblock %}
+
+{% block title %}
+   {% trans "Search results for" %} "{{ query }}" - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    {{ map }}
+{% endblock %}
