@@ -787,6 +787,13 @@ textarea, input, select {
   width: 400px;
   height: 300px;
 }
+.card .map_cover {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  width: 200px;
+  height: 200px;
+}
 /* Just the widget. Contained in #map. */
 .mapwidget.small {
   border: 1px solid #b5b5b5;

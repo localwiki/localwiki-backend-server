@@ -7,7 +7,10 @@
 	    <img src="{{ im.url }}"/>
       {% endthumbnail %}
     {% elif map %}
-        <div class="map">{{ map }}</div>
+        <div class="map">
+          <div class="map_cover"></div>
+          {{ map }}
+        </div>
     {% else %}
         <div class="placeholder"><div class="text">
             {{ content|striptags|truncatewords:18 }}
