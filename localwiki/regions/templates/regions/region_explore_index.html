@@ -55,8 +55,9 @@
 
 {% block content %}
   <div class="option_toggle minimal" style="float: right;">
-    <a class="current" href="#">Default</a>
-    <a href="{% url 'regions:as-list' %}">As List</a>
+    <a class="current" href="#">{% trans "Default" %}</a>
+    <a class="as_map" href="{% url 'regions:as-map' %}">{% trans "Map" %}</a>
+    <a href="{% url 'regions:as-list' %}">{% trans "As List" %}</a>
   </div>
 
   <div class="cards">

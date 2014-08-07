@@ -2874,6 +2874,19 @@ table.noborder, table.noborder td {
     padding-top: 2.5em;
 }
 
+.full_map #splash_page #map {
+   display: block;
+   float: none;
+   padding: 0;
+   margin: 0;
+}
+
+@media screen and (max-width: 994px) {
+  .full_map #splash_page #map {
+     margin-top: 54px;
+  }
+}
+
 
 /* For some pages, e.g. the region explore page, we want the main
  * header to remain fixed */
@@ -2894,6 +2907,10 @@ table.noborder, table.noborder td {
 #region_explore_page #content_wrapper {
     max-width: none;
     margin-top: 0!important;
+}
+
+#region_explore_page .option_toggle .as_map {
+    display: none;
 }
 
 #region_explore_page .option_toggle.minimal { margin-top: 1em; }
@@ -3021,6 +3038,14 @@ table.noborder, table.noborder td {
     }
     #region_explore_page #content_wrapper {
         padding-top: 0!important;
+    }
+}
+@media screen and (max-width: 580px) {
+    #region_explore_page #map {
+        display: none;
+    }
+    #region_explore_page .option_toggle .as_map {
+        display: inline;
     }
 }
 @media screen and (max-width: 417px) {

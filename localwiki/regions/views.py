@@ -111,6 +111,10 @@ class RegionListView(ListView):
         context = super(RegionListView, self).get_context_data(*args, **kwargs)
         map_objects = [(obj.geom.centroid, popup_html(obj)) for obj in self.get_queryset() if obj.geom]
 
+        context['map'] = InfoMap(map_objects, options=self.get_map_options())
+        return context
+
+    def get_map_options(self):    
         olwidget_options = copy.deepcopy(getattr(settings,
             'OLWIDGET_DEFAULT_OPTIONS', {}))
 
@@ -125,11 +129,27 @@ class RegionListView(ListView):
             map_controls.remove('KeyboardDefaults')
         olwidget_options['map_options'] = map_opts
         olwidget_options['map_div_class'] = 'mapwidget small'
-        context['map'] = InfoMap(
-            map_objects,
-            options=olwidget_options)
+        return olwidget_options
 
-        return context
+   
+class RegionListMapView(RegionListView):
+    template_name = 'regions/region_list_map.html'
+
+    def get_map_options(self):    
+        olwidget_options = copy.deepcopy(getattr(settings,
+            'OLWIDGET_DEFAULT_OPTIONS', {}))
+
+        # Center to show most of the US'ish
+        olwidget_options['default_lat'] = 39.79
+        olwidget_options['default_lon'] = -100.99
+        olwidget_options['zoomToDataExtent'] = self.zoom_to_data
+
+        map_opts = olwidget_options.get('map_options', {})
+        map_controls = map_opts.get('controls', [])
+        if 'KeyboardDefaults' in map_controls:
+            map_controls.remove('KeyboardDefaults')
+        olwidget_options['map_options'] = map_opts
+        return olwidget_options
 
 
 class RegionExploreView(MultipleTypesPaginatedView):
