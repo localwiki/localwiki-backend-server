@@ -578,6 +578,19 @@ SaplingMap = {
     },
 
     _setup_map_search: function(map, layer) {
+        var _add_as_point = function(datum) {
+            var point = new OpenLayers.Geometry.Point(datum.lon, datum.lat);
+            point = point.transform(
+                new OpenLayers.Projection("EPSG:4326"),
+                map.getProjectionObject());
+            var pointFeature = new OpenLayers.Feature.Vector(point, null, null);
+            // clear the features out
+            layer.destroyFeatures();
+            layer.addFeatures([pointFeature]);
+            map.zoomToExtent(layer.getDataExtent());
+            return;
+        }
+
         $('.mapwidget').prepend(
             '<form id="map_search" class="search" action="." onSubmit="return false;" method="POST"><input type="text" id="address" name="address" placeholder="Find via address.."/></form>');
 
@@ -626,29 +639,25 @@ SaplingMap = {
         .on('typeahead:selected', function(e, datum) {
             if (!datum.osm_type) {
                 // Isn't a way, relation or node - just a point I think?
-                var point = new OpenLayers.Geometry.Point(datum.lon, datum.lat);
-                point = point.transform(
-                    new OpenLayers.Projection("EPSG:4326"),
-                    map.getProjectionObject());
-                var pointFeature = new OpenLayers.Feature.Vector(point, null, null);
-                // clear the features out
-                layer.destroyFeatures();
-                layer.addFeatures([pointFeature]);
-                map.zoomToExtent(layer.getDataExtent());
-                return;
+                return _add_as_point(datum); 
             }
 
             $('.mapwidget').prepend('<div class="loading"></div>');
             $('.mapwidget .loading').height($('.mapwidget').height());
 
             $.get('/' + region_slug + '/map/_get_osm/', { 'display_name': datum.display_name, 'osm_id': datum.osm_id, 'osm_type': datum.osm_type }, function(data){
-                var temp = new olwidget.InfoLayer([[data.geom, 'osm', 'osm']]);
-                temp.visibility = false;
-                map.addLayer(temp);
-                layer.removeAllFeatures();
-                layer.addFeatures(temp.features);
-                map.removeLayer(temp);
-                map.zoomToExtent(layer.getDataExtent());
+                if (data.geom == "GEOMETRYCOLLECTION EMPTY" && datum.lat && datum.lon) {
+                    _add_as_point(datum);
+                }
+                else {
+                    var temp = new olwidget.InfoLayer([[data.geom, 'osm', 'osm']]);
+                    temp.visibility = false;
+                    map.addLayer(temp);
+                    layer.removeAllFeatures();
+                    layer.addFeatures(temp.features);
+                    map.removeLayer(temp);
+                    map.zoomToExtent(layer.getDataExtent());
+                }
                 $('.mapwidget .loading').remove();
             });
         });
