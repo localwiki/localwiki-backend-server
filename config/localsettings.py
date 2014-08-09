@@ -6,7 +6,10 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['.{{ public_hostname }}', {% for hostname in custom_domains %}'{{ hostname }}', {% endfor %} '127.0.0.1', '.localhost']
 
-SESSION_COOKIE_DOMAIN = '.{{ public_hostname }}'
+def _remove_port(s):
+    return s.split(':')[0]
+
+SESSION_COOKIE_DOMAIN = _remove_port('.{{ public_hostname }}')
 if SESSION_COOKIE_DOMAIN.endswith('.localhost'):
     SESSION_COOKIE_DOMAIN = None
 

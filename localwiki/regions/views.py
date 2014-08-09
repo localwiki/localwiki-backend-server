@@ -63,6 +63,13 @@ def create_region(request, region=None, form=None, slug=None, full_name=None,
     # Notify followers that user created region
     action.send(request.user, verb='created region', action_object=region)
 
+    msg = _(
+        "You've created a new LocalWiki region! "
+        "We've set you up as an admin for this region. "
+        "Learn more about <a href=\"http://localwiki.net/main/Local_Adminship_Hub\" target=\"_blank\">LocalWiki adminship here</a>."
+    )
+    messages.add_message(request, messages.SUCCESS, msg)
+
 
 class RegionMixin(object):
     """
@@ -251,12 +258,6 @@ class RegionCreateView(CreateView):
     form_class = RegionForm
 
     def get_success_url(self):
-        msg = _(
-            "You've created a new LocalWiki region! "
-            "We've set you up as an admin for this region. "
-            "Learn more about <a href=\"http://localwiki.net/main/Local_Adminship_Hub\" target=\"_blank\">LocalWiki adminship here</a>."
-        )
-        messages.add_message(self.request, messages.SUCCESS, msg)
         return reverse('frontpage', kwargs={'region': self.object.slug})
 
     def get_form_kwargs(self):
@@ -296,7 +297,7 @@ class RegionCreateView(CreateView):
             return HttpResponseRedirect(url)
 
         response = super(RegionCreateView, self).form_valid(form)
-        create_region(region=self.object, form=form)
+        create_region(self.request, region=self.object, form=form)
         return response
 
 

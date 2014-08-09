@@ -48,7 +48,8 @@
     <div class="item geom">
         {{ form.geom.errors }}
         <label for="id_geom">{% trans "Draw the rough area the region will cover" %}</label>:
-        <div class="help_text">{% trans "Pick an area roughly the size of a city. Don't worry about being exact!" %}</div>
+        <div class="help_text">{% trans "When drawing your shape, <strong>double click to close it</strong>!" %}
+        {% trans "Pick an area roughly the size of a city. Don't worry about being exact!" %}</div>
         {{ form.geom }}
     </div>
         {{ form.default_language.errors }}

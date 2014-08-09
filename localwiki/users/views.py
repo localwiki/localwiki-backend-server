@@ -31,6 +31,7 @@ from django.conf import settings
 
 from guardian.shortcuts import get_users_with_perms, assign_perm, remove_perm
 from registration.views import register as _register
+from registration.backends import get_backend
 from follow.models import Follow
 
 from versionutils.versioning.utils import is_versioned
@@ -364,11 +365,44 @@ def process_post_save_after_auth(request):
             )
 
 
-def register(request, backend, **kwargs):
-    response = _register(request, backend, **kwargs)
-    if request.GET.get('post_save', None) and request.user.is_authenticated():
-        process_post_save_after_auth(request)
-    return response
+def register(request, backend, success_url=None, form_class=None,
+             disallowed_url='registration_disallowed',
+             template_name='registration/registration_form.html',
+             extra_context=None):
+    backend = get_backend(backend)
+    if not backend.registration_allowed(request):
+        return redirect(disallowed_url)
+    if form_class is None:
+        form_class = backend.get_form_class(request)
+
+    if request.method == 'POST':
+        form = form_class(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            new_user = backend.register(request, **form.cleaned_data)
+
+            ##########################################
+            # Our custom bit here:
+            ##########################################
+            if request.GET.get('post_save', None):
+                process_post_save_after_auth(request)
+
+            if success_url is None:
+                to, args, kwargs = backend.post_registration_redirect(request, new_user)
+                return redirect(to, *args, **kwargs)
+            else:
+                return redirect(success_url)
+    else:
+        form = form_class()
+    
+    if extra_context is None:
+        extra_context = {}
+    context = RequestContext(request)
+    for key, value in extra_context.items():
+        context[key] = callable(value) and value() or value
+
+    return render_to_response(template_name,
+                              {'form': form},
+                              context_instance=context)
 
 
 @sensitive_post_parameters()

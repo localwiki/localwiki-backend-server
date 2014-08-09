@@ -18,6 +18,9 @@
 #cover_form_selector {
     display: none;
 }
+#frontpage .messages {
+    margin-top: 0;
+}
 
 #change_cover_button, #save_cover {
     margin-right: 30px;

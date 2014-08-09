@@ -18,6 +18,16 @@
   {% render_canonical_url region %}
 {% endblock %}
 
+{% block body %}
+<body>
+   <div id="frontpage">
+   {% block everything_wrapper %}
+        {{ block.super }}
+   {% endblock %}
+   </div>
+</body>
+{% endblock %}
+
 {% block header_bar_inner %}
   {% if request.user.is_authenticated %}
     {% trans "region" as object_type %}
@@ -27,10 +37,19 @@
   {{ block.super }}
 {% endblock %}
 
+{% block messages %}
+{% endblock %}
+
 {% block main_wrapper %}
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif%}><div>{{ message|safe }}</div></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
 
 <div id="cover">
-    
     <div class="contents">
         <h1 class="primary_title">{% blocktrans with region_name=region.full_name %}Welcome to the {{ region_name }} LocalWiki!{% endblocktrans %}</h1>
         <h3 class="subtitle">{% blocktrans with region_name=region.full_name %}A website about {{ region_name }} that <em>anyone</em> can edit{% endblocktrans %}</h3>
