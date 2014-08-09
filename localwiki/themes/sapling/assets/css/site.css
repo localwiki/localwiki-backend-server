@@ -2341,7 +2341,7 @@ form #content_footer {
      display: block;
 }
 
-.region form .item {
+form .item {
     margin-top: 1em;
     margin-bottom: 1em; 
     padding: 1.1em 1em 1em 1em;
@@ -2350,21 +2350,18 @@ form #content_footer {
     -moz-border-radius: 5px 5px 5px 5px;
     -webkit-border-radius: 5px 5px 5px 5px;
 }
-.region form .item {
-    margin-top: 2em;
-    margin-bottom: 2em;
-}
-.region form .item .button {
+.item .button {
     float: none;
     width: auto;
-    display: inline;
+    display: inline-block;
+    white-space: nowrap;
 }
-.region form .item ul {
+form .item ul {
     list-style: none;
     margin-bottom: 0.8em;
     margin-top: 0.5em;
 }
-.region form .item li {
+form .item li {
     margin-left: 0;
 }
 .region .geom .help_text {

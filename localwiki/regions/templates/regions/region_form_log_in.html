@@ -1,0 +1,15 @@
+{% extends "regions/region_form.html" %}
+
+{% load i18n %}
+
+{% block content %}
+  {% url 'auth_login' as login_url %}
+  {% url 'registration_register' as register_url %}
+  {% url 'regions:add' as current_path %}
+  <div class="item">
+  {% blocktrans with qs=request.GET.urlencode %}
+      <h2>..you're almost done!</h2>
+      <p>Now you just need to <a class="button" href="{{ login_url }}?{{ qs }}&amp;next={{ next}}">log in</a> or <a class="button" href="{{ register_url }}?{{ qs }}&amp;next={{ next }}">create an account</a></p>
+  {% endblocktrans %}
+  </div>
+{% endblock %}

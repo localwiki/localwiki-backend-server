@@ -1,11 +1,12 @@
 import copy
 import random
+import urllib
 
 from django.conf import settings
 from django.views.generic import TemplateView as DjangoTemplateView
 from django.views.generic import View, ListView
 from django.db import connection
-from django.http import Http404, HttpResponseNotFound
+from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.views.generic.edit import CreateView, FormView, UpdateView
 from django.http import HttpResponseForbidden, HttpResponse
 from django.contrib import messages
@@ -32,6 +33,35 @@ def region_404_response(request, slug):
         (slug, region_add))
     html = render_to_string('404.html', {'message': msg}, RequestContext(request))
     return HttpResponseNotFound(html)
+
+def create_region(request, region=None, form=None, slug=None, full_name=None,
+        geom=None, default_language=None):
+    if not region:
+        region = Region(
+            slug=slug,
+            full_name=full_name,
+            geom=geom
+        )
+    if form:
+        default_language = form.cleaned_data['default_language']
+
+    region.save()
+
+    # Set the language
+    region.regionsettings.default_language = default_language
+    region.regionsettings.save()
+
+    # Create the initial pages, etc in the region.
+    region.populate_region()
+
+    # Add the creator as the initial region admin.
+    region.regionsettings.admins.add(request.user)
+
+    # Set the creator as following the region
+    do_follow(request.user, region)
+
+    # Notify followers that user created region
+    action.send(request.user, verb='created region', action_object=region)
 
 
 class RegionMixin(object):
@@ -216,19 +246,9 @@ class RegionExploreView(MultipleTypesPaginatedView):
         return context
 
 
-class RegionCreateView(AuthenticationRequired, CreateView):
+class RegionCreateView(CreateView):
     model = Region
     form_class = RegionForm
-
-    def get_forbidden_message(self):
-        forbidden_message = _(
-            'To create a region you must first <strong><a href="%(login_url)s?next=%(current_path)s">log in</a></strong> or '
-            '<strong><a href="%(register_url)s?next=%(current_path)s">create an account</a></strong>.') % {
-                'login_url': reverse('auth_login'),
-                 'current_path': reverse('regions:add'),
-                 'register_url': reverse('registration_register'),
-        }
-        return forbidden_message
 
     def get_success_url(self):
         msg = _(
@@ -257,29 +277,37 @@ class RegionCreateView(AuthenticationRequired, CreateView):
         response = super(RegionCreateView, self).form_invalid(form)
         return response
 
+    def form_to_qs(self, form):
+        d = {
+            'default_language': form.cleaned_data['default_language'],
+            'geom': form.cleaned_data['geom'].wkt,
+            'slug': form.cleaned_data['slug'],
+            'full_name': form.cleaned_data['full_name'],
+            'post_save': 'create_region',
+        }
+        return urllib.urlencode(d)
 
     def form_valid(self, form):
+        if not self.request.user.is_authenticated():
+            # If they're not logged in, let's save the form data,
+            # pass it along to the log-in-or-create-account page.
+            # Later, we'll re-process it here.
+            url = '%s?%s' % (reverse('regions:post-save-log-in'), self.form_to_qs(form))
+            return HttpResponseRedirect(url)
+
         response = super(RegionCreateView, self).form_valid(form)
-        region = self.object
-
-        # Set the language
-        region.regionsettings.default_language = form.cleaned_data['default_language']
-        region.regionsettings.save()
-
-        # Create the initial pages, etc in the region.
-        region.populate_region()
-
-        # Add the creator as the initial region admin.
-        if self.request.user.is_authenticated():
-            region.regionsettings.admins.add(self.request.user)
-
-        # Set the creator as following the region
-        do_follow(self.request.user, region)
-
-        # Notify followers that user created region
-        action.send(self.request.user, verb='created region', action_object=region)
-
+        create_region(region=self.object, form=form)
         return response
+
+
+class RegionPostSaveLogInView(DjangoTemplateView):
+    template_name = 'regions/region_form_log_in.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(RegionPostSaveLogInView, self).get_context_data(*args, **kwargs)
+        region_slug = self.request.GET.get('slug')
+        context['next'] = reverse('frontpage', kwargs={'region': region_slug})
+        return context
 
 
 class RegionSettingsView(RegionAdminRequired, RegionMixin, FormView):

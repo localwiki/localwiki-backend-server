@@ -30,6 +30,7 @@ from django.contrib.sites.models import get_current_site
 from django.conf import settings
 
 from guardian.shortcuts import get_users_with_perms, assign_perm, remove_perm
+from registration.views import register as _register
 from follow.models import Follow
 
 from versionutils.versioning.utils import is_versioned
@@ -338,6 +339,38 @@ def is_safe_url(url):
         (not url_info.scheme or url_info.scheme in ['http', 'https'])
 
 
+def get_registration_success_url(request):
+    if request.GET.get('post_save', None):
+        if request.GET.get('post_save') == 'create_region':
+            return reverse('frontpage', kwargs={'region': request.GET.get('slug')})
+    return None
+
+
+def process_post_save_after_auth(request):
+    from django.contrib.gis.geos import GEOSGeometry
+    from regions.views import create_region
+    if request.GET.get('post_save') == 'create_region':
+        slug = request.GET.get('slug')
+        full_name = request.GET.get('full_name')
+        geom = GEOSGeometry(request.GET.get('geom'))
+        default_language = request.GET.get('default_language')
+        if slug and full_name and geom and default_language:
+            create_region(
+                request,
+                slug=slug,
+                full_name=full_name,
+                geom=geom,
+                default_language=default_language
+            )
+
+
+def register(request, backend, **kwargs):
+    response = _register(request, backend, **kwargs)
+    if request.GET.get('post_save', None) and request.user.is_authenticated():
+        process_post_save_after_auth(request)
+    return response
+
+
 @sensitive_post_parameters()
 @csrf_protect
 @never_cache
@@ -370,6 +403,12 @@ def login(request, template_name='registration/login.html',
             if request.session.test_cookie_worked():
                 request.session.delete_test_cookie()
 
+            ##############################################
+            # Custom post-login action here:
+            ##############################################
+            if request.GET.get('post_save', None):
+                process_post_save_after_auth(request)
+
             return HttpResponseRedirect(redirect_to)
     else:
         form = authentication_form(request)
@@ -386,6 +425,7 @@ def login(request, template_name='registration/login.html',
     }
     if extra_context is not None:
         context.update(extra_context)
+
     return TemplateResponse(request, template_name, context,
                             current_app=current_app)
 

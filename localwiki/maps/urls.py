@@ -1,5 +1,4 @@
 from django.conf.urls import *
-from django.views.generic import TemplateView
 
 from utils.constants import DATETIME_REGEXP
 from views import *
