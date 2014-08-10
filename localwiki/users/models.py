@@ -26,6 +26,8 @@ def name_to_first_last(self, name):
     Args:
         name: A name string.
     """
+    if not name:
+        return
     split_name = name.split()
     last_name = ''
     if len(split_name) > 1:

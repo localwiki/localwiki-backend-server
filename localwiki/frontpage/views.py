@@ -83,6 +83,7 @@ class FrontPageView(Custom404Mixin, TemplateView):
         context = super(FrontPageView, self).get_context_data() 
 
         context['frontpage'] = FrontPage.objects.get(region=self.get_region())
+        context['no_index'] = self.get_region().is_empty
         context['map'] = self.get_map()
         context['cover_map'] = self.get_map(cover=True)
         context['pages_for_cards'] = self.get_pages_for_cards()

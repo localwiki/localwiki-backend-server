@@ -18,6 +18,14 @@
   {% render_canonical_url region %}
 {% endblock %}
 
+{% block search_robots %}
+{% if no_index %}
+  <meta name="robots" content="noindex,follow">
+{% else %}
+  <meta name="robots" content="index,follow">
+{% endif %}
+{% endblock %}
+
 {% block body %}
 <body>
    <div id="frontpage">

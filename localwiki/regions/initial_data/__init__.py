@@ -10,6 +10,8 @@ from django.utils.translation import ugettext as _
 
 from pages.models import Page, slugify
 
+NUM_DEFAULT_PAGES = 1
+
 def populate_region(region):
     Page(
         name="Front Page",

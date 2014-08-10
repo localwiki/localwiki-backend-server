@@ -60,6 +60,15 @@ class Region(models.Model):
     def get_absolute_url(self):
         return reverse('frontpage', kwargs={'region': self.slug})
 
+    @property
+    def is_empty(self):
+        from pages.models import Page
+        from initial_data import NUM_DEFAULT_PAGES
+
+        if Page.objects.filter(region=self).count() == NUM_DEFAULT_PAGES:
+            return True
+        return False
+
 
 LANGUAGES = [(lang[0], ugettext_lazy(lang[1])) for lang in settings.LANGUAGES]
 
