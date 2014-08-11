@@ -219,3 +219,41 @@
 .olwidgetPaginationCount {
     margin-top: -0.3em;
 }
+
+@media screen and (max-width: 800px) {
+    .olControlPanZoom {
+        display: none;
+    }
+    .olControlEditingToolbar {
+        margin-left: -80px;
+    }
+    .mapwidget #map_search {
+        margin-left: 250px;
+    }
+}
+@media screen and (max-width: 733px) {
+    .mapwidget .olwidgetDeleteVertexItemInactive {
+        display: none;
+    }
+    .mapwidget #map_search {
+        margin-left: 210px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .olControlLayerSwitcher {
+        display: none;
+    }
+}
+@media screen and (max-width: 580px) {
+    .olControlEditingToolbar {
+        margin-left: -100px;
+    }
+    .mapwidget #map_search {
+        margin-left: 190px;
+    }
+}
+@media screen and (max-width: 560px) {
+    .mapwidget #map_search {
+        display: none;
+    }
+}
