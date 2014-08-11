@@ -88,6 +88,26 @@ class PageAPITests(APITestCase):
         resp = self.client.post('%s/pages/' % self.API_ROOT, data, format='json')
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
 
+    def test_basic_page_delete(self):
+        self.client.force_authenticate(user=self.edit_user)
+
+        # First, let's create
+        data = {'name': 'Test Page for delete', 'content': '<p>hi</p>', 'region': 'http://testserver%s/regions/%s/' % (self.API_ROOT, self.sf_region.id)}
+        resp = self.client.post('%s/pages/' % self.API_ROOT, data, format='json')
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+
+        jresp = json.loads(resp.content)
+        url = jresp['url']
+
+        # Page exists
+        self.assertTrue(Page.objects.filter(name='Test Page for delete'))
+
+        resp = self.client.delete(url, format='json')
+        self.assertEqual(resp.status_code, status.HTTP_204_NO_CONTENT)
+
+        # Page doesn't exist anymore
+        self.assertFalse(Page.objects.filter(name='Test Page for delete'))
+
     def test_page_post_with_tags(self):
         self.client.force_authenticate(user=self.edit_user)
 
