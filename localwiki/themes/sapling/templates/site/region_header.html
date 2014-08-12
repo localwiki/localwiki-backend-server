@@ -1,0 +1,15 @@
+<div id="region_header"
+  {% if not region %}class="not_in_region"{% else %}{% if region.regionsettings.logo %}class="with_logo"{% endif %}{% endif %}>
+  {% if region %}
+    <div id="region_title">{% include "site/region_title.html" %}</div>
+    {% block region_nav %}
+      <div id="nav" class="region_nav">
+        <a href="#" id="pull"></a>
+        <ul>
+          {% include "site/nav.html" %}
+        </ul>
+      </div>
+    {% endblock %}
+    {% include "site/add_page_area.html" %}
+  {% endif %}
+</div>

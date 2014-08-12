@@ -407,7 +407,7 @@ textarea, input, select {
         display: none;
     }
     #common_header { 
-        position: absolute;
+        /*position: absolute;*/
         margin-top: 0px;
         display: block;
         background: none;
@@ -501,7 +501,6 @@ textarea, input, select {
     vertical-align: middle;
 }
 #login_info .welcome {
-    float: left;
     margin-right: 0.8em;
     font-size: 90%;
 }
@@ -511,6 +510,9 @@ textarea, input, select {
 #login_info .actions .button {
     margin-left: 0.1em;
     margin-right: 0.1em;
+}
+#login_info a, #login_info a:link {
+    text-decoration: none;
 }
 @media screen and (max-width: 700px){
     #login_info {
@@ -589,14 +591,15 @@ textarea, input, select {
     #header .site_search {
         width: auto;
         float: none;
-        margin: 0;
-        margin-right: 80px;
-        padding: 0;
-        /*padding-left: 65px;*/
-        padding-left: 5px;
-        padding-top: 5px;
+        margin: 5px 0 0 5px;
+        padding: 0 85px 0 0;
         height: 27px;
         display: block;
+        position: absolute;
+        width: 100%;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
     }
     .site_search form {
         height: 100%;
@@ -618,28 +621,28 @@ textarea, input, select {
 
 /*
 ====================================
- Nav
+ Inner-regon nav bar
 ====================================
 */
-#nav {
+.region_nav {
     display: inline-block;
     vertical-align: middle;
     padding-left: 1em;
 }
-#nav ul {
+.region_nav ul {
     list-style-type: none;
     display: table-cell;
     margin: 0;
 }
-#nav a, #nav a:link {
+.region_nav a, .region_nav a:link {
     color: #444;
 }
-#nav li {
+.region_nav li {
     margin: 0;
     margin-right: 0.4em;
     float: left;
 }
-#nav li a {
+.region_nav li a {
     text-align: center;
     font-size: 83%;
     border-radius: 3px;
@@ -655,32 +658,109 @@ textarea, input, select {
     background-color: #e1e1e1;
     text-decoration: none;
 }
-#nav li a:hover {
+.region_nav li a:hover {
     background-color: #bfbfbf;
     border: 1px solid #bfbfbf;
     color: #111;
 }
+
 #nav #pull {
     display: static;  
 }
+
+/*
+====================================
+ Common / global nav bar
+====================================
+*/
+
+.common_nav {
+    display: table;
+    padding-left: 1em;
+    padding-right: 0.2em;
+    float: right;
+    height: 54px;
+}
+.common_nav ul {
+    list-style-type: none;
+    display: table-cell;
+    vertical-align: middle;
+    margin: 0;
+}
+.common_nav li {
+    margin: 0;
+    margin-right: 0.4em;
+    float: left;
+}
+.common_nav li a, .common_nav li a:link {
+    color: #666;
+    text-align: center;
+    background: none;
+    border: none;
+
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0 0.5em 0 0.5em;
+    height: 1.7em;
+    line-height: 100%;
+    margin: 0;
+    text-decoration: none;
+    font-size: 90%;
+}
+.common_nav li a:hover {
+    color: black;
+    background-color: #d7d7d7;
+}
+
+@media screen and (max-width: 1175px) {
+    .common_nav .hide1 {
+        display: none;
+    }
+}
+@media screen and (max-width: 1135px) {
+    .common_nav .hide2 {
+        display: none;
+    }
+}
+@media screen and (max-width: 1070px) {
+    .common_nav .hide3 {
+        display: none;
+    }
+}
+@media screen and (max-width: 1011px) {
+    .common_nav .hide4 {
+        display: none;
+    }
+}
 @media screen and (max-width: 700px) {
-    #nav {
+    .region_nav {
         padding-left: 0.2em;
     }
-    #nav ul {
+    .region_nav ul {
         font-size: 90%;
         margin: -0.8em 0.5em 0.5em 0.5em;
         padding: 0;
     }
-    #nav li {
+    .region_nav li {
         margin: 0.2em;
     }
     
-    #nav li a {
+    .region_nav li a {
     }
 }
 @media screen and (max-width: 500px) {
+    #nav.common_nav .hide1, #nav.common_nav .hide2, #nav.common_nav .hide3, #nav.common_nav .hide4 {
+        display: block;
+    }
+    .common_nav, .common_nav li {
+        display: none;
+    }
+    .common_nav {
+        float: none;
+        height: auto;
+    }
     #nav {
+        width: 100%;
         color: #666!important;
         font-weight: bold;
         border: none;
@@ -689,7 +769,7 @@ textarea, input, select {
         background: #e6e6e6 url(../img/gradient.png) repeat-x bottom left;
         border-bottom: 1px solid #bfbfbf;
         text-decoration: none;
-        display: block;
+        display: block!important;
         padding-left: 0;
     }
     #nav ul {
@@ -711,6 +791,9 @@ textarea, input, select {
 	    text-align: center;
 	    text-decoration: none;
 	    line-height: 40px;
+        box-shadow: none!important;
+        -moz-box-shadow: none!important;
+        -webkit-box-shadow: none!important;
     }
     #nav li a {
         border: none;
@@ -731,7 +814,7 @@ textarea, input, select {
         border-bottom: none;
     }
     #nav #pull {  
-        display: block;  
+        display: block;
         height: 40px;
     }  
     #nav #pull .button {
@@ -751,6 +834,7 @@ textarea, input, select {
         text-transform: capitalize;
     }
 }
+
 
 
 /*
@@ -2505,921 +2589,4 @@ table.noborder, table.noborder td {
 }
 .divider_list .follow_item {
     margin-top: -0.1em;
-}
-
-/*
-====================================
- Main (splash) page
-====================================
-*/
-
-/* !!!!!! */
-/* XXX TODO: REMOVE BEFORE DEPLOY */
-/* !!!!!! */
-#preview_banner {
-    display: none;
-}
-
-#splash_page #region_header {
-    margin: 0;
-    padding: 0;
-}
-
-#splash_page #header {
-    border-bottom: 0;
-}
-#splash_page a, #splash_page a:link {
-    text-decoration: none;
-}
-#splash_page .simple_pagination a {
-    float: none;
-    display: inline-block;
-    margin-top: 2em;
-    margin-bottom: 2em;
-}
-
-
-
-
-/* XX */
-/* XX */
-
-/* XXX TODO
- * MOVE TO #NAV definition area */
-
-/* XX */
-/* XX */
-/* XX */
-
-#common_nav {
-    display: table;
-    padding-left: 1em;
-    float: right;
-    height: 54px;
-}
-#common_nav ul {
-    list-style-type: none;
-    display: table-cell;
-    vertical-align: middle;
-    margin: 0;
-}
-#common_nav li {
-    margin: 0;
-    margin-right: 0.4em;
-    float: left;
-}
-#common_nav li a, #common_nav li a:link {
-    color: #666;
-    text-align: center;
-
-    display: table-cell;
-    vertical-align: middle;
-    padding: 0 0.5em 0 0.5em;
-    height: 1.7em;
-    line-height: 100%;
-    margin: 0;
-    text-decoration: none;
-    font-size: 90%;
-}
-#common_nav li a:hover {
-    color: black;
-    background-color: #d7d7d7;
-}
-
-@media screen and (max-width: 1175px) {
-    #common_nav .hide1 {
-        display: none;
-    }
-}
-@media screen and (max-width: 1135px) {
-    #common_nav .hide2 {
-        display: none;
-    }
-}
-@media screen and (max-width: 1070px) {
-    #common_nav .hide3 {
-        display: none;
-    }
-}
-@media screen and (max-width: 1011px) {
-    #common_nav .hide4 {
-        display: none;
-    }
-}
-
-
-
-
-
-
-#splash_page #map_header_bar #map {
-    float: none;
-    margin: 0;
-    border: none;
-    padding: 0;
-    
-
-}
-
-/* TEMP */
-#splash_page #map_header_bar {
-    background-color: #c3ccde;
-    height: 400px!important;
-    margin-top: -1px;
-}
-
-#splash_page #map_header_bar .mapwidget {
-
-
-    width: 100%!important;
-    float: none;
-    margin: 0;
-    height: 400px!important;
-    display: block;
-    border: none;
-}
-
-/* Baseline styles for splash page */
-#splash_page h1, #splash_page h2, #splash_page h3, #splash_page h4 {
-    color: #3f3f3f;
-}
-#splash_page a[href^="http:"],
-#splash_page a[href^="https:"] {
-    background: none;
-    padding-left: 0;
-}
-
-#splash_page .callout {
-    text-align: center;
-    background-color: #f3f3f3;
-    padding: 3em 0 3em 0;
-}
-#splash_page .callout h1 {
-    max-width: 600px;
-    display: inline-block;
-    margin: 0;
-    color: #505050;
-    font-size: 30px;
-}
-
-#splash_page .bring_localwiki {
-    text-align: center;
-    display: block;
-    background-color: white;
-    background-image: url('http://localwiki.org/static/img/bg_map.png');
-    background-repeat: repeat;
-}
-#splash_page .bring_localwiki .button {
-    float: none;
-    display: inline-block;
-    margin-top: 2.5em;
-    margin-bottom: 2.5em;
-    color: white!important;
-    text-shadow: 0px 1px 0px rgba(120, 120, 120, 1);
-    padding: 0.8em 1.1em 0.8em 1.1em;
-    background-image: none;
-    background-color: #5C6;
-}
-#splash_page .bring_localwiki .button:hover {
-    background-image: none;
-    background-color: rgba(80, 198, 97, 1)!important;
-    color: #F5F5F5!important;
-}
-#splash_page .interesting_cards {
-    padding-top: 3em;
-    padding-bottom: 1.5em;
-}
-#splash_page .interesting_cards .explore_more a {
-    margin-top: 1em;
-}
-#splash_page .interesting_cards h2 {
-    text-align: center; 
-    margin-bottom: 1em;
-}
-
-#splash_page .highlights .item {
-    clear: both;
-    width: 100%;
-    display: table;
-    text-align: center;
-}
-
-#splash_page .highlights p {
-    padding-right: 4em;
-    display: inline;
-}
-#splash_page .highlights .item > div {
-    text-align: left;
-    width: 100%;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    display: inline-block;
-
-    padding-top: 100px;
-    padding-bottom: 100px;
-    padding-left: 20px;
-    padding-right: 20px;
-
-    max-width: 800px;
-}
-#splash_page .highlights img {
-    margin-right: 4em;
-}
-#splash_page .highlights .description {
-}
-#splash_page .highlights .item:nth-child(odd) .description {
-    padding-left: 363px;
-}
-#splash_page .highlights .item:nth-child(even) .description {
-    padding-right: 363px;
-}
-#splash_page .highlights .item:nth-child(odd) {
-    background-color: white;
-}
-#splash_page .highlights .item:nth-child(odd) img {
-    float: left;
-}
-#splash_page .highlights .item:nth-child(even) img {
-    float: right;
-}
-
-#splash_page .recent_blogs {
-    padding-top: 3em;
-    padding-bottom: 4em;
-    padding-left: 20px;
-    padding-right: 20px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-}
-#splash_page .recent_blogs h2 {
-    margin-bottom: 1.5em;
-}
-#splash_page .recent_blogs li {
-   list-style-type: none;
-   margin-left: 0;
-   margin-bottom: 1.5em;
-   background-color: white;
-   padding: 1.5em 2em;
-   line-height: 1.1;
-   clear: both;
-}
-#splash_page .recent_blogs li:last-child {
-   margin-bottom: 0;
-}
-#splash_page .recent_blogs li:hover {
-    background-color: #ebebeb;
-    color: #111;
-    cursor: pointer;
-}
-#splash_page .recent_blogs .image_frame {
-   float: left;
-}
-#splash_page .blog_content {
-   font-size: 90%;
-   line-height: 1.4;
-   margin-left: 100px;
-   max-height: 60px;
-   height: 60px;
-   overflow: hidden;
-}
-
-/* Blog pages */
-#splash_page #blog_page .title {
-    text-align: center;
-    margin-bottom: 0;
-}
-#splash_page #blog_page .info {
-    color: #8F8F8F;
-    font-size: 85%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0.6em;
-    margin-bottom: 1.5em;
-    display: table;
-}
-#splash_page #blog_page .info a, 
-#splash_page #blog_page .info a:link {
-    color: #8F8F8F;
-}
-#splash_page #blog_page .pagination {
-    float: none;
-    display: inline-block;
-    margin-top: 2em;
-}
-#splash_page #blog_page .info a:hover {
-    color: black;
-}
-#splash_page #blog_page .info > div {
-    display: inline-block;
-    margin-left: 0.1em;
-}
-#splash_page #blog_page .info img {
-    vertical-align: middle;
-    margin-right: 0.2em;
-    margin-bottom: 4px;
-}
-#splash_page #blog_page .item {
-    border-bottom: 1px solid #E4E4E4;
-    padding-bottom: 1em;
-    margin-bottom: 4em;
-}
-#splash_page #blog_page .item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-#splash_page #blog_page .body {
-    margin-top: 1em;
-}
-#splash_page #blog_page .body .image_frame,
-#splash_page #blog_page .body iframe {
-    display: table;
-    margin-left: auto;
-    margin-right: auto;
-}
-#splash_page #blog_page .body a, #splash_page #blog_page .body a:link {
-    text-decoration: underline;
-}
-
-
-
-/* For a flat page on the main site, or for the blog, we use the splash_page styles. */
-#splash_page #content {
-  margin: 0;
-}
-#splash_page #header_title {
-   text-align: center;
-   padding-top: 3em;
-   padding-bottom: 3em;
-}
-#splash_page #header_title h1 {
-    margin: 0;
-    font-size: 250%;
-}
-#splash_page #main {
-    margin: 0;
-}
-
-#splash_page #content_wrapper {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 600px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 2.5em;
-}
-
-.full_map #splash_page #map {
-   display: block;
-   float: none;
-   padding: 0;
-   margin: 0;
-}
-
-@media screen and (max-width: 994px) {
-  .full_map #splash_page #map {
-     margin-top: 54px;
-  }
-}
-
-
-/* For some pages, e.g. the region explore page, we want the main
- * header to remain fixed */
-.fixed_header #common_header {
-    position: fixed;
-    z-index: 2;
-    margin-top: 0;
-}
-.fixed_header #content_wrapper {
-    margin-top: 54px!important;
-    padding-top: 1em!important;
-}
-
-
-/******************************* 
-  Region explore page 
- ******************************/
-#region_explore_page #content_wrapper {
-    max-width: none;
-    margin-top: 0!important;
-}
-
-#region_explore_page .option_toggle .as_map {
-    display: none;
-}
-
-#region_explore_page .option_toggle.minimal { margin-top: 1em; }
-
-#region_explore_page #header_title .search {
-    display: inline-block;
-    margin-top: 1.7em;
-}
-#region_explore_page #header_title .search input {
-    margin-bottom: 0;
-    display: inline-block;
-}
-#region_explore_page #header_title .add_region .button {
-    float: none;
-    display: inline-block;
-    font-weight: normal;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    margin-left: 0.3em;
-}
-#region_explore_page #header_title .add_region {
-    color: #868686;
-    display: inline;
-    margin-left: 0.3em;
-}
-#region_explore_page .cards {
-    display: table-cell;
-    text-align: center;
-}
-#region_explore_page .cards .card {
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-}
-#region_explore_page .cards .endless_container .button {
-    float: none;
-    display: block;
-    margin-bottom: 1em;
-}
-#region_explore_page .endless_loading {
-    float: none;
-    display: block;
-    margin-bottom: 1em;
-}
-
-/* Hide this but allow Enter-to-submit */
-#region_explore_page #header_title .search input[type="submit"] {
-    position: absolute;
-    z-index: -1000;
-    left: -1000px;
-}
-
-#region_explore_page #map {
-    float: none;
-    border: 0;
-    padding: 0;
-    margin: 0;
-    position: fixed;
-    z-index: 1;
-    width: 40%;
-    height: 100%;
-    left: 0;
-    margin-top: 54px;
-}
-#region_explore_page #map .mapwidget {
-    width: 100%!important;
-    height: 100%!important;
-    border: none;
-}
-#region_explore_page #main, #region_explore_page #footer, #region_explore_page #attributions, #region_explore_page #about {
-    width: 60%;
-    float: right;
-}
-#region_explore_page #header_title {
-    float: right;
-    width: 60%;
-    margin-top: 54px!important;
-    padding-top: 1.7em;
-    padding-bottom: 1.8em;
-}
-#region_explore_page #header_title h1 {
-    font-size: 200%;
-}
-
-#region_explore_page #header_title .search .twitter-typeahead {
-    float: none;
-}
-
-@media screen and (max-width: 994px) {
-    #region_explore_page #header_title {
-        width: 100%;
-        float: none;
-        margin-top: 0!important;
-    }
-    #region_explore_page #main, #region_explore_page #footer, #region_explore_page #attributions, #region_explore_page #about {
-        width: 100%;
-        float: none;
-    }
-    #region_explore_page #map {
-        position: static;
-        width: 100%;
-        height: 300px;
-        margin-top: 15px;
-    }
-    .fixed_header #common_header {
-        position: static;
-    }
-}
-@media screen and (max-width: 700px) {
-    #region_explore_page #header_title .search input {
-        width: auto!important;
-    }
-}
-@media screen and (max-width: 600px) {
-    #region_explore_page .option_toggle.minimal {
-        float: none!important;
-        margin-left: 0.5em;
-        display: inline-block;
-    }
-    #region_explore_page #content {
-        text-align: center;
-    }
-    #region_explore_page #main {
-        border-top: 1px solid #FFF;
-    }
-    #region_explore_page #content_wrapper {
-        padding-top: 0!important;
-    }
-}
-@media screen and (max-width: 580px) {
-    #region_explore_page #map {
-        display: none;
-    }
-    #region_explore_page .option_toggle .as_map {
-        display: inline;
-    }
-}
-@media screen and (max-width: 417px) {
-    #region_explore_page #header_title .add_region {
-        display: block;
-        font-size: 90%;
-    }
-    #region_explore_page #header_title .add_region .button {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 236px;
-        margin-top: 0.1em;
-        font-size: 100%;
-    }
-    #region_explore_page #map {
-        margin-top: 0;
-    }
-}
-
-
-/* TEMP TEMP TEMP */
-#splash_page #main {
-    background-color: white!important;
-}
-
-@media screen and (max-width: 1000px) {
-    #login_info .actions .button {
-        font-size: 70%;
-    }
-    #splash_page #nav {
-        margin-right: 200px;
-        margin-top: -39px;
-    }
-    #splash_page #nav li a {
-        font-size: 80%;
-    }
-}
-@media screen and (max-width: 940px) {
-    #splash_page .highlights .item > div {
-        padding-top: 30px;
-        padding-bottom: 30px;
-    }
-}
-
-@media screen and (max-width: 790px) {
-    #splash_page .recent_blogs {
-        padding-top: 2em;
-    }
-}
-
-@media screen and (max-width: 700px) {
-    #splash_page #map_header_bar .mapwidget {
-        height: 200px!important;
-    }
-    #splash_page .recent_blogs {
-    }
-    #splash_page .callout h1 {
-        font-size: 20px;
-        max-width: 400px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-    #splash_page .interesting_cards h2 {
-        font-size: 140%;
-        padding-left: 0.5em;
-        padding-right: 0.5em;
-    }
-}
-
-@media screen and (max-width: 660px) {
-    #splash_page .highlights .item img {
-        float: none!important;
-        margin-right: 0!important;
-        margin-bottom: 15px;
-    }
-    #splash_page .highlights .item > div {
-        text-align: center;
-    }
-    #splash_page .highlights .item .description {
-        text-align: left;
-        padding-left: 0!important;
-        padding-right: 0!important;
-    }
-    #splash_page .highlights p {
-        padding-right: 0;
-    }
-}
-
-@media screen and (max-width: 500px) {
-
-
-   /*
-    #splash_page #nav li a {
-        border-bottom: 2px solid #576979;
-        font-size: 100%;
-        text-shadow: none;
-        -moz-text-shadow: none;
-        -webkit-text-shadow: none;
-        font-weight: bold;
-    }
-    #splash_page #nav .button {
-        box-shadow: none;
-        -moz-box-shadow: none;
-        -webkit-box-shadow: none;
-    }
-    #region_header.not_in_region #nav {
-        padding-left: 0;
-    }
-    #splash_page #map_header_bar #map {
-        padding-top: 0; 
-    }
-    #splash_page #nav {
-        position: static;
-        right: inherit;
-        margin-top: inherit;
-        margin-right: inherit;
-    }
-
-    */
-}
-
-@media screen and (max-width: 914px) {
-    /* *************************************************
-     * We set up the mobile-y nav bar at 914px here.
-     * Because we're doing this at 914px rather than
-     * 500px, we have to duplicate a bunch of CSS here.
-     * The rules below are copy/pasted from the above
-     * 500px nav/header-related rules:
-     * *************************************************
-     * */
-    #header {
-        border-top: 0;
-        border-left: 0;
-        border-right: 0;
-    }
-    #header_bar {
-        margin-top: 0;
-        padding: 0.5em 1em 0.5em 1em;
-    }
-    #header_bar .inner {
-        display: block;
-    }
-    #map_header_bar {
-    }
-   #region_header {
-        padding: 0;
-    }
-    #common_header #common_title {
-        display: none;
-    }
-    #common_header { 
-        position: absolute;
-        margin-top: 0px;
-        display: block;
-        background: none;
-        border: 0;
-    }
-    #region_header #new_page_button {
-        display: none;
-    }
-    #region_title {
-        display: none;
-    }
-    #login_info {
-        display: none;
-    }
-    #header .site_search {
-        width: auto;
-        float: none;
-        margin: 0;
-        margin-right: 80px;
-        padding: 0;
-        /*padding-left: 65px;*/
-        padding-left: 5px;
-        padding-top: 5px;
-        height: 27px;
-        display: block;
-    }
-    .site_search form {
-        height: 100%;
-    }
-    #header .site_search input {
-        float: none;
-        box-shadow: none;
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-    }
-    #header .site_search input[type="text"], #header .site_search #id_q {
-        height: 100%;
-        width: 100%;
-        background-position: 10px 8px;
-        font-size: 13px;
-        line-height: 14px;
-    }
-    #nav {
-        color: #666!important;
-        font-weight: bold;
-        border: none;
-        margin-bottom: 0;
-        /* TODO: explore using purely CSS gradients */
-        background: #e6e6e6 url(../img/gradient.png) repeat-x bottom left;
-        border-bottom: 1px solid #bfbfbf;
-        text-decoration: none;
-        display: block;
-        padding-left: 0;
-    }
-    #nav ul {
-        margin: 0;
-        padding: 0;
-        top: 0;
-        display: none;
-        border: none;
-    }
-    #nav li, #nav li a {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        float: none;
-        font-size: 110%;
-        background-color: #455868;
-        color: #f4f4f4!important;
-	    display: table;
-	    text-align: center;
-	    text-decoration: none;
-	    line-height: 40px;
-    }
-    #nav li a {
-        border: none;
-        border-bottom: 2px solid #576979;
-        border-radius: 0;
-        -moz-border-radius: 0;
-        -webkit-border-radius: 0;
-    }
-    #nav li:last-child a {
-        border-bottom: none;
-    }
-    #nav li a:hover, #nav li a:active {
-        background-color: #8c99a4;
-        border: none;
-        border-bottom: 2px solid #576979;
-    }
-    #nav li:last-child a:hover, #nav li:last-child a:active {
-        border-bottom: none;
-    }
-    #nav #pull {  
-        display: block;  
-        height: 40px;
-    }  
-    #nav #pull .button {
-        float: none;
-    }
-    #nav #pull:after {  
-        content:"";  
-        background: url('../img/nav-icon.png') no-repeat;  
-        width: 30px;  
-        height: 30px;  
-        display: block;  
-        position: absolute;
-        margin-top: 11px;  
-        right: 5px;  
-    }
-    #nav li {
-        text-transform: capitalize;
-    }
-    #nav {
-        color: #666!important;
-        font-weight: bold;
-        border: none;
-        margin-bottom: 0;
-        /* TODO: explore using purely CSS gradients */
-        background: #e6e6e6 url(../img/gradient.png) repeat-x bottom left;
-        border-bottom: 1px solid #bfbfbf;
-        text-decoration: none;
-        display: block;
-        padding-left: 0;
-    }
-    #nav ul {
-        margin: 0;
-        padding: 0;
-        top: 0;
-        display: none;
-        border: none;
-    }
-    #nav li, #nav li a {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        float: none;
-        font-size: 110%;
-        background-color: #455868;
-        color: #f4f4f4!important;
-	    display: table;
-	    text-align: center;
-	    text-decoration: none;
-	    line-height: 40px;
-    }
-    #nav li a {
-        border: none;
-        border-bottom: 2px solid #576979;
-        border-radius: 0;
-        -moz-border-radius: 0;
-        -webkit-border-radius: 0;
-    }
-    #nav li:last-child a {
-        border-bottom: none;
-    }
-    #nav li a:hover, #nav li a:active {
-        background-color: #8c99a4;
-        border: none;
-        border-bottom: 2px solid #576979;
-    }
-    #nav li:last-child a:hover, #nav li:last-child a:active {
-        border-bottom: none;
-    }
-    #nav #pull {  
-        display: block;  
-        height: 40px;
-    }  
-    #nav #pull .button {
-        float: none;
-    }
-    #nav #pull:after {  
-        content:"";  
-        background: url('../img/nav-icon.png') no-repeat;  
-        width: 30px;  
-        height: 30px;  
-        display: block;  
-        position: absolute;
-        margin-top: 11px;  
-        right: 5px;  
-    }
-    #nav li {
-        text-transform: capitalize;
-    }
-
-    .twitter-typeahead {
-        width: 100%;
-    }
-
-
-    /* **************************************************
-     * Now we fix up the nav & bar based on #splash_page
-     * specific customizations we made earlier.
-     * **************************************************
-     */
-
-
-    /*
-     *
-    #splash_page #nav li a {
-        border-bottom: 2px solid #576979;
-        font-size: 100%;
-        text-shadow: none;
-        -moz-text-shadow: none;
-        -webkit-text-shadow: none;
-        font-weight: bold;
-    }
-    #splash_page #nav .button {
-        box-shadow: none;
-        -moz-box-shadow: none;
-        -webkit-box-shadow: none;
-    }
-    #region_header.not_in_region #nav {
-        padding-left: 0;
-    }
-    #splash_page #map_header_bar #map {
-        padding-top: 0; 
-    }
-    #splash_page #nav {
-        position: static;
-        right: inherit;
-        margin-top: inherit;
-        margin-right: inherit;
-    }
-
-
-    */
-
 }
