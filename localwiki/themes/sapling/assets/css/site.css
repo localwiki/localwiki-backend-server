@@ -514,18 +514,36 @@ textarea, input, select {
 #login_info a, #login_info a:link {
     text-decoration: none;
 }
+@media screen and (max-width: 775px){
+    #login_info .welcome {
+        font-size: 80%;
+    }
+    #login_info .actions {
+        font-size: 85%;
+    }
+}
+@media screen and (max-width: 735px){
+    #login_info .welcome .user_link span {
+        display: none; 
+    }
+    #login_info .welcome .user_link img {
+        float: none;
+        margin: 0;
+    }
+    #login_info .welcome {
+        float: left;
+        margin-top: 3px;
+        margin-right: 0.5em;
+    }
+}
 @media screen and (max-width: 700px){
     #login_info {
-        display: block;
-        float: none;
-        text-align: right;
-        width: 100%;
-        margin: 0;
-        padding: 0;
+        margin-right: 0.5em;
+        padding-right: 0;
      }
-    #login_info > div {
-        margin: 0.5em;
-    }
+     #login_info > div {
+        white-space: nowrap;
+     }
 }
 @media screen and (max-width: 500px) {
     #login_info {
@@ -579,12 +597,9 @@ textarea, input, select {
 }
 
 /* Hacky - needs fix but this..kind of worked: */
-@media screen and (max-width: 700px) {
-    #header .site_search {
-        width: 34%;
-    }
+@media screen and (max-width: 600px) {
     #header .site_search input[type="text"], #header .site_search #id_q {
-        width: 85%;
+        width: 80%;
     }
 }
 @media screen and (max-width: 500px) {
@@ -717,18 +732,26 @@ textarea, input, select {
         display: none;
     }
 }
-@media screen and (max-width: 1135px) {
+@media screen and (max-width: 1080px) {
     .common_nav .hide2 {
         display: none;
     }
 }
-@media screen and (max-width: 1070px) {
+@media screen and (max-width: 1030px) {
     .common_nav .hide3 {
         display: none;
     }
 }
-@media screen and (max-width: 1011px) {
+@media screen and (max-width: 990px) {
     .common_nav .hide4 {
+        display: none;
+    }
+}
+@media screen and (max-width: 940px) {
+    .common_nav .hide5 {
+        display: none;
+    }
+    .common_nav {
         display: none;
     }
 }
