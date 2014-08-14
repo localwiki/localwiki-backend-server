@@ -54,7 +54,7 @@ def humanize_int(n):
 
 
 def pretty_url(url):
-    if urlparse(url).path == '/':
+    if urllib_parse.urlparse(url).path == '/':
         # Strip trailing slash
         url = url[:-1]
     if url.startswith('http://'):
@@ -87,7 +87,7 @@ def get_user_page(user, request):
             return Page(name=pagename, region=region)
         # Let's try and guess by the previous URL. Ugh!
         if referer:
-            urlparts = urlparse(referer)
+            urlparts = urllib_parse.urlparse(referer)
             # Is this host us?
             for host in settings.ALLOWED_HOSTS:
                 if urlparts.netloc.endswith(host):
