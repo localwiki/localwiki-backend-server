@@ -13,6 +13,15 @@ from django.utils.importlib import import_module
 from django.utils import translation
 from django.utils.cache import learn_cache_key, get_max_age
 
+class XForwardedForMiddleware():
+    """
+    For our Varnish configuration.
+    """
+    def process_request(self, request):
+        if 'HTTP_X_FORWARDED_FOR' in request.META:
+            request.META['REMOTE_ADDR'] = request.META['HTTP_X_FORWARDED_FOR']
+        return None
+
 
 class AutoTrackUserInfoMiddleware(object):
     """
