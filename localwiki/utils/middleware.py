@@ -19,7 +19,13 @@ class XForwardedForMiddleware():
     """
     def process_request(self, request):
         if 'HTTP_X_FORWARDED_FOR' in request.META:
-            request.META['REMOTE_ADDR'] = request.META['HTTP_X_FORWARDED_FOR']
+            parts = request.META['HTTP_X_FORWARDED_FOR'].split(',')
+            if len(parts) > 1:
+                # Get the second-to-last, in our case. Skip varnish (the last value)
+                ip = parts[-2]
+            else:
+                ip = parts[0]
+            request.META['REMOTE_ADDR'] = ip
         return None
 
 
