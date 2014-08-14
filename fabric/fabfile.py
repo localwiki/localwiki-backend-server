@@ -373,6 +373,8 @@ def update_apache_settings():
         context=env, use_jinja=True, use_sudo=True)
     upload_template('config/apache/apache2.conf', '/etc/apache2/apache2.conf',
         context=env, use_jinja=True, use_sudo=True)
+    upload_template('config/apache/ports.conf', '/etc/apache2/ports.conf',
+        context=env, use_jinja=True, use_sudo=True)
     sudo('service apache2 restart')
 
 def init_localwiki_install():
@@ -486,6 +488,10 @@ def setup_apache():
         # Install apache config
         upload_template('config/apache/localwiki', '/etc/apache2/sites-available/localwiki',
             context=env, use_jinja=True, use_sudo=True)
+        upload_template('config/apache/apache2.conf', '/etc/apache2/apache2.conf',
+            context=env, use_jinja=True, use_sudo=True)
+        upload_template('config/apache/ports.conf', '/etc/apache2/ports.conf',
+            context=env, use_jinja=True, use_sudo=True)
         sudo('a2ensite localwiki')
 
         # Restart apache
@@ -509,7 +515,6 @@ def setup_mapserver():
     Enable map-a.localwiki.org, map-b.localwiki.org, map-c.localwiki.org as
     cached proxies to cloudmade tiles.
     """
-    setup_varnish()
     upload_template('config/apache/map', '/etc/apache2/sites-available/map',
             context=env, use_jinja=True, use_sudo=True)
     sudo('a2ensite map')
@@ -652,6 +657,8 @@ def provision():
     setup_db_based_cache()
     setup_permissions() 
     setup_celery()
+    setup_varnish()
+
     setup_apache()
 
     setup_mapserver()

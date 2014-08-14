@@ -3,7 +3,7 @@
 #     $ sudo a2ensite example.com
 #     $ sudo /etc/init.d/apache2 reload
 
-<VirtualHost *:80>
+<VirtualHost *:8084>
 
     ServerName {{ apache_settings.server_name }}
     ServerAlias {{ apache_settings.server_name }} www.{{ apache_settings.server_name }}
@@ -14,6 +14,11 @@
     RewriteEngine on
     RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
     RewriteRule ^(.*)$ http://%1$1 [R=301,L]
+
+    # XXX TEMPORARY
+    # TODO remove
+    # mis-named regions
+    RewriteRule ^/stl/(.*)$ http://localwiki.net/st-louis/$1 [R=301]
 
     # The media directory, which contains user-uploaded content, should be set
     # to force downloads. This is *extremely* important for security reasons.
@@ -41,6 +46,62 @@
     WSGIPassAuthorization On
 
     WSGIScriptAlias / {{ localwiki_root }}/localwiki.wsgi
+
+    CustomLog /var/log/apache2/access.log combined
+
+</VirtualHost>
+
+<VirtualHost *:80>
+
+    ServerName {{ apache_settings.server_name }}
+    ServerAlias {{ apache_settings.server_name }} www.{{ apache_settings.server_name }}
+    ServerAlias *.{{ apache_settings.server_name }}
+    ServerAdmin {{ apache_settings.server_admin }}
+
+    # Redirect www -> no-www
+    RewriteEngine on
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ http://%1$1 [R=301,L]
+
+    # XXX TEMPORARY
+    # TODO remove
+    # mis-named regions
+    RewriteRule ^/stl/(.*)$ http://localwiki.net/st-louis/$1 [R=301]
+
+    # The media directory, which contains user-uploaded content, should be set
+    # to force downloads. This is *extremely* important for security reasons.
+    # Note: The /media/ directory must be writable by the www-data user
+    Alias /media/ {{ data_root }}/media/
+    <Location /media/>
+        Header set Content-Disposition attachment
+    </Location>
+
+    Alias /static/ {{ data_root }}/static/
+    Alias /robots.txt {{ data_root }}/static/robots.txt
+    Alias /sitemap.xml {{ data_root }}/static/sitemap.xml
+    Alias /favicon.ico {{ data_root }}/static/favicon.ico
+
+    <Directory {{ data_root }}>
+        Options -Indexes FollowSymLinks MultiViews
+        AllowOverride None
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+    <Proxy *>
+        Order deny,allow
+        Allow from all
+    </Proxy>
+    ProxyRequests off
+
+    # Route to varnish
+    <Location "/">
+        SetEnv proxy-nokeepalive 1
+        SetEnv force-proxy-request-1.0
+
+        ProxyPass http://127.0.0.1:6081/
+        ProxyPassReverse http://127.0.0.1:6081/
+    </Location>
 
     CustomLog /var/log/apache2/access.log combined
 

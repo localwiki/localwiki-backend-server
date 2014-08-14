@@ -7,7 +7,7 @@
  backend cloudmade {
      # cloudmade tiles
      #.host = "c.tile.cloudmade.com";
-     .host = "54.230.136.120";
+     .host = "54.230.151.226";
      .port = "80";
 
      .connect_timeout = 900s;
@@ -33,15 +33,15 @@
  #    .between_bytes_timeout = 600s;
  #}
 
-# backend localwiki { 
-#     .host = "127.0.0.1";
-#     .port = "8084";
-#
-#     .connect_timeout = 600s;
-#     .first_byte_timeout = 600s;
-#     .between_bytes_timeout = 600s;
-# }
-# 
+ backend localwiki { 
+     .host = "127.0.0.1";
+     .port = "8084";
+
+     .connect_timeout = 600s;
+     .first_byte_timeout = 600s;
+     .between_bytes_timeout = 600s;
+ }
+ 
 # Below is a commented-out copy of the default VCL logic.  If you
 # redefine any of these subroutines, the built-in logic will be
 # appended to your code.
@@ -78,14 +78,14 @@ sub vcl_recv {
     #   set req.http.host = "antartica.localwiki.org";
     #   set req.backend = antarctica;
     #}
-    #else if (req.http.x-forwarded-host == "www.localwiki.org") {
-    #   set req.http.host = "localwiki.org";
-    #   set req.backend = localwiki;
-    #}
-    #else if (req.http.x-forwarded-host == "localwiki.org") {
-    #   set req.http.host = "localwiki.org";
-    #   set req.backend = localwiki;
-    #}
+    else if (req.http.x-forwarded-host == "www.localwiki.net") {
+       set req.http.host = "localwiki.net";
+       set req.backend = localwiki;
+    }
+    else if (req.http.x-forwarded-host == "localwiki.net") {
+       set req.http.host = "localwiki.net";
+       set req.backend = localwiki;
+    }
     else {
         set req.backend = cloudmade;
         set req.http.host = "a.tile.cloudmade.com";
@@ -125,16 +125,16 @@ sub vcl_fetch {
     }
 
      /* Remove Expires from backend, it's not long enough */
-     unset beresp.http.expires;
+     /* unset beresp.http.expires; */
 
      /* Set the clients TTL on this object */
-     set beresp.http.cache-control = "max-age=900";
+     /* set beresp.http.cache-control = "max-age=900"; */
 
      /* Set how long Varnish will keep it */
-     set beresp.ttl = 20w;
+     /* set beresp.ttl = 20w; */
 
      /* marker for vcl_deliver to reset Age: */
-     set beresp.http.magicmarker = "1";
+     /* set beresp.http.magicmarker = "1"; */
 
      return (deliver);
 
