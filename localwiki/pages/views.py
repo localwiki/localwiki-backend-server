@@ -153,7 +153,7 @@ class PageUpdateView(PermissionRequiredMixin, CreateObjectMixin,
 
         if self.request.user.is_authenticated() and not map_create_link:
             if is_user_page(self.object):
-                obj = User.objects.get(username__iexact=self.object.name[6:])
+                obj = User.objects.get(username__iexact=self.kwargs['original_slug'][6:])
                 following = Follow.objects.filter(user=self.request.user, target_user=obj).exists()
             else:
                 following = Follow.objects.filter(user=self.request.user, target_page=self.object).exists()
