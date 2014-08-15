@@ -278,7 +278,11 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
                         }
 
                         var csrf_cookie = getCookie('csrftoken');
-                        if (!csrf_cookie) return;
+                        if (!csrf_cookie) {
+                            $.get('/_api/_get_csrf_cookie', function() {
+                                csrf_cookie = getCookie('csrftoken');
+                            });
+                        }
 
                         var uploadForm = this.getInputElement().$.form;
                         var csrf = uploadForm.csrfmiddlewaretoken;

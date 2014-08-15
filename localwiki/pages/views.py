@@ -27,7 +27,7 @@ from versionutils import diff
 from versionutils.versioning.views import UpdateView
 from versionutils.versioning.views import VersionsList
 from localwiki.utils.views import (Custom404Mixin, CreateObjectMixin,
-    PermissionRequiredMixin, DeleteView, RevertView)
+    PermissionRequiredMixin, DeleteView, RevertView, NeverCacheMixin)
 from localwiki.utils.urlresolvers import reverse
 from regions.models import Region
 from regions.views import RegionMixin, region_404_response
@@ -259,7 +259,7 @@ class PageFileListView(RegionMixin, ListView):
         return context
 
 
-class PageFilebrowserView(PageFileListView):
+class PageFilebrowserView(NeverCacheMixin, PageFileListView):
     template_name = 'pages/cke_filebrowser.html'
 
     def get_context_data(self, **kwargs):

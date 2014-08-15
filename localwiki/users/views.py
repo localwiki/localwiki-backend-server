@@ -89,7 +89,7 @@ def get_user_page(user, request):
             return Page(name=pagename, region=region)
         # Let's try and guess by the previous URL. Ugh!
         if referer:
-            urlparts = urlparse(referer)
+            urlparts = urllib_parse.urlparse(referer)
             # Is this host us?
             for host in settings.ALLOWED_HOSTS:
                 if urlparts.netloc.endswith(host):

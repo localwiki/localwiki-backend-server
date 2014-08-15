@@ -1,6 +1,8 @@
 from django.utils.decorators import classonlymethod
 from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.utils import simplejson as json
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import never_cache
 from django.views.generic import View, RedirectView, TemplateView
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
@@ -14,6 +16,12 @@ from . import take_n_from
 
 class ForbiddenException:
     pass
+
+
+class NeverCacheMixin(object):
+    @method_decorator(never_cache)
+    def dispatch(self, *args, **kwargs):
+        return super(NeverCacheMixin, self).dispatch(*args, **kwargs)
 
 
 class Custom404Mixin(object):
@@ -163,6 +171,10 @@ class AuthenticationRequired(object):
         msg = self.get_forbidden_message()
         html = render_to_string(self.forbidden_template_name, {'message': msg}, RequestContext(request))
         return HttpResponseForbidden(html)
+
+
+class GetCSRFCookieView(TemplateView):
+    template_name = 'utils/get_csrf_cookie.html'
 
 
 class MultipleTypesPaginatedView(TemplateView):

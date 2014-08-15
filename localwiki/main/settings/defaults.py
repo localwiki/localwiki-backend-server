@@ -213,8 +213,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 MIDDLEWARE_CLASSES = (
     'django_hosts.middleware.HostsMiddlewareRequest',
-    'utils.middleware.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'utils.middleware.XForwardedForMiddleware',
     'utils.middleware.SessionMiddleware',
     'django_xsession.middleware.XSessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -230,8 +230,6 @@ MIDDLEWARE_CLASSES = (
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
     'block_ip.middleware.BlockIPMiddleware',
-    'utils.middleware.FetchFromCacheMiddleware',
-    'utils.middleware.TrackPOSTMiddleware',
     'django_hosts.middleware.HostsMiddlewareResponse',
 )
 

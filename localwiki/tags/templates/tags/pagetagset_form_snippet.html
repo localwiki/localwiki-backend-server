@@ -1,8 +1,12 @@
-
 {% load i18n %}
 
-<form action="{% url 'pages:tags' slug=form.instance.page.pretty_slug region=form.instance.region.slug %}" method="POST">
-    {% csrf_token %}
+{% comment %}
+For caching purposes, we don't set crsf_token in this form. We instead get the csrf cookie via JS.
+Because this template is embedded inside the page_detail.html view, which is our most common view,
+we want to avoid sending the csrftoken cookie in order to allow maximal non-authenticated caching.
+{% endcomment %}
+
+<form id="pagetagset_form" action="{% url 'pages:tags' slug=form.instance.page.pretty_slug region=form.instance.region.slug %}" method="POST">
     {{ form }}
     <input type="hidden" name="next" value="{{ request.path }}"/>
     <br/>

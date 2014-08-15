@@ -213,6 +213,22 @@ $(document).ready(function() {
     
 });
 
+var setup_lazy_csrf = function(selector) {
+  $(selector).submit(function() {
+    var form = $(this)[0];
+    set_django_tokens(form, function() {
+        $(selector)[0].submit();
+    });
+    return false;
+  });
+}
+
+/* Lazy CSRF for page tag edit */
+$(document).ready(function () {
+    setup_lazy_csrf('#pagetagset_form');
+    setup_lazy_csrf('#file_replace_upload');
+});
+
 /* Add page button */
 $(document).ready(function() {
     $('#new_page_button').click(function() {
@@ -276,25 +292,37 @@ function getCookie(key) {
     return (result = new RegExp('(?:^|; )' + encodeURIComponent(key) + '=([^;]*)').exec(document.cookie)) ? decodeURIComponent(result[1]) : null;
 }
 
-function set_django_tokens(form) {
+function set_django_tokens(form, cb) {
     // Patch the form -- add the CSRF token and honeypot fields
 
+    if (!cb) {
+        var cb = function() {};
+    }
+    
+    var _setup_tokens = function(csrf_cookie) {
+        csrf = form.ownerDocument.createElement('input');
+        csrf.setAttribute('name', 'csrfmiddlewaretoken');
+        csrf.setAttribute('type', 'hidden');
+        csrf.setAttribute('value', csrf_cookie);
+        form.appendChild(csrf);
+        
+        /* TODO: make this automatic, this is hardcoded to the django-honeypot settings */
+        honeypot = form.ownerDocument.createElement('input');
+        honeypot.setAttribute('name', 'main_content');
+        honeypot.setAttribute('type', 'hidden');
+        form.appendChild(honeypot);
+        honeypot_js = form.ownerDocument.createElement('input');
+        honeypot_js.setAttribute('name', 'main_content_js');
+        honeypot_js.setAttribute('type', 'hidden');
+        form.appendChild(honeypot_js);
+    }
+
     var csrf_cookie = getCookie('csrftoken');
-    if (!csrf_cookie) return;
-    
-    csrf = form.ownerDocument.createElement('input');
-    csrf.setAttribute('name', 'csrfmiddlewaretoken');
-    csrf.setAttribute('type', 'hidden');
-    csrf.setAttribute('value', csrf_cookie);
-    form.appendChild(csrf);
-    
-    /* TODO: make this automatic, this is hardcoded to the django-honeypot settings */
-    honeypot = form.ownerDocument.createElement('input');
-    honeypot.setAttribute('name', 'main_content');
-    honeypot.setAttribute('type', 'hidden');
-    form.appendChild(honeypot);
-    honeypot_js = form.ownerDocument.createElement('input');
-    honeypot_js.setAttribute('name', 'main_content_js');
-    honeypot_js.setAttribute('type', 'hidden');
-    form.appendChild(honeypot_js);
+    if (!csrf_cookie) {
+        $.get('/_api/_get_csrf_cookie', function() {
+            var csrf_cookie = getCookie('csrftoken');
+            _setup_tokens(csrf_cookie);
+            cb();
+        });
+    }
 }
