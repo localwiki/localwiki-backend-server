@@ -3,35 +3,6 @@
 # 
 # Default backend definition.  Set this to point to your content
 # server.
-# 
- backend cloudmade {
-     # cloudmade tiles
-     #.host = "c.tile.cloudmade.com";
-     .host = "54.230.151.226";
-     .port = "80";
-
-     .connect_timeout = 900s;
-     .first_byte_timeout = 900s;
-     .between_bytes_timeout = 900s;
- }
-
- backend geoserver {
-     .host = "i-am-cc.org";
-     .port = "8080";
-
-     .connect_timeout = 600s;
-     .first_byte_timeout = 600s;
-     .between_bytes_timeout = 600s;
- }
-
- #backend antarctica { 
- #    .host = "127.0.0.1";
- #    .port = "8083";
-
- #    .connect_timeout = 600s;
- #    .first_byte_timeout = 600s;
- #    .between_bytes_timeout = 600s;
- #}
 
  backend localwiki { 
      .host = "127.0.0.1";
@@ -42,14 +13,9 @@
      .between_bytes_timeout = 600s;
  }
  
-# Below is a commented-out copy of the default VCL logic.  If you
-# redefine any of these subroutines, the built-in logic will be
-# appended to your code.
-# 
-
 sub vcl_recv {
     # unless sessionid/csrftoken is in the request, don't pass ANY cookies (referral_source, utm, etc)
-    if (req.request == "GET" && (req.url ~ "^/static" || (req.http.cookie !~ "sessionid" && req.http.cookie !~ "csrftoken"))) {
+    if (req.request == "GET" && (req.url ~ "^/static" || req.url ~ "^/media" || (req.http.cookie !~ "sessionid" && req.http.cookie !~ "csrftoken"))) {
         remove req.http.Cookie;
     }
 
@@ -69,26 +35,12 @@ sub vcl_recv {
     # Allow the backend to serve up stale content if it is responding slowly.
     set req.grace = 6h;
 
-    # Hardcode Host header to point to cloudmade tile server.
-    if (req.http.x-forwarded-host == "map-wms.localwiki.org") {
-       set req.http.host = "i-am-cc.org";
-       set req.backend = geoserver;
-    }
-    #else if (req.http.x-forwarded-host ~ "antarctica.localwiki.org") {
-    #   set req.http.host = "antartica.localwiki.org";
-    #   set req.backend = antarctica;
-    #}
-    else if (req.http.x-forwarded-host == "www.localwiki.net") {
-       set req.http.host = "localwiki.net";
+    if (req.http.x-forwarded-host == "www.{{ public_hostname }}" || req.http.x-forwarded-host == "{{ public_hostname }}") {
+       set req.http.host = "{{ public_hostname }}";
        set req.backend = localwiki;
-    }
-    else if (req.http.x-forwarded-host == "localwiki.net") {
-       set req.http.host = "localwiki.net";
+    } else {
+       set req.http.host = req.http.x-forwarded-host;
        set req.backend = localwiki;
-    }
-    else {
-        set req.backend = cloudmade;
-        set req.http.host = "a.tile.cloudmade.com";
     }
 
     if (req.http.x-forwarded-for) {
@@ -111,15 +63,12 @@ sub vcl_recv {
         /* We only deal with GET and HEAD by default */
         return (pass);
     }
-    if (req.url ~ "^/server-status-04f30idj30j2d35dsm") {
-        return (pass);
-    }
     return (lookup);
 }
 
 sub vcl_fetch {
     # static files always cached
-    if (req.url ~ "^/static") {
+    if (req.url ~ "^/static" || req.url ~ "^/media") {
        unset beresp.http.set-cookie;
        return (deliver);
     }

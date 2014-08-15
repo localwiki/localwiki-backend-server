@@ -164,6 +164,8 @@ class AuthenticationRequired(object):
         return HttpResponseForbidden(html)
 
 
+class GetCSRFCookieView(TemplateView):
+    template_name = 'utils/get_csrf_cookie.html'
 
 
 class MultipleTypesPaginatedView(TemplateView):

@@ -189,10 +189,6 @@ env.localwiki_root = '/srv/localwiki'
 env.src_root = os.path.join(env.localwiki_root, 'src')
 env.virtualenv = os.path.join(env.localwiki_root, 'env')
 env.data_root = os.path.join(env.virtualenv, 'share', 'localwiki')
-env.apache_settings = {
-    'server_name': 'localwiki.net',
-    'server_admin': 'contact@localwiki.org',
-}
 env.branch = 'hub'
 
 def production():
@@ -370,11 +366,11 @@ def update_django_settings():
 
 def update_apache_settings():
     upload_template('config/apache/localwiki', '/etc/apache2/sites-available/localwiki',
-        context=env, use_jinja=True, use_sudo=True)
+        context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/apache2.conf', '/etc/apache2/apache2.conf',
-        context=env, use_jinja=True, use_sudo=True)
+        context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/ports.conf', '/etc/apache2/ports.conf',
-        context=env, use_jinja=True, use_sudo=True)
+        context=get_context(env), use_jinja=True, use_sudo=True)
     sudo('service apache2 restart')
 
 def init_localwiki_install():
@@ -487,11 +483,11 @@ def setup_apache():
 
         # Install apache config
         upload_template('config/apache/localwiki', '/etc/apache2/sites-available/localwiki',
-            context=env, use_jinja=True, use_sudo=True)
+            context=get_context(env), use_jinja=True, use_sudo=True)
         upload_template('config/apache/apache2.conf', '/etc/apache2/apache2.conf',
-            context=env, use_jinja=True, use_sudo=True)
+            context=get_context(env), use_jinja=True, use_sudo=True)
         upload_template('config/apache/ports.conf', '/etc/apache2/ports.conf',
-            context=env, use_jinja=True, use_sudo=True)
+            context=get_context(env), use_jinja=True, use_sudo=True)
         sudo('a2ensite localwiki')
 
         # Restart apache
@@ -515,13 +511,20 @@ def setup_mapserver():
     Enable map-a.localwiki.org, map-b.localwiki.org, map-c.localwiki.org as
     cached proxies to cloudmade tiles.
     """
+    # NOTE: Currently disabled, as we now use MapBox for our tiles. MapBox
+    # forbids, in their ToS, caching their tiles, so we don't cache here.
+    # However, we may ask them about allowing us an exemption here, so this
+    # may be re-enabled soon:
+    return
+
     upload_template('config/apache/map', '/etc/apache2/sites-available/map',
-            context=env, use_jinja=True, use_sudo=True)
+            context=get_context(env), use_jinja=True, use_sudo=True)
     sudo('a2ensite map')
     sudo('service apache2 restart')
 
-def setup_varnish():
-    put('config/varnish/default.vcl', '/etc/varnish/default.vcl', use_sudo=True)
+def update_varnish_settings():
+    upload_template('config/varnish/default.vcl', '/etc/varnish/default.vcl',
+            context=get_context(env), use_jinja=True, use_sudo=True)
     sudo('service varnish restart')
 
 def add_ssh_keys():
@@ -657,11 +660,11 @@ def provision():
     setup_db_based_cache()
     setup_permissions() 
     setup_celery()
-    setup_varnish()
+    update_varnish_settings()
 
     setup_apache()
 
-    setup_mapserver()
+    #setup_mapserver()
     save_config_secrets()
 
 def run_tests():
@@ -708,6 +711,13 @@ def update(local=False):
             #sudo("python setup.py install")
             sudo("localwiki-manage setup_all", user="www-data")
 
+def note_start_deploy():
+    with cd(env.localwiki_root):
+        sudo("touch .in_deploy")
+
+def note_end_deploy():
+    with cd(env.localwiki_root):
+        sudo("rm .in_deploy")
 
 def deploy(local=False, update_configs=False):
     """
@@ -725,15 +735,23 @@ def deploy(local=False, update_configs=False):
     if env.host_type == 'vagrant':
         # Annoying vagrant virtualbox permission issues
         sudo('chmod -R 770 %s' % env.virtualenv)
-    update(local=local)
-    setup_jetty()
-    if update_configs:
-        update_apache_settings()
-        setup_memcached()
-        # In case celery apps have changed:
-        sudo('service celery restart')
-    touch_wsgi()
-    sudo("service memcached restart", pty=False)
+    note_start_deploy()
+    try:
+        update(local=local)
+        setup_jetty()
+        if update_configs:
+            update_apache_settings()
+            update_varnish_settings()
+            setup_memcached()
+            # In case celery apps have changed:
+            sudo('service celery restart')
+        touch_wsgi()
+        sudo("service memcached restart", pty=False)
+    except Exception as e:
+        note_end_deploy()
+        raise e
+    else:
+        note_end_deploy()
 
 def fix_locale():
     sudo('update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8')

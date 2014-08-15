@@ -12,7 +12,7 @@ if SESSION_COOKIE_DOMAIN.endswith('.localhost'):
 
 MAIN_HOSTNAME = '{{ public_hostname }}'
 CUSTOM_HOSTNAMES = [{% for hostname in custom_domains %}'{{ hostname }}', {% endfor %}]
-XSESSION_DOMAINS = [{% for hostname in xsession_domains %}'{{ hostname }}', {% endfor %}'{{ public_hostname }}']
+XSESSION_DOMAINS = [{% for hostname in custom_domains %}'{{ hostname }}', {% endfor %}'{{ public_hostname }}']
 
 DATABASES = {
     'default': {
@@ -74,11 +74,6 @@ else:
     )
 
 POSTGIS_VERSION = (2, 0, 3)
-
-# cache settings
-CACHE_MIDDLEWARE_SECONDS = 60
-CACHE_MIDDLEWARE_KEY_PREFIX = ''
-CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
 CACHES = {
     'default': {

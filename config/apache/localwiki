@@ -5,10 +5,14 @@
 
 <VirtualHost *:8084>
 
-    ServerName {{ apache_settings.server_name }}
-    ServerAlias {{ apache_settings.server_name }} www.{{ apache_settings.server_name }}
-    ServerAlias *.{{ apache_settings.server_name }}
-    ServerAdmin {{ apache_settings.server_admin }}
+    ServerName {{ public_hostname }}
+    ServerAlias www.{{ public_hostname }}
+    ServerAlias *.{{ public_hostname }}
+    {% for domain in custom_domains %}
+    ServerAlias {{ domain }}
+    {% endfor %}
+
+    ServerAdmin {{ server_admin_email }}
 
     # Redirect www -> no-www
     RewriteEngine on
@@ -53,10 +57,14 @@
 
 <VirtualHost *:80>
 
-    ServerName {{ apache_settings.server_name }}
-    ServerAlias {{ apache_settings.server_name }} www.{{ apache_settings.server_name }}
-    ServerAlias *.{{ apache_settings.server_name }}
-    ServerAdmin {{ apache_settings.server_admin }}
+    ServerName {{ public_hostname }}
+    ServerAlias www.{{ public_hostname }}
+    ServerAlias *.{{ public_hostname }}
+    {% for domain in custom_domains %}
+        ServerAlias {{ domain }}
+    {% endfor %}
+
+    ServerAdmin {{ server_admin_email }}
 
     # Redirect www -> no-www
     RewriteEngine on
