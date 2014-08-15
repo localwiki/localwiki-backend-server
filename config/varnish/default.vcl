@@ -15,7 +15,7 @@
  
 sub vcl_recv {
     # unless sessionid/csrftoken is in the request, don't pass ANY cookies (referral_source, utm, etc)
-    if (req.request == "GET" && (req.url ~ "^/static" || req.url ~ "^/media" || (req.http.cookie !~ "sessionid" && req.http.cookie !~ "csrftoken"))) {
+    if (req.request == "GET" && (req.url ~ "^/static" || (req.http.cookie !~ "sessionid" && req.http.cookie !~ "csrftoken"))) {
         remove req.http.Cookie;
     }
 
@@ -84,8 +84,6 @@ sub vcl_fetch {
 
      /* marker for vcl_deliver to reset Age: */
      /* set beresp.http.magicmarker = "1"; */
-
-     return (deliver);
 
     # pass through for anything with a session/csrftoken set
     if (beresp.http.set-cookie ~ "sessionid" || beresp.http.set-cookie ~ "csrftoken") {
