@@ -183,15 +183,20 @@ $(document).ready(function() {
     
 });
 
-/* Lazy CSRF for page tag edit */
-$(document).ready(function () {
-  $('#pagetagset_form').submit(function() {
+var setup_lazy_csrf = function(selector) {
+  $(selector).submit(function() {
     var form = $(this)[0];
     set_django_tokens(form, function() {
-        $('#pagetagset_form')[0].submit();
+        $(selector)[0].submit();
     });
     return false;
   });
+}
+
+/* Lazy CSRF for page tag edit */
+$(document).ready(function () {
+    setup_lazy_csrf('#pagetagset_form');
+    setup_lazy_csrf('#file_replace_upload');
 });
 
 /* Add page button */
