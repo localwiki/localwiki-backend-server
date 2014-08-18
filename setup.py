@@ -169,6 +169,7 @@ install_requires = [
     'django-xsession==0.1-custom1',
     'django-hosts==0.6-custom4',
     'django-phased==0.6.1-custom1',
+    'django-fancy-cache==0.6.0',
 ]
 if int(os.getenv('DISABLE_INSTALL_REQUIRES', '0')):
     install_requires = None

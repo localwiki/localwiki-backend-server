@@ -204,7 +204,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 MIDDLEWARE_CLASSES = (
     'johnny.middleware.LocalStoreClearMiddleware',
     'johnny.middleware.QueryCacheMiddleware',
-    'phased.middleware.PhasedRenderMiddleware',
     'django_hosts.middleware.HostsMiddlewareRequest',
     'django.middleware.common.CommonMiddleware',
     'utils.middleware.XForwardedForMiddleware',
@@ -223,6 +222,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.transaction.TransactionMiddleware',
     'block_ip.middleware.BlockIPMiddleware',
     'django_hosts.middleware.HostsMiddlewareResponse',
+    'phased.middleware.PhasedRenderMiddleware',
 )
 
 XSESSION_FILENAME = '_utils/xsession_loader.js'

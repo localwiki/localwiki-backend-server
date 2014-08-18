@@ -1,18 +1,32 @@
+import time
+
 from django.utils.decorators import classonlymethod
 from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.utils import simplejson as json
 from django.utils.decorators import method_decorator
 from django.views.decorators.vary import vary_on_headers as dj_vary_on_headers
-from django.views.decorators.cache import never_cache, cache_page
+from django.views.decorators.cache import never_cache
 from django.views.generic import View, RedirectView, TemplateView
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
+from django.core.cache import cache
+from django.http import HttpRequest
+from django.utils.cache import get_cache_key
 from django.template.loader import render_to_string
 from django.template.context import RequestContext
+
+from fancy_cache import cache_page
 
 from versionutils.versioning.views import RevertView, DeleteView
 
 from . import take_n_from
+
+# 29 days, effectively infinite in cache years
+# XXX NOTE: For some reason, the memcached client we're using
+# gives a client error when sending timestamp-style expiration
+# dates -- e.g. > 30 days timestamps. So, for now we must make
+# sure and always use <= 30 day timeouts, which should be fine.
+DEFAULT_MEMCACHED_TIMEOUT = 60 * 60 * 24 * 29
 
 
 class ForbiddenException:
@@ -26,20 +40,33 @@ class NeverCacheMixin(object):
 
 
 class CacheMixin(object):
-    cache_timeout = None
+    # By default, set it to a huge timeout due to Django (and now, django-fancy-cache) confusion around timeout parameter here.
+    # TODO: Set this to either None or 0 once we're on Django 1.7 AND once django-fancy-cache has fixed it's 0/None timeout
+    #       issue.
+    cache_timeout = DEFAULT_MEMCACHED_TIMEOUT  
     # For now, we default to Vary on the Host header.
     # This is because Django 1.5 doesn't (yet) automatically
     # generate cache keys based on the full URI - only the path.
     #
     # TODO: In Django 1.7 this can be removed, as the full URI
     #       is used in the cache key.
-    vary_on_headers = ['host']
+    vary_on_headers = ['Host']
+    get_cache_prefix = None
      
     def dispatch(self, *args, **kwargs):
-        f = cache_page(self.cache_timeout)(super(CacheMixin, self).dispatch)
+        # Have to create this closure b/c args aren't being passed
+        # correctly to the passed cache prefix function for some
+        # reason.
+        def _get_cache_prefix(request, *ignore_args, **ignore_kwargs):
+            if not self.get_cache_prefix:
+                return None
+            return self.get_cache_prefix(*args, **kwargs)
+
+        f = cache_page(self.cache_timeout, key_prefix=_get_cache_prefix)(super(CacheMixin, self).dispatch)
         if self.vary_on_headers:
             f = dj_vary_on_headers(*self.vary_on_headers)(f)
         return f(*args, **kwargs)
+
 
 class Custom404Mixin(object):
     @classonlymethod

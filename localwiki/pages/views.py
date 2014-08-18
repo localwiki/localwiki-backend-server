@@ -94,6 +94,17 @@ class PageDetailView(CacheMixin, Custom404Mixin, AddContributorsMixin, RegionMix
                 options=olwidget_options)
         return context
 
+    def get_cache_prefix(self, request, *args, **kwargs):
+        # TODO: Cache this lookup if this ends up being slow.
+        #       (and expire it on post_save/post_delete)
+        try:
+            dt = self.get_object().versions.most_recent().version_info.date
+            t = time.mktime(dt.timetuple()) + dt.microsecond * 1e-6
+            pdb.set_trace()
+            return str(t)
+        except Http404:
+            return 'not-found'
+
 
 class PageVersionDetailView(PageDetailView):
     template_name = 'pages/page_version_detail.html'

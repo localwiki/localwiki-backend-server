@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load cache %}
 {% load hosts %}
+{% load phased_tags %}
 {% load django_xsession %}
 {% load canonical_urls %}
 
@@ -139,6 +140,7 @@
         <div id="main_header">
         {% block main_header %}
           {% block messages %}
+            {% phased %}
             {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
@@ -146,7 +148,9 @@
                 {% endfor %}
             </ul>
             {% endif %}
+            {% endphased %}
           {% endblock %}
+
           {% block dialog %}{% endblock %}
         {% endblock %}
         </div>
