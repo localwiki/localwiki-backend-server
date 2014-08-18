@@ -100,7 +100,6 @@ class PageDetailView(CacheMixin, Custom404Mixin, AddContributorsMixin, RegionMix
         try:
             dt = self.get_object().versions.most_recent().version_info.date
             t = time.mktime(dt.timetuple()) + dt.microsecond * 1e-6
-            pdb.set_trace()
             return str(t)
         except Http404:
             return 'not-found'
