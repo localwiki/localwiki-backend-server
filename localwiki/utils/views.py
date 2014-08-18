@@ -2,8 +2,8 @@ from django.utils.decorators import classonlymethod
 from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.utils import simplejson as json
 from django.utils.decorators import method_decorator
+from django.views.decorators.vary import vary_on_headers as dj_vary_on_headers
 from django.views.decorators.cache import never_cache, cache_page
-from django.views.decorators.cache import cache_page
 from django.views.generic import View, RedirectView, TemplateView
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
@@ -27,13 +27,19 @@ class NeverCacheMixin(object):
 
 class CacheMixin(object):
     cache_timeout = None
-     
-    def get_cache_timeout(self):
-        return self.cache_timeout
+    # For now, we default to Vary on the Host header.
+    # This is because Django 1.5 doesn't (yet) automatically
+    # generate cache keys based on the full URI - only the path.
+    #
+    # TODO: In Django 1.7 this can be removed, as the full URI
+    #       is used in the cache key.
+    vary_on_headers = ['host']
      
     def dispatch(self, *args, **kwargs):
-        return cache_page(self.get_cache_timeout())(super(CacheMixin, self).dispatch)(*args, **kwargs)
-
+        f = cache_page(self.cache_timeout)(super(CacheMixin, self).dispatch)
+        if self.vary_on_headers:
+            f = dj_vary_on_headers(*self.vary_on_headers)(f)
+        return f(*args, **kwargs)
 
 class Custom404Mixin(object):
     @classonlymethod
