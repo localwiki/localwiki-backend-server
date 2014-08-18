@@ -168,6 +168,7 @@ install_requires = [
     'raven==4.2.1',
     'django-xsession==0.1-custom1',
     'django-hosts==0.6-custom4',
+    'johnny-cache==1.4',
     'django-phased==0.6.1-custom1',
     'django-fancy-cache==0.6.0',
 ]
