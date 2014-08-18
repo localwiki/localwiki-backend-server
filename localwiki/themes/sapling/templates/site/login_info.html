@@ -1,7 +1,11 @@
+{% load phased_tags %}
+
+<div>
+{% phased with region %}
+
 {% load i18n %}
 {% load user_tags %}
 
-<div>
 {% if request.user.is_authenticated %}
     <span class="welcome">
         {% trans "Welcome" %}, {% user_link request.user region=region %}
@@ -15,5 +19,5 @@
         <a href="{% url 'auth_login' %}?next=//{{ request.get_host }}{{ request.path }}" rel="nofollow">{% trans "log in" %}</a> {% trans "or" %} <a href="{% url 'registration_register' %}?next={{ request.get_host }}{{ request.path }}" rel="nofollow">{% trans "create account" %}</a>
     </span>
 {% endif %}
-
+{% endphased %}
 </div>

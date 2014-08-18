@@ -183,16 +183,6 @@ HONEYPOT_REDIRECT_URL = '/'
 
 TASTYPIE_ALLOW_MISSING_SLASH = True
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-    'django.template.loaders.eggs.Loader',
-#     'django.template.loaders.eggs.load_template_source',
-)
-if not DEBUG:
-    TEMPLATE_LOADERS = (('django.template.loaders.cached.Loader', TEMPLATE_LOADERS))
-
 TEMPLATE_CONTEXT_PROCESSORS = (
     "utils.context_processors.sites.current_site",
     "utils.context_processors.settings.license_agreements",
@@ -212,6 +202,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'johnny.middleware.LocalStoreClearMiddleware',
+    'johnny.middleware.QueryCacheMiddleware',
+    'phased.middleware.PhasedRenderMiddleware',
     'django_hosts.middleware.HostsMiddlewareRequest',
     'django.middleware.common.CommonMiddleware',
     'utils.middleware.XForwardedForMiddleware',
@@ -244,12 +237,15 @@ PASSWORD_HASHERS = (
     'users.auth.UnsaltedSHA1PasswordHasher',  # For legacy imports
 )
 
-# Dummy cache - TODO: switch to memcached by default
+# Dummy cache
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
+
+JOHNNY_MIDDLEWARE_KEY_PREFIX='jc_lw'
+PHASED_KEEP_CONTEXT = False
 
 ROOT_URLCONF = 'main.urls'
 ROOT_HOSTCONF = 'main.hosts'
@@ -300,6 +296,7 @@ INSTALLED_APPS = (
     'actstream',
     'django_hosts',
     'django_xsession',
+    'phased',
 
     # Our apps
     'versionutils.versioning',

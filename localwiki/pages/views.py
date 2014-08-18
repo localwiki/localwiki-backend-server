@@ -27,7 +27,8 @@ from versionutils import diff
 from versionutils.versioning.views import UpdateView
 from versionutils.versioning.views import VersionsList
 from localwiki.utils.views import (Custom404Mixin, CreateObjectMixin,
-    PermissionRequiredMixin, DeleteView, RevertView, NeverCacheMixin)
+    PermissionRequiredMixin, DeleteView, RevertView,
+    CacheMixin, NeverCacheMixin)
 from localwiki.utils.urlresolvers import reverse
 from regions.models import Region
 from regions.views import RegionMixin, region_404_response
@@ -40,7 +41,7 @@ from .utils import is_user_page
 from .exceptions import PageExistsError
 
 
-class PageDetailView(Custom404Mixin, AddContributorsMixin, RegionMixin, DetailView):
+class PageDetailView(CacheMixin, Custom404Mixin, AddContributorsMixin, RegionMixin, DetailView):
     model = Page
     context_object_name = 'page'
 

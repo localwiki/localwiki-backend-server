@@ -289,7 +289,7 @@ function set_django_tokens(form, cb) {
 
     var csrf_cookie = getCookie('csrftoken');
     if (!csrf_cookie) {
-        $.get('/_api/_get_csrf_cookie', function() {
+        $.get('/_api/_get/csrf_cookie', function() {
             var csrf_cookie = getCookie('csrftoken');
             _setup_tokens(csrf_cookie);
             cb();

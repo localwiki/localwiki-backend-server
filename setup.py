@@ -153,7 +153,7 @@ install_requires = [
     'djangorestframework==2.3.13-custom1',
     'django-filter==0.7',
     'djangorestframework-filter==0.2.1',
-    'djangorestframework-gis==0.1.0-custom2',
+    'djangorestframework-gis==0.1.0-custom3',
     'markdown==2.3.1',
     'django-cors-headers==0.12',
     'django-gravatar2==1.1.3',
@@ -168,6 +168,7 @@ install_requires = [
     'raven==4.2.1',
     'django-xsession==0.1-custom1',
     'django-hosts==0.6-custom4',
+    'django-phased==0.6.1-custom1',
 ]
 if int(os.getenv('DISABLE_INSTALL_REQUIRES', '0')):
     install_requires = None
@@ -195,12 +196,13 @@ setup(
         'https://github.com/philipn/django-constance/tarball/localwiki#egg=django-constance-0.6-custom1',
         'https://github.com/philipn/django-rest-framework/tarball/localwiki#egg=djangorestframework-2.3.13-custom1',
         'https://github.com/philipn/django-rest-framework-chain/tarball/django_rest_framework_filter#egg=djangorestframework-filter-0.2.1',
-        'https://github.com/philipn/django-rest-framework-gis/tarball/localwiki#egg=djangorestframework-gis-0.1.0-custom2',
+        'https://github.com/philipn/django-rest-framework-gis/tarball/localwiki#egg=djangorestframework-gis-0.1.0-custom3',
         'https://github.com/philipn/django-endless-pagination/tarball/zip_safe#egg=django-endless-pagination-2.0',
         'https://github.com/philipn/django-static-sitemaps/tarball/localwiki#egg=django-static-sitemaps-2.1.0-custom1',
         'https://github.com/philipn/django-celery-email/tarball/localwiki#egg=django-celery-email-1.0.4-custom1',
         'https://github.com/philipn/django-xsession/tarball/localwiki#egg=django-xsession-0.1-custom1',
         'https://github.com/philipn/django-hosts/tarball/localwiki#egg=django-hosts-0.6-custom4',
+        'https://github.com/philipn/django-phased/tarball/localwiki#egg=django-phased-0.6.1-custom1',
     ],
     entry_points={
         'console_scripts': ['localwiki-manage=localwiki.manage:main'],

@@ -1,4 +1,11 @@
+import os
+
 DEBUG = False
+
+
+# Set Django debug mode based on environment variable
+DEBUG = os.getenv('DJANGO_DEBUG', DEBUG)
+if DEBUG: DEBUG = True
 
 #######################################################################
 # Config values you *must* change
@@ -65,22 +72,39 @@ HAYSTACK_CONNECTIONS = {
 BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
-if '{{ sentry_secret_url }}':
+# List of callables that know how to import templates from various sources.
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.eggs.Loader',
+#     'django.template.loaders.eggs.load_template_source',
+)
+
+if '':
     LOCAL_INSTALLED_APPS = (
         'raven.contrib.django.raven_compat',
     )
 else:
     LOCAL_INSTALLED_APPS = (
+        'profiler',
     )
+
+if DEBUG:
+     LOCAL_MIDDLEWARE_CLASSES = (
+        'armstrong.esi.middleware.IncludeEsiMiddleware',
+     )
+else:
+    LOCAL_MIDDLEWARE_CLASSES = ()
+    TEMPLATE_LOADERS = (('django.template.loaders.cached.Loader', TEMPLATE_LOADERS),)
 
 POSTGIS_VERSION = (2, 0, 3)
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'BACKEND': 'johnny.backends.memcached.MemcachedCache',
         'KEY_PREFIX': '',
 	    'LOCATION': '127.0.0.1:11211',
-        'TIMEOUT': 60,
+        'JOHNNY_CACHE': True,
     },
     'long-living': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',

@@ -1,3 +1,3 @@
-from .load_localsettings import *
-
 DEBUG = True
+
+from .load_localsettings import *

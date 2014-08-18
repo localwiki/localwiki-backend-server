@@ -2,7 +2,8 @@ from django.utils.decorators import classonlymethod
 from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.utils import simplejson as json
 from django.utils.decorators import method_decorator
-from django.views.decorators.cache import never_cache
+from django.views.decorators.cache import never_cache, cache_page
+from django.views.decorators.cache import cache_page
 from django.views.generic import View, RedirectView, TemplateView
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
@@ -22,6 +23,16 @@ class NeverCacheMixin(object):
     @method_decorator(never_cache)
     def dispatch(self, *args, **kwargs):
         return super(NeverCacheMixin, self).dispatch(*args, **kwargs)
+
+
+class CacheMixin(object):
+    cache_timeout = None
+     
+    def get_cache_timeout(self):
+        return self.cache_timeout
+     
+    def dispatch(self, *args, **kwargs):
+        return cache_page(self.get_cache_timeout())(super(CacheMixin, self).dispatch)(*args, **kwargs)
 
 
 class Custom404Mixin(object):

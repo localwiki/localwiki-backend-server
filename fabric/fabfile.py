@@ -34,7 +34,7 @@ like::
 Then, when ssh'ed into vagrant::
 
     $ source /srv/localwiki/env/bin/activate
-    $ localwiki-manage runserver --settings=main.settings.debug 0.0.0.0:8000
+    $ DJANGO_DEBUG=1 localwiki-manage runserver 0.0.0.0:8000
 
 You can then access the development server at http://localhost:8082
 on your local machine.  Hack on the code that lives inside of

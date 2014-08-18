@@ -8,5 +8,6 @@ urlpatterns = patterns('',
     url(r'^regions/suggest/?$', 'regions.views.suggest'),
     url(r'^tags/suggest/?$', 'tags.views.suggest_tags'),
     url(r'^users/suggest/(?P<region>[^/]+?)/?$', 'users.views.suggest_users'),
-    url(r'^_get_csrf_cookie/?$', GetCSRFCookieView.as_view(), name='get_csrf_cookie')
+
+    url(r'^_get/csrf_cookie/?$', GetCSRFCookieView.as_view(), name='get_csrf_cookie'),
 )

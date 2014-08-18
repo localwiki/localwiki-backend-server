@@ -73,6 +73,7 @@ urlpatterns = patterns('',
     url(r'^sitemap.xml', include('static_sitemaps.urls')),
 
     (r'^(?P<region>[^/]+?)/(((?i)Front[_ ]Page)/?)?', include('frontpage.urls')),
+
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
