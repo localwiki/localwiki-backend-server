@@ -39,7 +39,7 @@ class CustomURLConfURLNode(URLNode):
     def __init__(self, view_name, args, kwargs, asvar, urlconf=None, remove_region_slug=False):
         self.view_name = view_name
         self.args = args
-        self.kwargs = kwargs
+        self.kwargs = copy(kwargs)
         self.original_kwargs = copy(kwargs)
         self.asvar = asvar
         self.urlconf = urlconf

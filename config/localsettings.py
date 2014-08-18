@@ -88,12 +88,7 @@ else:
     LOCAL_INSTALLED_APPS = (
     )
 
-if DEBUG:
-     LOCAL_MIDDLEWARE_CLASSES = (
-        'armstrong.esi.middleware.IncludeEsiMiddleware',
-     )
-else:
-    LOCAL_MIDDLEWARE_CLASSES = ()
+if not DEBUG:
     TEMPLATE_LOADERS = (('django.template.loaders.cached.Loader', TEMPLATE_LOADERS),)
 
 POSTGIS_VERSION = (2, 0, 3)
