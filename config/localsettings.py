@@ -86,7 +86,6 @@ if '':
     )
 else:
     LOCAL_INSTALLED_APPS = (
-        'profiler',
     )
 
 if DEBUG:
