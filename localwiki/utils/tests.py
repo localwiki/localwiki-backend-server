@@ -96,6 +96,11 @@ class CanonicalURLTests(TestCase):
         # This is certainly rather annoying, but needed because
         # we have to reload everything as we're changing settings
         # dynamically.
+        from regions.models import RegionSettings
+        have_domains = RegionSettings.objects.exclude(domain=None)
+        current_CUSTOM_HOSTNAMES = settings.CUSTOM_HOSTNAMES
+        settings.CUSTOM_HOSTNAMES = [r.domain for r in have_domains]
+
         import django_hosts
         reload(django_hosts)
         import main.hosts
@@ -116,6 +121,7 @@ class CanonicalURLTests(TestCase):
         yield
 
         set_urlconf(current_urlconf)
+        settings.CUSTOM_HOSTNAMES = current_CUSTOM_HOSTNAMES
 
     @override_settings(CUSTOM_HOSTNAMES=['fakename.org'])
     def test_canonical_front_page(self):
