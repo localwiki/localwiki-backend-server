@@ -13,6 +13,7 @@
     height: 200px; 
 }
 #cover .underlay .mapwidget {
+    max-height: 380px!important;
 }
 #cover_form_selector {
     display: none;
@@ -157,11 +158,12 @@
 }
 .frontpage #map {
     margin-left: 2.5em!important;
+    margin-bottom: 1.5em!important;
 }
 .frontpage #map .mapwidget {
     cursor: pointer;
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 770px) {
     .frontpage #map {
         display: none;
     }
@@ -186,5 +188,53 @@
 }
 
 .frontpage h1, .frontpage h2, .frontpage h3, .frontpage h4, .frontpage h5 {
-    clear: none!important;
+    clear: left!important;
+}
+
+.frontpage #interesting_pages {
+    clear: both;
+    margin-bottom: 1em;
+}
+.frontpage .cards {
+    text-align: center;
+}
+#interesting_pages .no_pages a {
+    float: none;
+    display: inline-block;
+    background-image: url(../theme/img/edit_icon.png);
+
+    font-weight: normal;
+    padding-left: 28px;
+    font-size: 90%;
+    background-repeat: no-repeat;
+    background-position: 9px 50%;
+}
+.frontpage #interesting_pages .explore_more {
+    padding-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+#interesting_pages .explore_more a {
+    float: none;
+    width: auto;
+    display: inline-block;
+    margin-top: 0;
+}
+
+/* Some kinda specific tweaks to make cards flow correctly */
+
+@media screen and (max-width: 1314px) {
+    .frontpage .cards .card:nth-child(n+5) {
+        display: none;
+    }
+}
+@media screen and (max-width: 880px) {
+    .frontpage .cards {
+    }
+}
+@media screen and (max-width: 473px) {
+    .frontpage .cards .card:nth-child(n+4) {
+        display: none;
+    }
 }

@@ -273,6 +273,7 @@ class ChangesTracker(object):
                 # Don't set auto_now=True historical models' fields.
                 field.auto_now = False
 
+            dont_create_reverse_relation = False
             is_fk = isinstance(field, models.ForeignKey)
             is_m2m = isinstance(field, models.ManyToManyField)
             if isinstance(field, models.fields.related.RelatedField):
@@ -316,16 +317,26 @@ class ChangesTracker(object):
                     if hasattr(field, 'attname'):
                         hist_field.attname = field.attname
                     field = hist_field
+                else:
+                    # If the related model isn't versioned and we have a set
+                    # related_name, then we need to avoid creating the related
+                    # set with the same name.  In this case, let's just not
+                    # create a reverse related set.
+                    if field.rel.related_name:
+                        dont_create_reverse_relation = True
 
+                # When this isn't an FK (which includes OneToOne) or M2M
+                # then this is something a bit more strange.  In
+                # this case, let's make the related name end with
+                # '+' which causes the related descriptor to not be
+                # added.  We'll also use our own unique name here to
+                # avoid collisions, which were seen with
+                # django-taggit (it uses a forced related_name on
+                # all models).
                 if not is_fk and not is_m2m:
-                    # When this isn't an FK (which includes OneToOne) or M2M
-                    # then this is something a bit more strange.  In
-                    # this case, let's make the related name end with
-                    # '+' which causes the related descriptor to not be
-                    # added.  We'll also use our own unique name here to
-                    # avoid collisions, which were seen with
-                    # django-taggit (it uses a forced related_name on
-                    # all models).
+                    dont_create_reverse_relation = True
+
+                if dont_create_reverse_relation:
                     field.rel.related_name = '%s_hist_%s+' % (
                         model.__name__.lower(),
                         model._meta.app_label.lower()
@@ -459,6 +470,7 @@ class ChangesTracker(object):
         if not isinstance(instance, parent):
             return
 
+        hist_instance = None
         parent_instance = get_parent_instance(instance, parent)
         if parent_instance:
             if is_versioned(parent_instance):
@@ -492,6 +504,16 @@ class ChangesTracker(object):
         if hasattr(instance, '_rel_objs_methods'):
             for model, method in instance._rel_objs_methods.iteritems():
                 models.signals.pre_delete.disconnect(method, model, weak=False)
+
+        # If the `delete_older_versions` kwarg was provided to delete(), then
+        # delete all the versions of the object.
+        if getattr(instance, '_delete_older_versions', False):
+            if hist_instance:
+                vs = instance.versions.filter(history_date__lt=hist_instance.version_info.date)
+            else:
+                vs = instance.versions.all()
+            for h in vs:
+                h.delete()
 
     def m2m_init(self, instance, hist_instance):
         """
@@ -711,7 +733,8 @@ def delete_func(model_delete):
 
 
 def delete_with_arguments(model_delete, m, using=None,
-                          track_changes=True, **kws):
+                          track_changes=True, delete_older_versions=False,
+                          **kws):
     """
     A simple custom delete() method on models with changes tracked.
 
@@ -721,6 +744,7 @@ def delete_with_arguments(model_delete, m, using=None,
     """
     m._track_changes = track_changes
     m._save_with = kws
+    m._delete_older_versions = delete_older_versions
 
     if is_pk_recycle_a_problem(m):
         m._track_changes = False

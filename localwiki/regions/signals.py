@@ -2,8 +2,8 @@ from django.db.models.signals import post_save
 
 from frontpage.models import FrontPage
 
-from models import Region, RegionSettings
-from map_utils import get_zoom_for_extent
+from .models import Region, RegionSettings
+from .map_utils import get_zoom_for_extent
 
 
 def setup_region_settings(sender, instance, created, raw, **kwargs):
@@ -33,7 +33,6 @@ def create_front_page(sender, instance, created, raw, **kwargs):
     if not frontpage:
         frontpage = FrontPage(region=instance)
         frontpage.save()
-
 
 
 post_save.connect(setup_region_settings, sender=Region)

@@ -2,10 +2,11 @@ from urllib import quote
 from urllib import unquote_plus
 import mimetypes
 import re
+from urlparse import urljoin
+from lxml.html import fragments_fromstring
 from copy import copy
 
 from django.contrib.gis.db import models
-from django.core.urlresolvers import reverse
 from django.template.defaultfilters import stringfilter
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
@@ -15,17 +16,27 @@ from django.utils.translation import ugettext_lazy
 from django_randomfilenamestorage.storage import (
     RandomFilenameFileSystemStorage)
 
-from versionutils import diff
-from versionutils import versioning
+from versionutils import diff, versioning
+from versionutils.versioning.utils import is_versioned
+from localwiki.utils.urlresolvers import reverse
 from regions.models import Region
 
-import exceptions
-from fields import WikiHTMLField
+from . import exceptions
+from .fields import WikiHTMLField
+from .constants import page_base_path
+
+
+def validate_page_slug(slug):
+    if slugify(slug) != slug:
+        raise ValidationError(_('Provided slug is invalid. Slugs must be lowercase, '
+            'contain no trailing or leading whitespace, and contain only alphanumber '
+            'characters along with %(KEEP_CHARACTERS)s') % {'KEEP_CHARACTERS': SLUGIFY_KEEP})
 
 
 class Page(models.Model):
     name = models.CharField(max_length=255, blank=False)
-    slug = models.SlugField(max_length=255, editable=False, blank=False)
+    slug = models.CharField(max_length=255, editable=False, blank=False, db_index=True,
+        validators=[validate_page_slug])
     content = WikiHTMLField()
     region = models.ForeignKey(Region, null=True)
 
@@ -36,10 +47,7 @@ class Page(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('pages:show', kwargs={
-            'slug': self.pretty_slug,
-            'region': self.region.slug
-        })
+        return page_url(self.name, self.region)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -61,7 +69,8 @@ class Page(models.Model):
         return self.name.lower() == 'front page'
 
     def is_template_page(self):
-        return self.name.lower().startswith('templates/')
+        return (self.name.lower().startswith('templates/') or
+                self.name.lower() == 'templates')
 
     def pretty_slug(self):
         if not self.name:
@@ -72,6 +81,24 @@ class Page(models.Model):
     def name_parts(self):
         return self.name.split('/')
     name_parts = property(name_parts)
+
+    def _get_related_objs(self):
+        related_objs = []
+        for r in self._meta.get_all_related_objects():
+            try:
+                rel_obj = getattr(self, r.get_accessor_name())
+            except:
+                continue  # No object for this relation.
+
+            # Is this a related /set/, e.g. redirect_set?
+            if isinstance(rel_obj, models.Manager):
+                # list() freezes the QuerySet, which we don't want to be
+                # fetched /after/ we delete the page.
+                related_objs.append(
+                    (r.get_accessor_name(), list(rel_obj.all())))
+            else:
+                related_objs.append((r.get_accessor_name(), rel_obj))
+        return related_objs
 
     def _get_slug_related_objs(self):
         # Right now this is simply hard-coded.
@@ -118,21 +145,7 @@ class Page(models.Model):
         new_p.save(comment=_('Renamed from "%s"') % self.name)
 
         # Get all related objects before the original page is deleted.
-        related_objs = []
-        for r in self._meta.get_all_related_objects():
-            try:
-                rel_obj = getattr(self, r.get_accessor_name())
-            except:
-                continue  # No object for this relation.
-
-            # Is this a related /set/, e.g. redirect_set?
-            if isinstance(rel_obj, models.Manager):
-                # list() freezes the QuerySet, which we don't want to be
-                # fetched /after/ we delete the page.
-                related_objs.append(
-                    (r.get_accessor_name(), list(rel_obj.all())))
-            else:
-                related_objs.append((r.get_accessor_name(), rel_obj))
+        related_objs = self._get_related_objs()
 
         # Cache all ManyToMany values on related objects so we can restore them
         # later--otherwise they will be lost when page is deleted.
@@ -157,7 +170,10 @@ class Page(models.Model):
                     obj.pk = None  # Reset the primary key before saving.
                     try:
                         getattr(new_p, attname).add(obj)
-                        obj.save(comment=_("Parent page renamed"))
+                        if is_versioned(obj):
+                            obj.save(comment=_("Parent page renamed"))
+                        else:
+                            obj.save()
                         # Restore any m2m fields now that we have a new pk
                         for name, value in obj._m2m_values.items():
                             setattr(obj, name, value)
@@ -170,7 +186,10 @@ class Page(models.Model):
                 # This is an easy way to set obj to point to new_p.
                 setattr(new_p, attname, rel_obj)
                 rel_obj.pk = None  # Reset the primary key before saving.
-                rel_obj.save(comment=_("Parent page renamed"))
+                if is_versioned(rel_obj):
+                    rel_obj.save(comment=_("Parent page renamed"))
+                else:
+                    rel_obj.save()
                 # Restore any m2m fields now that we have a new pk
                 for name, value in rel_obj._m2m_values.items():
                     setattr(rel_obj, name, value)
@@ -191,6 +210,42 @@ class Page(models.Model):
                 obj.pk = None  # Reset the primary key before saving.
                 obj.save(comment=_("Parent page renamed"))
 
+        return new_p
+
+    def get_highlight_image(self):
+        """
+        Return either a good `PageFile` or None if the page
+        doesn't contain any images (inside the content).
+        """
+        from .plugins import _files_url, file_url_to_name
+
+        if not PageFile.objects.filter(slug=self.slug, region=self.region).exists():
+            return None
+
+        # Parse the page HTML and look for the first local image
+        for e in fragments_fromstring(self.content):
+            if isinstance(e, basestring):
+                continue
+            for i in e.iter('img'):
+                src = i.attrib.get('src', '')
+                if src.startswith(_files_url):
+                    _file = PageFile.objects.filter(
+                        slug__exact=self.slug,
+                        name__exact=file_url_to_name(src),
+                        region=self.region
+                    )
+                    if _file:
+                        return _file[0]
+
+    def __getstate__(self):
+        """
+        For pickling purposes.
+        """
+        state = copy(self.__dict__)
+        if '_history_manager' in state:
+            del state['_history_manager']
+        return state
+
 
 class PageDiff(diff.BaseModelDiff):
     fields = ('name',
@@ -206,7 +261,9 @@ class PageFile(models.Model):
     file = models.FileField(ugettext_lazy("file"), upload_to='pages/files/',
                             storage=RandomFilenameFileSystemStorage())
     name = models.CharField(max_length=255, blank=False)
-    slug = models.SlugField(max_length=255, editable=False, blank=False)
+    # TODO: Create PageSlugField for this purpose
+    slug = models.CharField(max_length=255, blank=False, db_index=True,
+        validators=[validate_page_slug])
     region = models.ForeignKey(Region, null=True)
 
     _rough_type_map = [(r'^audio', 'audio'),
@@ -269,7 +326,8 @@ def clean_name(name):
     return name
 
 
-def slugify(value, keep=r"\-\.,'\"/!@$%&*()"):
+SLUGIFY_KEEP = r"\-\.,'\"/!@$%&*()"
+def slugify(value, keep=SLUGIFY_KEEP):
     """
     Normalizes page name for db lookup
 
@@ -323,7 +381,16 @@ def url_to_name(value):
 url_to_name = stringfilter(url_to_name)
 
 
+def page_url(pagename, region):
+    """
+    Faster than reverse() for repeated page links.
+    TODO: put this somewhere else.
+    """
+    slug = name_to_url(pagename)
+    # Use page_base_path() to avoid reverse() overhead.
+    return urljoin(page_base_path(region), slug)
+
+
 # For registration calls
 import signals
-import api
 import feeds

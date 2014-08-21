@@ -1,16 +1,17 @@
 {% extends "site/base.html" %}
 
-{% load url from future %}
-
 {% load i18n %}
 {% load static from staticfiles %}
+{% load follow_tags %}
 
+{% comment %}
 {% block head_extra %}{% if page %}<link rel="alternate" href="{% url 'pages:changes-feed' slug=page.pretty_slug region=page.region.slug %}" type="application/rss+xml" title="{% trans "Recent changes on this Page" %}"/>{% endif %}{% endblock %}
-  
+{% endcomment %} 
+
 {% block media %}
-{{ block.super }}
-<link rel="stylesheet" href="{% static "theme/pages/css/pages.css" %}">
-{% if form %}{{ form.media }}{% endif %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static "theme/pages/css/pages.css" %}">
+  {% if form %}{{ form.media }}{% endif %}
 {% endblock %}
 
 {% block header_title %}
@@ -26,10 +27,28 @@
 {% block object_actions %}
   <ul>
     {% if page %}
-        <li><a href="{% url 'pages:edit' slug=page.pretty_slug region=page.region.slug %}" class="button">{% trans "Edit" %}</a></li>
-        <li><a href="{% url 'pages:history' slug=page.pretty_slug region=page.region.slug %}" class="button">{% trans "Info" %}</a></li>
+        <li><a href="{% url 'pages:edit' slug=page.pretty_slug region=page.region.slug %}" rel="nofollow" class="button">{% trans "Edit" %}</a></li>
+        <li><a href="{% url 'pages:history' slug=page.pretty_slug region=page.region.slug %}" rel="nofollow" class="button">{% trans "Info" %}</a></li>
     {% endif %}
   </ul>
+{% endblock %}
+
+{% block header_bar_inner %}
+  {% if page.slug != 'front page' and request.user.is_authenticated and page.exists and object_type_untrans != 'user' %}
+    {% trans "page" as object_type %}
+    {% if page.versions %}
+        {% follow_form page %}
+    {% else %}
+        {% follow_form page.history__object %}
+    {% endif %}
+  {% elif page.slug == 'front page' and not frontpage %}
+    {% if request.user.is_authenticated %}
+      {% trans "region" as object_type %}
+      {% follow_form page.region %}
+    {% endif %}
+  {% endif %}
+
+  {{ block.super }}
 {% endblock %}
 
 {% block attributions %}

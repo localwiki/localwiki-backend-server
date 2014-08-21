@@ -1,7 +1,5 @@
 {% extends "pages/base.html" %}
 
-{% load url from future %}
-
 {% load i18n %}
 
 {% block title %}{% blocktrans with name=form.instance.name super=block.super %}Editing page "{{ name }}" - {{ super }}{% endblocktrans %}{% endblock %}
@@ -68,7 +66,7 @@
 
       {% block content_footer %}
       <div id="content_footer">
-        <h3>{% trans "Please comment about this change:" %}</h3>
+        <h3>{% trans "Please describe this change:" %}</h3>
         {{ form.comment }}
         <div id="editor_actions">
           <ul class="save_area">

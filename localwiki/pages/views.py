@@ -4,12 +4,14 @@ import copy
 
 from django.conf import settings
 from django.views.generic.base import RedirectView
-from django.views.generic import (DetailView, ListView,
+from django.contrib.auth.models import User
+from django.template import Template
+from django.template import RequestContext
+from django.views.generic import (View, DetailView, ListView,
     FormView)
 from django.http import (HttpResponseNotFound, HttpResponseRedirect,
-                         HttpResponseBadRequest, HttpResponse)
+                         HttpResponseBadRequest, HttpResponse, Http404)
 from django import forms
-from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.db import IntegrityError
 from django.shortcuts import get_object_or_404, render
@@ -18,36 +20,28 @@ from django.utils.http import urlquote
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
 
+from follow.models import Follow
+
 from ckeditor.views import ck_upload_result
 from versionutils import diff
-from versionutils.versioning.views import UpdateView, DeleteView
-from versionutils.versioning.views import RevertView, VersionsList
+from versionutils.versioning.views import UpdateView
+from versionutils.versioning.views import VersionsList
 from localwiki.utils.views import (Custom404Mixin, CreateObjectMixin,
-    PermissionRequiredMixin)
+    PermissionRequiredMixin, DeleteView, RevertView,
+    CacheMixin, NeverCacheMixin)
+from localwiki.utils.urlresolvers import reverse
 from regions.models import Region
-from regions.views import RegionMixin
-from models import Page, PageFile, url_to_name
-from forms import PageForm, PageFileForm
+from regions.views import RegionMixin, region_404_response
 from maps.widgets import InfoMap
+from users.views import SetPermissionsView, AddContributorsMixin
 
-from models import slugify, clean_name
-from utils import is_user_page
-from exceptions import PageExistsError
-from users.decorators import permission_required
-
-# Where possible, we subclass similar generic views here.
-
-
-class PageListView(RegionMixin, ListView):
-    model = Page
-    context_object_name = 'page_list'
-
-    def get_queryset(self):
-        qs = super(PageListView, self).get_queryset()
-        return qs.defer('content').order_by('name')
+from .models import slugify, clean_name, Page, PageFile, url_to_name
+from .forms import PageForm, PageFileForm
+from .utils import is_user_page
+from .exceptions import PageExistsError
 
 
-class PageDetailView(Custom404Mixin, RegionMixin, DetailView):
+class PageDetailView(CacheMixin, Custom404Mixin, AddContributorsMixin, RegionMixin, DetailView):
     model = Page
     context_object_name = 'page'
 
@@ -58,7 +52,10 @@ class PageDetailView(Custom404Mixin, RegionMixin, DetailView):
 
     def handler404(self, request, *args, **kwargs):
         name = url_to_name(kwargs['original_slug'])
-        region = Region.objects.get(slug=kwargs['region'])
+        try:
+            region = self.get_region(request=request, kwargs=kwargs)
+        except Http404:
+            return region_404_response(request, kwargs['region']) 
         slug = kwargs['slug']
 
         page_templates = Page.objects.filter(
@@ -72,6 +69,8 @@ class PageDetailView(Custom404Mixin, RegionMixin, DetailView):
         )
 
     def get_context_data(self, **kwargs):
+        from maps.widgets import map_options_for_region
+
         context = super(PageDetailView, self).get_context_data(**kwargs)
         context['region'] = self.object.region
         context['date'] = self.object.versions.most_recent().version_info.date
@@ -89,10 +88,21 @@ class PageDetailView(Custom404Mixin, RegionMixin, DetailView):
                 map_controls.remove('KeyboardDefaults')
             olwidget_options['map_options'] = map_opts
             olwidget_options['map_div_class'] = 'mapwidget small'
+            olwidget_options.update(map_options_for_region(self.object.region))
             context['map'] = InfoMap(
                 [(self.object.mapdata.geom, self.object.name)],
                 options=olwidget_options)
         return context
+
+    def get_cache_prefix(self, request, *args, **kwargs):
+        # TODO: Cache this lookup if this ends up being slow.
+        #       (and expire it on post_save/post_delete)
+        try:
+            dt = self.get_object().versions.most_recent().version_info.date
+            t = time.mktime(dt.timetuple()) + dt.microsecond * 1e-6
+            return str(t)
+        except Http404:
+            return 'not-found'
 
 
 class PageVersionDetailView(PageDetailView):
@@ -125,31 +135,60 @@ class PageUpdateView(PermissionRequiredMixin, CreateObjectMixin,
     def success_msg(self):
         # NOTE: This is eventually marked as safe when rendered in our
         # template.  So do *not* allow unescaped user input!
-        message = _('Thank you for your changes. '
+        #
+        # XXX TODO: Refactor this into something more general + show this
+        # message on other content types (maps, tags)
+        default_message = '<div>%s</div>' % _('Thank you for your changes. '
                    'Your attention to detail is appreciated.')
+        log_in_message = ''
+        map_create_link = ''
+        follow_message = ''
+
         if not self.request.user.is_authenticated():
-            message = (_('Changes saved! To use your name when editing, please '
+            default_message = '<div>%s</div>' % (_('Changes saved! To use your name when editing, please '
                 '<a href="%(login_url)s?next=%(current_path)s"><strong>log in</strong></a> or '
                 '<a href="%(register_url)s?next=%(current_path)s"><strong>create an account</strong></a>.')
-                % {'login_url': reverse('django.contrib.auth.views.login'),
+                % {'login_url': reverse('auth_login'),
                    'current_path' :self.request.path,
                    'register_url': reverse('registration_register')
                    }
                 )
-        map_create_link = ''
         if not hasattr(self.object, 'mapdata') and not is_user_page(self.object):
             slug = self.object.pretty_slug
             map_create_link = (_(
                 '<p class="create_map"><a href="%s" class="button little map">'
                 '<span class="text">Create a map</span></a> '
                 'for this page?</p>') %
-                reverse('maps:edit', args=[self.object.region.slug, slug])
+                reverse('maps:edit', kwargs={'region': self.object.region.slug, 'slug': slug})
             )
-        return '<div>%s</div>%s' % (message, map_create_link)
+
+        if self.request.user.is_authenticated() and not map_create_link:
+            if is_user_page(self.object):
+                obj = User.objects.get(username__iexact=self.kwargs['original_slug'][6:])
+                following = Follow.objects.filter(user=self.request.user, target_user=obj).exists()
+            else:
+                following = Follow.objects.filter(user=self.request.user, target_page=self.object).exists()
+                obj = self.object
+
+            # They're already auto-following their own user page
+            own_user_page = slugify(self.object.name) == slugify('users/%s' % self.request.user.username)
+            if not following and not own_user_page:
+                t = Template("""
+{% load follow_tags %}
+{% follow_form page %}
+                """)
+                c = RequestContext(self.request, {
+                    'page': obj,
+                    'follow_text': _("Follow this page"),
+                })
+                follow_message = '<div>%s</div>' % (_("%(follow_page_notice)s for updates!") % {'follow_page_notice': t.render(c)})
+
+        return '%s%s%s' % (default_message, map_create_link, follow_message)
 
     def get_success_url(self):
+        region = self.get_region()
         return reverse('pages:show',
-            args=[self.kwargs['region'], self.object.pretty_slug])
+            kwargs={'region': region.slug, 'slug': self.object.pretty_slug})
 
     def create_object(self):
         pagename = clean_name(self.kwargs['original_slug'])
@@ -173,8 +212,9 @@ class PageDeleteView(PermissionRequiredMixin, RegionMixin, DeleteView):
 
     def get_success_url(self):
         # Redirect back to the page.
+        region = self.get_region()
         return reverse('pages:show',
-            args=[self.kwargs.get('region'), self.kwargs.get('original_slug')])
+            kwargs={'region': region.slug, 'slug': self.kwargs.get('original_slug')})
 
 
 class PageRevertView(PermissionRequiredMixin, RegionMixin, RevertView):
@@ -187,9 +227,10 @@ class PageRevertView(PermissionRequiredMixin, RegionMixin, RevertView):
         return page.versions.as_of(version=int(self.kwargs['version']))
 
     def get_success_url(self):
+        region = self.get_region()
         # Redirect back to the page.
         return reverse('pages:show',
-            args=[self.kwargs.get('region'), self.kwargs.get('original_slug')])
+            kwargs={'region': region.slug, 'slug': self.kwargs.get('original_slug')})
 
 
 class PageVersionsList(RegionMixin, VersionsList):
@@ -227,7 +268,7 @@ class PageFileListView(RegionMixin, ListView):
         return context
 
 
-class PageFilebrowserView(PageFileListView):
+class PageFilebrowserView(NeverCacheMixin, PageFileListView):
     template_name = 'pages/cke_filebrowser.html'
 
     def get_context_data(self, **kwargs):
@@ -292,10 +333,13 @@ class PageFileRevertView(PermissionRequiredMixin, RegionMixin, RevertView):
         return Page.objects.get(slug=self.object.slug, region=self.get_region())
 
     def get_success_url(self):
+        region = self.get_region()
         # Redirect back to the file info page.
-        return reverse('pages:file-info', args=[self.kwargs['region'],
-                                                self.kwargs['slug'],
-                                                self.kwargs['file']])
+        return reverse('pages:file-info', kwargs={
+            'region': region.slug,
+             'slug': self.kwargs['slug'],
+             'file': self.kwargs['file']
+        })
 
 
 class PageFileInfo(RegionMixin, VersionsList):
@@ -328,7 +372,8 @@ class PageCompareView(RegionMixin, diff.views.CompareView):
     model = Page
 
     def get_object(self):
-        return Page(slug=self.kwargs['slug'], region=self.get_region())
+        ph = Page(slug=self.kwargs['slug'], region=self.get_region()).versions.most_recent()
+        return ph.version_info._object
 
     def get_context_data(self, **kwargs):
         context = super(PageCompareView, self).get_context_data(**kwargs)
@@ -354,7 +399,12 @@ class PageCreateView(RegionMixin, RedirectView):
         if Page.objects.filter(slug=slug, region=region).exists():
             return Page.objects.get(slug=slug, region=region).get_absolute_url()
         else:
-            return reverse('pages:edit', args=[self.kwargs['region'], pagename])
+            if self.request.GET.get('show_templates'):
+                # Show them the 'empty page' page, which displays the list of
+                # templates to create a page with.
+                return reverse('pages:show', kwargs={'region': region.slug, 'slug': pagename})
+            else:
+                return reverse('pages:edit', kwargs={'region': region.slug, 'slug': pagename})
 
 
 def _find_available_filename(filename, slug, region):
@@ -370,82 +420,99 @@ def _find_available_filename(filename, slug, region):
     return filename
 
 
-@permission_required('pages.change_page',
-    (Page, 'slug', 'slug', 'region__slug', 'region'))
-def upload(request, **kwargs):
-    # For GET, just return blank response. See issue #327.
-    if request.method != 'POST':
+class UploadView(PermissionRequiredMixin, RegionMixin, View):
+    http_method_names = ['get', 'post']
+    permission = 'pages.change_page'
+
+    def get(self, request, *args, **kwargs):
+        # For GET, just return blank response. See issue #327.
         return HttpResponse('')
-    error = None
-    file_form = PageFileForm(request.POST, request.FILES)
 
-    slug = kwargs['slug']
-    region = Region.objects.get(slug=kwargs['region'])
+    def post(self, request, *args, **kwargs):
+        slug = kwargs['slug']
+        region = self.get_region()
 
-    uploaded = request.FILES['file']
-    if 'file' in kwargs:
-        # Replace existing file if exists
+        error = None
+        file_form = PageFileForm(request.POST, request.FILES)
+
+        uploaded = request.FILES['file']
+        if 'file' in kwargs:
+            # Replace existing file if exists
+            try:
+                file = PageFile.objects.get(
+                    slug__exact=slug,
+                    name__exact=kwargs['file'],
+                    region=region
+                )
+                file.file = uploaded
+            except PageFile.DoesNotExist:
+                file = PageFile(
+                    file=uploaded,
+                    name=uploaded.name,
+                    slug=slug,
+                    region=region
+                )
+            file_form.instance = file
+            if not file_form.is_valid():
+                error = file_form.errors.values()[0]
+            else:
+                file_form.save()
+
+            if error is not None:
+                return HttpResponseBadRequest(error)
+            return HttpResponseRedirect(
+                reverse('pages:file-info',
+                        kwargs={'region': region.slug, 'slug': slug, 'file': kwargs['file']}))
+
+        # uploaded from ckeditor
+        filename = _find_available_filename(uploaded.name, slug, region)
+        relative_url = '_files/' + urlquote(filename)
         try:
-            file = PageFile.objects.get(
-                slug__exact=slug,
-                name__exact=kwargs['file'],
-                region=region
-            )
-            file.file = uploaded
-        except PageFile.DoesNotExist:
-            file = PageFile(
-                file=uploaded,
-                name=uploaded.name,
-                slug=slug,
-                region=region
-            )
-        file_form.instance = file
-        if not file_form.is_valid():
-            error = file_form.errors.values()[0]
-        else:
-            file_form.save()
+            file = PageFile(file=uploaded, name=filename, slug=slug, region=region)
+            file.save()
+            return ck_upload_result(request, url=relative_url)
+        except IntegrityError:
+            error = _('A file with this name already exists')
+        return ck_upload_result(request, url=relative_url, message=error)
 
-        if error is not None:
-            return HttpResponseBadRequest(error)
-        return HttpResponseRedirect(
-            reverse('pages:file-info',
-                    args=[kwargs['region'], slug, kwargs['file']]))
+    def get_protected_object(self):
+        slug = slugify(self.kwargs['slug'])
+        region = self.get_region()
 
-    # uploaded from ckeditor
-    filename = _find_available_filename(uploaded.name, slug, region)
-    relative_url = '_files/' + urlquote(filename)
-    try:
-        file = PageFile(file=uploaded, name=filename, slug=slug, region=region)
-        file.save()
-        return ck_upload_result(request, url=relative_url)
-    except IntegrityError:
-        error = _('A file with this name already exists')
-    return ck_upload_result(request, url=relative_url, message=error)
+        if Page.objects.filter(slug=slug, region=region).exists():
+            return Page.objects.get(slug=slug, region=region)
+        return Page(slug=slug, region=region)
 
 
 class RenameForm(forms.Form):
+    # Translators: This is for the page rename form.
     pagename = forms.CharField(max_length=255, label=ugettext_lazy("New page name"))
     comment = forms.CharField(max_length=150, required=False, label=ugettext_lazy("Comment"))
 
 
-class PageRenameView(RegionMixin, FormView):
+class PageRenameView(PermissionRequiredMixin, RegionMixin, FormView):
     form_class = RenameForm
     template_name = 'pages/page_rename.html'
+    permission = 'pages.change_page'
 
     def form_valid(self, form):
+        region = self.get_region()
         try:
             p = Page.objects.get(
                 slug=slugify(self.kwargs['slug']),
-                region=self.get_region()
+                region=region
             )
             self.new_pagename = form.cleaned_data['pagename']
             p.rename_to(self.new_pagename)
         except PageExistsError, s:
             messages.add_message(self.request, messages.SUCCESS, s)
             return HttpResponseRedirect(
-                reverse('pages:show', args=[p.region.slug, p.slug]))
+                reverse('pages:show', kwargs={'region': region.slug, 'slug': p.slug}))
 
         return HttpResponseRedirect(self.get_success_url())
+
+    def get_protected_objects(self):
+        return [Page.objects.get(slug=slugify(self.kwargs['slug']), region=self.get_region())]
 
     def get_context_data(self, **kwargs):
         context = super(PageRenameView, self).get_context_data(**kwargs)
@@ -459,11 +526,29 @@ class PageRenameView(RegionMixin, FormView):
         return ('<div>' + _('Page renamed to "%s"') + '</div>') % escape(self.new_pagename)
 
     def get_success_url(self):
+        region = self.get_region()
         messages.add_message(self.request, messages.SUCCESS,
             self.success_msg())
         # Redirect back to the page.
         return reverse('pages:show',
-            args=[self.kwargs['region'], self.new_pagename])
+            kwargs={'region': region.slug, 'slug': self.new_pagename})
+
+
+class PagePermissionsView(SetPermissionsView):
+    template_name = 'pages/page_permissions.html'
+
+    def get_object(self):
+        return Page.objects.get(slug=self.kwargs.get('slug'), region=self.get_region())
+
+    def get_success_url(self):
+        return reverse('pages:show', kwargs={
+            'slug':self.get_object().slug, 'region': self.get_region().slug
+        })
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(PagePermissionsView, self).get_context_data(*args, **kwargs)
+        context['page'] = self.get_object()
+        return context
 
 
 class PageRandomView(RegionMixin, RedirectView):
@@ -474,7 +559,7 @@ class PageRandomView(RegionMixin, RedirectView):
         return pgs_in_region.order_by('?')[0].get_absolute_url()
 
 
-def suggest(request):
+def suggest(request, *args, **kwargs):
     """
     Simple page suggest.
     """
@@ -483,9 +568,20 @@ def suggest(request):
     import json
 
     term = request.GET.get('term', None)
-    region_id = int(request.GET.get('region_id'))
+    if 'region_id' in request.GET:
+        region_id = int(request.GET.get('region_id'))
+    else:
+        region_id = None
     if not term:
         return HttpResponse('')
-    results = SearchQuerySet().autocomplete(name_auto=term).filter_and(region_id=region_id)
-    results = [p.name for p in results]
+
+    if region_id is not None:
+        results = SearchQuerySet().models(Page).autocomplete(name_auto=term).filter_and(region_id=region_id)
+    else:
+        results = SearchQuerySet().models(Page).autocomplete(name_auto=term)
+
+    # Set a sane limit
+    results = results[:20]
+
+    results = [{'value': p.name, 'region': p.object.region.slug, 'url': p.object.get_absolute_url()} for p in results]
     return HttpResponse(json.dumps(results))

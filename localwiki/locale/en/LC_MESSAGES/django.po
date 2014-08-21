@@ -1,0 +1,2348 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-05-20 14:26-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: activity/feeds.py:40 activity/feeds.py:46
+#, python-format
+msgid "Activity on %s"
+msgstr ""
+
+#: activity/feeds.py:81 activity/feeds.py:177
+#, python-format
+msgid "to version %s"
+msgstr ""
+
+#: activity/feeds.py:88 activity/feeds.py:184
+#, python-format
+msgid " with comment \"%s\""
+msgstr ""
+
+#: activity/feeds.py:89 activity/feeds.py:185
+#, python-format
+msgid "%(title)s was %(change_type)s by %(user)s%(comment)s."
+msgstr ""
+
+#: activity/feeds.py:148 activity/feeds.py:154
+#, python-format
+msgid "Changes for %(title)s on %(site_name)s"
+msgstr ""
+
+#: activity/templates/activity/all_activity_index.html:6
+#: activity/templates/activity/all_activity_index.html:18
+msgid "All activity on LocalWiki"
+msgstr ""
+
+#: activity/templates/activity/all_activity_index.html:27
+#: activity/templates/activity/followed_activity_index.html:39
+#: activity/templates/activity/user_activity_index.html:38
+#, python-format
+msgid ""
+"Need help? Want advice? Check out the <a href=\"%(guide_url)s\">LocalWiki "
+"guide</a>."
+msgstr ""
+
+#: activity/templates/activity/followed_activity_index.html:19
+#: themes/sapling/templates/site/nav.html:16
+msgid "News Feed"
+msgstr ""
+
+#: activity/templates/activity/followed_activity_index.html:27
+msgid "Welcome to LocalWiki! What's next?"
+msgstr ""
+
+#: activity/templates/activity/followed_activity_index.html:29
+msgid "Explore LocalWiki communities"
+msgstr ""
+
+#: activity/templates/activity/followed_activity_index.html:31
+msgid "Create a new LocalWiki region"
+msgstr ""
+
+#: activity/templates/activity/followed_activity_index.html:32
+msgid "Follow <strong>@localwiki</strong> on Twitter"
+msgstr ""
+
+#: activity/templates/activity/followed_activity_index.html:41
+#, python-format
+msgid ""
+"Want to see <strong><a href=\"%(all_activity_url)s\">all activity across "
+"LocalWiki</a>?"
+msgstr ""
+
+#: activity/templates/activity/followed_activity_page.html:22
+#, python-format
+msgid ""
+"\n"
+"            <span class=\"user\">%(actor_link)s</span> started following "
+"%(user_followed_link)s <span class=\"weak\">%(timesince)s ago</span>\n"
+"          "
+msgstr ""
+
+#: activity/templates/activity/followed_activity_page.html:27
+#, python-format
+msgid ""
+"\n"
+"            <span class=\"user\">%(actor_link)s</span> created page <a href="
+"\"%(page_url)s\">%(page_name)s</a> on <a href=\"%(region_url)s\">"
+"%(region_name)s</a> <span class=\"weak\">%(timesince)s ago</span>\n"
+"          "
+msgstr ""
+
+#: activity/templates/activity/followed_activity_page.html:32
+#, python-format
+msgid ""
+"\n"
+"            <span class=\"user\">%(actor_link)s</span> created region <a "
+"href=\"%(region_url)s\">%(region_name)s</a> <span class=\"weak\">"
+"%(timesince)s ago</span>\n"
+"          "
+msgstr ""
+
+#: activity/templates/activity/followed_activity_page.html:37
+#, python-format
+msgid ""
+"\n"
+"            <span class=\"user\">%(actor_link)s</span> starred <a href="
+"\"%(page_url)s\">%(page_name)s</a> on <a href=\"%(region_url)s\">"
+"%(region_name)s</a> <span class=\"weak\">%(timesince)s ago</span>\n"
+"          "
+msgstr ""
+
+#: activity/templates/activity/followed_activity_page.html:42
+#, python-format
+msgid ""
+"\n"
+"            <span class=\"user\">%(actor_link)s</span> starred <a href="
+"\"%(region_url)s\">%(region_name)s</a> <span class=\"weak\">%(timesince)s "
+"ago</span>\n"
+"          "
+msgstr ""
+
+#: activity/templates/activity/followed_activity_page.html:53
+#: activity/templates/activity/index_page.html:15
+#, python-format
+msgid "last modified %(version_date)s ago"
+msgstr ""
+
+#: activity/templates/activity/followed_activity_page.html:61
+#: activity/templates/activity/index_page.html:23
+msgid "new"
+msgstr ""
+
+#: activity/templates/activity/followed_activity_page.html:63
+#: activity/templates/activity/index_page.html:25
+msgid "deleted"
+msgstr ""
+
+#: activity/templates/activity/followed_activity_page.html:65
+#: activity/templates/activity/index_page.html:27
+msgid "changes"
+msgstr ""
+
+#: activity/templates/activity/followed_activity_page.html:69
+#: activity/templates/activity/index_page.html:31
+#, python-format
+msgid "Reverted to version from %(version_date_timesince)s ago"
+msgstr ""
+
+#: activity/templates/activity/followed_activity_page.html:75
+#: activity/templates/activity/index_page.html:37
+#, python-format
+msgid "Redirected to <a href=\"%(url)s\">%(destination)s</a>"
+msgstr ""
+
+#: activity/templates/activity/followed_activity_page.html:87
+#, python-format
+msgid ""
+"\n"
+"                via %(user_ip)s\n"
+"                "
+msgstr ""
+
+#: activity/templates/activity/followed_activity_page.html:110
+#: activity/templates/activity/index_page.html:62
+#: templates/endless/show_more.html:5
+msgid "More"
+msgstr ""
+
+#: activity/templates/activity/index.html:6
+#: activity/templates/activity/index.html:9
+#: activity/templates/activity/index.html:16
+#: themes/sapling/templates/site/nav.html:9
+msgid "Activity"
+msgstr ""
+
+#: activity/templates/activity/index.html:24
+#, python-format
+msgid ""
+"For statistics about pages, maps, and more, check out the <a href="
+"\"%(dashboard_main_url)s\">dashboard</a>"
+msgstr ""
+
+#: activity/templates/activity/user_activity_index.html:10
+#, python-format
+msgid "%(username)s contribution history"
+msgstr ""
+
+#: activity/templates/activity/user_activity_index.html:24
+#, python-format
+msgid "%(user_link)s page contribution history"
+msgstr ""
+
+#: activity/templates/activity/user_activity_index.html:26
+#, python-format
+msgid "%(user_link)s map contribution history"
+msgstr ""
+
+#: activity/templates/activity/user_activity_index.html:28
+#, python-format
+msgid "%(user_link)s total contribution history"
+msgstr ""
+
+#: ckeditor/models.py:30
+msgid "This field contains invalid data."
+msgstr ""
+
+#: ckeditor/models.py:178
+msgid "XML text"
+msgstr ""
+
+#: ckeditor/models.py:188
+msgid "XHTML text"
+msgstr ""
+
+#: ckeditor/models.py:197
+msgid "HTML5 text"
+msgstr ""
+
+#: ckeditor/models.py:229
+msgid "HTML5 fragment text"
+msgstr ""
+
+#: ckeditor/views.py:14
+msgid "Unable to upload"
+msgstr ""
+
+#: ckeditor/templates/ckeditor/upload_result.html:4
+msgid "Upload result"
+msgstr ""
+
+#: dashboard/views.py:193 dashboard/views.py:206
+msgid "pages"
+msgstr ""
+
+#: dashboard/views.py:194 dashboard/views.py:209
+msgid "maps"
+msgstr ""
+
+#: dashboard/views.py:195 dashboard/views.py:212
+msgid "files"
+msgstr ""
+
+#: dashboard/views.py:197 dashboard/views.py:215
+msgid "redirects"
+msgstr ""
+
+#: dashboard/templates/dashboard/index.html:9
+msgid "Dashboard"
+msgstr ""
+
+#: dashboard/templates/dashboard/index.html:22
+msgid "Statistics loading.  This may take several minutes the first time."
+msgstr ""
+
+#: dashboard/templates/dashboard/index.html:27
+#: dashboard/templates/dashboard/render.html:4
+msgid "Pages"
+msgstr ""
+
+#: dashboard/templates/dashboard/index.html:28
+#: dashboard/templates/dashboard/render.html:5
+#: pages/templates/pages/cke_filebrowser.html:7
+#: pages/templates/pages/page_files.html:7
+msgid "Files"
+msgstr ""
+
+#: dashboard/templates/dashboard/index.html:29
+#: dashboard/templates/dashboard/render.html:6
+msgid "Maps"
+msgstr ""
+
+#: dashboard/templates/dashboard/index.html:30
+#: dashboard/templates/dashboard/render.html:7
+msgid "Redirects"
+msgstr ""
+
+#: dashboard/templates/dashboard/index.html:31
+#: dashboard/templates/dashboard/render.html:8
+msgid "Users"
+msgstr ""
+
+#: dashboard/templates/dashboard/index.html:36
+#: dashboard/templates/dashboard/render.html:13
+msgid "Growth over time"
+msgstr ""
+
+#: dashboard/templates/dashboard/index.html:38
+#: dashboard/templates/dashboard/index.html:48
+#: dashboard/templates/dashboard/index.html:58
+#: dashboard/templates/dashboard/index.html:68
+msgid "Generating graph..."
+msgstr ""
+
+#: dashboard/templates/dashboard/index.html:46
+#: dashboard/templates/dashboard/render.html:20
+msgid "Edits over time"
+msgstr ""
+
+#: dashboard/templates/dashboard/index.html:56
+#: dashboard/templates/dashboard/render.html:27
+msgid "Page content growth over time"
+msgstr ""
+
+#: dashboard/templates/dashboard/index.html:66
+#: dashboard/templates/dashboard/render.html:34
+msgid "Users registered over time"
+msgstr ""
+
+#: frontpage/views.py:135
+msgid "Cover photo updated!"
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:18
+#: pages/templates/pages/base.html:45
+msgid "region"
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:30
+#, python-format
+msgid "Welcome to the %(region_name)s LocalWiki!"
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:31
+#, python-format
+msgid "A website about %(region_name)s that <em>anyone</em> can edit"
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:33
+msgid ""
+"\n"
+"        I want to make a page about <span class=\"searchbox\"><input type="
+"\"text\" name=\"q\" value=\"\"><input type=\"submit\" value=\"Search or "
+"create page\"></span>\n"
+"        "
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:50
+msgid "Change cover"
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:52
+msgid "Save cover"
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:73
+#: pages/templates/pages/page_detail.html:42
+#: users/templates/users/user_page.html:34
+#, python-format
+msgid ""
+"Revision %(version_number)s\n"
+"          (%(date)s by %(user_link)s)"
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:82
+#: maps/templates/maps/nearby_pages.html:45
+#: pages/templates/pages/page_detail.html:50
+#: tags/templates/tags/tagged_list_snippet.html:8
+msgid "View"
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:90
+msgid "Explore nearby regions"
+msgstr ""
+
+#: links/templates/links/orphaned_pages.html:12
+msgid "Orphaned Pages"
+msgstr ""
+
+#: links/templates/links/orphaned_pages.html:16
+#, python-format
+msgid ""
+"\n"
+"<h3>Pages that link to <a href=\"%(page_url)s\">%(page_name)s</a>:</h3>\n"
+msgstr ""
+
+#: links/templates/links/orphaned_pages.html:25
+#, python-format
+msgid ""
+"\n"
+"<h3>Pages <a href=\"%(page_url)s\">%(page_name)s</a> links to:</h3>\n"
+msgstr ""
+
+#: main/settings/defaults.py:43
+msgid ""
+"<p>Except where otherwise noted, this content is licensed under a <a rel="
+"\"license\" href=\"http://creativecommons.org/licenses/by/3.0/\">Creative "
+"Commons Attribution License</a>. See <a href=\"/Copyrights\">Copyrights</a>."
+"</p>"
+msgstr ""
+
+#: main/settings/defaults.py:45
+msgid ""
+"<p>By clicking \"Save Changes\" you are agreeing to release your "
+"contribution under the <a rel=\"license\" href=\"http://creativecommons.org/"
+"publicdomain/zero/1.0/\" target=\"_blank\">CC0 Public Domain license</a>, "
+"unless noted otherwise. See <a href=\"/Copyrights\" target=\"_blank"
+"\">Copyrights</a>.</p>"
+msgstr ""
+
+#: main/settings/defaults.py:47
+msgid ""
+"I agree to release my contributions under the <a rel=\"license\" href="
+"\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\">CC0 "
+"Public Domain license</a>, unless noted otherwise. See <a href=\"/Copyrights"
+"\" target=\"_blank\">Copyrights</a>."
+msgstr ""
+
+#: main/settings/defaults.py:49
+msgid ""
+"I would like to receive occasional updates about this project via email."
+msgstr ""
+
+#: main/settings/defaults.py:68
+msgid "English"
+msgstr ""
+
+#: main/settings/defaults.py:69
+msgid "Japanese"
+msgstr ""
+
+#: main/settings/defaults.py:70
+msgid "French"
+msgstr ""
+
+#: main/settings/defaults.py:71
+msgid "Spanish"
+msgstr ""
+
+#: main/settings/defaults.py:72
+msgid "German"
+msgstr ""
+
+#: main/settings/defaults.py:73
+msgid "Dutch"
+msgstr ""
+
+#: main/settings/defaults.py:74
+msgid "Ukrainian"
+msgstr ""
+
+#: maps/feeds.py:26 maps/feeds.py:45
+#, python-format
+msgid "Map for \"%s\""
+msgstr ""
+
+#: maps/fields.py:172
+#, python-format
+msgid ""
+"The '%(fieldname)s' attribute can only be accessed from %(ownername)s "
+"instances."
+msgstr ""
+
+#: maps/fields.py:217
+#, python-format
+msgid "cannot set %(cname)s CollectionFrom with value of type: %(vtype)s"
+msgstr ""
+
+#: maps/validators.py:14
+#, python-format
+msgid "Map error: %s."
+msgstr ""
+
+#: maps/views.py:314 pages/views.py:193
+#, python-format
+msgid "<p>What do you know about %s?</p>"
+msgstr ""
+
+#: maps/views.py:333
+#, python-format
+msgid ""
+"Map saved! You should probably go <a href=\"%s\">edit the page that was "
+"created</a>, too."
+msgstr ""
+
+#: maps/templates/maps/attribution.html:2
+msgid "Map data"
+msgstr ""
+
+#: maps/templates/maps/attribution.html:2
+msgid "Map tiles via"
+msgstr ""
+
+#: maps/templates/maps/base.html:8
+msgid "Recent changes on this Map"
+msgstr ""
+
+#: maps/templates/maps/base.html:17 maps/templates/maps/mapdata_list.html:25
+#: maps/templates/maps/mapdata_list.html:31
+#: themes/sapling/templates/site/nav.html:6
+msgid "Map"
+msgstr ""
+
+#: maps/templates/maps/base.html:34 maps/templates/maps/mapdata_form.html:87
+#: maps/templates/maps/mapdata_versions.html:25
+#: pages/templates/pages/base.html:29
+#: pages/templates/pages/page_detail.html:50
+#: pages/templates/pages/page_form.html:93
+#: pages/templates/pages/page_versions.html:28
+msgid "Edit"
+msgstr ""
+
+#: maps/templates/maps/base.html:35 maps/templates/maps/mapdata_form.html:88
+#: maps/templates/maps/mapdata_versions.html:26
+#: pages/templates/pages/base.html:30 pages/templates/pages/page_form.html:94
+#: pages/templates/pages/page_versions.html:29
+msgid "Info"
+msgstr ""
+
+#: maps/templates/maps/editor_actions.html:5
+msgid "Delete map"
+msgstr ""
+
+#: maps/templates/maps/editor_actions.html:8
+#: pages/templates/pages/editor_actions.html:11
+#: pages/templates/pages/editor_actions.html:13
+msgid "Security"
+msgstr ""
+
+#: maps/templates/maps/mapdata_detail.html:24
+msgid "Map for"
+msgstr ""
+
+#: maps/templates/maps/mapdata_detail.html:38
+#: maps/templates/maps/mapdata_diff.html:62
+#: maps/templates/maps/mapdata_diff.html:67
+#: redirects/templates/redirects/redirect_diff.html:43
+#: redirects/templates/redirects/redirect_diff.html:48
+#: tags/templates/tags/pagetagset_diff.html:40
+#: tags/templates/tags/pagetagset_diff.html:45
+#: tags/templates/tags/pagetagset_version_detail.html:24
+msgid "Revision"
+msgstr ""
+
+#: maps/templates/maps/mapdata_detail.html:39
+#: maps/templates/maps/mapdata_diff.html:63
+#: maps/templates/maps/mapdata_diff.html:68
+#: redirects/templates/redirects/redirect_diff.html:44
+#: redirects/templates/redirects/redirect_diff.html:49
+#: tags/templates/tags/pagetagset_diff.html:41
+#: tags/templates/tags/pagetagset_diff.html:46
+#: tags/templates/tags/pagetagset_version_detail.html:25
+#: utils/templates/utils/history/form.html:7
+#: versionutils/templates/versionutils/history/form.html:35
+#: versionutils/templates/versionutils/history/form_page.html:19
+msgid "by"
+msgstr ""
+
+#: maps/templates/maps/mapdata_detail.html:54
+#: pages/templates/pages/page_detail.html:84
+#, python-format
+msgid ""
+"\n"
+"        Contributed by <span class=\"contributor_list\">"
+"%(contributors_html)s</span> and <a href=\"%(request_path)s/_history/\">"
+"%(contributors_number)s</a> others.\n"
+"        "
+msgstr ""
+
+#: maps/templates/maps/mapdata_detail.html:58
+#: pages/templates/pages/page_detail.html:88
+#, python-format
+msgid ""
+"\n"
+"        Contributed by <span class=\"contributor_list\">"
+"%(contributors_html)s</span>\n"
+"        "
+msgstr ""
+
+#: maps/templates/maps/mapdata_diff.html:52
+msgid "Differences for map on"
+msgstr ""
+
+#: maps/templates/maps/mapdata_diff.html:53
+#, python-format
+msgid "Differences for <a href=\"%(maps_global)s\">Map</a>"
+msgstr ""
+
+#: maps/templates/maps/mapdata_diff.html:73
+#: pages/templates/pages/page_diff.html:60
+#: tags/templates/tags/pagetagset_diff.html:51
+msgid "Deletions are marked like this"
+msgstr ""
+
+#: maps/templates/maps/mapdata_diff.html:76
+#: pages/templates/pages/page_diff.html:63
+#: tags/templates/tags/pagetagset_diff.html:54
+msgid "Additions are marked like this"
+msgstr ""
+
+#: maps/templates/maps/mapdata_form.html:35
+msgid "Editing map for"
+msgstr ""
+
+#: maps/templates/maps/mapdata_form.html:65
+msgid "Please comment about this change:"
+msgstr ""
+
+#: maps/templates/maps/mapdata_form.html:69
+#: pages/templates/pages/page_form.html:75
+msgid "Save changes"
+msgstr ""
+
+#: maps/templates/maps/mapdata_form.html:70
+#: pages/templates/pages/page_detail.html:73
+#: pages/templates/pages/page_form.html:76
+#: users/templates/users/deactivate.html:17
+#: users/templates/users/user_page.html:148
+msgid "Cancel"
+msgstr ""
+
+#: maps/templates/maps/mapdata_list.html:44
+#: maps/templates/maps/mapdata_list.html:48
+msgid "Add a new map"
+msgstr ""
+
+#: maps/templates/maps/mapdata_list.html:46
+msgid "What's here? (Name of page)"
+msgstr ""
+
+#: maps/templates/maps/mapdata_new.html:6
+msgid "Map for page not found"
+msgstr ""
+
+#: maps/templates/maps/mapdata_new.html:7
+msgid "Map for page"
+msgstr ""
+
+#: maps/templates/maps/mapdata_new.html:7
+msgid "does not exist (yet!)"
+msgstr ""
+
+#: maps/templates/maps/mapdata_new.html:15
+msgid "Create this map"
+msgstr ""
+
+#: maps/templates/maps/mapdata_versions.html:16
+msgid "Previous versions of map for"
+msgstr ""
+
+#: maps/templates/maps/nearby_pages.html:27
+#: maps/templates/maps/nearby_pages.html:28
+msgid "Pages near you"
+msgstr ""
+
+#: maps/templates/maps/nearby_pages.html:40
+msgid "No pages near you. Make some!"
+msgstr ""
+
+#: pages/feeds.py:52 pages/feeds.py:96
+#, python-format
+msgid "File %(filename)s on page \"%(pagename)s\""
+msgstr ""
+
+#: pages/fields.py:81
+#, python-format
+msgid "Page %s does not exist!  Please enter a valid page name."
+msgstr ""
+
+#: pages/forms.py:15
+msgid ""
+"Warning: someone else saved this page before you.  Please resolve edit "
+"conflicts and save again."
+msgstr ""
+
+#: pages/forms.py:46
+msgid "A page with this name already exists"
+msgstr ""
+
+#: pages/forms.py:62
+msgid "The new file should be of the same type"
+msgstr ""
+
+#: pages/models.py:30
+#, python-format
+msgid ""
+"Provided slug is invalid. Slugs must be lowercase, contain no trailing or "
+"leading whitespace, and contain only alphanumber characters along with "
+"%(KEEP_CHARACTERS)s"
+msgstr ""
+
+#: pages/models.py:58
+msgid "Page name is invalid."
+msgstr ""
+
+#: pages/models.py:131 pages/models.py:143
+#, python-format
+msgid "Renamed from \"%s\""
+msgstr ""
+
+#: pages/models.py:135
+#, python-format
+msgid "The page '%s' already exists!"
+msgstr ""
+
+#: pages/models.py:171 pages/models.py:184 pages/models.py:203
+msgid "Parent page renamed"
+msgstr ""
+
+#: pages/models.py:219
+msgid "file"
+msgstr ""
+
+#: pages/plugins.py:414
+msgid ""
+"The embedded URL is not on the list of approved providers.  Contact the site "
+"administrator to add it."
+msgstr ""
+
+#: pages/plugins.py:418
+msgid "Invalid embed code"
+msgstr ""
+
+#: pages/plugins.py:430 search/templates/search/base.html:17
+#: search/templates/search/base.html:64
+#: themes/sapling/templates/site/search_form.html:7
+#: themes/sapling/templates/site/search_form.html:12
+msgid "Search or create page"
+msgstr ""
+
+#: pages/signals.py:16
+msgid "Redirect created"
+msgstr ""
+
+#: pages/signals.py:22
+msgid "Page created"
+msgstr ""
+
+#: pages/views.py:140
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr ""
+
+#: pages/views.py:147
+#, python-format
+msgid ""
+"Changes saved! To use your name when editing, please <a href=\"%(login_url)s?"
+"next=%(current_path)s\"><strong>log in</strong></a> or <a href="
+"\"%(register_url)s?next=%(current_path)s\"><strong>create an account</"
+"strong></a>."
+msgstr ""
+
+#: pages/views.py:158
+#, python-format
+msgid ""
+"<p class=\"create_map\"><a href=\"%s\" class=\"button little map\"><span "
+"class=\"text\">Create a map</span></a> for this page?</p>"
+msgstr ""
+
+#: pages/views.py:181
+msgid "Follow this page"
+msgstr ""
+
+#: pages/views.py:183
+#, python-format
+msgid "%(follow_page_notice)s for updates!"
+msgstr ""
+
+#: pages/views.py:387
+msgid "You must provide a page name when creating a page."
+msgstr ""
+
+#: pages/views.py:465
+msgid "A file with this name already exists"
+msgstr ""
+
+#. Translators: This is for the page rename form.
+#: pages/views.py:471
+msgid "New page name"
+msgstr ""
+
+#: pages/views.py:472 versionutils/versioning/forms.py:18
+msgid "Comment"
+msgstr ""
+
+#: pages/views.py:507
+#, python-format
+msgid "Page renamed to \"%s\""
+msgstr ""
+
+#: pages/widgets.py:29
+msgid "Normal"
+msgstr ""
+
+#: pages/widgets.py:30
+msgid "Heading 1"
+msgstr ""
+
+#: pages/widgets.py:31
+msgid "Heading 2"
+msgstr ""
+
+#: pages/widgets.py:32
+msgid "Heading 3"
+msgstr ""
+
+#: pages/widgets.py:33
+msgid "Formatted"
+msgstr ""
+
+#: pages/widgets.py:34
+msgid "Typewriter"
+msgstr ""
+
+#: pages/templates/pages/base.html:8
+msgid "Recent changes on this Page"
+msgstr ""
+
+#: pages/templates/pages/base.html:37
+msgid "page"
+msgstr ""
+
+#: pages/templates/pages/editor_actions.html:5
+msgid "Edit map"
+msgstr ""
+
+#: pages/templates/pages/editor_actions.html:6
+msgid "Delete page"
+msgstr ""
+
+#: pages/templates/pages/editor_actions.html:8
+msgid "Redirect"
+msgstr ""
+
+#: pages/templates/pages/page_detail.html:27
+msgid "Redirected from"
+msgstr ""
+
+#: pages/templates/pages/page_detail.html:67
+#: users/templates/users/user_page.html:142
+msgid "Edit tags"
+msgstr ""
+
+#: pages/templates/pages/page_detail.html:67
+#: users/templates/users/user_page.html:142
+msgid "Add tags"
+msgstr ""
+
+#: pages/templates/pages/page_diff.html:22
+#, python-format
+msgid "Differences for %(name)s"
+msgstr ""
+
+#: pages/templates/pages/page_diff.html:23
+#, python-format
+msgid "Differences for <a href=\"%(pretty_slug)s\">%(new_name)s</a>"
+msgstr ""
+
+#: pages/templates/pages/page_diff.html:34
+#, python-format
+msgid ""
+"\n"
+"                        Revision %(version_number)s ( %(date)s by "
+"%(user_link)s)\n"
+"                    "
+msgstr ""
+
+#: pages/templates/pages/page_diff.html:38
+#: pages/templates/pages/page_diff.html:51
+#, python-format
+msgid ""
+"\n"
+"                        , \"%(comment)s\"\n"
+"                        "
+msgstr ""
+
+#: pages/templates/pages/page_diff.html:47
+#, python-format
+msgid ""
+"\n"
+"\t\t\t        Revision %(version_number)s (%(date)s by %(user_link)s)\n"
+"\t\t          "
+msgstr ""
+
+#: pages/templates/pages/page_files.html:22
+msgid "Files attached to this page:"
+msgstr ""
+
+#: pages/templates/pages/page_files.html:37
+msgid "View page"
+msgstr ""
+
+#: pages/templates/pages/page_form.html:7
+#, python-format
+msgid "Editing page \"%(name)s\" - %(super)s"
+msgstr ""
+
+#: pages/templates/pages/page_form.html:71
+msgid "Please describe this change:"
+msgstr ""
+
+#: pages/templates/pages/page_list.html:7
+#: pages/templates/pages/page_list.html:9
+#: themes/sapling/templates/site/nav.html:10
+msgid "All Pages"
+msgstr ""
+
+#: pages/templates/pages/page_new.html:7
+msgid "Page not found"
+msgstr ""
+
+#: pages/templates/pages/page_new.html:8
+#, python-format
+msgid "Page \"%(name)s\" does not exist (yet!)"
+msgstr ""
+
+#: pages/templates/pages/page_new.html:17
+#: search/templates/search/search.html:16
+#: search/templates/search/search.html:79
+msgid "Create this page"
+msgstr ""
+
+#: pages/templates/pages/page_new.html:21
+msgid "Or use one of these templates:"
+msgstr ""
+
+#: pages/templates/pages/page_new.html:24
+#, python-format
+msgid "Create with %(name)s template"
+msgstr ""
+
+#: pages/templates/pages/page_permissions.html:7
+#, python-format
+msgid "Permissions for page \"%(name)s\" - %(super)s"
+msgstr ""
+
+#: pages/templates/pages/page_permissions.html:15
+msgid "Who can change this page?"
+msgstr ""
+
+#: pages/templates/pages/page_permissions.html:17
+#: redirects/templates/redirects/redirect_permissions.html:17
+#: users/forms.py:10
+msgid "Everyone"
+msgstr ""
+
+#: pages/templates/pages/page_permissions.html:18
+#: redirects/templates/redirects/redirect_permissions.html:18
+msgid "Only these users:"
+msgstr ""
+
+#: pages/templates/pages/page_permissions.html:24
+#: redirects/templates/redirects/redirect_permissions.html:24
+#: regions/templates/regions/admins_update.html:24
+#: regions/templates/regions/banned_update.html:24
+#: regions/templates/regions/settings.html:78
+#: tags/templates/tags/pagetagset_form_snippet.html:9
+#: users/templates/users/deactivate.html:17
+#: users/templates/users/settings.html:35
+msgid "Save"
+msgstr ""
+
+#: pages/templates/pages/page_rename.html:14
+msgid "Submit"
+msgstr ""
+
+#: pages/templates/pages/page_versions.html:16
+#, python-format
+msgid "Previous versions of page \"%(name)s\" - %(super)s"
+msgstr ""
+
+#: pages/templates/pages/page_versions.html:21
+msgid ""
+" Looking for <a href=\"../_files/\">files</a> or <a href=\"../_tags/_history/"
+"\">tags</a>?"
+msgstr ""
+
+#: pages/templates/pages/pagefile_diff.html:37
+#, python-format
+msgid "Differences for %(new_name)s on %(new_slug)s"
+msgstr ""
+
+#: pages/templates/pages/pagefile_diff.html:38
+#, python-format
+msgid ""
+"Differences for %(new_name)s on <a href=\"%(url_pages_show)s\">"
+"%(new_attached_to_page)s</a>"
+msgstr ""
+
+#: pages/templates/pages/pagefile_diff.html:47
+#, python-format
+msgid ""
+"\n"
+"                      Revision %(version_number)s ( %(date)s by "
+"%(user_link)s)\n"
+"                  "
+msgstr ""
+
+#: pages/templates/pages/pagefile_diff.html:51
+#: pages/templates/pages/pagefile_diff.html:64
+#, python-format
+msgid ""
+"\n"
+"                      , \"%(comment)s\"\n"
+"                      "
+msgstr ""
+
+#: pages/templates/pages/pagefile_diff.html:60
+#, python-format
+msgid ""
+"\n"
+"\t\t          Revision %(version_number)s (%(date)s by %(user_link)s)\n"
+"\t\t        "
+msgstr ""
+
+#: pages/templates/pages/pagefile_diff.html:88
+msgid "File info"
+msgstr ""
+
+#: pages/templates/pages/pagefile_info.html:7
+msgid "Recent changes for this file"
+msgstr ""
+
+#: pages/templates/pages/pagefile_info.html:14
+#, python-format
+msgid "Information about \"%(name)s\" on %(slug)s - %(super)s"
+msgstr ""
+
+#: pages/templates/pages/pagefile_info.html:15
+#, python-format
+msgid ""
+"Information about \"%(name)s\" on <a href=\"%(pages_show_url)s\">"
+"%(attached_to_page)s</a>"
+msgstr ""
+
+#: pages/templates/pages/pagefile_info.html:39
+#, python-format
+msgid "Download %(name)s"
+msgstr ""
+
+#: pages/templates/pages/pagefile_info.html:44
+msgid "Upload a new version"
+msgstr ""
+
+#: pages/templates/pages/pagefile_info.html:51
+msgid "Upload"
+msgstr ""
+
+#: pages/templates/pages/pagefile_info.html:57
+#: tags/templates/tags/pagetagset_versions.html:31
+msgid "Previous versions:"
+msgstr ""
+
+#: pages/templatetags/cards_tags.py:113 pages/templatetags/pages_tags.py:113
+#, python-format
+msgid ""
+"Unable to include <a href=\"%(page_url)s\" class=\"missing_link\">"
+"%(page_name)s</a>"
+msgstr ""
+
+#: pages/templatetags/cards_tags.py:121 pages/templatetags/pages_tags.py:121
+#, python-format
+msgid ""
+"Unable to include <a href=\"%(page_url)s\">%(page_name)s</a>: endless "
+"include loop."
+msgstr ""
+
+#: redirects/feeds.py:30
+#, python-format
+msgid "Redirect %(objsrc)s --> %(objdest)s"
+msgstr ""
+
+#: redirects/forms.py:17
+msgid "Destination"
+msgstr ""
+
+#: redirects/models.py:35
+msgid "You cannot redirect a page to itself"
+msgstr ""
+
+#: redirects/views.py:51 redirects/views.py:117
+#: versionutils/versioning/views.py:67
+msgid "Thank you for your changes. "
+msgstr ""
+
+#: redirects/views.py:52
+#, python-format
+msgid "This page now redirects to <a href=\"%(url)s\">%(obj)s</a>."
+msgstr ""
+
+#: redirects/views.py:118
+msgid "The redirect has been deleted"
+msgstr ""
+
+#: redirects/templates/redirects/redirect_diff.html:34
+#: redirects/templates/redirects/redirect_diff.html:35
+#, python-format
+msgid "Differences for %(new.source)s redirect"
+msgstr ""
+
+#: redirects/templates/redirects/redirect_form.html:27
+msgid "Update redirect"
+msgstr ""
+
+#: redirects/templates/redirects/redirect_form.html:28
+msgid "Delete redirect"
+msgstr ""
+
+#: redirects/templates/redirects/redirect_form.html:30
+msgid "Create redirect"
+msgstr ""
+
+#: redirects/templates/redirects/redirect_permissions.html:7
+#, python-format
+msgid "Permissions for redirect \"%(name)s\" - %(super)s"
+msgstr ""
+
+#: redirects/templates/redirects/redirect_permissions.html:15
+msgid "Who can change this redirect?"
+msgstr ""
+
+#: regions/forms.py:33 regions/forms.py:52
+msgid "Default language"
+msgstr ""
+
+#: regions/forms.py:35
+msgid "The language for the region"
+msgstr ""
+
+#: regions/forms.py:49
+msgid "Full name"
+msgstr ""
+
+#: regions/forms.py:50 regions/models.py:17
+msgid "The full name of this region, e.g. 'San Francisco'"
+msgstr ""
+
+#: regions/forms.py:71
+msgid "You cannot delete yourself as an admin"
+msgstr ""
+
+#: regions/models.py:19
+msgid ""
+"A very short name for this region that will appear in URLs, e.g. 'sf'. Keep "
+"it short and memorable!"
+msgstr ""
+
+#: regions/models.py:37
+msgid "Region already has pages in it"
+msgstr ""
+
+#: regions/views.py:29
+#, python-format
+msgid ""
+"<p>Region \"%s\" not found. Would you like to <a href=\"%s\" rel=\"nofollow"
+"\">create it</a>?</p>"
+msgstr ""
+
+#: regions/views.py:46
+#, python-format
+msgid "Region '%s' was deleted."
+msgstr ""
+
+#: regions/views.py:65 utils/views.py:87 utils/views.py:149
+msgid "Sorry, you are not allowed to perform this action."
+msgstr ""
+
+#: regions/views.py:146
+#, python-format
+msgid ""
+"To create a region you must first <strong><a href=\"%(login_url)s?next="
+"%(current_path)s\">log in</a></strong> or <strong><a href=\"%(register_url)s?"
+"next=%(current_path)s\">create an account</a></strong>."
+msgstr ""
+
+#: regions/views.py:156
+msgid ""
+"You've created a new LocalWiki region! We've set you up as an admin for this "
+"region. Learn more about <a href=\"http://localwiki.net/main/"
+"Local_Adminship_Hub\" target=\"_blank\">LocalWiki adminship here</a>."
+msgstr ""
+
+#: regions/views.py:223
+msgid "Settings updated!"
+msgstr ""
+
+#: regions/views.py:248
+msgid "Region admins updated!"
+msgstr ""
+
+#: regions/views.py:269
+msgid "Banned users updated."
+msgstr ""
+
+#. Translators: Please fix the links here to point to "Place," "Business", "Disambiguation", "Restaurant" as translated in your language.  But leave the "Templates/" part of the page link.  "Templates/" in a URL is currently hard-coded and must remain in English for now.
+#: regions/initial_data/__init__.py:18
+msgid ""
+"<p>\n"
+"    \tTemplates are special pages that serve as a starting point when "
+"creating a new page. &nbsp;Using a common template for related topics gives "
+"those pages a common structure. &nbsp;To use one of the templates, simply "
+"select the template when creating a new page. &nbsp;</p>\n"
+"    <p>\n"
+"    \tBelow is a list of the available templates. To add a new template, "
+"create a page whose title starts with &quot;Templates/&quot;, as in <a href="
+"\"Templates%2FBusiness\">Templates/Business</a>. &nbsp;When you create a new "
+"template, add it to this list so it&#39;s easier to find.</p>\n"
+"    <h3>\n"
+"    \t<span>List of templates</span></h3>\n"
+"    <ul>\n"
+"    \t<li>\n"
+"    \t\t<a href=\"Templates%2FPlace\">Templates/Place</a></li>\n"
+"    \t<li>\n"
+"    \t\t<a href=\"Templates%2FBusiness\">Templates/Business</a></li>\n"
+"    \t<li>\n"
+"    \t\t<a href=\"Templates%2FDisambiguation\">Templates/Disambiguation</a></"
+"li>\n"
+"    \t<li>\n"
+"    \t\t<a href=\"Templates%2FRestaurant\">Templates/Restaurant</a></li>\n"
+"    </ul>"
+msgstr ""
+
+#. Translators: This is for "Templates/Page" - a template page
+#: regions/initial_data/__init__.py:38
+msgid "Place"
+msgstr ""
+
+#: regions/initial_data/__init__.py:42
+msgid ""
+"<table>\n"
+"    \t<tbody>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Location</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\taddress</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Contact</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\t(555) 555 5555</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Website</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\tAdd link here</td>\n"
+"    \t\t</tr>\n"
+"    \t</tbody>\n"
+"    </table>\n"
+"    <p>\n"
+"    \tThe <strong>Thing I&#39;m Talking About</strong> should have a blurb "
+"here with links to relevant things, like the <a href=\"Front%20Page\">Front "
+"Page</a>.</p>\n"
+"    <h2>\n"
+"    \tSection Title</h2>\n"
+"    <p>\n"
+"    \tText goes here.</p>"
+msgstr ""
+
+#. Translators: This is for "Templates/Restaurant" - a template page
+#: regions/initial_data/__init__.py:80
+msgid "Restaurant"
+msgstr ""
+
+#: regions/initial_data/__init__.py:84
+msgid ""
+"<table>\n"
+"    \t<tbody>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Location</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\tPlease fill in address</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Hours</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\t(Please fill in hours)</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Phone</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\t(415) 555-5555</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Website</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\tAdd link here</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Established</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\t(Date, i.e. YYYY-MM-DD)</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Price range</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\t(Prices for &quot;average&quot; entrees)</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Payment Methods</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\t(Cash, check, credit cards, other?)</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Wheelchair accessibility</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\t(notes on stairs, bathroom access, handrails, aisle width)</td>\n"
+"    \t\t</tr>\n"
+"    \t</tbody>\n"
+"    </table>\n"
+"    <p>\n"
+"    \tThen, put&nbsp;<em>whatever</em>&nbsp;you want down here! Note "
+"that&nbsp;<a href=\"http://local.google.com\">http://local.google.com</"
+"a>&nbsp;is sometimes a good and easy place to find times/phone. Better yet, "
+"look them up in the phone book, and ask them.</p>\n"
+"    <p>\n"
+"    \tRemember to add this restaurant to the neighborhood&nbsp;<a href="
+"\"restaurants\">restaurants</a>&nbsp;page.</p>\n"
+"    <h3>\n"
+"    \tRelated Links</h3>\n"
+"    <ul>\n"
+"    \t<li>\n"
+"    \t\t<a href=\"Restaurants\">Restaurants</a></li>\n"
+"    </ul>\n"
+"    <p>\n"
+"    \t&nbsp;</p>"
+msgstr ""
+
+#. Translators: This is for "Templates/Business" - a template page
+#: regions/initial_data/__init__.py:168
+msgid "Business"
+msgstr ""
+
+#: regions/initial_data/__init__.py:172
+msgid ""
+"\n"
+"    <table>\n"
+"    \t<tbody>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Location</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\tPlease fill in address</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Hours</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\tPlease fill in hours</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Phone</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\t(415) 555-5555</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Website</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\tAdd link here</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>E-mail</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\tEmail address</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Owner(s)</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\tNames of owners/proprietors here</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Established</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\tDate, i.e. YYYY-MM-DD</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Payment Method</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\tType of payment</td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td style=\"background-color: rgb(232, 236, 239);\">\n"
+"    \t\t\t\t<strong>Wheelchair accessibility</strong></td>\n"
+"    \t\t</tr>\n"
+"    \t\t<tr>\n"
+"    \t\t\t<td>\n"
+"    \t\t\t\tstairs, bathrooms, handrails, aisle width?</td>\n"
+"    \t\t</tr>\n"
+"    \t</tbody>\n"
+"    </table>\n"
+"    <p>\n"
+"    \tThen, put&nbsp;<em>whatever</em>&nbsp;you want down here! Note "
+"that&nbsp;<a href=\"http://local.google.com\">http://local.google.com</"
+"a>&nbsp;is sometimes a good and easy place to find times/phone. Better yet, "
+"look them up in the phone book, and ask them. Remove the fields you don&#39;"
+"t fill out &mdash; or even better, look up or call them for the missing "
+"information!</p>\n"
+"    <h3>\n"
+"    \tRelated Links</h3>\n"
+"    <ul>\n"
+"    \t<li>\n"
+"    \t\t<a href=\"Shopping\">Shopping</a></li>\n"
+"    </ul>\n"
+"    <p>\n"
+"    \t&nbsp;</p>"
+msgstr ""
+
+#. Translators: This is for "Templates/Disambiguation" - a template page
+#: regions/initial_data/__init__.py:263
+msgid "Disambiguation"
+msgstr ""
+
+#: regions/initial_data/__init__.py:267
+msgid ""
+"<p>\n"
+"    \tThis has multiple meanings. You are probably looking for information "
+"on one of the following:</p>\n"
+"    <ul>\n"
+"    \t<li>\n"
+"    \t\t<a href=\"ItemOne\">ItemOne</a>&nbsp;- A brief summary of ItemOne</"
+"li>\n"
+"    \t<li>\n"
+"    \t\t<a href=\"ItemTwo\">ItemTwo</a>&nbsp;- A brief summary of ItemTwo</"
+"li>\n"
+"    </ul>\n"
+"    <p>\n"
+"    \t&nbsp;</p>\n"
+"    <p>\n"
+"    \tThis is a&nbsp;<em>disambiguation</em> page&nbsp;&mdash; a "
+"navigational aid which lists other pages that might otherwise share the same "
+"title. If an page link referred you here, you might want to go back and fix "
+"it to point directly to the intended page.</p>"
+msgstr ""
+
+#: regions/initial_data/__init__.py:285
+#, python-format
+msgid ""
+"<p>\n"
+"    \tWelcome to the new LocalWiki region for %(region)s! There are "
+"currently just a handful of pages in it, to get you started.\n"
+"    <p>\n"
+"    \tClick on <strong>All Pages</strong> at the top to see what's here now."
+"</p>\n"
+"    <p>\n"
+"    \tYou can edit this and any other page by clicking the <strong>Edit</"
+"strong> button.</p>\n"
+"    <p>Need <strong>help</strong>? Please see the <a href=\"http://localwiki."
+"net/main/Help\">help page</a> on the <a href=\"http://localwiki.net/main/"
+"\">LocalWiki Guide</a>!</p>"
+msgstr ""
+
+#: regions/templates/regions/admins_update.html:6
+#: regions/templates/regions/banned_update.html:6
+#: regions/templates/regions/settings.html:6
+msgid "LocalWiki - Settings"
+msgstr ""
+
+#: regions/templates/regions/admins_update.html:10
+#: regions/templates/regions/banned_update.html:10
+#, python-format
+msgid ""
+"\n"
+"        <a href=\"%(region_settings)s\">Settings</a> for <a href=\"%(url)s\">"
+"%(region_slug)s</a>\n"
+"    "
+msgstr ""
+
+#: regions/templates/regions/banned_update.html:20
+#: regions/templates/regions/settings.html:54
+msgid "Banned users"
+msgstr ""
+
+#: regions/templates/regions/main.html:6 regions/templates/regions/main.html:8
+#: regions/templates/regions/region_form.html:6
+msgid "LocalWiki"
+msgstr ""
+
+#: regions/templates/regions/main.html:15
+#: regions/templates/regions/main.html:41
+#: regions/templates/regions/region_list.html:17
+msgid "Add region"
+msgstr ""
+
+#: regions/templates/regions/main.html:26
+#, python-format
+msgid ""
+"\n"
+"    <p>Welcome to the <strong>insanely</strong> early preview of the <a href="
+"\"http://localwiki.org/blog/2013/jul/25/big-news-future-localwiki/\" target="
+"\"_blank\">new version of LocalWiki</a>. We are experimenting with ways to "
+"make it easier for people to share knowledge about their community. Please "
+"check out the existing projects below, but be warned that all of these are "
+"in the very earliest stages of development!</p>\n"
+"\n"
+"    <p>If you've come here to create a new LocalWiki, welcome! It only takes "
+"a few minutes to set one up. All you have to do is click the \"Add a Region"
+"\" button at the bottom of the screen.</p>\n"
+"\n"
+"    <p>Finally, check out the <strong><a href=\"%(guide_url)s\">LocalWiki "
+"Guide</a></strong> for more information about the project and help using the "
+"site.</p>\n"
+"    "
+msgstr ""
+
+#: regions/templates/regions/main.html:34
+#: regions/templates/regions/region_list.html:8
+msgid "Regions"
+msgstr ""
+
+#: regions/templates/regions/region_form.html:8
+msgid "Add a new LocalWiki region"
+msgstr ""
+
+#: regions/templates/regions/region_form.html:47
+msgid "Draw the rough area the region will cover"
+msgstr ""
+
+#: regions/templates/regions/region_form.html:48
+#: regions/templates/regions/settings.html:69
+msgid "Pick an area roughly the size of a city. Don't worry about being exact!"
+msgstr ""
+
+#: regions/templates/regions/region_list.html:6
+msgid "Regions - LocalWiki"
+msgstr ""
+
+#: regions/templates/regions/settings.html:9
+#, python-format
+msgid ""
+"\n"
+"        Settings for <a href=\"%(url)s\">%(region_slug)s</a>\n"
+"    "
+msgstr ""
+
+#: regions/templates/regions/settings.html:45
+msgid "Admins"
+msgstr ""
+
+#: regions/templates/regions/settings.html:57
+msgid "Nobody is banned. Hooray!"
+msgstr ""
+
+#: regions/templates/regions/settings.html:68
+msgid "The rough area the region covers"
+msgstr ""
+
+#: search/templates/search/base.html:14 search/templates/search/base.html:61
+msgid "Search results for"
+msgstr ""
+
+#: search/templates/search/base.html:19 search/templates/search/base.html:66
+#: search/templates/search/search.html:86
+msgid "Search"
+msgstr ""
+
+#: search/templates/search/global_search.html:18
+#: search/templates/search/global_search.html:57
+#: search/templates/search/search.html:25
+#: search/templates/search/search.html:58
+msgid "Previous"
+msgstr ""
+
+#: search/templates/search/global_search.html:21
+#: search/templates/search/global_search.html:60
+#: search/templates/search/search.html:28
+#: search/templates/search/search.html:61
+msgid "Next"
+msgstr ""
+
+#: search/templates/search/global_search.html:50
+#: search/templates/search/search.html:51
+msgid "No results found."
+msgstr ""
+
+#: search/templates/search/search.html:15
+#, python-format
+msgid "No page with the exact title \"%(query)s\" exists."
+msgstr ""
+
+#: search/templates/search/search.html:68
+#, python-format
+msgid ""
+"\n"
+"            Want to <a href=\"%(global_search)s?q=%(query)s\">search all of "
+"LocalWiki for \"%(query)s\"</a>?\n"
+"            "
+msgstr ""
+
+#: search/templates/search/search.html:76
+msgid "Create a new page:"
+msgstr ""
+
+#: search/templates/search/search.html:83
+msgid "Search for pages:"
+msgstr ""
+
+#: stars/signals.py:72 stars/signals.py:114
+#, python-format
+msgid "Their edit comment was \"%s\"."
+msgstr ""
+
+#: stars/templates/stars/page_stars_for_user.html:8
+#, python-format
+msgid "Pages %(username)s follows"
+msgstr ""
+
+#: stars/templates/stars/page_stars_for_user.html:14
+#, python-format
+msgid ""
+"\n"
+"    Pages <a href=\"%(user_link)s\">you</a> follow:\n"
+"    "
+msgstr ""
+
+#: stars/templates/stars/page_stars_for_user.html:18
+#, python-format
+msgid ""
+"\n"
+"        Pages <a href=\"%(user_link)s\">%(username)s</a> follows:\n"
+"        "
+msgstr ""
+
+#: stars/templates/stars/user_stars_for_user.html:9
+#, python-format
+msgid "Users %(username)s follows"
+msgstr ""
+
+#: stars/templates/stars/user_stars_for_user.html:15
+#, python-format
+msgid ""
+"\n"
+"    Users <a href=\"%(user_link)s\">you</a> follow:\n"
+"    "
+msgstr ""
+
+#: stars/templates/stars/user_stars_for_user.html:19
+#, python-format
+msgid ""
+"\n"
+"        Users <a href=\"%(user_link)s\">%(username)s</a> follows:\n"
+"        "
+msgstr ""
+
+#: tags/forms.py:98
+#, python-format
+msgid "removed %(name)s %(deleted)s."
+msgid_plural "removed %(name)s %(deleted)s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: tags/forms.py:107
+#, python-format
+msgid "removed %(count)i %(name)s."
+msgid_plural "removed %(count)i %(name)s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: tags/forms.py:118
+#, python-format
+msgid "added %(name)s %(added)s."
+msgid_plural "added %(name)s %(added)s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: tags/forms.py:127
+#, python-format
+msgid "added %(count)i %(name)s."
+msgid_plural "added %(count)i %(name)s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: tags/forms.py:136
+msgid "no changes made"
+msgstr ""
+
+#: tags/forms.py:137 tags/forms.py:140
+msgid " and "
+msgstr ""
+
+#: tags/models.py:35
+msgid "Tag"
+msgstr ""
+
+#: tags/models.py:36 tags/templates/tags/pagetagset_list.html:7
+#: tags/templates/tags/pagetagset_list.html:8
+#: tags/templates/tags/tag_list.html:5
+msgid "Tags"
+msgstr ""
+
+#: tags/templates/tags/pagetagset_diff.html:31
+#: tags/templates/tags/pagetagset_diff.html:32
+#, python-format
+msgid "Differences for tag versions for %(new_name)s"
+msgstr ""
+
+#: tags/templates/tags/pagetagset_diff.html:64
+msgid "Tags history"
+msgstr ""
+
+#: tags/templates/tags/pagetagset_form.html:16
+#: tags/templates/tags/pagetagset_form.html:17
+#: tags/templates/tags/pagetagset_version_detail.html:19
+#: tags/templates/tags/pagetagset_versions.html:17
+msgid "Tags for"
+msgstr ""
+
+#: tags/templates/tags/pagetagset_version_detail.html:18
+#: tags/templates/tags/pagetagset_versions.html:16
+msgid "Tags for "
+msgstr ""
+
+#: tags/templates/tags/pagetagset_versions.html:25
+#, python-format
+msgid ""
+"\n"
+"        This page has no tags.  <a href=\"%(page_url)s\">Add some!</a>\n"
+"    "
+msgstr ""
+
+#: tags/templates/tags/tag_list.html:6
+msgid "All tags"
+msgstr ""
+
+#: tags/templates/tags/tag_list.html:18
+msgid "Alphabetical"
+msgstr ""
+
+#: tags/templates/tags/tag_list.html:19
+msgid "Most popular"
+msgstr ""
+
+#: tags/templates/tags/tag_list.html:20
+msgid "As a cloud"
+msgstr ""
+
+#: tags/templates/tags/tag_list.html:65
+msgid "There are no tags. Add some!"
+msgstr ""
+
+#: tags/templates/tags/tagged_list_snippet.html:19
+#, python-format
+msgid "There are no pages with the tag \"%(tag_name)s\"."
+msgstr ""
+
+#: templates/follow/form.html:9
+#, python-format
+msgid "Stop following this %(object_type)s"
+msgstr ""
+
+#: templates/follow/form.html:12
+#, python-format
+msgid "Start following this %(object_type)s"
+msgstr ""
+
+#: templates/registration/login.html:5
+msgid "Log in"
+msgstr ""
+
+#: templates/registration/login.html:9
+msgid "Your username and password didn't match. Please try again."
+msgstr ""
+
+#: templates/registration/login.html:10 templates/registration/login.html:22
+msgid "Forgot your password?"
+msgstr ""
+
+#: templates/registration/login.html:18
+#: templates/registration/registration_form.html:34
+msgid "login"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:5
+#: templates/registration/password_reset_complete.html:6
+#: templates/registration/password_reset_complete.html:9
+msgid "Password reset complete"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:11
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:13
+msgid "Sign in"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:4
+#: templates/registration/password_reset_confirm.html:6
+#: templates/registration/password_reset_form.html:4
+#: templates/registration/password_reset_form.html:5
+#: templates/registration/password_reset_form.html:8
+msgid "Password reset"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:11
+msgid "Enter new password"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:13
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:17
+msgid "New password:"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:19
+msgid "Confirm password:"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:20
+msgid "Change my password"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:24
+msgid "Password reset unsuccessful"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:26
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: templates/registration/password_reset_done.html:4
+#: templates/registration/password_reset_done.html:5
+#: templates/registration/password_reset_done.html:8
+msgid "Password reset successful"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:10
+msgid ""
+"We've e-mailed you instructions for setting your password to the e-mail "
+"address you submitted. You should be receiving it shortly."
+msgstr ""
+
+#: templates/registration/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this e-mail because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+
+#: templates/registration/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:8
+msgid "Your username, in case you've forgotten:"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:10
+msgid "Thanks for using our site!"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:12
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:10
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll e-mail "
+"instructions for setting a new one."
+msgstr ""
+
+#: templates/registration/password_reset_form.html:14
+msgid "E-mail address:"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:14
+msgid "Reset my password"
+msgstr ""
+
+#: templates/registration/registration_form.html:5
+msgid "Create account"
+msgstr ""
+
+#: themes/sapling/templates/404.html:5 themes/sapling/templates/404.html:7
+msgid "Not found"
+msgstr ""
+
+#: themes/sapling/templates/404.html:14
+msgid "Item not found"
+msgstr ""
+
+#: themes/sapling/templates/site/add_page_area.html:3
+#: themes/sapling/templates/site/add_page_area.html:7
+msgid "Add a new page"
+msgstr ""
+
+#: themes/sapling/templates/site/add_page_area.html:5
+msgid "Name of page"
+msgstr ""
+
+#: themes/sapling/templates/site/base.html:87
+msgid ""
+"This is an <strong>insanely</strong> early preview of the <a href=\"http://"
+"localwiki.org/blog/2013/jul/25/big-news-future-localwiki/\" target=\"_blank"
+"\">new version of LocalWiki</a>.  We're making everything open as we build, "
+"but there's not much to see here yet.<br/>Feel free to share with your "
+"friends, but not too widely &mdash; we are a long way away from launching!"
+msgstr ""
+
+#: themes/sapling/templates/site/base.html:176
+msgid ""
+"\n"
+"      LocalWiki is a grassroots effort to collect, share and open the "
+"world’s local knowledge.  We are a 501(c)3 non-profit organization. <a href="
+"\"http://localwiki.org/about/\" target=\"_blank\">Learn more</a>.</p>\n"
+"      "
+msgstr ""
+
+#: themes/sapling/templates/site/login_info.html:8
+msgid "Welcome"
+msgstr ""
+
+#: themes/sapling/templates/site/login_info.html:11
+msgid "settings"
+msgstr ""
+
+#: themes/sapling/templates/site/login_info.html:12
+msgid "log out"
+msgstr ""
+
+#: themes/sapling/templates/site/login_info.html:16
+msgid "log in"
+msgstr ""
+
+#: themes/sapling/templates/site/login_info.html:16
+msgid "or"
+msgstr ""
+
+#: themes/sapling/templates/site/login_info.html:16
+msgid "create account"
+msgstr ""
+
+#: themes/sapling/templates/site/nav.html:7
+msgid "Near You"
+msgstr ""
+
+#: themes/sapling/templates/site/nav.html:12
+msgid "Settings"
+msgstr ""
+
+#: themes/sapling/templates/site/nav.html:18
+msgid "Guide"
+msgstr ""
+
+#: themes/sapling/templates/site/nav.html:19
+msgid "Help"
+msgstr ""
+
+#: themes/sapling/templates/site/nav.html:20
+msgid "Communities"
+msgstr ""
+
+#: themes/sapling/templates/site/nav.html:21
+msgid "API"
+msgstr ""
+
+#: themes/sapling/templates/site/nav.html:22
+msgid "About"
+msgstr ""
+
+#: themes/sapling/templates/site/search_form.html:6
+#, python-format
+msgid "Search %(region_name)s"
+msgstr ""
+
+#: themes/sapling/templates/site/search_form.html:11
+msgid "Search LocalWiki "
+msgstr ""
+
+#: users/__init__.py:7
+msgid "You are now logged out."
+msgstr ""
+
+#: users/admin.py:16
+msgid "Personal info"
+msgstr ""
+
+#: users/admin.py:17
+msgid "Permissions"
+msgstr ""
+
+#: users/admin.py:19
+msgid "Important dates"
+msgstr ""
+
+#: users/auth.py:34
+msgid "algorithm"
+msgstr ""
+
+#: users/auth.py:35
+msgid "hash"
+msgstr ""
+
+#: users/forms.py:11
+msgid "Only these users"
+msgstr ""
+
+#: users/forms.py:28 users/registration_backend/forms.py:44
+msgid "Your name"
+msgstr ""
+
+#: users/forms.py:29
+msgid "Email address"
+msgstr ""
+
+#: users/forms.py:30
+msgid "Gravatar email (private)"
+msgstr ""
+
+#: users/forms.py:34
+msgid "Disable this account permanently"
+msgstr ""
+
+#: users/models.py:56
+msgid "Gravatar Email (Private)"
+msgstr ""
+
+#: users/models.py:57
+msgid "Show email publicly (Helps with communication)"
+msgstr ""
+
+#: users/models.py:58
+msgid "Personal website"
+msgstr ""
+
+#: users/views.py:196
+msgid "Permissions updated!"
+msgstr ""
+
+#: users/views.py:207 users/views.py:242 users/views.py:252
+msgid "You must be logged in to change user settings."
+msgstr ""
+
+#: users/views.py:221
+msgid "User settings updated!"
+msgstr ""
+
+#: users/views.py:258
+msgid "Your account has been de-activated."
+msgstr ""
+
+#: users/registration_backend/__init__.py:61
+msgid "You are signed up and logged in!"
+msgstr ""
+
+#: users/registration_backend/__init__.py:63
+#, python-format
+msgid "Tell us who you are by <a href=\"%s\">creating a page for yourself!</a>"
+msgstr ""
+
+#: users/registration_backend/forms.py:33
+msgid "Username"
+msgstr ""
+
+#: users/registration_backend/forms.py:35
+msgid "This value may contain only letters (a-z), numbers, +, - and ."
+msgstr ""
+
+#: users/registration_backend/forms.py:40
+msgid "E-mail"
+msgstr ""
+
+#: users/registration_backend/forms.py:43
+msgid "Password"
+msgstr ""
+
+#: users/registration_backend/forms.py:49
+msgid "You must agree to the terms to register"
+msgstr ""
+
+#: users/registration_backend/forms.py:64
+msgid "A user with that username already exists."
+msgstr ""
+
+#: users/registration_backend/forms.py:73
+msgid ""
+"This email address is already in use. Please supply a different email "
+"address."
+msgstr ""
+
+#: users/templates/users/deactivate.html:9
+msgid "Deactivate account"
+msgstr ""
+
+#: users/templates/users/settings.html:10
+msgid "User settings"
+msgstr ""
+
+#: users/templates/users/settings.html:33
+msgid "Change your user icon at Gravatar.com"
+msgstr ""
+
+#: users/templates/users/settings.html:39
+#, python-format
+msgid ""
+"You can also <a href=\"%(deactivate_url)s\">deactivate your account</a>."
+msgstr ""
+
+#: users/templates/users/subscribed_list.html:4
+msgid "List of subscribers"
+msgstr ""
+
+#: users/templates/users/subscribed_list.html:8
+msgid "Subscriber emails:"
+msgstr ""
+
+#: users/templates/users/user_page.html:21
+msgid "user"
+msgstr ""
+
+#: users/templates/users/user_page.html:41
+msgid "This user account is disabled."
+msgstr ""
+
+#: users/templates/users/user_page.html:57
+#, python-format
+msgid "Joined on %(date_joined)s"
+msgstr ""
+
+#: users/templates/users/user_page.html:64
+msgid "total contributions"
+msgstr ""
+
+#: users/templates/users/user_page.html:73
+msgid "pages edited"
+msgstr ""
+
+#: users/templates/users/user_page.html:82
+msgid "maps edited"
+msgstr ""
+
+#: users/templates/users/user_page.html:93
+#, python-format
+msgid "%(num_pages_followed)s pages starred"
+msgstr ""
+
+#: users/templates/users/user_page.html:100
+#, python-format
+msgid "%(num_users_followed)s users starred"
+msgstr ""
+
+#: users/templates/users/user_page.html:108
+msgid "Regions followed"
+msgstr ""
+
+#: users/templatetags/user_tags.py:26
+msgid "Unknown"
+msgstr ""
+
+#: utils/views.py:88
+msgid ""
+"Anonymous users may not perform this action. Please <a href=\"/Users/login/"
+"\">log in</a>."
+msgstr ""
+
+#: utils/templates/utils/history/form.html:18
+msgid "revert"
+msgstr ""
+
+#: versionutils/diff/diffutils.py:103 versionutils/diff/diffutils.py:206
+#: versionutils/diff/diffutils.py:294 versionutils/diff/diffutils.py:314
+#: versionutils/diff/diffutils.py:377 versionutils/diff/diffutils.py:391
+#: versionutils/diff/diffutils.py:494
+msgid "No differences found"
+msgstr ""
+
+#: versionutils/diff/diffutils.py:529 versionutils/diff/diffutils.py:539
+#: versionutils/diff/diffutils.py:552 versionutils/diff/diffutils.py:562
+msgid "Stayed the same"
+msgstr ""
+
+#: versionutils/diff/diffutils.py:532 versionutils/diff/diffutils.py:544
+msgid "Removed"
+msgstr ""
+
+#: versionutils/diff/diffutils.py:555 versionutils/diff/diffutils.py:567
+#: versionutils/versioning/constants.py:14
+msgid "Added"
+msgstr ""
+
+#: versionutils/diff/templates/diff/file_diff.html:8
+msgid "Download deleted version"
+msgstr ""
+
+#: versionutils/diff/templates/diff/file_diff.html:9
+msgid "Download added version"
+msgstr ""
+
+#: versionutils/merging/forms.py:53
+msgid ""
+"Warning: someone else made changes before you.  Please review the changes "
+"and save again."
+msgstr ""
+
+#: versionutils/merging/forms.py:55
+msgid ""
+"Someone else made changes before you but yourchanges were successfully "
+"merged."
+msgstr ""
+
+#: versionutils/templates/versionutils/delete_form.html:11
+msgid "Delete"
+msgstr ""
+
+#: versionutils/templates/versionutils/revert_form.html:12
+msgid "Revert"
+msgstr ""
+
+#: versionutils/templates/versionutils/history/form.html:8
+#: versionutils/templates/versionutils/history/form.html:15
+msgid "Compare"
+msgstr ""
+
+#: versionutils/templates/versionutils/history/form.html:47
+msgid "There is no revision history."
+msgstr ""
+
+#: versionutils/templates/versionutils/history/media.html:47
+msgid "Please select two versions to compare"
+msgstr ""
+
+#: versionutils/versioning/constants.py:15
+msgid "Updated"
+msgstr ""
+
+#: versionutils/versioning/constants.py:16
+msgid "Deleted"
+msgstr ""
+
+#: versionutils/versioning/constants.py:17
+msgid "Deleted via cascade"
+msgstr ""
+
+#: versionutils/versioning/constants.py:18
+msgid "Reverted"
+msgstr ""
+
+#: versionutils/versioning/constants.py:19
+msgid "Reverted/Added"
+msgstr ""
+
+#: versionutils/versioning/constants.py:20
+msgid "Reverted/Deleted"
+msgstr ""
+
+#: versionutils/versioning/constants.py:21
+msgid "Reverted/Deleted via cascade"
+msgstr ""
+
+#: versionutils/versioning/constants.py:22
+msgid "Reverted via cascade"
+msgstr ""
+
+#: versionutils/versioning/forms.py:48
+msgid "Reason for deletion"
+msgstr ""
+
+#: versionutils/versioning/forms.py:49
+msgid "Permanently remove older versions"
+msgstr ""
+
+#: versionutils/versioning/forms.py:50 versionutils/versioning/forms.py:62
+msgid "Don't log this change"
+msgstr ""
+
+#: versionutils/versioning/forms.py:60
+msgid "Reason for revert"
+msgstr ""
+
+#: versionutils/versioning/forms.py:61
+msgid "Permanently remove newer versions"
+msgstr ""
+
+#: versionutils/versioning/views.py:68
+msgid "Your attention to detail is appreciated."
+msgstr ""
+
+#: versionutils/versioning/views.py:103
+msgid "Successfully deleted!"
+msgstr ""
+
+#: versionutils/versioning/views.py:156
+#, python-format
+msgid "Reverted to version %s."
+msgstr ""

@@ -2,6 +2,8 @@
 # This is a thin wrapper over olwidget.
 # We provide our own media.
 ################################################
+from copy import copy
+
 from django.conf import settings
 
 from olwidget import widgets
@@ -9,8 +11,6 @@ from utils import reverse_lazy
 from utils.static_helpers import static_url
 
 OUR_JS = [
-    reverse_lazy('django.views.i18n.javascript_catalog',
-                   args=['maps']),
     static_url('olwidget/js/sapling_utils.js'),
 ]
 OUR_CSS = {}
@@ -42,8 +42,13 @@ class InfoMap(MediaMixin, widgets.InfoMap):
 
 def map_options_for_region(region):
     region_center = region.regionsettings.region_center
-    return {
+    if not region_center:
+        return {}
+    opts = {
         'default_lon': region_center.x,
         'default_lat': region_center.y,
         'default_zoom': region.regionsettings.region_zoom_level,
     }
+    layers = copy(getattr(settings, 'OLWIDGET_DEFAULT_OPTIONS')['layers'])
+    opts['layers'] = layers
+    return opts

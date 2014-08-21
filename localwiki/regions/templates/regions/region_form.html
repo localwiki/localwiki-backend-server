@@ -1,11 +1,11 @@
 {% extends "pages/base.html" %}
 
-{% load url from future %}
+
 {% load i18n %}
 
 {% block title %}{% trans "LocalWiki" %}{% endblock %}
 
-{% block header_title %}{% trans "Add a region" %}{% endblock %}
+{% block header_title %}{% trans "Add a new LocalWiki region" %}{% endblock %}
 
 {% block body %}
 <body>
@@ -47,6 +47,11 @@
         <label for="id_geom">{% trans "Draw the rough area the region will cover" %}</label>:
         <div class="help_text">{% trans "Pick an area roughly the size of a city. Don't worry about being exact!" %}</div>
         {{ form.geom }}
+    </div>
+    <div class="item">
+        {{ form.default_language.errors }}
+        {{ form.default_language.label_tag }}: {{ form.default_language }}
+        <div class="help_text">{{ form.default_language.help_text }}</div>
     </div>
 
     <input type="submit" value="Add region" />

@@ -12,16 +12,18 @@ class Migration(DataMigration):
         from pages.models import slugify
         from links import extract_internal_links
 
-        for page in orm['pages.Page'].objects.all():
+        for page in orm['pages.Page'].objects.all().iterator():
             region = page.region
             links = extract_internal_links(page.content)
+            print "..recording page links on %s" % smart_str(page.name)
             for pagename, count in links.iteritems():
                 page_exists = orm['pages.Page'].objects.filter(slug=slugify(pagename), region=region)
                 if page_exists:
                     destination = page_exists[0]
                 else:
                     destination = None
-                print "..recording page links on %s" % smart_str(pagename)
+                if orm.Link.objects.filter(source=page, destination=destination).exists():
+                    continue
                 link = orm.Link(
                     source=page,
                     region=region,
@@ -30,6 +32,7 @@ class Migration(DataMigration):
                     count=count,
                 )
                 link.save()
+                pass
 
     def backwards(self, orm):
         orm.Link.objects.all().delete()

@@ -1,8 +1,10 @@
 SaplingMap = {
 
     is_dirty: false,
+    show_links_on_hover: true,
 
     init_openlayers: function() {
+        OpenLayers.Control.Navigation.prototype.dragPanOptions = {enableKinetic: true};
         OpenLayers.Control.LayerSwitcher.prototype.roundedCorner = false;
         OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
         var base_initOptions = olwidget.Map.prototype.initOptions;
@@ -74,7 +76,45 @@ SaplingMap = {
             map.addControl(new OpenLayers.Control.Permalink({anchor: true}));
         }
 
-        this.setup_link_hover_activation(map);
+        if (this.show_links_on_hover) {
+            this.setup_link_hover_activation(map);
+        }
+        this.disable_scroll_zoom(map);
+    },
+
+    _setup_pagename_autocomplete: function () {
+        var pages_remote_url = '/_api/pages/suggest?term=%QUERY&region_id=' + region_id;
+        var autoPages = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.whitespace('value'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: pages_remote_url
+        });
+        autoPages.initialize();
+
+        $('#map_pagename').typeahead(null,
+            {
+              name: 'map_page_name',
+              source: autoPages.ttAdapter(),
+            }
+        );
+    },
+
+    add_map_button: function() {
+        $('#add_map_button').click(function(e) {
+            e.preventDefault();
+            $(this).hide()
+            $('#new_map_form').show();
+            SaplingMap._setup_pagename_autocomplete();
+            $('#new_map_form #map_pagename').focus();
+        });
+        $('#new_map_form').submit(function(e) {
+            e.preventDefault();
+            var hash = window.location.hash;
+            hash = hash.replace('#', '');
+            var action = $('#new_map_form').attr('action');
+            $('#new_map_form').attr('action', action + '#' + hash);
+            this.submit();
+        });
     },
 
     setup_link_hover_activation: function(map) {
@@ -96,6 +136,12 @@ SaplingMap = {
                 SaplingMap._highlightResult(this, feature, map, true);
             });
         });
+    },
+
+    disable_scroll_zoom: function(map) {
+        var controls = map.getControlsByClass('OpenLayers.Control.Navigation');
+        for(var i = 0; i < controls.length; ++i)
+        controls[i].disableZoomWheel();
     },
 
     _set_selected_style: function(map, feature) {
@@ -145,6 +191,8 @@ SaplingMap = {
               var feature = evt.feature;
               var featureBounds = feature.geometry.bounds;
               $('#results_pane').css('display', 'block');
+              $('#add_map_button').addClass('with_results');
+              $('#new_map_form').addClass('with_results');
               $('.mapwidget').css('float', 'left');
               size_map();
               map.updateSize();
@@ -513,12 +561,106 @@ SaplingMap = {
         }
     },
 
+    _convert_to_coordinate: function(s) {
+        var coords = null;
+        if (s.split(',').length == 2) {
+            var coords = s.split(',');
+        }
+        else if (s.split(' ').length == 2) {
+            var coords = s.split(' ');
+        }
+        if (!coords) {
+            return;
+        }
+        if (!(isNaN(parseFloat(coords[0]))) && (!isNaN(parseFloat(coords[1])))) {
+            return [parseFloat(coords[0]), parseFloat(coords[1])];
+        }
+    },
+
+    _setup_map_search: function(map, layer) {
+        $('.mapwidget').prepend(
+            '<form id="map_search" class="search" action="." onSubmit="return false;" method="POST"><input type="text" id="address" name="address" placeholder="Find via address.."/></form>');
+
+        var geoCodeURL = "http://nominatim.openstreetmap.org/search";
+        var mapSearch = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.whitespace('value'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: {
+                url: geoCodeURL,
+                replace: function(url, uriEncodedQuery) {
+                    var q = decodeURIComponent(uriEncodedQuery);
+                    // Did they use a coma to specify the city, etc?
+                    var didnt_specify_region = q.indexOf(',') === -1;
+                    if (didnt_specify_region) {
+                        // Let's throw in the region name to improve geocoding.
+                        q += ', ' + region_name;
+                    }
+                    return (url + '?q=' + encodeURIComponent(q)) + '&format=json';
+                }
+            }
+        });
+        mapSearch.initialize();
+        $('#address').typeahead(null,
+            {
+              name: 'address',
+              source: mapSearch.ttAdapter(),
+              displayKey: 'display_name'
+            },
+            {
+              // Footer: see if they typed a lat, lon pair instead of an address.
+              source: function(q, cb) {
+                var coords = SaplingMap._convert_to_coordinate(q);
+                if (coords) {
+                  return cb([{'value': q, 'lat': coords[0], 'lon': coords[1]}]);
+                }
+              },
+              templates: {
+                header: Handlebars.compile('<div class="autocomplete_divider"></div>'),
+                suggestion: Handlebars.compile("<p>" +
+                    gettext('Add marker for lat, lon "{{ value }}"') +
+                    "</p>"
+                )
+              }
+            }
+        )
+        .on('typeahead:selected', function(e, datum) {
+            if (!datum.osm_type) {
+                // Isn't a way, relation or node - just a point I think?
+                var point = new OpenLayers.Geometry.Point(datum.lon, datum.lat);
+                point = point.transform(
+                    new OpenLayers.Projection("EPSG:4326"),
+                    map.getProjectionObject());
+                var pointFeature = new OpenLayers.Feature.Vector(point, null, null);
+                // clear the features out
+                layer.destroyFeatures();
+                layer.addFeatures([pointFeature]);
+                map.zoomToExtent(layer.getDataExtent());
+                return;
+            }
+
+            $('.mapwidget').prepend('<div class="loading"></div>');
+            $('.mapwidget .loading').height($('.mapwidget').height());
+
+            $.get('/' + region_slug + '/map/_get_osm/', { 'display_name': datum.display_name, 'osm_id': datum.osm_id, 'osm_type': datum.osm_type }, function(data){
+                var temp = new olwidget.InfoLayer([[data.geom, 'osm', 'osm']]);
+                temp.visibility = false;
+                map.addLayer(temp);
+                layer.removeAllFeatures();
+                layer.addFeatures(temp.features);
+                map.removeLayer(temp);
+                map.zoomToExtent(layer.getDataExtent());
+                $('.mapwidget .loading').remove();
+            });
+        });
+    },
+
     _open_editing: function(map) {
         for (var i = 0; i < map.controls.length; i++) { 
             if (map.controls[i] && map.controls[i].CLASS_NAME == 
         "olwidget.EditableLayerSwitcher") { 
                 layer = map.vectorLayers[0];
                 if (layer.controls) {
+                    this._setup_map_search(map, layer);
                     this._remove_unneeded_controls(layer);
                     map.controls[i].setEditing(layer);
 

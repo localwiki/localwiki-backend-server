@@ -8,6 +8,9 @@ def _is_absolute(href):
 
 def _is_anchor_link(href):
     return href.startswith('#')
+
+def _invalid(href):
+    return len(href) > 255
     
 def extract_internal_links(html):
     """
@@ -29,7 +32,7 @@ def extract_internal_links(html):
     # Grab the links if they're not anchors or external.
     d = {}
     for href in hrefs:
-        if not _is_absolute(href) and not _is_anchor_link(href):
+        if not _is_absolute(href) and not _is_anchor_link(href) and not _invalid(href):
             if not slugify(href) in d:
                 d[slugify(href)] = (url_to_name(href), 1)
             else:

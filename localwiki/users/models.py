@@ -7,6 +7,8 @@ from django.db import models
 from django.conf import settings
 from django.contrib.sites.models import Site
 
+from localwiki.utils.urlresolvers import reverse
+
 
 #######################################################################
 #
@@ -16,7 +18,6 @@ from django.contrib.sites.models import Site
 #######################################################################
 
 User._meta.get_field_by_name('email')[0]._unique = True
-
 
 def name_to_first_last(self, name):
     """
@@ -43,7 +44,7 @@ def first_last_to_name(self):
 
 
 def get_absolute_url(self):
-    return "/Users/%s" % urllib.quote(smart_str(self.username))
+    return reverse('user-page', kwargs={'username': smart_str(self.username), 'rest': ''})
 
 
 User.name = property(first_last_to_name, name_to_first_last)
@@ -53,9 +54,15 @@ User.get_absolute_url = get_absolute_url
 class UserProfile(models.Model):
     # this field is required
     user = models.OneToOneField(User)
-    subscribed = models.BooleanField(verbose_name=_(settings.SUBSCRIBE_MESSAGE))
+    subscribed = models.BooleanField(verbose_name=_(settings.SUBSCRIBE_MESSAGE), db_index=True)
+    _gravatar_email = models.EmailField(verbose_name=_("Gravatar Email (Private)"), max_length=254, blank=True, null=True)
+    show_email = models.BooleanField(verbose_name=_("Show email publicly (Helps with communication)"), default=False)
+    personal_url = models.URLField(verbose_name=_("Personal website"), blank=True, null=True)
+
+    @property
+    def gravatar_email(self):
+        return self._gravatar_email or self.user.email
 
 
 # For registration calls
 import signals
-import api

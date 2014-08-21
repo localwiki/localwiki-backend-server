@@ -1,9 +1,8 @@
 {% extends "pages/base.html" %}
 
-{% load url from future %}
-
 {% load i18n %}
 {% load pages_tags %}
+{% load canonical_urls %}
 {% load tags_tags %}
 
 {% block media %}{{block.super}}{% if map %}{{ map.media }}{% endif %}
@@ -20,7 +19,12 @@
 {% endif %}
 {% endblock %}
 
+{% block canonical_url %}
+  {% render_canonical_url page %}
+{% endblock %}
+
 {% block header_subtitle %}
+  {{ block.super }}
   {% if request.GET.redirected_from %}
     <div id="object_subtitle">
     {% trans "Redirected from" %} <a href="{% url 'pages:show' slug=request.GET.redirected_from region=page.region.slug %}?show=1">{{ request.GET.redirected_from }}</a>
@@ -78,7 +82,15 @@
 
 {% block footer %}
   {{ block.super }}
-  <p>
-    {% blocktrans with ago=date|timesince %}This page was last modified {{ ago }} ago{% endblocktrans %}
+  <p class="contributors">
+    {% if contributors_number %}
+        {% blocktrans with ago=date|timesince contributors_html=contributors_html|safe contributors_number=contributors_number|safe request_path=request.path %}
+        Contributed by <span class="contributor_list">{{ contributors_html }}</span> and <a href="{{ request_path }}/_history/">{{ contributors_number }}</a> others.
+        {% endblocktrans %}
+    {% else %}
+        {% blocktrans with ago=date|timesince contributors_html=contributors_html|safe contributors_number=contributors_number|safe request_path=request.path %}
+        Contributed by <span class="contributor_list">{{ contributors_html }}</span>
+        {% endblocktrans %}
+    {% endif %}
   </p>
 {% endblock %}

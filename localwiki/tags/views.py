@@ -9,7 +9,7 @@ from django.db.models.aggregates import Count
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
-from versionutils.versioning.views import VersionsList, RevertView, UpdateView
+from versionutils.versioning.views import VersionsList, UpdateView
 from versionutils.diff.views import CompareView
 from regions.models import Region
 from regions.views import RegionMixin
@@ -18,7 +18,7 @@ from forms import PageTagSetForm
 from pages.models import Page
 
 from utils.views import CreateObjectMixin, PermissionRequiredMixin,\
-    Custom404Mixin
+    Custom404Mixin, RevertView
 
 
 class PageNotFoundMixin(Custom404Mixin):
@@ -57,12 +57,13 @@ class TaggedList(RegionMixin, ListView):
         # tags list page
         from maps.views import MapForTag
         map_view = MapForTag()
+        map_view.request = self.request
         map_view.kwargs = dict(tag=self.tag.slug, region=self.get_region().slug)
         map_view.object_list = map_view.get_queryset()
         return map_view.get_map_objects()
 
     def get_context_data(self, *args, **kwargs):
-        from maps.widgets import InfoMap
+        from maps.widgets import InfoMap, map_options_for_region
 
         context = super(TaggedList, self).get_context_data(*args, **kwargs)
         context['tag'] = self.tag
@@ -82,6 +83,7 @@ class TaggedList(RegionMixin, ListView):
                 map_controls.remove('KeyboardDefaults')
             olwidget_options['map_options'] = map_opts
             olwidget_options['map_div_class'] = 'mapwidget small'
+            olwidget_options.update(map_options_for_region(self.get_region()))
             context['map'] = InfoMap(
                 map_objects,
                 options=olwidget_options)
@@ -200,7 +202,7 @@ class PageTagSetRevertView(PermissionRequiredMixin, RegionMixin, RevertView):
             args=[self.kwargs['region'], self.kwargs['slug']])
 
 
-def suggest_tags(request, region=None):
+def suggest_tags(request):
     """
     Simple tag suggest.
     """
@@ -210,8 +212,17 @@ def suggest_tags(request, region=None):
     term = request.GET.get('term', None)
     if not term:
         return HttpResponse('')
-    results = Tag.objects.filter(
-        name__istartswith=term,
-        region__slug=region).exclude(pagetagset=None)
+    region_id = request.GET.get('region_id', None)
+    if region_id is not None:
+        results = Tag.objects.filter(
+            name__istartswith=term,
+            region__id=int(region_id)).exclude(pagetagset=None)
+    else:
+        results = Tag.objects.filter(
+            name__istartswith=term).exclude(pagetagset=None)
+
+    # Set a sane limit
+    results = results[:20]
+
     results = [t.name for t in results]
     return HttpResponse(json.dumps(results))

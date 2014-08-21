@@ -37,13 +37,14 @@ DATABASES = {
 SOUTH_MIGRATION_MODULES = {
     # HACK: South treats 'database' as the name of constance.backends.database
     'database': 'migrations.south.constance',
+    'follow': 'utils.external_migrations.follow',
 }
 
 GLOBAL_LICENSE_NOTE = _("""<p>Except where otherwise noted, this content is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution License</a>. See <a href="/Copyrights">Copyrights</a>.</p>""")
 
-EDIT_LICENSE_NOTE = _("""<p>By clicking "Save Changes" you are agreeing to release your contribution under the <a rel="license" href="http://creativecommons.org/licenses/by/3.0/" target="_blank">Creative Commons-By license</a>, unless noted otherwise. See <a href="/Copyrights" target="_blank">Copyrights</a>.</p>""")
+EDIT_LICENSE_NOTE = _("""<p>By clicking "Save Changes" you are agreeing to release your contribution under the <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0 Public Domain license</a>, unless noted otherwise. See <a href="/Copyrights" target="_blank">Copyrights</a>.</p>""")
 
-SIGNUP_TOS = _("""I agree to release my contributions under the <a rel="license" href="http://creativecommons.org/licenses/by/3.0/" target="_blank">Creative Commons-By license</a>, unless noted otherwise. See <a href="/Copyrights" target="_blank">Copyrights</a>.""")
+SIGNUP_TOS = _("""I agree to release my contributions under the <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0 Public Domain license</a>, unless noted otherwise. See <a href="/Copyrights" target="_blank">Copyrights</a>.""")
 
 SUBSCRIBE_MESSAGE = _("""I would like to receive occasional updates about this project via email.""")
 
@@ -56,7 +57,7 @@ TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 LOCALE_PATHS = (
     os.path.join(PROJECT_ROOT, 'locale'),
@@ -66,12 +67,11 @@ LOCALE_PATHS = (
 LANGUAGES = (
     ('en', _('English')),
     ('ja', _('Japanese')),
-    ('ru_RU', _('Russian')),
-    ('de_CH', _('German (Swiss)')),
-    ('es_AR', _('Spanish (Argentina)')),
-    ('da_DK', _('Danish')),
-    ('it_IT', _('Italian')),
-    ('pt_PT', _('Portuguese')),
+    ('fr', _('French')),
+    ('es', _('Spanish')),
+    ('de', _('German')),
+    ('nl', _('Dutch')),
+    ('uk', _('Ukrainian')),
 )
 
 SITE_ID = 1
@@ -150,6 +150,12 @@ USERS_DEFAULT_PERMISSIONS = {'auth.group':
                                  },
                                 ]
                             }
+USER_REGION_ADMIN_CAN_MANAGE = [
+    'pages.models.Page',
+    'page.models.PageFile',
+    'maps.models.MapData',
+    'redirects.models.Redirect',
+]
 
 # django-guardian setting
 ANONYMOUS_USER_ID = -1
@@ -163,9 +169,6 @@ SHOW_IP_ADDRESSES = True
 
 LOGIN_REDIRECT_URL = '/'
 
-HAYSTACK_SITECONF = 'main.search_sites'
-HAYSTACK_SEARCH_ENGINE = 'solr'
-
 THUMBNAIL_BACKEND = 'utils.sorl_backends.AutoFormatBackend'
 
 OL_API = STATIC_URL + 'openlayers/OpenLayers.js?tm=1348975452'
@@ -174,22 +177,16 @@ OLWIDGET_JS = '%solwidget/js/olwidget.js?tm=1317359250' % STATIC_URL
 CLOUDMADE_API = '%solwidget/js/sapling_cloudmade.js?tm=1317359250' % STATIC_URL
 
 # django-honeypot options
-HONEYPOT_FIELD_NAME = 'content2'
+HONEYPOT_FIELD_NAME = 'main_content'
 HONEYPOT_USE_JS_FIELD = True
 HONEYPOT_REDIRECT_URL = '/'
 
 TASTYPIE_ALLOW_MISSING_SLASH = True
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.load_template_source',
-)
-
 TEMPLATE_CONTEXT_PROCESSORS = (
     "utils.context_processors.sites.current_site",
     "utils.context_processors.settings.license_agreements",
+    "utils.context_processors.settings.hostnames",
 
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
@@ -205,20 +202,30 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'utils.middleware.UpdateCacheMiddleware',
+    'johnny.middleware.LocalStoreClearMiddleware',
+    'johnny.middleware.QueryCacheMiddleware',
+    'django_hosts.middleware.HostsMiddlewareRequest',
     'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'utils.middleware.XForwardedForMiddleware',
+    'utils.middleware.SessionMiddleware',
+    'django_xsession.middleware.XSessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'utils.middleware.SubdomainLanguageMiddleware',
+    'regions.middleware.RedirectToLanguageSubdomainMiddleware',
+    'utils.middleware.RequestURIMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'honeypot.middleware.HoneypotMiddleware',
     'versionutils.versioning.middleware.AutoTrackUserInfoMiddleware',
     'redirects.middleware.RedirectFallbackMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
-    'utils.middleware.FetchFromCacheMiddleware',
-    'utils.middleware.TrackPOSTMiddleware',
-    'main.api.middleware.XsSharing',
+    'block_ip.middleware.BlockIPMiddleware',
+    'django_hosts.middleware.HostsMiddlewareResponse',
+    'phased.middleware.PhasedRenderMiddleware',
 )
+
+XSESSION_FILENAME = '_utils/xsession_loader.js'
 
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
@@ -230,19 +237,26 @@ PASSWORD_HASHERS = (
     'users.auth.UnsaltedSHA1PasswordHasher',  # For legacy imports
 )
 
-# Dummy cache - TODO: switch to memcached by default
+# Dummy cache
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
 
+JOHNNY_MIDDLEWARE_KEY_PREFIX='jc_lw'
+PHASED_KEEP_CONTEXT = False
+
 ROOT_URLCONF = 'main.urls'
+ROOT_HOSTCONF = 'main.hosts'
+DEFAULT_HOST = 'hub'
 
 TEMPLATE_DIRS = (
     os.path.join(DATA_ROOT, 'templates'),
     os.path.join(PROJECT_ROOT, 'templates'),
 )
+
+SOUTH_TESTS_MIGRATE = True
 
 INSTALLED_APPS = (
     # Django-provided apps
@@ -253,20 +267,36 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.sites',
+    'django.contrib.humanize',
+    'django.contrib.sitemaps',
     #'django.contrib.staticfiles',
 
     # Other third-party apps
     'haystack',
+    'celery_haystack',
     'olwidget',
     'registration',
     'sorl.thumbnail',
     'staticfiles',
     'guardian',
     'south',
-    'tastypie',
+    'rest_framework',
+    'rest_framework.authtoken',
     'honeypot',
     'constance.backends.database',
     'constance',
+    'django_extensions',
+    'corsheaders',
+    'django_gravatar',
+    'endless_pagination',
+    'follow',
+    'block_ip',
+    'static_sitemaps',
+    'djcelery_email',
+    'actstream',
+    'django_hosts',
+    'django_xsession',
+    'phased',
 
     # Our apps
     'versionutils.versioning',
@@ -279,11 +309,15 @@ INSTALLED_APPS = (
     'links',
     'tags',
     'users',
-    'recentchanges',
+    'activity',
+    'page_scores',
     'search',
     'frontpage',
     'dashboard',
+    'stars',
+    'explore',
     'main.api',
+    'main',
     'utils',
 )
 
@@ -292,24 +326,73 @@ TEMPLATE_DIRS = ()
 
 SITE_THEME = 'sapling'
 
+REST_FRAMEWORK = {
+    'PAGINATE_BY': 30,
+    # Allow client to override, using `?limit=xxx`.
+    'PAGINATE_BY_PARAM': 'limit',  
+    # Maximum limit allowed when using `?limit=xxx`.
+    'MAX_PAGINATE_BY': 100,
+    # Use hyperlinked styles by default.
+    # Only used if the `serializer_class` attribute is not set on a view.
+    'DEFAULT_MODEL_SERIALIZER_CLASS':
+        'rest_framework.serializers.HyperlinkedModelSerializer',
+
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework.filters.DjangoFilterBackend', 'rest_framework.filters.OrderingFilter',
+    ),
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        # Combined, these allow only authenticated users to 
+        # write via the API and non-authenticated users to read.
+        'main.api.permissions.DjangoObjectPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly'
+    ],
+    # Base API policies
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'main.api.renderers.LocalWikiAPIRenderer',
+    ),
+}
+
+# Allow Cross-Origin Resource Sharing headers on API urls
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_URLS_REGEX = r'^/api/.*$'
+
+ENDLESS_PAGINATION_PER_PAGE = 50
+
+STATICSITEMAPS_ROOT_SITEMAP = 'localwiki.main.sitemaps.sitemaps'
+STATICSITEMAPS_REFRESH_AFTER = 60 * 1
+STATICSITEMAPS_USE_GZIP = False
+
 # For testing, you can start the python debugging smtp server like so:
 # sudo python -m smtpd -n -c DebuggingServer localhost:25
 EMAIL_HOST = 'localhost'
 EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 25
 EMAIL_USE_TLS = False
+TEMPLATED_EMAIL_TEMPLATE_DIR = ''
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 
-#######################################################################
-# Other config values.
-#######################################################################
+CELERY_EMAIL_TASK_CONFIG = {
+    'rate_limit' : '80/m',
+}
+
+ACTSTREAM_SETTINGS = {
+    'MODELS': ('auth.user', 'pages.page', 'regions.region'),
+}
+DISABLE_FOLLOW_SIGNALS = False
 
 OLWIDGET_DEFAULT_OPTIONS = {
-    'default_lat': 37.76,
-    'default_lon': -122.43,
-    'default_zoom': 12,
+    'default_lat': 37,
+    'default_lon': -99,
+    'default_zoom': 3,
     'zoom_to_data_extent_min': 16,
 
-    'layers': ['cloudmade.35165', 've.aerial'],
+    'layers': ['mblw', 've.aerial'],
     'map_options': {
         'controls': ['Navigation', 'PanZoom', 'KeyboardDefaults'],
         'theme': '/static/openlayers/theme/sapling/style.css',
@@ -323,10 +406,12 @@ OLWIDGET_DEFAULT_OPTIONS = {
 DAISYDIFF_URL = 'http://localhost:8080/daisydiff/diff'
 DAISYDIFF_MERGE_URL = 'http://localhost:8080/daisydiff/merge'
 
+IN_API_TEST = False
+
 # list of regular expressions for white listing embedded URLs
 EMBED_ALLOWED_SRC = ['.*']
 
-HAYSTACK_SOLR_URL = 'http://localhost:8080/solr'
+HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 
 CACHE_BACKEND = 'dummy:///'
 

@@ -6,6 +6,10 @@ from regions.models import Region
 
 
 class Link(models.Model):
+    """
+    Model representing an internal href link between two
+    LocalWiki pages.
+    """
     source = models.ForeignKey(Page, related_name='links')
     destination = models.ForeignKey(Page, related_name='links_to_here', null=True)
     # We can link to pages that don't yet exist, so we record the page name as well.

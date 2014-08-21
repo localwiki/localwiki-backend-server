@@ -1,7 +1,5 @@
 {% extends "pages/base.html" %}
 
-{% load url from future %}
-
 {% load i18n %}
 
 {% block head_extra %}{{ block.super }}<link rel="alternate" href="{% url 'pages:file-changes-feed' slug=file.slug file=file.name region=file.region.slug %}" type="application/rss+xml" title="{% trans "Recent changes for this file" %}"/>{% endblock %}
@@ -42,8 +40,12 @@
   
   {% block extras %}
   <h3>{% trans "Upload a new version" %}</h3>
-  <form action="../_upload" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+  {% comment %}
+  For caching purposes, we don't set crsf_token in this form. We instead get the csrf cookie via JS.
+  Because this template is very frequently accessed and we want to avoid sending the csrftoken cookie
+  in order to allow maximal non-authenticated caching.
+  {% endcomment %}
+  <form action="../_upload" id="file_replace_upload" method="post" enctype="multipart/form-data">
     <table>
       <tbody>
         {{ form }}

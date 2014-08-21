@@ -1,0 +1,94 @@
+# LocalWiki Apache config file
+# After modifying and saving, you may need to run these commands:
+#     $ sudo a2ensite example.com
+#     $ sudo /etc/init.d/apache2 reload
+
+<VirtualHost *:8084>
+
+    ServerAdmin {{ server_admin_email }}
+
+    WSGIDaemonProcess localwiki processes=2 threads=15 maximum-requests=10000 user=www-data group=www-data display-name=%{GROUP}
+    WSGIProcessGroup localwiki
+    # For API Authorization header support
+    WSGIPassAuthorization On
+
+    WSGIScriptAlias / {{ localwiki_root }}/localwiki.wsgi
+
+    CustomLog /var/log/apache2/access.log combined
+
+</VirtualHost>
+
+<VirtualHost *:80>
+    # Virtualhost for routing to either:
+    #   1) Static assets, served via apache directly.
+    #   2) Application URLs, proxied to varnish first.
+    #      a) Varnish will then use localhost:8084
+    #         to get the application content.
+
+    ServerName {{ public_hostname }}
+    ServerAlias www.{{ public_hostname }}
+    ServerAlias *.{{ public_hostname }}
+    {% for domain in custom_domains %}
+    ServerAlias {{ domain }}
+    {% endfor %}
+
+    ServerAdmin {{ server_admin_email }}
+
+    # Redirect www -> no-www
+    RewriteEngine on
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ http://%1$1 [R=301,L]
+
+    # XXX TEMPORARY
+    # TODO remove
+    # mis-named regions
+    RewriteRule ^/stl/(.*)$ http://localwiki.net/st-louis/$1 [R=301]
+
+    # The media directory, which contains user-uploaded content, should be set
+    # to force downloads. This is *extremely* important for security reasons.
+    # Note: The /media/ directory must be writable by the www-data user
+    Alias /media/ {{ data_root }}/media/
+    <Location /media/>
+        Header set Content-Disposition attachment
+    </Location>
+
+    Alias /static/ {{ data_root }}/static/
+    Alias /robots.txt {{ data_root }}/static/robots.txt
+    Alias /sitemap.xml {{ data_root }}/static/sitemap.xml
+    Alias /favicon.ico {{ data_root }}/static/favicon.ico
+
+    <Directory {{ data_root }}>
+        Options -Indexes FollowSymLinks MultiViews
+        AllowOverride None
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+    <Proxy *>
+        Order deny,allow
+        Allow from all
+    </Proxy>
+    ProxyRequests off
+
+    # Route to varnish, except for some static assets
+    SetEnv proxy-nokeepalive 1
+    SetEnv force-proxy-request-1.0
+    
+    ProxyPass /static/ !
+    ProxyPass /media/ !
+    ProxyPass /robots.txt !
+    ProxyPass /sitemap.xml !
+    ProxyPass /favicon.ico !
+    ProxyPass / http://127.0.0.1:6081/
+
+    ProxyPassReverse /static/ !
+    ProxyPassReverse /media/ !
+    ProxyPassReverse /static/ !
+    ProxyPassReverse /robots.txt !
+    ProxyPassReverse /sitemap.xml !
+    ProxyPassReverse /favicon.ico !
+    ProxyPassReverse / http://127.0.0.1:6081/
+
+    CustomLog /var/log/apache2/access.log combined
+
+</VirtualHost>
