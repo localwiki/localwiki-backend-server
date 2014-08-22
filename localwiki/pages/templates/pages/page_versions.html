@@ -17,7 +17,7 @@
   {% include "utils/history/form.html" %}
   <p style="margin-top: 1em;">
     {% url 'links:for-page' slug=page.name region=region.slug as page_links_url %}
-    {% blocktrans %} Looking for <a href="../_files/">files</a>, <a href="{{ page_links_url }}">links</a>, or <a href="../_tags/_history/">tags</a>?{% endblocktrans %}
+    {% blocktrans %} Looking for <a href="../_files/">files</a>, <a href="{{ page_links_url }}" rel="nofollow">links</a>, or <a href="../_tags/_history/" rel="nofollow">tags</a>?{% endblocktrans %}
   </p>
 {% endblock %}
 
