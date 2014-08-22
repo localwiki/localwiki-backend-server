@@ -29,6 +29,8 @@ class MediaMixin(object):
 # We provide our own media.
 ################################################
 
+MAX_REGION_AREA = 3  # This should probably be even less. Ugh.
+
 class RegionForm(MediaMixin, MapModelForm):
     default_language = forms.ChoiceField(label=ugettext_lazy("Default language"),
         choices=LANGUAGES, required=False,
@@ -41,7 +43,9 @@ class RegionForm(MediaMixin, MapModelForm):
     def clean_geom(self):
         data = self.cleaned_data['geom']
         if not data or not data[0]:
-            raise forms.ValidationError("Please draw a region with the map drawing tool.")
+            raise forms.ValidationError(_("Please draw a region with the map drawing tool."))
+        if data[0].area > MAX_REGION_AREA:
+            raise forms.ValidationError(_("The region you drew is too large. Please draw a region that's about the size of a city (or smaller). If you need a bigger region than that, please email contact@localwiki.org."))
         return data
 
 
