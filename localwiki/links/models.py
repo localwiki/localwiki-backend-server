@@ -26,5 +26,29 @@ class Link(models.Model):
         return "%s ---> %s" % (self.source, self.destination_name)
 
 
+class IncludedPage(models.Model):
+    """
+    Model representing an included page object.
+
+    If page A includes page B, an IncludedPage model instance will be created
+    with the values:
+
+       m.source = A
+       m.included_page = B
+    """
+    source = models.ForeignKey(Page, related_name='included_pages')
+    included_page = models.ForeignKey(Page, related_name='pages_that_include_this', null=True)
+    # We can include pages that don't yet exist, so we record the page name as well.
+    included_page_name = models.CharField(max_length=255, editable=False, blank=False)
+
+    region = models.ForeignKey(Region)
+
+    class Meta:
+        unique_together = ('source', 'included_page')
+
+    def __unicode__(self):
+        return "%s ---> %s" % (self.source, self.included_page_name)
+
+
 # For registration calls
 import signals

@@ -46,5 +46,27 @@ def extract_internal_links(html):
     
     return links
 
+def _is_included_page(a):
+    classes = a.attrib.get('class', '').split()
+    return ('includepage' in classes and 'plugin' in classes)
+
+def extract_included_pagenames(html):
+    """
+    Args:
+        html: A string containing an HTML5 fragment.
+
+    Returns:
+        A list of the included page names.
+    """
+    parser = html5lib.HTMLParser(
+        tree=html5lib.treebuilders.getTreeBuilder("lxml"),
+        namespaceHTMLElements=False)
+    # Wrap to make the tree lookup easier
+    tree = parser.parseFragment('<div>%s</div>' % html)[0]
+    a_s = tree.xpath('//a')
+
+    # Grab the link source if it's an included page
+    return [url_to_name(a.attrib.get('href')) for a in a_s if _is_included_page(a)]
+
 
 import site
