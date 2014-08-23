@@ -44,6 +44,7 @@ from .exceptions import PageExistsError
 class PageDetailView(CacheMixin, Custom404Mixin, AddContributorsMixin, RegionMixin, DetailView):
     model = Page
     context_object_name = 'page'
+    cache_keep_forever = True
 
     def get_object(self):
         slug = self.kwargs.get('slug')

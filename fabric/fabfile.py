@@ -522,6 +522,16 @@ def setup_mapserver():
     sudo('a2ensite map')
     sudo('service apache2 restart')
 
+def setup_varnish():
+    if not config_secrets['varnish_secret']:
+        config_secrets['varnish_secret'] = ''.join([
+            random.choice('abcdefghijklmnopqrstuvwxyz0123456789')
+            for i in range(50)
+        ])
+        # Now, write the varnish secret file
+        sudo('echo %s > /etc/varnish/secret')
+    update_varnish_settings()
+
 def update_varnish_settings():
     upload_template('config/varnish/default.vcl', '/etc/varnish/default.vcl',
             context=get_context(env), use_jinja=True, use_sudo=True)
@@ -660,7 +670,7 @@ def provision():
     setup_db_based_cache()
     setup_permissions() 
     setup_celery()
-    update_varnish_settings()
+    setup_varnish()
 
     setup_apache()
 

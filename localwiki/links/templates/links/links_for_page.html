@@ -8,10 +8,17 @@
 <meta name="robots" content="noindex,nofollow">
 {% endblock %}
 
-{% block header_title %}
-    {% blocktrans with page_url=page.get_absolute_url page_name=page.name %}
-        Links for <a href="{{ page_url }}">{{ page_name }}</a>
-    {% endblocktrans %}
+{% block header_bar_inner %}
+    <div class="inner">
+      <h1 id="object_title">
+        {% block header_title %}
+          {% blocktrans with page_url=page.get_absolute_url page_name=page.name %}
+             Links for <a href="{{ page_url }}">{{ page_name }}</a>
+          {% endblocktrans %}
+        {% endblock %}
+      </h1>
+      {% block header_subtitle %}{% endblock %}
+    </div>
 {% endblock %}
 
 {% block content %}

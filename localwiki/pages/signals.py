@@ -56,3 +56,14 @@ pre_save.connect(_delete_redirect, sender=Page)
 
 if not settings.DISABLE_FOLLOW_SIGNALS:
     post_save.connect(_created_page_action, sender=Page)
+
+
+
+# Clear Varnish cache after a page, or a related object that's displayed
+# inside the page, is modified. Is there a better way to do this?
+#post_save.connect( .., sender=Page)
+#post_delete.connect(.., sender=Page)
+#post_save.connect( .., sender=PageTagSet)
+#post_delete.connect(.., sender=PageTagSet)
+#post_save.connect( .., sender=MapData)
+#post_delete.connect(.., sender=MapData)

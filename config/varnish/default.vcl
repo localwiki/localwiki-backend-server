@@ -15,21 +15,8 @@
  
 sub vcl_recv {
     # unless sessionid/csrftoken is in the request, don't pass ANY cookies (referral_source, utm, etc)
-    if (req.request == "GET" && (req.url ~ "^/static" || (req.http.cookie !~ "sessionid" && req.http.cookie !~ "csrftoken"))) {
+    if (req.request == "GET" && (req.url ~ "^/static" || req.url ~ "^/media" || (req.http.cookie !~ "sessionid" && req.http.cookie !~ "csrftoken"))) {
         remove req.http.Cookie;
-    }
-
-    # normalize accept-encoding to account for different browsers
-    # see: https://www.varnish-cache.org/trac/wiki/VCLExampleNormalizeAcceptEncoding
-    if (req.http.Accept-Encoding) {
-        if (req.http.Accept-Encoding ~ "gzip") {
-            set req.http.Accept-Encoding = "gzip";
-        } elsif (req.http.Accept-Encoding ~ "deflate") {
-            set req.http.Accept-Encoding = "deflate";
-        } else {
-            # unknown algorithm
-            remove req.http.Accept-Encoding;
-        }
     }
 
     # Allow the backend to serve up stale content if it is responding slowly.
@@ -67,23 +54,25 @@ sub vcl_recv {
 }
 
 sub vcl_fetch {
+    if (beresp.ttl > 0s && beresp.http.X-KEEPME) {
+        /* Remove Expires from backend, it's not long enough */
+        unset beresp.http.expires;
+
+        /* Set the clients TTL on this object */
+        set beresp.http.cache-control = "max-age=900";
+
+        /* Set how long Varnish will keep it */
+        set beresp.ttl = 52w;
+
+        /* marker for vcl_deliver to reset Age: */
+        set beresp.http.magicmarker = "1";
+    }
+
     # static files always cached
     if (req.url ~ "^/static" || req.url ~ "^/media") {
        unset beresp.http.set-cookie;
        return (deliver);
     }
-
-     /* Remove Expires from backend, it's not long enough */
-     /* unset beresp.http.expires; */
-
-     /* Set the clients TTL on this object */
-     /* set beresp.http.cache-control = "max-age=900"; */
-
-     /* Set how long Varnish will keep it */
-     /* set beresp.ttl = 20w; */
-
-     /* marker for vcl_deliver to reset Age: */
-     /* set beresp.http.magicmarker = "1"; */
 
     # pass through for anything with a session/csrftoken set
     if (beresp.http.set-cookie ~ "sessionid" || beresp.http.set-cookie ~ "csrftoken") {
@@ -94,11 +83,20 @@ sub vcl_fetch {
 }
 
 sub vcl_deliver {
-    if (resp.http.magicmarker) {
+    if (resp.http.x-url) {
+       unset resp.http.x-url;
+    }
+    if (resp.http.x-host) {
+       unset resp.http.x-host;
+    }
+    if (resp.http.X-KEEPME) {
+       unset resp.http.X-KEEPME;
+    }
+     if (resp.http.magicmarker) {
         /* Remove the magic marker */
         unset resp.http.magicmarker;
 
-        /* By definition we have a fresh object */
+	/* By definition we have a fresh object */
         set resp.http.age = "0";
     }
     return (deliver);

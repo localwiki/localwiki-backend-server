@@ -39,6 +39,9 @@ EMAIL_PORT = 25
 EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = 'dontreply@{{ public_hostname }}'
 
+VARNISH_MANAGEMENT_SERVERS = ('127.0.0.1:6082',)
+VARNISH_SECRET = '{{ varnish_secret }}'
+
 # For Sentry error logging
 RAVEN_CONFIG = {
     'dsn': '{{ sentry_secret_url }}',

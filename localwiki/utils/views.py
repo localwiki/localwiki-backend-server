@@ -52,6 +52,7 @@ class CacheMixin(object):
     #       is used in the cache key.
     vary_on_headers = ['Host']
     get_cache_prefix = None
+    cache_keep_forever = False
      
     def dispatch(self, *args, **kwargs):
         # Have to create this closure b/c args aren't being passed
@@ -65,7 +66,12 @@ class CacheMixin(object):
         f = cache_page(self.cache_timeout, key_prefix=_get_cache_prefix)(super(CacheMixin, self).dispatch)
         if self.vary_on_headers:
             f = dj_vary_on_headers(*self.vary_on_headers)(f)
-        return f(*args, **kwargs)
+
+        request = args[0]
+        r = f(*args, **kwargs)
+        if self.cache_keep_forever:
+            r['X-KEEPME'] = True
+        return r
 
 
 class Custom404Mixin(object):
