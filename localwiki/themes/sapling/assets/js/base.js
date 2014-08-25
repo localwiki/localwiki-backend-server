@@ -295,4 +295,8 @@ function set_django_tokens(form, cb) {
             cb();
         });
     }
+    else {
+        _setup_tokens(csrf_cookie);
+        cb();
+    }
 }
