@@ -59,7 +59,7 @@ def _async_cache_post_edit(instance, created=False, deleted=False, raw=False):
     from pages.models import Page
     from maps.models import MapData
     from tags.models import PageTagSet
-    from links.models import Link, IncludedPage
+    from links.models import Link, IncludedPage, IncludedTagList
 
     if isinstance(instance, Page):
         # First, let's clear out the Varnish cache for this page
@@ -81,8 +81,17 @@ def _async_cache_post_edit(instance, created=False, deleted=False, raw=False):
     elif isinstance(instance, MapData):
         varnish_invalidate_page(instance.page)
 
-    elif isinstance(instance, PageTagSet):
+    # Only ever deal with PageTagSet if deleted (otherwise we deal with m2m_changed)
+    elif isinstance(instance, PageTagSet) and deleted:
         varnish_invalidate_page(instance.page)
+        django_invalidate_page(instance.page)
+
+        # Clear out the pages that include a 'list of tagged pages' of the deleted
+        # tags:
+        slugs_before_delete = [t.slug for t in instance.versions.all()[1].tags.all()]
+        for tl in IncludedTagList.objects.filter(included_tag__slug__in=slugs_before_delete):
+            varnish_invalidate_page(tl.source)
+            django_invalidate_page(tl.source)
 
 def _page_cache_post_edit(sender, instance, created=False, deleted=False, raw=False, **kwargs):
     # We want to syncronously clear the page cache when it's been edited directly, or an
@@ -102,10 +111,46 @@ def _page_cache_post_edit(sender, instance, created=False, deleted=False, raw=Fa
     elif isinstance(instance, PageTagSet):
         django_invalidate_page(instance.page)
 
-    _async_cache_post_edit(instance, created=created, deleted=deleted, raw=raw)
+    _async_cache_post_edit.delay(instance, created=created, deleted=deleted, raw=raw)
+
+@shared_task(ignore_result=True)
+def _async_pagetagset_m2m_changed(instance):
+    from links.models import IncludedTagList
+    from versionutils.diff import diff
+
+    varnish_invalidate_page(instance.page)
+    django_invalidate_page(instance.page)
+
+    # This seems roundabout because it is. We clear() out the tag set each time
+    # the PageTagSet is changed[1], so we have to check what's changed in this
+    # roundabout manner.
+    #
+    # 1. Not sure why, but may be worth looking into.
+
+    if instance.versions.all().count() == 1:
+        changed = [t.slug for t in instance.tags.all()]
+    else:
+        # Most recent two versions
+        v2, v1 = instance.versions.all()[:2]
+        items = diff(v1, v2).get_diff()['tags'].get_diff()
+        changed = [t.slug for t in set.union(items['added'], items['deleted'])]
+
+    for tl in IncludedTagList.objects.filter(included_tag__slug__in=changed):
+        varnish_invalidate_page(tl.source)
+        django_invalidate_page(tl.source)
 
 def _page_cache_post_save(sender, instance, created, raw, **kwargs):
     _page_cache_post_edit(sender, instance, created=created, deleted=False, raw=raw, **kwargs)
 
 def _page_cache_post_delete(sender, instance, **kwargs):
     _page_cache_post_edit(sender, instance, deleted=True, **kwargs)
+
+def _pagetagset_m2m_changed(sender, instance, action, reverse, model, pk_set, *args, **kwargs):
+    if action == 'post_clear' and not pk_set:
+        # No information, so skip this.
+        return
+
+    if action == 'post_add' or action == 'post_remove' or action == 'post_clear':
+        # Get the tags in this transaction before handing off to celery
+        instance.tags.all()
+        _async_pagetagset_m2m_changed.delay(instance)

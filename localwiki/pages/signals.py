@@ -1,4 +1,4 @@
-from django.db.models.signals import pre_save, post_save, post_delete
+from django.db.models.signals import pre_save, post_save, post_delete, m2m_changed
 from django.utils.translation import ugettext as _
 from django.conf import settings
 
@@ -9,7 +9,7 @@ from tags.models import PageTagSet
 from maps.models import MapData
 
 from .models import Page
-from .cache import _page_cache_post_save, _page_cache_post_delete
+from .cache import _page_cache_post_save, _page_cache_post_delete, _pagetagset_m2m_changed
 
 
 def _delete_page(sender, instance, raw, **kws):
@@ -67,6 +67,8 @@ post_delete.connect(_page_cache_post_delete, sender=Page)
 
 post_save.connect(_page_cache_post_save, sender=PageTagSet)
 post_delete.connect(_page_cache_post_delete, sender=PageTagSet)
+
+m2m_changed.connect(_pagetagset_m2m_changed, sender=PageTagSet.tags.through)
 
 post_save.connect(_page_cache_post_save, sender=MapData)
 post_delete.connect(_page_cache_post_delete, sender=MapData)
