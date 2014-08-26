@@ -68,5 +68,31 @@ def extract_included_pagenames(html):
     # Grab the link source if it's an included page
     return [url_to_name(a.attrib.get('href')) for a in a_s if _is_included_page(a)]
 
+def _is_included_tag(a):
+    classes = a.attrib.get('class', '').split()
+    return ('includetag' in classes and 'plugin' in classes)
+
+TAGS_PATH_LEN = len('tags/')
+
+def extract_included_tags(html):
+    """
+    Args:
+        html: A string containing an HTML5 fragment.
+
+    Returns:
+        A list of the included tag slugs (lowercased).
+    """
+    from tags.models import slugify
+
+    parser = html5lib.HTMLParser(
+        tree=html5lib.treebuilders.getTreeBuilder("lxml"),
+        namespaceHTMLElements=False)
+    # Wrap to make the tree lookup easier
+    tree = parser.parseFragment('<div>%s</div>' % html)[0]
+    a_s = tree.xpath('//a')
+
+    # Grab the link source if it's an included page
+    return [slugify(url_to_name(a.attrib.get('href'))[TAGS_PATH_LEN:].lower()) for a in a_s if _is_included_tag(a)]
+
 
 import site

@@ -80,6 +80,7 @@ def _async_cache_post_edit(instance, created=False, deleted=False, raw=False):
 
     elif isinstance(instance, MapData):
         varnish_invalidate_page(instance.page)
+
     elif isinstance(instance, PageTagSet):
         varnish_invalidate_page(instance.page)
 
@@ -93,14 +94,13 @@ def _page_cache_post_edit(sender, instance, created=False, deleted=False, raw=Fa
     from pages.models import Page
     from maps.models import MapData
     from tags.models import PageTagSet
-    from links.models import Link, IncludedPage
 
     if isinstance(instance, Page):
         django_invalidate_page(instance)
     elif isinstance(instance, MapData):
-        django_invalidate_page(p.source)
+        django_invalidate_page(instance.page)
     elif isinstance(instance, PageTagSet):
-        django_invalidate_page(p.source)
+        django_invalidate_page(instance.page)
 
     _async_cache_post_edit(instance, created=created, deleted=deleted, raw=raw)
 

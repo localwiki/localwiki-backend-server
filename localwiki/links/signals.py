@@ -1,9 +1,10 @@
-from django.db.models.signals import post_save, pre_delete
+from django.db.models.signals import post_save, pre_delete, post_delete
 
 from pages.models import Page, slugify
+from tags.models import Tag
 
-from links import extract_internal_links, extract_included_pagenames
-from models import Link, IncludedPage
+from links import extract_internal_links, extract_included_pagenames, extract_included_tags
+from .models import Link, IncludedPage, IncludedTagList
 
 
 def record_page_links(page):
@@ -115,6 +116,47 @@ def _remove_included_page_exists(sender, instance, **kws):
         m.included_page = None
         m.save()
 
+##########################################
+# Now for included "list of tagged pages"
+##########################################
+
+def record_tag_includes(page):
+    region = page.region
+    included = extract_included_tags(page.content)
+    
+    for tag_slug in included:
+        included_tag_exists = IncludedTagList.objects.filter(
+            source=page,
+            region=region,
+            included_tag__slug=tag_slug)
+        if not included_tag_exists:
+            tag_exists = Tag.objects.filter(slug=tag_slug, region=region)
+            if tag_exists:
+                included_tag = tag_exists[0]
+            else:
+                continue
+            m = IncludedTagList(
+                source=page,
+                region=region,
+                included_tag=included_tag,
+            )
+            m.save()
+
+    # Remove tag lists they've removed from the page
+    to_delete = IncludedTagList.objects.filter(source=page, region=region).exclude(included_tag__slug__in=included)
+    for m in to_delete:
+        m.delete()
+
+def _record_tag_includes(sender, instance, created, raw, **kws):
+    # Don't create IncludedTagLists when importing via loaddata - they're already
+    # being imported.
+    if raw:
+        return
+    record_tag_includes(instance)
+
+def _delete_tag_includes(sender, instance, **kws):
+    for m in IncludedTagList.objects.filter(source=instance):
+        m.delete()
 
 # TODO: make these happen in the background using a task queue.
 # Links signals
@@ -126,3 +168,7 @@ pre_delete.connect(_remove_destination_exists, sender=Page)
 post_save.connect(_record_page_includes, sender=Page)
 post_save.connect(_check_included_page_created, sender=Page)
 pre_delete.connect(_remove_included_page_exists, sender=Page)
+
+# Included tag list signals
+post_save.connect(_record_tag_includes, sender=Page)
+post_delete.connect(_delete_tag_includes, sender=Page)

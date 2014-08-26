@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from pages.models import Page
+from tags.models import Tag
 from regions.models import Region
 
 
@@ -48,6 +49,23 @@ class IncludedPage(models.Model):
 
     def __unicode__(self):
         return "%s ---> %s" % (self.source, self.included_page_name)
+
+
+class IncludedTagList(models.Model):
+    """
+    Model representing an included tag list object.
+    """
+    source = models.ForeignKey(Page, related_name='included_tag_lists')
+    included_tag = models.ForeignKey(Tag, related_name='pages_that_include_tag_list', null=True)
+
+    region = models.ForeignKey(Region)
+
+    class Meta:
+        unique_together = ('source', 'included_tag')
+
+    def __unicode__(self):
+        return "%s ---> %s" % (self.source, self.included_tag)
+
 
 
 # For registration calls

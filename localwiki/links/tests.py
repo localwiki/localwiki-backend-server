@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from links import extract_internal_links, extract_included_pagenames
+from links import extract_internal_links, extract_included_pagenames, extract_included_tags
 
 
 class ExtractLinkTest(TestCase):
@@ -90,3 +90,28 @@ class ExtractIncludedPagesTest(TestCase):
         included_pagenames= extract_included_pagenames(html)
         self.assertTrue('Parks' in included_pagenames)
         self.assertEqual(len(included_pagenames), 1)
+
+
+class ExtractIncludedTagsTest(TestCase):
+    def test_simple_extraction(self):
+        html = """
+<p>I love <a href="tags%2Fparks" class="plugin includetag"></a>.</p>
+        """
+        included_tags = extract_included_tags(html)
+        self.assertTrue('parks' in included_tags)
+
+    def test_case_insensitive(self):
+        html = """
+<p>I love <a href="tags%2FPARKS" class="plugin includetag"></a>.</p>
+        """
+        included_tags = extract_included_tags(html)
+        self.assertTrue('parks' in included_tags)
+
+    def test_ignore_other_links(self):
+        html = """
+<p>I love <a href="Parks">outside</a>.</p>
+<p>I love <a href="http://example.org/Night">test</a>.</p>
+        """
+        included_tags = extract_included_tags(html)
+        self.assertFalse('parks' in included_tags)
+        self.assertTrue(included_tags == [])
