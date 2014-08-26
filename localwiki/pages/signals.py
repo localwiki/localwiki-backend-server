@@ -1,12 +1,15 @@
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import pre_save, post_save, post_delete
 from django.utils.translation import ugettext as _
 from django.conf import settings
 
 from actstream import action
 
 from redirects.models import Redirect
+from tags.models import PageTagSet
+from maps.models import MapData
 
 from .models import Page
+from .cache import _page_cache_post_save, _page_cache_post_delete
 
 
 def _delete_page(sender, instance, raw, **kws):
@@ -57,13 +60,13 @@ pre_save.connect(_delete_redirect, sender=Page)
 if not settings.DISABLE_FOLLOW_SIGNALS:
     post_save.connect(_created_page_action, sender=Page)
 
+# Clear Page-related caches after a page, or a related object that's displayed
+# inside the page, is modified.
+post_save.connect(_page_cache_post_save, sender=Page)
+post_delete.connect(_page_cache_post_delete, sender=Page)
 
+post_save.connect(_page_cache_post_save, sender=PageTagSet)
+post_delete.connect(_page_cache_post_delete, sender=PageTagSet)
 
-# Clear Varnish cache after a page, or a related object that's displayed
-# inside the page, is modified. Is there a better way to do this?
-#post_save.connect( .., sender=Page)
-#post_delete.connect(.., sender=Page)
-#post_save.connect( .., sender=PageTagSet)
-#post_delete.connect(.., sender=PageTagSet)
-#post_save.connect( .., sender=MapData)
-#post_delete.connect(.., sender=MapData)
+post_save.connect(_page_cache_post_save, sender=MapData)
+post_delete.connect(_page_cache_post_delete, sender=MapData)
