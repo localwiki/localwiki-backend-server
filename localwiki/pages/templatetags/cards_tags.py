@@ -5,6 +5,7 @@ from django.core.cache import get_cache
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.db.models.signals import post_save
+from django.core.urlresolvers import get_urlconf
 
 from pages.models import Page
 from maps.widgets import InfoMap
@@ -34,9 +35,8 @@ def page_card(context, page):
     from maps.widgets import map_options_for_region
     cache = get_cache('long-living')
     request = context['request']
-    host = request.META['HTTP_HOST']
 
-    card = cache.get('card:%s,%s' % (page.id, host))
+    card = cache.get('card:%s,%s' % (get_urlconf(), page.id))
     if card:
         return card
 
@@ -58,11 +58,14 @@ def page_card(context, page):
         'file': _file,
         'map': _map,
     })
-    cache.set('card:%s,%s' % (page.id, host), card)
+    cache.set('card:%s,%s' % (get_urlconf(), page.id), card)
     return card
 
 def _clear_card(sender, instance, *args, **kwargs):
     cache = get_cache('long-living')
-    cache.delete('card:%s' % instance.id)
+    if instance.region.regionsettings.domain:
+        # Have to clear both urlconfs
+        cache.delete('card:main.urls_no_region,%s' % instance.id)
+    cache.delete('card:main.urls,%s' % instance.id)
 
 post_save.connect(_clear_card, sender=Page)
