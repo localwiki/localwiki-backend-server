@@ -273,7 +273,8 @@ def setup_postgres(test_server=False):
         put('config/postgresql/postgresql_test.conf', '/etc/postgresql/9.1/main/postgresql.conf', use_sudo=True)
 
     # Increase system shared memory limits
-    shmmax = 288940032
+    # (allow for 768MB shared_buffer in PostgreSQL)
+    shmmax = 805306368 
     shmall = int(shmmax * 1.0 / 4096)
     sudo('echo "%s" > /proc/sys/kernel/shmmax' % shmmax)
     sudo('echo "%s" > /proc/sys/kernel/shmall' % shmall)
