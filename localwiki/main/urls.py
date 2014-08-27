@@ -2,8 +2,10 @@ from django.conf.urls import *
 from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.static import static
+from django.views.i18n import javascript_catalog
 from django.views.generic import RedirectView, TemplateView
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.decorators.cache import cache_control
 
 import pages
 import maps
@@ -64,7 +66,7 @@ urlpatterns = patterns('',
     (r'^_tools/dashboard/', include(dashboard.site.urls)),
 
     # JS i18n support.
-    (r'^jsi18n/$', 'django.views.i18n.javascript_catalog'),
+    url(r'^jsi18n/$', cache_control(max_age=31536000)(javascript_catalog), name='i18n_javascript_catalog'),
 
     (r'^admin$', RedirectView.as_view(url='/admin/')),
     (r'^admin/subscribers/$', staff_member_required(SubscribedList.as_view())),

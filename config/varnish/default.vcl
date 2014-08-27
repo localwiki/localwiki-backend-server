@@ -18,6 +18,10 @@ sub vcl_recv {
     if (req.request == "GET" && (req.url ~ "^/static" || req.url ~ "^/media" || (req.http.cookie !~ "sessionid" && req.http.cookie !~ "csrftoken"))) {
         remove req.http.Cookie;
     }
+    # Some Django URLs to always, always cache.
+    if (req.request == "GET" && (req.url ~ "^/jsi18n/")) {
+        remove req.http.Cookie;
+    }
 
     # Allow the backend to serve up stale content if it is responding slowly.
     set req.grace = 6h;
@@ -70,6 +74,12 @@ sub vcl_fetch {
 
     # static files always cached
     if (req.url ~ "^/static" || req.url ~ "^/media") {
+       unset beresp.http.set-cookie;
+       return (deliver);
+    }
+
+    # Hardcoded Django URLs to always cache.
+    if (req.url ~ "^/jsi18n/") {
        unset beresp.http.set-cookie;
        return (deliver);
     }

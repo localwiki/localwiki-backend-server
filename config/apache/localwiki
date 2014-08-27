@@ -57,6 +57,17 @@
     Alias /sitemap.xml {{ data_root }}/static/sitemap.xml
     Alias /favicon.ico {{ data_root }}/static/favicon.ico
 
+    # Make sure we send Expires and Cache-control headers for
+    # static & media content.
+    <Location /media/>
+        ExpiresDefault "access plus 1 year"
+        ExpiresActive On
+    </Location>
+    <Location /static/>
+        ExpiresDefault "access plus 1 year"
+        ExpiresActive On
+    </Location>
+
     <Directory {{ data_root }}>
         Options -Indexes FollowSymLinks MultiViews
         AllowOverride None
