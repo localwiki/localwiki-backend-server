@@ -533,9 +533,26 @@ def setup_varnish():
     update_varnish_settings()
 
 def update_varnish_settings():
+    # Add our custom configuration
+    if env.host_type == 'test_server' or env.host_type == 'varnish':
+        put('config/varnish/varnish_test', '/etc/defaults/varnish', use_sudo=True)
+    else:
+        put('config/varnish/varnish', '/etc/defaults/varnish', use_sudo=True)
     upload_template('config/varnish/default.vcl', '/etc/varnish/default.vcl',
             context=get_context(env), use_jinja=True, use_sudo=True)
     sudo('service varnish restart')
+
+def clear_caches():
+    """
+    Clears out the primary caches. Use the `clear_caches` keyword to `deploy()`
+    to activate this during a deploy. Needed when the HTML or appserver UI changes.
+
+    Doesn't clear -all- caching. Some stuff, such as thumbnail information and 'page cards',
+    are kept in a longer-term cache.
+    """
+    sudo("service memcached restart", pty=False)
+    sudo("service varnish restart", pty=False)
+_clear_caches = clear_caches
 
 def add_ssh_keys():
     run('mkdir -p ~/.ssh && chmod 700 ~/.ssh')
@@ -729,7 +746,7 @@ def note_end_deploy():
     with cd(env.localwiki_root):
         sudo("rm .in_deploy")
 
-def deploy(local=False, update_configs=False):
+def deploy(local=False, update_configs=None, clear_caches=None):
     """
     Update the code (git pull) and restart / rebuild all needed services.
 
@@ -741,10 +758,22 @@ def deploy(local=False, update_configs=False):
             local changes.
         update_configs: If True, update Apache, etc configuration files.
              Default: False
+        clear_caches: If True, clear primary caches after deploy.
+             Default: False
     """
     if env.host_type == 'vagrant':
         # Annoying vagrant virtualbox permission issues
         sudo('chmod -R 770 %s' % env.virtualenv)
+    if env.host_type == 'vagrant' and local:
+        if update_configs is None and clear_caches is None:
+            # We assume that for a local, varnish-based deploy
+            # we'd like to re-init all configs and restart
+            # caches on each deploy, as code is probably
+            # changing here more quickly.
+            update_configs, clear_caches = True, True
+    update_configs = False if update_configs is None
+    clear_caches = False if clear_caches is None
+
     note_start_deploy()
     try:
         update(local=local)
@@ -756,7 +785,8 @@ def deploy(local=False, update_configs=False):
             # In case celery apps have changed:
             sudo('service celery restart')
         touch_wsgi()
-        sudo("service memcached restart", pty=False)
+        if clear_caches:
+            _clear_caches()
     except Exception as e:
         note_end_deploy()
         raise e
