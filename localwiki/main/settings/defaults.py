@@ -98,11 +98,12 @@ STATIC_ROOT = os.path.join(DATA_ROOT, 'static')
 # TODO: Temporary until we upgrade to the next Django release and have
 # the latest staticfiles changes.
 STATICFILES_FINDERS = (
-    'staticfiles.finders.FileSystemFinder',
-    'staticfiles.finders.AppDirectoriesFinder'
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder'
+    #'compressor.finders.CompressorFinder',
 )
 
-STATICFILES_STORAGE = 'staticfiles.storage.CachedStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
 
 AUTHENTICATION_BACKENDS = (
     'users.backends.CaseInsensitiveModelBackend',
@@ -193,8 +194,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
     "django.core.context_processors.csrf",
     "django.core.context_processors.media",
-    #"django.core.context_processors.static",
-    "staticfiles.context_processors.static",
+    "django.core.context_processors.static",
     "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request",
 
@@ -269,7 +269,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
-    #'django.contrib.staticfiles',
+    'django.contrib.staticfiles',
 
     # Other third-party apps
     'haystack',
@@ -277,7 +277,6 @@ INSTALLED_APPS = (
     'olwidget',
     'registration',
     'sorl.thumbnail',
-    'staticfiles',
     'guardian',
     'south',
     'rest_framework',

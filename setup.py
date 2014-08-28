@@ -140,7 +140,6 @@ install_requires = [
     'django-guardian==1.1.1',
     'South==0.8.1-custom2',
     'python-flot-utils==0.2.1',
-    'django-staticfiles==1.2.1',
     'django-registration==0.8.0',
     'django-olwidget==0.46-custom2',
     'django-honeypot==0.4.0-custom3',

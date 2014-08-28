@@ -54,14 +54,15 @@
     <script type="text/javascript" src="{% static "theme/js/handlebars.min.js" %}"></script>
     <script type="text/javascript" src="{% static "theme/js/typeahead.min.js" %}"></script>
     <script type="text/javascript" src="{% static "theme/js/base.js" %}"></script>
-    {% xsession_loader %}
+    <script type="text/javascript" src="{% static "js/srcset.min.js" %}"></script>
 
     <link rel="stylesheet" href="{% static "theme/css/font_face.css" %}">
     <link rel="stylesheet" href="{% static "theme/css/reset.css" %}">
     <link rel="stylesheet" href="{% static "theme/css/site.css" %}">
 
-    <script type="text/javascript" src="{% static "js/srcset.min.js" %}"></script>
     {% include "site/extra_media.html" %}
+
+    {% xsession_loader %}
   {% endblock %}
 
   {% block analytics %}
