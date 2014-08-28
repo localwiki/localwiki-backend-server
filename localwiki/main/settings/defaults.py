@@ -95,12 +95,10 @@ MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(DATA_ROOT, 'static')
 
-# TODO: Temporary until we upgrade to the next Django release and have
-# the latest staticfiles changes.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder'
-    #'compressor.finders.CompressorFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
@@ -296,6 +294,7 @@ INSTALLED_APPS = (
     'django_hosts',
     'django_xsession',
     'phased',
+    'compressor',
 
     # Our apps
     'versionutils.versioning',

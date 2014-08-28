@@ -218,7 +218,10 @@ CKEDITOR.dialog.add( 'pagelink', function( editor )
 			this.setupContent( processLink.apply( this, [ editor, element, selected_text ] ) );
 			// Set up autocomplete.
 			var urlField = this.getContentElement( 'info', 'url' );
-            $('#' + urlField.domId + ' input').autocomplete({source: '/_api/pages/suggest?region_id=' + region_id});
+            $('#' + urlField.domId + ' input').autocomplete({
+                source: '/_api/pages/suggest?region_id=' + region_id,
+                appendTo: '#' + urlField.domId
+            });
 		},
 		onOk : function()
 		{

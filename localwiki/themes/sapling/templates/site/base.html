@@ -1,4 +1,5 @@
 {% load static from staticfiles %}
+{% load compress %}
 {% load i18n %}
 {% load cache %}
 {% load hosts %}
@@ -49,7 +50,9 @@
     </script>
 
     <script type="text/javascript" src="{% url 'i18n_javascript_catalog' %}"></script>
+
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="{% static "theme/js/jquery/jquery-ui/jquery-ui.min.js" %}"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/enquire.min.js"></script>
     <script type="text/javascript" src="{% static "theme/js/handlebars.min.js" %}"></script>
     <script type="text/javascript" src="{% static "theme/js/typeahead.min.js" %}"></script>
