@@ -253,6 +253,7 @@ COMPRESS_JS_FILTERS = [
     'compressor.filters.yui.YUIJSFilter',
 ]
 COMPRESS_YUI_BINARY = '/usr/bin/yui-compressor'
+COMPRESS_OFFLINE = True
 
 ROOT_URLCONF = 'main.urls'
 ROOT_HOSTCONF = 'main.hosts'

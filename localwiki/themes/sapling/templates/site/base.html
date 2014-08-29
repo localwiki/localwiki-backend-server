@@ -1,5 +1,4 @@
 {% load static from staticfiles %}
-{% load compress %}
 {% load i18n %}
 {% load cache %}
 {% load hosts %}
@@ -49,35 +48,7 @@
         {% endif %}
     </script>
 
-    {# All of the commonly-used JS goes here #}
-    {% compress js %}
-    <script src="{{ STATIC_URL }}jsi18n/{{ LANGUAGE_CODE }}/djangojs.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery-1.7.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}theme/js/jquery/jquery-ui/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/enquire.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}theme/js/handlebars.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}theme/js/typeahead.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}theme/js/base.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/srcset.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}tagedit/js/jquery.tagedit.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}tagedit/js/jquery.autoGrowInput.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}openlayers/OpenLayers.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}olwidget/js/olwidget.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}olwidget/js/sapling_utils.js"></script>
-    <script src="{{ STATIC_URL }}js/coverphoto.js"></script>
-    {% endcompress %}
-
-    {# All of the commonly-used CSS goes here #}
-    {% compress css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}theme/css/font_face.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}theme/css/reset.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}theme/css/site.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/pages.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}tagedit/css/jquery.tagedit.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}olwidget/css/sapling.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/frontpage.css"/>
-    {% endcompress %}
-
+    {% include "site/static_media.html" %}
     {% include "site/extra_media.html" %}
 
     {% xsession_loader %}
