@@ -15,6 +15,7 @@ class Command(BaseCommand):
         call_command('syncdb', interactive=False, verbosity=0)
         call_command('migrate', autofake_first=True, verbosity=0)
         call_command('collectstatic', interactive=False, verbosity=0)
+        call_command('compilejsi18n')
         call_command('reset_permissions', verbosity=0)
 
         if not has_regions():
