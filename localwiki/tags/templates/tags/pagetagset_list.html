@@ -1,16 +1,9 @@
 {% extends "tags/base.html" %}
 
-
-
 {% load i18n %}
 
 {% block title %}{% trans "Tags" %} / {{ tag_name }} - {{ block.super }}{% endblock %}
 {% block header_title %}<a href="{% url 'tags:list' region=tag.region.slug %}">{% trans "Tags" %}</a> / {{ tag_name }}{% endblock %}
-
-{% block media %}
-  {{ block.super }}
-  {% if map %}{{ map.media }}{% endif %}
-{% endblock %}
 
 {% block content_wrapper %}
 <div id="content_wrapper">

@@ -4,11 +4,13 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.views.generic import RedirectView, TemplateView
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.decorators.cache import cache_control
 
 import pages
 import maps
 import redirects
 import dashboard
+import links
 import regions
 from regions.views import MainPageView
 from users.views import GlobalUserpageRedirectView
@@ -51,6 +53,7 @@ urlpatterns = patterns('',
     (r'^(?P<region>[^/]+?)/tags$', NamedRedirectView.as_view(name='tags:list')),
     (r'^(?P<region>[^/]+?)/tags/', include('tags.urls', 'tags', 'tags')),
     (r'^_redirect/', include(redirects.site.urls)),
+    (r'^_links/', include(links.site.urls)),
     (r'^', include('search.urls')),
     (r'^', include('activity.urls')),
     (r'^(?P<region>[^/]+?)/', include('explore.urls')),
@@ -60,9 +63,6 @@ urlpatterns = patterns('',
     # Historical URL for dashboard:
     (r'^(?P<region>[^/]+?)/tools/dashboard/?$', NamedRedirectView.as_view(name='dashboard:main')),
     (r'^_tools/dashboard/', include(dashboard.site.urls)),
-
-    # JS i18n support.
-    (r'^jsi18n/$', 'django.views.i18n.javascript_catalog'),
 
     (r'^admin$', RedirectView.as_view(url='/admin/')),
     (r'^admin/subscribers/$', staff_member_required(SubscribedList.as_view())),

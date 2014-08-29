@@ -35,7 +35,7 @@ from regions.views import RegionMixin, region_404_response
 from maps.widgets import InfoMap
 from users.views import SetPermissionsView, AddContributorsMixin
 
-from .models import slugify, clean_name, Page, PageFile, url_to_name
+from .models import slugify, clean_name, Page, PageFile, url_to_name, name_to_url
 from .forms import PageForm, PageFileForm
 from .utils import is_user_page
 from .exceptions import PageExistsError
@@ -44,6 +44,7 @@ from .exceptions import PageExistsError
 class PageDetailView(CacheMixin, Custom404Mixin, AddContributorsMixin, RegionMixin, DetailView):
     model = Page
     context_object_name = 'page'
+    cache_keep_forever = True
 
     def get_object(self):
         slug = self.kwargs.get('slug')
@@ -94,15 +95,13 @@ class PageDetailView(CacheMixin, Custom404Mixin, AddContributorsMixin, RegionMix
                 options=olwidget_options)
         return context
 
-    def get_cache_prefix(self, request, *args, **kwargs):
-        # TODO: Cache this lookup if this ends up being slow.
-        #       (and expire it on post_save/post_delete)
-        try:
-            dt = self.get_object().versions.most_recent().version_info.date
-            t = time.mktime(dt.timetuple()) + dt.microsecond * 1e-6
-            return str(t)
-        except Http404:
-            return 'not-found'
+    @staticmethod
+    def get_cache_key(*args, **kwargs):
+        from django.core.urlresolvers import get_urlconf
+        urlconf = get_urlconf()
+        slug = kwargs.get('slug')
+        region = kwargs.get('region')
+        return '%s/%s/%s' % (urlconf, region, name_to_url(slug))
 
 
 class PageVersionDetailView(PageDetailView):

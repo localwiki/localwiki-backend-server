@@ -11,9 +11,8 @@
 
 {% block media %}
   {{ block.super }}
-  <link rel="stylesheet" href="{% static "theme/pages/css/diff.css" %}">
-  <script type="text/javascript" src="{% static "js/jquery/jquery-1.7.min.js" %}"></script>
-  <script type="text/javascript" src="{% static "theme/pages/js/diff.js" %}"></script>
+  <link rel="stylesheet" href="{% static "css/page_diff.css" %}">
+  <script type="text/javascript" src="{% static "js/page_diff.js" %}"></script>
   {{ page_diff.media }}
 {% endblock %}
 

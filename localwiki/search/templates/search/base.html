@@ -31,10 +31,7 @@
 
 {% block media %}
    {{ block.super }}
-   {% page_tags_form_media %}
    {% if map %}
-       {{ map.media }}
-       <script type="text/javascript" src="{% static "js/enquire.min.js" %}"></script>
        <script type="text/javascript" src="{% static "js/jquery/jquery-scrolltofixed-min.js" %}"></script>
        <script type="text/javascript">
         function setup_map_scrolling() {

@@ -10,7 +10,6 @@
 
 {% block media %}
   {{ block.super }}
-  <link rel="stylesheet" href="{% static "theme/pages/css/pages.css" %}">
   {% if form %}{{ form.media }}{% endif %}
 {% endblock %}
 

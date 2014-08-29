@@ -218,3 +218,12 @@ def is_pk_recycle_a_problem(instance):
         if (db['ENGINE'] == 'sqlite3' and
             not unique_lookup_values_for(instance)):
             return True
+
+
+def pickle_friendly__getstate__(s):
+    from copy import copy
+
+    state = copy(s.__dict__)
+    if '_history_manager' in state:
+        del state['_history_manager']
+    return state

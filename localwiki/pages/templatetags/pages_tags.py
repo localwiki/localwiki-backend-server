@@ -93,6 +93,10 @@ class IncludePageNode(IncludeContentNode):
         try:
             self.page = Page.objects.get(
                 slug__exact=slugify(self.name), region=self.region)
+            # Keep track of the fact this page was included (for caching purposes)
+            _depends_on = getattr(context['request'], '_depends_on_header', [])
+            _depends_on.append(self.page.id)
+            context['request']._depends_on = _depends_on
         except Page.DoesNotExist:
             self.page = None
 
@@ -188,12 +192,14 @@ def do_link(parser, token):
         tag, href = token.split_contents()
     except ValueError:
         raise template.TemplateSyntaxError("%r tag requires one argument" %
-                                           token.contents.split()[0])
-    if not is_quoted(href):
-        raise template.TemplateSyntaxError(
-                                    "%r tag's argument should be in quotes" %
-                                     token.contents.split()[0])
+            token.contents.split()[0])
+    if is_quoted(href):
+        href = unescape_string_literal(href)
+    else:
+        # It's probably a variable in this case.
+        href = template.Variable(href) 
 
     nodelist = parser.parse(('endlink',))
     parser.delete_first_token()
-    return LinkNode(unescape_string_literal(href), nodelist)
+
+    return LinkNode(href, nodelist)

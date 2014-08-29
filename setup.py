@@ -140,7 +140,6 @@ install_requires = [
     'django-guardian==1.1.1',
     'South==0.8.1-custom2',
     'python-flot-utils==0.2.1',
-    'django-staticfiles==1.2.1',
     'django-registration==0.8.0',
     'django-olwidget==0.46-custom2',
     'django-honeypot==0.4.0-custom3',
@@ -169,8 +168,9 @@ install_requires = [
     'django-xsession==0.1-custom1',
     'django-hosts==0.6-custom4',
     'johnny-cache==1.6a',
-    'django-phased==0.6.1-custom2',
-    'django-fancy-cache==0.6.0',
+    'django-phased==0.6.1-custom3',
+    'django_compressor==1.4',
+    'django-statici18n==1.1',
 ]
 if int(os.getenv('DISABLE_INSTALL_REQUIRES', '0')):
     install_requires = None
@@ -204,7 +204,7 @@ setup(
         'https://github.com/philipn/django-celery-email/tarball/localwiki#egg=django-celery-email-1.0.4-custom1',
         'https://github.com/philipn/django-xsession/tarball/localwiki#egg=django-xsession-0.1-custom1',
         'https://github.com/philipn/django-hosts/tarball/localwiki#egg=django-hosts-0.6-custom4',
-        'https://github.com/philipn/django-phased/tarball/localwiki#egg=django-phased-0.6.1-custom2',
+        'https://github.com/philipn/django-phased/tarball/localwiki#egg=django-phased-0.6.1-custom3',
         'https://github.com/philipn/johnny-cache/tarball/localwiki#egg=johnny-cache-1.6a',
     ],
     entry_points={

@@ -237,15 +237,6 @@ class Page(models.Model):
                     if _file:
                         return _file[0]
 
-    def __getstate__(self):
-        """
-        For pickling purposes.
-        """
-        state = copy(self.__dict__)
-        if '_history_manager' in state:
-            del state['_history_manager']
-        return state
-
 
 class PageDiff(diff.BaseModelDiff):
     fields = ('name',

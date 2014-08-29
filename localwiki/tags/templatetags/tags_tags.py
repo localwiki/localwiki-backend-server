@@ -37,12 +37,6 @@ def page_tags_form(context, page):
     return rendered
 
 
-@register.simple_tag
-def page_tags_form_media():
-    f = PageTagSetForm()
-    return f.media
-
-
 @register.tag(name='include_tag')
 def do_include_page(parser, token):
     return IncludeTagNode(parser, token)

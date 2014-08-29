@@ -12,7 +12,6 @@
 {% block media %}
   {{ block.super }}
   {{ form.media }}
-  {% page_tags_form_media %}
 {% endblock %}
 
 {% block title %}{% trans "Tags for " %} {{ pagetagset.page.name }} - {{ block.super }}{% endblock %}

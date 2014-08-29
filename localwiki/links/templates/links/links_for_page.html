@@ -1,0 +1,43 @@
+{% extends "pages/base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+{% load pages_tags %}
+
+{% block search_robots %}
+<meta name="robots" content="noindex,nofollow">
+{% endblock %}
+
+{% block header_bar_inner %}
+    <div class="inner">
+      <h1 id="object_title">
+        {% block header_title %}
+          {% blocktrans with page_url=page.get_absolute_url page_name=page.name %}
+             Links for <a href="{{ page_url }}">{{ page_name }}</a>
+          {% endblocktrans %}
+        {% endblock %}
+      </h1>
+      {% block header_subtitle %}{% endblock %}
+    </div>
+{% endblock %}
+
+{% block content %}
+{% blocktrans with page_url=page.get_absolute_url page_name=page.name %}
+<h3>Pages that link to <a href="{{ page_url }}">{{ page_name }}</a>:</h3>
+{% endblocktrans %}
+<ul>
+    {% for link in links_to_page %}
+        <li><a href="{{ link.source.get_absolute_url }}">{{ link.source }}</a></li>
+    {% endfor %}
+</ul>
+
+{% blocktrans with page_url=page.get_absolute_url page_name=page.name %}
+<h3>Pages <a href="{{ page_url }}">{{ page_name}}</a> links to:</h3>
+{% endblocktrans %}
+<ul>
+    {% for link in links_from_page %}
+        <li>{% link link.destination_name %}{{ link.destination_name }}{% endlink %}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

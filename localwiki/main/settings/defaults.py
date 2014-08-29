@@ -95,14 +95,13 @@ MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(DATA_ROOT, 'static')
 
-# TODO: Temporary until we upgrade to the next Django release and have
-# the latest staticfiles changes.
 STATICFILES_FINDERS = (
-    'staticfiles.finders.FileSystemFinder',
-    'staticfiles.finders.AppDirectoriesFinder'
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
-STATICFILES_STORAGE = 'staticfiles.storage.CachedStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
 
 AUTHENTICATION_BACKENDS = (
     'users.backends.CaseInsensitiveModelBackend',
@@ -193,8 +192,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
     "django.core.context_processors.csrf",
     "django.core.context_processors.media",
-    #"django.core.context_processors.static",
-    "staticfiles.context_processors.static",
+    "django.core.context_processors.static",
     "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request",
 
@@ -247,6 +245,16 @@ CACHES = {
 JOHNNY_MIDDLEWARE_KEY_PREFIX='jc_lw'
 PHASED_KEEP_CONTEXT = False
 
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.yui.YUICSSFilter',
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.yui.YUIJSFilter',
+]
+COMPRESS_YUI_BINARY = '/usr/bin/yui-compressor'
+COMPRESS_OFFLINE = True
+
 ROOT_URLCONF = 'main.urls'
 ROOT_HOSTCONF = 'main.hosts'
 DEFAULT_HOST = 'hub'
@@ -269,7 +277,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
-    #'django.contrib.staticfiles',
+    'django.contrib.staticfiles',
 
     # Other third-party apps
     'haystack',
@@ -277,7 +285,6 @@ INSTALLED_APPS = (
     'olwidget',
     'registration',
     'sorl.thumbnail',
-    'staticfiles',
     'guardian',
     'south',
     'rest_framework',
@@ -297,6 +304,8 @@ INSTALLED_APPS = (
     'django_hosts',
     'django_xsession',
     'phased',
+    'compressor',
+    'statici18n',
 
     # Our apps
     'versionutils.versioning',
@@ -306,6 +315,7 @@ INSTALLED_APPS = (
     'pages',
     'maps',
     'redirects',
+    'links',
     'tags',
     'users',
     'activity',

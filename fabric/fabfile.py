@@ -273,7 +273,8 @@ def setup_postgres(test_server=False):
         put('config/postgresql/postgresql_test.conf', '/etc/postgresql/9.1/main/postgresql.conf', use_sudo=True)
 
     # Increase system shared memory limits
-    shmmax = 288940032
+    # (allow for 768MB shared_buffer in PostgreSQL)
+    shmmax = 805306368 
     shmall = int(shmmax * 1.0 / 4096)
     sudo('echo "%s" > /proc/sys/kernel/shmmax' % shmmax)
     sudo('echo "%s" > /proc/sys/kernel/shmall' % shmall)
@@ -325,6 +326,7 @@ def install_system_requirements():
     postgres_pkg = ['gdal-bin', 'proj', 'postgresql-9.1-postgis-2.1', 'postgresql-server-dev-all']
     memcached_pkg = ['memcached']
     varnish_pkg = ['varnish']
+    web_pkg = ['yui-compressor']
 
     if env.host_type == 'test_server':
         # Travis won't start the redis server correctly
@@ -343,6 +345,7 @@ def install_system_requirements():
         postgres_pkg +
         memcached_pkg +
         varnish_pkg +
+        web_pkg +
         redis_pkg + 
         mailserver_pkg
     )
@@ -461,6 +464,7 @@ def setup_apache():
         sudo('a2enmod wsgi')
         sudo('a2enmod headers')
         sudo('a2enmod rewrite')
+        sudo('a2enmod expires')
         sudo('a2enmod proxy')
         sudo('a2enmod proxy_http')
         sudo('a2enmod ssl')
@@ -522,10 +526,37 @@ def setup_mapserver():
     sudo('a2ensite map')
     sudo('service apache2 restart')
 
+def setup_varnish():
+    if not config_secrets['varnish_secret']:
+        config_secrets['varnish_secret'] = ''.join([
+            random.choice('abcdefghijklmnopqrstuvwxyz0123456789')
+            for i in range(50)
+        ])
+        # Now, write the varnish secret file
+        sudo('echo %s > /etc/varnish/secret')
+    update_varnish_settings()
+
 def update_varnish_settings():
+    # Add our custom configuration
+    if env.host_type == 'test_server' or env.host_type == 'varnish':
+        put('config/varnish/varnish_test', '/etc/defaults/varnish', use_sudo=True)
+    else:
+        put('config/varnish/varnish', '/etc/defaults/varnish', use_sudo=True)
     upload_template('config/varnish/default.vcl', '/etc/varnish/default.vcl',
             context=get_context(env), use_jinja=True, use_sudo=True)
     sudo('service varnish restart')
+
+def clear_caches():
+    """
+    Clears out the primary caches. Use the `clear_caches` keyword to `deploy()`
+    to activate this during a deploy. Needed when the HTML or appserver UI changes.
+
+    Doesn't clear -all- caching. Some stuff, such as thumbnail information and 'page cards',
+    are kept in a longer-term cache.
+    """
+    sudo("service memcached restart", pty=False)
+    sudo("service varnish restart", pty=False)
+_clear_caches = clear_caches
 
 def add_ssh_keys():
     run('mkdir -p ~/.ssh && chmod 700 ~/.ssh')
@@ -660,7 +691,7 @@ def provision():
     setup_db_based_cache()
     setup_permissions() 
     setup_celery()
-    update_varnish_settings()
+    setup_varnish()
 
     setup_apache()
 
@@ -719,7 +750,7 @@ def note_end_deploy():
     with cd(env.localwiki_root):
         sudo("rm .in_deploy")
 
-def deploy(local=False, update_configs=False):
+def deploy(local=False, update_configs=None, clear_caches=None):
     """
     Update the code (git pull) and restart / rebuild all needed services.
 
@@ -731,10 +762,22 @@ def deploy(local=False, update_configs=False):
             local changes.
         update_configs: If True, update Apache, etc configuration files.
              Default: False
+        clear_caches: If True, clear primary caches after deploy.
+             Default: False
     """
     if env.host_type == 'vagrant':
         # Annoying vagrant virtualbox permission issues
         sudo('chmod -R 770 %s' % env.virtualenv)
+    if env.host_type == 'vagrant' and local:
+        if update_configs is None and clear_caches is None:
+            # We assume that for a local, varnish-based deploy
+            # we'd like to re-init all configs and restart
+            # caches on each deploy, as code is probably
+            # changing here more quickly.
+            update_configs, clear_caches = True, True
+    update_configs = False if update_configs is None
+    clear_caches = False if clear_caches is None
+
     note_start_deploy()
     try:
         update(local=local)
@@ -746,7 +789,8 @@ def deploy(local=False, update_configs=False):
             # In case celery apps have changed:
             sudo('service celery restart')
         touch_wsgi()
-        sudo("service memcached restart", pty=False)
+        if clear_caches:
+            _clear_caches()
     except Exception as e:
         note_end_deploy()
         raise e
