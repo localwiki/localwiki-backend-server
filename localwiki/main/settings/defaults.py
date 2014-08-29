@@ -245,6 +245,15 @@ CACHES = {
 JOHNNY_MIDDLEWARE_KEY_PREFIX='jc_lw'
 PHASED_KEEP_CONTEXT = False
 
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.yui.YUICSSFilter',
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.yui.YUIJSFilter',
+]
+COMPRESS_YUI_BINARY = '/usr/bin/yui-compressor'
+
 ROOT_URLCONF = 'main.urls'
 ROOT_HOSTCONF = 'main.hosts'
 DEFAULT_HOST = 'hub'
