@@ -49,8 +49,9 @@
         {% endif %}
     </script>
 
-    <script type="text/javascript" src="{% url 'i18n_javascript_catalog' %}"></script>
-
+    {# All of the commonly-used JS goes here #}
+    {% compress js %}
+    <script src="{{ STATIC_URL }}jsi18n/{{ LANGUAGE_CODE }}/djangojs.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery-1.7.min.js"></script>
     <script type="text/javascript" src="{% static "theme/js/jquery/jquery-ui/jquery-ui.min.js" %}"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/enquire.min.js"></script>
@@ -58,10 +59,24 @@
     <script type="text/javascript" src="{% static "theme/js/typeahead.min.js" %}"></script>
     <script type="text/javascript" src="{% static "theme/js/base.js" %}"></script>
     <script type="text/javascript" src="{% static "js/srcset.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "tagedit/js/jquery.tagedit.js" %}"></script>
+    <script type="text/javascript" src="{% static "tagedit/js/jquery.autoGrowInput.js" %}"></script>
+    <script type="text/javascript" src="{% static "openlayers/OpenLayers.js" %}"></script>
+    <script type="text/javascript" src="{% static "olwidget/js/olwidget.js" %}"></script>
+    <script type="text/javascript" src="{% static "olwidget/js/sapling_utils.js" %}"></script>
+    <script src="{% static "js/coverphoto.js" %}"></script>
+    {% endcompress %}
 
+    {# All of the commonly-used CSS goes here #}
+    {% compress css %}
     <link rel="stylesheet" href="{% static "theme/css/font_face.css" %}">
     <link rel="stylesheet" href="{% static "theme/css/reset.css" %}">
     <link rel="stylesheet" href="{% static "theme/css/site.css" %}">
+    <link rel="stylesheet" href="{% static "css/pages.css" %}">
+    <link rel="stylesheet" href="{% static "tagedit/css/jquery.tagedit.css" %}">
+    <link rel="stylesheet" href="{% static "olwidget/css/sapling.css" %}">
+    <link rel="stylesheet" href="{% static "css/frontpage.css" %}"/>
+    {% endcompress %}
 
     {% include "site/extra_media.html" %}
 

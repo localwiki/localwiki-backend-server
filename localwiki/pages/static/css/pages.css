@@ -4,7 +4,7 @@
 }
 
 .tag_link {
-    background: url(../../img/tag-icon-small.png) no-repeat;
+    background: url(../theme/img/tag-icon-small.png) no-repeat;
     background-position: left center;
     padding-left: 18px;
     margin-left: 1px;
@@ -249,7 +249,7 @@ hr.selected {
     width: 180px;
     font-size: 15px;
     line-height: 30px;
-    background: #ffffff url(../../img/magnifying_glass.png) no-repeat 10px 10px;
+    background: #ffffff url(../theme/img/magnifying_glass.png) no-repeat 10px 10px;
     padding-left: 30px;
     margin-right: 0.5em;
     margin-bottom: 0.5em;

@@ -17,12 +17,3 @@ class TagEdit(forms.TextInput):
                                         {'id': attrs['id'],
                                          'autocomplete_url': self.autocomplete_url()
                                          })
-
-    class Media:
-        js = (static_url('tagedit/js/jquery.tagedit.js'),
-              static_url('tagedit/js/jquery.autoGrowInput.js'),
-        )
-        css = { 'all':
-            (static_url('tagedit/css/jquery.tagedit.css'),
-            ),
-        }

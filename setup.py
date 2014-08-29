@@ -170,6 +170,7 @@ install_requires = [
     'johnny-cache==1.6a',
     'django-phased==0.6.1-custom3',
     'django_compressor==1.4',
+    'django-statici18n==1.1',
 ]
 if int(os.getenv('DISABLE_INSTALL_REQUIRES', '0')):
     install_requires = None

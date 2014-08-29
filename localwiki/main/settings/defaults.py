@@ -295,6 +295,7 @@ INSTALLED_APPS = (
     'django_xsession',
     'phased',
     'compressor',
+    'statici18n',
 
     # Our apps
     'versionutils.versioning',

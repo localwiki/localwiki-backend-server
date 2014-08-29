@@ -1,8 +1,6 @@
-
 {% load i18n %}
 
 {% if map %}
-  {{ map.media }}
   <div id="map">
     {{ map }}
     <div class="info"><a class="view tiny button" href="{% url 'maps:tagged' tag=tag.slug region=tag.region.slug %}">{% trans "View" %}</a></div>

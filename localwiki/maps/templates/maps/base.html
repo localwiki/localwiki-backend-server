@@ -1,16 +1,9 @@
 {% extends "site/base.html" %}
 
-
-
 {% load i18n %}
 {% load static from staticfiles %}
 
 {% block head_extra %}{% if mapdata %}<link rel="alternate" href="{% url 'maps:changes-feed' slug=mapdata.page.pretty_slug region=mapdata.region %}" type="application/rss+xml" title="{% trans 'Recent changes on this Map' %}"/>{% endif %}{% endblock %}
-
-{% block media %}
-{{ block.super }}
-<link rel="stylesheet" href="{% static "theme/pages/css/pages.css" %}">
-{% endblock %}
 
 {% block header_title %}
   {% if mapdata %}

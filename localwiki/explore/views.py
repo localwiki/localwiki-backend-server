@@ -23,11 +23,6 @@ class BaseExploreList(RegionMixin, MultipleTypesPaginatedView):
 
         return [qs]
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(BaseExploreList, self).get_context_data(*args, **kwargs)
-        context['map_media'] = InfoMap([]).media
-        return context
-
 
 class RandomExploreList(BaseExploreList):
     def get_template_names(self):
