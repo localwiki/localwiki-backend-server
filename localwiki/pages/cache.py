@@ -142,7 +142,7 @@ def _async_pagetagset_m2m_changed(instance):
 def _page_cache_post_save(sender, instance, created, raw, **kwargs):
     _page_cache_post_edit(sender, instance, created=created, deleted=False, raw=raw, **kwargs)
 
-def _page_cache_post_delete(sender, instance, **kwargs):
+def _page_cache_pre_delete(sender, instance, **kwargs):
     _page_cache_post_edit(sender, instance, deleted=True, **kwargs)
 
 def _pagetagset_m2m_changed(sender, instance, action, reverse, model, pk_set, *args, **kwargs):

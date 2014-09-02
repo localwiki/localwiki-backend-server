@@ -94,9 +94,10 @@ class IncludePageNode(IncludeContentNode):
             self.page = Page.objects.get(
                 slug__exact=slugify(self.name), region=self.region)
             # Keep track of the fact this page was included (for caching purposes)
-            _depends_on = getattr(context['request'], '_depends_on_header', [])
-            _depends_on.append(self.page.id)
-            context['request']._depends_on = _depends_on
+            if 'request' in context:
+                _depends_on = getattr(context['request'], '_depends_on_header', [])
+                _depends_on.append(self.page.id)
+                context['request']._depends_on = _depends_on
         except Page.DoesNotExist:
             self.page = None
 
