@@ -168,6 +168,7 @@ install_requires = [
     'django-xsession==0.1-custom1',
     'django-hosts==0.6-custom4',
     'johnny-cache==1.6a',
+    'python-varnish==0.2.1',
     'django-phased==0.6.1-custom3',
     'django_compressor==1.4',
     'django-statici18n==1.1',
