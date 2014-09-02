@@ -775,8 +775,8 @@ def deploy(local=False, update_configs=None, clear_caches=None):
             # caches on each deploy, as code is probably
             # changing here more quickly.
             update_configs, clear_caches = True, True
-    update_configs = False if update_configs is None
-    clear_caches = False if clear_caches is None
+    update_configs = (False if update_configs is None else update_configs)
+    clear_caches = (False if clear_caches is None else clear_caches)
 
     note_start_deploy()
     try:
