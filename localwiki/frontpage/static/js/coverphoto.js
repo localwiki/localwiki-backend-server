@@ -11,7 +11,7 @@ $(function() {
     var img_w = null;
     var img_h = null;
     // Only show 'change cover' button if they're an admin
-    if (region_is_admin) {
+    if (typeof(region_is_admin) == "undefined" || region_is_admin) {
         $('#change_cover_button').hover(function () {
             $(this).show();
         });
