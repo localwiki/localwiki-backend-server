@@ -27,22 +27,24 @@ from versionutils import diff
 from versionutils.versioning.views import UpdateView
 from versionutils.versioning.views import VersionsList
 from localwiki.utils.views import (Custom404Mixin, CreateObjectMixin,
-    PermissionRequiredMixin, DeleteView, RevertView, NeverCacheMixin)
+    PermissionRequiredMixin, DeleteView, RevertView,
+    CacheMixin, NeverCacheMixin)
 from localwiki.utils.urlresolvers import reverse
 from regions.models import Region
 from regions.views import RegionMixin, region_404_response
 from maps.widgets import InfoMap
 from users.views import SetPermissionsView, AddContributorsMixin
 
-from .models import slugify, clean_name, Page, PageFile, url_to_name
+from .models import slugify, clean_name, Page, PageFile, url_to_name, name_to_url
 from .forms import PageForm, PageFileForm
 from .utils import is_user_page
 from .exceptions import PageExistsError
 
 
-class PageDetailView(Custom404Mixin, AddContributorsMixin, RegionMixin, DetailView):
+class PageDetailView(CacheMixin, Custom404Mixin, AddContributorsMixin, RegionMixin, DetailView):
     model = Page
     context_object_name = 'page'
+    cache_keep_forever = True
 
     def get_object(self):
         slug = self.kwargs.get('slug')
@@ -94,6 +96,14 @@ class PageDetailView(Custom404Mixin, AddContributorsMixin, RegionMixin, DetailVi
                 [(self.object.mapdata.geom, self.object.name)],
                 options=olwidget_options)
         return context
+
+    @staticmethod
+    def get_cache_key(*args, **kwargs):
+        from django.core.urlresolvers import get_urlconf
+        urlconf = get_urlconf()
+        slug = kwargs.get('slug')
+        region = kwargs.get('region')
+        return '%s/%s/%s' % (urlconf, region, name_to_url(slug))
 
 
 class PageVersionDetailView(PageDetailView):

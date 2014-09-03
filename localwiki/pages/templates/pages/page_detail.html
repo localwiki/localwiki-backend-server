@@ -5,9 +5,6 @@
 {% load canonical_urls %}
 {% load tags_tags %}
 
-{% block media %}{{block.super}}{% if map %}{{ map.media }}{% endif %}
-{% endblock %}
-
 {% block title %}{% if not page.is_front_page %}{{ page.name }} - {% endif %}{{ block.super }}{% endblock %}
 {% block header_title %}<a href="{% url 'pages:show' slug=page.pretty_slug region=page.region.slug %}">{{ page.name }}</a>{% endblock %}
 
@@ -72,7 +69,6 @@
       </a>
     </div>
     <div class="tags edit" style="display: none">
-      {% page_tags_form_media %}
       {% page_tags_form page %}
       <a class="edit_tags_cancel" href="{% url 'pages:show' slug=page.pretty_slug region=page.region.slug %}">{% trans "Cancel" %}</a>
     </div>

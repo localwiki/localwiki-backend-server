@@ -94,7 +94,7 @@ SaplingMap = {
         $('#map_pagename').typeahead(null,
             {
               name: 'map_page_name',
-              source: autoPages.ttAdapter(),
+              source: autoPages.ttAdapter()
             }
         );
     },
@@ -222,7 +222,7 @@ SaplingMap = {
 
         // Only do feature select / sidebar stuff on larger screens
         enquire.register("screen and (min-width:700px)", {
-            match: register_feature_select,
+            match: register_feature_select
         });
         enquire.listen(); 
     },

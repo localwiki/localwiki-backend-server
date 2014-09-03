@@ -70,6 +70,8 @@ class ChangesTracker(object):
         # Being able to look this up is intensely helpful.
         setattr(m, '_history_manager_name', self.manager_name)
 
+        setattr(m, '__getstate__', pickle_friendly__getstate__)
+
     def ineligible_for_history_model(self, model):
         """
         Certain abstract-y models can't have corresponding history models.

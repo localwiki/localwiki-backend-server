@@ -1,17 +1,30 @@
+import time
+
 from django.utils.decorators import classonlymethod
 from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.utils import simplejson as json
 from django.utils.decorators import method_decorator
+from django.views.decorators.vary import vary_on_headers as dj_vary_on_headers
 from django.views.decorators.cache import never_cache
 from django.views.generic import View, RedirectView, TemplateView
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
+from django.core.cache import cache
+from django.utils.cache import get_max_age
+from django.http import HttpRequest
 from django.template.loader import render_to_string
 from django.template.context import RequestContext
 
 from versionutils.versioning.views import RevertView, DeleteView
 
 from . import take_n_from
+
+# 29 days, effectively infinite in cache years
+# XXX NOTE: For some reason, the memcached client we're using
+# gives a client error when sending timestamp-style expiration
+# dates -- e.g. > 30 days timestamps. So, for now we must make
+# sure and always use <= 30 day timeouts, which should be fine.
+DEFAULT_MEMCACHED_TIMEOUT = 60 * 60 * 24 * 29
 
 
 class ForbiddenException:
@@ -22,6 +35,56 @@ class NeverCacheMixin(object):
     @method_decorator(never_cache)
     def dispatch(self, *args, **kwargs):
         return super(NeverCacheMixin, self).dispatch(*args, **kwargs)
+
+
+class CacheMixin(object):
+    cache_timeout = DEFAULT_MEMCACHED_TIMEOUT
+    cache_keep_forever = False
+
+    @staticmethod
+    def get_cache_key(*args, **kwargs):
+        raise NotImplementedError
+
+    def _should_cache(self, request, response):
+        if response.streaming or response.status_code != 200:
+            return False
+
+        # Don't cache responses that set a user-specific (and maybe security
+        # sensitive) cookie in response to a cookie-less request.
+        if not request.COOKIES and response.cookies and has_vary_header(response, 'Cookie'):
+            return False
+
+        if get_max_age(response) == 0:
+            return False
+
+        return True
+
+    def _get_from_cache(self, method, request, *args, **kwargs):
+        key = self.get_cache_key(request, *args, **kwargs)
+
+        response = cache.get(key)
+        if response is None:
+            response = getattr(super(CacheMixin, self), method)(request, *args, **kwargs)
+
+            if hasattr(response, 'render') and callable(response.render):
+                response.add_post_render_callback(
+                    lambda r: cache.set(key, r, self.cache_timeout)
+                )
+            else:
+                cache.set(key, response, self.cache_timeout)
+
+        if self._should_cache(request, response):
+            # Mark to keep around in Varnish and other cache layers
+            if self.cache_keep_forever:
+                response['X-KEEPME'] = True
+
+        return response
+
+    def get(self, request, *args, **kwargs):
+        return self._get_from_cache('get', request, *args, **kwargs)
+
+    def head(self, request, *args, **kwargs):
+        return self._get_from_cache('head', request, *args, **kwargs)
 
 
 class Custom404Mixin(object):

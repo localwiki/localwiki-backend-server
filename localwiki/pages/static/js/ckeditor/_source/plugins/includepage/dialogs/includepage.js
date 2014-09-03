@@ -175,7 +175,10 @@ CKEDITOR.dialog.add( 'includepage', function( editor )
 			this.setupContent( data );
 			// Set up autocomplete.
 			var urlField = this.getContentElement( 'info', 'page' );
-            $('#' + urlField.domId + ' input').autocomplete({source: '/_api/pages/suggest?region_id=' + region_id});
+            $('#' + urlField.domId + ' input').autocomplete({
+                source: '/_api/pages/suggest?region_id=' + region_id,
+                appendTo: '#' + urlField.domId
+            });
 		},
 		onOk : function()
 		{

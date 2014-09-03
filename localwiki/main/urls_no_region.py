@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.views.generic import RedirectView
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.decorators.cache import cache_control
 
 import pages
 import maps
@@ -51,9 +52,6 @@ urlpatterns = patterns('',
     # Historical URL for dashboard:
     (r'^tools/dashboard/?$', NamedRedirectView.as_view(name='dashboard:main')),
     (r'^_tools/dashboard/', include(dashboard.site.urls)),
-
-    # JS i18n support.
-    (r'^jsi18n/$', 'django.views.i18n.javascript_catalog'),
 
     (r'^(((?i)Front[_ ]Page)/?)?', include('frontpage.urls')),
 

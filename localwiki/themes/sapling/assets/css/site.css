@@ -2086,6 +2086,30 @@ input:focus {
     border-bottom: 1px solid #dedede;
 }
 
+/* For jQuery autocomplete / jQuery UI */
+.ui-autocomplete {
+    margin-top: 0em;
+    background-color: white;
+    display: table;
+    border: 1px solid #BFBFBF;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2)
+}
+.ui-autocomplete .ui-menu-item {
+    padding-left: 30px;
+    padding-top: 0.5em;
+    display: block;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    margin: 0!important;
+    list-style-image: none;
+}
+.ui-autocomplete .ui-menu-item.ui-state-focus {
+    background-color: #d7e7f9;
+}
+
 /*
 ====================================
  Attributions

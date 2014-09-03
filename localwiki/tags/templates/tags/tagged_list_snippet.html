@@ -1,8 +1,6 @@
-
 {% load i18n %}
 
 {% if map %}
-  {{ map.media }}
   <div id="map">
     <a class="map_cover small" href="{% url 'maps:tagged' tag=tag.slug region=tag.region.slug %}"></a>
     {{ map }}

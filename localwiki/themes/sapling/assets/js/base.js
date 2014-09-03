@@ -104,7 +104,7 @@ $(document).ready(function() {
         $('#id_q').typeahead(null,
             {
               name: 'pages',
-              source: autoPages.ttAdapter(),
+              source: autoPages.ttAdapter()
             },
             {
                 // Footer: search within this region
@@ -150,7 +150,7 @@ $(document).ready(function() {
               name: 'regions',
               source: autoRegions.ttAdapter(),
               templates: {
-                suggestion: Handlebars.compile("<p><strong>{{ value }}</strong> &mdash; {{ slug }}</p>"),
+                suggestion: Handlebars.compile("<p><strong>{{ value }}</strong> &mdash; {{ slug }}</p>")
               }
             },
             {
@@ -319,10 +319,14 @@ function set_django_tokens(form, cb) {
 
     var csrf_cookie = getCookie('csrftoken');
     if (!csrf_cookie) {
-        $.get('/_api/_get_csrf_cookie', function() {
+        $.get('/_api/_get/csrf_cookie', function() {
             var csrf_cookie = getCookie('csrftoken');
             _setup_tokens(csrf_cookie);
             cb();
         });
+    }
+    else {
+        _setup_tokens(csrf_cookie);
+        cb();
     }
 }

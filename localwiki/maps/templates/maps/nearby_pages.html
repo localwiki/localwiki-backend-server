@@ -39,7 +39,6 @@
       {% if not nearby_maps %}
         <p>{% trans "No pages near you. Make some!" %}</p>
       {% else %}
-          {{ map.media }}
           <div id="map">
             {{ map }}
             <div class="info"><a id="view_map" class="view tiny button" href="{% url 'maps:global' region=region.slug %}#zoom=15&lat={{ request.GET.lat }}&amp;lon={{ request.GET.lng }}">{% trans "View" %}</a></div>

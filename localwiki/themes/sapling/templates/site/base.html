@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load cache %}
 {% load hosts %}
+{% load phased_tags %}
 {% load django_xsession %}
 {% load canonical_urls %}
 
@@ -47,23 +48,14 @@
         {% endif %}
     </script>
 
-    <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery-1.7.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/enquire.min.js"></script>
-    <script type="text/javascript" src="{% static "theme/js/handlebars.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "theme/js/typeahead.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "theme/js/base.js" %}"></script>
-    {% xsession_loader %}
-
-    <link rel="stylesheet" href="{% static "theme/css/font_face.css" %}">
-    <link rel="stylesheet" href="{% static "theme/css/reset.css" %}">
-    <link rel="stylesheet" href="{% static "theme/css/site.css" %}">
-
-    <script type="text/javascript" src="{% static "js/srcset.min.js" %}"></script>
+    {% include "site/static_media.html" %}
     {% include "site/extra_media.html" %}
+
+    {% xsession_loader %}
   {% endblock %}
 
   {% block analytics %}
+  {% cache 0 google_analytics %}
   {% if config.GOOGLE_ANALYTICS_ID %}
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -82,6 +74,7 @@
     })();
   </script>
   {% endif %}
+  {% endcache %}
   {% endblock %}
 
   {% block head_extra %}{% endblock %}
@@ -125,6 +118,7 @@
         <div id="main_header">
         {% block main_header %}
           {% block messages %}
+            {% phased %}
             {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
@@ -132,7 +126,9 @@
                 {% endfor %}
             </ul>
             {% endif %}
+            {% endphased %}
           {% endblock %}
+
           {% block dialog %}{% endblock %}
         {% endblock %}
         </div>

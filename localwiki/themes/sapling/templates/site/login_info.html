@@ -1,19 +1,23 @@
+{% load phased_tags %}
+
+<div>
+{% phased with region %}
+
 {% load i18n %}
 {% load user_tags %}
 
-<div>
 {% if request.user.is_authenticated %}
     <span class="welcome">
         {% user_link request.user region=region %}
     </span>
     <span class="actions">
         <a href="{% url 'user-settings' %}" class="tiny button">{% trans "settings" %}</a>
-        <a href="{% url 'auth_logout' %}?next={{ request.path }}" class="tiny button">{% trans "log out" %}</a>
+        <a href="{% url 'auth_logout' %}?next=//{{ request.get_host }}{{ request.path }}" class="tiny button">{% trans "log out" %}</a>
     </span>
 {% else %}
     <span class="actions">
-        <a href="{% url 'auth_login' %}?next=//{{ request.get_host }}{{ request.path }}" rel="nofollow" class="tiny button">{% trans "log in" %}</a> {% trans "or" %} <a href="{% url 'registration_register' %}?next={{ request.get_host }}{{ request.path }}" rel="nofollow" class="tiny button">{% trans "create account" %}</a>
+        <a href="{% url 'auth_login' %}?next=//{{ request.get_host }}{{ request.path }}" rel="nofollow" class="tiny button">{% trans "log in" %}</a> {% trans "or" %} <a href="{% url 'registration_register' %}?next=//{{ request.get_host }}{{ request.path }}" rel="nofollow" class="tiny button">{% trans "create account" %}</a>
     </span>
 {% endif %}
-
+{% endphased %}
 </div>

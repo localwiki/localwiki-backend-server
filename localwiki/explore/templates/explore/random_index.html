@@ -16,7 +16,7 @@
   {% endif %}
 {% endblock %}
 
-{% block media %}{{block.super}}{{ map_media }}<script type="text/javascript">SaplingMap.show_links_on_hover = false;</script>{% endblock %}
+{% block media %}{{block.super}}<script type="text/javascript">SaplingMap.show_links_on_hover = false;</script>{% endblock %}
 
 {% block content %}
   <div id="explore">

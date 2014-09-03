@@ -1,5 +1,7 @@
 $(function() {
-    var cover_form = new FormData(document.getElementById('cover_form'));
+    if (document.getElementById('cover_form')) {
+        var cover_form = new FormData(document.getElementById('cover_form'));
+    }
     var cover_ratio = 3.68421;
     var cover_y_position = 0;
     var cover_x_position = 0;
