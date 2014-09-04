@@ -18,8 +18,8 @@
   {% if request.user.is_authenticated %}
     {% trans "region" as object_type %}
     {% follow_form region %}
-  {% endphased %}
   {% endif %}
+  {% endphased %}
 
   {{ block.super }}
 {% endblock %}

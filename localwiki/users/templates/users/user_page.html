@@ -17,15 +17,16 @@
 {% endblock %}
 
 {% block header_bar_inner %}
-  {% phased with user_for_page %}
   {% with "user" as object_type_untrans %}
+    {% phased with user_for_page %}
     {% if request.user.is_authenticated %}
       {% trans "user" as object_type %}
       {% follow_form user_for_page %}
     {% endif %}
-  {% endphased %}
+    {% endphased %}
 
     {{ block.super }}
+
   {% endwith %}
 {% endblock %}
 
