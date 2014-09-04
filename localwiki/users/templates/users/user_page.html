@@ -15,7 +15,7 @@
     </div>
 {% endblock %}
 
-{% block header_bar_inner %}
+{% block follow_area %}
   {% phased with user_for_page %}
     {% load i18n %}
     {% load follow_tags %}
@@ -26,8 +26,6 @@
       {% endif %}
     {% endwith %}
   {% endphased %}
-
-  {{ block.super }}
 {% endblock %}
 
 {% block content_wrapper %}

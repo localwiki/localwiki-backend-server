@@ -33,7 +33,9 @@
 {% endblock %}
 
 {% block header_bar_inner %}
-  {% include "pages/follow_area.html" %} 
+  {% block follow_area %}
+    {% include "pages/follow_area.html" %} 
+  {% endblock %}
   {{ block.super }}
 {% endblock %}
 
