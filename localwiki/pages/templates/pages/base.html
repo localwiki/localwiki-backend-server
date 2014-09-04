@@ -33,7 +33,7 @@
 {% endblock %}
 
 {% block header_bar_inner %}
-  {% phased with page object_type_untrans %} 
+  {% phased with page object_type_untrans frontpage %} 
     {% load follow_tags %}
     {% load i18n %}
 
@@ -42,7 +42,7 @@
       {% if page.versions %}
           {% follow_form page %}
       {% else %}
-          {% follow_form page.history__object %}
+      OBJ
       {% endif %}
     {% elif page.slug == 'front page' and not frontpage %}
       {% if request.user.is_authenticated %}
