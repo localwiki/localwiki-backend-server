@@ -1,0 +1,11 @@
+{% if page.exists and object_type_untrans != 'user' %}
+  {% if page.versions %}
+    {% with follow_obj=page %}
+      {% include "pages/follow_page.html" %}
+    {% endwith %}
+  {% else %}
+    {% with follow_obj=page.history__object %}
+      {% include "pages/follow_page.html" %}
+    {% endwith %}
+  {% endif %}
+{% endif %}

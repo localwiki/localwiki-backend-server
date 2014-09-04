@@ -33,25 +33,7 @@
 {% endblock %}
 
 {% block header_bar_inner %}
-  {% phased with page object_type_untrans frontpage %} 
-    {% load follow_tags %}
-    {% load i18n %}
-
-    {% if page.slug != 'front page' and request.user.is_authenticated and page.exists and object_type_untrans != 'user' %}
-      {% trans "page" as object_type %}
-      {% if page.versions %}
-          {% follow_form page %}
-      {% else %}
-      OBJ
-      {% endif %}
-    {% elif page.slug == 'front page' and not frontpage %}
-      {% if request.user.is_authenticated %}
-        {% trans "region" as object_type %}
-        {% follow_form page.region %}
-      {% endif %}
-    {% endif %}
-  {% endphased %}
-
+  {% include "pages/follow_area.html" %} 
   {{ block.super }}
 {% endblock %}
 

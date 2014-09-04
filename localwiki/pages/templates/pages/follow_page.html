@@ -1,0 +1,16 @@
+{% load phased_tags %}
+
+{% phased with follow_obj frontpage %} 
+  {% load follow_tags %}
+  {% load i18n %}
+
+  {% if request.user.is_authenticated %} 
+    {% if follow_obj.slug != 'front page' %}
+      {% trans "page" as object_type %}
+      {% follow_form follow_obj %}
+    {% elif follow_obj.slug == 'front page' and not frontpage %}
+        {% trans "region" as object_type %}
+        {% follow_form page.region %}
+    {% endif %}
+  {% endif %}
+{% endphased %}
