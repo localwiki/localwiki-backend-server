@@ -14,9 +14,11 @@
 {% endblock %}
 
 {% block header_bar_inner %}
+  {% phased with region %}
   {% if request.user.is_authenticated %}
     {% trans "region" as object_type %}
     {% follow_form region %}
+  {% endphased %}
   {% endif %}
 
   {{ block.super }}

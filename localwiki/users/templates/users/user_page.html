@@ -1,10 +1,10 @@
 {% extends "pages/base.html" %}
 
-
 {% load i18n %}
 {% load pages_tags %}
 {% load tags_tags %}
 {% load gravatar %}
+{% load phased_tags %}
 {% load follow_tags %}
 
 {% block title %}{% if not page.is_front_page %}{{ page.name }} - {% endif %}{{ block.super }}{% endblock %}
@@ -17,11 +17,13 @@
 {% endblock %}
 
 {% block header_bar_inner %}
+  {% phased with user_for_page %}
   {% with "user" as object_type_untrans %}
     {% if request.user.is_authenticated %}
       {% trans "user" as object_type %}
       {% follow_form user_for_page %}
     {% endif %}
+  {% endphased %}
 
     {{ block.super }}
   {% endwith %}

@@ -747,7 +747,7 @@ def update(local=False):
             update_django_settings()
             sudo("python setup.py develop", user="www-data")
             #sudo("python setup.py install")
-            sudo("localwiki-manage setup_all", user="www-data")
+            #sudo("localwiki-manage setup_all", user="www-data")
 
 def note_start_deploy():
     with cd(env.localwiki_root):
