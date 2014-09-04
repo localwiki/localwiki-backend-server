@@ -1,14 +1,8 @@
 {% extends "pages/base.html" %}
 
-{% load staticfiles %}
 {% load i18n %}
 
 {% block title %}{% trans "LocalWiki" %}{% endblock %}
-
-{% block media %}
-{{ block.super }}
-<link rel="stylesheet" href="{% static "css/main_content.css" %}">
-{% endblock %}
 
 {% block head_extra %}
 <script type="text/javascript">
