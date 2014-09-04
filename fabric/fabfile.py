@@ -190,6 +190,7 @@ env.src_root = os.path.join(env.localwiki_root, 'src')
 env.virtualenv = os.path.join(env.localwiki_root, 'env')
 env.data_root = os.path.join(env.virtualenv, 'share', 'localwiki')
 env.branch = 'hub'
+env.git_hash = None
 
 def production():
     # Use the global roledefs
@@ -709,11 +710,17 @@ def run_tests():
 def branch(name):
     env.branch = name
 
+def git_hash(s):
+    env.git_hash = s
+
 def update_code():
     with cd(env.src_root):
         sudo("git fetch origin", user="www-data")
         stash_str = sudo("git stash", user="www-data")
-        sudo("git reset --hard origin/%s" % env.branch, user="www-data")
+        if env.git_hash:
+            sudo("git reset --hard %s" % env.git_hash, user="www-data")
+        else:
+            sudo("git reset --hard origin/%s" % env.branch, user="www-data")
         print 'stash_str', stash_str
         if stash_str.strip() != 'No local changes to save':
             sudo("git stash pop", user="www-data")
