@@ -10,7 +10,7 @@
       {% follow_form follow_obj %}
     {% elif follow_obj.slug == 'front page' and not frontpage %}
         {% trans "region" as object_type %}
-        {% follow_form page.region %}
+        {% follow_form follow_obj.region %}
     {% endif %}
   {% endif %}
 {% endphased %}
