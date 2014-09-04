@@ -107,5 +107,6 @@ def extract_included_tags(html):
             except UnicodeDecodeError:
                 continue
             l.append(item)
+    return l
 
 import site
