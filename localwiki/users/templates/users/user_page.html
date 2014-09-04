@@ -17,17 +17,17 @@
 {% endblock %}
 
 {% block header_bar_inner %}
-  {% with "user" as object_type_untrans %}
-    {% phased with user_for_page %}
-    {% if request.user.is_authenticated %}
-      {% trans "user" as object_type %}
-      {% follow_form user_for_page %}
-    {% endif %}
-    {% endphased %}
+  {% phased with user_for_page %}
+    {% load i18n %}
+    {% with "user" as object_type_untrans %}
+      {% if request.user.is_authenticated %}
+        {% trans "user" as object_type %}
+        {% follow_form user_for_page %}
+      {% endif %}
+    {% endwith %}
+  {% endphased %}
 
-    {{ block.super }}
-
-  {% endwith %}
+  {{ block.super }}
 {% endblock %}
 
 {% block content_wrapper %}

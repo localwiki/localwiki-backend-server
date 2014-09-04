@@ -15,6 +15,7 @@
 
 {% block header_bar_inner %}
   {% phased with region %}
+  {% load i18n %}
   {% if request.user.is_authenticated %}
     {% trans "region" as object_type %}
     {% follow_form region %}
