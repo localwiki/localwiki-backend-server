@@ -91,3 +91,5 @@ if not settings.DEBUG:
 urlpatterns += patterns('',
     (r'^(?P<region>[^/]+?)/', include(pages.site.urls)),
 )
+
+handler500 = 'utils.views.server_error'
