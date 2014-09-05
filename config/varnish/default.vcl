@@ -58,6 +58,10 @@ sub vcl_recv {
 }
 
 sub vcl_fetch {
+    /* Set URL and Host on object for ban-reaper purposes */
+    set beresp.http.x-url = req.url;
+    set beresp.http.x-host = req.http.host;
+
     if (beresp.ttl > 0s && beresp.http.X-KEEPME) {
         /* Remove Expires from backend, it's not long enough */
         unset beresp.http.expires;

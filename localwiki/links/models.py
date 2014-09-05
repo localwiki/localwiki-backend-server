@@ -12,7 +12,7 @@ class Link(models.Model):
     LocalWiki pages.
     """
     source = models.ForeignKey(Page, related_name='links')
-    destination = models.ForeignKey(Page, related_name='links_to_here', null=True)
+    destination = models.ForeignKey(Page, related_name='links_to_here', null=True, on_delete=models.SET_NULL)
     # We can link to pages that don't yet exist, so we record the page name as well.
     destination_name = models.CharField(max_length=255, editable=False, blank=False)
     count = models.PositiveSmallIntegerField(
@@ -38,7 +38,7 @@ class IncludedPage(models.Model):
        m.included_page = B
     """
     source = models.ForeignKey(Page, related_name='included_pages')
-    included_page = models.ForeignKey(Page, related_name='pages_that_include_this', null=True)
+    included_page = models.ForeignKey(Page, related_name='pages_that_include_this', null=True, on_delete=models.SET_NULL)
     # We can include pages that don't yet exist, so we record the page name as well.
     included_page_name = models.CharField(max_length=255, editable=False, blank=False)
 
