@@ -24,14 +24,19 @@ class Migration(DataMigration):
                     included_page = None
                 if orm.IncludedPage.objects.filter(source=page, included_page=included_page).exists():
                     continue
-                included= orm.IncludedPage(
-                    source=page,
-                    region=region,
-                    included_page=included_page,
-                    included_page_name=pagename,
-                )
-                included.save()
-                pass
+                if orm.IncludedPage.objects.filter(source=page, included_page_name__iexact=pagename).exists():
+                    if included_page:
+                        included = orm.IncludedPage.objects.filter(source=page, included_page_name__iexact=pagename)[0]
+                        included.included_page = included_page
+                        included.save()
+                else:
+                    included = orm.IncludedPage(
+                        source=page,
+                        region=region,
+                        included_page=included_page,
+                        included_page_name=pagename,
+                    )
+                    included.save()
 
     def backwards(self, orm):
         orm.IncludedPage.objects.all().delete()

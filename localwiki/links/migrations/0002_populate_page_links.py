@@ -24,15 +24,21 @@ class Migration(DataMigration):
                     destination = None
                 if orm.Link.objects.filter(source=page, destination=destination).exists():
                     continue
-                link = orm.Link(
-                    source=page,
-                    region=region,
-                    destination=destination,
-                    destination_name=pagename,
-                    count=count,
-                )
-                link.save()
-                pass
+
+                if orm.Link.objects.filter(source=page, destination_name__iexact=pagename).exists():
+                    if destination:
+                        link = orm.Link.objects.filter(source=page, destination_name__iexact=pagename)[0]
+                        link.destination = destination
+                        link.save()
+                else:
+                    link = orm.Link(
+                        source=page,
+                        region=region,
+                        destination=destination,
+                        destination_name=pagename,
+                        count=count,
+                    )
+                    link.save()
 
     def backwards(self, orm):
         orm.Link.objects.all().delete()
