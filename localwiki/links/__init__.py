@@ -33,11 +33,14 @@ def extract_internal_links(html):
     d = {}
     for href in hrefs:
         if not _is_absolute(href) and not _is_anchor_link(href) and not _invalid(href):
-            if not slugify(href) in d:
-                d[slugify(href)] = (url_to_name(href), 1)
-            else:
-                name, count = d[slugify(href)]
-                d[slugify(href)] = (name, count + 1)
+            try:
+                if not slugify(href) in d:
+                    d[slugify(href)] = (url_to_name(href), 1)
+                else:
+                    name, count = d[slugify(href)]
+                    d[slugify(href)] = (name, count + 1)
+            except UnicodeDecodeError:
+                pass
 
     # Format the result correctly.
     links = {}
@@ -66,7 +69,11 @@ def extract_included_pagenames(html):
     a_s = tree.xpath('//a')
 
     # Grab the link source if it's an included page
-    return [url_to_name(a.attrib.get('href')) for a in a_s if _is_included_page(a)]
+    l = []
+    for a in a_s:
+        if _is_included_page(a):
+            l.append(url_to_name(a.attrib.get('href')))
+    return l
 
 def _is_included_tag(a):
     classes = a.attrib.get('class', '').split()
@@ -92,7 +99,14 @@ def extract_included_tags(html):
     a_s = tree.xpath('//a')
 
     # Grab the link source if it's an included page
-    return [slugify(url_to_name(a.attrib.get('href'))[TAGS_PATH_LEN:].lower()) for a in a_s if _is_included_tag(a)]
-
+    l = []
+    for a in a_s:
+        if _is_included_tag(a):
+            try:
+                item = slugify(url_to_name(a.attrib.get('href'))[TAGS_PATH_LEN:].lower())
+            except UnicodeDecodeError:
+                continue
+            l.append(item)
+    return l
 
 import site

@@ -7,7 +7,6 @@
 {% load canonical_urls %}
 {% load pages_tags %}
 {% load cards_tags %}
-{% load follow_tags %}
 
 {% block canonical_url %}
   {% render_canonical_url region %}
@@ -32,10 +31,14 @@
 {% endblock %}
 
 {% block header_bar_inner %}
+  {% phased with region %}
+  {% load follow_tags %}
+  {% load i18n %}
   {% if request.user.is_authenticated %}
     {% trans "region" as object_type %}
     {% follow_form region %}
   {% endif %}
+  {% endphased %}
 
   {{ block.super }}
 {% endblock %}

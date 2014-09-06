@@ -1,3 +1,5 @@
+import urllib
+
 from django.conf import settings
 from django.core.urlresolvers import set_urlconf, get_urlconf
 from django.core.cache import cache
@@ -14,7 +16,7 @@ def varnish_invalidate_page(p):
     if p.region.regionsettings.domain:
         # Has a domain, ugh. Need to clear two URLs on two hosts, in this case
         set_urlconf('main.urls_no_region')
-        url = p.get_absolute_url()
+        url = urllib.unquote(p.get_absolute_url())  # Varnish needs it unquoted
         ban_cmd = (ban_path % {'url': url, 'host': p.region.regionsettings.domain}).encode('ascii')
         manager = VarnishManager(settings.VARNISH_MANAGEMENT_SERVERS)
         manager.run('ban', ban_cmd, secret=settings.VARNISH_SECRET)
@@ -22,6 +24,7 @@ def varnish_invalidate_page(p):
         # Now invalidate main path on LocalWiki hub
         set_urlconf('main.urls')
         url = p.get_absolute_url()
+        url = urllib.unquote(p.get_absolute_url())  # Varnish needs it unquoted
         ban_cmd = ban_path % {'url': url, 'host': settings.MAIN_HOSTNAME}
         manager = VarnishManager(settings.VARNISH_MANAGEMENT_SERVERS)
         manager.run('ban', ban_cmd, secret=settings.VARNISH_SECRET)
@@ -69,9 +72,17 @@ def _async_cache_post_edit(instance, created=False, deleted=False, raw=False):
         if created or deleted:
             # Clear the cache for pages that link to this page, as the
             # link dashed-underline-status has changed.
-            for p in instance.links_to_here.all():
-                varnish_invalidate_page(p.source)
-                django_invalidate_page(p.source)
+
+            # First, make sure and get all the page links, whether or not the
+            # destination page exists:
+            links_to_here = set([l.source for l in instance.links_to_here.all()])
+            other_links = Link.objects.filter(destination_name__iexact=instance.slug)
+            other_links = [Page(name=l.source.name, slug=l.source.slug, region=instance.region) for l in other_links]
+            links_to_here = set.union(links_to_here, other_links)
+
+            for p in links_to_here:
+                varnish_invalidate_page(p)
+                django_invalidate_page(p)
 
         # Clear out the cache for pages that include this page
         for p in instance.pages_that_include_this.all():

@@ -2,9 +2,9 @@
 
 {% block subject %}{% blocktrans with region=page.region.slug pagename=page.name %}LocalWiki [{{ region }}]: {{ pagename}}{% endblocktrans %}{% endblock %}
 
-{% block plain %}{% blocktrans %}{{ username }} edited "{{ pagename }}" on {{ base_uri }}{{ region_url }}.{% if comment_text %}{{ comment_text }}{% endif %}
+{% block plain %}{% blocktrans %}{{ username }} edited "{{ pagename }}" on {{ base_uri }}{{ region_url }}.{% endblocktrans %}{% if comment_text %} {{ comment_text }}{% endif %}
 
-Go here to see the exact changes:
+{% blocktrans %}Go here to see the exact changes:
 
 {{ base_uri }}{{ diff_url_plaintext }}
 
@@ -15,8 +15,8 @@ To disable this notification, un-star the page here: {{ base_uri }}{{ page_url }
 
 {% block html %}
 {% blocktrans %}
-<p>{{ user_with_link }} edited <a href="{{ base_uri }}{{ page_url }}">{{ pagename }}</a> on <a href="{{ base_uri }}{{ region_url }}">LocalWiki {{ region_name }}</a>.{% if comment_text %}{{ comment_text }}{% endif %}</p>
-<p><a href="{{ base_uri }}{{ diff_url }}">Click here</a> to see what they changed.</p>
+<p>{{ user_with_link }} edited <a href="{{ base_uri }}{{ page_url }}">{{ pagename }}</a> on <a href="{{ base_uri }}{{ region_url }}">LocalWiki {{ region_name }}</a>.{% endblocktrans %}{% if comment_text %}{{ comment_text }}{% endif %}</p>
+{% blocktrans %}<p><a href="{{ base_uri }}{{ diff_url }}">Click here</a> to see what they changed.</p>
 <p>
 ---
 <br/>

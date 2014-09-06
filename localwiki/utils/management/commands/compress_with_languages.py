@@ -26,6 +26,13 @@ class Command(BaseCommand):
         manifest = {}
 
         MANIFEST_ROOT = join(settings.STATIC_ROOT, 'CACHE')
+
+        # Get the current manifest, to figure out if we should bail out
+        # faster here (faster deploys)
+        if os.path.exists(join(MANIFEST_ROOT, ORIGINAL_OFFLINE_MANIFEST)):
+            current_manifest = json.load(open(join(MANIFEST_ROOT, ORIGINAL_OFFLINE_MANIFEST)))
+        else:
+            current_manifest = None
         
         # Write a bunch of different manifests for each language
         for code, description in settings.LANGUAGES:
@@ -37,6 +44,10 @@ class Command(BaseCommand):
             manifest_for_code = json.load(open(join(MANIFEST_ROOT, '%s_manifest.json' % code)))
             manifest.update(manifest_for_code)
             os.remove(join(MANIFEST_ROOT, '%s_manifest.json' % code))
+
+            if current_manifest and set(manifest_for_code.items()).issubset(current_manifest.items()):
+                # Nothing's changed, so let's not bother computing all of the languages
+                return
        
         # Combine them all into one manifest
         f = open(join(MANIFEST_ROOT, ORIGINAL_OFFLINE_MANIFEST), 'w')

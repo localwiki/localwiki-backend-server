@@ -1,45 +1,27 @@
 # -*- coding: utf-8 -*-
 import datetime
 from south.db import db
-from south.v2 import DataMigration
+from south.v2 import SchemaMigration
 from django.db import models
-from django.utils.encoding import smart_str
 
 
-class Migration(DataMigration):
+class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        from pages.models import slugify
-        from links import extract_included_pagenames
 
-        for page in orm['pages.Page'].objects.all().iterator():
-            region = page.region
-            included_pages = extract_included_pagenames(page.content)
-            print "..recording included pages on %s" % smart_str(page.name)
-            for pagename in included_pages:
-                page_exists = orm['pages.Page'].objects.filter(slug=slugify(pagename), region=region)
-                if page_exists:
-                    included_page = page_exists[0]
-                else:
-                    included_page = None
-                if orm.IncludedPage.objects.filter(source=page, included_page=included_page).exists():
-                    continue
-                if orm.IncludedPage.objects.filter(source=page, included_page_name__iexact=pagename).exists():
-                    if included_page:
-                        included = orm.IncludedPage.objects.filter(source=page, included_page_name__iexact=pagename)[0]
-                        included.included_page = included_page
-                        included.save()
-                else:
-                    included = orm.IncludedPage(
-                        source=page,
-                        region=region,
-                        included_page=included_page,
-                        included_page_name=pagename,
-                    )
-                    included.save()
+        # Changing field 'Link.destination'
+        db.alter_column(u'links_link', 'destination_id', self.gf('django.db.models.fields.related.ForeignKey')(null=True, on_delete=models.SET_NULL, to=orm['pages.Page']))
+
+        # Changing field 'IncludedPage.included_page'
+        db.alter_column(u'links_includedpage', 'included_page_id', self.gf('django.db.models.fields.related.ForeignKey')(null=True, on_delete=models.SET_NULL, to=orm['pages.Page']))
 
     def backwards(self, orm):
-        orm.IncludedPage.objects.all().delete()
+
+        # Changing field 'Link.destination'
+        db.alter_column(u'links_link', 'destination_id', self.gf('django.db.models.fields.related.ForeignKey')(null=True, to=orm['pages.Page']))
+
+        # Changing field 'IncludedPage.included_page'
+        db.alter_column(u'links_includedpage', 'included_page_id', self.gf('django.db.models.fields.related.ForeignKey')(null=True, to=orm['pages.Page']))
 
     models = {
         u'actstream.action': {
@@ -66,15 +48,22 @@ class Migration(DataMigration):
         u'links.includedpage': {
             'Meta': {'unique_together': "(('source', 'included_page'),)", 'object_name': 'IncludedPage'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'included_page': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'pages_that_include_this'", 'null': 'True', 'to': u"orm['pages.Page']"}),
+            'included_page': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'pages_that_include_this'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': u"orm['pages.Page']"}),
             'included_page_name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'region': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['regions.Region']"}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'included_pages'", 'to': u"orm['pages.Page']"})
         },
+        u'links.includedtaglist': {
+            'Meta': {'unique_together': "(('source', 'included_tag'),)", 'object_name': 'IncludedTagList'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'included_tag': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'pages_that_include_tag_list'", 'null': 'True', 'to': u"orm['tags.Tag']"}),
+            'region': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['regions.Region']"}),
+            'source': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'included_tag_lists'", 'to': u"orm['pages.Page']"})
+        },
         u'links.link': {
             'Meta': {'unique_together': "(('source', 'destination'),)", 'object_name': 'Link'},
             'count': ('django.db.models.fields.PositiveSmallIntegerField', [], {}),
-            'destination': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'links_to_here'", 'null': 'True', 'to': u"orm['pages.Page']"}),
+            'destination': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'links_to_here'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': u"orm['pages.Page']"}),
             'destination_name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'region': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['regions.Region']"}),
@@ -95,8 +84,14 @@ class Migration(DataMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '255'})
+        },
+        u'tags.tag': {
+            'Meta': {'ordering': "('slug',)", 'unique_together': "(('slug', 'region'),)", 'object_name': 'Tag'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'region': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['regions.Region']", 'null': 'True'}),
+            'slug': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         }
     }
 
     complete_apps = ['links']
-    symmetrical = True

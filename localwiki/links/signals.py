@@ -56,12 +56,6 @@ def _check_destination_created(sender, instance, created, raw, **kws):
         link.destination = instance
         link.save()
 
-def _remove_destination_exists(sender, instance, **kws):
-    # The destination page is being deleted, so let's record that.
-    links = Link.objects.filter(destination_name__iexact=instance.slug)
-    for link in links:
-        link.destination = None
-        link.save()
 
 ############################
 # Now for included pages:
@@ -109,12 +103,6 @@ def _check_included_page_created(sender, instance, created, raw, **kws):
         m.included_page = instance
         m.save()
 
-def _remove_included_page_exists(sender, instance, **kws):
-    # The page-being-included is being deleted, so let's record that.
-    pages_that_include_this = IncludedPage.objects.filter(included_page_name__iexact=instance.slug)
-    for m in pages_that_include_this:
-        m.included_page = None
-        m.save()
 
 ##########################################
 # Now for included "list of tagged pages"
@@ -154,21 +142,14 @@ def _record_tag_includes(sender, instance, created, raw, **kws):
         return
     record_tag_includes(instance)
 
-def _delete_tag_includes(sender, instance, **kws):
-    for m in IncludedTagList.objects.filter(source=instance):
-        m.delete()
-
 # TODO: make these happen in the background using a task queue.
 # Links signals
 post_save.connect(_record_page_links, sender=Page)
 post_save.connect(_check_destination_created, sender=Page)
-pre_delete.connect(_remove_destination_exists, sender=Page)
 
 # Included page signals
 post_save.connect(_record_page_includes, sender=Page)
 post_save.connect(_check_included_page_created, sender=Page)
-pre_delete.connect(_remove_included_page_exists, sender=Page)
 
 # Included tag list signals
 post_save.connect(_record_tag_includes, sender=Page)
-post_delete.connect(_delete_tag_includes, sender=Page)

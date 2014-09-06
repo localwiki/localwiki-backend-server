@@ -2,8 +2,8 @@
 
 {% block subject %}{% blocktrans %}Someone edited your user page on LocalWiki{% endblocktrans %}{% endblock %}
 
-{% block plain %}{% blocktrans %}{{ username }} edited your user page on {{ base_uri }}.{% if comment_text %}{{ comment_text }}{% endif %}
-
+{% block plain %}{% blocktrans %}{{ username }} edited your user page on {{ base_uri }}.{% endblocktrans %}{% if comment_text %} {{ comment_text }}{% endif %}
+{% blocktrans %}
 Go here to see the exact changes:
 
 {{ base_uri }}{{ diff_url_plaintext }}
@@ -15,8 +15,8 @@ To disable this notification, un-star your user page here: {{ base_uri }}{{ page
 
 {% block html %}
 {% blocktrans %}
-<p>{{ user_with_link }} edited <a href="{{ base_uri }}{{ page_url }}">your user page</a> on <a href="{{ base_uri }}">LocalWiki</a>.{% if comment_text %}{{ comment_text }}{% endif %}</p>
-<p><a href="{{ base_uri }}{{ diff_url }}">Click here</a> to see what they changed.</p>
+<p>{{ user_with_link }} edited <a href="{{ base_uri }}{{ page_url }}">your user page</a> on <a href="{{ base_uri }}">LocalWiki</a>.{% endblocktrans %}{% if comment_text %} {{ comment_text }}{% endif %}</p>
+{% blocktrans %}<p><a href="{{ base_uri }}{{ diff_url }}">Click here</a> to see what they changed.</p>
 <p>
 ---
 <br/>

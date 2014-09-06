@@ -2,7 +2,7 @@
 
 {% load i18n %}
 {% load static from staticfiles %}
-{% load follow_tags %}
+{% load phased_tags %}
 
 {% comment %}
 {% block head_extra %}{% if page %}<link rel="alternate" href="{% url 'pages:changes-feed' slug=page.pretty_slug region=page.region.slug %}" type="application/rss+xml" title="{% trans "Recent changes on this Page" %}"/>{% endif %}{% endblock %}
@@ -33,20 +33,9 @@
 {% endblock %}
 
 {% block header_bar_inner %}
-  {% if page.slug != 'front page' and request.user.is_authenticated and page.exists and object_type_untrans != 'user' %}
-    {% trans "page" as object_type %}
-    {% if page.versions %}
-        {% follow_form page %}
-    {% else %}
-        {% follow_form page.history__object %}
-    {% endif %}
-  {% elif page.slug == 'front page' and not frontpage %}
-    {% if request.user.is_authenticated %}
-      {% trans "region" as object_type %}
-      {% follow_form page.region %}
-    {% endif %}
-  {% endif %}
-
+  {% block follow_area %}
+    {% include "pages/follow_area.html" %} 
+  {% endblock %}
   {{ block.super }}
 {% endblock %}
 

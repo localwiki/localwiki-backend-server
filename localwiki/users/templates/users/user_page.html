@@ -1,11 +1,10 @@
 {% extends "pages/base.html" %}
 
-
 {% load i18n %}
 {% load pages_tags %}
 {% load tags_tags %}
 {% load gravatar %}
-{% load follow_tags %}
+{% load phased_tags %}
 
 {% block title %}{% if not page.is_front_page %}{{ page.name }} - {% endif %}{{ block.super }}{% endblock %}
 {% block header_title %}<a href="#">{% if user_for_page.name %}{{ user_for_page.name }}{% else %}{{ user_for_page.username }}{% endif %}</a>{% endblock %}
@@ -16,15 +15,17 @@
     </div>
 {% endblock %}
 
-{% block header_bar_inner %}
-  {% with "user" as object_type_untrans %}
-    {% if request.user.is_authenticated %}
-      {% trans "user" as object_type %}
-      {% follow_form user_for_page %}
-    {% endif %}
-
-    {{ block.super }}
-  {% endwith %}
+{% block follow_area %}
+  {% phased with user_for_page %}
+    {% load i18n %}
+    {% load follow_tags %}
+    {% with "user" as object_type_untrans %}
+      {% if request.user.is_authenticated %}
+        {% trans "user" as object_type %}
+        {% follow_form user_for_page %}
+      {% endif %}
+    {% endwith %}
+  {% endphased %}
 {% endblock %}
 
 {% block content_wrapper %}

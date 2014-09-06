@@ -176,6 +176,8 @@ class PageUpdateView(PermissionRequiredMixin, CreateObjectMixin,
             if not following and not own_user_page:
                 t = Template("""
 {% load follow_tags %}
+{% load i18n %}
+{% trans "page" as object_type %}
 {% follow_form page %}
                 """)
                 c = RequestContext(self.request, {

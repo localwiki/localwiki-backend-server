@@ -1,7 +1,8 @@
 import time
 
 from django.utils.decorators import classonlymethod
-from django.http import HttpResponse, Http404, HttpResponseForbidden
+from django.conf import settings
+from django.http import HttpResponse, Http404, HttpResponseForbidden, HttpResponseServerError
 from django.utils import simplejson as json
 from django.utils.decorators import method_decorator
 from django.views.decorators.vary import vary_on_headers as dj_vary_on_headers
@@ -10,6 +11,8 @@ from django.views.generic import View, RedirectView, TemplateView
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.core.cache import cache
+from django.views.decorators.csrf import requires_csrf_token
+from django.template import (Context, loader, TemplateDoesNotExist)
 from django.utils.cache import get_max_age
 from django.http import HttpRequest
 from django.template.loader import render_to_string
@@ -310,3 +313,21 @@ class RevertView(RevertView):
 class DeleteView(DeleteView):
     def allow_admin_actions(self):
         return self.request.user.is_staff
+
+
+@requires_csrf_token
+def server_error(request, template_name='500.html'):
+    """
+    500 error handler.
+
+    Templates: :template:`500.html`
+    Context: Contains {{ STATIC_URL }} and {{ LANGUAGE_CODE }}
+    """
+    try:
+        template = loader.get_template(template_name)
+    except TemplateDoesNotExist:
+        return HttpResponseServerError('<h1>Server Error (500)</h1>')
+    return HttpResponseServerError(template.render(Context({
+        'STATIC_URL': settings.STATIC_URL,
+        'LANGUAGE_CODE': settings.LANGUAGE_CODE,
+    })))
