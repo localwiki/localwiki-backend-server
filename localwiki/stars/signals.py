@@ -62,7 +62,7 @@ def notify_page_edited(user, page, notification_type=None):
     if page_hist.version_info.user:
         username = page_hist.version_info.user.username
         user_url = page_hist.version_info.user.get_absolute_url()
-        user_with_link = '<a href="%s">%s</a>' % (user_url, username)
+        user_with_link = '<a href="%s%s">%s</a>' % (get_base_uri(), user_url, username)
     else:
         username = page_hist.version_info.user_ip
         user_with_link = username
