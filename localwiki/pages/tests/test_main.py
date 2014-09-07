@@ -359,9 +359,9 @@ class PageTest(TestCase):
         p.rename_to("Places to have the MOST fun")
        
         new_p = Page.objects.get(name="Places to have the MOST fun", region=self.region)
-        self.assertEqual(new_p.links_to_here.all().count(), 1)
-        self.assertEqual(new_p.links_to_here.all()[0].destination_name, 'dogs')
-        self.assertEqual(new_p.links_to_here.all()[0].destination, dogs_p)
+        self.assertEqual(new_p.links.all().count(), 1)
+        self.assertEqual(new_p.links.all()[0].destination_name, 'Dogs')
+        self.assertEqual(new_p.links.all()[0].destination, dogs_p)
 
 
 class TestModel(models.Model):
