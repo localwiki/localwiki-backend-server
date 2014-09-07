@@ -817,6 +817,8 @@ textarea, input, select {
         box-shadow: none!important;
         -moz-box-shadow: none!important;
         -webkit-box-shadow: none!important;
+        text-shadow: none!important;
+        font-weight: bold;
     }
     #nav li a {
         border: none;
