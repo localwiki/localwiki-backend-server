@@ -346,6 +346,23 @@ class PageTest(TestCase):
         p_h = p_c.versions.as_of(version=1)
         p_h.revert_to()
 
+        ###########################################################
+        # Page rename with links!
+        ###########################################################
+        from links.models import Link
+
+        dogs_p = Page(name="Dogs", slug="dogs", region=self.region, content="<p>what</p>")
+        dogs_p.save()
+
+        p = Page(name="Places to have fun", content='<p><a href="Dogs">a link</a></p>', region=self.region)
+        p.save()
+        p.rename_to("Places to have the MOST fun")
+       
+        new_p = Page.objects.get(name="Places to have the MOST fun", region=self.region)
+        self.assertEqual(new_p.links_to_here.all().count(), 1)
+        self.assertEqual(new_p.links_to_here.all()[0].destination_name, 'dogs')
+        self.assertEqual(new_p.links_to_here.all()[0].destination, dogs_p)
+
 
 class TestModel(models.Model):
     save_time = models.DateTimeField(auto_now=True)
