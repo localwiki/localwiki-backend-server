@@ -38,14 +38,14 @@ def record_page_links(page):
 def _record_page_links(sender, instance, created, raw, **kws):
     # Don't create Links when importing via loaddata - they're already
     # being imported.
-    if raw:
+    if raw or getattr(instance, '_in_rename', False):
         return
     record_page_links(instance)
 
 def _check_destination_created(sender, instance, created, raw, **kws):
     # Don't create Links when importing via loaddata - they're already
     # being imported.
-    if raw:
+    if raw or getattr(instance, '_in_rename', False):
         return
     if not created:
         return
@@ -85,14 +85,14 @@ def record_page_includes(page):
 def _record_page_includes(sender, instance, created, raw, **kws):
     # Don't create IncludedPages when importing via loaddata - they're already
     # being imported.
-    if raw:
+    if raw or getattr(instance, '_in_rename', False):
         return
     record_page_includes(instance)
 
 def _check_included_page_created(sender, instance, created, raw, **kws):
     # Don't create IncludedPages when importing via loaddata - they're already
     # being imported.
-    if raw:
+    if raw or getattr(instance, '_in_rename', False):
         return
     if not created:
         return
@@ -138,7 +138,7 @@ def record_tag_includes(page):
 def _record_tag_includes(sender, instance, created, raw, **kws):
     # Don't create IncludedTagLists when importing via loaddata - they're already
     # being imported.
-    if raw:
+    if raw or getattr(instance, '_in_rename', False):
         return
     record_tag_includes(instance)
 

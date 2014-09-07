@@ -17,7 +17,7 @@ from django_randomfilenamestorage.storage import (
     RandomFilenameFileSystemStorage)
 
 from versionutils import diff, versioning
-from versionutils.versioning.utils import is_versioned
+from versionutils.versioning.utils import is_versioned, unique_lookup_values_for
 from localwiki.utils.urlresolvers import reverse
 from regions.models import Region
 
@@ -142,6 +142,7 @@ class Page(models.Model):
         new_p.pk = None
         new_p.name = pagename
         new_p.slug = slugify(pagename)
+        new_p._in_rename = True
         new_p.save(comment=_('Renamed from "%s"') % self.name)
 
         # Get all related objects before the original page is deleted.
@@ -206,10 +207,12 @@ class Page(models.Model):
                 obj_lookup = _get_slug_lookup(unique_together, obj, new_p)
                 if obj.__class__.objects.filter(**obj_lookup):
                     continue
+
                 obj.slug = new_p.slug
                 obj.pk = None  # Reset the primary key before saving.
                 obj.save(comment=_("Parent page renamed"))
 
+        new_p._in_rename = False
         return new_p
 
     def get_highlight_image(self):

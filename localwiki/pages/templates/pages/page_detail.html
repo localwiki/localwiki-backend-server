@@ -24,14 +24,16 @@
 {% block header_subtitle %}
   {{ block.super }}
 
-  {% phased with page %}
-  {% load i18n %}
-  {% if request.GET.redirected_from %}
-    <div id="object_subtitle">
-    {% trans "Redirected from" %} <a href="{% url 'pages:show' slug=request.GET.redirected_from region=page.region.slug %}?show=1">{{ request.GET.redirected_from }}</a>
-    </div>
+  {% if page.versions %}
+    {% phased with page %}
+        {% load i18n %}
+        {% if request.GET.redirected_from %}
+          <div id="object_subtitle">
+          {% trans "Redirected from" %} <a href="{% url 'pages:show' slug=request.GET.redirected_from region=page.region.slug %}?show=1">{{ request.GET.redirected_from }}</a>
+          </div>
+        {% endif %}
+    {% endphased %}
   {% endif %}
-  {% endphased %}
 {% endblock %}
 
 {% block content_wrapper %}

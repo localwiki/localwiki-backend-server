@@ -86,7 +86,7 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.load_template_source',
 )
 
-if '':
+if not DEBUG:
     LOCAL_INSTALLED_APPS = (
         'raven.contrib.django.raven_compat',
     )
@@ -118,6 +118,3 @@ CACHES = {
 }
 
 SECRET_KEY = '{{ django_secret_key }}'
-
-SENTRY_REMOTE_URL = 'https://errors.localwiki.org/sentry/store/'
-SENTRY_KEY = '{{ sentry_key }}'

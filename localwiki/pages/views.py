@@ -41,7 +41,7 @@ from .utils import is_user_page
 from .exceptions import PageExistsError
 
 
-class PageDetailView(CacheMixin, Custom404Mixin, AddContributorsMixin, RegionMixin, DetailView):
+class BasePageDetailView(Custom404Mixin, AddContributorsMixin, RegionMixin, DetailView):
     model = Page
     context_object_name = 'page'
     cache_keep_forever = True
@@ -72,7 +72,7 @@ class PageDetailView(CacheMixin, Custom404Mixin, AddContributorsMixin, RegionMix
     def get_context_data(self, **kwargs):
         from maps.widgets import map_options_for_region
 
-        context = super(PageDetailView, self).get_context_data(**kwargs)
+        context = super(BasePageDetailView, self).get_context_data(**kwargs)
         context['region'] = self.object.region
         context['date'] = self.object.versions.most_recent().version_info.date
         if hasattr(self.object, 'mapdata'):
@@ -97,6 +97,8 @@ class PageDetailView(CacheMixin, Custom404Mixin, AddContributorsMixin, RegionMix
                 options=olwidget_options)
         return context
 
+
+class PageDetailView(CacheMixin, BasePageDetailView):
     @staticmethod
     def get_cache_key(*args, **kwargs):
         from django.core.urlresolvers import get_urlconf
@@ -106,7 +108,7 @@ class PageDetailView(CacheMixin, Custom404Mixin, AddContributorsMixin, RegionMix
         return '%s/%s/%s' % (urlconf, region, name_to_url(slug))
 
 
-class PageVersionDetailView(PageDetailView):
+class PageVersionDetailView(BasePageDetailView):
     template_name = 'pages/page_version_detail.html'
 
     def get_object(self):
