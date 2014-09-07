@@ -30,7 +30,7 @@ class RedirectFallbackMiddleware(object):
             # No need to check for a redirect for non-404 responses.
             return response
 
-        if request.META['HTTP_HOST'] == settings.MAIN_HOSTNAME:
+        if request.META['HTTP_HOST'].endswith(settings.MAIN_HOSTNAME):
             page_routing_pattern = page_routing_pattern_region
         else:
             page_routing_pattern = page_routing_pattern_no_region
@@ -48,7 +48,7 @@ class RedirectFallbackMiddleware(object):
 
         slug = slugify(re_match.group('slug'))
 
-        if request.META['HTTP_HOST'] == settings.MAIN_HOSTNAME:
+        if request.META['HTTP_HOST'].endswith(settings.MAIN_HOSTNAME):
             region_slug = re_match.group('region')
             region = Region.objects.filter(slug=region_slug)
         else:
