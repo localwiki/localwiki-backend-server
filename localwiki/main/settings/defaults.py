@@ -200,8 +200,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'johnny.middleware.LocalStoreClearMiddleware',
-    'johnny.middleware.QueryCacheMiddleware',
+    #'johnny.middleware.LocalStoreClearMiddleware',
+    #'johnny.middleware.QueryCacheMiddleware',
     'django_hosts.middleware.HostsMiddlewareRequest',
     'django.middleware.common.CommonMiddleware',
     'utils.middleware.XForwardedForMiddleware',
