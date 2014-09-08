@@ -17,7 +17,7 @@ class XForwardedForMiddleware():
             parts = request.META['HTTP_X_FORWARDED_FOR'].split(',')
             if len(parts) > 1:
                 # Get the second-to-last, in our case. Skip varnish (the last value)
-                ip = parts[-2]
+                ip = parts[-2].strip()
             else:
                 ip = parts[0]
             request.META['REMOTE_ADDR'] = ip
