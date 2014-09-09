@@ -1,0 +1,577 @@
+/* !!!!!! */
+/* XXX TODO: REMOVE BEFORE DEPLOY */
+/* !!!!!! */
+
+#preview_banner {
+    display: none;
+}
+
+#splash_page #region_header {
+    margin: 0;
+    padding: 0;
+}
+
+#splash_page #header {
+    border-bottom: 0;
+}
+#splash_page a, #splash_page a:link {
+    text-decoration: none;
+}
+#splash_page .simple_pagination a {
+    float: none;
+    display: inline-block;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+#splash_page #map_header_bar #map {
+    float: none;
+    margin: 0;
+    border: none;
+    padding: 0;
+    
+
+}
+
+/* TEMP */
+#splash_page #map_header_bar {
+    background-color: #c3ccde;
+    height: 400px!important;
+    margin-top: -1px;
+}
+
+#splash_page #map_header_bar .mapwidget {
+
+
+    width: 100%!important;
+    float: none;
+    margin: 0;
+    height: 400px!important;
+    display: block;
+    border: none;
+}
+
+/* Baseline styles for splash page */
+#splash_page h1, #splash_page h2, #splash_page h3, #splash_page h4 {
+    color: #3f3f3f;
+}
+#splash_page a[href^="http:"],
+#splash_page a[href^="https:"] {
+    background: none;
+    padding-left: 0;
+}
+
+#splash_page .callout {
+    text-align: center;
+    background-color: #f3f3f3;
+    padding: 3em 0 3em 0;
+}
+#splash_page .callout h1 {
+    max-width: 600px;
+    display: inline-block;
+    margin: 0;
+    color: #505050;
+    font-size: 30px;
+}
+
+#splash_page .bring_localwiki {
+    text-align: center;
+    display: block;
+    background-color: white;
+    background-image: url('http://localwiki.org/static/img/bg_map.png');
+    background-repeat: repeat;
+}
+#splash_page .bring_localwiki .button {
+    float: none;
+    display: inline-block;
+    margin-top: 2.5em;
+    margin-bottom: 2.5em;
+    color: white!important;
+    text-shadow: 0px 1px 0px rgba(120, 120, 120, 1);
+    padding: 0.8em 1.1em 0.8em 1.1em;
+    background-image: none;
+    background-color: #5C6;
+}
+#splash_page .bring_localwiki .button:hover {
+    background-image: none;
+    background-color: rgba(80, 198, 97, 1)!important;
+    color: #F5F5F5!important;
+}
+#splash_page .interesting_cards {
+    padding-top: 3em;
+    padding-bottom: 1.5em;
+}
+#splash_page .interesting_cards .explore_more a {
+    margin-top: 1em;
+}
+#splash_page .interesting_cards h2 {
+    text-align: center; 
+    margin-bottom: 1em;
+}
+
+#splash_page .highlights .item {
+    clear: both;
+    width: 100%;
+    display: table;
+    text-align: center;
+}
+
+#splash_page .highlights p {
+    padding-right: 4em;
+    display: inline;
+}
+#splash_page .highlights .item > div {
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    display: inline-block;
+
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    max-width: 800px;
+}
+#splash_page .highlights img {
+    margin-right: 4em;
+}
+#splash_page .highlights .description {
+}
+#splash_page .highlights .item:nth-child(odd) .description {
+    padding-left: 363px;
+}
+#splash_page .highlights .item:nth-child(even) .description {
+    padding-right: 363px;
+}
+#splash_page .highlights .item:nth-child(odd) {
+    background-color: white;
+}
+#splash_page .highlights .item:nth-child(odd) img {
+    float: left;
+}
+#splash_page .highlights .item:nth-child(even) img {
+    float: right;
+}
+
+#splash_page .recent_blogs {
+    padding-top: 3em;
+    padding-bottom: 4em;
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#splash_page .recent_blogs h2 {
+    margin-bottom: 1.5em;
+}
+#splash_page .recent_blogs li {
+   list-style-type: none;
+   margin-left: 0;
+   margin-bottom: 1.5em;
+   background-color: white;
+   padding: 1.5em 2em 2em 2em;
+   line-height: 1.1;
+   clear: both;
+}
+#splash_page .recent_blogs li:last-child {
+   margin-bottom: 0;
+}
+#splash_page .recent_blogs li:hover {
+    background-color: #ebebeb;
+    color: #111;
+    cursor: pointer;
+}
+#splash_page .recent_blogs .image_frame {
+   float: left;
+}
+#splash_page .blog_content {
+   font-size: 90%;
+   line-height: 1.4;
+   margin-left: 100px;
+   max-height: 60px;
+   height: 60px;
+   overflow: hidden;
+}
+
+/* Blog pages */
+#splash_page #blog_page .title {
+    text-align: center;
+    margin-bottom: 0;
+}
+#splash_page #blog_page .info {
+    color: #8F8F8F;
+    font-size: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.6em;
+    margin-bottom: 1.5em;
+    display: table;
+}
+#splash_page #blog_page .info a, 
+#splash_page #blog_page .info a:link {
+    color: #8F8F8F;
+}
+#splash_page #blog_page .pagination {
+    float: none;
+    display: inline-block;
+    margin-top: 2em;
+}
+#splash_page #blog_page .info a:hover {
+    color: black;
+}
+#splash_page #blog_page .info > div {
+    display: inline-block;
+    margin-left: 0.1em;
+}
+#splash_page #blog_page .info img {
+    vertical-align: middle;
+    margin-right: 0.2em;
+    margin-bottom: 4px;
+}
+#splash_page #blog_page .item {
+    border-bottom: 1px solid #E4E4E4;
+    padding-bottom: 1em;
+    margin-bottom: 4em;
+}
+#splash_page #blog_page .item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+#splash_page #blog_page .body {
+    margin-top: 1em;
+}
+#splash_page #blog_page .body .image_frame,
+#splash_page #blog_page .body iframe {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+}
+#splash_page #blog_page .body a, #splash_page #blog_page .body a:link {
+    text-decoration: underline;
+}
+#blog_page .item a {
+    background: none;
+    padding: 0;
+}
+
+#blog_page blockquote {
+  display: block;
+  padding: 1.5em 0 0 2em;
+  max-width: 23em;
+  color: rgba(149, 149, 149, 1);
+  font-size: 130%;
+  line-height: 1.3;
+}
+
+#blog_page blockquote:before, #blog_page blockquote:after {
+  color: #69c;
+  display: block;
+  font-size: 300%;
+  width: 50px;
+}
+#blog_page blockquote:before {
+  content: "“";
+  height: 0;
+  margin-left: -0.45em;
+  float: left;
+  margin-top: -0.7em;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+/* For a flat page on the main site, or for the blog, we use the splash_page styles. */
+#splash_page #content {
+  margin: 0;
+}
+#splash_page #header_title {
+   text-align: center;
+   padding-top: 3em;
+   padding-bottom: 3em;
+}
+#splash_page #header_title h1 {
+    margin: 0;
+    font-size: 250%;
+}
+#splash_page #main {
+    margin: 0;
+}
+
+#splash_page #content_wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 600px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 2.5em;
+}
+
+.full_map #splash_page #map {
+   display: block;
+   float: none;
+   padding: 0;
+   margin: 0;
+}
+
+@media screen and (max-width: 994px) {
+  .full_map #splash_page #map {
+     margin-top: 54px;
+  }
+}
+
+
+/* For some pages, e.g. the region explore page, we want the main
+ * header to remain fixed */
+.fixed_header #common_header {
+    position: fixed;
+    z-index: 2;
+    margin-top: 0;
+}
+.fixed_header #content_wrapper {
+    margin-top: 54px!important;
+    padding-top: 1em!important;
+}
+
+
+/******************************* 
+  Region explore page 
+ ******************************/
+#region_explore_page #content_wrapper {
+    max-width: none;
+    margin-top: 0!important;
+}
+
+#region_explore_page .option_toggle .as_map {
+    display: none;
+}
+
+#region_explore_page .option_toggle.minimal { margin-top: 1em; }
+
+#region_explore_page #header_title .search {
+    display: inline-block;
+    margin-top: 1.7em;
+}
+#region_explore_page #header_title .search input {
+    margin-bottom: 0;
+    display: inline-block;
+}
+#region_explore_page #header_title .add_region .button {
+    float: none;
+    display: inline-block;
+    font-weight: normal;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin-left: 0.3em;
+}
+#region_explore_page #header_title .add_region {
+    color: #868686;
+    display: inline;
+    margin-left: 0.3em;
+}
+#region_explore_page .cards {
+    display: table-cell;
+    text-align: center;
+}
+#region_explore_page .cards .card {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+#region_explore_page .cards .endless_container .button {
+    float: none;
+    display: block;
+    margin-bottom: 1em;
+}
+#region_explore_page .endless_loading {
+    float: none;
+    display: block;
+    margin-bottom: 1em;
+}
+
+/* Hide this but allow Enter-to-submit */
+#region_explore_page #header_title .search input[type="submit"] {
+    position: absolute;
+    z-index: -1000;
+    left: -1000px;
+}
+
+#region_explore_page #map {
+    float: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    z-index: 1;
+    width: 40%;
+    height: 100%;
+    left: 0;
+    margin-top: 54px;
+}
+#region_explore_page #map .mapwidget {
+    width: 100%!important;
+    height: 100%!important;
+    border: none;
+}
+#region_explore_page #main, #region_explore_page #footer, #region_explore_page #attributions, #region_explore_page #about {
+    width: 60%;
+    float: right;
+}
+#region_explore_page #header_title {
+    float: right;
+    width: 60%;
+    margin-top: 54px!important;
+    padding-top: 1.7em;
+    padding-bottom: 1.8em;
+}
+#region_explore_page #header_title h1 {
+    font-size: 200%;
+}
+
+#region_explore_page #header_title .search .twitter-typeahead {
+    float: none;
+}
+
+@media screen and (max-width: 994px) {
+    #region_explore_page #header_title {
+        width: 100%;
+        float: none;
+        margin-top: 0!important;
+    }
+    #region_explore_page #main, #region_explore_page #footer, #region_explore_page #attributions, #region_explore_page #about {
+        width: 100%;
+        float: none;
+    }
+    #region_explore_page #map {
+        position: static;
+        width: 100%;
+        height: 300px;
+        margin-top: 15px;
+    }
+    .fixed_header #common_header {
+        position: static;
+    }
+}
+@media screen and (max-width: 700px) {
+    #region_explore_page #header_title .search input {
+        width: auto!important;
+    }
+}
+@media screen and (max-width: 600px) {
+    #region_explore_page .option_toggle.minimal {
+        float: none!important;
+        margin-left: 0.5em;
+        display: inline-block;
+    }
+    #region_explore_page #content {
+        text-align: center;
+    }
+    #region_explore_page #main {
+        border-top: 1px solid #FFF;
+    }
+    #region_explore_page #content_wrapper {
+        padding-top: 0!important;
+    }
+}
+@media screen and (max-width: 580px) {
+    #region_explore_page #map {
+        display: none;
+    }
+    #region_explore_page .option_toggle .as_map {
+        display: inline;
+    }
+}
+@media screen and (max-width: 417px) {
+    #region_explore_page #header_title .add_region {
+        display: block;
+        font-size: 90%;
+    }
+    #region_explore_page #header_title .add_region .button {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 236px;
+        margin-top: 0.1em;
+        font-size: 100%;
+    }
+    #region_explore_page #map {
+        margin-top: 0;
+    }
+}
+
+
+/* TEMP TEMP TEMP */
+#splash_page #main {
+    background-color: white!important;
+}
+
+
+/*
+@media screen and (max-width: 1000px) {
+    #login_info .actions .button {
+        font-size: 70%;
+    }
+    #splash_page #nav {
+        margin-right: 200px;
+        margin-top: -39px;
+    }
+    #splash_page #nav li a {
+        font-size: 80%;
+    }
+}
+*/
+
+@media screen and (max-width: 940px) {
+    #splash_page .highlights .item > div {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 790px) {
+    #splash_page .recent_blogs {
+        padding-top: 2em;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #splash_page #map_header_bar .mapwidget {
+        height: 200px!important;
+    }
+    #splash_page .recent_blogs {
+    }
+    #splash_page .callout h1 {
+        font-size: 20px;
+        max-width: 400px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    #splash_page .interesting_cards h2 {
+        font-size: 140%;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+    }
+}
+
+@media screen and (max-width: 660px) {
+    #splash_page .highlights .item img {
+        float: none!important;
+        margin-right: 0!important;
+        margin-bottom: 15px;
+    }
+    #splash_page .highlights .item > div {
+        text-align: center;
+    }
+    #splash_page .highlights .item .description {
+        text-align: left;
+        padding-left: 0!important;
+        padding-right: 0!important;
+    }
+    #splash_page .highlights p {
+        padding-right: 0;
+    }
+}
+

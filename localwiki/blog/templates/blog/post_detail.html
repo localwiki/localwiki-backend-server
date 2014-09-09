@@ -3,39 +3,23 @@
 {% load i18n %}
 {% load gravatar %}
 
-{% block title %}{{ object.title }}{% endblock %}
+{% block title %}{{ object.title }} - {% trans "LocalWiki blog" %}{% endblock %}
 {% block body_class %}{{ block.super }} post_detail{% endblock %}
 {% block body_id %}post_{{ object.id }}{% endblock %}
 
-
 {% block content_title %}
   <h2>{{ object.title }}</h2>
-  {% comment %}
-  <p class="other_posts">
-    {% if object.get_previous_by_publish %}
-    <a class="previous" href="{{ object.get_previous_post.get_absolute_url }}" title="{% trans "View previous post" %}">&laquo; {{ object.get_previous_post }}</a>
-    {% endif %}
-    {% if object.get_next_by_publish %}
-    | <a class="next" href="{{ object.get_next_post.get_absolute_url }}" title="{% trans "View next post" %}">{{ object.get_next_post }} &raquo;</a>
-    {% endif %}
-  </p>
-  {% endcomment %}
 {% endblock %}
 
-
 {% block blog_content %}
-  <div class="item">
-  {% if object.author %}
-    <p class="user"><img src="{% gravatar_url object.author.email 25 %}"/>By <a href="{{ object.author.userprofile.twitter_url }}" target="_blank">{{ object.author.first_name }} {{ object.author.last_name }}</a></p>
-  {% endif %}
-  <h3 class="title"><a href="{{ object.get_absolute_url }}" title="{% trans "View this post" %}">{{ object.title }}</a></h3>
-  <p class="date">{{ object.publish|date:"j F Y" }}</p>
-
-  <div class="body">
-    {% block blog_body %}
-    {{ object.body|safe }}
-    {% endblock %}
-  </div>
-
-  </div>
+    <div class="item">
+      <h2 class="title"><a href="{{ object.get_absolute_url }}" title="{% trans "View this object" %}">{{ object.title }}</a></h2>
+      <div class="info">
+        <div class="date">{{ object.publish|date:"j F Y" }}</div>
+        {% if object.author %}
+          <div class="user">{% trans "by" %} <a target="_blank" href="{{ object.author.get_absolute_url }}" target="_blank"><img src="{% gravatar_url object.author.userprofile.gravatar_email 25 %}"/>{{ object.author.first_name }} {{ object.author.last_name }}</a></div>
+        {% endif %}
+      </div>
+      <div class="body">{{ object.body|safe }}</div>
+    </div>
 {% endblock %}
