@@ -55,7 +55,7 @@
     Alias /static/ {{ data_root }}/static/
     Alias /robots.txt {{ data_root }}/static/robots.txt
     Alias /sitemap.xml {{ data_root }}/static/sitemap.xml
-    Alias /favicon.ico {{ data_root }}/static/favicon.ico
+    Alias /favicon.ico {{ data_root }}/static/theme/img/favicons/favicon.ico
 
     # Make sure we send Expires and Cache-control headers for
     # static & media content.
