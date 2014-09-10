@@ -1,6 +1,6 @@
-{% extends "site/base.html" %}
+{% extends "main_content/default.html" %}
 
-{% block title %}{{ flatpage.title }}{% endblock %}
+{% block title %}{{ flatpage.title }} - {{ block.super }}{% endblock %}
 
 {% block header_title %}{{ flatpage.title }}{% endblock %}
 

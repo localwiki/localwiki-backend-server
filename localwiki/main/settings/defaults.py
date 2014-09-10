@@ -215,13 +215,17 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'honeypot.middleware.HoneypotMiddleware',
     'versionutils.versioning.middleware.AutoTrackUserInfoMiddleware',
+
+
+    # After messages middleware, before flatpage middleware
+    'phased.middleware.PhasedRenderMiddleware',
+
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'redirects.middleware.RedirectFallbackMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
     'block_ip.middleware.BlockIPMiddleware',
     'django_hosts.middleware.HostsMiddlewareResponse',
-    'phased.middleware.PhasedRenderMiddleware',
 )
 
 XSESSION_FILENAME = '_utils/xsession_loader.js'

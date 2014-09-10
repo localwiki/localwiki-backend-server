@@ -29,8 +29,6 @@
     margin: 0;
     border: none;
     padding: 0;
-    
-
 }
 
 /* TEMP */
@@ -41,8 +39,6 @@
 }
 
 #splash_page #map_header_bar .mapwidget {
-
-
     width: 100%!important;
     float: none;
     margin: 0;
@@ -53,7 +49,7 @@
 
 /* Baseline styles for splash page */
 #splash_page h1, #splash_page h2, #splash_page h3, #splash_page h4 {
-    color: #3f3f3f;
+    color: #505050;
 }
 #splash_page a[href^="http:"],
 #splash_page a[href^="https:"] {
@@ -78,7 +74,7 @@
     text-align: center;
     display: block;
     background-color: white;
-    background-image: url('http://localwiki.org/static/img/bg_map.png');
+    background-image: url('../img/bg_map.png');
     background-repeat: repeat;
 }
 #splash_page .bring_localwiki .button {
@@ -197,10 +193,19 @@
    overflow: hidden;
 }
 
+/* *********************** */
 /* Blog pages */
+/* *********************** */
 #splash_page #blog_page .title {
     text-align: center;
     margin-bottom: 0;
+    font-size: 200%;
+}
+#splash_page #blog_page .title a {
+    color: inherit;
+}
+#splash_page #blog_page .title a:hover {
+    text-decoration: underline;
 }
 #splash_page #blog_page .info {
     color: #8F8F8F;
@@ -284,18 +289,19 @@
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
+
 /* For a flat page on the main site, or for the blog, we use the splash_page styles. */
 #splash_page #content {
   margin: 0;
 }
 #splash_page #header_title {
    text-align: center;
-   padding-top: 3em;
-   padding-bottom: 3em;
+   padding-top: 2.3em;
+   padding-bottom: 2.3em;
 }
 #splash_page #header_title h1 {
     margin: 0;
-    font-size: 250%;
+    font-size: 200%;
 }
 #splash_page #main {
     margin: 0;
@@ -309,6 +315,8 @@
     padding-right: 20px;
     padding-top: 2.5em;
 }
+
+
 
 .full_map #splash_page #map {
    display: block;
@@ -506,6 +514,30 @@
 /* TEMP TEMP TEMP */
 #splash_page #main {
     background-color: white!important;
+}
+
+
+/* *********************** */
+/* Default / flatpage style. This is for content on a non-wiki,
+ * non-special page.
+/* *********************** */
+#splash_page.default {
+    background-image: url('../img/bg_map.png');
+    background-repeat: repeat; /* for iOS Safari which doesn't honor attachment: fixed */
+    background-position: 50% 0%;
+    background-attachment: fixed;
+}
+#splash_page.default #header, #splash_page.default #main {
+    background: none!important;
+    background-color: none!important;
+    background-image: none!important;
+}
+#splash_page.default #global_footer {
+    background: url('../img/body-bg.png') repeat scroll left top #FAFAFA;
+}
+#splash_page.default #content_wrapper {
+    background-color: white;
+    padding: 2.5em 3.5em 2.5em 3.5em;
 }
 
 

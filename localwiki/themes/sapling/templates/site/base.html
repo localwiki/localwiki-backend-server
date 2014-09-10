@@ -150,31 +150,33 @@
      {% endblock %}
     </div>
 
-    {% if region %}
-      {% cache 3600 nearby_regions region %}
-        {% if region.get_nearby_regions %}
-        <div id="nearby_regions_bar">
-          Nearby LocalWiki regions:
-          {% for region in region.get_nearby_regions %}
-              <a href="{% host_url 'frontpage' region=region.slug on hub %}">{{ region.full_name }}</a>
-          {% endfor %}
-        </div>
-        {% endif %}
-      {% endcache %}
-    {% endif %}
+    <div id="global_footer">
+      {% if region %}
+        {% cache 3600 nearby_regions region %}
+          {% if region.get_nearby_regions %}
+          <div id="nearby_regions_bar">
+            Nearby LocalWiki regions:
+            {% for region in region.get_nearby_regions %}
+                <a href="{% host_url 'frontpage' region=region.slug on hub %}">{{ region.full_name }}</a>
+            {% endfor %}
+          </div>
+          {% endif %}
+        {% endcache %}
+      {% endif %}
 
-    <div id="about">
-      <p>
-      {% blocktrans %}
-      LocalWiki is a grassroots effort to collect, share and open the world’s local knowledge.  We are a 501(c)3 non-profit organization. <a href="http://localwiki.org/about/" target="_blank">Learn more</a>.
-      {% endblocktrans %} 
-      </p>
-    </div>
+      <div id="about">
+        <p>
+        {% blocktrans %}
+        LocalWiki is a grassroots effort to collect, share and open the world’s local knowledge.  We are a 501(c)3 non-profit organization. <a href="http://localwiki.org/about/" target="_blank">Learn more</a>.
+        {% endblocktrans %} 
+        </p>
+      </div>
 
-    <div id="attributions">
-     {% block attributions %}
-       {% trans GLOBAL_LICENSE_NOTE|safe %}
-     {% endblock %}
+      <div id="attributions">
+       {% block attributions %}
+         {% trans GLOBAL_LICENSE_NOTE|safe %}
+       {% endblock %}
+      </div>
     </div>
 
   {% endblock %}
