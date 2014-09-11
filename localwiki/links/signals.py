@@ -51,7 +51,9 @@ def _check_destination_created(sender, instance, created, raw, **kws):
         return
 
     # The destination page has been created, so let's record that.
-    links = Link.objects.filter(destination_name__iexact=instance.slug, region=instance.region)
+    links = Link.objects.filter(
+        destination_name__iexact=instance.slug, region=instance.region
+    ).exclude(destination=instance)  # Skip if it's already added somehow
     for link in links:
         link.destination = instance
         link.save()
@@ -99,7 +101,8 @@ def _check_included_page_created(sender, instance, created, raw, **kws):
 
     # The included page has been created, so let's record that.
     pages_that_include_this = IncludedPage.objects.filter(
-        included_page_name__iexact=instance.slug, region=instance.region)
+        included_page_name__iexact=instance.slug, region=instance.region
+    ).exclude(included_page=instance)  # Skip if it's already added somehow
     for m in pages_that_include_this:
         m.included_page = instance
         m.save()
