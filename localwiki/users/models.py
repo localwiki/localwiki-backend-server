@@ -30,7 +30,9 @@ def name_to_first_last(self, name):
     last_name = ''
     if len(split_name) > 1:
         last_name = ' '.join(split_name[1:])
-    first_name = split_name[0]
+        first_name = split_name[0]
+    else:
+        first_name = name.strip()
 
     self.first_name = first_name
     self.last_name = last_name
