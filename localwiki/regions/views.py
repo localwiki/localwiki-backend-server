@@ -36,6 +36,8 @@ class RegionMixin(object):
     """
     Provides helpers to views that deal with Regions.
     """
+    region_required = True
+
     def get_region(self, request=None, kwargs=None):
         """
         Returns the Region associated with this view.
@@ -49,21 +51,35 @@ class RegionMixin(object):
             region_slug = kwargs.get('region')
             r = get_object_or_404(Region, slug=slugify(region_slug))
         else:
-            rs = get_object_or_404(RegionSettings, domain=request.META['HTTP_HOST'])
-            r = rs.region
-        if not r.is_active:
+            if self.region_required:
+                rs = get_object_or_404(RegionSettings, domain=request.META['HTTP_HOST'])
+                r = rs.region
+            else:
+                if RegionSettings.objects.filter(domain=request.META['HTTP_HOST']).exists():
+                    rs = get_object_or_404(RegionSettings, domain=request.META['HTTP_HOST'])
+                    r = rs.region
+                else:
+                    r = None
+
+        if self.region_required and not r.is_active:
             raise Http404(_("Region '%s' was deleted." % r.slug))
+
         return r
 
     def get_queryset(self):
         qs = super(RegionMixin, self).get_queryset()
-        return qs.filter(region=self.get_region(), region__is_active=True)
+        r = self.get_region()
+        if r:
+            return qs.filter(region=self.get_region(), region__is_active=True)
+        else:
+            return qs.filter(region__is_active=True)
 
     def get_context_data(self, *args, **kwargs):
         context = super(RegionMixin, self).get_context_data(*args, **kwargs)
         context['region'] = self.get_region()
         if hasattr(self, 'request'):
-            context['is_region_admin'] = context['region'].is_admin(self.request.user)
+            if context['region']:
+                context['is_region_admin'] = context['region'].is_admin(self.request.user)
         return context
 
 
