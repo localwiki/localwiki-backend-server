@@ -16,7 +16,8 @@
   </div>
 </div>
 <div id="tour_container">
-  <iframe id="tour" frameborder="0"></iframe>
+  <iframe id="tour0" class="tour" frameborder="0"></iframe>
+  <iframe id="tour1" class="tour" frameborder="0"></iframe>
 </div>
 {% endblock %}
 
@@ -30,8 +31,10 @@
         height: 0;
         overflow: hidden;
     }
-    
-    #tour {
+    .tour1 {
+        display: none;
+    }
+    .tour {
         position: absolute;
         top: 0; 
         left: 0;
@@ -43,6 +46,7 @@
         background-color: #DBECF9;
         text-align: center;
         padding: 0.7em 0 0.7em 0;
+        border-bottom: 2px solid rgba(143, 143, 143, 0.05);
     }
     #controls .button {
         float: none;
