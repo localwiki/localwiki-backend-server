@@ -1,12 +1,17 @@
 {% extends "pages/base.html" %}
 
-
 {% load i18n %}
 {% load cache %}
 
 {% block title %}{% blocktrans with region_name=region.full_name %}Explore {{ region_name }}{% endblocktrans %} - {{ block.super }}{% endblock %}
 
 {% block header_title %}{% blocktrans with region_name=region.full_name region_url=region.get_absolute_url %}Explore <a href="{{ region_url }}">{{ region_name }}</a>{% endblocktrans %}{% endblock %}
+
+{% block object_actions %}
+  <ul>
+      <li><a href="{% url 'random-tour' region=region.slug %}" rel="nofollow" class="button">{% trans "Take tour" %}</a></li>
+  </ul>
+{% endblock %}
 
 {% block head_extra %}
   <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>

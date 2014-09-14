@@ -24,22 +24,22 @@
 {% block head_extra %}
 <script type="text/javascript" src="{{ STATIC_URL }}js/random_tour.js"></script>
 <style>
-    #tour_container {
-        position: relative;
-        padding-bottom: 56.25%; /* proportion value to aspect ratio 16:9 (9 / 16 = 0.5625 or 56.25%) */
-        padding-top: 30px;
-        height: 0;
-        overflow: hidden;
-    }
-    .tour1 {
-        display: none;
-    }
-    .tour {
-        position: absolute;
-        top: 0; 
-        left: 0;
+    html, body {
         width: 100%;
         height: 100%;
+    }
+    #tour_container {
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+    }
+    .tour1 {
+        //display: none;
+    }
+    .tour {
+        width: 100%;
+        height: 100%;
+        position: absolute;
     }
     #controls {
         width: 100%;

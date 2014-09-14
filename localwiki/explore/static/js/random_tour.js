@@ -1,6 +1,9 @@
 var urls = [];
 var tour_i = 0;
 var iterate_tour = true;
+var seed = null;
+var z_index = 10;
+var page = 0;
 
 function run_tour(flip) {
     // First run
@@ -17,13 +20,13 @@ function run_tour(flip) {
         return;
     }
     
-    set_page(urls[tour_i], flip);
+    set_page(urls, tour_i, flip);
     tour_i++;
 
     $('#tour' + flip).unbind('load');
     $('#tour' + flip).load(function() {
         flip = (flip + 1) % 2;
-        setTimeout(function(){ run_tour(flip); }, 1500);
+        setTimeout(function(){ run_tour(flip); }, 1800);
     });
 }
 
@@ -32,19 +35,33 @@ function get_urls(flip) {
     if (typeof(region_slug) != 'undefined' && region_slug) {
         get_url = "/" + region_slug + get_url;
     }
+    get_url += '?';
+    if (seed) {
+        get_url += ('&s=' + seed);
+    }
+    if (page) {
+        get_url += ('&page=' + page);
+    }
     $.getJSON(get_url, function(data) {
         urls = data['urls'];
+        seed = data['random_seed'];
+        tour_i = 0;
+        page += 100;  // From explore.views items_per_page
         if (urls.length > 0) {
             run_tour(flip);
         }
     });
 }
 
-function set_page(url, flip) {
+function set_page(urls, tour_i, flip) {
+    var url = urls[tour_i];
+
     $('#tour' + flip).attr('src', url);
-    $('#tour' + flip);
-    flip = (flip + 1) % 2
-    $('#tour' + flip).show();
+    // Hide behavior is different on the first run
+    if (!(tour_i == 0 && page == 100)) {
+        flip = (flip + 1) % 2;
+        $('#tour' + flip).css('z-index', ++z_index);
+    }
 }
 
 $(document).ready(function() {
