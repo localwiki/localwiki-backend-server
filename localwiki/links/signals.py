@@ -10,6 +10,7 @@ from .models import Link, IncludedPage, IncludedTagList
 
 def record_page_links(page):
     region = page.region
+    links_before = list(page.links.all())
     links = extract_internal_links(page.content)
     for pagename, count in links.iteritems():
         link_exists = Link.objects.filter(
@@ -35,6 +36,13 @@ def record_page_links(page):
                 count=count,
             )
         link.save()
+
+        if link in links_before:
+            links_before.remove(link)
+    
+    # Links that were removed when the page was edited
+    for l in links_before:
+        l.delete()
 
 def _record_page_links(sender, instance, created, raw, **kws):
     # Don't create Links when importing via loaddata - they're already
@@ -82,6 +90,11 @@ def record_page_includes(page):
                 included_page_name=pagename,
             )
             m.save()
+
+    # Remove included pages they've removed from the page
+    to_delete = IncludedPage.objects.filter(source=page, region=region).exclude(included_page_name__in=included)
+    for m in to_delete:
+        m.delete()
 
 def _record_page_includes(sender, instance, created, raw, **kws):
     # Don't create IncludedPages when importing via loaddata - they're already
@@ -155,7 +168,7 @@ def _new_link_fix_page_score(sender, instance, created, raw, **kwargs):
 
 def _deleted_link_fix_page_score(sender, instance, **kwargs):
     # Don't create when importing via loaddata or renaming
-    if raw or getattr(instance, '_in_rename', False):
+    if getattr(instance, '_in_rename', False):
         return
     if instance.destination:
         # TODO: If this is slow later on, maybe just od this on some link count threshold
