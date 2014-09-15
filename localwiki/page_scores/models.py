@@ -6,9 +6,14 @@ import urlparse
 from django.utils.translation import ugettext as _
 from django.utils.encoding import smart_str
 from django.db import models
+from django.db.models import Avg
+from django.core.cache import cache
 from django.db.models.signals import post_save
 
 from pages.models import Page, slugify
+from links.models import Link
+
+SKIP_USER_PAGES_FOR_PAGESCORE = True
 
 
 class PageScore(models.Model):
@@ -18,6 +23,7 @@ class PageScore(models.Model):
     """
     page = models.OneToOneField(Page, related_name='score')
     score = models.SmallIntegerField()
+    page_content_length = models.PositiveIntegerField()  # Needed for some score metrics
 
     def __unicode__(self):
         return _("Page score %s: %s") % (self.page, self.score)
@@ -30,19 +36,60 @@ def is_plugin(elem):
     classes = elem.attrib.get('class', '')
     return ('plugin' in classes.split())
 
-@shared_task(ignore_result=True)
-def _calculate_page_score(page_id):
+def avg_incoming_links_for_region(region):    
+    avg = cache.get('avg_incoming_links:%s' % region.slug)
+    if avg is not None:
+        return avg
+
+    qs = Page.objects.filter(region=region)
+    # XXX TODO remove this once all
+    # /User/ pages are moved to a single global namespace
+    if SKIP_USER_PAGES_FOR_PAGESCORE:
+        qs = qs.exclude(slug__istartswith='users/')
+
+    num_vs = qs.\
+        annotate(num_links_here=models.Count('links_to_here')).\
+        order_by('-num_links_here').\
+        only('num_links_here').\
+        values('num_links_here')
+    count = num_vs.count()
+    if count:
+        avg = (sum(i['num_links_here'] for i in num_vs) * 1.0)/ (num_vs.count())
+    else:
+        avg = 0
+
+    cache.set('avg_incoming_links:%s' % region.slug, avg, 60 * 5)
+    return avg
+
+def avg_page_length(region):    
+    avg = cache.get('avg_page_length:%s' % region.slug)
+    if avg is not None:
+        return avg
+
+    qs = Page.objects.filter(region=region)
+    # XXX TODO remove this once all
+    # /User/ pages are moved to a single global namespace
+    if SKIP_USER_PAGES_FOR_PAGESCORE:
+        qs = qs.exclude(slug__istartswith='users/')
+
+    avg = qs.aggregate(avg=Avg('score__page_content_length'))['avg']
+
+    cache.set('avg_page_length:%s' % region.slug, avg, 60 * 5)
+    return avg
+
+def _compute_score(page):
     from maps.models import MapData
     from pages.plugins import _files_url
 
-    page = Page.objects.filter(id=page_id)
-    if page.exists():
-        page = page[0]
-    else:
-        return
     score = 0
     num_images = 0
     link_num = 0
+
+    # XXX TODO remove this once all
+    # /User/ pages are moved to a single global namespace
+    if SKIP_USER_PAGES_FOR_PAGESCORE:
+        if page.slug.startswith('users/'):
+            return 0
 
     # 1 point for having a map
     if MapData.objects.filter(page=page).exists():
@@ -74,12 +121,40 @@ def _calculate_page_score(page_id):
     if link_num >= 3:
         score += 1
 
+    # 1 point for a page length >= average page length
+    avg_page_length = Page.objects.filter(region=page.region).aggregate(
+        avg=Avg('score__page_content_length'))
+    if len(page.content) >= avg_page_length:
+        score += min(int((len(page.content) * 1.0) / avg_page_length), 3)
+
+    # Use # of incoming links in the page score
+    avg_links_to = avg_incoming_links_for_region(page.region)
+    num_links_to_here = page.links_to_here.count()
+    if num_links_to_here >= avg_links_to:
+        score += min(int((num_links_to_here * 1.0) / avg_links_to), 5)
+
+    # Normalize to get more randomness.  Otherwise we'd see the top few pages all the time on Explore
+    score = min(score, 8)
+
+    return score
+
+@shared_task(ignore_result=True)
+def _calculate_page_score(page_id):
+    page = Page.objects.filter(id=page_id)
+    if page.exists():
+        page = page[0]
+    else:
+        return
+
+    score = _compute_score(page)
+    
     score_obj = PageScore.objects.filter(page=page)
     if not score_obj.exists():
         score_obj = PageScore(page=page)
     else:
         score_obj = score_obj[0]
     score_obj.score = score
+    score_obj.page_content_length = len(page.content)
     score_obj.save()
 
 def _handle_page_score(sender, instance, created, raw, **kws):
