@@ -2,6 +2,7 @@ from django.db.models.signals import post_save, pre_delete, post_delete
 
 from pages.models import Page, slugify
 from tags.models import Tag
+from page_scores.models import _calculate_page_score
 
 from links import extract_internal_links, extract_included_pagenames, extract_included_tags
 from .models import Link, IncludedPage, IncludedTagList
@@ -55,7 +56,7 @@ def _check_destination_created(sender, instance, created, raw, **kws):
     for link in links:
         link.destination = instance
         link.save()
-
+   
 
 ############################
 # Now for included pages:
@@ -136,12 +137,30 @@ def record_tag_includes(page):
     for m in to_delete:
         m.delete()
 
-def _record_tag_includes(sender, instance, created, raw, **kws):
+def _record_tag_includes(sender, instance, created, raw, **kwargs):
     # Don't create IncludedTagLists when importing via loaddata - they're already
     # being imported.
     if raw or getattr(instance, '_in_rename', False):
         return
     record_tag_includes(instance)
+
+def _new_link_fix_page_score(sender, instance, created, raw, **kwargs):
+    # Don't create when importing via loaddata or renaming
+    if raw or getattr(instance, '_in_rename', False):
+        return
+    if created and instance.destination:
+        # TODO: If this is slow later on, maybe just od this on some link count threshold
+        # (e.g. new count > total average link count)
+        _calculate_page_score.delay(instance.destination.id)
+
+def _deleted_link_fix_page_score(sender, instance, **kwargs):
+    # Don't create when importing via loaddata or renaming
+    if raw or getattr(instance, '_in_rename', False):
+        return
+    if instance.destination:
+        # TODO: If this is slow later on, maybe just od this on some link count threshold
+        # (e.g. new count > total average link count)
+        _calculate_page_score.delay(instance.destination.id)
 
 # TODO: make these happen in the background using a task queue.
 # Links signals
@@ -154,3 +173,7 @@ post_save.connect(_check_included_page_created, sender=Page)
 
 # Included tag list signals
 post_save.connect(_record_tag_includes, sender=Page)
+
+# When links change we want to re-calculate the page score
+post_save.connect(_new_link_fix_page_score, sender=Link)
+pre_delete.connect(_deleted_link_fix_page_score, sender=Link)
