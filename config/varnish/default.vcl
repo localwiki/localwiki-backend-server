@@ -4,18 +4,28 @@
 # Default backend definition.  Set this to point to your content
 # server.
 
- backend localwiki { 
-     .host = "127.0.0.1";
-     .port = "8084";
+backend localwiki { 
+    .host = "127.0.0.1";
+    .port = "8084";
 
-     .connect_timeout = 600s;
-     .first_byte_timeout = 600s;
-     .between_bytes_timeout = 600s;
- }
+    .connect_timeout = 600s;
+    .first_byte_timeout = 600s;
+    .between_bytes_timeout = 600s;
+}
+
+
+backend splash { 
+    .host = "71.19.144.195";
+    .port = "80";
+
+    .connect_timeout = 600s;
+    .first_byte_timeout = 600s;
+    .between_bytes_timeout = 600s;
+}
  
 sub vcl_recv {
     # unless sessionid/csrftoken is in the request, don't pass ANY cookies (referral_source, utm, etc)
-    if (req.request == "GET" && (req.url ~ "^/static" || req.url ~ "^/media" || (req.http.cookie !~ "sessionid" && req.http.cookie !~ "csrftoken"))) {
+    if (req.request == "GET" && (req.url ~ "^/static" || req.url ~ "^/media" || req.url ~ "^/first_year" || (req.http.cookie !~ "sessionid" && req.http.cookie !~ "csrftoken"))) {
         remove req.http.Cookie;
     }
     # Some Django URLs to always, always cache.
@@ -26,12 +36,30 @@ sub vcl_recv {
     # Allow the backend to serve up stale content if it is responding slowly.
     set req.grace = 6h;
 
-    if (req.http.x-forwarded-host == "www.{{ public_hostname }}" || req.http.x-forwarded-host == "{{ public_hostname }}") {
-       set req.http.host = "{{ public_hostname }}";
-       set req.backend = localwiki;
-    } else {
-       set req.http.host = req.http.x-forwarded-host;
-       set req.backend = localwiki;
+    # XXX TODO TEMPORARY UNTIL SPLASH SITE IS FULLY INTEGRATED
+    # REMOVE THIS CONDITIONAL AFTER
+    if (req.url ~ "^/blog" || req.url ~ "^/about" || req.url ~ "^/donate" || req.url ~ "^/signup" || req.url ~ "^/_start_new" || req.url ~ "^/static_old" || req.url ~ "^/media_old") {
+        # In these cases, always serve from the old splash site backend
+        set req.backend = splash;
+    }
+    else {
+        # XXX TODO TEMPORARY UNTIL SPLASH SITE IS FULLY INTEGRATED
+        # REMOVE THIS CONDITIONAL AFTER
+        if (req.http.cookie !~ "sessionid" && req.url ~ "^/$") {
+            # Serve main page from splash backend if not logged in
+            set req.backend = splash;
+        }
+        else {
+            # XXX TODO extract this bit back up after splash
+            # is integrated:
+            if (req.http.x-forwarded-host == "www.{{ public_hostname }}" || req.http.x-forwarded-host == "{{ public_hostname }}") {
+               set req.http.host = "{{ public_hostname }}";
+               set req.backend = localwiki;
+            } else {
+               set req.http.host = req.http.x-forwarded-host;
+               set req.backend = localwiki;
+            }
+        }
     }
 
     if (req.http.x-forwarded-for) {
