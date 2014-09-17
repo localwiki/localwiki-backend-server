@@ -40,6 +40,14 @@ sub vcl_recv {
     } else {
        set req.http.X-Forwarded-For = client.ip;
     }
+
+    if (req.http.X-Forwarded-Proto == "https" ) {
+        set req.http.X-Forwarded-Port = "443";
+    } else {
+        set req.http.X-Forwarded-Port = "80";
+        set req.http.X-Forwarded-Proto = "http";
+    }
+
     if (req.request != "GET" &&
       req.request != "HEAD" &&
       req.request != "PUT" &&
@@ -55,6 +63,12 @@ sub vcl_recv {
         return (pass);
     }
     return (lookup);
+}
+
+sub vcl_hash {
+  if (req.http.X-Forwarded-Proto) {
+     hash_data(req.http.X-Forwarded-Proto);
+  }
 }
 
 sub vcl_fetch {

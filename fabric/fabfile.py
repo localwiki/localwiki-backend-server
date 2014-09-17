@@ -498,7 +498,8 @@ def setup_apache():
         # Restart apache
         sudo('service apache2 restart')
 
-        setup_apache_monitoring()
+        if env.host_type == 'production':
+            setup_apache_monitoring()
 
 def setup_permissions():
     # Add the user we run commands with to the apache user group
