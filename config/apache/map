@@ -99,7 +99,7 @@
 	SSLCertificateFile /etc/apache2/ssl/{{ ssl_name }}/{{ ssl_cert }}
 	SSLCertificateKeyFile /etc/apache2/ssl/{{ ssl_name }}/{{ ssl_key }}
 	SSLCACertificateFile /etc/apache2/ssl/{{ ssl_name }}/{{ ssl_intermediate }}
-    Header set Strict-Transport-Security "max-age=1800"
+    #Header set Strict-Transport-Security "max-age=1800"
 
 	ServerName map.{{ hostname }}
     ServerAlias map-a.{{ hostname }} map.{{ hostname }}

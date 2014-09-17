@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import pickle, os, sys, logging
-from httplib import HTTPConnection, socket
+from httplib import HTTPSConnection, socket
 from smtplib import SMTP
 import time
 from subprocess import call
@@ -33,7 +33,7 @@ def get_site_status(url):
 def get_response(url):
     '''Return response object from URL'''
     try:
-        conn = HTTPConnection(url)
+        conn = HTTPSConnection(url)
         conn.request('HEAD', '/')
         return conn.getresponse()
     except socket.error, e:
