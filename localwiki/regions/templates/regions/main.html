@@ -31,7 +31,7 @@
     {% endblocktrans %}
 
     <h2>{% trans "Regions" %}</h2>
-    <span style="" class="image_frame image_frame_border image_right"><img  src="http://localwiki.org/static/img/jobs/edit_your_city_crowd.jpg"></span>
+    <span style="" class="image_frame image_frame_border image_right"><img  src="/static/img/jobs/edit_your_city_crowd.jpg"></span>
     <ul>
     {% for region in regions %}
       <li><a href="{% url 'frontpage' region=region.slug %}">{{ region.full_name }}</a></li>
