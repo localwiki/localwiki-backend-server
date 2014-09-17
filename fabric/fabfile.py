@@ -369,11 +369,20 @@ def update_django_settings():
         context=get_context(env), use_jinja=True, use_sudo=True)
 
 def update_apache_settings():
+    # Create our extra config file directory if it doesn't already exist
+    run('mkdir -p /etc/apache2/extra-conf')
+
     upload_template('config/apache/localwiki', '/etc/apache2/sites-available/localwiki',
+        context=get_context(env), use_jinja=True, use_sudo=True)
+    upload_template('config/apache/old_localwiki', '/etc/apache2/sites-available/old_localwiki',
         context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/apache2.conf', '/etc/apache2/apache2.conf',
         context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/ports.conf', '/etc/apache2/ports.conf',
+        context=get_context(env), use_jinja=True, use_sudo=True)
+    upload_template('config/apache/extra-conf/ssl.conf', '/etc/apache2/extra-conf/ssl.conf',
+        context=get_context(env), use_jinja=True, use_sudo=True)
+    upload_template('config/apache/extra-conf/localwiki_certs.conf', '/etc/apache2/extra-conf/localwiki_certs.conf',
         context=get_context(env), use_jinja=True, use_sudo=True)
     sudo('service apache2 restart')
 
@@ -494,6 +503,7 @@ def setup_apache():
         upload_template('config/apache/ports.conf', '/etc/apache2/ports.conf',
             context=get_context(env), use_jinja=True, use_sudo=True)
         sudo('a2ensite localwiki')
+        sudo('a2ensite old_localwiki')
 
         # Restart apache
         sudo('service apache2 restart')
