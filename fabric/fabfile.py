@@ -374,8 +374,6 @@ def update_apache_settings():
 
     upload_template('config/apache/localwiki', '/etc/apache2/sites-available/localwiki',
         context=get_context(env), use_jinja=True, use_sudo=True)
-    upload_template('config/apache/old_localwiki', '/etc/apache2/sites-available/old_localwiki',
-        context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/apache2.conf', '/etc/apache2/apache2.conf',
         context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/ports.conf', '/etc/apache2/ports.conf',
@@ -384,6 +382,10 @@ def update_apache_settings():
         context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/extra-conf/localwiki_certs.conf', '/etc/apache2/extra-conf/localwiki_certs.conf',
         context=get_context(env), use_jinja=True, use_sudo=True)
+
+    if config_secrets.get('localwiki_main_production', False):
+        upload_template('config/apache/old_localwiki', '/etc/apache2/sites-available/old_localwiki',
+            context=get_context(env), use_jinja=True, use_sudo=True)
     sudo('service apache2 restart')
 
 def init_localwiki_install():
@@ -503,7 +505,8 @@ def setup_apache():
         upload_template('config/apache/ports.conf', '/etc/apache2/ports.conf',
             context=get_context(env), use_jinja=True, use_sudo=True)
         sudo('a2ensite localwiki')
-        sudo('a2ensite old_localwiki')
+        if config_secrets.get('localwiki_main_production', False):
+            sudo('a2ensite old_localwiki')
 
         # Restart apache
         sudo('service apache2 restart')
@@ -857,4 +860,4 @@ def push_translations():
 
 def populate_page_cards():
     with virtualenv():
-        sudo('localwiki-manage populate_page_cards', user='www-data')
+        sudo('localwiki-manage runscript populate_page_cards', user='www-data')

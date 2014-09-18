@@ -193,6 +193,7 @@
 ##############################################################################
 # http://denton.localwiki.net, http://www.denton.localwiki.net,
 # http://denton.localwiki.org/, http://www.denton.localwiki.org,
+# https://denton.localwiki.org,
 # http://dentonwiki.org, http://www.dentonwiki.org
 #
 #     -> https://localwiki.org/denton/
@@ -214,6 +215,33 @@
 
 	RewriteRule ^/ao8oddrm5hkl* https://localwiki.org/denton/ [R=301]
     RewriteRule ^/(.*) https://localwiki.org/denton/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName denton.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/denton/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName dentonwiki.org
+    ServerAlias www.dentonwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/denton/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    SSLCertificateFile /etc/apache2/ssl/www.dentonwiki.org/www.dentonwiki.org.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/www.dentonwiki.org/www.dentonwiki.org.key
+    SSLCACertificateFile /etc/apache2/ssl/www.dentonwiki.org/intermediate.crt
 </VirtualHost>
 
 ##############################################################################
@@ -344,6 +372,18 @@
     RewriteRule ^/(.*) https://localwiki.org/conway/$1 [R=301]
 </VirtualHost>
 
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName conway.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/conway/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
 ##############################################################################
 # http://detroit.localwiki.org, http://www.detroit.localwiki.org,
 # http://detroitwiki.org, http://www.detroitwiki.org
@@ -365,6 +405,7 @@
 
 ##############################################################################
 # http://dev.localwiki.org, http://www.dev.localwiki.org,
+# https://dev.localwiki.org
 #
 #     -> https://localwiki.org/dev/
 ##############################################################################
@@ -377,6 +418,18 @@
     ServerAlias www.dev.localwiki.org
     
     RewriteRule ^/(.*) https://localwiki.org/dev/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName dev.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/dev/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
 </VirtualHost>
 
 ##############################################################################
@@ -411,6 +464,7 @@
 
 ##############################################################################
 # http://richmond.localwiki.org, http://www.richmond.localwiki.org,
+# https://richmond.localwiki.org
 #
 #     -> https://localwiki.org/richmond/
 ##############################################################################
@@ -425,9 +479,21 @@
     RewriteRule ^/(.*) https://localwiki.org/richmond/$1 [R=301]
 </VirtualHost>
 
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName richmond.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/richmond/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
 
 ##############################################################################
 # http://richmond_va.localwiki.org, http://www.richmond_va.localwiki.org,
+# https://richmond_va.localwiki.org
 #
 #     -> https://localwiki.org/richmond-va/
 ##############################################################################
@@ -440,6 +506,18 @@
     ServerAlias www.richmond_va.localwiki.org
     
     RewriteRule ^/(.*) https://localwiki.org/richmond-va/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName richmond_va.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/richmond-va/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
 </VirtualHost>
 
 ##############################################################################
@@ -466,6 +544,7 @@
 
 ##############################################################################
 # http://sf.localwiki.org, http://www.sf.localwiki.org,
+# https://sf.localwiki.org,
 # http://sfwiki.org, http://www.sfwiki.org,
 #
 #     -> https://localwiki.org/sf/
@@ -483,8 +562,22 @@
     RewriteRule ^/(.*) https://localwiki.org/sf/$1 [R=301]
 </VirtualHost>
 
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName sf.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/sf/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
 ##############################################################################
 # http://sydney.localwiki.org, http://www.sydney.localwiki.org,
+# http://www.sydneywiki.org, http://sydneywiki.org,
+# https://sydney.localwiki.org
 #
 #     -> https://localwiki.org/sydney/
 ##############################################################################
@@ -495,12 +588,27 @@
     
     ServerName sydney.localwiki.org
     ServerAlias www.sydney.localwiki.org
+    ServerAlias sydneywiki.org
+    ServerAlias www.sydneywiki.org
     
     RewriteRule ^/(.*) https://localwiki.org/sydney/$1 [R=301]
 </VirtualHost>
 
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName sydney.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/sydney/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
 ##############################################################################
 # http://tacoma.localwiki.org, http://www.tacoma.localwiki.org,
+# https://tacoma.localwiki.org
 #
 #     -> https://localwiki.org/tacoma/
 ##############################################################################
@@ -515,8 +623,21 @@
     RewriteRule ^/(.*) https://localwiki.org/tacoma/$1 [R=301]
 </VirtualHost>
 
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName tacoma.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/tacoma/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
 ##############################################################################
 # http://tasmania.localwiki.org, http://www.tasmania.localwiki.org,
+# https://tasmania.localwiki.org
 #
 #     -> https://localwiki.org/tasmania/
 ##############################################################################
@@ -529,6 +650,18 @@
     ServerAlias www.tasmania.localwiki.org
     
     RewriteRule ^/(.*) https://localwiki.org/tasmania/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName tasmania.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/tasmania/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
 </VirtualHost>
 
 ##############################################################################
@@ -552,6 +685,7 @@
 
 ##############################################################################
 # http://triangle.localwiki.org, http://www.triangle.localwiki.org,
+# https://triangle.localwiki.org,
 # http://trianglewiki.org, http://www.trianglewiki.org,
 #
 #     -> https://localwiki.org/raleigh/ (or some other regions, such as /cary)
@@ -569,6 +703,18 @@
     RewriteRule ^(?i)/(cary_(.*)) https://localwiki.org/cary/$1 [R=301]
     RewriteRule ^(?i)/(durham_(.*)) https://localwiki.org/durham/$1 [R=301]
     RewriteRule ^/(.*) https://localwiki.org/raleigh/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName triangle.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/triangle/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
 </VirtualHost>
 
 ##############################################################################
@@ -592,6 +738,7 @@
 
 ##############################################################################
 # http://sacramento.localwiki.org, http://www.sacramento.localwiki.org,
+# https://sacramento.localwiki.org,
 # http://sacwiki.org, http://www.sacwiki.org,
 #
 #     -> https://localwiki.org/sac/
@@ -607,4 +754,16 @@
     ServerAlias www.sacwiki.org
     
     RewriteRule ^/(.*) https://localwiki.org/sac/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName sacramento.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/sacramento/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
 </VirtualHost>
