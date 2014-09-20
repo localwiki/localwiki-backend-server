@@ -13,9 +13,8 @@ def record_page_links(page):
     links_before = list(page.links.all())
     links = extract_internal_links(page.content)
     for pagename, count in links.iteritems():
-        link_exists = Link.objects.filter(
-            source=page, region=region,
-            destination_name__iexact=pagename)
+        qs = Link.objects.filter(source=page, region=region)
+        link_exists = qs.filter(destination_name__iexact=pagename) | qs.filter(destination__slug=slugify(pagename))
         if link_exists:
             link = link_exists[0]
             if link.count == count:
