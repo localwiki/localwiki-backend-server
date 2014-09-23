@@ -21,21 +21,28 @@ def name_to_url(value):
 
 
 class PageContentNode(BaseIncludeNode):
-    def __init__(self, html_var, render_plugins=True, *args, **kwargs):
+    def __init__(self, html_var, render_plugins=True, nofollow=False, *args, **kwargs):
         super(PageContentNode, self).__init__(*args, **kwargs)
+        self.nofollow = nofollow
         self.html_var = template.Variable(html_var)
         self.render_plugins = render_plugins
 
     def render(self, context):
         try:
             html = unicode(self.html_var.resolve(context))
-            t = Template(html_to_template_text(html, context,
-                                               self.render_plugins))
-            return self.render_template(t, context)
+            render_context = context
+            if self.nofollow:
+                context['_render_nofollow'] = True
+            t = Template(html_to_template_text(html, context, self.render_plugins))
+            html = self.render_template(t, context)
+            if self.nofollow:
+                del context['_render_nofollow']
+            return html
         except:
             if settings.TEMPLATE_DEBUG:
                 raise
-            return ''
+            if self.nofollow and '_render_nofollow' in context:
+                del context['_render_nofollow']
 
 
 class IncludeContentNode(BaseIncludeNode):
@@ -137,7 +144,7 @@ class IncludePageNode(IncludeContentNode):
 
 
 @register.tag(name='render_plugins')
-def do_render_plugins(parser, token, render_plugins=True):
+def do_render_plugins(parser, token, render_plugins=True, nofollow=False):
     """
     Render tags and plugins
     """
@@ -146,7 +153,15 @@ def do_render_plugins(parser, token, render_plugins=True):
     except ValueError:
         raise template.TemplateSyntaxError, ("%r tag requires one argument" %
                                              token.contents.split()[0])
-    return PageContentNode(html_var, render_plugins)
+    return PageContentNode(html_var, render_plugins, nofollow=nofollow)
+
+
+@register.tag(name='render_plugins_nofollow')
+def do_render_plugins_nofollow(parser, token, render_plugins=True):
+    """
+    Renders tags, making all external links rel="nofollow"
+    """
+    return do_render_plugins(parser, token, nofollow=True)
 
 
 @register.tag(name='render_tags')

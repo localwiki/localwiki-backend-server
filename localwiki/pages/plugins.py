@@ -312,6 +312,7 @@ def html_to_template_text(unsafe_html, context=None, render_plugins=True):
     # Restore img src for thumbnails
     template_text = template_text.replace('src_thumb', 'src')
     template_text = template_text.replace('srcset_thumb', 'srcset')
+
     return template_text.decode('utf-8')
 
 
@@ -322,6 +323,7 @@ class LinkNode(Node):
 
     def render(self, context):
         region = context['region']
+        nofollow = context.get('_render_nofollow', False)
         try:
             cls = ''
             url = self.href
@@ -357,6 +359,10 @@ class LinkNode(Node):
                         # Convert to proper URL: My%20page -> My_page
                         url = name_to_url(url_to_name(url))
                         url = reverse('pages:show', kwargs={'region': region.slug, 'slug': url})
+            # External links + nofollow flag (e.g. on User pages) => render as nofollow:
+            elif nofollow:
+                return '<a rel="nofollow" href="%s"%s>%s</a>' % (url, cls, self.nodelist.render(context))
+
             return '<a href="%s"%s>%s</a>' % (url, cls,
                                               self.nodelist.render(context))
         except:
