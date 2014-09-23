@@ -368,7 +368,10 @@ def update_django_settings():
         os.path.join(env.virtualenv, 'share', 'localwiki', 'conf'),
         context=get_context(env), use_jinja=True, use_sudo=True)
 
-def update_apache_settings():
+def update_apache_settings(restart=True):
+    # Get SSL information
+    get_ssl_info()
+
     # Create our extra config file directory if it doesn't already exist
     run('mkdir -p /etc/apache2/extra-conf')
 
@@ -386,7 +389,8 @@ def update_apache_settings():
     if config_secrets.get('localwiki_main_production', False):
         upload_template('config/apache/old_localwiki', '/etc/apache2/sites-available/old_localwiki',
             context=get_context(env), use_jinja=True, use_sudo=True)
-    sudo('service apache2 restart')
+    if restart:
+        sudo('service apache2 restart')
 
 def init_localwiki_install():
     init_postgres_db()
@@ -434,15 +438,20 @@ def switch_branch(branch):
 def install_ssl_certs():
     # Install our SSL certs for apache
     sudo('mkdir -p /etc/apache2/ssl')
+    sudo('mkdir -p /etc/apache2/extra-ssl')
     sudo('chown -R www-data:www-data /etc/apache2/ssl')
     sudo('chmod 700 /etc/apache2/ssl')
     with settings(warn_only=True):
         put('config_secrets/ssl/*', '/etc/apache2/ssl/', use_sudo=True)
+        put('config_secrets/extra-ssl/*', '/etc/apache2/extra-ssl/', use_sudo=True)
 
 def get_ssl_info():
     """
     Figure out what the SSL info is based on what's in the ssl/ dir.
     """
+    if (getattr(env, 'ssl_name', None) and getattr(env, 'ssl_key', None) and getattr(env, 'ssl_cert', None)):
+        # Already have the info
+        return
     ssl_name = os.path.split(sudo('ls -d /etc/apache2/ssl/*').strip())[1]
     env.ssl_name = ssl_name
     ssl_files = sudo('ls /etc/apache2/ssl/%s' % ssl_name).split()
@@ -494,16 +503,9 @@ def setup_apache():
 
         install_ssl_certs()
 
-        # Get SSL information
-        get_ssl_info()
-
         # Install apache config
-        upload_template('config/apache/localwiki', '/etc/apache2/sites-available/localwiki',
-            context=get_context(env), use_jinja=True, use_sudo=True)
-        upload_template('config/apache/apache2.conf', '/etc/apache2/apache2.conf',
-            context=get_context(env), use_jinja=True, use_sudo=True)
-        upload_template('config/apache/ports.conf', '/etc/apache2/ports.conf',
-            context=get_context(env), use_jinja=True, use_sudo=True)
+        update_apache_settings(restart=False)
+
         sudo('a2ensite localwiki')
         if config_secrets.get('localwiki_main_production', False):
             sudo('a2ensite old_localwiki')

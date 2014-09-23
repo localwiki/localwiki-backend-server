@@ -210,7 +210,7 @@
     ServerAlias denton.localwiki.net
     ServerAlias www.denton.localwiki.net
     # Used on reddit:
-    ServerName hmmm.localwiki.org
+    ServerAlias hmmm.localwiki.org
     ServerAlias www.hmmm.localwiki.org
 
 	RewriteRule ^/ao8oddrm5hkl* https://localwiki.org/denton/ [R=301]
@@ -239,9 +239,9 @@
     RewriteRule ^/(.*) https://localwiki.org/denton/$1 [R=301]
 
     Include extra-conf/ssl.conf
-    SSLCertificateFile /etc/apache2/ssl/www.dentonwiki.org/www.dentonwiki.org.crt
-    SSLCertificateKeyFile /etc/apache2/ssl/www.dentonwiki.org/www.dentonwiki.org.key
-    SSLCACertificateFile /etc/apache2/ssl/www.dentonwiki.org/intermediate.crt
+    SSLCertificateFile /etc/apache2/extra-ssl/www.dentonwiki.org/www.dentonwiki.org.crt
+    SSLCertificateKeyFile /etc/apache2/extra-ssl/www.dentonwiki.org/www.dentonwiki.org.key
+    SSLCACertificateFile /etc/apache2/extra-ssl/www.dentonwiki.org/intermediate.crt
 </VirtualHost>
 
 ##############################################################################
@@ -542,6 +542,22 @@
     RewriteRule ^/(.*) https://localwiki.org/santacruz/$1 [R=301]
 </VirtualHost>
 
+# XXX NOTE: Expired cert, don't care because we don't use this domain and haven't for a long time.
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName scruzwiki.org
+    ServerAlias www.scruzwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/santacruz/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    SSLCertificateFile /etc/apache2/extra-ssl/expired/www.scruzwiki.org/www.scruzwiki.org.crt
+    SSLCertificateKeyFile /etc/apache2/extra-ssl/expired/www.scruzwiki.org/www.scruzwiki.org.key
+    SSLCACertificateFile /etc/apache2/extra-ssl/expired/www.scruzwiki.org/intermediate.crt
+</VirtualHost>
+
 ##############################################################################
 # http://sf.localwiki.org, http://www.sf.localwiki.org,
 # https://sf.localwiki.org,
@@ -572,6 +588,22 @@
 
     Include extra-conf/ssl.conf
     Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+# XXX NOTE: Expired cert, don't care because we don't use this domain and haven't for a long time.
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName sfwiki.org
+    ServerAlias www.sfwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/sf/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    SSLCertificateFile /etc/apache2/extra-ssl/expired/www.sfwiki.org/www.sfwiki.org.crt
+    SSLCertificateKeyFile /etc/apache2/extra-ssl/expired/www.sfwiki.org/www.sfwiki.org.key
+    SSLCACertificateFile /etc/apache2/extra-ssl/expired/www.sfwiki.org/intermediate.crt
 </VirtualHost>
 
 ##############################################################################
@@ -713,8 +745,32 @@
     
     RewriteRule ^/(.*) https://localwiki.org/triangle/$1 [R=301]
 
+    RewriteRule ^(?i)/(cary_(.*)) https://localwiki.org/cary/$1 [R=301]
+    RewriteRule ^(?i)/(durham_(.*)) https://localwiki.org/durham/$1 [R=301]
+    RewriteRule ^/(.*) https://localwiki.org/raleigh/$1 [R=301]
+
     Include extra-conf/ssl.conf
     Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+# XXX NOTE: Expired cert, don't care because we don't use this domain and haven't for a long time.
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName trianglewiki.org
+    ServerAlias www.trianglewiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/raleigh/$1 [R=301]
+
+    RewriteRule ^(?i)/(cary_(.*)) https://localwiki.org/cary/$1 [R=301]
+    RewriteRule ^(?i)/(durham_(.*)) https://localwiki.org/durham/$1 [R=301]
+    RewriteRule ^/(.*) https://localwiki.org/raleigh/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    SSLCertificateFile /etc/apache2/extra-ssl/expired/www.trianglewiki.org/www.trianglewiki.org.crt
+    SSLCertificateKeyFile /etc/apache2/extra-ssl/expired/www.trianglewiki.org/www.trianglewiki.org.key
+    SSLCACertificateFile /etc/apache2/extra-ssl/expired/www.trianglewiki.org/intermediate.crt
 </VirtualHost>
 
 ##############################################################################
@@ -766,4 +822,20 @@
 
     Include extra-conf/ssl.conf
     Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+# XXX NOTE: Expired cert, don't care because we don't use this domain and haven't for a long time.
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName sacwiki.org
+    ServerAlias www.sacwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/sac/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    SSLCertificateFile /etc/apache2/extra-ssl/expired/www.sacwiki.org/www.sacwiki.org.crt
+    SSLCertificateKeyFile /etc/apache2/extra-ssl/expired/www.sacwiki.org/www.sacwiki.org.key
+    SSLCACertificateFile /etc/apache2/extra-ssl/expired/www.sacwiki.org/intermediate.crt
 </VirtualHost>

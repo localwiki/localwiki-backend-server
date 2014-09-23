@@ -44,9 +44,15 @@ def get_response(url):
         exit(1)
 
 def is_running():
+    return os.path.exists('/tmp/monitor_apache')
+
+def start_run():
     f = open('/tmp/monitor_apache', 'w')
     f.write('')
     f.close()
+
+def end_run():
+    os.remove('/tmp/monitor_apache')
 
 def in_deploy():
     if os.path.exists('/srv/localwiki/.in_deploy'):
@@ -57,9 +63,10 @@ def in_deploy():
     return False 
 
 if not is_running() and not in_deploy():
+    start_run()
     if get_site_status(url) != 'up':
         log(url + " is down.")
         restart_services()
     else:
         log(url + " is up.")
-    os.remove('/tmp/monitor_apache')
+    end_run()
