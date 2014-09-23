@@ -5,6 +5,7 @@ from lxml.html import fragments_fromstring
 
 from django.test import TestCase
 from django.db import models
+from django.test.client import RequestFactory
 from django import forms
 from django.template.base import Template
 from django.template.context import Context
@@ -753,6 +754,33 @@ class PluginTest(TestCase):
         template = Template(html_to_template_text(html))
         rendered = template.render(Context({'page': page, 'region': self.region}))
         self.failUnless('http://example.org/?t=1&amp;i=2' in rendered)
+
+    def test_link_nofollow(self):
+        # Regular
+        page = Page(name='Explore', region=self.region)
+        rf = RequestFactory()
+        request = rf.get('/')
+        content = ('<p><a href="http://example.org/">hi</a></p>')
+        template = Template("""
+{% load pages_tags %}
+{% render_plugins content %}
+        """)
+        rendered = template.render(Context({'region': self.region, 'request': request, 'content': content, 'page': page}))
+        self.failUnless('http://example.org/' in rendered)
+        self.assertTrue('nofollow' not in rendered)
+
+        # Nofollow
+        page = Page(name='Explore', region=self.region)
+        rf = RequestFactory()
+        request = rf.get('/')
+        content = ('<p><a href="http://example.org/">hi</a></p>')
+        template = Template("""
+{% load pages_tags %}
+{% render_plugins_nofollow content %}
+        """)
+        rendered = template.render(Context({'region': self.region, 'request': request, 'content': content, 'page': page}))
+        self.failUnless('http://example.org/' in rendered)
+        self.assertTrue('nofollow' in rendered)
 
 
 class XSSTest(TestCase):

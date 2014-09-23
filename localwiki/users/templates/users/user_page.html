@@ -127,7 +127,7 @@
 
       {% with region=page.region %}
         {% if user_for_page.is_active %}
-          {% render_plugins page.content %}
+          {% render_plugins_nofollow page.content %}
         {% endif %}
       {% endwith %}
 
