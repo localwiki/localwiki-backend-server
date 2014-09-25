@@ -312,7 +312,8 @@ def install_system_requirements():
 
     # Ubuntu system packages
     base_system_pkg = [
-        'git'
+        'git',
+        'unattended-upgrades',
     ] 
     system_python_pkg = [
         'python-dev',
@@ -669,6 +670,15 @@ def setup_celery():
     sudo('chmod 660 /var/log/celery.log')
     sudo('service celery start')
 
+def setup_unattended_upgrades():
+    """
+    Enable unattended Ubuntu package updates.
+
+    For now, this is just set to security updates (the Ubuntu defaults).
+    """
+    upload_template('config/apt/apt.conf.d/10periodic', '/etc/apt/apt.conf.d/10periodic',
+        context=get_context(env), use_jinja=True, use_sudo=True)
+
 def setup_hostname():
     public_hostname = get_context(env)['public_hostname']
     sudo('hostname %s' % public_hostname)
@@ -699,6 +709,7 @@ def provision():
 
     add_ssh_keys()
     install_system_requirements()
+    setup_unattended_upgrades()
     setup_hostname()
     setup_mailserver()
     setup_postgres()
