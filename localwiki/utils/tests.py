@@ -106,7 +106,7 @@ class CanonicalURLTests(TestCase):
         reload(django_hosts.middleware)
         from django_hosts.middleware import BaseHostsMiddleware
 
-        current_urlconf = get_urlconf()
+        current_urlconf = get_urlconf() or settings.ROOT_URLCONF
         middleware = BaseHostsMiddleware()
         host, kwargs = middleware.get_host(request.get_host())
         request.urlconf = host.urlconf

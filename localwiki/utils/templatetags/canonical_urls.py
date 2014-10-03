@@ -33,7 +33,7 @@ def render_canonical_url(context, obj=None):
             else:
                 return '<link rel="canonical" href="%s" />' % url
         else:
-            current_urlconf = get_urlconf()
+            current_urlconf = get_urlconf() or settings.ROOT_URLCONF
             set_urlconf(settings.ROOT_URLCONF)
             url = obj.get_absolute_url()
             set_urlconf(current_urlconf)
@@ -50,7 +50,7 @@ def render_canonical_url(context, obj=None):
             # We're on a custom domain, so let's render a URL
             # that points to the main host, but on the same
             # view, args, and kwargs.
-            current_urlconf = get_urlconf()
+            current_urlconf = get_urlconf() or settings.ROOT_URLCONF
 
             resolved = resolve(request.path)
             view_name, args, kwargs = resolved.view_name, resolved.args, resolved.kwargs

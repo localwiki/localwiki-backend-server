@@ -11,7 +11,7 @@ from varnish import VarnishManager
 def varnish_invalidate_page(p):
     ban_path = r'obj.http.x-url ~ ^(?i)(%(url)s(/*)(\\?.*)?)$ && obj.http.x-host ~ ^((?i)(.*\\.)?%(host)s(:[0-9]*)?)$'
 
-    current_urlconf = get_urlconf()
+    current_urlconf = get_urlconf() or settings.ROOT_URLCONF
 
     if p.region.regionsettings.domain:
         # Has a domain, ugh. Need to clear two URLs on two hosts, in this case
@@ -43,7 +43,7 @@ def django_invalidate_page(p):
 
     from pages.views import PageDetailView
 
-    current_urlconf = get_urlconf()
+    current_urlconf = get_urlconf() or settings.ROOT_URLCONF
 
     if p.region.regionsettings.domain:
         # Has a domain, ugh. Need to clear two URLs on two hosts, in this case
