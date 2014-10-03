@@ -29,9 +29,9 @@ class FrontPageView(Custom404Mixin, TemplateView):
         region = self.get_region()
         if not FrontPage.objects.filter(region=region).exists() or region.regionsettings.is_meta_region:
             page_view = PageDetailView()
-            page_view.kwargs = {'slug': 'Front Page', 'region': self.get_region().slug}
+            page_view.kwargs = {'slug': 'front page', 'region': self.get_region().slug}
             page_view.request = self.request
-            return page_view.get(*args, **kwargs)
+            return page_view.get(*args, **page_view.kwargs)
         return super(FrontPageView, self).get(*args, **kwargs)
 
     def get_map_objects(self):

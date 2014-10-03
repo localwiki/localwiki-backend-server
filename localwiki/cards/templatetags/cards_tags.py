@@ -45,7 +45,7 @@ def render_page_card(context, page):
     cache = get_cache('long-living')
     request = context['request']
 
-    card = cache.get('card:%s,%s' % (get_urlconf(), page.id))
+    card = cache.get('card:%s,%s' % (get_urlconf() or settings.ROOT_URLCONF, page.id))
     if card:
         return card
 
@@ -69,8 +69,7 @@ def render_page_card(context, page):
         'title': page.name,
         'content': page.content,
     })
-
-    cache.set('card:%s,%s' % (get_urlconf(), page.id), card)
+    cache.set('card:%s,%s' % (get_urlconf() or settings.ROOT_URLCONF, page.id), card)
     return card
 
 
