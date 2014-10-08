@@ -91,6 +91,7 @@ import random
 import time
 import shutil
 import json
+from copy import copy
 import string
 from collections import defaultdict
 from contextlib import contextmanager as _contextmanager
@@ -329,6 +330,7 @@ def install_system_requirements():
     memcached_pkg = ['memcached']
     varnish_pkg = ['varnish']
     web_pkg = ['yui-compressor']
+    monitoring = ['munin', 'munin-node']
 
     if env.host_type == 'test_server':
         # Travis won't start the redis server correctly
@@ -349,7 +351,8 @@ def install_system_requirements():
         varnish_pkg +
         web_pkg +
         redis_pkg + 
-        mailserver_pkg
+        mailserver_pkg +
+        monitoring
     )
     sudo('DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y --force-yes install %s' % ' '.join(packages))
 
@@ -687,6 +690,28 @@ def setup_hostname():
     upload_template('config/hostname/hosts', '/etc/hosts',
         context=get_context(env), use_jinja=True, use_sudo=True)
 
+def setup_munin():
+    upload_template('config/munin/apache.conf', '/etc/munin/apache.conf',
+        context=get_context(env), use_jinja=True, use_sudo=True)
+
+    if not config_secrets['munin_auth_info']:
+        # Generate a random password for now.
+        config_secrets['munin_auth_info'] = {'munin': ''.join([random.choice(string.letters + string.digits) for i in range(40)])}
+
+    if not os.path.exists('config_secrets/munin-htpasswd'):
+        f = open('config_secrets/munin-htpasswd', 'w')
+        f.close()
+
+    with htpasswd.Basic("config_secrets/munin-htpasswd") as userdb:
+        for username, password in config_secrets['munin_auth_info'].iteritems():
+            if username not in userdb:
+                userdb.add(username, password)
+            else:
+                userdb.change_password(username, password)
+
+    upload_template('config_secrets/munin-htpasswd', '/etc/munin/munin-htpasswd',
+        context=get_context(env), use_jinja=True, use_sudo=True) 
+
 def setup_mailserver():
     upload_template('config/postfix/main.cf', '/etc/postfix/main.cf',
         context=get_context(env), use_jinja=True, use_sudo=True)
@@ -712,6 +737,7 @@ def provision():
     setup_unattended_upgrades()
     setup_hostname()
     setup_mailserver()
+    setup_munin()
     setup_postgres()
     setup_memcached()
     setup_jetty()
