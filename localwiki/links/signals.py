@@ -53,6 +53,9 @@ def _check_destination_created(sender, instance, created, raw, **kws):
     # The destination page has been created, so let's record that.
     links = Link.objects.filter(destination_name__iexact=instance.slug, region=instance.region)
     for link in links:
+        # May have already been added via a revert
+        if Link.objects.filter(destination=instance, source=link.source, region=instance.region).exists():
+            continue
         link.destination = instance
         link.save()
 
