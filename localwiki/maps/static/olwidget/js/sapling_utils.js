@@ -594,7 +594,7 @@ SaplingMap = {
         $('.mapwidget').prepend(
             '<form id="map_search" class="search" action="." onSubmit="return false;" method="POST"><input type="text" id="address" name="address" placeholder="Find via address.."/></form>');
 
-        var geoCodeURL = "http://nominatim.openstreetmap.org/search";
+        var geoCodeURL = "//nominatim.openstreetmap.org/search";
         var mapSearch = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.whitespace('value'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
