@@ -1,5 +1,5 @@
 """
-This is the main management script for provisioning and managing the LocalWiki servers.
+This is the main management script for provisioning and managing the LocalWiki infrastructure.
 
 ==== Do this first ====
 
@@ -41,7 +41,7 @@ on your local machine.  Hack on the code that lives inside of
 vagrant_localwiki/localwiki.
 
 Apache, which runs the production-style setup, will be accessible at
-http://127.0.0.1:8081, but you should use :8082, the development server,
+https://127.0.0.1:8443, but you should use :8082, the development server,
 for most active work as it will automatically refresh.
 
 To test a full production-style deploy in vagrant::
@@ -49,7 +49,7 @@ To test a full production-style deploy in vagrant::
     $ cd localwiki/fabric
     $ fab vagrant deploy:local=True
 
-Then visit the production server, http://127.0.0.1:8081, on your
+Then visit the production server, https://127.0.0.1:8443, on your
 local machine.  The 'deploy:local' flag tells us to use your local
 code rather than a fresh git checkout.
 
@@ -76,10 +76,11 @@ To provision a new EC2 instance::
 
     $ fab create_ec2 provision
 
-==== Deploying to production ====
+==== Deploying to LocalWiki.org production ====
 
 After provisioning, make sure you edit `roledefs` below to point
-to the correct hosts. Then::
+to the correct hosts. You'll also need the master LocalWiki credentials
+(see below).  Then::
 
     $ fab production deploy
 
@@ -100,17 +101,30 @@ from fabric.contrib.files import upload_template, exists
 from fabric.network import disconnect_all
 from fabric.api import settings
 import boto.ec2
+import htpasswd
 from ilogue import fexpect
 
 ####################################################################
 #  Ignore `config_secrets` for development usage.
+# 
+#  Notes for folks deploying code to **localwiki.org (production)**:
+#  
+#    We will likely automate all deployments, making developer
+#    access to config secrets unneccessary for all but a very small
+#    handful of people.
 #
-#  For production deployments, you'll want to:
+#    0. Ask a devops/sysadmin for the config secrets, if necessary.
 #    1. cp config_secrets.example/ to config_secrets/
 #    2. Edit the secrets.json and other files accordingly.
+#    3. Ensure you have valid SSL certificates in config_secrets/ssl/
+#       in the format:
+#           * config_secrets/ssl/<hostname>/
+#           * config_secrets/ssl/<hostname>/<hostname>.crt
+#           * config_secrets/ssl/<hostname>/<hostname>.key
+#           * config_secrets/ssl/<hostname>/intermediate.crt (if present)
 #  
 #  You can provision without setting up these secrets, but this will
-#  allow you to e.g. have SSL, Sentry, and other stuff as we add it.
+#  enable non-self-signed SSL, Sentry, and other stuff as we add it.
 ####################################################################
 
 ####################################################################
@@ -118,7 +132,7 @@ from ilogue import fexpect
 ####################################################################
 
 roledefs = {
-    'web': ['ubuntu@localwiki.net'],
+    'web': ['ubuntu@localwiki.org'],
 }
 
 
@@ -376,6 +390,8 @@ def update_apache_settings():
     # Create our extra config file directory if it doesn't already exist
     run('mkdir -p /etc/apache2/extra-conf')
 
+    get_ssl_info()
+
     upload_template('config/apache/localwiki', '/etc/apache2/sites-available/localwiki',
         context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/apache2.conf', '/etc/apache2/apache2.conf',
@@ -440,8 +456,25 @@ def install_ssl_certs():
     sudo('mkdir -p /etc/apache2/ssl')
     sudo('chown -R www-data:www-data /etc/apache2/ssl')
     sudo('chmod 700 /etc/apache2/ssl')
+
     with settings(warn_only=True):
-        put('config_secrets/ssl/*', '/etc/apache2/ssl/', use_sudo=True)
+        # We only move over our SSL certs if we're running in production:
+        if env.host_type == 'production':
+            put('config_secrets/ssl/*', '/etc/apache2/ssl/', use_sudo=True)
+
+    # If we have no actual SSL certs, let's generate a self-signed one
+    # for testing purposes.
+    ssl_files = sudo('ls -1 /etc/apache2/ssl/', user='www-data').strip().split('\n')
+    if len(ssl_files) <= 1:
+        public_hostname = get_context(env)['public_hostname']
+        # Remove port, if in hostname:
+        public_hostname = public_hostname.split(':')[0]
+        sudo('mkdir /etc/apache2/ssl/%s' % public_hostname, user='www-data')
+        with cd('/etc/apache2/ssl/%s' % public_hostname):
+            sudo('openssl req -x509 -nodes -days 1825 -newkey rsa:2048 '
+                 '-keyout %(hostname)s.key -out %(hostname)s.crt '
+                 '-subj "/C=US/ST=California/L=San Francisco/O=Self-signed cert/CN=*.%(hostname)s"' %
+                    {'hostname': public_hostname}, user='www-data')
 
 def get_ssl_info():
     """
@@ -484,6 +517,9 @@ def setup_apache():
         sudo('a2enmod proxy')
         sudo('a2enmod proxy_http')
         sudo('a2enmod ssl')
+
+        # Disable CGI because it can be insecure
+        sudo('a2dismod cgi')
 
         # Install localwiki.wsgi
         upload_template('config/localwiki.wsgi', os.path.join(env.localwiki_root),
