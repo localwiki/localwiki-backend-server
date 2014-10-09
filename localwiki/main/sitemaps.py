@@ -59,10 +59,13 @@ class RegionSitemap(Sitemap):
 class StaticViewSitemap(Sitemap):
     def items(self):
         return [
+            'about',
             'main-page',
         ]
 
     def location(self, item):
+        if item == 'about':
+            return '/about/'
         return reverse(item)
 
 
