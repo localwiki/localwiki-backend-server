@@ -3,7 +3,6 @@
 {% load i18n %}
 {% load pages_tags %}
 {% load phased_tags %}
-{% load canonical_urls %}
 {% load tags_tags %}
 
 {% block title %}{% if not page.is_front_page %}{{ page.name }} - {% endif %}{{ block.super }}{% endblock %}
@@ -18,7 +17,10 @@
 {% endblock %}
 
 {% block canonical_url %}
-  {% render_canonical_url page %}
+  {% phased with page region %}
+    {% load canonical_urls %}
+    {% render_canonical_url page %}
+  {% endphased %}
 {% endblock %}
 
 {% block header_subtitle %}
