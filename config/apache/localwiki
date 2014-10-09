@@ -112,7 +112,7 @@
     ProxyPass /robots.txt !
     ProxyPass /sitemap.xml !
     ProxyPass /favicon.ico !
-    ProxyPass / http://127.0.0.1:6081/ keepalive=On
+    ProxyPass / http://127.0.0.1:6081/ keepalive=On retry=0
 
     ProxyPassReverse /static/ !
     ProxyPassReverse /media/ !
