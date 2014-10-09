@@ -24,7 +24,10 @@
 <script type="text/javascript">
     $(function() {
         $('#object_title a.not_created_yet').click(function() {
-            alert('You must create the page before renaming it.');
+            alert(gettext('You must create the page before renaming it.'));
+        });
+        $('#object_title a.front_page').click(function() {
+            alert(gettext("Sorry, you can't rename the 'Front Page' right now."));
         });
     });
 </script>
@@ -32,7 +35,11 @@
 
 {% block header_title %}
 {% if page.exists %}
+   {% if page.slug == 'front page' %}
+   <a href="#" class="front_page">{{ page.name }}</a>
+   {% else %}
    <a href="{% url 'pages:rename' slug=page.pretty_slug region=page.region.slug %}">{{ page.name }}</a>
+   {% endif %}
 {% else %}
    <a href="#" class="not_created_yet">{{ page.name }}</a>
 {% endif %}

@@ -1,10 +1,12 @@
 {% load i18n %}
 {% block editor_actions %}
-    {% if page.exists %}
-      <li><a href="{% url 'maps:edit' slug=page.pretty_slug region=page.region.slug %}" class="little button map"><span class="text">{% trans "Edit map" %}</span></a></li>
-      <li><a href="{% url 'pages:delete' slug=page.pretty_slug region=page.region.slug %}" class="little button">{% trans "Delete page" %}</a></li>
+    {% if not page.slug == 'front page' %}
+      {% if page.exists %}
+        <li><a href="{% url 'maps:edit' slug=page.pretty_slug region=page.region.slug %}" class="little button map"><span class="text">{% trans "Edit map" %}</span></a></li>
+        <li><a href="{% url 'pages:delete' slug=page.pretty_slug region=page.region.slug %}" class="little button">{% trans "Delete page" %}</a></li>
+      {% endif %}
+      <li><a href="{% url 'redirects:edit' slug=page.pretty_slug region=page.region.slug %}" class="little button redirect"><span class="text">{% trans "Redirect" %}</span></a></li>
     {% endif %}
-    <li><a href="{% url 'redirects:edit' slug=page.pretty_slug region=page.region.slug %}" class="little button redirect"><span class="text">{% trans "Redirect" %}</span></a></li>
     {% if is_region_admin %}
       {% if page.exists %}
          <li><a href="{% url 'pages:permissions' slug=page.pretty_slug region=page.region.slug %}" class="little button security"><span class="text">{% trans "Security" %}</span></a></li>
