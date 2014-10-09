@@ -9,6 +9,11 @@ def _is_absolute(href):
 def _is_anchor_link(href):
     return href.startswith('#')
 
+def _is_plugin(a):
+    if 'class' in a.attrib:
+        return 'plugin' in a.attrib['class']
+    return False
+
 def _invalid(href):
     return len(href) > 255
     
@@ -27,12 +32,16 @@ def extract_internal_links(html):
         namespaceHTMLElements=False)
     # Wrap to make the tree lookup easier
     tree = parser.parseFragment('<div>%s</div>' % html)[0]
-    hrefs = tree.xpath('//a/@href')
+    a_s = tree.xpath('//a')
 
     # Grab the links if they're not anchors or external.
     d = {}
-    for href in hrefs:
-        if not _is_absolute(href) and not _is_anchor_link(href) and not _invalid(href):
+    for a in a_s:
+        if 'href' not in a.attrib:
+            continue
+        href = a.attrib['href']
+        if (not _is_absolute(href) and not _is_anchor_link(href) and
+            not _is_plugin(a) and not _invalid(href)):
             try:
                 if not slugify(href) in d:
                     d[slugify(href)] = (url_to_name(href), 1)
