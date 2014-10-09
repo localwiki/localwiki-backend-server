@@ -401,6 +401,8 @@ def update_apache_settings(restart=True):
         context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/ports.conf', '/etc/apache2/ports.conf',
         context=get_context(env), use_jinja=True, use_sudo=True)
+    upload_template('config/apache/bad-bots', '/etc/apache2/conf.d/bad-bots',
+        context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/extra-conf/ssl.conf', '/etc/apache2/extra-conf/ssl.conf',
         context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/extra-conf/localwiki_certs.conf', '/etc/apache2/extra-conf/localwiki_certs.conf',
