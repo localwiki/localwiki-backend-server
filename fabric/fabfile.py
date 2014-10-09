@@ -407,7 +407,7 @@ def update_apache_settings(restart=True):
         context=get_context(env), use_jinja=True, use_sudo=True)
 
     if config_secrets.get('localwiki_main_production', False):
-        upload_template('config/apache/old_localwiki', '/etc/apache2/sites-available/old_localwiki',
+        upload_template('config/apache/aaaa_old_localwiki', '/etc/apache2/sites-available/aaaa_old_localwiki',
             context=get_context(env), use_jinja=True, use_sudo=True)
     if restart:
         sudo('service apache2 restart')
@@ -548,7 +548,7 @@ def setup_apache():
 
         sudo('a2ensite localwiki')
         if config_secrets.get('localwiki_main_production', False):
-            sudo('a2ensite old_localwiki')
+            sudo('a2ensite aaaa_old_localwiki')
 
         # Restart apache
         sudo('service apache2 restart')
