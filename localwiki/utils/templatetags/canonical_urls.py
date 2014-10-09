@@ -27,7 +27,7 @@ def render_canonical_url(context, obj=None):
     if obj:
         if request.host.name == settings.DEFAULT_HOST:
             url = obj.get_absolute_url()
-            if urllib.unquote(url) == request.path:
+            if urllib.unquote(url) == request.path and not request.GET.keys():
                 # Don't bother rendering a canonical URL tag.
                 return ''
             else:
