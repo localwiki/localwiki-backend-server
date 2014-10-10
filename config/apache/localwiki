@@ -69,6 +69,14 @@
     RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
     RewriteRule ^(.*)$ http://%1$1 [R=301,L]
 
+    <Location /server-status>
+        SetHandler server-status
+        Order deny,allow
+        Deny from all
+        Allow from 127.0.0.1 ::1
+    #    Allow from 192.0.2.0/24
+    </Location>
+
     # The media directory, which contains user-uploaded content, should be set
     # to force downloads. This is *extremely* important for security reasons.
     # Note: The /media/ directory must be writable by the www-data user
