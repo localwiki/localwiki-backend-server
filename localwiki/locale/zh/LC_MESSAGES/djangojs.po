@@ -3,15 +3,17 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# passerbyid <passerbyid@gmail.com>, 2014
 # Planetoid Hsu <planetoid@gmail.com>, 2014
+# whisky <whisky@ystaiwan.org.tw>, 2013
 # whisky <whisky@ystaiwan.org.tw>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-20 02:07-0500\n"
-"PO-Revision-Date: 2014-05-20 07:28+0000\n"
-"Last-Translator: philipn <philip@localwiki.org>\n"
+"POT-Creation-Date: 2014-10-11 06:04-0500\n"
+"PO-Revision-Date: 2014-10-11 11:23+0000\n"
+"Last-Translator: Philip Neustrom <philip@localwiki.org>\n"
 "Language-Team: Chinese (http://www.transifex.com/projects/p/localwiki/language/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,26 +21,30 @@ msgstr ""
 "Language: zh\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: maps/static/olwidget/js/sapling_utils.js:205
+#: maps/static/olwidget/js/sapling_utils.js:208
 msgid " for "
 msgstr ""
 
-#: maps/static/olwidget/js/sapling_utils.js:250
+#: maps/static/olwidget/js/sapling_utils.js:253
 msgid ""
 "You've made changes but haven't saved.  Are you sure you want to leave this "
 "page?"
 msgstr "變動還未儲存，確定要離開頁面？"
 
-#: maps/static/olwidget/js/sapling_utils.js:361
+#: maps/static/olwidget/js/sapling_utils.js:364
 msgid "Things on this map:"
 msgstr ""
 
-#: maps/static/olwidget/js/sapling_utils.js:377
+#: maps/static/olwidget/js/sapling_utils.js:380
 msgid "Things inside "
 msgstr ""
 
-#: maps/static/olwidget/js/sapling_utils.js:391
+#: maps/static/olwidget/js/sapling_utils.js:394
 msgid "Things near "
+msgstr ""
+
+#: maps/static/olwidget/js/sapling_utils.js:620
+msgid "Add marker for lat, lon \"{{ value }}\""
 msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/embed/plugin.js:14
@@ -85,7 +91,7 @@ msgstr "寬"
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:110
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:110
 msgid "pixels"
-msgstr ""
+msgstr "像素"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:111
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:111
@@ -103,8 +109,8 @@ msgstr ""
 msgid "None"
 msgstr "無"
 
-#: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:210
-#: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:233
+#: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:213
+#: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:236
 #, c-format
 msgid "Include page %s"
 msgstr ""
@@ -128,7 +134,7 @@ msgstr "請輸入標籤"
 msgid "Show title"
 msgstr "顯示標題"
 
-#: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:213
+#: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:216
 #, c-format
 msgid "List of pages tagged \"%s\""
 msgstr ""
@@ -170,31 +176,31 @@ msgstr "插入圖檔"
 msgid "Choose a file from your computer"
 msgstr ""
 
-#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:335
+#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:339
 msgid "Select a file"
 msgstr ""
 
-#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:335
+#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:339
 msgid "Select an image"
 msgstr ""
 
-#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:343
+#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:347
 msgid "or <a href=\"#\">use a file from the web</a>"
 msgstr ""
 
-#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:343
+#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:347
 msgid "or <a href=\"#\">use an image from the web</a>"
 msgstr ""
 
-#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:354
+#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:358
 msgid "File URL"
 msgstr "檔案 URL"
 
-#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:354
+#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:358
 msgid "Image URL"
 msgstr "圖檔 URL"
 
-#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:392
+#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:396
 msgid "No file selected"
 msgstr ""
 
@@ -234,11 +240,11 @@ msgstr ""
 msgid "Insert Object"
 msgstr "插入物件"
 
-#: themes/sapling/assets/js/base.js:113
+#: themes/sapling/assets/js/base.js:122
 msgid "Search for \"{{ value }}\""
 msgstr ""
 
-#: themes/sapling/assets/js/base.js:127 themes/sapling/assets/js/base.js:164
+#: themes/sapling/assets/js/base.js:136 themes/sapling/assets/js/base.js:173
 msgid "Search all of LocalWiki"
 msgstr ""
 

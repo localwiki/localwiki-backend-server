@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-20 02:04-0500\n"
-"PO-Revision-Date: 2014-05-20 07:27+0000\n"
-"Last-Translator: philipn <philip@localwiki.org>\n"
+"POT-Creation-Date: 2014-10-11 06:03-0500\n"
+"PO-Revision-Date: 2014-10-11 11:22+0000\n"
+"Last-Translator: Philip Neustrom <philip@localwiki.org>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/localwiki/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,11 +45,11 @@ msgid "Changes for %(title)s on %(site_name)s"
 msgstr "Зміни сторінки %(title)s на сайті %(site_name)s"
 
 #: activity/templates/activity/all_activity_index.html:6
-#: activity/templates/activity/all_activity_index.html:18
+#: activity/templates/activity/all_activity_index.html:22
 msgid "All activity on LocalWiki"
 msgstr ""
 
-#: activity/templates/activity/all_activity_index.html:27
+#: activity/templates/activity/all_activity_index.html:31
 #: activity/templates/activity/followed_activity_index.html:39
 #: activity/templates/activity/user_activity_index.html:38
 #, python-format
@@ -59,7 +59,7 @@ msgid ""
 msgstr ""
 
 #: activity/templates/activity/followed_activity_index.html:19
-#: themes/sapling/templates/site/nav.html:16
+#: themes/sapling/templates/site/nav.html:15
 msgid "News Feed"
 msgstr ""
 
@@ -83,7 +83,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Want to see <strong><a href=\"%(all_activity_url)s\">all activity across "
-"LocalWiki</a>?"
+"LocalWiki</a>?</strong>"
 msgstr ""
 
 #: activity/templates/activity/followed_activity_page.html:22
@@ -169,18 +169,18 @@ msgstr ""
 
 #: activity/templates/activity/followed_activity_page.html:110
 #: activity/templates/activity/index_page.html:62
-#: templates/endless/show_more.html:5
+#: explore/templates/explore/page.html:14
 msgid "More"
 msgstr ""
 
 #: activity/templates/activity/index.html:6
-#: activity/templates/activity/index.html:9
-#: activity/templates/activity/index.html:16
-#: themes/sapling/templates/site/nav.html:9
+#: activity/templates/activity/index.html:13
+#: activity/templates/activity/index.html:20
+#: themes/sapling/templates/site/nav.html:8
 msgid "Activity"
 msgstr ""
 
-#: activity/templates/activity/index.html:24
+#: activity/templates/activity/index.html:28
 #, python-format
 msgid ""
 "For statistics about pages, maps, and more, check out the <a "
@@ -251,134 +251,212 @@ msgstr "файлів"
 msgid "redirects"
 msgstr "перенаправлень"
 
-#: dashboard/templates/dashboard/index.html:9
+#: dashboard/templates/dashboard/index.html:7
 msgid "Dashboard"
 msgstr "Панель приладів"
 
-#: dashboard/templates/dashboard/index.html:22
+#: dashboard/templates/dashboard/index.html:20
 msgid "Statistics loading.  This may take several minutes the first time."
 msgstr "Завантажується статистика. Вперше це може тривати декілька хвилин."
 
-#: dashboard/templates/dashboard/index.html:27
+#: dashboard/templates/dashboard/index.html:25
 #: dashboard/templates/dashboard/render.html:4
 msgid "Pages"
 msgstr "Сторінок"
 
-#: dashboard/templates/dashboard/index.html:28
+#: dashboard/templates/dashboard/index.html:26
 #: dashboard/templates/dashboard/render.html:5
 #: pages/templates/pages/cke_filebrowser.html:7
-#: pages/templates/pages/page_files.html:7
+#: pages/templates/pages/page_files.html:10
 msgid "Files"
 msgstr "Файлів"
 
-#: dashboard/templates/dashboard/index.html:29
+#: dashboard/templates/dashboard/index.html:27
 #: dashboard/templates/dashboard/render.html:6
 msgid "Maps"
 msgstr "Мап"
 
-#: dashboard/templates/dashboard/index.html:30
+#: dashboard/templates/dashboard/index.html:28
 #: dashboard/templates/dashboard/render.html:7
 msgid "Redirects"
 msgstr "Перенаправлень"
 
-#: dashboard/templates/dashboard/index.html:31
+#: dashboard/templates/dashboard/index.html:29
 #: dashboard/templates/dashboard/render.html:8
 msgid "Users"
 msgstr "Користувачів"
 
-#: dashboard/templates/dashboard/index.html:36
+#: dashboard/templates/dashboard/index.html:34
 #: dashboard/templates/dashboard/render.html:13
 msgid "Growth over time"
 msgstr "Ріст"
 
-#: dashboard/templates/dashboard/index.html:38
-#: dashboard/templates/dashboard/index.html:48
-#: dashboard/templates/dashboard/index.html:58
-#: dashboard/templates/dashboard/index.html:68
+#: dashboard/templates/dashboard/index.html:36
+#: dashboard/templates/dashboard/index.html:46
+#: dashboard/templates/dashboard/index.html:56
+#: dashboard/templates/dashboard/index.html:66
 msgid "Generating graph..."
 msgstr "Генерування графіка..."
 
-#: dashboard/templates/dashboard/index.html:46
+#: dashboard/templates/dashboard/index.html:44
 #: dashboard/templates/dashboard/render.html:20
 msgid "Edits over time"
 msgstr "Зміни"
 
-#: dashboard/templates/dashboard/index.html:56
+#: dashboard/templates/dashboard/index.html:54
 #: dashboard/templates/dashboard/render.html:27
 msgid "Page content growth over time"
 msgstr "Ріст контенту"
 
-#: dashboard/templates/dashboard/index.html:66
+#: dashboard/templates/dashboard/index.html:64
 #: dashboard/templates/dashboard/render.html:34
 msgid "Users registered over time"
 msgstr "Зареєстровані користувачі"
 
-#: frontpage/views.py:135
+#: explore/templates/explore/alphabetical_index.html:7
+#: explore/templates/explore/just_list.html:7
+#: explore/templates/explore/random_index.html:6
+#, python-format
+msgid "Explore %(region_name)s"
+msgstr ""
+
+#: explore/templates/explore/alphabetical_index.html:9
+#: explore/templates/explore/random_index.html:8
+#, python-format
+msgid "Explore <a href=\"%(region_url)s\">%(region_name)s</a>"
+msgstr ""
+
+#: explore/templates/explore/alphabetical_index.html:33
+#: explore/templates/explore/just_list.html:22
+#: explore/templates/explore/random_index.html:37
+msgid "Default"
+msgstr ""
+
+#: explore/templates/explore/alphabetical_index.html:34
+#: explore/templates/explore/just_list.html:23
+#: explore/templates/explore/random_index.html:38
+#: tags/templates/tags/tag_list.html:12
+msgid "Alphabetical"
+msgstr "За алфавітом"
+
+#: explore/templates/explore/alphabetical_index.html:35
+#: explore/templates/explore/just_list.html:24
+#: explore/templates/explore/random_index.html:39
+msgid "List"
+msgstr ""
+
+#: explore/templates/explore/just_list.html:9
+msgid "Explore - All Pages"
+msgstr ""
+
+#: explore/templates/explore/random_index.html:12
+msgid "Take tour"
+msgstr ""
+
+#: explore/templates/explore/random_tour.html:9
+msgid "Random Tour"
+msgstr ""
+
+#: explore/templates/explore/random_tour.html:14
+msgid "Stop tour"
+msgstr ""
+
+#: explore/templates/explore/random_tour.html:15
+msgid "Start tour"
+msgstr ""
+
+#: frontpage/views.py:159
 msgid "Cover photo updated!"
 msgstr "Фото на головній сторінці оновлено!"
 
-#: frontpage/templates/frontpage/base.html:18
-#: pages/templates/pages/base.html:45
+#: frontpage/templates/frontpage/base.html:20
+#: pages/templates/pages/follow_page.html:12
 msgid "region"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:30
+#: frontpage/templates/frontpage/base.html:32
 #, python-format
 msgid "Welcome to the %(region_name)s LocalWiki!"
 msgstr "Вітаємо на %(region_name)s LocalWiki!"
 
-#: frontpage/templates/frontpage/base.html:31
+#: frontpage/templates/frontpage/base.html:33
 #, python-format
 msgid "A website about %(region_name)s that <em>anyone</em> can edit"
 msgstr "Веб-сайті про %(region_name)s, який <em>кожен</em> може змінювати"
 
-#: frontpage/templates/frontpage/base.html:33
+#: frontpage/templates/frontpage/base.html:35
 msgid ""
 "\n"
 "        I want to make a page about <span class=\"searchbox\"><input type=\"text\" name=\"q\" value=\"\"><input type=\"submit\" value=\"Search or create page\"></span>\n"
 "        "
 msgstr "\nЯ хочу створити сторінку про <span class=\"searchbox\"><input type=\"text\" name=\"q\" value=\"\"><input type=\"submit\" value=\"Search or create page\"></span>"
 
-#: frontpage/templates/frontpage/base.html:50
+#: frontpage/templates/frontpage/base.html:56
 msgid "Change cover"
 msgstr "Змінити фото на головній сторінці"
 
-#: frontpage/templates/frontpage/base.html:52
+#: frontpage/templates/frontpage/base.html:58
 msgid "Save cover"
 msgstr "Зберегти фото на головній сторінці"
 
-#: frontpage/templates/frontpage/base.html:73
-#: pages/templates/pages/page_detail.html:42
-#: users/templates/users/user_page.html:34
+#: frontpage/templates/frontpage/base.html:81
+#: pages/templates/pages/page_detail.html:51
+#: users/templates/users/user_page.html:37
 #, python-format
 msgid ""
 "Revision %(version_number)s\n"
 "          (%(date)s by %(user_link)s)"
 msgstr "Версія %(version_number)s\n(%(date)s користувачем %(user_link)s)"
 
-#: frontpage/templates/frontpage/base.html:82
-#: maps/templates/maps/nearby_pages.html:45
-#: pages/templates/pages/page_detail.html:50
-#: tags/templates/tags/tagged_list_snippet.html:8
+#: frontpage/templates/frontpage/base.html:90
+#: maps/templates/maps/nearby_pages.html:44
+#: pages/templates/pages/page_detail.html:59
+#: tags/templates/tags/tagged_list_snippet.html:6
 msgid "View"
 msgstr "Вид"
 
-#: frontpage/templates/frontpage/base.html:90
+#: frontpage/templates/frontpage/base.html:96
+msgid "Some interesting pages"
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:105
+msgid "Explore more pages"
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:109
+msgid "There are no pages yet.  Add some!"
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:110
+#: themes/sapling/templates/site/add_page_area.html:5
+#: themes/sapling/templates/site/add_page_area.html:9
+msgid "Add a new page"
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:118
 msgid "Explore nearby regions"
 msgstr ""
 
-#: links/templates/links/orphaned_pages.html:12
-msgid "Orphaned Pages"
-msgstr "Сторінки без зовнішніх посилань"
+#: links/models.py:19
+msgid "The number of times the source page links to the destination page."
+msgstr ""
 
-#: links/templates/links/orphaned_pages.html:16
+#: links/templates/links/links_for_page.html:15
+#, python-format
+msgid ""
+"\n"
+"             Links for <a href=\"%(page_url)s\">%(page_name)s</a>\n"
+"          "
+msgstr ""
+
+#: links/templates/links/links_for_page.html:25
 #, python-format
 msgid ""
 "\n"
 "<h3>Pages that link to <a href=\"%(page_url)s\">%(page_name)s</a>:</h3>\n"
 msgstr "\n<h3>Сторінки, що містять посилання на <a href=\"%(page_url)s\">%(page_name)s</a>:</h3>\n"
 
-#: links/templates/links/orphaned_pages.html:25
+#: links/templates/links/links_for_page.html:34
 #, python-format
 msgid ""
 "\n"
@@ -436,6 +514,10 @@ msgid "German"
 msgstr "Німецька"
 
 #: main/settings/defaults.py:73
+msgid "Dutch"
+msgstr ""
+
+#: main/settings/defaults.py:74
 msgid "Ukrainian"
 msgstr ""
 
@@ -461,12 +543,12 @@ msgstr ""
 msgid "Map error: %s."
 msgstr "Помилка мапи: %s."
 
-#: maps/views.py:314 pages/views.py:193
+#: maps/views.py:318 pages/views.py:199
 #, python-format
 msgid "<p>What do you know about %s?</p>"
 msgstr "<p>Що ви знаєте про %s?</p>"
 
-#: maps/views.py:333
+#: maps/views.py:337
 #, python-format
 msgid ""
 "Map saved! You should probably go <a href=\"%s\">edit the page that was "
@@ -481,29 +563,29 @@ msgstr "Дані мапи"
 msgid "Map tiles via"
 msgstr "Зображення за допомогою"
 
-#: maps/templates/maps/base.html:8
+#: maps/templates/maps/base.html:6
 msgid "Recent changes on this Map"
 msgstr "Останні зміни на цій Мапі"
 
-#: maps/templates/maps/base.html:17 maps/templates/maps/mapdata_list.html:25
-#: maps/templates/maps/mapdata_list.html:31
-#: themes/sapling/templates/site/nav.html:6
+#: maps/templates/maps/base.html:10 maps/templates/maps/mapdata_list.html:24
+#: maps/templates/maps/mapdata_list.html:30
+#: themes/sapling/templates/site/nav.html:5
 msgid "Map"
 msgstr "Мапа"
 
-#: maps/templates/maps/base.html:34 maps/templates/maps/mapdata_form.html:87
+#: maps/templates/maps/base.html:27 maps/templates/maps/mapdata_form.html:86
 #: maps/templates/maps/mapdata_versions.html:25
 #: pages/templates/pages/base.html:29
-#: pages/templates/pages/page_detail.html:50
-#: pages/templates/pages/page_form.html:93
-#: pages/templates/pages/page_versions.html:28
+#: pages/templates/pages/page_detail.html:59
+#: pages/templates/pages/page_form.html:98
+#: pages/templates/pages/page_versions.html:27
 msgid "Edit"
 msgstr "Змінити"
 
-#: maps/templates/maps/base.html:35 maps/templates/maps/mapdata_form.html:88
+#: maps/templates/maps/base.html:28 maps/templates/maps/mapdata_form.html:87
 #: maps/templates/maps/mapdata_versions.html:26
-#: pages/templates/pages/base.html:30 pages/templates/pages/page_form.html:94
-#: pages/templates/pages/page_versions.html:29
+#: pages/templates/pages/base.html:30 pages/templates/pages/page_form.html:99
+#: pages/templates/pages/page_versions.html:28
 msgid "Info"
 msgstr "Інформація"
 
@@ -512,42 +594,41 @@ msgid "Delete map"
 msgstr "Видалити мапу"
 
 #: maps/templates/maps/editor_actions.html:8
-#: pages/templates/pages/editor_actions.html:11
-#: pages/templates/pages/editor_actions.html:13
+#: pages/templates/pages/editor_actions.html:12
+#: pages/templates/pages/editor_actions.html:14
 msgid "Security"
 msgstr "Безпека"
 
-#: maps/templates/maps/mapdata_detail.html:24
+#: maps/templates/maps/mapdata_detail.html:21
 msgid "Map for"
 msgstr "Мапа на сторінці"
 
-#: maps/templates/maps/mapdata_detail.html:38
+#: maps/templates/maps/mapdata_detail.html:35
 #: maps/templates/maps/mapdata_diff.html:62
 #: maps/templates/maps/mapdata_diff.html:67
 #: redirects/templates/redirects/redirect_diff.html:43
 #: redirects/templates/redirects/redirect_diff.html:48
-#: tags/templates/tags/pagetagset_diff.html:40
-#: tags/templates/tags/pagetagset_diff.html:45
-#: tags/templates/tags/pagetagset_version_detail.html:24
+#: tags/templates/tags/pagetagset_diff.html:37
+#: tags/templates/tags/pagetagset_diff.html:42
+#: tags/templates/tags/pagetagset_version_detail.html:23
 msgid "Revision"
 msgstr "Версія"
 
-#: maps/templates/maps/mapdata_detail.html:39
+#: maps/templates/maps/mapdata_detail.html:36
 #: maps/templates/maps/mapdata_diff.html:63
 #: maps/templates/maps/mapdata_diff.html:68
 #: redirects/templates/redirects/redirect_diff.html:44
 #: redirects/templates/redirects/redirect_diff.html:49
-#: tags/templates/tags/pagetagset_diff.html:41
-#: tags/templates/tags/pagetagset_diff.html:46
-#: tags/templates/tags/pagetagset_version_detail.html:25
+#: tags/templates/tags/pagetagset_diff.html:38
+#: tags/templates/tags/pagetagset_diff.html:43
+#: tags/templates/tags/pagetagset_version_detail.html:24
 #: utils/templates/utils/history/form.html:7
 #: versionutils/templates/versionutils/history/form.html:35
-#: versionutils/templates/versionutils/history/form_page.html:19
 msgid "by"
 msgstr "користувачем"
 
-#: maps/templates/maps/mapdata_detail.html:54
-#: pages/templates/pages/page_detail.html:84
+#: maps/templates/maps/mapdata_detail.html:51
+#: pages/templates/pages/page_detail.html:92
 #, python-format
 msgid ""
 "\n"
@@ -555,8 +636,8 @@ msgid ""
 "        "
 msgstr ""
 
-#: maps/templates/maps/mapdata_detail.html:58
-#: pages/templates/pages/page_detail.html:88
+#: maps/templates/maps/mapdata_detail.html:55
+#: pages/templates/pages/page_detail.html:96
 #, python-format
 msgid ""
 "\n"
@@ -574,44 +655,44 @@ msgid "Differences for <a href=\"%(maps_global)s\">Map</a>"
 msgstr "Порівняння версій для <a href=\"%(maps_global)s\">Мапи</a>"
 
 #: maps/templates/maps/mapdata_diff.html:73
-#: pages/templates/pages/page_diff.html:60
-#: tags/templates/tags/pagetagset_diff.html:51
+#: pages/templates/pages/page_diff.html:57
+#: tags/templates/tags/pagetagset_diff.html:48
 msgid "Deletions are marked like this"
 msgstr "Видалення позначені як"
 
 #: maps/templates/maps/mapdata_diff.html:76
-#: pages/templates/pages/page_diff.html:63
-#: tags/templates/tags/pagetagset_diff.html:54
+#: pages/templates/pages/page_diff.html:60
+#: tags/templates/tags/pagetagset_diff.html:51
 msgid "Additions are marked like this"
 msgstr "Додавання позначені як"
 
-#: maps/templates/maps/mapdata_form.html:35
+#: maps/templates/maps/mapdata_form.html:34
 msgid "Editing map for"
 msgstr "Редагування мапи для"
 
-#: maps/templates/maps/mapdata_form.html:65
+#: maps/templates/maps/mapdata_form.html:64
 msgid "Please comment about this change:"
 msgstr "Коротко опишіть цю зміну:"
 
-#: maps/templates/maps/mapdata_form.html:69
-#: pages/templates/pages/page_form.html:75
+#: maps/templates/maps/mapdata_form.html:68
+#: pages/templates/pages/page_form.html:80
 msgid "Save changes"
 msgstr "Зберегти зміни"
 
-#: maps/templates/maps/mapdata_form.html:70
-#: pages/templates/pages/page_detail.html:73
-#: pages/templates/pages/page_form.html:76
+#: maps/templates/maps/mapdata_form.html:69
+#: pages/templates/pages/page_detail.html:81
+#: pages/templates/pages/page_form.html:81
 #: users/templates/users/deactivate.html:17
-#: users/templates/users/user_page.html:148
+#: users/templates/users/user_page.html:150
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: maps/templates/maps/mapdata_list.html:44
-#: maps/templates/maps/mapdata_list.html:48
+#: maps/templates/maps/mapdata_list.html:43
+#: maps/templates/maps/mapdata_list.html:47
 msgid "Add a new map"
 msgstr ""
 
-#: maps/templates/maps/mapdata_list.html:46
+#: maps/templates/maps/mapdata_list.html:45
 msgid "What's here? (Name of page)"
 msgstr ""
 
@@ -644,6 +725,11 @@ msgstr ""
 msgid "No pages near you. Make some!"
 msgstr ""
 
+#: page_scores/models.py:29
+#, python-format
+msgid "Page score %s: %s"
+msgstr ""
+
 #: pages/feeds.py:52 pages/feeds.py:96
 #, python-format
 msgid "File %(filename)s on page \"%(pagename)s\""
@@ -668,7 +754,7 @@ msgstr "Сторінка з такою назвою вже існує"
 msgid "The new file should be of the same type"
 msgstr "Новий файл повинен бути такого ж типу"
 
-#: pages/models.py:30
+#: pages/models.py:31
 #, python-format
 msgid ""
 "Provided slug is invalid. Slugs must be lowercase, contain no trailing or "
@@ -676,58 +762,58 @@ msgid ""
 "%(KEEP_CHARACTERS)s"
 msgstr ""
 
-#: pages/models.py:58
+#: pages/models.py:59
 msgid "Page name is invalid."
 msgstr "Некоректна назва сторінки."
 
-#: pages/models.py:131 pages/models.py:143
+#: pages/models.py:133 pages/models.py:146
 #, python-format
 msgid "Renamed from \"%s\""
 msgstr "Перейменовано з \"%s\""
 
-#: pages/models.py:135
+#: pages/models.py:137
 #, python-format
 msgid "The page '%s' already exists!"
 msgstr "Сторінка '%s' вже існує!"
 
-#: pages/models.py:171 pages/models.py:184 pages/models.py:203
+#: pages/models.py:175 pages/models.py:191 pages/models.py:213
 msgid "Parent page renamed"
 msgstr "Сторінку перейменовано"
 
-#: pages/models.py:219
+#: pages/models.py:255
 msgid "file"
 msgstr "файл"
 
-#: pages/plugins.py:414
+#: pages/plugins.py:425
 msgid ""
 "The embedded URL is not on the list of approved providers.  Contact the site"
 " administrator to add it."
 msgstr "Вбудована URL-адреса не входить до списку затверджених сайтів. Аби додати її, зв&#39;яжіться з адміністрацією сайту."
 
-#: pages/plugins.py:418
+#: pages/plugins.py:429
 msgid "Invalid embed code"
 msgstr "Неправильний код вбудовування"
 
-#: pages/plugins.py:430 search/templates/search/base.html:17
-#: search/templates/search/base.html:64
-#: themes/sapling/templates/site/search_form.html:7
-#: themes/sapling/templates/site/search_form.html:12
+#: pages/plugins.py:441 search/templates/search/base.html:17
+#: search/templates/search/base.html:61
+#: themes/sapling/templates/site/search_form.html:6
+#: themes/sapling/templates/site/search_form.html:11
 msgid "Search or create page"
 msgstr "Знайти або створити сторінку"
 
-#: pages/signals.py:16
+#: pages/signals.py:19
 msgid "Redirect created"
 msgstr "Перенаправлення створено"
 
-#: pages/signals.py:22
+#: pages/signals.py:25
 msgid "Page created"
 msgstr "Сторінку створено"
 
-#: pages/views.py:140
+#: pages/views.py:143
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Дякуємо за зміни! Ми цінуємо вашу увагу до деталей."
 
-#: pages/views.py:147
+#: pages/views.py:150
 #, python-format
 msgid ""
 "Changes saved! To use your name when editing, please <a "
@@ -736,40 +822,40 @@ msgid ""
 "account</strong></a>."
 msgstr "Зміни збережено! Для того, щоб користуватися своїм ім&#39;ям під час редагування, будь ласка, <a href=\"%(login_url)s?next=%(current_path)s\"><strong>увійдіть до свого акаунту</strong></a> або <a href=\"%(register_url)s?next=%(current_path)s\"><strong>зареєструйтеся</strong></a>."
 
-#: pages/views.py:158
+#: pages/views.py:161
 #, python-format
 msgid ""
 "<p class=\"create_map\"><a href=\"%s\" class=\"button little map\"><span "
 "class=\"text\">Create a map</span></a> for this page?</p>"
 msgstr "<p class=\"create_map\"><a href=\"%s\" class=\"button little map\"><span class=\"text\">Створити мапу</span></a> для цієї сторінки?</p>"
 
-#: pages/views.py:181
+#: pages/views.py:186
 msgid "Follow this page"
 msgstr ""
 
-#: pages/views.py:183
+#: pages/views.py:188
 #, python-format
 msgid "%(follow_page_notice)s for updates!"
 msgstr ""
 
-#: pages/views.py:387
+#: pages/views.py:398
 msgid "You must provide a page name when creating a page."
 msgstr "Ви повинні вказати назву нової сторінки."
 
-#: pages/views.py:465
+#: pages/views.py:479
 msgid "A file with this name already exists"
 msgstr "Файл із такою назвою вже існує"
 
 #. Translators: This is for the page rename form.
-#: pages/views.py:471
+#: pages/views.py:493
 msgid "New page name"
 msgstr "Назва нової сторінки"
 
-#: pages/views.py:472 versionutils/versioning/forms.py:18
+#: pages/views.py:494 versionutils/versioning/forms.py:18
 msgid "Comment"
 msgstr "Коментар"
 
-#: pages/views.py:507
+#: pages/views.py:530
 #, python-format
 msgid "Page renamed to \"%s\""
 msgstr "Сторінку перейменовано на \"%s\""
@@ -798,14 +884,6 @@ msgstr "Форматований"
 msgid "Typewriter"
 msgstr "Друкарська машинка"
 
-#: pages/templates/pages/base.html:8
-msgid "Recent changes on this Page"
-msgstr "Останні зміни на цій Сторінці"
-
-#: pages/templates/pages/base.html:37
-msgid "page"
-msgstr ""
-
 #: pages/templates/pages/editor_actions.html:5
 msgid "Edit map"
 msgstr "Редагувати мапу"
@@ -818,31 +896,35 @@ msgstr "Видалити сторінку"
 msgid "Redirect"
 msgstr "Перенаправити"
 
-#: pages/templates/pages/page_detail.html:27
+#: pages/templates/pages/follow_page.html:9
+msgid "page"
+msgstr ""
+
+#: pages/templates/pages/page_detail.html:34
 msgid "Redirected from"
 msgstr "Перенаправлено з"
 
-#: pages/templates/pages/page_detail.html:67
-#: users/templates/users/user_page.html:142
+#: pages/templates/pages/page_detail.html:76
+#: users/templates/users/user_page.html:145
 msgid "Edit tags"
 msgstr "Редагувати теги"
 
-#: pages/templates/pages/page_detail.html:67
-#: users/templates/users/user_page.html:142
+#: pages/templates/pages/page_detail.html:76
+#: users/templates/users/user_page.html:145
 msgid "Add tags"
 msgstr "Додати теги"
 
-#: pages/templates/pages/page_diff.html:22
+#: pages/templates/pages/page_diff.html:19
 #, python-format
 msgid "Differences for %(name)s"
 msgstr "Порівняння версій %(name)s"
 
-#: pages/templates/pages/page_diff.html:23
+#: pages/templates/pages/page_diff.html:20
 #, python-format
 msgid "Differences for <a href=\"%(pretty_slug)s\">%(new_name)s</a>"
 msgstr "Порівняння версій <a href=\"%(pretty_slug)s\">%(new_name)s</a>"
 
-#: pages/templates/pages/page_diff.html:34
+#: pages/templates/pages/page_diff.html:31
 #, python-format
 msgid ""
 "\n"
@@ -850,8 +932,8 @@ msgid ""
 "                    "
 msgstr "\nВерсія %(version_number)s  ( %(date)s користувачем %(user_link)s)"
 
-#: pages/templates/pages/page_diff.html:38
-#: pages/templates/pages/page_diff.html:51
+#: pages/templates/pages/page_diff.html:35
+#: pages/templates/pages/page_diff.html:48
 #, python-format
 msgid ""
 "\n"
@@ -859,7 +941,7 @@ msgid ""
 "                        "
 msgstr "\n, \"%(comment)s\""
 
-#: pages/templates/pages/page_diff.html:47
+#: pages/templates/pages/page_diff.html:44
 #, python-format
 msgid ""
 "\n"
@@ -867,79 +949,73 @@ msgid ""
 "\t\t          "
 msgstr "\n⇥⇥⇥ Версія %(version_number)s (%(date)s користувачем %(user_link)s)\n⇥⇥"
 
-#: pages/templates/pages/page_files.html:22
+#: pages/templates/pages/page_files.html:26
 msgid "Files attached to this page:"
 msgstr "Приєднані файли:"
 
-#: pages/templates/pages/page_files.html:37
+#: pages/templates/pages/page_files.html:41
 msgid "View page"
 msgstr "Переглянути сторінку"
 
-#: pages/templates/pages/page_form.html:7
+#: pages/templates/pages/page_form.html:5
 #, python-format
 msgid "Editing page \"%(name)s\" - %(super)s"
 msgstr "Редагування сторінки \"%(name)s\" - %(super)s"
 
-#: pages/templates/pages/page_form.html:71
+#: pages/templates/pages/page_form.html:76
 msgid "Please describe this change:"
 msgstr "Будь ласка, опишіть цю зміну:"
 
-#: pages/templates/pages/page_list.html:7
-#: pages/templates/pages/page_list.html:9
-#: themes/sapling/templates/site/nav.html:10
-msgid "All Pages"
-msgstr "Усі Сторінки"
-
-#: pages/templates/pages/page_new.html:7
+#: pages/templates/pages/page_new.html:5
 msgid "Page not found"
 msgstr "Сторінку не знайдено"
 
-#: pages/templates/pages/page_new.html:8
+#: pages/templates/pages/page_new.html:6
 #, python-format
 msgid "Page \"%(name)s\" does not exist (yet!)"
 msgstr "Сторінки \"%(name)s\" не існує (поки що!)"
 
-#: pages/templates/pages/page_new.html:17
+#: pages/templates/pages/page_new.html:15
 #: search/templates/search/search.html:16
 #: search/templates/search/search.html:79
 msgid "Create this page"
 msgstr "Створіть сторінку"
 
-#: pages/templates/pages/page_new.html:21
+#: pages/templates/pages/page_new.html:19
 msgid "Or use one of these templates:"
 msgstr "Або використайте один із шаблонів:"
 
-#: pages/templates/pages/page_new.html:24
+#: pages/templates/pages/page_new.html:22
 #, python-format
 msgid "Create with %(name)s template"
 msgstr "Створити за допомогою шаблона %(name)s"
 
-#: pages/templates/pages/page_permissions.html:7
+#: pages/templates/pages/page_permissions.html:5
 #, python-format
 msgid "Permissions for page \"%(name)s\" - %(super)s"
 msgstr "Дозволи для сторінки \"%(name)s\" - %(super)s"
 
-#: pages/templates/pages/page_permissions.html:15
+#: pages/templates/pages/page_permissions.html:13
 msgid "Who can change this page?"
 msgstr "Хто може змінювати цю сторінку?"
 
-#: pages/templates/pages/page_permissions.html:17
+#: pages/templates/pages/page_permissions.html:15
 #: redirects/templates/redirects/redirect_permissions.html:17
-#: users/forms.py:10
+#: users/forms.py:12
 msgid "Everyone"
 msgstr "Усі"
 
-#: pages/templates/pages/page_permissions.html:18
+#: pages/templates/pages/page_permissions.html:16
 #: redirects/templates/redirects/redirect_permissions.html:18
 msgid "Only these users:"
 msgstr "Тільки ці користувачі:"
 
-#: pages/templates/pages/page_permissions.html:24
+#: pages/templates/pages/page_permissions.html:22
 #: redirects/templates/redirects/redirect_permissions.html:24
 #: regions/templates/regions/admins_update.html:24
 #: regions/templates/regions/banned_update.html:24
 #: regions/templates/regions/settings.html:78
-#: tags/templates/tags/pagetagset_form_snippet.html:9
+#: tags/templates/tags/pagetagset_form_snippet.html:13
 #: users/templates/users/deactivate.html:17
 #: users/templates/users/settings.html:35
 msgid "Save"
@@ -949,30 +1025,32 @@ msgstr "Зберегти"
 msgid "Submit"
 msgstr "Надіслати"
 
-#: pages/templates/pages/page_versions.html:16
+#: pages/templates/pages/page_versions.html:14
 #, python-format
 msgid "Previous versions of page \"%(name)s\" - %(super)s"
 msgstr "Попередні версії сторінки \"%(name)s\" - %(super)s"
 
-#: pages/templates/pages/page_versions.html:21
+#: pages/templates/pages/page_versions.html:20
+#, python-format
 msgid ""
-" Looking for <a href=\"../_files/\">files</a> or <a "
-"href=\"../_tags/_history/\">tags</a>?"
-msgstr "Можливо, ви шукаєте <a href=\"../_files/\">файли</a> або <a href=\"../_tags/_history/\">теги</a>?"
+" Looking for <a href=\"../_files/\">files</a>, <a "
+"href=\"%(page_links_url)s\" rel=\"nofollow\">links</a>, or <a "
+"href=\"../_tags/_history/\" rel=\"nofollow\">tags</a>?"
+msgstr ""
 
-#: pages/templates/pages/pagefile_diff.html:37
+#: pages/templates/pages/pagefile_diff.html:34
 #, python-format
 msgid "Differences for %(new_name)s on %(new_slug)s"
 msgstr "Порівняння версій %(new_name)s на сторінці %(new_slug)s"
 
-#: pages/templates/pages/pagefile_diff.html:38
+#: pages/templates/pages/pagefile_diff.html:35
 #, python-format
 msgid ""
 "Differences for %(new_name)s on <a "
 "href=\"%(url_pages_show)s\">%(new_attached_to_page)s</a>"
 msgstr "Порівняння версій \"%(new_name)s\" на сторінці <a href=\"%(url_pages_show)s\">%(new_attached_to_page)s</a>"
 
-#: pages/templates/pages/pagefile_diff.html:47
+#: pages/templates/pages/pagefile_diff.html:44
 #, python-format
 msgid ""
 "\n"
@@ -980,8 +1058,8 @@ msgid ""
 "                  "
 msgstr "\nПеревірка %(version_number)s ( %(date)s користувачем %(user_link)s)"
 
-#: pages/templates/pages/pagefile_diff.html:51
-#: pages/templates/pages/pagefile_diff.html:64
+#: pages/templates/pages/pagefile_diff.html:48
+#: pages/templates/pages/pagefile_diff.html:61
 #, python-format
 msgid ""
 "\n"
@@ -989,7 +1067,7 @@ msgid ""
 "                      "
 msgstr "\n, \"%(comment)s\""
 
-#: pages/templates/pages/pagefile_diff.html:60
+#: pages/templates/pages/pagefile_diff.html:57
 #, python-format
 msgid ""
 "\n"
@@ -997,52 +1075,52 @@ msgid ""
 "\t\t        "
 msgstr "\n⇥⇥ Перевірка %(version_number)s (%(date)s користувачем %(user_link)s)\n⇥⇥"
 
-#: pages/templates/pages/pagefile_diff.html:88
+#: pages/templates/pages/pagefile_diff.html:85
 msgid "File info"
 msgstr "Інформація про файл"
 
-#: pages/templates/pages/pagefile_info.html:7
+#: pages/templates/pages/pagefile_info.html:5
 msgid "Recent changes for this file"
 msgstr "Останні зміни цього файлу"
 
-#: pages/templates/pages/pagefile_info.html:14
+#: pages/templates/pages/pagefile_info.html:12
 #, python-format
 msgid "Information about \"%(name)s\" on %(slug)s - %(super)s"
 msgstr "Інформація про файл \"%(name)s\" на сторінці %(slug)s - %(super)s"
 
-#: pages/templates/pages/pagefile_info.html:15
+#: pages/templates/pages/pagefile_info.html:13
 #, python-format
 msgid ""
 "Information about \"%(name)s\" on <a "
 "href=\"%(pages_show_url)s\">%(attached_to_page)s</a>"
 msgstr "Інформація про файл \"%(name)s\" на сторінці <a href=\"%(pages_show_url)s\">%(attached_to_page)s</a>"
 
-#: pages/templates/pages/pagefile_info.html:39
+#: pages/templates/pages/pagefile_info.html:37
 #, python-format
 msgid "Download %(name)s"
 msgstr "Завантажити %(name)s"
 
-#: pages/templates/pages/pagefile_info.html:44
+#: pages/templates/pages/pagefile_info.html:42
 msgid "Upload a new version"
 msgstr "Завантажити нову версію на сервер"
 
-#: pages/templates/pages/pagefile_info.html:51
+#: pages/templates/pages/pagefile_info.html:54
 msgid "Upload"
 msgstr "Завантажити на сервер"
 
-#: pages/templates/pages/pagefile_info.html:57
-#: tags/templates/tags/pagetagset_versions.html:31
+#: pages/templates/pages/pagefile_info.html:60
+#: tags/templates/tags/pagetagset_versions.html:30
 msgid "Previous versions:"
 msgstr "Попередні версії:"
 
-#: pages/templatetags/pages_tags.py:113
+#: pages/templatetags/pages_tags.py:126
 #, python-format
 msgid ""
 "Unable to include <a href=\"%(page_url)s\" "
 "class=\"missing_link\">%(page_name)s</a>"
 msgstr "Неможливо включити сторінку <a href=\"%(page_url)s\" class=\"missing_link\">%(page_name)s</a>"
 
-#: pages/templatetags/pages_tags.py:121
+#: pages/templatetags/pages_tags.py:134
 #, python-format
 msgid ""
 "Unable to include <a href=\"%(page_url)s\">%(page_name)s</a>: endless "
@@ -1103,33 +1181,44 @@ msgstr "Дозволи для перенаправлення \"%(name)s\" - %(su
 msgid "Who can change this redirect?"
 msgstr "Хто може змінити це перенаправлення?"
 
-#: regions/forms.py:33 regions/forms.py:52
+#: regions/forms.py:35 regions/forms.py:56
 msgid "Default language"
 msgstr "Мова за замовчуванням"
 
-#: regions/forms.py:35
+#: regions/forms.py:37
 msgid "The language for the region"
 msgstr "Мова регіону"
 
-#: regions/forms.py:49
+#: regions/forms.py:46
+msgid "Please draw a region with the map drawing tool."
+msgstr ""
+
+#: regions/forms.py:48
+msgid ""
+"The region you drew is too large. Please draw a region that's about the size"
+" of a city (or smaller). If you need a bigger region than that, please email"
+" contact@localwiki.org."
+msgstr ""
+
+#: regions/forms.py:53
 msgid "Full name"
 msgstr "Повне ім&#39;я"
 
-#: regions/forms.py:50 regions/models.py:17
+#: regions/forms.py:54 regions/models.py:20
 msgid "The full name of this region, e.g. 'San Francisco'"
 msgstr "Повна назва регіону, наприклад, 'Чернігів'"
 
-#: regions/forms.py:71
+#: regions/forms.py:75
 msgid "You cannot delete yourself as an admin"
 msgstr "Ви не можете видалити себе як адміністратора"
 
-#: regions/models.py:19
+#: regions/models.py:22
 msgid ""
 "A very short name for this region that will appear in URLs, e.g. 'sf'. Keep "
 "it short and memorable!"
 msgstr "Дуже коротка назва для цього регіону, яка з&#39;явиться в URL-адресі, наприклад, 'че'. Повинна бути короткою та запам&#39;ятовуваною!"
 
-#: regions/models.py:37
+#: regions/models.py:40
 msgid "Region already has pages in it"
 msgstr "Регіон вже має сторінки"
 
@@ -1140,20 +1229,25 @@ msgid ""
 "rel=\"nofollow\">create it</a>?</p>"
 msgstr ""
 
-#: regions/views.py:46
+#: regions/views.py:65
 #, python-format
 msgid "Region '%s' was deleted."
 msgstr ""
 
-#: regions/views.py:65 utils/views.py:87 utils/views.py:149
+#: regions/views.py:90 utils/views.py:163 utils/views.py:225
 msgid "Sorry, you are not allowed to perform this action."
 msgstr "Вибачте, у вас немає дозволу для здійснення цієї дії."
 
-#: regions/views.py:148
-msgid "login_url"
+#: regions/views.py:171
+#, python-format
+msgid ""
+"To create a region you must first <strong><a "
+"href=\"%(login_url)s?next=%(current_path)s\">log in</a></strong> or "
+"<strong><a href=\"%(register_url)s?next=%(current_path)s\">create an "
+"account</a></strong>."
 msgstr ""
 
-#: regions/views.py:156
+#: regions/views.py:181
 msgid ""
 "You've created a new LocalWiki region! We've set you up as an admin for this"
 " region. Learn more about <a "
@@ -1161,15 +1255,21 @@ msgid ""
 "target=\"_blank\">LocalWiki adminship here</a>."
 msgstr ""
 
-#: regions/views.py:223
+#: regions/views.py:200
+msgid ""
+"There was a problem with the map area you drew. Please re-draw it and try "
+"again."
+msgstr ""
+
+#: regions/views.py:258
 msgid "Settings updated!"
 msgstr "Налаштування оновлено!"
 
-#: regions/views.py:248
+#: regions/views.py:283
 msgid "Region admins updated!"
 msgstr "Список адміністраторів оновлено!"
 
-#: regions/views.py:269
+#: regions/views.py:304
 msgid "Banned users updated."
 msgstr "Список заблокованих користувачів оновлено."
 
@@ -1452,7 +1552,7 @@ msgid ""
 "<p>\n"
 "    \tWelcome to the new LocalWiki region for %(region)s! There are currently just a handful of pages in it, to get you started.\n"
 "    <p>\n"
-"    \tClick on <strong>All Pages</strong> at the top to see what's here now.</p>\n"
+"    \tClick on <strong>Explore</strong> at the top to see what's here now.</p>\n"
 "    <p>\n"
 "    \tYou can edit this and any other page by clicking the <strong>Edit</strong> button.</p>\n"
 "    <p>Need <strong>help</strong>? Please see the <a href=\"http://localwiki.net/main/Help\">help page</a> on the <a href=\"http://localwiki.net/main/\">LocalWiki Guide</a>!</p>"
@@ -1483,13 +1583,13 @@ msgstr "Заблоковані користувачі"
 msgid "LocalWiki"
 msgstr "LocalWiki"
 
-#: regions/templates/regions/main.html:15
-#: regions/templates/regions/main.html:41
-#: regions/templates/regions/region_list.html:17
+#: regions/templates/regions/main.html:14
+#: regions/templates/regions/main.html:40
+#: regions/templates/regions/region_list.html:16
 msgid "Add region"
 msgstr "Додати регіон"
 
-#: regions/templates/regions/main.html:26
+#: regions/templates/regions/main.html:25
 #, python-format
 msgid ""
 "\n"
@@ -1501,7 +1601,7 @@ msgid ""
 "    "
 msgstr ""
 
-#: regions/templates/regions/main.html:34
+#: regions/templates/regions/main.html:33
 #: regions/templates/regions/region_list.html:8
 msgid "Regions"
 msgstr "Регіони"
@@ -1515,6 +1615,10 @@ msgid "Draw the rough area the region will cover"
 msgstr "Окресліть приблизну площу, яку охоплюватиме регіон"
 
 #: regions/templates/regions/region_form.html:48
+msgid "When drawing your shape, <strong>double click to close it</strong>!"
+msgstr ""
+
+#: regions/templates/regions/region_form.html:49
 #: regions/templates/regions/settings.html:69
 msgid ""
 "Pick an area roughly the size of a city. Don't worry about being exact!"
@@ -1544,11 +1648,11 @@ msgstr "Нікого не заблоковано. Ура!"
 msgid "The rough area the region covers"
 msgstr "Приблизна площа, яку охоплює регіон"
 
-#: search/templates/search/base.html:14 search/templates/search/base.html:61
+#: search/templates/search/base.html:14 search/templates/search/base.html:58
 msgid "Search results for"
 msgstr "Результати пошуку для"
 
-#: search/templates/search/base.html:19 search/templates/search/base.html:66
+#: search/templates/search/base.html:19 search/templates/search/base.html:63
 #: search/templates/search/search.html:86
 msgid "Search"
 msgstr "Пошук"
@@ -1684,35 +1788,35 @@ msgstr "та"
 msgid "Tag"
 msgstr "Тег"
 
-#: tags/models.py:36 tags/templates/tags/pagetagset_list.html:7
-#: tags/templates/tags/pagetagset_list.html:8
+#: tags/models.py:36 tags/templates/tags/pagetagset_list.html:5
+#: tags/templates/tags/pagetagset_list.html:6
 #: tags/templates/tags/tag_list.html:5
 msgid "Tags"
 msgstr "Теги"
 
-#: tags/templates/tags/pagetagset_diff.html:31
-#: tags/templates/tags/pagetagset_diff.html:32
+#: tags/templates/tags/pagetagset_diff.html:28
+#: tags/templates/tags/pagetagset_diff.html:29
 #, python-format
 msgid "Differences for tag versions for %(new_name)s"
 msgstr "Порівняння версій тегів на сторінці %(new_name)s"
 
-#: tags/templates/tags/pagetagset_diff.html:64
+#: tags/templates/tags/pagetagset_diff.html:61
 msgid "Tags history"
 msgstr "Історія тегів"
 
-#: tags/templates/tags/pagetagset_form.html:16
-#: tags/templates/tags/pagetagset_form.html:17
-#: tags/templates/tags/pagetagset_version_detail.html:19
-#: tags/templates/tags/pagetagset_versions.html:17
+#: tags/templates/tags/pagetagset_form.html:14
+#: tags/templates/tags/pagetagset_form.html:15
+#: tags/templates/tags/pagetagset_version_detail.html:18
+#: tags/templates/tags/pagetagset_versions.html:16
 msgid "Tags for"
 msgstr "Теги на сторінці"
 
-#: tags/templates/tags/pagetagset_version_detail.html:18
-#: tags/templates/tags/pagetagset_versions.html:16
+#: tags/templates/tags/pagetagset_version_detail.html:17
+#: tags/templates/tags/pagetagset_versions.html:15
 msgid "Tags for "
 msgstr "Теги на сторінці"
 
-#: tags/templates/tags/pagetagset_versions.html:25
+#: tags/templates/tags/pagetagset_versions.html:24
 #, python-format
 msgid ""
 "\n"
@@ -1724,23 +1828,19 @@ msgstr "\nНа цій сторінці немає тегів. <a href=\"%(page_u
 msgid "All tags"
 msgstr "Усі теги"
 
-#: tags/templates/tags/tag_list.html:18
-msgid "Alphabetical"
-msgstr "За алфавітом"
-
-#: tags/templates/tags/tag_list.html:19
+#: tags/templates/tags/tag_list.html:13
 msgid "Most popular"
 msgstr "Найбільш популярні"
 
-#: tags/templates/tags/tag_list.html:20
+#: tags/templates/tags/tag_list.html:14
 msgid "As a cloud"
 msgstr "Хмаринкою"
 
-#: tags/templates/tags/tag_list.html:65
+#: tags/templates/tags/tag_list.html:59
 msgid "There are no tags. Add some!"
 msgstr "Немає тегів. Додайте їх!"
 
-#: tags/templates/tags/tagged_list_snippet.html:19
+#: tags/templates/tags/tagged_list_snippet.html:17
 #, python-format
 msgid "There are no pages with the tag \"%(tag_name)s\"."
 msgstr "Немає сторінок із тегом \"%(tag_name)s\"."
@@ -1759,16 +1859,16 @@ msgstr ""
 msgid "Log in"
 msgstr "Увійти"
 
-#: templates/registration/login.html:9
+#: templates/registration/login.html:21
 msgid "Your username and password didn't match. Please try again."
 msgstr "Введено неправильне ім&#39;я користувача або пароль. Спробуйте ще раз."
 
-#: templates/registration/login.html:10 templates/registration/login.html:22
+#: templates/registration/login.html:22 templates/registration/login.html:32
 msgid "Forgot your password?"
 msgstr "Забули пароль?"
 
-#: templates/registration/login.html:18
-#: templates/registration/registration_form.html:34
+#: templates/registration/login.html:29
+#: templates/registration/registration_form.html:44
 msgid "login"
 msgstr "увійти"
 
@@ -1888,16 +1988,11 @@ msgstr ""
 msgid "Item not found"
 msgstr ""
 
-#: themes/sapling/templates/site/add_page_area.html:3
 #: themes/sapling/templates/site/add_page_area.html:7
-msgid "Add a new page"
-msgstr ""
-
-#: themes/sapling/templates/site/add_page_area.html:5
 msgid "Name of page"
 msgstr ""
 
-#: themes/sapling/templates/site/base.html:87
+#: themes/sapling/templates/site/base.html:89
 msgid ""
 "This is an <strong>insanely</strong> early preview of the <a "
 "href=\"http://localwiki.org/blog/2013/jul/25/big-news-future-localwiki/\" "
@@ -1907,71 +2002,75 @@ msgid ""
 "from launching!"
 msgstr ""
 
-#: themes/sapling/templates/site/base.html:176
+#: themes/sapling/templates/site/base.html:182
 msgid ""
 "\n"
 "      LocalWiki is a grassroots effort to collect, share and open the world’s local knowledge.  We are a 501(c)3 non-profit organization. <a href=\"http://localwiki.org/about/\" target=\"_blank\">Learn more</a>.</p>\n"
 "      "
 msgstr ""
 
-#: themes/sapling/templates/site/login_info.html:8
+#: themes/sapling/templates/site/login_info.html:11
 msgid "Welcome"
 msgstr "Вітаємо"
 
-#: themes/sapling/templates/site/login_info.html:11
+#: themes/sapling/templates/site/login_info.html:14
 msgid "settings"
 msgstr ""
 
-#: themes/sapling/templates/site/login_info.html:12
+#: themes/sapling/templates/site/login_info.html:15
 msgid "log out"
 msgstr "вийти"
 
-#: themes/sapling/templates/site/login_info.html:16
+#: themes/sapling/templates/site/login_info.html:19
 msgid "log in"
 msgstr "увійти"
 
-#: themes/sapling/templates/site/login_info.html:16
+#: themes/sapling/templates/site/login_info.html:19
 msgid "or"
 msgstr "або"
 
-#: themes/sapling/templates/site/login_info.html:16
+#: themes/sapling/templates/site/login_info.html:19
 msgid "create account"
 msgstr "створити акаунт"
 
-#: themes/sapling/templates/site/nav.html:7
+#: themes/sapling/templates/site/nav.html:6
 msgid "Near You"
 msgstr ""
 
-#: themes/sapling/templates/site/nav.html:12
+#: themes/sapling/templates/site/nav.html:9
+msgid "Explore"
+msgstr ""
+
+#: themes/sapling/templates/site/nav.html:11
 msgid "Settings"
 msgstr "Налаштування"
 
-#: themes/sapling/templates/site/nav.html:18
+#: themes/sapling/templates/site/nav.html:17
 msgid "Guide"
 msgstr "Гід"
 
-#: themes/sapling/templates/site/nav.html:19
+#: themes/sapling/templates/site/nav.html:18
 msgid "Help"
 msgstr "Допомога"
 
-#: themes/sapling/templates/site/nav.html:20
+#: themes/sapling/templates/site/nav.html:19
 msgid "Communities"
 msgstr "Спільнота"
 
-#: themes/sapling/templates/site/nav.html:21
+#: themes/sapling/templates/site/nav.html:20
 msgid "API"
 msgstr ""
 
-#: themes/sapling/templates/site/nav.html:22
+#: themes/sapling/templates/site/nav.html:21
 msgid "About"
 msgstr "Про нас"
 
-#: themes/sapling/templates/site/search_form.html:6
+#: themes/sapling/templates/site/search_form.html:5
 #, python-format
 msgid "Search %(region_name)s"
 msgstr ""
 
-#: themes/sapling/templates/site/search_form.html:11
+#: themes/sapling/templates/site/search_form.html:10
 msgid "Search LocalWiki "
 msgstr ""
 
@@ -1999,52 +2098,56 @@ msgstr "алгоритм"
 msgid "hash"
 msgstr "хеш"
 
-#: users/forms.py:11
+#: users/forms.py:13
 msgid "Only these users"
 msgstr "Тільки ці користувачі"
 
-#: users/forms.py:28 users/registration_backend/forms.py:44
+#: users/forms.py:30 users/registration_backend/forms.py:44
 msgid "Your name"
 msgstr "Ваше ім&#39;я"
 
-#: users/forms.py:29
+#: users/forms.py:31
 msgid "Email address"
 msgstr ""
 
-#: users/forms.py:30
+#: users/forms.py:32
 msgid "Gravatar email (private)"
 msgstr ""
 
-#: users/forms.py:34
+#: users/forms.py:36
 msgid "Disable this account permanently"
 msgstr ""
 
-#: users/models.py:56
+#: users/models.py:63
 msgid "Gravatar Email (Private)"
 msgstr ""
 
-#: users/models.py:57
+#: users/models.py:64
 msgid "Show email publicly (Helps with communication)"
 msgstr ""
 
-#: users/models.py:58
+#: users/models.py:65
 msgid "Personal website"
 msgstr ""
 
-#: users/views.py:196
+#: users/views.py:213
 msgid "Permissions updated!"
 msgstr "Дозволи оновлені!"
 
-#: users/views.py:207 users/views.py:242 users/views.py:252
+#: users/views.py:224 users/views.py:259 users/views.py:269
 msgid "You must be logged in to change user settings."
 msgstr ""
 
-#: users/views.py:221
+#: users/views.py:238
 msgid "User settings updated!"
 msgstr ""
 
-#: users/views.py:258
+#: users/views.py:275
 msgid "Your account has been de-activated."
+msgstr ""
+
+#: users/views.py:434
+msgid "Logged out"
 msgstr ""
 
 #: users/registration_backend/__init__.py:61
@@ -2111,42 +2214,42 @@ msgstr "Список підписантів"
 msgid "Subscriber emails:"
 msgstr "Електронні адреси підписантів:"
 
-#: users/templates/users/user_page.html:21
+#: users/templates/users/user_page.html:24
 msgid "user"
 msgstr ""
 
-#: users/templates/users/user_page.html:41
+#: users/templates/users/user_page.html:44
 msgid "This user account is disabled."
 msgstr ""
 
-#: users/templates/users/user_page.html:57
+#: users/templates/users/user_page.html:60
 #, python-format
 msgid "Joined on %(date_joined)s"
 msgstr ""
 
-#: users/templates/users/user_page.html:64
+#: users/templates/users/user_page.html:67
 msgid "total contributions"
 msgstr ""
 
-#: users/templates/users/user_page.html:73
+#: users/templates/users/user_page.html:76
 msgid "pages edited"
 msgstr ""
 
-#: users/templates/users/user_page.html:82
+#: users/templates/users/user_page.html:85
 msgid "maps edited"
 msgstr ""
 
-#: users/templates/users/user_page.html:93
+#: users/templates/users/user_page.html:96
 #, python-format
 msgid "%(num_pages_followed)s pages starred"
 msgstr ""
 
-#: users/templates/users/user_page.html:100
+#: users/templates/users/user_page.html:103
 #, python-format
 msgid "%(num_users_followed)s users starred"
 msgstr ""
 
-#: users/templates/users/user_page.html:108
+#: users/templates/users/user_page.html:111
 msgid "Regions followed"
 msgstr ""
 
@@ -2154,7 +2257,7 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: utils/views.py:88
+#: utils/views.py:164
 msgid ""
 "Anonymous users may not perform this action. Please <a "
 "href=\"/Users/login/\">log in</a>."
@@ -2164,23 +2267,23 @@ msgstr "Анонімні користувачі не можить виконув
 msgid "revert"
 msgstr "відновити"
 
-#: versionutils/diff/diffutils.py:103 versionutils/diff/diffutils.py:206
-#: versionutils/diff/diffutils.py:294 versionutils/diff/diffutils.py:314
-#: versionutils/diff/diffutils.py:377 versionutils/diff/diffutils.py:391
-#: versionutils/diff/diffutils.py:494
+#: versionutils/diff/diffutils.py:114 versionutils/diff/diffutils.py:224
+#: versionutils/diff/diffutils.py:316 versionutils/diff/diffutils.py:336
+#: versionutils/diff/diffutils.py:402 versionutils/diff/diffutils.py:419
+#: versionutils/diff/diffutils.py:524
 msgid "No differences found"
 msgstr "Відмінностей не знайдено"
 
-#: versionutils/diff/diffutils.py:529 versionutils/diff/diffutils.py:539
-#: versionutils/diff/diffutils.py:552 versionutils/diff/diffutils.py:562
+#: versionutils/diff/diffutils.py:559 versionutils/diff/diffutils.py:569
+#: versionutils/diff/diffutils.py:582 versionutils/diff/diffutils.py:592
 msgid "Stayed the same"
 msgstr "Не змінилося"
 
-#: versionutils/diff/diffutils.py:532 versionutils/diff/diffutils.py:544
+#: versionutils/diff/diffutils.py:562 versionutils/diff/diffutils.py:574
 msgid "Removed"
 msgstr "Видалено"
 
-#: versionutils/diff/diffutils.py:555 versionutils/diff/diffutils.py:567
+#: versionutils/diff/diffutils.py:585 versionutils/diff/diffutils.py:597
 #: versionutils/versioning/constants.py:14
 msgid "Added"
 msgstr "Додано"
@@ -2222,7 +2325,7 @@ msgstr "Порівняти"
 msgid "There is no revision history."
 msgstr "Немає попередніх версій."
 
-#: versionutils/templates/versionutils/history/media.html:47
+#: versionutils/templates/versionutils/history/media.html:46
 msgid "Please select two versions to compare"
 msgstr "Виберіть дві версії для порівняння"
 
