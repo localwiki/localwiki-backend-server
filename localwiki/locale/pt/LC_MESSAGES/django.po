@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Rafael etc <rafael.etc@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-20 02:04-0500\n"
-"PO-Revision-Date: 2014-05-20 07:27+0000\n"
-"Last-Translator: philipn <philip@localwiki.org>\n"
+"POT-Creation-Date: 2014-05-20 14:26-0500\n"
+"PO-Revision-Date: 2014-10-09 18:05+0000\n"
+"Last-Translator: Rafael etc <rafael.etc@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/localwiki/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +21,7 @@ msgstr ""
 #: activity/feeds.py:40 activity/feeds.py:46
 #, python-format
 msgid "Activity on %s"
-msgstr ""
+msgstr "Atividade em %s"
 
 #: activity/feeds.py:81 activity/feeds.py:177
 #, python-format
@@ -45,7 +46,7 @@ msgstr "Alterações em %(title)s em %(site_name)s"
 #: activity/templates/activity/all_activity_index.html:6
 #: activity/templates/activity/all_activity_index.html:18
 msgid "All activity on LocalWiki"
-msgstr ""
+msgstr "Todas as atividades do LocalWiki"
 
 #: activity/templates/activity/all_activity_index.html:27
 #: activity/templates/activity/followed_activity_index.html:39
@@ -434,6 +435,10 @@ msgid "German"
 msgstr ""
 
 #: main/settings/defaults.py:73
+msgid "Dutch"
+msgstr ""
+
+#: main/settings/defaults.py:74
 msgid "Ukrainian"
 msgstr ""
 
@@ -1033,14 +1038,14 @@ msgstr "Carregar"
 msgid "Previous versions:"
 msgstr "Versões anteriores:"
 
-#: pages/templatetags/pages_tags.py:113
+#: pages/templatetags/cards_tags.py:113 pages/templatetags/pages_tags.py:113
 #, python-format
 msgid ""
 "Unable to include <a href=\"%(page_url)s\" "
 "class=\"missing_link\">%(page_name)s</a>"
 msgstr "Não foi possível incluir a página <a href=\"%(page_url)s\" class=\"missing_link\">%(page_name)s</a>"
 
-#: pages/templatetags/pages_tags.py:121
+#: pages/templatetags/cards_tags.py:121 pages/templatetags/pages_tags.py:121
 #, python-format
 msgid ""
 "Unable to include <a href=\"%(page_url)s\">%(page_name)s</a>: endless "
@@ -1147,8 +1152,13 @@ msgstr ""
 msgid "Sorry, you are not allowed to perform this action."
 msgstr "Não tem permissões para realizar este comando."
 
-#: regions/views.py:148
-msgid "login_url"
+#: regions/views.py:146
+#, python-format
+msgid ""
+"To create a region you must first <strong><a "
+"href=\"%(login_url)s?next=%(current_path)s\">log in</a></strong> or "
+"<strong><a href=\"%(register_url)s?next=%(current_path)s\">create an "
+"account</a></strong>."
 msgstr ""
 
 #: regions/views.py:156
