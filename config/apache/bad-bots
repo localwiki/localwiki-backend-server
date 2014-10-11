@@ -244,6 +244,10 @@ deny from 65.213.208.128/27
 deny from 65.222.176.96/27
 deny from 65.222.185.72/29
 
+# Other bad bots
+deny from 117.26.199.146
+deny from 110.89.63.220
+
 Deny from env=bad_bot
 </Limit>
 
