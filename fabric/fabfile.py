@@ -903,7 +903,7 @@ def fix_locale():
 def setup_transifex():
     with virtualenv():
         sudo('apt-get install gettext')
-        run('pip install transifex-client')
+        sudo('pip install transifex-client', user='www-data')
 
         with cd(os.path.join(env.src_root, 'localwiki')):
             run('tx init')
@@ -920,7 +920,7 @@ def pull_translations():
             with cd(os.path.join(env.src_root, 'localwiki')):
                 with virtualenv():
                     run('tx pull -a')
-                    run('localwiki-manage compilemessages')
+                    sudo('localwiki-manage compilemessages', user='www-data')
 
 def push_translations():
     with settings(warn_only=True):
@@ -931,8 +931,8 @@ def push_translations():
 
             with cd(os.path.join(env.src_root, 'localwiki')):
                 with virtualenv():
-                    run('localwiki-manage makemessages -l en')
-                    run('localwiki-manage makemessages -d djangojs -l en')
+                    sudo('localwiki-manage makemessages -l en', user='www-data')
+                    sudo('localwiki-manage makemessages -d djangojs -l en', user='www-data')
                     run('tx push -s -t')
 
 def populate_page_cards():
