@@ -6,7 +6,6 @@ from django.db import IntegrityError
 from django.conf import settings
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
-from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.template.defaultfilters import stringfilter
 from django.contrib.gis.db import models
@@ -14,6 +13,7 @@ from django.contrib.gis.db import models
 from django_randomfilenamestorage.storage import (
     RandomFilenameFileSystemStorage)
 
+from localwiki.utils.urlresolvers import reverse
 
 class Region(models.Model):
     full_name = models.CharField(max_length=255,
