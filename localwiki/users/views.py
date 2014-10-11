@@ -24,13 +24,12 @@ from django.db.models import Count
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.decorators.cache import never_cache
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.cache import cache_page
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.sites.models import get_current_site
 from django.conf import settings
 
 from guardian.shortcuts import get_users_with_perms, assign_perm, remove_perm
-from registration.views import register as _register
 from registration.backends import get_backend
 from follow.models import Follow
 
@@ -364,7 +363,8 @@ def process_post_save_after_auth(request):
                 default_language=default_language
             )
 
-
+@cache_page(60 * 60 * 24)
+@csrf_exempt
 def register(request, backend, success_url=None, form_class=None,
              disallowed_url='registration_disallowed',
              template_name='registration/registration_form.html',
@@ -405,9 +405,10 @@ def register(request, backend, success_url=None, form_class=None,
                               context_instance=context)
 
 
+
+@cache_page(60 * 60 * 24)
+@csrf_exempt
 @sensitive_post_parameters()
-@csrf_protect
-@never_cache
 def login(request, template_name='registration/login.html',
           redirect_field_name=REDIRECT_FIELD_NAME,
           authentication_form=AuthenticationForm,
@@ -422,6 +423,10 @@ def login(request, template_name='registration/login.html',
     # more flexible - class based auth?
 
     redirect_to = request.REQUEST.get(redirect_field_name, '')
+
+    if request.user.is_authenticated():
+        # Not valid
+        return
 
     if request.method == "POST":
         form = authentication_form(data=request.POST)
@@ -446,8 +451,6 @@ def login(request, template_name='registration/login.html',
             return HttpResponseRedirect(redirect_to)
     else:
         form = authentication_form(request)
-
-    request.session.set_test_cookie()
 
     current_site = get_current_site(request)
 
