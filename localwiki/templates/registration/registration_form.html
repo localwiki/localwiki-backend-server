@@ -4,9 +4,19 @@
 
 {% block header_title %}{% trans "Create account" %}{% endblock %}
 
+{% block head_extra %}
+{{ block.super }}
+<script type="text/javascript">
+    $(document).ready(function() {
+        var next = location.search.split("next=")[1];
+        var action = $('#register_form').attr("action");
+        $('#register_form').attr("action", action + '?next=' + next);
+    });
+</script>
+{% endblock %}
+
 {% block content %}
-<form method="post" action="{% url 'registration_register' %}?next={{ request.GET.next }}">
-{% csrf_token %}
+<form method="post" action="{% url 'registration_register' %}" id="register_form">
 <p>
 {{ form.username.errors }}
 {{ form.username.label_tag }}: {{ form.username }}
