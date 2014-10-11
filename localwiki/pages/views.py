@@ -44,7 +44,6 @@ from .exceptions import PageExistsError
 class BasePageDetailView(Custom404Mixin, AddContributorsMixin, RegionMixin, DetailView):
     model = Page
     context_object_name = 'page'
-    cache_keep_forever = True
 
     def get_object(self):
         slug = self.kwargs.get('slug')
@@ -99,6 +98,8 @@ class BasePageDetailView(Custom404Mixin, AddContributorsMixin, RegionMixin, Deta
 
 
 class PageDetailView(CacheMixin, BasePageDetailView):
+    cache_keep_forever = True
+
     @staticmethod
     def get_cache_key(*args, **kwargs):
         from django.core.urlresolvers import get_urlconf

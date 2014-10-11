@@ -4,6 +4,7 @@ from django.utils.decorators import classonlymethod
 from django.conf import settings
 from django.http import HttpResponse, Http404, HttpResponseForbidden, HttpResponseServerError
 from django.utils import simplejson as json
+from django.utils.cache import patch_response_headers
 from django.utils.decorators import method_decorator
 from django.views.decorators.vary import vary_on_headers as dj_vary_on_headers
 from django.views.decorators.cache import never_cache
@@ -81,6 +82,7 @@ class CacheMixin(object):
             if self.cache_keep_forever:
                 response['X-KEEPME'] = True
 
+        patch_response_headers(response, self.cache_timeout)
         return response
 
     def get(self, request, *args, **kwargs):
