@@ -3,17 +3,18 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# julianrod <julianrod@gmail.com>, 2013
-# julianrod <julianrod@gmail.com>, 2013
-# philipn <philip@localwiki.org>, 2013
-# philipn <philip@localwiki.org>, 2013
+# Julián Rodriguez Orihuela <julianrod@gmail.com>, 2013
+# Julián Rodriguez Orihuela <julianrod@gmail.com>, 2013
+# Philip Neustrom <philip@localwiki.org>, 2013
+# Philip Neustrom <philip@localwiki.org>, 2013
+# ykciV <vknoxsironi@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-20 02:04-0500\n"
-"PO-Revision-Date: 2014-05-20 07:27+0000\n"
-"Last-Translator: philipn <philip@localwiki.org>\n"
+"POT-Creation-Date: 2014-05-20 14:26-0500\n"
+"PO-Revision-Date: 2014-09-05 21:39+0000\n"
+"Last-Translator: ykciV <vknoxsironi@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/localwiki/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +25,7 @@ msgstr ""
 #: activity/feeds.py:40 activity/feeds.py:46
 #, python-format
 msgid "Activity on %s"
-msgstr ""
+msgstr "Actividad en %s"
 
 #: activity/feeds.py:81 activity/feeds.py:177
 #, python-format
@@ -49,7 +50,7 @@ msgstr "Cambios para %(title)s en %(site_name)s"
 #: activity/templates/activity/all_activity_index.html:6
 #: activity/templates/activity/all_activity_index.html:18
 msgid "All activity on LocalWiki"
-msgstr ""
+msgstr "Toda la actividad en LocalWiki"
 
 #: activity/templates/activity/all_activity_index.html:27
 #: activity/templates/activity/followed_activity_index.html:39
@@ -58,35 +59,35 @@ msgstr ""
 msgid ""
 "Need help? Want advice? Check out the <a href=\"%(guide_url)s\">LocalWiki "
 "guide</a>."
-msgstr ""
+msgstr "¿Necesita ayuda? ¿Algún consejo? Mire a la <a href=\"%(guide_url)s\">guía de LocalWiki</a>."
 
 #: activity/templates/activity/followed_activity_index.html:19
 #: themes/sapling/templates/site/nav.html:16
 msgid "News Feed"
-msgstr ""
+msgstr "Fuente de Noticias"
 
 #: activity/templates/activity/followed_activity_index.html:27
 msgid "Welcome to LocalWiki! What's next?"
-msgstr ""
+msgstr "¡Bienvenidos a LocalWiki! ¿Y ahora qué?"
 
 #: activity/templates/activity/followed_activity_index.html:29
 msgid "Explore LocalWiki communities"
-msgstr ""
+msgstr "Explorar comunidades LocalWiki"
 
 #: activity/templates/activity/followed_activity_index.html:31
 msgid "Create a new LocalWiki region"
-msgstr ""
+msgstr "Crear una nueva región LocalWiki"
 
 #: activity/templates/activity/followed_activity_index.html:32
 msgid "Follow <strong>@localwiki</strong> on Twitter"
-msgstr ""
+msgstr "Sigue a <strong>@localwiki</strong> en Twitter"
 
 #: activity/templates/activity/followed_activity_index.html:41
 #, python-format
 msgid ""
 "Want to see <strong><a href=\"%(all_activity_url)s\">all activity across "
 "LocalWiki</a>?"
-msgstr ""
+msgstr "¿Quieres ver a <strong><a href=\"%(all_activity_url)s\">toda la actividad en LocalWiki</a>?"
 
 #: activity/templates/activity/followed_activity_page.html:22
 #, python-format
@@ -94,7 +95,7 @@ msgid ""
 "\n"
 "            <span class=\"user\">%(actor_link)s</span> started following %(user_followed_link)s <span class=\"weak\">%(timesince)s ago</span>\n"
 "          "
-msgstr ""
+msgstr "\n<span class=\"user\">%(actor_link)s</span> siguió a %(user_followed_link)s hace <span class=\"weak\">%(timesince)s</span>"
 
 #: activity/templates/activity/followed_activity_page.html:27
 #, python-format
@@ -173,7 +174,7 @@ msgstr ""
 #: activity/templates/activity/index_page.html:62
 #: templates/endless/show_more.html:5
 msgid "More"
-msgstr ""
+msgstr "Más"
 
 #: activity/templates/activity/index.html:6
 #: activity/templates/activity/index.html:9
@@ -438,8 +439,12 @@ msgid "German"
 msgstr "Alemán"
 
 #: main/settings/defaults.py:73
-msgid "Ukrainian"
+msgid "Dutch"
 msgstr ""
+
+#: main/settings/defaults.py:74
+msgid "Ukrainian"
+msgstr "ucranio"
 
 #: maps/feeds.py:26 maps/feeds.py:45
 #, python-format
@@ -555,7 +560,7 @@ msgid ""
 "\n"
 "        Contributed by <span class=\"contributor_list\">%(contributors_html)s</span> and <a href=\"%(request_path)s/_history/\">%(contributors_number)s</a> others.\n"
 "        "
-msgstr ""
+msgstr "\nContribuido por <span class=\"contributor_list\">%(contributors_html)s</span> y <a href=\"%(request_path)s/_history/\">%(contributors_number)s</a> otros."
 
 #: maps/templates/maps/mapdata_detail.html:58
 #: pages/templates/pages/page_detail.html:88
@@ -564,7 +569,7 @@ msgid ""
 "\n"
 "        Contributed by <span class=\"contributor_list\">%(contributors_html)s</span>\n"
 "        "
-msgstr ""
+msgstr "\nContribuido por <span class=\"contributor_list\">%(contributors_html)s</span>"
 
 #: maps/templates/maps/mapdata_diff.html:52
 msgid "Differences for map on"
@@ -1037,14 +1042,14 @@ msgstr "Subir"
 msgid "Previous versions:"
 msgstr "Versiones anteriores:"
 
-#: pages/templatetags/pages_tags.py:113
+#: pages/templatetags/cards_tags.py:113 pages/templatetags/pages_tags.py:113
 #, python-format
 msgid ""
 "Unable to include <a href=\"%(page_url)s\" "
 "class=\"missing_link\">%(page_name)s</a>"
 msgstr "Imposible incluir <a href=\"%(page_url)s\" class=\"missing_link\">%(page_name)s</a>"
 
-#: pages/templatetags/pages_tags.py:121
+#: pages/templatetags/cards_tags.py:121 pages/templatetags/pages_tags.py:121
 #, python-format
 msgid ""
 "Unable to include <a href=\"%(page_url)s\">%(page_name)s</a>: endless "
@@ -1151,8 +1156,13 @@ msgstr ""
 msgid "Sorry, you are not allowed to perform this action."
 msgstr "Disculpa, no tienes permitido realizar esta acción."
 
-#: regions/views.py:148
-msgid "login_url"
+#: regions/views.py:146
+#, python-format
+msgid ""
+"To create a region you must first <strong><a "
+"href=\"%(login_url)s?next=%(current_path)s\">log in</a></strong> or "
+"<strong><a href=\"%(register_url)s?next=%(current_path)s\">create an "
+"account</a></strong>."
 msgstr ""
 
 #: regions/views.py:156
@@ -1918,7 +1928,7 @@ msgstr "¡Bienvenido"
 
 #: themes/sapling/templates/site/login_info.html:11
 msgid "settings"
-msgstr ""
+msgstr "configuración"
 
 #: themes/sapling/templates/site/login_info.html:12
 msgid "log out"
@@ -1958,7 +1968,7 @@ msgstr "Comunidades"
 
 #: themes/sapling/templates/site/nav.html:21
 msgid "API"
-msgstr ""
+msgstr "IPA"
 
 #: themes/sapling/templates/site/nav.html:22
 msgid "About"
@@ -2007,11 +2017,11 @@ msgstr "Su nombre"
 
 #: users/forms.py:29
 msgid "Email address"
-msgstr ""
+msgstr "Correo electrónico"
 
 #: users/forms.py:30
 msgid "Gravatar email (private)"
-msgstr ""
+msgstr "correo Gravatar (privado)"
 
 #: users/forms.py:34
 msgid "Disable this account permanently"
@@ -2019,15 +2029,15 @@ msgstr ""
 
 #: users/models.py:56
 msgid "Gravatar Email (Private)"
-msgstr ""
+msgstr "Correo Gravatar (Privado)"
 
 #: users/models.py:57
 msgid "Show email publicly (Helps with communication)"
-msgstr ""
+msgstr "Mostrar correo públicamente (Ayuda con las comunicaciones)"
 
 #: users/models.py:58
 msgid "Personal website"
-msgstr ""
+msgstr "Sitio web personal"
 
 #: users/views.py:196
 msgid "Permissions updated!"
@@ -2035,11 +2045,11 @@ msgstr "¡Permisos actualizados!"
 
 #: users/views.py:207 users/views.py:242 users/views.py:252
 msgid "You must be logged in to change user settings."
-msgstr ""
+msgstr "Usted tiene que estar conectado para cambiar la configuración del usuario."
 
 #: users/views.py:221
 msgid "User settings updated!"
-msgstr ""
+msgstr "Configuración actualizado!"
 
 #: users/views.py:258
 msgid "Your account has been de-activated."
@@ -2090,11 +2100,11 @@ msgstr ""
 
 #: users/templates/users/settings.html:10
 msgid "User settings"
-msgstr ""
+msgstr "Configuración del usuario"
 
 #: users/templates/users/settings.html:33
 msgid "Change your user icon at Gravatar.com"
-msgstr ""
+msgstr "Cambiar tu icono de usuario en Gravatar.com"
 
 #: users/templates/users/settings.html:39
 #, python-format
@@ -2150,7 +2160,7 @@ msgstr ""
 
 #: users/templatetags/user_tags.py:26
 msgid "Unknown"
-msgstr ""
+msgstr "Desconocido"
 
 #: utils/views.py:88
 msgid ""

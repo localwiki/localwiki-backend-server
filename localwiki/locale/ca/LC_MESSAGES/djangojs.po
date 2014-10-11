@@ -3,264 +3,264 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Rafael etc <rafael.etc@gmail.com>, 2014
+# ykciV <vknoxsironi@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-20 14:26-0500\n"
-"PO-Revision-Date: 2014-10-09 17:59+0000\n"
-"Last-Translator: Rafael etc <rafael.etc@gmail.com>\n"
-"Language-Team: Portuguese (http://www.transifex.com/projects/p/localwiki/language/pt/)\n"
+"PO-Revision-Date: 2014-09-24 21:35+0000\n"
+"Last-Translator: ykciV <vknoxsironi@gmail.com>\n"
+"Language-Team: Catalan (http://www.transifex.com/projects/p/localwiki/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt\n"
+"Language: ca\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: maps/static/olwidget/js/sapling_utils.js:205
 msgid " for "
-msgstr " para "
+msgstr "per"
 
 #: maps/static/olwidget/js/sapling_utils.js:250
 msgid ""
 "You've made changes but haven't saved.  Are you sure you want to leave this "
 "page?"
-msgstr "Tem alterações que ainda não foram gravadas. Tem certeza que pretende deixar esta página?"
+msgstr "No has guardat els teus canvis. Segur que vols sortir de la pàgina?"
 
 #: maps/static/olwidget/js/sapling_utils.js:361
 msgid "Things on this map:"
-msgstr "Locais neste mapa:"
+msgstr "Coses en el mapa:"
 
 #: maps/static/olwidget/js/sapling_utils.js:377
 msgid "Things inside "
-msgstr "Locais dentro de "
+msgstr "Coses adins"
 
 #: maps/static/olwidget/js/sapling_utils.js:391
 msgid "Things near "
-msgstr "Locais perto de "
+msgstr "Coses a prop"
 
 #: pages/static/js/ckeditor/_source/plugins/embed/plugin.js:14
 #: pages/static/js/ckeditor/_source/plugins/embed/dialogs/embed.js:17
 #: pages/static/js/ckeditor/_source/plugins/embed/dialogs/embed.js:18
 msgid "Embed media"
-msgstr "Incorporar media"
+msgstr "Encastar mitjà"
 
 #: pages/static/js/ckeditor/_source/plugins/embed/dialogs/embed.js:24
 msgid "Paste the embed code below:"
-msgstr "Colar o código de incorporar:"
+msgstr "Pegar el codi de encastar a sota:"
 
 #: pages/static/js/ckeditor/_source/plugins/embed/dialogs/embed.js:29
 msgid "Please enter the embed code"
-msgstr "Introduza o código de incorporar"
+msgstr "Si us plau ingressar el codi de encastar "
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/plugin.js:14
 msgid "Include page"
-msgstr "Incluir página"
+msgstr "Incloure pàgina"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:11
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:17
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:18
 msgid "Include Page"
-msgstr "Incluir Página"
+msgstr "Incloure pàgina"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:24
 msgid "Page name"
-msgstr "Nome de página"
+msgstr "Nom de pàgina"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:45
 msgid "Please enter a page name"
-msgstr "Introduza o nome da página"
+msgstr "Si us plau ingressar el nom de pàgina"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:64
 msgid "Show page title"
-msgstr "Mostrar título da página"
+msgstr "Mostra titol de pàgina"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:84
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:84
 msgid "Width"
-msgstr "Largura"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:110
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:110
 msgid "pixels"
-msgstr "pixeis"
+msgstr "píxels"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:111
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:111
 msgid "percent"
-msgstr "percentagem"
+msgstr "percentatge"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:126
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:126
 msgid "Align"
-msgstr "Alinhar"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:131
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:131
 #: pages/static/js/ckeditor/_source/plugins/simpleimage/dialogs/simpleimage.js:822
 msgid "None"
-msgstr "Nenhum"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:210
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:233
 #, c-format
 msgid "Include page %s"
-msgstr "Incluir página %s"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/includetag/plugin.js:14
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:11
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:17
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:18
 msgid "List of tagged pages"
-msgstr "Lista com as páginas com tag"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:24
 msgid "Tag"
-msgstr "Tag"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:45
 msgid "Please enter a tag"
-msgstr "Por favor escreva uma tag"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:64
 msgid "Show title"
-msgstr "Mostrar título"
+msgstr "Mostra titol"
 
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:213
 #, c-format
 msgid "List of pages tagged \"%s\""
-msgstr "Lista de páginas com a tag \"%s\""
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/plugin.js:34
 msgid "Attach file"
-msgstr "Anexar ficheiro"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:93
 msgid "Uploading your file..."
-msgstr "A transferir o ficheiro..."
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:110
 msgid "Loading files..."
-msgstr "Transferir ficheiros..."
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:111
 msgid "No files attached to this page"
-msgstr "Nenhum ficheiro anexado a esta página"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:114
 msgid "Loading images..."
-msgstr "A transferir imagens..."
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:115
 msgid "No images attached to this page"
-msgstr "Nenhuma imagem anexada a esta página"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:170
 msgid "Attach File"
-msgstr "Anexar Ficheiro"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:170
 msgid "Insert Image"
-msgstr "Inserir Imagem"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:249
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:253
 msgid "Choose a file from your computer"
-msgstr "Escolha um ficheiro do computador"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:335
 msgid "Select a file"
-msgstr "Escolha um ficheiro"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:335
 msgid "Select an image"
-msgstr "Selecione uma imagem"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:343
 msgid "or <a href=\"#\">use a file from the web</a>"
-msgstr "ou <a href=\"#\">use um ficheiro da internet</a>"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:343
 msgid "or <a href=\"#\">use an image from the web</a>"
-msgstr "ou <a href=\"#\">use uma imagem da internet</a>"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:354
 msgid "File URL"
-msgstr "URL do Ficheiro"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:354
 msgid "Image URL"
-msgstr "URL da Imagem"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:392
 msgid "No file selected"
-msgstr "Nenhum ficheiro selecionado"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/pagelink/dialogs/pageanchor.js:60
 msgid "Anchor name"
-msgstr "Nome da âncora"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/pagelink/dialogs/pagelink.js:143
 msgid "Page name or URL"
-msgstr "Página ou URL"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/searchbox/plugin.js:14
 #: pages/static/js/ckeditor/_source/plugins/searchbox/dialogs/searchbox.js:10
 #: pages/static/js/ckeditor/_source/plugins/searchbox/dialogs/searchbox.js:16
 #: pages/static/js/ckeditor/_source/plugins/searchbox/dialogs/searchbox.js:17
 msgid "Search Box"
-msgstr "Pesquisa"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/searchbox/dialogs/searchbox.js:23
 msgid "Search query"
-msgstr "Pesquisa"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/simpleimage/plugin.js:83
 msgid "Add a caption"
-msgstr "Colocar legenda"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/simpletable/dialogs/simpletable.js:469
 msgid "Advanced settings..."
-msgstr "Configurações avançadas..."
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/simpletable/dialogs/simpletable.js:478
 msgid "CSS classes"
-msgstr "Classes CSS"
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/wikiplugins/plugin.js:23
 #: pages/static/js/ckeditor/_source/plugins/wikiplugins/plugin.js:24
 msgid "Insert Object"
-msgstr "Inserir Objecto"
+msgstr ""
 
 #: themes/sapling/assets/js/base.js:113
 msgid "Search for \"{{ value }}\""
-msgstr "Pesquisa para \"{{ value }}\""
+msgstr ""
 
 #: themes/sapling/assets/js/base.js:127 themes/sapling/assets/js/base.js:164
 msgid "Search all of LocalWiki"
-msgstr "Pesquisa por todo o LocalWiki"
+msgstr ""
 
 #: versionutils/diff/static/js/diff/htmldiff.js:24
 msgid "Previous"
-msgstr "Anterior"
+msgstr ""
 
 #: versionutils/diff/static/js/diff/htmldiff.js:26
 msgid "Next"
-msgstr "Seguinte"
+msgstr "Següent"
 
 #: versionutils/diff/static/js/diff/htmldiff.js:54
 msgid "Review changes"
-msgstr "Rever alterações"
+msgstr "Revisar canvis"
 
 #: versionutils/diff/static/js/diff/htmldiff.js:59
 msgid "You can use the &larr; and &rarr; keys, too."
-msgstr "Pode usar as teclas &larr; e &rarr;."
+msgstr ""
 
 #: versionutils/diff/static/js/diff/htmldiff.js:69
 msgid "Content was deleted"
-msgstr "Conteúdo removido"
+msgstr ""
 
 #: versionutils/diff/static/js/diff/htmldiff.js:70
 msgid "Content was added"
-msgstr "Conteúdo adicionado"
+msgstr ""
