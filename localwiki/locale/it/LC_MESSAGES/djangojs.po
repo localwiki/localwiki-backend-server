@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-20 02:07-0500\n"
-"PO-Revision-Date: 2014-05-20 07:28+0000\n"
-"Last-Translator: philipn <philip@localwiki.org>\n"
+"POT-Creation-Date: 2014-10-11 06:04-0500\n"
+"PO-Revision-Date: 2014-10-11 11:23+0000\n"
+"Last-Translator: Philip Neustrom <philip@localwiki.org>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/localwiki/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,27 +17,31 @@ msgstr ""
 "Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: maps/static/olwidget/js/sapling_utils.js:205
+#: maps/static/olwidget/js/sapling_utils.js:208
 msgid " for "
 msgstr "per"
 
-#: maps/static/olwidget/js/sapling_utils.js:250
+#: maps/static/olwidget/js/sapling_utils.js:253
 msgid ""
 "You've made changes but haven't saved.  Are you sure you want to leave this "
 "page?"
 msgstr "Hai fatto delle modifiche, ma non le hai salvate. Sei sicuro di voler lasciare questa pagina?"
 
-#: maps/static/olwidget/js/sapling_utils.js:361
+#: maps/static/olwidget/js/sapling_utils.js:364
 msgid "Things on this map:"
 msgstr "Punti su questa mappa:"
 
-#: maps/static/olwidget/js/sapling_utils.js:377
+#: maps/static/olwidget/js/sapling_utils.js:380
 msgid "Things inside "
 msgstr "Punti interni"
 
-#: maps/static/olwidget/js/sapling_utils.js:391
+#: maps/static/olwidget/js/sapling_utils.js:394
 msgid "Things near "
 msgstr "Punti nei dintorni"
+
+#: maps/static/olwidget/js/sapling_utils.js:620
+msgid "Add marker for lat, lon \"{{ value }}\""
+msgstr ""
 
 #: pages/static/js/ckeditor/_source/plugins/embed/plugin.js:14
 #: pages/static/js/ckeditor/_source/plugins/embed/dialogs/embed.js:17
@@ -101,8 +105,8 @@ msgstr "Allineamento"
 msgid "None"
 msgstr "Nessuno"
 
-#: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:210
-#: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:233
+#: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:213
+#: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:236
 #, c-format
 msgid "Include page %s"
 msgstr "Includi pagina %s"
@@ -126,7 +130,7 @@ msgstr "Inserisci un tag"
 msgid "Show title"
 msgstr "Mostra titolo"
 
-#: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:213
+#: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:216
 #, c-format
 msgid "List of pages tagged \"%s\""
 msgstr "Lista delle pagine con tag \"%s\""
@@ -168,31 +172,31 @@ msgstr "Inserisci immagine"
 msgid "Choose a file from your computer"
 msgstr "Scegli un file dal tuo computer"
 
-#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:335
+#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:339
 msgid "Select a file"
 msgstr "Seleziona un file"
 
-#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:335
+#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:339
 msgid "Select an image"
 msgstr "Seleziona una immagine"
 
-#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:343
+#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:347
 msgid "or <a href=\"#\">use a file from the web</a>"
 msgstr "o <a href=\"#\">utilizza un file dal web</a>"
 
-#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:343
+#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:347
 msgid "or <a href=\"#\">use an image from the web</a>"
 msgstr "o <a href=\"#\">utilizza un\\'immagine dal web</a>"
 
-#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:354
+#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:358
 msgid "File URL"
 msgstr "URL del file"
 
-#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:354
+#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:358
 msgid "Image URL"
 msgstr "URL dell\\'immagine"
 
-#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:392
+#: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:396
 msgid "No file selected"
 msgstr "Nessun file selezionato"
 
@@ -232,11 +236,11 @@ msgstr "classi CSS"
 msgid "Insert Object"
 msgstr "Inserisci Oggetto"
 
-#: themes/sapling/assets/js/base.js:113
+#: themes/sapling/assets/js/base.js:122
 msgid "Search for \"{{ value }}\""
 msgstr ""
 
-#: themes/sapling/assets/js/base.js:127 themes/sapling/assets/js/base.js:164
+#: themes/sapling/assets/js/base.js:136 themes/sapling/assets/js/base.js:173
 msgid "Search all of LocalWiki"
 msgstr ""
 

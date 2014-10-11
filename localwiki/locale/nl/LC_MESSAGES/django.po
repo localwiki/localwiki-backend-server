@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# MarcelNL <zeeforel70@yahoo.com>, 2014
+# Marcel de Ruiter <zeeforel70@yahoo.com>, 2014
+# Marcel de Ruiter <zeeforel70@yahoo.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-20 02:04-0500\n"
-"PO-Revision-Date: 2014-05-20 07:27+0000\n"
-"Last-Translator: philipn <philip@localwiki.org>\n"
+"POT-Creation-Date: 2014-10-11 06:03-0500\n"
+"PO-Revision-Date: 2014-10-11 11:22+0000\n"
+"Last-Translator: Philip Neustrom <philip@localwiki.org>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/localwiki/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,11 +45,11 @@ msgid "Changes for %(title)s on %(site_name)s"
 msgstr "Veranderingen voor %(title)s op %(site_name)s"
 
 #: activity/templates/activity/all_activity_index.html:6
-#: activity/templates/activity/all_activity_index.html:18
+#: activity/templates/activity/all_activity_index.html:22
 msgid "All activity on LocalWiki"
 msgstr ""
 
-#: activity/templates/activity/all_activity_index.html:27
+#: activity/templates/activity/all_activity_index.html:31
 #: activity/templates/activity/followed_activity_index.html:39
 #: activity/templates/activity/user_activity_index.html:38
 #, python-format
@@ -58,7 +59,7 @@ msgid ""
 msgstr ""
 
 #: activity/templates/activity/followed_activity_index.html:19
-#: themes/sapling/templates/site/nav.html:16
+#: themes/sapling/templates/site/nav.html:15
 msgid "News Feed"
 msgstr ""
 
@@ -82,7 +83,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Want to see <strong><a href=\"%(all_activity_url)s\">all activity across "
-"LocalWiki</a>?"
+"LocalWiki</a>?</strong>"
 msgstr ""
 
 #: activity/templates/activity/followed_activity_page.html:22
@@ -168,18 +169,18 @@ msgstr ""
 
 #: activity/templates/activity/followed_activity_page.html:110
 #: activity/templates/activity/index_page.html:62
-#: templates/endless/show_more.html:5
+#: explore/templates/explore/page.html:14
 msgid "More"
 msgstr ""
 
 #: activity/templates/activity/index.html:6
-#: activity/templates/activity/index.html:9
-#: activity/templates/activity/index.html:16
-#: themes/sapling/templates/site/nav.html:9
+#: activity/templates/activity/index.html:13
+#: activity/templates/activity/index.html:20
+#: themes/sapling/templates/site/nav.html:8
 msgid "Activity"
 msgstr ""
 
-#: activity/templates/activity/index.html:24
+#: activity/templates/activity/index.html:28
 #, python-format
 msgid ""
 "For statistics about pages, maps, and more, check out the <a "
@@ -250,134 +251,212 @@ msgstr "bestanden"
 msgid "redirects"
 msgstr "doorverwijzingen"
 
-#: dashboard/templates/dashboard/index.html:9
+#: dashboard/templates/dashboard/index.html:7
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: dashboard/templates/dashboard/index.html:22
+#: dashboard/templates/dashboard/index.html:20
 msgid "Statistics loading.  This may take several minutes the first time."
 msgstr "De statistieken worden geladen. De kan de eerste keer een aantal minuten duren. "
 
-#: dashboard/templates/dashboard/index.html:27
+#: dashboard/templates/dashboard/index.html:25
 #: dashboard/templates/dashboard/render.html:4
 msgid "Pages"
 msgstr "Pagina's"
 
-#: dashboard/templates/dashboard/index.html:28
+#: dashboard/templates/dashboard/index.html:26
 #: dashboard/templates/dashboard/render.html:5
 #: pages/templates/pages/cke_filebrowser.html:7
-#: pages/templates/pages/page_files.html:7
+#: pages/templates/pages/page_files.html:10
 msgid "Files"
 msgstr "Bestanden"
 
-#: dashboard/templates/dashboard/index.html:29
+#: dashboard/templates/dashboard/index.html:27
 #: dashboard/templates/dashboard/render.html:6
 msgid "Maps"
 msgstr "Kaarten"
 
-#: dashboard/templates/dashboard/index.html:30
+#: dashboard/templates/dashboard/index.html:28
 #: dashboard/templates/dashboard/render.html:7
 msgid "Redirects"
 msgstr "Doorverwijzingen"
 
-#: dashboard/templates/dashboard/index.html:31
+#: dashboard/templates/dashboard/index.html:29
 #: dashboard/templates/dashboard/render.html:8
 msgid "Users"
 msgstr "Gebruikers"
 
-#: dashboard/templates/dashboard/index.html:36
+#: dashboard/templates/dashboard/index.html:34
 #: dashboard/templates/dashboard/render.html:13
 msgid "Growth over time"
 msgstr "Groei over de tijd"
 
-#: dashboard/templates/dashboard/index.html:38
-#: dashboard/templates/dashboard/index.html:48
-#: dashboard/templates/dashboard/index.html:58
-#: dashboard/templates/dashboard/index.html:68
+#: dashboard/templates/dashboard/index.html:36
+#: dashboard/templates/dashboard/index.html:46
+#: dashboard/templates/dashboard/index.html:56
+#: dashboard/templates/dashboard/index.html:66
 msgid "Generating graph..."
 msgstr "Grafiek wordt gemaakt..."
 
-#: dashboard/templates/dashboard/index.html:46
+#: dashboard/templates/dashboard/index.html:44
 #: dashboard/templates/dashboard/render.html:20
 msgid "Edits over time"
 msgstr "Aantal wijzigingen de tijd"
 
-#: dashboard/templates/dashboard/index.html:56
+#: dashboard/templates/dashboard/index.html:54
 #: dashboard/templates/dashboard/render.html:27
 msgid "Page content growth over time"
 msgstr "Groei van inhoud van pagina's over de tijd"
 
-#: dashboard/templates/dashboard/index.html:66
+#: dashboard/templates/dashboard/index.html:64
 #: dashboard/templates/dashboard/render.html:34
 msgid "Users registered over time"
 msgstr "Geregistreerde bezoekers gedurende de tijd"
 
-#: frontpage/views.py:135
+#: explore/templates/explore/alphabetical_index.html:7
+#: explore/templates/explore/just_list.html:7
+#: explore/templates/explore/random_index.html:6
+#, python-format
+msgid "Explore %(region_name)s"
+msgstr ""
+
+#: explore/templates/explore/alphabetical_index.html:9
+#: explore/templates/explore/random_index.html:8
+#, python-format
+msgid "Explore <a href=\"%(region_url)s\">%(region_name)s</a>"
+msgstr ""
+
+#: explore/templates/explore/alphabetical_index.html:33
+#: explore/templates/explore/just_list.html:22
+#: explore/templates/explore/random_index.html:37
+msgid "Default"
+msgstr ""
+
+#: explore/templates/explore/alphabetical_index.html:34
+#: explore/templates/explore/just_list.html:23
+#: explore/templates/explore/random_index.html:38
+#: tags/templates/tags/tag_list.html:12
+msgid "Alphabetical"
+msgstr "Alphabetisch"
+
+#: explore/templates/explore/alphabetical_index.html:35
+#: explore/templates/explore/just_list.html:24
+#: explore/templates/explore/random_index.html:39
+msgid "List"
+msgstr ""
+
+#: explore/templates/explore/just_list.html:9
+msgid "Explore - All Pages"
+msgstr ""
+
+#: explore/templates/explore/random_index.html:12
+msgid "Take tour"
+msgstr ""
+
+#: explore/templates/explore/random_tour.html:9
+msgid "Random Tour"
+msgstr ""
+
+#: explore/templates/explore/random_tour.html:14
+msgid "Stop tour"
+msgstr ""
+
+#: explore/templates/explore/random_tour.html:15
+msgid "Start tour"
+msgstr ""
+
+#: frontpage/views.py:159
 msgid "Cover photo updated!"
 msgstr "Voorpaginafoto ververst!"
 
-#: frontpage/templates/frontpage/base.html:18
-#: pages/templates/pages/base.html:45
+#: frontpage/templates/frontpage/base.html:20
+#: pages/templates/pages/follow_page.html:12
 msgid "region"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:30
+#: frontpage/templates/frontpage/base.html:32
 #, python-format
 msgid "Welcome to the %(region_name)s LocalWiki!"
 msgstr "Welkom bij de LocalWiki van %(region_name)s!"
 
-#: frontpage/templates/frontpage/base.html:31
+#: frontpage/templates/frontpage/base.html:33
 #, python-format
 msgid "A website about %(region_name)s that <em>anyone</em> can edit"
 msgstr "Een website over %(region_name)s die <em>iedereen </em> kan aanpassen"
 
-#: frontpage/templates/frontpage/base.html:33
+#: frontpage/templates/frontpage/base.html:35
 msgid ""
 "\n"
 "        I want to make a page about <span class=\"searchbox\"><input type=\"text\" name=\"q\" value=\"\"><input type=\"submit\" value=\"Search or create page\"></span>\n"
 "        "
 msgstr "\nik wil een pagina maken over <span class=\"searchbox\"><input type=\"text\" name=\"q\" value=\"\"><input type=\"submit\" value=\"Zoek of maak een pagina\"></span>"
 
-#: frontpage/templates/frontpage/base.html:50
+#: frontpage/templates/frontpage/base.html:56
 msgid "Change cover"
 msgstr "Verander voorkant"
 
-#: frontpage/templates/frontpage/base.html:52
+#: frontpage/templates/frontpage/base.html:58
 msgid "Save cover"
 msgstr "Sla voorkant op"
 
-#: frontpage/templates/frontpage/base.html:73
-#: pages/templates/pages/page_detail.html:42
-#: users/templates/users/user_page.html:34
+#: frontpage/templates/frontpage/base.html:81
+#: pages/templates/pages/page_detail.html:51
+#: users/templates/users/user_page.html:37
 #, python-format
 msgid ""
 "Revision %(version_number)s\n"
 "          (%(date)s by %(user_link)s)"
 msgstr "Bewerking %(version_number)s\n(%(date)s door %(user_link)s)"
 
-#: frontpage/templates/frontpage/base.html:82
-#: maps/templates/maps/nearby_pages.html:45
-#: pages/templates/pages/page_detail.html:50
-#: tags/templates/tags/tagged_list_snippet.html:8
+#: frontpage/templates/frontpage/base.html:90
+#: maps/templates/maps/nearby_pages.html:44
+#: pages/templates/pages/page_detail.html:59
+#: tags/templates/tags/tagged_list_snippet.html:6
 msgid "View"
 msgstr "Bekijk"
 
-#: frontpage/templates/frontpage/base.html:90
+#: frontpage/templates/frontpage/base.html:96
+msgid "Some interesting pages"
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:105
+msgid "Explore more pages"
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:109
+msgid "There are no pages yet.  Add some!"
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:110
+#: themes/sapling/templates/site/add_page_area.html:5
+#: themes/sapling/templates/site/add_page_area.html:9
+msgid "Add a new page"
+msgstr ""
+
+#: frontpage/templates/frontpage/base.html:118
 msgid "Explore nearby regions"
 msgstr ""
 
-#: links/templates/links/orphaned_pages.html:12
-msgid "Orphaned Pages"
-msgstr "Weespagina's"
+#: links/models.py:19
+msgid "The number of times the source page links to the destination page."
+msgstr ""
 
-#: links/templates/links/orphaned_pages.html:16
+#: links/templates/links/links_for_page.html:15
+#, python-format
+msgid ""
+"\n"
+"             Links for <a href=\"%(page_url)s\">%(page_name)s</a>\n"
+"          "
+msgstr ""
+
+#: links/templates/links/links_for_page.html:25
 #, python-format
 msgid ""
 "\n"
 "<h3>Pages that link to <a href=\"%(page_url)s\">%(page_name)s</a>:</h3>\n"
 msgstr "\n<h3>Pagina's die linken naar <a href=\"%(page_url)s\">%(page_name)s</a>:</h3>\n"
 
-#: links/templates/links/orphaned_pages.html:25
+#: links/templates/links/links_for_page.html:34
 #, python-format
 msgid ""
 "\n"
@@ -435,6 +514,10 @@ msgid "German"
 msgstr "Duits"
 
 #: main/settings/defaults.py:73
+msgid "Dutch"
+msgstr ""
+
+#: main/settings/defaults.py:74
 msgid "Ukrainian"
 msgstr "Oekraïens"
 
@@ -460,12 +543,12 @@ msgstr ""
 msgid "Map error: %s."
 msgstr "Kaart fout: %s."
 
-#: maps/views.py:314 pages/views.py:193
+#: maps/views.py:318 pages/views.py:199
 #, python-format
 msgid "<p>What do you know about %s?</p>"
 msgstr "<p>Wat weet je over %s?</p>"
 
-#: maps/views.py:333
+#: maps/views.py:337
 #, python-format
 msgid ""
 "Map saved! You should probably go <a href=\"%s\">edit the page that was "
@@ -480,29 +563,29 @@ msgstr "Kaart informatie"
 msgid "Map tiles via"
 msgstr "Kaart tegels via"
 
-#: maps/templates/maps/base.html:8
+#: maps/templates/maps/base.html:6
 msgid "Recent changes on this Map"
 msgstr "Recente wijzigingen op deze kaart"
 
-#: maps/templates/maps/base.html:17 maps/templates/maps/mapdata_list.html:25
-#: maps/templates/maps/mapdata_list.html:31
-#: themes/sapling/templates/site/nav.html:6
+#: maps/templates/maps/base.html:10 maps/templates/maps/mapdata_list.html:24
+#: maps/templates/maps/mapdata_list.html:30
+#: themes/sapling/templates/site/nav.html:5
 msgid "Map"
 msgstr "Kaart"
 
-#: maps/templates/maps/base.html:34 maps/templates/maps/mapdata_form.html:87
+#: maps/templates/maps/base.html:27 maps/templates/maps/mapdata_form.html:86
 #: maps/templates/maps/mapdata_versions.html:25
 #: pages/templates/pages/base.html:29
-#: pages/templates/pages/page_detail.html:50
-#: pages/templates/pages/page_form.html:93
-#: pages/templates/pages/page_versions.html:28
+#: pages/templates/pages/page_detail.html:59
+#: pages/templates/pages/page_form.html:98
+#: pages/templates/pages/page_versions.html:27
 msgid "Edit"
 msgstr "Wijzig"
 
-#: maps/templates/maps/base.html:35 maps/templates/maps/mapdata_form.html:88
+#: maps/templates/maps/base.html:28 maps/templates/maps/mapdata_form.html:87
 #: maps/templates/maps/mapdata_versions.html:26
-#: pages/templates/pages/base.html:30 pages/templates/pages/page_form.html:94
-#: pages/templates/pages/page_versions.html:29
+#: pages/templates/pages/base.html:30 pages/templates/pages/page_form.html:99
+#: pages/templates/pages/page_versions.html:28
 msgid "Info"
 msgstr "informatie"
 
@@ -511,42 +594,41 @@ msgid "Delete map"
 msgstr "Verwijder kaart"
 
 #: maps/templates/maps/editor_actions.html:8
-#: pages/templates/pages/editor_actions.html:11
-#: pages/templates/pages/editor_actions.html:13
+#: pages/templates/pages/editor_actions.html:12
+#: pages/templates/pages/editor_actions.html:14
 msgid "Security"
 msgstr "Beveiliging"
 
-#: maps/templates/maps/mapdata_detail.html:24
+#: maps/templates/maps/mapdata_detail.html:21
 msgid "Map for"
 msgstr "Kaart voor"
 
-#: maps/templates/maps/mapdata_detail.html:38
+#: maps/templates/maps/mapdata_detail.html:35
 #: maps/templates/maps/mapdata_diff.html:62
 #: maps/templates/maps/mapdata_diff.html:67
 #: redirects/templates/redirects/redirect_diff.html:43
 #: redirects/templates/redirects/redirect_diff.html:48
-#: tags/templates/tags/pagetagset_diff.html:40
-#: tags/templates/tags/pagetagset_diff.html:45
-#: tags/templates/tags/pagetagset_version_detail.html:24
+#: tags/templates/tags/pagetagset_diff.html:37
+#: tags/templates/tags/pagetagset_diff.html:42
+#: tags/templates/tags/pagetagset_version_detail.html:23
 msgid "Revision"
 msgstr "Herziening"
 
-#: maps/templates/maps/mapdata_detail.html:39
+#: maps/templates/maps/mapdata_detail.html:36
 #: maps/templates/maps/mapdata_diff.html:63
 #: maps/templates/maps/mapdata_diff.html:68
 #: redirects/templates/redirects/redirect_diff.html:44
 #: redirects/templates/redirects/redirect_diff.html:49
-#: tags/templates/tags/pagetagset_diff.html:41
-#: tags/templates/tags/pagetagset_diff.html:46
-#: tags/templates/tags/pagetagset_version_detail.html:25
+#: tags/templates/tags/pagetagset_diff.html:38
+#: tags/templates/tags/pagetagset_diff.html:43
+#: tags/templates/tags/pagetagset_version_detail.html:24
 #: utils/templates/utils/history/form.html:7
 #: versionutils/templates/versionutils/history/form.html:35
-#: versionutils/templates/versionutils/history/form_page.html:19
 msgid "by"
 msgstr "door"
 
-#: maps/templates/maps/mapdata_detail.html:54
-#: pages/templates/pages/page_detail.html:84
+#: maps/templates/maps/mapdata_detail.html:51
+#: pages/templates/pages/page_detail.html:92
 #, python-format
 msgid ""
 "\n"
@@ -554,8 +636,8 @@ msgid ""
 "        "
 msgstr "\nBijdragen van <span class=\"contributor_list\">%(contributors_html)s</span> en <a href=\"%(request_path)s/_history/\">%(contributors_number)s</a> anderen.\n        "
 
-#: maps/templates/maps/mapdata_detail.html:58
-#: pages/templates/pages/page_detail.html:88
+#: maps/templates/maps/mapdata_detail.html:55
+#: pages/templates/pages/page_detail.html:96
 #, python-format
 msgid ""
 "\n"
@@ -573,44 +655,44 @@ msgid "Differences for <a href=\"%(maps_global)s\">Map</a>"
 msgstr "Verschillen voor <a href=\"%(maps_global)s\">Kaart</a>"
 
 #: maps/templates/maps/mapdata_diff.html:73
-#: pages/templates/pages/page_diff.html:60
-#: tags/templates/tags/pagetagset_diff.html:51
+#: pages/templates/pages/page_diff.html:57
+#: tags/templates/tags/pagetagset_diff.html:48
 msgid "Deletions are marked like this"
 msgstr "Verwijderingen worden zo aangeduid"
 
 #: maps/templates/maps/mapdata_diff.html:76
-#: pages/templates/pages/page_diff.html:63
-#: tags/templates/tags/pagetagset_diff.html:54
+#: pages/templates/pages/page_diff.html:60
+#: tags/templates/tags/pagetagset_diff.html:51
 msgid "Additions are marked like this"
 msgstr "Toevoegingen worden zo aangeduid"
 
-#: maps/templates/maps/mapdata_form.html:35
+#: maps/templates/maps/mapdata_form.html:34
 msgid "Editing map for"
 msgstr "Bewerkt kaart voor"
 
-#: maps/templates/maps/mapdata_form.html:65
+#: maps/templates/maps/mapdata_form.html:64
 msgid "Please comment about this change:"
 msgstr "Reageer op deze verandering:"
 
-#: maps/templates/maps/mapdata_form.html:69
-#: pages/templates/pages/page_form.html:75
+#: maps/templates/maps/mapdata_form.html:68
+#: pages/templates/pages/page_form.html:80
 msgid "Save changes"
 msgstr "Opslaan veranderingen"
 
-#: maps/templates/maps/mapdata_form.html:70
-#: pages/templates/pages/page_detail.html:73
-#: pages/templates/pages/page_form.html:76
+#: maps/templates/maps/mapdata_form.html:69
+#: pages/templates/pages/page_detail.html:81
+#: pages/templates/pages/page_form.html:81
 #: users/templates/users/deactivate.html:17
-#: users/templates/users/user_page.html:148
+#: users/templates/users/user_page.html:150
 msgid "Cancel"
 msgstr "Annuleer"
 
-#: maps/templates/maps/mapdata_list.html:44
-#: maps/templates/maps/mapdata_list.html:48
+#: maps/templates/maps/mapdata_list.html:43
+#: maps/templates/maps/mapdata_list.html:47
 msgid "Add a new map"
 msgstr ""
 
-#: maps/templates/maps/mapdata_list.html:46
+#: maps/templates/maps/mapdata_list.html:45
 msgid "What's here? (Name of page)"
 msgstr ""
 
@@ -643,6 +725,11 @@ msgstr ""
 msgid "No pages near you. Make some!"
 msgstr ""
 
+#: page_scores/models.py:29
+#, python-format
+msgid "Page score %s: %s"
+msgstr ""
+
 #: pages/feeds.py:52 pages/feeds.py:96
 #, python-format
 msgid "File %(filename)s on page \"%(pagename)s\""
@@ -667,7 +754,7 @@ msgstr "Er bestaat al een pagina met deze naam"
 msgid "The new file should be of the same type"
 msgstr "Het nieuwe bestand moet van hetzelfde type zijn"
 
-#: pages/models.py:30
+#: pages/models.py:31
 #, python-format
 msgid ""
 "Provided slug is invalid. Slugs must be lowercase, contain no trailing or "
@@ -675,58 +762,58 @@ msgid ""
 "%(KEEP_CHARACTERS)s"
 msgstr "De ingegeven verkorte naam is ongeldig. Verkorte namen moeten geschreven worden in kleine letters, mogen geen voor- of achterlopende spaties bevatten en mogen alleen alphanumerieke karakters samen met %(KEEP_CHARACTERS)s"
 
-#: pages/models.py:58
+#: pages/models.py:59
 msgid "Page name is invalid."
 msgstr "Paginanaam is ongeldig."
 
-#: pages/models.py:131 pages/models.py:143
+#: pages/models.py:133 pages/models.py:146
 #, python-format
 msgid "Renamed from \"%s\""
 msgstr "Hernoemd van \"%s\""
 
-#: pages/models.py:135
+#: pages/models.py:137
 #, python-format
 msgid "The page '%s' already exists!"
 msgstr "Pagina '%s' bestaat al!"
 
-#: pages/models.py:171 pages/models.py:184 pages/models.py:203
+#: pages/models.py:175 pages/models.py:191 pages/models.py:213
 msgid "Parent page renamed"
 msgstr "Parent pagina hernoemd"
 
-#: pages/models.py:219
+#: pages/models.py:255
 msgid "file"
 msgstr "bestand"
 
-#: pages/plugins.py:414
+#: pages/plugins.py:425
 msgid ""
 "The embedded URL is not on the list of approved providers.  Contact the site"
 " administrator to add it."
 msgstr "De ingevoegde URL staat niet op de lijst van goedgekeurde aanbieders. Neem contact op met de admin om hem toe te voegen. "
 
-#: pages/plugins.py:418
+#: pages/plugins.py:429
 msgid "Invalid embed code"
 msgstr "Ongeldige invoegcode"
 
-#: pages/plugins.py:430 search/templates/search/base.html:17
-#: search/templates/search/base.html:64
-#: themes/sapling/templates/site/search_form.html:7
-#: themes/sapling/templates/site/search_form.html:12
+#: pages/plugins.py:441 search/templates/search/base.html:17
+#: search/templates/search/base.html:61
+#: themes/sapling/templates/site/search_form.html:6
+#: themes/sapling/templates/site/search_form.html:11
 msgid "Search or create page"
 msgstr "Zoek of maak pagina"
 
-#: pages/signals.py:16
+#: pages/signals.py:19
 msgid "Redirect created"
 msgstr "Doorverwijzing gemaakt"
 
-#: pages/signals.py:22
+#: pages/signals.py:25
 msgid "Page created"
 msgstr "Pagina gemaakt"
 
-#: pages/views.py:140
+#: pages/views.py:143
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Bedankt voor je bewerking. Je aandacht voor detail wordt gewaardeerd. "
 
-#: pages/views.py:147
+#: pages/views.py:150
 #, python-format
 msgid ""
 "Changes saved! To use your name when editing, please <a "
@@ -735,40 +822,40 @@ msgid ""
 "account</strong></a>."
 msgstr "Bewerking opgeslagen! <a href=\"%(login_url)s?next=%(current_path)s\"><strong>Log in</strong> a.u.b. </a> of <a href=\"%(register_url)s?next=%(current_path)s\"><strong>maak een account</strong></a> om je naam te gebruiken bij een bewerking. "
 
-#: pages/views.py:158
+#: pages/views.py:161
 #, python-format
 msgid ""
 "<p class=\"create_map\"><a href=\"%s\" class=\"button little map\"><span "
 "class=\"text\">Create a map</span></a> for this page?</p>"
 msgstr "<p class=\"create_map\"><a href=\"%s\" class=\"button little map\"><span class=\"text\">Een kaart maken</span></a> voor deze pagina?</p>"
 
-#: pages/views.py:181
+#: pages/views.py:186
 msgid "Follow this page"
 msgstr ""
 
-#: pages/views.py:183
+#: pages/views.py:188
 #, python-format
 msgid "%(follow_page_notice)s for updates!"
 msgstr ""
 
-#: pages/views.py:387
+#: pages/views.py:398
 msgid "You must provide a page name when creating a page."
 msgstr "Je moet een paginanaam opgeven wanneer je een pagina maakt."
 
-#: pages/views.py:465
+#: pages/views.py:479
 msgid "A file with this name already exists"
 msgstr "Er bestaat al een bestand met deze naam"
 
 #. Translators: This is for the page rename form.
-#: pages/views.py:471
+#: pages/views.py:493
 msgid "New page name"
 msgstr "Nieuwe paginanaam"
 
-#: pages/views.py:472 versionutils/versioning/forms.py:18
+#: pages/views.py:494 versionutils/versioning/forms.py:18
 msgid "Comment"
 msgstr "Reactie"
 
-#: pages/views.py:507
+#: pages/views.py:530
 #, python-format
 msgid "Page renamed to \"%s\""
 msgstr "Pagina hernoemd tot \"%s\""
@@ -797,14 +884,6 @@ msgstr "Geformateerd"
 msgid "Typewriter"
 msgstr "Schrijfmachine"
 
-#: pages/templates/pages/base.html:8
-msgid "Recent changes on this Page"
-msgstr "Recente veranderingen op deze Pagina"
-
-#: pages/templates/pages/base.html:37
-msgid "page"
-msgstr ""
-
 #: pages/templates/pages/editor_actions.html:5
 msgid "Edit map"
 msgstr "Bewerk kaart"
@@ -817,31 +896,35 @@ msgstr "Verwijder pagina"
 msgid "Redirect"
 msgstr "Doorverwijzing"
 
-#: pages/templates/pages/page_detail.html:27
+#: pages/templates/pages/follow_page.html:9
+msgid "page"
+msgstr ""
+
+#: pages/templates/pages/page_detail.html:34
 msgid "Redirected from"
 msgstr "Doorverwezen vanaf"
 
-#: pages/templates/pages/page_detail.html:67
-#: users/templates/users/user_page.html:142
+#: pages/templates/pages/page_detail.html:76
+#: users/templates/users/user_page.html:145
 msgid "Edit tags"
 msgstr "Bewerk tags"
 
-#: pages/templates/pages/page_detail.html:67
-#: users/templates/users/user_page.html:142
+#: pages/templates/pages/page_detail.html:76
+#: users/templates/users/user_page.html:145
 msgid "Add tags"
 msgstr "Voeg tags toe"
 
-#: pages/templates/pages/page_diff.html:22
+#: pages/templates/pages/page_diff.html:19
 #, python-format
 msgid "Differences for %(name)s"
 msgstr "Verschillen voor %(name)s"
 
-#: pages/templates/pages/page_diff.html:23
+#: pages/templates/pages/page_diff.html:20
 #, python-format
 msgid "Differences for <a href=\"%(pretty_slug)s\">%(new_name)s</a>"
 msgstr "Verschillen voor <a href=\"%(pretty_slug)s\">%(new_name)s</a>"
 
-#: pages/templates/pages/page_diff.html:34
+#: pages/templates/pages/page_diff.html:31
 #, python-format
 msgid ""
 "\n"
@@ -849,8 +932,8 @@ msgid ""
 "                    "
 msgstr "\nBewerking %(version_number)s ( %(date)s door %(user_link)s)\n                    "
 
-#: pages/templates/pages/page_diff.html:38
-#: pages/templates/pages/page_diff.html:51
+#: pages/templates/pages/page_diff.html:35
+#: pages/templates/pages/page_diff.html:48
 #, python-format
 msgid ""
 "\n"
@@ -858,7 +941,7 @@ msgid ""
 "                        "
 msgstr "\n, \"%(comment)s\"\n                        "
 
-#: pages/templates/pages/page_diff.html:47
+#: pages/templates/pages/page_diff.html:44
 #, python-format
 msgid ""
 "\n"
@@ -866,79 +949,73 @@ msgid ""
 "\t\t          "
 msgstr "\n⇥⇥⇥ Bewerking %(version_number)s (%(date)s door %(user_link)s)\n⇥⇥\t\t          "
 
-#: pages/templates/pages/page_files.html:22
+#: pages/templates/pages/page_files.html:26
 msgid "Files attached to this page:"
 msgstr "Bestanden aangehecht op deze pagina:"
 
-#: pages/templates/pages/page_files.html:37
+#: pages/templates/pages/page_files.html:41
 msgid "View page"
 msgstr "Bekijk pagina"
 
-#: pages/templates/pages/page_form.html:7
+#: pages/templates/pages/page_form.html:5
 #, python-format
 msgid "Editing page \"%(name)s\" - %(super)s"
 msgstr "Pagina onder bewerking \"%(name)s\" - %(super)s"
 
-#: pages/templates/pages/page_form.html:71
+#: pages/templates/pages/page_form.html:76
 msgid "Please describe this change:"
 msgstr "Beschrijf deze verandering:"
 
-#: pages/templates/pages/page_list.html:7
-#: pages/templates/pages/page_list.html:9
-#: themes/sapling/templates/site/nav.html:10
-msgid "All Pages"
-msgstr "Alle pagina's"
-
-#: pages/templates/pages/page_new.html:7
+#: pages/templates/pages/page_new.html:5
 msgid "Page not found"
 msgstr "Pagina niet gevonden"
 
-#: pages/templates/pages/page_new.html:8
+#: pages/templates/pages/page_new.html:6
 #, python-format
 msgid "Page \"%(name)s\" does not exist (yet!)"
 msgstr "Pagina \"%(name)s\" bestaat (nog!) niet"
 
-#: pages/templates/pages/page_new.html:17
+#: pages/templates/pages/page_new.html:15
 #: search/templates/search/search.html:16
 #: search/templates/search/search.html:79
 msgid "Create this page"
 msgstr "Maak deze pagina"
 
-#: pages/templates/pages/page_new.html:21
+#: pages/templates/pages/page_new.html:19
 msgid "Or use one of these templates:"
 msgstr "Of gebruik één van deze sjablonen:"
 
-#: pages/templates/pages/page_new.html:24
+#: pages/templates/pages/page_new.html:22
 #, python-format
 msgid "Create with %(name)s template"
 msgstr "Maak met %(name)s sjabloon"
 
-#: pages/templates/pages/page_permissions.html:7
+#: pages/templates/pages/page_permissions.html:5
 #, python-format
 msgid "Permissions for page \"%(name)s\" - %(super)s"
 msgstr "Machtigingen voor pagina \"%(name)s\" - %(super)s"
 
-#: pages/templates/pages/page_permissions.html:15
+#: pages/templates/pages/page_permissions.html:13
 msgid "Who can change this page?"
 msgstr "Wie kan deze pagina wijzigen?"
 
-#: pages/templates/pages/page_permissions.html:17
+#: pages/templates/pages/page_permissions.html:15
 #: redirects/templates/redirects/redirect_permissions.html:17
-#: users/forms.py:10
+#: users/forms.py:12
 msgid "Everyone"
 msgstr "Iedereen"
 
-#: pages/templates/pages/page_permissions.html:18
+#: pages/templates/pages/page_permissions.html:16
 #: redirects/templates/redirects/redirect_permissions.html:18
 msgid "Only these users:"
 msgstr "Alleen deze gebruikers:"
 
-#: pages/templates/pages/page_permissions.html:24
+#: pages/templates/pages/page_permissions.html:22
 #: redirects/templates/redirects/redirect_permissions.html:24
 #: regions/templates/regions/admins_update.html:24
 #: regions/templates/regions/banned_update.html:24
 #: regions/templates/regions/settings.html:78
-#: tags/templates/tags/pagetagset_form_snippet.html:9
+#: tags/templates/tags/pagetagset_form_snippet.html:13
 #: users/templates/users/deactivate.html:17
 #: users/templates/users/settings.html:35
 msgid "Save"
@@ -948,30 +1025,32 @@ msgstr "Opslaan"
 msgid "Submit"
 msgstr "Indienen"
 
-#: pages/templates/pages/page_versions.html:16
+#: pages/templates/pages/page_versions.html:14
 #, python-format
 msgid "Previous versions of page \"%(name)s\" - %(super)s"
 msgstr "Vorige versies van pagina \"%(name)s\" - %(super)s"
 
-#: pages/templates/pages/page_versions.html:21
+#: pages/templates/pages/page_versions.html:20
+#, python-format
 msgid ""
-" Looking for <a href=\"../_files/\">files</a> or <a "
-"href=\"../_tags/_history/\">tags</a>?"
-msgstr "Op zoek naar <a href=\"../_files/\">bestanden</a> of <a href=\"../_tags/_history/\">tags</a>?"
+" Looking for <a href=\"../_files/\">files</a>, <a "
+"href=\"%(page_links_url)s\" rel=\"nofollow\">links</a>, or <a "
+"href=\"../_tags/_history/\" rel=\"nofollow\">tags</a>?"
+msgstr ""
 
-#: pages/templates/pages/pagefile_diff.html:37
+#: pages/templates/pages/pagefile_diff.html:34
 #, python-format
 msgid "Differences for %(new_name)s on %(new_slug)s"
 msgstr "Verschillen voor %(new_name)s over %(new_slug)s"
 
-#: pages/templates/pages/pagefile_diff.html:38
+#: pages/templates/pages/pagefile_diff.html:35
 #, python-format
 msgid ""
 "Differences for %(new_name)s on <a "
 "href=\"%(url_pages_show)s\">%(new_attached_to_page)s</a>"
 msgstr "Verschillen voor %(new_name)s over <a href=\"%(url_pages_show)s\">%(new_attached_to_page)s</a>"
 
-#: pages/templates/pages/pagefile_diff.html:47
+#: pages/templates/pages/pagefile_diff.html:44
 #, python-format
 msgid ""
 "\n"
@@ -979,8 +1058,8 @@ msgid ""
 "                  "
 msgstr "\nHerziening %(version_number)s ( %(date)s door %(user_link)s)\n                  "
 
-#: pages/templates/pages/pagefile_diff.html:51
-#: pages/templates/pages/pagefile_diff.html:64
+#: pages/templates/pages/pagefile_diff.html:48
+#: pages/templates/pages/pagefile_diff.html:61
 #, python-format
 msgid ""
 "\n"
@@ -988,7 +1067,7 @@ msgid ""
 "                      "
 msgstr "\n, \"%(comment)s\"\n                      "
 
-#: pages/templates/pages/pagefile_diff.html:60
+#: pages/templates/pages/pagefile_diff.html:57
 #, python-format
 msgid ""
 "\n"
@@ -996,52 +1075,52 @@ msgid ""
 "\t\t        "
 msgstr "\nHerziening %(version_number)s (%(date)s door %(user_link)s)\n\t\t        "
 
-#: pages/templates/pages/pagefile_diff.html:88
+#: pages/templates/pages/pagefile_diff.html:85
 msgid "File info"
 msgstr "Bestandsinformatie"
 
-#: pages/templates/pages/pagefile_info.html:7
+#: pages/templates/pages/pagefile_info.html:5
 msgid "Recent changes for this file"
 msgstr "Recente bewerkingen voor dit bestand"
 
-#: pages/templates/pages/pagefile_info.html:14
+#: pages/templates/pages/pagefile_info.html:12
 #, python-format
 msgid "Information about \"%(name)s\" on %(slug)s - %(super)s"
 msgstr "Informatie over \"%(name)s\" on %(slug)s - %(super)s"
 
-#: pages/templates/pages/pagefile_info.html:15
+#: pages/templates/pages/pagefile_info.html:13
 #, python-format
 msgid ""
 "Information about \"%(name)s\" on <a "
 "href=\"%(pages_show_url)s\">%(attached_to_page)s</a>"
 msgstr "Informatie over \"%(name)s\" op <a href=\"%(pages_show_url)s\">%(attached_to_page)s</a>"
 
-#: pages/templates/pages/pagefile_info.html:39
+#: pages/templates/pages/pagefile_info.html:37
 #, python-format
 msgid "Download %(name)s"
 msgstr "Download %(name)s"
 
-#: pages/templates/pages/pagefile_info.html:44
+#: pages/templates/pages/pagefile_info.html:42
 msgid "Upload a new version"
 msgstr "Upload een nieuwe versie"
 
-#: pages/templates/pages/pagefile_info.html:51
+#: pages/templates/pages/pagefile_info.html:54
 msgid "Upload"
 msgstr "Upload"
 
-#: pages/templates/pages/pagefile_info.html:57
-#: tags/templates/tags/pagetagset_versions.html:31
+#: pages/templates/pages/pagefile_info.html:60
+#: tags/templates/tags/pagetagset_versions.html:30
 msgid "Previous versions:"
 msgstr "Vorige versies:"
 
-#: pages/templatetags/pages_tags.py:113
+#: pages/templatetags/pages_tags.py:126
 #, python-format
 msgid ""
 "Unable to include <a href=\"%(page_url)s\" "
 "class=\"missing_link\">%(page_name)s</a>"
 msgstr "<a href=\"%(page_url)s\" class=\"missing_link\">%(page_name)s</a> kan niet ingevoegd worden"
 
-#: pages/templatetags/pages_tags.py:121
+#: pages/templatetags/pages_tags.py:134
 #, python-format
 msgid ""
 "Unable to include <a href=\"%(page_url)s\">%(page_name)s</a>: endless "
@@ -1102,33 +1181,44 @@ msgstr "Machtigingen voor doorverwijzing \"%(name)s\" - %(super)s"
 msgid "Who can change this redirect?"
 msgstr "Wie mag deze doorverwijzing wijzigen?"
 
-#: regions/forms.py:33 regions/forms.py:52
+#: regions/forms.py:35 regions/forms.py:56
 msgid "Default language"
 msgstr "Default taal"
 
-#: regions/forms.py:35
+#: regions/forms.py:37
 msgid "The language for the region"
 msgstr "De taal voor de regio"
 
-#: regions/forms.py:49
+#: regions/forms.py:46
+msgid "Please draw a region with the map drawing tool."
+msgstr ""
+
+#: regions/forms.py:48
+msgid ""
+"The region you drew is too large. Please draw a region that's about the size"
+" of a city (or smaller). If you need a bigger region than that, please email"
+" contact@localwiki.org."
+msgstr ""
+
+#: regions/forms.py:53
 msgid "Full name"
 msgstr "Volledige naam"
 
-#: regions/forms.py:50 regions/models.py:17
+#: regions/forms.py:54 regions/models.py:20
 msgid "The full name of this region, e.g. 'San Francisco'"
 msgstr "De hele naam van deze regio, bijv. 'San Francisco'"
 
-#: regions/forms.py:71
+#: regions/forms.py:75
 msgid "You cannot delete yourself as an admin"
 msgstr "Je kan jezelf niet verwijderen als admin"
 
-#: regions/models.py:19
+#: regions/models.py:22
 msgid ""
 "A very short name for this region that will appear in URLs, e.g. 'sf'. Keep "
 "it short and memorable!"
 msgstr "Een hele korte naam voor deze regio, die zal verschijnen in URL's, bijv. 'sf'. Hou het kort en makkelijk te onthouden!"
 
-#: regions/models.py:37
+#: regions/models.py:40
 msgid "Region already has pages in it"
 msgstr "Deze regio heeft al pagina's"
 
@@ -1139,20 +1229,25 @@ msgid ""
 "rel=\"nofollow\">create it</a>?</p>"
 msgstr ""
 
-#: regions/views.py:46
+#: regions/views.py:65
 #, python-format
 msgid "Region '%s' was deleted."
 msgstr ""
 
-#: regions/views.py:65 utils/views.py:87 utils/views.py:149
+#: regions/views.py:90 utils/views.py:163 utils/views.py:225
 msgid "Sorry, you are not allowed to perform this action."
 msgstr "Sorry, je mag deze actie niet uitvoeren. "
 
-#: regions/views.py:148
-msgid "login_url"
+#: regions/views.py:171
+#, python-format
+msgid ""
+"To create a region you must first <strong><a "
+"href=\"%(login_url)s?next=%(current_path)s\">log in</a></strong> or "
+"<strong><a href=\"%(register_url)s?next=%(current_path)s\">create an "
+"account</a></strong>."
 msgstr ""
 
-#: regions/views.py:156
+#: regions/views.py:181
 msgid ""
 "You've created a new LocalWiki region! We've set you up as an admin for this"
 " region. Learn more about <a "
@@ -1160,15 +1255,21 @@ msgid ""
 "target=\"_blank\">LocalWiki adminship here</a>."
 msgstr ""
 
-#: regions/views.py:223
+#: regions/views.py:200
+msgid ""
+"There was a problem with the map area you drew. Please re-draw it and try "
+"again."
+msgstr ""
+
+#: regions/views.py:258
 msgid "Settings updated!"
 msgstr "Instellingen ververst!"
 
-#: regions/views.py:248
+#: regions/views.py:283
 msgid "Region admins updated!"
 msgstr "Regio admins ververst!"
 
-#: regions/views.py:269
+#: regions/views.py:304
 msgid "Banned users updated."
 msgstr "Gebande gebruikers ververst."
 
@@ -1451,7 +1552,7 @@ msgid ""
 "<p>\n"
 "    \tWelcome to the new LocalWiki region for %(region)s! There are currently just a handful of pages in it, to get you started.\n"
 "    <p>\n"
-"    \tClick on <strong>All Pages</strong> at the top to see what's here now.</p>\n"
+"    \tClick on <strong>Explore</strong> at the top to see what's here now.</p>\n"
 "    <p>\n"
 "    \tYou can edit this and any other page by clicking the <strong>Edit</strong> button.</p>\n"
 "    <p>Need <strong>help</strong>? Please see the <a href=\"http://localwiki.net/main/Help\">help page</a> on the <a href=\"http://localwiki.net/main/\">LocalWiki Guide</a>!</p>"
@@ -1482,13 +1583,13 @@ msgstr "Gebande gebruikers"
 msgid "LocalWiki"
 msgstr "LocalWiki"
 
-#: regions/templates/regions/main.html:15
-#: regions/templates/regions/main.html:41
-#: regions/templates/regions/region_list.html:17
+#: regions/templates/regions/main.html:14
+#: regions/templates/regions/main.html:40
+#: regions/templates/regions/region_list.html:16
 msgid "Add region"
 msgstr "Voeg regio toe"
 
-#: regions/templates/regions/main.html:26
+#: regions/templates/regions/main.html:25
 #, python-format
 msgid ""
 "\n"
@@ -1500,7 +1601,7 @@ msgid ""
 "    "
 msgstr "\n<p>Welkom op deze <strong>ongelofelijk</strong> vroege preview van de <a href=\"http://localwiki.org/blog/2013/jul/25/big-news-future-localwiki/\" target=\"_blank\">nieuwe versie van LocalWiki</a>. We experimenteren met nieuwe wegen om het mensen gemakkelijk te maken om lokale kennis over hun leefomgeving te delen. Kijk eens naar de bestaande projecten hieronder, maar houdt er rekening mee dat deze nog steeds erg in ontwikkeling zijn!</p>\n\n<p>Als je hier gekomen bent om een nieuwe LocalWiki te maken, welkom! Het kost slechts enkele minuten om er één op te starten. Je hoeft slechts te klikken op \"Voeg een regio toe\" knop onderaan het scherm.</p>\n\n<p>Tot slot, kijk eens naar de <strong><a href=\"%(guide_url)s\">LocalWiki Gids</a></strong> voor meer informatie over het project en voor hulp met het gebruik van de site.</p>\n    "
 
-#: regions/templates/regions/main.html:34
+#: regions/templates/regions/main.html:33
 #: regions/templates/regions/region_list.html:8
 msgid "Regions"
 msgstr "Regio's"
@@ -1514,6 +1615,10 @@ msgid "Draw the rough area the region will cover"
 msgstr "Teken ruwweg het gebied dat de regio zal omvatten"
 
 #: regions/templates/regions/region_form.html:48
+msgid "When drawing your shape, <strong>double click to close it</strong>!"
+msgstr ""
+
+#: regions/templates/regions/region_form.html:49
 #: regions/templates/regions/settings.html:69
 msgid ""
 "Pick an area roughly the size of a city. Don't worry about being exact!"
@@ -1543,11 +1648,11 @@ msgstr "Niemand is geband. Hoera!"
 msgid "The rough area the region covers"
 msgstr "Het gebied dat de regio zal omvatten"
 
-#: search/templates/search/base.html:14 search/templates/search/base.html:61
+#: search/templates/search/base.html:14 search/templates/search/base.html:58
 msgid "Search results for"
 msgstr "Zoekresultaten voor"
 
-#: search/templates/search/base.html:19 search/templates/search/base.html:66
+#: search/templates/search/base.html:19 search/templates/search/base.html:63
 #: search/templates/search/search.html:86
 msgid "Search"
 msgstr "Zoek"
@@ -1679,35 +1784,35 @@ msgstr "en"
 msgid "Tag"
 msgstr "Tag"
 
-#: tags/models.py:36 tags/templates/tags/pagetagset_list.html:7
-#: tags/templates/tags/pagetagset_list.html:8
+#: tags/models.py:36 tags/templates/tags/pagetagset_list.html:5
+#: tags/templates/tags/pagetagset_list.html:6
 #: tags/templates/tags/tag_list.html:5
 msgid "Tags"
 msgstr "Tags"
 
-#: tags/templates/tags/pagetagset_diff.html:31
-#: tags/templates/tags/pagetagset_diff.html:32
+#: tags/templates/tags/pagetagset_diff.html:28
+#: tags/templates/tags/pagetagset_diff.html:29
 #, python-format
 msgid "Differences for tag versions for %(new_name)s"
 msgstr "Verschillen voor tag versies voor %(new_name)s"
 
-#: tags/templates/tags/pagetagset_diff.html:64
+#: tags/templates/tags/pagetagset_diff.html:61
 msgid "Tags history"
 msgstr "Tag historie"
 
-#: tags/templates/tags/pagetagset_form.html:16
-#: tags/templates/tags/pagetagset_form.html:17
-#: tags/templates/tags/pagetagset_version_detail.html:19
-#: tags/templates/tags/pagetagset_versions.html:17
+#: tags/templates/tags/pagetagset_form.html:14
+#: tags/templates/tags/pagetagset_form.html:15
+#: tags/templates/tags/pagetagset_version_detail.html:18
+#: tags/templates/tags/pagetagset_versions.html:16
 msgid "Tags for"
 msgstr "Tags voor"
 
-#: tags/templates/tags/pagetagset_version_detail.html:18
-#: tags/templates/tags/pagetagset_versions.html:16
+#: tags/templates/tags/pagetagset_version_detail.html:17
+#: tags/templates/tags/pagetagset_versions.html:15
 msgid "Tags for "
 msgstr "Tags voor"
 
-#: tags/templates/tags/pagetagset_versions.html:25
+#: tags/templates/tags/pagetagset_versions.html:24
 #, python-format
 msgid ""
 "\n"
@@ -1719,23 +1824,19 @@ msgstr "\nDeze pagina heeft geen tags.  <a href=\"%(page_url)s\">Voeg ze toe!</a
 msgid "All tags"
 msgstr "Alle tags"
 
-#: tags/templates/tags/tag_list.html:18
-msgid "Alphabetical"
-msgstr "Alphabetisch"
-
-#: tags/templates/tags/tag_list.html:19
+#: tags/templates/tags/tag_list.html:13
 msgid "Most popular"
 msgstr "Meest populair"
 
-#: tags/templates/tags/tag_list.html:20
+#: tags/templates/tags/tag_list.html:14
 msgid "As a cloud"
 msgstr "Als een wolk"
 
-#: tags/templates/tags/tag_list.html:65
+#: tags/templates/tags/tag_list.html:59
 msgid "There are no tags. Add some!"
 msgstr "Er zijn geen tags. Voeg ze toe!"
 
-#: tags/templates/tags/tagged_list_snippet.html:19
+#: tags/templates/tags/tagged_list_snippet.html:17
 #, python-format
 msgid "There are no pages with the tag \"%(tag_name)s\"."
 msgstr "Er zijn geen pagina's met de tag \"%(tag_name)s\"."
@@ -1754,16 +1855,16 @@ msgstr ""
 msgid "Log in"
 msgstr "Inloggen"
 
-#: templates/registration/login.html:9
+#: templates/registration/login.html:21
 msgid "Your username and password didn't match. Please try again."
 msgstr "Je gebruikersnaam en wachtwoord zijn onjuist. Probeer het nog eens. "
 
-#: templates/registration/login.html:10 templates/registration/login.html:22
+#: templates/registration/login.html:22 templates/registration/login.html:32
 msgid "Forgot your password?"
 msgstr "Wachtwoord vergeten?"
 
-#: templates/registration/login.html:18
-#: templates/registration/registration_form.html:34
+#: templates/registration/login.html:29
+#: templates/registration/registration_form.html:44
 msgid "login"
 msgstr "inlog"
 
@@ -1883,16 +1984,11 @@ msgstr ""
 msgid "Item not found"
 msgstr ""
 
-#: themes/sapling/templates/site/add_page_area.html:3
 #: themes/sapling/templates/site/add_page_area.html:7
-msgid "Add a new page"
-msgstr ""
-
-#: themes/sapling/templates/site/add_page_area.html:5
 msgid "Name of page"
 msgstr ""
 
-#: themes/sapling/templates/site/base.html:87
+#: themes/sapling/templates/site/base.html:89
 msgid ""
 "This is an <strong>insanely</strong> early preview of the <a "
 "href=\"http://localwiki.org/blog/2013/jul/25/big-news-future-localwiki/\" "
@@ -1902,71 +1998,75 @@ msgid ""
 "from launching!"
 msgstr "Dit is een <strong>ongelofelijk</strong> vroege preview van de <a href=\"http://localwiki.org/blog/2013/jul/25/big-news-future-localwiki/\" target=\"_blank\">nieuwe versie van LocalWiki</a>.  We maken alles openbaar wat we bouwen, maar er is hier momenteel nog niet veel te zien.<br/>Voel je vrij het te delen met je vrienden, maar niet te breed &mdash; we zijn nog ver verwijderd van de lancering!"
 
-#: themes/sapling/templates/site/base.html:176
+#: themes/sapling/templates/site/base.html:182
 msgid ""
 "\n"
 "      LocalWiki is a grassroots effort to collect, share and open the world’s local knowledge.  We are a 501(c)3 non-profit organization. <a href=\"http://localwiki.org/about/\" target=\"_blank\">Learn more</a>.</p>\n"
 "      "
 msgstr "\nLocalWiki is een initiatief om wereldwijd locale kennis te verzamelen, delen en openbaren. LocalWiki is een Amerikaanse zogenaamde 501(c)3 non-profit organizatie. <a href=\"http://localwiki.org/about/\" target=\"_blank\">Meer over LocalWiki</a>.</p>\n      "
 
-#: themes/sapling/templates/site/login_info.html:8
+#: themes/sapling/templates/site/login_info.html:11
 msgid "Welcome"
 msgstr "Welkom"
 
-#: themes/sapling/templates/site/login_info.html:11
+#: themes/sapling/templates/site/login_info.html:14
 msgid "settings"
 msgstr "instellingen"
 
-#: themes/sapling/templates/site/login_info.html:12
+#: themes/sapling/templates/site/login_info.html:15
 msgid "log out"
 msgstr "Log uit"
 
-#: themes/sapling/templates/site/login_info.html:16
+#: themes/sapling/templates/site/login_info.html:19
 msgid "log in"
 msgstr "log in"
 
-#: themes/sapling/templates/site/login_info.html:16
+#: themes/sapling/templates/site/login_info.html:19
 msgid "or"
 msgstr "of"
 
-#: themes/sapling/templates/site/login_info.html:16
+#: themes/sapling/templates/site/login_info.html:19
 msgid "create account"
 msgstr "maak account"
 
-#: themes/sapling/templates/site/nav.html:7
+#: themes/sapling/templates/site/nav.html:6
 msgid "Near You"
 msgstr ""
 
-#: themes/sapling/templates/site/nav.html:12
+#: themes/sapling/templates/site/nav.html:9
+msgid "Explore"
+msgstr ""
+
+#: themes/sapling/templates/site/nav.html:11
 msgid "Settings"
 msgstr "Instellingen"
 
-#: themes/sapling/templates/site/nav.html:18
+#: themes/sapling/templates/site/nav.html:17
 msgid "Guide"
 msgstr "Gids"
 
-#: themes/sapling/templates/site/nav.html:19
+#: themes/sapling/templates/site/nav.html:18
 msgid "Help"
 msgstr "Help"
 
-#: themes/sapling/templates/site/nav.html:20
+#: themes/sapling/templates/site/nav.html:19
 msgid "Communities"
 msgstr "Communities"
 
-#: themes/sapling/templates/site/nav.html:21
+#: themes/sapling/templates/site/nav.html:20
 msgid "API"
 msgstr "API"
 
-#: themes/sapling/templates/site/nav.html:22
+#: themes/sapling/templates/site/nav.html:21
 msgid "About"
 msgstr "Over"
 
-#: themes/sapling/templates/site/search_form.html:6
+#: themes/sapling/templates/site/search_form.html:5
 #, python-format
 msgid "Search %(region_name)s"
 msgstr ""
 
-#: themes/sapling/templates/site/search_form.html:11
+#: themes/sapling/templates/site/search_form.html:10
 msgid "Search LocalWiki "
 msgstr ""
 
@@ -1994,52 +2094,56 @@ msgstr "algoritme"
 msgid "hash"
 msgstr "hash"
 
-#: users/forms.py:11
+#: users/forms.py:13
 msgid "Only these users"
 msgstr "Alleen deze gebruikers"
 
-#: users/forms.py:28 users/registration_backend/forms.py:44
+#: users/forms.py:30 users/registration_backend/forms.py:44
 msgid "Your name"
 msgstr "Je naam"
 
-#: users/forms.py:29
+#: users/forms.py:31
 msgid "Email address"
 msgstr "E-mail adres"
 
-#: users/forms.py:30
+#: users/forms.py:32
 msgid "Gravatar email (private)"
 msgstr "Gravatar e-mail (privé)"
 
-#: users/forms.py:34
+#: users/forms.py:36
 msgid "Disable this account permanently"
 msgstr ""
 
-#: users/models.py:56
+#: users/models.py:63
 msgid "Gravatar Email (Private)"
 msgstr "Gravatar E-mail (Privé)"
 
-#: users/models.py:57
+#: users/models.py:64
 msgid "Show email publicly (Helps with communication)"
 msgstr "Toon e-mail adres in openbaar (is handig voor communicatie)"
 
-#: users/models.py:58
+#: users/models.py:65
 msgid "Personal website"
 msgstr "Persoonlijke site"
 
-#: users/views.py:196
+#: users/views.py:213
 msgid "Permissions updated!"
 msgstr "Machtigingen ververst!"
 
-#: users/views.py:207 users/views.py:242 users/views.py:252
+#: users/views.py:224 users/views.py:259 users/views.py:269
 msgid "You must be logged in to change user settings."
 msgstr "Je dient ingelogd te zijn om gebruikersinstellingen te wijzigen.  "
 
-#: users/views.py:221
+#: users/views.py:238
 msgid "User settings updated!"
 msgstr "Gebruikersinstellingen ververst!"
 
-#: users/views.py:258
+#: users/views.py:275
 msgid "Your account has been de-activated."
+msgstr ""
+
+#: users/views.py:434
+msgid "Logged out"
 msgstr ""
 
 #: users/registration_backend/__init__.py:61
@@ -2106,42 +2210,42 @@ msgstr "Lijst van abonnees"
 msgid "Subscriber emails:"
 msgstr "E-mails van abonnees:"
 
-#: users/templates/users/user_page.html:21
+#: users/templates/users/user_page.html:24
 msgid "user"
 msgstr ""
 
-#: users/templates/users/user_page.html:41
+#: users/templates/users/user_page.html:44
 msgid "This user account is disabled."
 msgstr ""
 
-#: users/templates/users/user_page.html:57
+#: users/templates/users/user_page.html:60
 #, python-format
 msgid "Joined on %(date_joined)s"
 msgstr "Aangemeld op %(date_joined)s"
 
-#: users/templates/users/user_page.html:64
+#: users/templates/users/user_page.html:67
 msgid "total contributions"
 msgstr ""
 
-#: users/templates/users/user_page.html:73
+#: users/templates/users/user_page.html:76
 msgid "pages edited"
 msgstr ""
 
-#: users/templates/users/user_page.html:82
+#: users/templates/users/user_page.html:85
 msgid "maps edited"
 msgstr ""
 
-#: users/templates/users/user_page.html:93
+#: users/templates/users/user_page.html:96
 #, python-format
 msgid "%(num_pages_followed)s pages starred"
 msgstr ""
 
-#: users/templates/users/user_page.html:100
+#: users/templates/users/user_page.html:103
 #, python-format
 msgid "%(num_users_followed)s users starred"
 msgstr ""
 
-#: users/templates/users/user_page.html:108
+#: users/templates/users/user_page.html:111
 msgid "Regions followed"
 msgstr ""
 
@@ -2149,7 +2253,7 @@ msgstr ""
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: utils/views.py:88
+#: utils/views.py:164
 msgid ""
 "Anonymous users may not perform this action. Please <a "
 "href=\"/Users/login/\">log in</a>."
@@ -2159,23 +2263,23 @@ msgstr "Anonieme gebruikers mogen deze actie niet uitvoeren. <a href=\"/Users/lo
 msgid "revert"
 msgstr "draai terug"
 
-#: versionutils/diff/diffutils.py:103 versionutils/diff/diffutils.py:206
-#: versionutils/diff/diffutils.py:294 versionutils/diff/diffutils.py:314
-#: versionutils/diff/diffutils.py:377 versionutils/diff/diffutils.py:391
-#: versionutils/diff/diffutils.py:494
+#: versionutils/diff/diffutils.py:114 versionutils/diff/diffutils.py:224
+#: versionutils/diff/diffutils.py:316 versionutils/diff/diffutils.py:336
+#: versionutils/diff/diffutils.py:402 versionutils/diff/diffutils.py:419
+#: versionutils/diff/diffutils.py:524
 msgid "No differences found"
 msgstr "Geen verschillen gevonden."
 
-#: versionutils/diff/diffutils.py:529 versionutils/diff/diffutils.py:539
-#: versionutils/diff/diffutils.py:552 versionutils/diff/diffutils.py:562
+#: versionutils/diff/diffutils.py:559 versionutils/diff/diffutils.py:569
+#: versionutils/diff/diffutils.py:582 versionutils/diff/diffutils.py:592
 msgid "Stayed the same"
 msgstr "Gelijk gebleven"
 
-#: versionutils/diff/diffutils.py:532 versionutils/diff/diffutils.py:544
+#: versionutils/diff/diffutils.py:562 versionutils/diff/diffutils.py:574
 msgid "Removed"
 msgstr "Verwijderd"
 
-#: versionutils/diff/diffutils.py:555 versionutils/diff/diffutils.py:567
+#: versionutils/diff/diffutils.py:585 versionutils/diff/diffutils.py:597
 #: versionutils/versioning/constants.py:14
 msgid "Added"
 msgstr "Toegevoegd"
@@ -2217,7 +2321,7 @@ msgstr "Vergelijken"
 msgid "There is no revision history."
 msgstr "Er is geen geschiedenis van wijzigingen. "
 
-#: versionutils/templates/versionutils/history/media.html:47
+#: versionutils/templates/versionutils/history/media.html:46
 msgid "Please select two versions to compare"
 msgstr "Selecteer twee versies om te vergelijken"
 
