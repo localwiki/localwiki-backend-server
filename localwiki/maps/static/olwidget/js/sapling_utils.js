@@ -687,7 +687,11 @@ SaplingMap = {
     _setup_clustering_strategy: function() {
 
         var base_shouldCluster = OpenLayers.Strategy.Cluster.prototype.shouldCluster;
-        OpenLayers.Strategy.Cluster.prototype.shouldCluster = function(cluster, feature) {
+        OpenLayers.Strategy.Cluster.prototype.shouldCluster = function(cluster, feature, dynamic) {
+            // We use a different clustering strategy for dynamic maps, for now.
+            if (!dynamic) {
+                return base_shouldCluster.call(this, cluster, feature);
+            }
             if (feature.geometry.CLASS_NAME == "OpenLayers.Geometry.Point") {
                 return base_shouldCluster.call(this, cluster, feature);
             }
@@ -708,13 +712,16 @@ SaplingMap = {
                             clustered = false;
                             for(var j=clusters.length-1; j>=0; --j) {
                                 cluster = clusters[j];
-                                if(this.shouldCluster(cluster, feature)) {
+                                if(this.shouldCluster(cluster, feature, this.layer.map.opts.dynamic)) {
                                     this.addToCluster(cluster, feature);
                                     clustered = true;
                                     break;
                                 }
                             }
                             if(!clustered) {
+                                if (this.features[i]._old_geometry) {
+                                    this.features[i].geometry = this.features[i]._old_geometry;
+                                }
                                 if(this.features[i].geometry.CLASS_NAME == "OpenLayers.Geometry.Point") {
                                    clusters.push(this.createCluster(this.features[i]));
                                 }
@@ -723,6 +730,21 @@ SaplingMap = {
                                    cluster.cluster = [this.features[i]];
                                    clusters.push(cluster);
                                 }
+                            }
+                        }
+                    }
+                    if (!this.layer.map.opts.dynamic) {
+                        // Different clustering strategy for dynamic and non-dynamic maps.
+                        for(var i=0; i<clusters.length; i++) {
+                            var cluster = clusters[i];
+                            if (cluster.cluster.length > 1 && cluster.geometry.CLASS_NAME != "OpenLayers.Geometry.Point") {
+                                cluster._old_geometry = cluster.geometry;
+                                console.log(cluster.geometry);
+                                cluster.geometry = cluster.geometry.getCentroid();
+                            }
+                            else if (cluster.cluster.length == 1 && cluster._old_geometry && cluster._old_geometry.CLASS_NAME != "OpenLayers.Geometry.Point") {
+                                cluster.geometry = cluster._old_geometry;
+                                cluster._old_geometry = null;
                             }
                         }
                     }
