@@ -104,7 +104,7 @@ class PageDetailView(CacheMixin, BasePageDetailView):
         urlconf = get_urlconf() or settings.ROOT_URLCONF
         slug = kwargs.get('slug')
         region = kwargs.get('region')
-        return '%s/%s/%s' % (urlconf, region, name_to_url(slug))
+        return '%s/%s/%s' % (urlconf, name_to_url(region), name_to_url(slug))
 
 
 class PageVersionDetailView(BasePageDetailView):
