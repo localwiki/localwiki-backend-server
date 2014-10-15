@@ -22,10 +22,10 @@ backend splash {
     .first_byte_timeout = 600s;
     .between_bytes_timeout = 600s;
 }
- 
+
 sub vcl_recv {
     # unless sessionid/csrftoken is in the request, don't pass ANY cookies (referral_source, utm, etc)
-    if (req.request == "GET" && (req.url ~ "^/static" || req.url ~ "^/media" || req.url ~ "^/first_year" || (req.http.cookie !~ "sessionid" && req.http.cookie !~ "csrftoken"))) {
+    if (req.request == "GET" && (req.url ~ "^/static" || req.url ~ "^/media" || (req.http.cookie !~ "sessionid" && req.http.cookie !~ "csrftoken"))) {
         remove req.http.Cookie;
     }
     # Some Django URLs to always, always cache.
@@ -39,6 +39,7 @@ sub vcl_recv {
     # XXX TODO TEMPORARY UNTIL SPLASH SITE IS FULLY INTEGRATED
     # REMOVE THIS CONDITIONAL AFTER
     if (req.url ~ "^/blog" || req.url ~ "^/about" || req.url ~ "^/donate" || req.url ~ "^/signup" || req.url ~ "^/_start_new" || req.url ~ "^/static_old" || req.url ~ "^/media_old") {
+
         # In these cases, always serve from the old splash site backend
         set req.backend = splash;
     }
@@ -52,8 +53,8 @@ sub vcl_recv {
         else {
             # XXX TODO extract this bit back up after splash
             # is integrated:
-            if (req.http.x-forwarded-host == "www.{{ public_hostname }}" || req.http.x-forwarded-host == "{{ public_hostname }}") {
-               set req.http.host = "{{ public_hostname }}";
+            if (req.http.x-forwarded-host == "www.localwiki.org" || req.http.x-forwarded-host == "localwiki.org") {
+               set req.http.host = "localwiki.org";
                set req.backend = localwiki;
             } else {
                set req.http.host = req.http.x-forwarded-host;
@@ -116,6 +117,23 @@ sub vcl_fetch {
 
         /* marker for vcl_deliver to reset Age: */
         set beresp.http.magicmarker = "1";
+    }
+
+    # XXX TODO TEMPORARY UNTIL SPLASH SITE IS FULLY INTEGRATED
+    # REMOVE THIS CONDITIONAL AFTER
+    if (req.url ~ "^/blog" || req.url ~ "^/about" || req.url ~ "^/donate" || req.url ~ "^/signup" || req.url ~ "^/_start_new" || req.url ~ "^/static_old" || req.url ~ "^/media_old" || (req.http.cookie !~ "sessionid" && req.url ~ "^/$")) {
+       unset beresp.http.set-cookie;
+       /* Remove Expires from backend, it's not long enough */
+        unset beresp.http.expires;
+
+        /* Set the clients TTL on this object */
+        set beresp.http.cache-control = "max-age=900";
+
+        /* Set how long Varnish will keep it */
+        set beresp.ttl = 2h;
+
+        set beresp.http.magicmarker = "1";
+        return (deliver);
     }
 
     # static files always cached

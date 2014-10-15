@@ -119,7 +119,6 @@
     ProxyPass /media/ !
     ProxyPass /robots.txt !
     ProxyPass /sitemap.xml !
-    ProxyPass /static_old/ !
     ProxyPass /_monitoring/ !
     ProxyPass /favicon.ico !
     ProxyPass /apple-touch-icon.png !
@@ -131,7 +130,6 @@
     ProxyPassReverse /static/ !
     ProxyPassReverse /robots.txt !
     ProxyPassReverse /sitemap.xml !
-    ProxyPassReverse /static_old/ !
     ProxyPassReverse /_monitoring/ !
     ProxyPassReverse /favicon.ico !
     ProxyPassReverse /apple-touch-icon.png !
