@@ -9,7 +9,7 @@ register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
-def filtered_tags(context, region_slug, list, keywords):
+def filtered_tags(context, list, keywords, region_slug=None):
     list = list or []
     keywords = keywords or []
     unused = set(list)
@@ -22,7 +22,13 @@ def filtered_tags(context, region_slug, list, keywords):
                 break
     if not filtered:
         return ''
-    tags = [{'name': t, 'slug': slugify(t), 'region': {'slug': region_slug}} for t in filtered]
+
+    if region_slug:
+        context['global'] = False
+        tags = [{'name': t, 'slug': slugify(t), 'region': {'slug': region_slug}} for t in filtered]
+    else:
+        context['global'] = True
+        tags = [{'name': t, 'slug': slugify(t)} for t in filtered]
 
     context = copy(context)
     context.update({'tag_list': tags})

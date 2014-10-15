@@ -2,7 +2,11 @@
 {% if tag_list %}
   <ul class="tag-list">
   {% for tag in tag_list %}
+    {% if global %}
+    <li class="tag"><a href="{% url 'tags:global-tagged' slug=tag.slug %}" rel="tag">{{ tag.name }}</a></li>
+    {% else %}
     <li class="tag"><a href="{% url 'tags:tagged' slug=tag.slug region=tag.region.slug %}" rel="tag">{{ tag.name }}</a></li>
+    {% endif %}
   {% endfor %}
   </ul>
 {% endif %}

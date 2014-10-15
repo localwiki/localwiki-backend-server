@@ -44,7 +44,7 @@
                 <a href="{{ result.object.get_absolute_url }}">{{ result.name }}</a>
             </h3>
             <div id="object_tags">
-                {% filtered_tags region.slug result.tags keywords %}
+                {% filtered_tags result.tags keywords region.slug %}
             </div>
             <p>
                 {% with result.text as content %}
