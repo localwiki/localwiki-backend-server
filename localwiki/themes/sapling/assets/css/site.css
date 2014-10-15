@@ -262,6 +262,14 @@ textarea, input, select {
     margin-bottom: 0;
     font-size: 110%;
 }
+
+#object_title a.tag_link {
+    background: url(../img/tag-icon.png) no-repeat;
+    background-position: left center;
+    padding-left: 34px;
+    margin-left: 6px;
+}
+
 @media screen and (max-width: 700px) {
     #object_title {
       font-size: 150%;

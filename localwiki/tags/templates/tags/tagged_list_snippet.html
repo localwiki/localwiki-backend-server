@@ -3,7 +3,11 @@
 {% if map %}
   <div id="map">
     {{ map }}
-    <div class="info"><a class="view tiny button" href="{% url 'maps:tagged' tag=tag.slug region=tag.region.slug %}">{% trans "View" %}</a></div>
+    {% if region %}
+    <div class="info"><a class="view tiny button" href="{% url 'maps:tagged' tag=tag.slug region=region.slug %}">{% trans "View" %}</a></div>
+    {% else %}
+    <div class="info"><a class="view tiny button" href="{% url 'maps:global-tagged' tag=tag_name %}">{% trans "View" %}</a></div>
+    {% endif %}
   </div>
 {% endif %}
 <div id="pagetagset"{% if map %} class="has_map"{% endif %}>

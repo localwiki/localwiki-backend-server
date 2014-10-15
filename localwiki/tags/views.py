@@ -90,6 +90,53 @@ class TaggedList(RegionMixin, ListView):
         return context
 
 
+class GlobalTaggedList(ListView):
+    model = PageTagSet
+    template_name = 'tags/global_pagetagset_list.html'
+
+    def get_queryset(self):
+        self.tag_name = slugify(self.kwargs['slug'])
+        return PageTagSet.objects.filter(tags__slug=self.tag_name)
+
+    def get_map_objects(self):
+        if not self.tag_name:
+            return None
+        # We re-use the GlobalMapForTag view's logic here to embed a mini-map on the
+        # tags list page
+        from maps.views import GlobalMapForTag
+        map_view = GlobalMapForTag()
+        map_view.request = self.request
+        map_view.kwargs = dict(tag=self.tag_name)
+        map_view.object_list = map_view.get_queryset()
+        return map_view.get_map_objects()
+
+    def get_context_data(self, *args, **kwargs):
+        from maps.widgets import InfoMap, map_options_for_region
+
+        context = super(GlobalTaggedList, self).get_context_data(*args, **kwargs)
+        context['tag_name'] = self.tag_name
+        map_objects = self.get_map_objects()
+        if map_objects:
+            # Remove the PanZoom on normal page views.
+            olwidget_options = copy.deepcopy(getattr(settings,
+                'OLWIDGET_DEFAULT_OPTIONS', {}))
+            map_opts = olwidget_options.get('map_options', {})
+            map_controls = map_opts.get('controls', [])
+            if 'PanZoomBar' in map_controls:
+                map_controls.remove('PanZoomBar')
+            if 'PanZoom' in map_controls:
+                map_controls.remove('PanZoom')
+            if 'KeyboardDefaults' in map_controls:
+                map_controls.remove('KeyboardDefaults')
+            olwidget_options['map_options'] = map_opts
+            olwidget_options['map_div_class'] = 'mapwidget small'
+            olwidget_options['cluster'] = True
+            context['map'] = InfoMap(
+                map_objects,
+                options=olwidget_options)
+        return context
+
+
 class PageTagSetUpdateView(PageNotFoundMixin, PermissionRequiredMixin,
         RegionMixin, CreateObjectMixin, UpdateView):
     model = PageTagSet
