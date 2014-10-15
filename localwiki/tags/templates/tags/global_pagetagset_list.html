@@ -1,0 +1,20 @@
+{% extends "tags/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Tags" %} / {{ tag_name }} - {{ block.super }}{% endblock %}
+{% block header_title %}<a href="#">{% trans "Tags" %}</a> / {{ tag_name }}{% endblock %}
+
+{% block content_wrapper %}
+<div id="content_wrapper">
+  {% if map %}
+    <div id="content" class="has_map">
+  {% else %}
+    <div id="content">
+  {% endif %}
+  {% block content %}
+    {% include "tags/tagged_list_snippet.html" %}
+  {% endblock %}
+    </div>
+</div>
+{% endblock %}
