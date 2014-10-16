@@ -132,9 +132,11 @@ SaplingMap = {
 
         $('#content a').each(function() {
             var feature = url_to_features[$(this).attr('href')];
-            $(this).bind('mouseover', function (){
-                SaplingMap._highlightResult(this, feature, map, true);
-            });
+            if (typeof feature !== 'undefined') {
+                $(this).bind('mouseover', function (){
+                    SaplingMap._highlightResult(this, feature, map, true);
+                });
+            }
         });
     },
 
@@ -732,6 +734,20 @@ SaplingMap = {
                                    cluster.cluster = [this.features[i]];
                                    clusters.push(cluster);
                                 }
+                            }
+                        }
+                    }
+                    if (!this.layer.map.opts.dynamic) {
+                        // Different clustering strategy for dynamic and non-dynamic maps.
+                        for(var i=0; i<clusters.length; i++) {
+                            var cluster = clusters[i];
+                            if (cluster.cluster.length > 1 && cluster.geometry.CLASS_NAME != "OpenLayers.Geometry.Point") {
+                                cluster._old_geometry = cluster.geometry;
+                                cluster.geometry = cluster.geometry.getCentroid();
+                            }
+                            else if (cluster.cluster.length == 1 && cluster._old_geometry && cluster._old_geometry.CLASS_NAME != "OpenLayers.Geometry.Point") {
+                                cluster.geometry = cluster._old_geometry;
+                                cluster._old_geometry = null;
                             }
                         }
                     }

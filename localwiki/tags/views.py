@@ -4,6 +4,7 @@ from dateutil.parser import parse as dateparser
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
+from django.contrib.gis.measure import D
 from django.shortcuts import get_object_or_404
 from django.db.models.aggregates import Count
 from django.views.generic.list import ListView
@@ -62,13 +63,35 @@ class TaggedList(RegionMixin, ListView):
         map_view.object_list = map_view.get_queryset()
         return map_view.get_map_objects()
 
-    def get_context_data(self, *args, **kwargs):
+    def get_nearby_tags(self):
+        from maps.models import MapData
+
+        region = self.get_region()
+        center = region.regionsettings.region_center
+
+        nearby_pts = PageTagSet.objects.exclude(region=region).\
+            filter(region__regionsettings__region_center__distance_lte=(center, D(mi=50)))
+        nearby_pts = nearby_pts.select_related('page__mapdata')
+
+        self.nearby_pagetagset_list = nearby_pts
+        return nearby_pts
+
+    def get_nearby_map_objects(self):
+        from maps.models import MapData
+        from maps.views import popup_html
+
+        if getattr(self, 'nearby_pagetagset_list', None) is None:
+            self.get_nearby_tags()
+
+        pts = self.nearby_pagetagset_list
+        pts = pts.exclude(page__mapdata=None)
+        ids = pts.values('page__id').distinct().order_by('page')
+        maps = MapData.objects.exclude(region=self.get_region()).filter(page__id__in=ids)
+        return [(obj.geom, popup_html(obj)) for obj in maps]
+
+    def map_context(self, map_objects):
         from maps.widgets import InfoMap, map_options_for_region
 
-        context = super(TaggedList, self).get_context_data(*args, **kwargs)
-        context['tag'] = self.tag
-        context['tag_name'] = self.tag_name
-        map_objects = self.get_map_objects()
         if map_objects:
             # Remove the PanZoom on normal page views.
             olwidget_options = copy.deepcopy(getattr(settings,
@@ -84,9 +107,20 @@ class TaggedList(RegionMixin, ListView):
             olwidget_options['map_options'] = map_opts
             olwidget_options['map_div_class'] = 'mapwidget small'
             olwidget_options.update(map_options_for_region(self.get_region()))
-            context['map'] = InfoMap(
+            return InfoMap(
                 map_objects,
                 options=olwidget_options)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(TaggedList, self).get_context_data(*args, **kwargs)
+        context['tag'] = self.tag
+        context['tag_name'] = self.tag_name
+        context['map'] = self.map_context(self.get_map_objects())
+
+        # Grab nearby PageTagSets
+        context['nearby_pagetagset_list'] = self.get_nearby_tags()
+        context['nearby_map'] = self.map_context(self.get_nearby_map_objects())
+
         return context
 
 

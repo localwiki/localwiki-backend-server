@@ -215,7 +215,7 @@ class MapForTag(MapFullRegionView):
             'tag_name': escape(self.tag.name)
         }
         return (
-            _('<a href="%(map_url)s">Map</a> for tag <a class="tag_link" href="%(page_tag_url)s">%(tag_name)s</a>') % d
+            _('<a href="%(map_url)s">Map</a> for tag "<a href="%(page_tag_url)s">%(tag_name)s</a>"') % d
         )
 
     def get_context_data(self, **kwargs):
@@ -243,7 +243,7 @@ class GlobalMapForTag(MapBaseListView):
             'tag_name': escape(self.tag_slug)
         }
         return (
-            _('Map for tag <a class="tag_link" href="%(page_tag_url)s">%(tag_name)s</a>') % d
+            _('Map for tag "<a href="%(page_tag_url)s">%(tag_name)s</a>"') % d
         )
 
     def get_context_data(self, **kwargs):
