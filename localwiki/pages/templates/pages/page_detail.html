@@ -17,10 +17,12 @@
 {% endblock %}
 
 {% block canonical_url %}
+  {% if page.versions %}
   {% phased with page region %}
     {% load canonical_urls %}
     {% render_canonical_url page %}
   {% endphased %}
+  {% endif %}
 {% endblock %}
 
 {% block header_subtitle %}
