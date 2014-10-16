@@ -1,6 +1,6 @@
 import re
 
-from django.db import models
+from django.contrib.gis.db import models
 from django.db.utils import IntegrityError
 from django.template.defaultfilters import stringfilter
 from django.utils.html import strip_tags
@@ -53,6 +53,8 @@ class PageTagSet(models.Model):
     page = models.OneToOneField('pages.Page')
     tags = models.ManyToManyField(Tag)
     region = models.ForeignKey(Region, null=True)
+
+    objects = models.GeoManager()
 
     def __unicode__(self):
         return ', '.join(map(unicode, self.tags.all()))
