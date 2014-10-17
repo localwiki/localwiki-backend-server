@@ -1,6 +1,6 @@
 
 {% if tag_list %}
-  <ul class="tag-list">
+  <ul class="tag-list tag-info">
   {% for tag in tag_list %}
     {% if global %}
     <li class="tag"><a href="{% url 'tags:global-tagged' slug=tag.slug %}" rel="tag">{{ tag.name }}</a></li>

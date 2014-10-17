@@ -488,6 +488,10 @@ textarea, input, select {
 #object_tags .tag-list {
     display: table-cell;
 }
+.tag-list.tag-info .tag {
+    float: left;
+    clear: left;
+}
 #object_tags .tags_button {
     float: left;
     display: block;
