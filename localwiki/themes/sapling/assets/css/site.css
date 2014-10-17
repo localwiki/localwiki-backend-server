@@ -138,7 +138,7 @@ textarea, input, select {
     }
     /* For an included list of tagged pages */
     #pagetagset.has_map {
-        margin-top: 290px;
+        margin-top: 280px!important;
         display: inline-block;
     }
     #pagetagset.has_nearby_map {
