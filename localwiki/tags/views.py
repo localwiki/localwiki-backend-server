@@ -2,10 +2,13 @@ import copy
 from dateutil.parser import parse as dateparser
 
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseNotFound
+from django.utils.translation import ugettext as _
+from django.template.context import RequestContext
+from django.template.loader import render_to_string
 from django.conf import settings
 from django.contrib.gis.measure import D
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.db.models.aggregates import Count
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -37,19 +40,23 @@ class TagListView(RegionMixin, ListView):
                     num_pages=Count('pagetagset')).filter(num_pages__gt=0)
 
 
-class TaggedList(RegionMixin, ListView):
+class TaggedList(Custom404Mixin, RegionMixin, ListView):
     model = PageTagSet
 
     def get_queryset(self):
         self.tag_name = slugify(self.kwargs['slug'])
         try:
+            region = self.get_region()
             self.tag = Tag.objects.get(
-                slug=self.tag_name, region=self.get_region())
+                slug=self.tag_name, region=region)
             self.tag_name = self.tag.name
-            return PageTagSet.objects.filter(tags=self.tag)
+            pts = PageTagSet.objects.filter(tags=self.tag, region=region)
+            if not pts.exists():
+                raise Http404
+            return pts
         except Tag.DoesNotExist:
             self.tag = None
-            return PageTagSet.objects.none()
+            raise Http404
 
     def get_map_objects(self):
         if not self.tag:
@@ -144,6 +151,13 @@ class TaggedList(RegionMixin, ListView):
             context['map_params'] = map_params
 
         return context
+
+    def handler404(self, request, *args, **kwargs):
+        tag_name = slugify(kwargs['slug'])
+        msg = (_('<p>No pages tagged "%s".</p>') % 
+             tag_name)
+        html = render_to_string('404.html', {'message': msg}, RequestContext(request))
+        return HttpResponseNotFound(html)
 
 
 class GlobalTaggedList(ListView):
