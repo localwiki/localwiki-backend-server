@@ -2,9 +2,13 @@ import copy
 from dateutil.parser import parse as dateparser
 
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseNotFound
+from django.utils.translation import ugettext as _
+from django.template.context import RequestContext
+from django.template.loader import render_to_string
 from django.conf import settings
-from django.shortcuts import get_object_or_404
+from django.contrib.gis.measure import D
+from django.shortcuts import get_object_or_404, render
 from django.db.models.aggregates import Count
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -36,19 +40,23 @@ class TagListView(RegionMixin, ListView):
                     num_pages=Count('pagetagset')).filter(num_pages__gt=0)
 
 
-class TaggedList(RegionMixin, ListView):
+class TaggedList(Custom404Mixin, RegionMixin, ListView):
     model = PageTagSet
 
     def get_queryset(self):
         self.tag_name = slugify(self.kwargs['slug'])
         try:
+            region = self.get_region()
             self.tag = Tag.objects.get(
-                slug=self.tag_name, region=self.get_region())
+                slug=self.tag_name, region=region)
             self.tag_name = self.tag.name
-            return PageTagSet.objects.filter(tags=self.tag)
+            pts = PageTagSet.objects.filter(tags=self.tag, region=region)
+            if not pts.exists():
+                raise Http404
+            return pts
         except Tag.DoesNotExist:
             self.tag = None
-            return PageTagSet.objects.none()
+            raise Http404
 
     def get_map_objects(self):
         if not self.tag:
@@ -62,11 +70,120 @@ class TaggedList(RegionMixin, ListView):
         map_view.object_list = map_view.get_queryset()
         return map_view.get_map_objects()
 
+    def get_nearby_tags(self):
+        from maps.models import MapData
+
+        region = self.get_region()
+        center = region.regionsettings.region_center
+        if center is None:
+            self.nearby_pagetagset_list = []
+            return []
+
+        nearby_pts = PageTagSet.objects.exclude(region=region).\
+            exclude(region__regionsettings=None).exclude(region__regionsettings__region_center=None).\
+            filter(region__regionsettings__region_center__distance_lte=(center, D(mi=50)))
+        nearby_pts = nearby_pts.filter(tags__slug=self.tag)
+        nearby_pts = nearby_pts.select_related('page__mapdata')
+
+        self.nearby_pagetagset_list = nearby_pts
+        return nearby_pts
+
+    def get_nearby_map_objects(self):
+        from maps.models import MapData
+        from maps.views import popup_html
+
+        if getattr(self, 'nearby_pagetagset_list', None) is None:
+            self.get_nearby_tags()
+
+        pts = self.nearby_pagetagset_list
+        if pts == [] or not pts.exists():
+            return
+
+        pts = pts.exclude(page__mapdata=None)
+        ids = pts.values('page__id').distinct().order_by('page')
+        maps = MapData.objects.exclude(region=self.get_region()).filter(page__id__in=ids)
+        return [(obj.geom, popup_html(obj)) for obj in maps]
+
+    def map_context(self, map_objects):
+        from maps.widgets import InfoMap, map_options_for_region
+
+        if map_objects:
+            # Remove the PanZoom on normal page views.
+            olwidget_options = copy.deepcopy(getattr(settings,
+                'OLWIDGET_DEFAULT_OPTIONS', {}))
+            map_opts = olwidget_options.get('map_options', {})
+            map_controls = map_opts.get('controls', [])
+            if 'PanZoomBar' in map_controls:
+                map_controls.remove('PanZoomBar')
+            if 'PanZoom' in map_controls:
+                map_controls.remove('PanZoom')
+            if 'KeyboardDefaults' in map_controls:
+                map_controls.remove('KeyboardDefaults')
+            olwidget_options['map_options'] = map_opts
+            olwidget_options['map_div_class'] = 'mapwidget small'
+            olwidget_options.update(map_options_for_region(self.get_region()))
+            return InfoMap(
+                map_objects,
+                options=olwidget_options)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(TaggedList, self).get_context_data(*args, **kwargs)
+        region = self.get_region()
+
+        context['tag'] = self.tag
+        context['tag_name'] = self.tag_name
+        context['map'] = self.map_context(self.get_map_objects())
+
+        # Grab nearby PageTagSets
+        context['nearby_pagetagset_list'] = self.get_nearby_tags()
+        context['nearby_map'] = self.map_context(self.get_nearby_map_objects())
+
+        total_pts = PageTagSet.objects.filter(tags__slug=self.tag.slug).count()
+        region_pts = PageTagSet.objects.filter(tags__slug=self.tag.slug, region=region).count()
+        if total_pts > region_pts:
+            context['more_tags'] = True
+        else:
+            context['more_tags'] = False
+
+        if not region.regionsettings.is_meta_region:
+            zoom = region.regionsettings.region_zoom_level - 2 
+            map_params = "#zoom=%s&lon=%s&lat=%s" % (zoom, region.regionsettings.region_center.x, region.regionsettings.region_center.y)
+            context['map_params'] = map_params
+
+        return context
+
+    def handler404(self, request, *args, **kwargs):
+        tag_name = slugify(kwargs['slug'])
+        msg = (_('<p>No pages tagged "%s".</p>') % 
+             tag_name)
+        html = render_to_string('404.html', {'message': msg}, RequestContext(request))
+        return HttpResponseNotFound(html)
+
+
+class GlobalTaggedList(ListView):
+    model = PageTagSet
+    template_name = 'tags/global_pagetagset_list.html'
+
+    def get_queryset(self):
+        self.tag_name = slugify(self.kwargs['slug'])
+        return PageTagSet.objects.filter(tags__slug=self.tag_name)
+
+    def get_map_objects(self):
+        if not self.tag_name:
+            return None
+        # We re-use the GlobalMapForTag view's logic here to embed a mini-map on the
+        # tags list page
+        from maps.views import GlobalMapForTag
+        map_view = GlobalMapForTag()
+        map_view.request = self.request
+        map_view.kwargs = dict(tag=self.tag_name)
+        map_view.object_list = map_view.get_queryset()
+        return map_view.get_map_objects()
+
     def get_context_data(self, *args, **kwargs):
         from maps.widgets import InfoMap, map_options_for_region
 
-        context = super(TaggedList, self).get_context_data(*args, **kwargs)
-        context['tag'] = self.tag
+        context = super(GlobalTaggedList, self).get_context_data(*args, **kwargs)
         context['tag_name'] = self.tag_name
         map_objects = self.get_map_objects()
         if map_objects:
@@ -83,7 +200,7 @@ class TaggedList(RegionMixin, ListView):
                 map_controls.remove('KeyboardDefaults')
             olwidget_options['map_options'] = map_opts
             olwidget_options['map_div_class'] = 'mapwidget small'
-            olwidget_options.update(map_options_for_region(self.get_region()))
+            olwidget_options['cluster'] = True
             context['map'] = InfoMap(
                 map_objects,
                 options=olwidget_options)
@@ -206,6 +323,16 @@ def suggest_tags(request):
     """
     Simple tag suggest.
     """
+    def _make_unique(l):
+        d = {}
+        ll = []
+        for m in l:
+            if m['slug'] in d:
+                continue
+            ll.append(m) 
+            d[m['slug']] = True
+        return ll
+
     # XXX TODO: Break this out when doing the API work.
     import json
 
@@ -217,12 +344,19 @@ def suggest_tags(request):
         results = Tag.objects.filter(
             name__istartswith=term,
             region__id=int(region_id)).exclude(pagetagset=None)
+
+        if len(results) < 5:
+            # Set a sane limit before adding
+            results = results.values('slug').distinct().values('slug', 'name').order_by('slug')[:20]
+            global_results = Tag.objects.filter(
+                name__istartswith=term).exclude(pagetagset=None).values('slug').distinct().values('slug', 'name').order_by('slug')[:20]
+            results = _make_unique(list(results) + list(global_results))[:20]
+        else:
+            results = results.values('slug').distinct().values('slug', 'name').order_by('slug')[:20]
+
     else:
         results = Tag.objects.filter(
-            name__istartswith=term).exclude(pagetagset=None)
+            name__istartswith=term).exclude(pagetagset=None).values('slug').distinct().values('slug', 'name').order_by('slug')[:20]
 
-    # Set a sane limit
-    results = results[:20]
-
-    results = [t.name for t in results]
+    results = [t['name'] for t in results]
     return HttpResponse(json.dumps(results))

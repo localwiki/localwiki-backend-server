@@ -23,6 +23,7 @@ class Region(models.Model):
             "Keep it short and memorable!"))
     geom = models.MultiPolygonField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
+
     objects = models.GeoManager()
 
     def __unicode__(self):
@@ -40,14 +41,16 @@ class Region(models.Model):
             raise IntegrityError(_("Region already has pages in it"))
         populate_region(self)
 
-    def get_nearby_regions(self):
+    def get_nearby_regions(self, limit=6):
         # XXX CACHE
         if not self.geom:
             return
         center = self.geom.centroid
         rgs = Region.objects.exclude(geom__isnull=True).exclude(id=self.id).exclude(regionsettings__is_meta_region=True).exclude(is_active=False).distance(center).order_by('distance')
         # Return 6 nearest now. TODO: Rank by page count?
-        return rgs[:6]
+        if limit is not None:
+            return rgs[:limit]
+        return rgs
 
     def is_admin(self, user):
         """
@@ -78,6 +81,8 @@ class RegionSettings(models.Model):
     logo = models.ImageField("logo", upload_to="regions/logos/",
         storage=RandomFilenameFileSystemStorage(), null=True, blank=True)
     is_meta_region = models.BooleanField(default=False)
+
+    objects = models.GeoManager()
 
     def __unicode__(self):
         return 'settings: %s' % str(self.region)

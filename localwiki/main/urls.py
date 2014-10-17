@@ -12,6 +12,7 @@ import redirects
 import dashboard
 import links
 import regions
+import tags
 from regions.views import MainPageView
 from users.views import GlobalUserpageRedirectView
 from utils.views import NamedRedirectView
@@ -49,9 +50,9 @@ urlpatterns = patterns('',
     (r'^_api/', include('main.api.internal_urls')),
 
     (r'^(?P<region>[^/]+?)/map$', NamedRedirectView.as_view(name='maps:global')),
-    (r'^(?P<region>[^/]+?)/map/', include(maps.site.urls)),
+    (r'^', include(maps.site.urls)),
     (r'^(?P<region>[^/]+?)/tags$', NamedRedirectView.as_view(name='tags:list')),
-    (r'^(?P<region>[^/]+?)/tags/', include('tags.urls', 'tags', 'tags')),
+    (r'^', include(tags.site.urls)),
     (r'^_redirect/', include(redirects.site.urls)),
     (r'^_links/', include(links.site.urls)),
     (r'^', include('search.urls')),

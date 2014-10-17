@@ -40,12 +40,14 @@
 {% endblock %}
 
 {% block content %}
+    {% if region %}
     <div id="add_map_button"><a href="#" class="little button"><span class="text">{% trans "Add a new map" %}</span></a></div>
     <form method="GET" action="{% url 'maps:edit-without-page' region=region.slug %}" id="new_map_form">
     <input type="text" name="pagename" id="map_pagename" placeholder="{% trans "What's here? (Name of page)" %}"/>
     <input type="hidden" name="show_templates" value="1" />
     <input type="submit" value="{% trans 'Add a new map' %}" class="little">
     </form>
+    {% endif %}
     <div id="results_pane"></div>
     {{ map }}
 {% endblock %}

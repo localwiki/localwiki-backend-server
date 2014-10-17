@@ -5,7 +5,7 @@
         font-size: 80%;
     }
 </style>
-<ul class="tag-list">
+<ul class="tag-list tag-info">
 {% for tag in tag_list|dictsortreversed:"num_pages" %}
   <li class="tag"><a href="{% url 'tags:tagged' slug=tag.slug region=tag.region.slug %}">{{ tag.name }}</a> <span class="num_pages">x {{ tag.num_pages}}</span>
   </li>

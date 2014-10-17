@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block title %}{% trans "Tags" %} / {{ tag_name }} - {{ block.super }}{% endblock %}
-{% block header_title %}<a href="{% url 'tags:list' region=tag.region.slug %}">{% trans "Tags" %}</a> / {{ tag_name }}{% endblock %}
+{% block header_title %}<a href="#">{% trans "Tags" %}</a> / {{ tag_name }}{% endblock %}
 
 {% block content_wrapper %}
 <div id="content_wrapper">
@@ -14,7 +14,6 @@
   {% endif %}
   {% block content %}
     {% include "tags/tagged_list_snippet.html" %}
-    {% include "tags/nearby_tagged_list_snippet.html" %}
   {% endblock %}
     </div>
 </div>
