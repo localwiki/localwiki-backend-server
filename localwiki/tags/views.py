@@ -68,9 +68,13 @@ class TaggedList(RegionMixin, ListView):
 
         region = self.get_region()
         center = region.regionsettings.region_center
+        if center is None:
+            return []
 
         nearby_pts = PageTagSet.objects.exclude(region=region).\
+            exclude(region__regionsettings=None).exclude(region__regionsettings__region_center=None).\
             filter(region__regionsettings__region_center__distance_lte=(center, D(mi=50)))
+        nearby_pts = nearby_pts.filter(tags__slug=self.tag)
         nearby_pts = nearby_pts.select_related('page__mapdata')
 
         self.nearby_pagetagset_list = nearby_pts
