@@ -125,6 +125,13 @@ class TaggedList(RegionMixin, ListView):
         context['nearby_pagetagset_list'] = self.get_nearby_tags()
         context['nearby_map'] = self.map_context(self.get_nearby_map_objects())
 
+        total_pts = PageTagSet.objects.filter(tags__slug=self.tag.slug).count()
+        region_pts = PageTagSet.objects.filter(tags__slug=self.tag.slug, region=self.get_region()).count()
+        if total_pts > region_pts:
+            context['more_tags'] = True
+        else:
+            context['more_tags'] = False
+
         return context
 
 

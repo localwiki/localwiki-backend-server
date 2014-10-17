@@ -1,7 +1,7 @@
 {% load i18n %}
 
 {% if nearby_pagetagset_list %}
-  <h2>{% trans "Other nearby pages" %}</h2>
+  <h2 style="clear:both;">{% trans "Other nearby pages" %}</h2>
   {% if nearby_map %}
     <div id="map" class="secondary">
       {{ nearby_map }}
@@ -15,4 +15,7 @@
     {% endfor %}
     </ul>
   </div>
+{% endif %}
+{% if more_tags %}
+<a class="little button tags_button" href="{% url 'tags:global-tagged' slug=tag.slug %}">{% blocktrans with tag=tag.slug %}All LocalWiki pages tagged {{ tag }}{% endblocktrans %}</a>
 {% endif %}

@@ -488,13 +488,13 @@ textarea, input, select {
 #object_tags .tag-list {
     display: table-cell;
 }
-#object_tags .edit_tags {
+#object_tags .tags_button {
     float: left;
     display: block;
     margin-top: 0.5em;
     margin-bottom: 1em;
 }
-#object_tags .edit_tags span {
+.tags_button span {
     background: url(../img/tag-icon-small.png) 0 0 no-repeat;
     padding-left: 22px;
 }
@@ -502,6 +502,21 @@ textarea, input, select {
     display: inline-block;
     vertical-align: top;
     margin: 8px;
+}
+
+.tagpage .tags_button {
+    float: none;
+    margin-right: 2em;
+    background-image: url('../img/tag-icon-small.png');
+    padding-top: 0.4em!important;
+    padding-bottom: 0.5em!important;
+    padding-left: 30px!important;
+    padding-right: 0.8em!important;
+    font-size: 90%;
+    background-repeat: no-repeat;
+    background-position: 9px 50%;
+    display: inline-block;
+    font-weight: normal;
 }
 
 #login_info {
