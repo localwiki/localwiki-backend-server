@@ -117,6 +117,8 @@ class TaggedList(RegionMixin, ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(TaggedList, self).get_context_data(*args, **kwargs)
+        region = self.get_region()
+
         context['tag'] = self.tag
         context['tag_name'] = self.tag_name
         context['map'] = self.map_context(self.get_map_objects())
@@ -126,11 +128,15 @@ class TaggedList(RegionMixin, ListView):
         context['nearby_map'] = self.map_context(self.get_nearby_map_objects())
 
         total_pts = PageTagSet.objects.filter(tags__slug=self.tag.slug).count()
-        region_pts = PageTagSet.objects.filter(tags__slug=self.tag.slug, region=self.get_region()).count()
+        region_pts = PageTagSet.objects.filter(tags__slug=self.tag.slug, region=region).count()
         if total_pts > region_pts:
             context['more_tags'] = True
         else:
             context['more_tags'] = False
+
+        zoom = region.regionsettings.region_zoom_level - 2 
+        map_params = "#zoom=%s&lon=%s&lat=%s" % (zoom, region.regionsettings.region_center.x, region.regionsettings.region_center.y)
+        context['map_params'] = map_params
 
         return context
 
