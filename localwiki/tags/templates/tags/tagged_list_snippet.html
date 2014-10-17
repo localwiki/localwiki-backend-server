@@ -2,7 +2,11 @@
 
 {% if map %}
   <div id="map">
+    {% if region %}
     <a class="map_cover small" href="{% url 'maps:tagged' tag=tag.slug region=tag.region.slug %}"></a>
+    {% else %}
+    <a class="map_cover small" href="{% url 'maps:global-tagged' tag=tag_name %}"></a>
+    {% endif %}
     {{ map }}
     {% if region %}
     <div class="info"><a class="view tiny button" href="{% url 'maps:tagged' tag=tag.slug region=region.slug %}">{% trans "View" %}</a></div>

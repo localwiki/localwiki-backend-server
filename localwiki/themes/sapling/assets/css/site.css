@@ -492,6 +492,16 @@ textarea, input, select {
     float: left;
     clear: left;
 }
+.tag-list li.tag {
+    padding: 5px 9px 5px 16px!important;
+}
+.tagpage .tag-list li.tag {
+    padding: 3px 9px 3px 16px!important;
+}
+.tags_show .tag-list.tag-info .tag {
+    float: none;
+    clear: none;
+}
 #object_tags .tags_button {
     float: left;
     display: block;
