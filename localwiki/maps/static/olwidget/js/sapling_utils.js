@@ -2,6 +2,7 @@ SaplingMap = {
 
     is_dirty: false,
     show_links_on_hover: true,
+    cluster_all_zoom_levels: true,
 
     init_openlayers: function() {
         OpenLayers.Control.Navigation.prototype.dragPanOptions = {enableKinetic: true};
@@ -689,7 +690,10 @@ SaplingMap = {
     _setup_clustering_strategy: function() {
 
         var base_shouldCluster = OpenLayers.Strategy.Cluster.prototype.shouldCluster;
-        OpenLayers.Strategy.Cluster.prototype.shouldCluster = function(cluster, feature, dynamic) {
+        OpenLayers.Strategy.Cluster.prototype.shouldCluster = function(cluster, feature, dynamic, resolution) {
+            if (!SaplingMap.cluster_all_zoom_levels && resolution <= 76) {
+                return false;        
+            }
             // We use a different clustering strategy for dynamic maps, for now.
             if (!dynamic) {
                 return base_shouldCluster.call(this, cluster, feature);
@@ -714,7 +718,7 @@ SaplingMap = {
                             clustered = false;
                             for(var j=clusters.length-1; j>=0; --j) {
                                 cluster = clusters[j];
-                                if(this.shouldCluster(cluster, feature, this.layer.map.opts.dynamic)) {
+                                if(this.shouldCluster(cluster, feature, this.layer.map.opts.dynamic, resolution)) {
                                     this.addToCluster(cluster, feature);
                                     clustered = true;
                                     break;

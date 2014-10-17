@@ -1,5 +1,7 @@
 {% extends "maps/mapdata_list.html" %}
 
+{% block media %}{{block.super}}<script type="text/javascript">SaplingMap.cluster_all_zoom_levels = false;</script>{% endblock %}
+
 {% block content %}
     <div id="results_pane"></div>
     {{ map }}
