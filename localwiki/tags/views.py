@@ -69,6 +69,7 @@ class TaggedList(RegionMixin, ListView):
         region = self.get_region()
         center = region.regionsettings.region_center
         if center is None:
+            self.nearby_pagetagset_list = []
             return []
 
         nearby_pts = PageTagSet.objects.exclude(region=region).\
@@ -88,6 +89,9 @@ class TaggedList(RegionMixin, ListView):
             self.get_nearby_tags()
 
         pts = self.nearby_pagetagset_list
+        if pts == [] or not pts.exists():
+            return
+
         pts = pts.exclude(page__mapdata=None)
         ids = pts.values('page__id').distinct().order_by('page')
         maps = MapData.objects.exclude(region=self.get_region()).filter(page__id__in=ids)
@@ -134,9 +138,10 @@ class TaggedList(RegionMixin, ListView):
         else:
             context['more_tags'] = False
 
-        zoom = region.regionsettings.region_zoom_level - 2 
-        map_params = "#zoom=%s&lon=%s&lat=%s" % (zoom, region.regionsettings.region_center.x, region.regionsettings.region_center.y)
-        context['map_params'] = map_params
+        if not region.regionsettings.is_meta_region:
+            zoom = region.regionsettings.region_zoom_level - 2 
+            map_params = "#zoom=%s&lon=%s&lat=%s" % (zoom, region.regionsettings.region_center.x, region.regionsettings.region_center.y)
+            context['map_params'] = map_params
 
         return context
 
