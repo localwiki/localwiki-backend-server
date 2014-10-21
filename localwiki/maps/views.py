@@ -203,7 +203,8 @@ class MapForTag(MapFullRegionView):
         )
         tagsets = tags.PageTagSet.objects.filter(tags=self.tag, region=region)
         pages = Page.objects.filter(pagetagset__in=tagsets, region=region)
-        return MapData.objects.filter(page__in=pages).order_by('-length')
+        return MapData.objects.filter(page__in=pages).\
+            select_related('page').defer('page__content').order_by('-length')
 
     def get_map_title(self):
         region = self.get_region()
@@ -234,7 +235,8 @@ class GlobalMapForTag(MapBaseListView):
 
     def get_queryset(self):
         self.tag_slug = self.kwargs['tag']
-        return MapData.objects.filter(page__pagetagset__tags__slug=self.tag_slug).select_related('page').defer('page__content')
+        return MapData.objects.filter(page__pagetagset__tags__slug=self.tag_slug).\
+            select_related('page').defer('page__content')
 
     def get_map_title(self):
         d = {
