@@ -488,7 +488,7 @@ textarea, input, select {
 #object_tags .tag-list {
     display: table-cell;
 }
-.tag-list.tag-info .tag {
+.tagpage .tag-list.tag-info .tag {
     float: left;
     clear: left;
 }
