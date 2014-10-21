@@ -592,7 +592,7 @@ def setup_varnish():
             for i in range(50)
         ])
         # Now, write the varnish secret file
-        sudo('echo %s > /etc/varnish/secret')
+        sudo('echo %s > /etc/varnish/secret' % config_secrets['varnish_secret'])
         update_django_settings()
     update_varnish_settings()
 
