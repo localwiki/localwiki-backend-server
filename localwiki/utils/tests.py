@@ -51,8 +51,12 @@ class TakeNFromTests(TestCase):
 
 
 class CanonicalURLTests(TestCase):
-    def has_canonical_url(self, html, url):
-        doc = document_fromstring(html)
+    def has_canonical_url(self, url, request, response):
+        from phased.middleware import PhasedRenderMiddleware
+        phased_middleware = PhasedRenderMiddleware()
+
+        response = phased_middleware.process_response(request, response)
+        doc = document_fromstring(response.content)
         canonical_urls = doc.findall('.//link[@rel="canonical"]')
 
         if len(canonical_urls) != 1:
@@ -113,6 +117,9 @@ class CanonicalURLTests(TestCase):
         request.host = host
         set_urlconf(host.urlconf)
 
+        # Annddd we also need to render the phased template response, too! Whew.
+        
+
         yield
 
         set_urlconf(current_urlconf)
@@ -136,7 +143,7 @@ class CanonicalURLTests(TestCase):
 
             canonical_url = '//%s/sf/' % settings.MAIN_HOSTNAME
             response.render()
-            self.assertTrue(self.has_canonical_url(response.content, canonical_url))
+            self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
         #####################################################
         # The /Front_Page page in a custom domain region.
@@ -152,7 +159,7 @@ class CanonicalURLTests(TestCase):
 
             canonical_url = '//%s/sf/' % settings.MAIN_HOSTNAME
             response.render()
-            self.assertTrue(self.has_canonical_url(response.content, canonical_url))
+            self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
         #####################################################
         # The /Front_Page page on the main host inside region
@@ -168,7 +175,7 @@ class CanonicalURLTests(TestCase):
 
             canonical_url = '/sf/'
             response.render()
-            self.assertTrue(self.has_canonical_url(response.content, canonical_url))
+            self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
         #####################################################
         # The /FRONT_pAgE (changed capitalization)
@@ -184,7 +191,7 @@ class CanonicalURLTests(TestCase):
 
             canonical_url = '/sf/'
             response.render()
-            self.assertTrue(self.has_canonical_url(response.content, canonical_url))
+            self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
 
     @override_settings(CUSTOM_HOSTNAMES=['fakename.org'])
@@ -207,7 +214,7 @@ class CanonicalURLTests(TestCase):
 
             canonical_url = '//%s/sf/Parks' % settings.MAIN_HOSTNAME
             response.render()
-            self.assertTrue(self.has_canonical_url(response.content, canonical_url))
+            self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
         #####################################################
         # Now let's try it with an alternative capitalization
@@ -223,7 +230,7 @@ class CanonicalURLTests(TestCase):
 
             canonical_url = '//%s/sf/Parks' % settings.MAIN_HOSTNAME
             response.render()
-            self.assertTrue(self.has_canonical_url(response.content, canonical_url))
+            self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
         #####################################################
         # Regular page viewing directly on the main host
@@ -239,7 +246,7 @@ class CanonicalURLTests(TestCase):
 
             response.render()
             # Directly on the canonical url, so it shouldn't be rendered
-            self.assertFalse(self.has_canonical_url(response.content, ''))
+            self.assertFalse(self.has_canonical_url('', request, response))
 
         #####################################################
         # Capitalization variant viewed on the main host
@@ -255,7 +262,7 @@ class CanonicalURLTests(TestCase):
 
             canonical_url = '/sf/Parks'
             response.render()
-            self.assertFalse(self.has_canonical_url(response.content, canonical_url))
+            self.assertFalse(self.has_canonical_url(canonical_url, request, response))
 
     @override_settings(CUSTOM_HOSTNAMES=['fakename.org'])
     def test_canonical_search(self):
@@ -275,7 +282,7 @@ class CanonicalURLTests(TestCase):
             response = view(request)
 
             canonical_url = '//%s/_rsearch/sf?q=parks' % settings.MAIN_HOSTNAME
-            self.assertTrue(self.has_canonical_url(response.content, canonical_url))
+            self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
         #####################################################
         # Search page on main domain
@@ -291,7 +298,7 @@ class CanonicalURLTests(TestCase):
 
             canonical_url = ''
             # On host, so no canonical url
-            self.assertFalse(self.has_canonical_url(response.content, canonical_url))
+            self.assertFalse(self.has_canonical_url(canonical_url, request, response))
 
     @override_settings(CUSTOM_HOSTNAMES=['fakename.org'])
     def test_canonical_activity(self):
@@ -311,7 +318,7 @@ class CanonicalURLTests(TestCase):
 
             canonical_url = '//%s/sf/_activity' % settings.MAIN_HOSTNAME
             response.render()
-            self.assertTrue(self.has_canonical_url(response.content, canonical_url))
+            self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
         #####################################################
         # Activity page on normal region
@@ -328,11 +335,11 @@ class CanonicalURLTests(TestCase):
             canonical_url = ''
             response.render()
             # No canonical URL emitted
-            self.assertFalse(self.has_canonical_url(response.content, canonical_url))
+            self.assertFalse(self.has_canonical_url(canonical_url, request, response))
 
     @override_settings(CUSTOM_HOSTNAMES=['fakename.org'])
     def test_canonical_map(self):
-        from maps.views import MapGlobalView
+        from maps.views import MapFullRegionView 
 
         #####################################################
         # Main map on custom domain
@@ -343,12 +350,12 @@ class CanonicalURLTests(TestCase):
         request.META['HTTP_HOST'] = self.sf.regionsettings.domain
 
         with self.mock_hosts_middleware(request):
-            view = MapGlobalView.as_view()
+            view = MapFullRegionView.as_view()
             response = view(request)
 
             canonical_url = '//%s/sf/map/' % settings.MAIN_HOSTNAME
             response.render()
-            self.assertTrue(self.has_canonical_url(response.content, canonical_url))
+            self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
         #####################################################
         # Main map on normal region
@@ -359,13 +366,13 @@ class CanonicalURLTests(TestCase):
         request.META['HTTP_HOST'] = settings.MAIN_HOSTNAME
 
         with self.mock_hosts_middleware(request):
-            view = MapGlobalView.as_view()
+            view = MapFullRegionView.as_view()
             response = view(request, region='sf')
 
             canonical_url = ''
             response.render()
             # No canonical URL emitted
-            self.assertFalse(self.has_canonical_url(response.content, canonical_url))
+            self.assertFalse(self.has_canonical_url(canonical_url, request, response))
 
 
     @override_settings(CUSTOM_HOSTNAMES=['fakename.org'])
@@ -386,7 +393,7 @@ class CanonicalURLTests(TestCase):
 
             canonical_url = '//%s/sf/tags/park' % settings.MAIN_HOSTNAME
             response.render()
-            self.assertTrue(self.has_canonical_url(response.content, canonical_url))
+            self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
         #####################################################
         # Main map on normal region
@@ -403,7 +410,7 @@ class CanonicalURLTests(TestCase):
             canonical_url = ''
             response.render()
             # No canonical URL emitted
-            self.assertFalse(self.has_canonical_url(response.content, canonical_url))
+            self.assertFalse(self.has_canonical_url(canonical_url, request, response))
 
 
     @override_settings(CUSTOM_HOSTNAMES=['fakename.org'])
@@ -424,7 +431,7 @@ class CanonicalURLTests(TestCase):
 
             canonical_url = '//%s/sf/map/tags/park' % settings.MAIN_HOSTNAME
             response.render()
-            self.assertTrue(self.has_canonical_url(response.content, canonical_url))
+            self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
         #####################################################
         # Main map on normal region
@@ -441,7 +448,7 @@ class CanonicalURLTests(TestCase):
             canonical_url = ''
             response.render()
             # No canonical URL emitted
-            self.assertFalse(self.has_canonical_url(response.content, canonical_url))
+            self.assertFalse(self.has_canonical_url(canonical_url, request, response))
 
     @override_settings(CUSTOM_HOSTNAMES=['fakename.org'])
     def test_canonical_page_info(self):
@@ -462,7 +469,7 @@ class CanonicalURLTests(TestCase):
 
             canonical_url = '//%s/sf/Parks/_history/' % settings.MAIN_HOSTNAME
             response.render()
-            self.assertTrue(self.has_canonical_url(response.content, canonical_url))
+            self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
         #####################################################
         # Main map on normal region
@@ -479,7 +486,7 @@ class CanonicalURLTests(TestCase):
             canonical_url = ''
             response.render()
             # No canonical URL emitted
-            self.assertFalse(self.has_canonical_url(response.content, canonical_url))
+            self.assertFalse(self.has_canonical_url(canonical_url, request, response))
 
     @override_settings(CUSTOM_HOSTNAMES=['fakename.org'])
     def test_canonical_page_diff(self):
@@ -500,7 +507,7 @@ class CanonicalURLTests(TestCase):
 
             canonical_url = '//%s/sf/Parks/_history/2...1' % settings.MAIN_HOSTNAME
             response.render()
-            self.assertTrue(self.has_canonical_url(response.content, canonical_url))
+            self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
         #####################################################
         # Page diff on a normal region
@@ -517,4 +524,4 @@ class CanonicalURLTests(TestCase):
             canonical_url = ''
             response.render()
             # No canonical URL emitted
-            self.assertFalse(self.has_canonical_url(response.content, canonical_url))
+            self.assertFalse(self.has_canonical_url(canonical_url, request, response))

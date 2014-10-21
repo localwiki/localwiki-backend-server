@@ -145,7 +145,7 @@ class TaggedList(Custom404Mixin, RegionMixin, ListView):
         else:
             context['more_tags'] = False
 
-        if not region.regionsettings.is_meta_region:
+        if not region.regionsettings.is_meta_region and region.regionsettings.region_zoom_level is not None:
             zoom = region.regionsettings.region_zoom_level - 2 
             map_params = "#zoom=%s&lon=%s&lat=%s" % (zoom, region.regionsettings.region_center.x, region.regionsettings.region_center.y)
             context['map_params'] = map_params
