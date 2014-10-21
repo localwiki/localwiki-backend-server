@@ -166,7 +166,7 @@ class GlobalTaggedList(ListView):
 
     def get_queryset(self):
         self.tag_name = slugify(self.kwargs['slug'])
-        return PageTagSet.objects.filter(tags__slug=self.tag_name)
+        return PageTagSet.objects.filter(tags__slug=self.tag_name).select_related('page', 'region').defer('page__content')
 
     def get_map_objects(self):
         if not self.tag_name:
