@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-11 06:16-0500\n"
+"POT-Creation-Date: 2014-10-21 04:20-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -410,7 +410,7 @@ msgid "Save cover"
 msgstr ""
 
 #: frontpage/templates/frontpage/base.html:81
-#: pages/templates/pages/page_detail.html:51
+#: pages/templates/pages/page_detail.html:53
 #: users/templates/users/user_page.html:37
 #, python-format
 msgid ""
@@ -420,8 +420,10 @@ msgstr ""
 
 #: frontpage/templates/frontpage/base.html:90
 #: maps/templates/maps/nearby_pages.html:44
-#: pages/templates/pages/page_detail.html:59
-#: tags/templates/tags/tagged_list_snippet.html:6
+#: pages/templates/pages/page_detail.html:61
+#: tags/templates/tags/nearby_tagged_list_snippet.html:8
+#: tags/templates/tags/tagged_list_snippet.html:7
+#: tags/templates/tags/tagged_list_snippet.html:9
 msgid "View"
 msgstr ""
 
@@ -553,12 +555,24 @@ msgstr ""
 msgid "Map error: %s."
 msgstr ""
 
-#: maps/views.py:318 pages/views.py:199
+#: maps/views.py:218
+#, python-format
+msgid ""
+"<a href=\"%(map_url)s\">Map</a> for tag \"<a href=\"%(page_tag_url)s\">"
+"%(tag_name)s</a>\""
+msgstr ""
+
+#: maps/views.py:246
+#, python-format
+msgid "Map for tag \"<a href=\"%(page_tag_url)s\">%(tag_name)s</a>\""
+msgstr ""
+
+#: maps/views.py:365 pages/views.py:199
 #, python-format
 msgid "<p>What do you know about %s?</p>"
 msgstr ""
 
-#: maps/views.py:337
+#: maps/views.py:384
 #, python-format
 msgid ""
 "Map saved! You should probably go <a href=\"%s\">edit the page that was "
@@ -586,7 +600,7 @@ msgstr ""
 #: maps/templates/maps/base.html:27 maps/templates/maps/mapdata_form.html:86
 #: maps/templates/maps/mapdata_versions.html:25
 #: pages/templates/pages/base.html:29
-#: pages/templates/pages/page_detail.html:59
+#: pages/templates/pages/page_detail.html:61
 #: pages/templates/pages/page_form.html:98
 #: pages/templates/pages/page_versions.html:27
 msgid "Edit"
@@ -638,7 +652,7 @@ msgid "by"
 msgstr ""
 
 #: maps/templates/maps/mapdata_detail.html:51
-#: pages/templates/pages/page_detail.html:92
+#: pages/templates/pages/page_detail.html:94
 #, python-format
 msgid ""
 "\n"
@@ -649,7 +663,7 @@ msgid ""
 msgstr ""
 
 #: maps/templates/maps/mapdata_detail.html:55
-#: pages/templates/pages/page_detail.html:96
+#: pages/templates/pages/page_detail.html:98
 #, python-format
 msgid ""
 "\n"
@@ -693,19 +707,19 @@ msgid "Save changes"
 msgstr ""
 
 #: maps/templates/maps/mapdata_form.html:69
-#: pages/templates/pages/page_detail.html:81
+#: pages/templates/pages/page_detail.html:83
 #: pages/templates/pages/page_form.html:81
 #: users/templates/users/deactivate.html:17
 #: users/templates/users/user_page.html:150
 msgid "Cancel"
 msgstr ""
 
-#: maps/templates/maps/mapdata_list.html:43
-#: maps/templates/maps/mapdata_list.html:47
+#: maps/templates/maps/mapdata_list.html:44
+#: maps/templates/maps/mapdata_list.html:48
 msgid "Add a new map"
 msgstr ""
 
-#: maps/templates/maps/mapdata_list.html:45
+#: maps/templates/maps/mapdata_list.html:46
 msgid "What's here? (Name of page)"
 msgstr ""
 
@@ -913,16 +927,16 @@ msgstr ""
 msgid "page"
 msgstr ""
 
-#: pages/templates/pages/page_detail.html:34
+#: pages/templates/pages/page_detail.html:36
 msgid "Redirected from"
 msgstr ""
 
-#: pages/templates/pages/page_detail.html:76
+#: pages/templates/pages/page_detail.html:78
 #: users/templates/users/user_page.html:145
 msgid "Edit tags"
 msgstr ""
 
-#: pages/templates/pages/page_detail.html:76
+#: pages/templates/pages/page_detail.html:78
 #: users/templates/users/user_page.html:145
 msgid "Add tags"
 msgstr ""
@@ -1233,7 +1247,7 @@ msgid ""
 "it short and memorable!"
 msgstr ""
 
-#: regions/models.py:40
+#: regions/models.py:41
 msgid "Region already has pages in it"
 msgstr ""
 
@@ -1833,10 +1847,26 @@ msgstr ""
 msgid "Tag"
 msgstr ""
 
-#: tags/models.py:36 tags/templates/tags/pagetagset_list.html:5
+#: tags/models.py:36 tags/templates/tags/global_pagetagset_list.html:5
+#: tags/templates/tags/global_pagetagset_list.html:6
+#: tags/templates/tags/pagetagset_list.html:5
 #: tags/templates/tags/pagetagset_list.html:6
 #: tags/templates/tags/tag_list.html:5
 msgid "Tags"
+msgstr ""
+
+#: tags/views.py:157
+#, python-format
+msgid "<p>No pages tagged \"%s\".</p>"
+msgstr ""
+
+#: tags/templates/tags/nearby_tagged_list_snippet.html:4
+msgid "Other nearby pages"
+msgstr ""
+
+#: tags/templates/tags/nearby_tagged_list_snippet.html:20
+#, python-format
+msgid "All LocalWiki pages tagged %(tag)s"
 msgstr ""
 
 #: tags/templates/tags/pagetagset_diff.html:28
@@ -1885,7 +1915,7 @@ msgstr ""
 msgid "There are no tags. Add some!"
 msgstr ""
 
-#: tags/templates/tags/tagged_list_snippet.html:17
+#: tags/templates/tags/tagged_list_snippet.html:25
 #, python-format
 msgid "There are no pages with the tag \"%(tag_name)s\"."
 msgstr ""
