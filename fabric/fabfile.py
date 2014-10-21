@@ -880,8 +880,8 @@ def deploy(local=False, update_configs=None, clear_caches=None):
     note_start_deploy()
     try:
         update(local=local)
-        setup_jetty()
         if update_configs:
+            setup_jetty()
             update_apache_settings()
             update_varnish_settings()
             setup_memcached()
