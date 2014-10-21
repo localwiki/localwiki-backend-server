@@ -50,7 +50,8 @@ class TaggedList(Custom404Mixin, RegionMixin, ListView):
             self.tag = Tag.objects.get(
                 slug=self.tag_name, region=region)
             self.tag_name = self.tag.name
-            pts = PageTagSet.objects.filter(tags=self.tag, region=region)
+            pts = PageTagSet.objects.filter(tags=self.tag, region=region).\
+                select_related('page', 'region').defer('page__content')
             if not pts.exists():
                 raise Http404
             return pts
