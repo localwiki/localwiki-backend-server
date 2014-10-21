@@ -15,9 +15,9 @@
   <ul>
   {% for pagetags in pagetagset_list %}
     {% if region %}
-    <li><a href="{% url 'pages:show' slug=pagetags.page.pretty_slug region=pagetags.region.slug %}">{{ pagetags.page.name }}</a></li>
+    <li><a href="{{ pagetags.page.get_absolute_url }}">{{ pagetags.page.name }}</a></li>
     {% else %}
-    <li><a href="{% url 'pages:show' slug=pagetags.page.pretty_slug region=pagetags.region.slug %}">{{ pagetags.page.name }}</a> <span class="weak">(<a href="{{ pagetags.region.get_absolute_url }}">{{ pagetags.region.slug }}</a>)</span></li>
+    <li><a href="{{ pagetags.page.get_absolute_url }}">{{ pagetags.page.name }}</a> <span class="weak">(<a href="{{ pagetags.region.get_absolute_url }}">{{ pagetags.region.slug }}</a>)</span></li>
     {% endif %}
   {% endfor %}
   </ul>
