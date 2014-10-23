@@ -80,9 +80,20 @@ class TaggedList(Custom404Mixin, RegionMixin, ListView):
             self.nearby_pagetagset_list = []
             return []
 
+        # __dwithin=(center, 1) means: all objects within
+        # 1 degree of center. This is roughly 60 miles. This will vary slightly as we move around the earth,
+        # but the complexity of fixing this here is too great. Not a huge deal
+        # for this particular case. The real fix here is to:
+        #
+        #   1.) Use a geometry column instead of the default geography column type or
+        #   2.) Figure out how to case to a geometry column for this query, or
+        #   3.) Write a method that, given a point, finds the correct UTM_N projection,
+        #       then projects the center point into that UTM_N, then buffers by meters
+        #       around the point, and then finally does a __within= on the queryset. Whew.
+        #
         nearby_pts = PageTagSet.objects.exclude(region=region).\
             exclude(region__regionsettings=None).exclude(region__regionsettings__region_center=None).\
-            filter(region__regionsettings__region_center__distance_lte=(center, D(mi=50)))
+            filter(region__regionsettings__region_center__dwithin=(center, 1))
         nearby_pts = nearby_pts.filter(tags__slug=self.tag)
         nearby_pts = nearby_pts.select_related('page__mapdata')
 
