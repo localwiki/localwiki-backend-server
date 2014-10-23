@@ -24,7 +24,6 @@ from django.db.models import Count
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.sites.models import get_current_site
 from django.conf import settings
@@ -38,6 +37,7 @@ from regions.models import Region
 from regions import get_main_region
 from regions.views import RegionMixin, RegionAdminRequired
 from localwiki.utils.urlresolvers import reverse
+from localwiki.utils.cache import cache_page
 
 from .templatetags.user_tags import user_link
 from .models import UserProfile
