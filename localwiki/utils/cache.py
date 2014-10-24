@@ -7,9 +7,7 @@ from django.utils.decorators import decorator_from_middleware_with_args, availab
 def cache_page(*o_args, **o_kwargs):
     def _add_host_to_key_prefix(host, o_kwargs):
         key_prefix = o_kwargs.get('key_prefix', '')
-        if key_prefix and not key_prefix.startswith('%s:' % host):
-            key_prefix = '%s:%s:' % (host, key_prefix)
-        else:
+        if not key_prefix:
             key_prefix = '%s:' % host
         o_kwargs['key_prefix'] = key_prefix
 
