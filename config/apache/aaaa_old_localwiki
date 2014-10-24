@@ -767,3 +767,55 @@
     Include extra-conf/ssl.conf
     Include extra-conf/localwiki_certs.conf
 </VirtualHost>
+
+##############################################################################
+# http://guide.localwiki.org, https://guide.localwiki.org
+#
+#     -> https://localwiki.org/main/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+
+    ServerName guide.localwiki.org
+    RewriteRule ^/(.*) https://localwiki.org/main/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+
+    ServerName guide.localwiki.org
+
+    RewriteRule ^/(.*) https://localwiki.org/main/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+##############################################################################
+# http://austin.localwiki.org, https://austin.localwiki.org
+#
+#     -> https://localwiki.org/austin/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+
+    ServerName austin.localwiki.org
+    RewriteRule ^/(.*) https://localwiki.org/austin/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+
+    ServerName austin.localwiki.org
+
+    RewriteRule ^/(.*) https://localwiki.org/austin/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
