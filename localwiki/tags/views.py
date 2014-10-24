@@ -80,7 +80,7 @@ class TaggedList(Custom404Mixin, RegionMixin, ListView):
             self.nearby_pagetagset_list = []
             return []
 
-        # __dwithin=(center, 1) means: all objects within
+        # __dwithin=(center, 0.5) means: all objects within
         # 1 degree of center. This is roughly 60 miles. This will vary slightly as we move around the earth,
         # but the complexity of fixing this here is too great. Not a huge deal
         # for this particular case. The real fix here is to:
@@ -93,7 +93,7 @@ class TaggedList(Custom404Mixin, RegionMixin, ListView):
         #
         nearby_pts = PageTagSet.objects.exclude(region=region).\
             exclude(region__regionsettings=None).exclude(region__regionsettings__region_center=None).\
-            filter(region__regionsettings__region_center__dwithin=(center, 1))
+            filter(region__regionsettings__region_center__dwithin=(center, 0.5))
         nearby_pts = nearby_pts.filter(tags__slug=self.tag)
         nearby_pts = nearby_pts.select_related('page__mapdata')
 
