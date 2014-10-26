@@ -35,7 +35,7 @@ from regions.views import RegionMixin, region_404_response
 from maps.widgets import InfoMap
 from users.views import SetPermissionsView, AddContributorsMixin
 
-from .models import slugify, clean_name, Page, PageFile, url_to_name
+from .models import slugify, clean_name, Page, PageFile, url_to_name, name_to_url
 from .forms import PageForm, PageFileForm
 from .utils import is_user_page
 from .exceptions import PageExistsError
