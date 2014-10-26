@@ -36,7 +36,7 @@ def page_card(context, page):
     cache = get_cache('long-living')
     request = context['request']
 
-    card = cache.get('card:%s,%s' % (get_urlconf(), page.id))
+    card = cache.get('card:%s,%s' % (get_urlconf() or settings.ROOT_URLCONF, page.id))
     if card:
         return card
 
@@ -58,7 +58,7 @@ def page_card(context, page):
         'file': _file,
         'map': _map,
     })
-    cache.set('card:%s,%s' % (get_urlconf(), page.id), card)
+    cache.set('card:%s,%s' % (get_urlconf() or settings.ROOT_URLCONF, page.id), card)
     return card
 
 def _clear_card(sender, instance, *args, **kwargs):

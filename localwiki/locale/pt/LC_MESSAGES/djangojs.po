@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Rafael etc <rafael.etc@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-20 02:07-0500\n"
-"PO-Revision-Date: 2014-05-20 07:28+0000\n"
-"Last-Translator: philipn <philip@localwiki.org>\n"
+"POT-Creation-Date: 2014-05-20 14:26-0500\n"
+"PO-Revision-Date: 2014-10-09 17:59+0000\n"
+"Last-Translator: Rafael etc <rafael.etc@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/localwiki/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,7 +56,7 @@ msgstr "Introduza o código de incorporar"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/plugin.js:14
 msgid "Include page"
-msgstr ""
+msgstr "Incluir página"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:11
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:17
@@ -99,7 +100,7 @@ msgstr "Alinhar"
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:131
 #: pages/static/js/ckeditor/_source/plugins/simpleimage/dialogs/simpleimage.js:822
 msgid "None"
-msgstr ""
+msgstr "Nenhum"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:210
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:233
@@ -112,24 +113,24 @@ msgstr "Incluir página %s"
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:17
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:18
 msgid "List of tagged pages"
-msgstr ""
+msgstr "Lista com as páginas com tag"
 
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:24
 msgid "Tag"
-msgstr ""
+msgstr "Tag"
 
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:45
 msgid "Please enter a tag"
-msgstr ""
+msgstr "Por favor escreva uma tag"
 
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:64
 msgid "Show title"
-msgstr ""
+msgstr "Mostrar título"
 
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:213
 #, c-format
 msgid "List of pages tagged \"%s\""
-msgstr ""
+msgstr "Lista de páginas com a tag \"%s\""
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/plugin.js:34
 msgid "Attach file"
@@ -234,11 +235,11 @@ msgstr "Inserir Objecto"
 
 #: themes/sapling/assets/js/base.js:113
 msgid "Search for \"{{ value }}\""
-msgstr ""
+msgstr "Pesquisa para \"{{ value }}\""
 
 #: themes/sapling/assets/js/base.js:127 themes/sapling/assets/js/base.js:164
 msgid "Search all of LocalWiki"
-msgstr ""
+msgstr "Pesquisa por todo o LocalWiki"
 
 #: versionutils/diff/static/js/diff/htmldiff.js:24
 msgid "Previous"

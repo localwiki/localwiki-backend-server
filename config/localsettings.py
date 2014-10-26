@@ -17,6 +17,10 @@ SESSION_COOKIE_DOMAIN = '.{{ public_hostname }}'
 if SESSION_COOKIE_DOMAIN.endswith('.localhost'):
     SESSION_COOKIE_DOMAIN = None
 
+if not DEBUG:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+
 MAIN_HOSTNAME = '{{ public_hostname }}'
 CUSTOM_HOSTNAMES = [{% for hostname in custom_domains %}'{{ hostname }}', {% endfor %}]
 XSESSION_DOMAINS = [{% for hostname in custom_domains %}'{{ hostname }}', {% endfor %}'{{ public_hostname }}']
@@ -42,6 +46,8 @@ DEFAULT_FROM_EMAIL = 'dontreply@{{ public_hostname }}'
 VARNISH_MANAGEMENT_SERVERS = ('127.0.0.1:6082',)
 VARNISH_SECRET = '{{ varnish_secret }}'
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # For Sentry error logging
 RAVEN_CONFIG = {
     'dsn': '{{ sentry_secret_url }}',
@@ -53,7 +59,7 @@ RAVEN_CONFIG = {
 
 OLWIDGET_CUSTOM_LAYER_TYPES = {
     'mblw': """OpenLayers.Layer.XYZ('MB LW',
-        ["http://a.tiles.mapbox.com/v3/philipn.hjmo8m80/${z}/${x}/${y}.png"], {
+        ["//a.tiles.mapbox.com/v3/philipn.hjmo8m80/${z}/${x}/${y}.png"], {
             sphericalMercator: true,
             wrapDateLine: true,
     })""",

@@ -1,0 +1,821 @@
+##############################################################################
+# http://www.localwiki.net, http://localwiki.net/
+#
+#    -> https://localwiki.org/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName localwiki.net
+    ServerAlias www.localwiki.net
+    
+    RewriteRule ^/(.*) https://localwiki.org/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://ja.localwiki.net, http://www.ja.localwiki.net
+#
+#     -> https://ja.localwiki.org/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName ja.localwiki.net
+    ServerAlias www.ja.localwiki.net
+    
+    RewriteRule ^/(.*) https://ja.localwiki.org/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://es.localwiki.net, http://www.es.localwiki.net
+#
+#     -> https://es.localwiki.org/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName es.localwiki.net
+    ServerAlias www.es.localwiki.net
+    
+    RewriteRule ^/(.*) https://es.localwiki.org/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://fr.localwiki.net, http://www.fr.localwiki.net
+#
+#     -> https://fr.localwiki.org/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName fr.localwiki.net
+    ServerAlias www.fr.localwiki.net
+    
+    RewriteRule ^/(.*) https://fr.localwiki.org/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://nl.localwiki.net, http://www.nl.localwiki.net
+#
+#     -> https://nl.localwiki.org/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName nl.localwiki.net
+    ServerAlias www.nl.localwiki.net
+    
+    RewriteRule ^/(.*) https://nl.localwiki.org/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://de.localwiki.net, http://www.de.localwiki.net
+#
+#     -> https://de.localwiki.org/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName de.localwiki.net
+    ServerAlias www.de.localwiki.net
+    
+    RewriteRule ^/(.*) https://de.localwiki.org/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://uk.localwiki.net, http://www.uk.localwiki.net
+#
+#     -> https://uk.localwiki.org/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName uk.localwiki.net
+    ServerAlias www.uk.localwiki.net
+    
+    RewriteRule ^/(.*) https://uk.localwiki.org/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://da.localwiki.net, http://www.da.localwiki.net
+#
+#     -> https://da.localwiki.org/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName da.localwiki.net
+    ServerAlias www.da.localwiki.net
+    
+    RewriteRule ^/(.*) https://da.localwiki.org/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://it.localwiki.net, http://www.it.localwiki.net
+#
+#     -> https://it.localwiki.org/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName it.localwiki.net
+    ServerAlias www.it.localwiki.net
+    
+    RewriteRule ^/(.*) https://it.localwiki.org/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://ru.localwiki.net, http://www.ru.localwiki.net
+#
+#     -> https://ru.localwiki.org/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName ru.localwiki.net
+    ServerAlias www.ru.localwiki.net
+    
+    RewriteRule ^/(.*) https://ru.localwiki.org/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://pt.localwiki.net, http://www.pt.localwiki.net
+#
+#     -> https://pt.localwiki.org/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName pt.localwiki.net
+    ServerAlias www.pt.localwiki.net
+    
+    RewriteRule ^/(.*) https://pt.localwiki.org/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://zh.localwiki.net, http://www.zh.localwiki.net
+#
+#     -> https://zh.localwiki.org/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName zh.localwiki.net
+    ServerAlias www.zh.localwiki.net
+    
+    RewriteRule ^/(.*) https://zh.localwiki.org/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://denton.localwiki.net, http://www.denton.localwiki.net,
+# http://denton.localwiki.org/, http://www.denton.localwiki.org,
+# https://denton.localwiki.org,
+# http://dentonwiki.org, http://www.dentonwiki.org
+#
+#     -> https://localwiki.org/denton/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName dentonwiki.org
+    ServerAlias www.dentonwiki.org
+    ServerAlias denton.localwiki.org
+    ServerAlias www.denton.localwiki.org
+    ServerAlias denton.localwiki.net
+    ServerAlias www.denton.localwiki.net
+    # Used on reddit:
+    ServerName hmmm.localwiki.org
+    ServerAlias www.hmmm.localwiki.org
+
+	RewriteRule ^/ao8oddrm5hkl* https://localwiki.org/denton/ [R=301]
+    RewriteRule ^/(.*) https://localwiki.org/denton/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName denton.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/denton/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName dentonwiki.org
+    ServerAlias www.dentonwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/denton/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    SSLCertificateFile /etc/apache2/ssl/www.dentonwiki.org/www.dentonwiki.org.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/www.dentonwiki.org/www.dentonwiki.org.key
+    SSLCACertificateFile /etc/apache2/ssl/www.dentonwiki.org/intermediate.crt
+</VirtualHost>
+
+##############################################################################
+# http://kitchenerwiki.org, http://www.kitchenerwiki.org
+#
+#     -> https://localwiki.org/kitchener/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName kitchenerwiki.org
+    ServerAlias www.kitchenerwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/kitchener/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://miamiwiki.org, http://www.miamiwiki.org
+#
+#     -> https://localwiki.org/miami/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName miamiwiki.org
+    ServerAlias www.miamiwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/miami/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://antarctica.localwiki.org, http://www.antarctica.localwiki.org,
+# https://antarctica.localwiki.org
+#
+#     -> https://localwiki.org/palmer-station/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName antarctica.localwiki.org
+    ServerAlias www.antarctica.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/palmer-station/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName antarctica.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/palmer-station/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+##############################################################################
+# http://boise.localwiki.org, http://www.boise.localwiki.org,
+# https://boise.localwiki.org,
+# http://boisewiki.org, http://www.boisewiki.org
+#
+#     -> https://localwiki.org/boise/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName boise.localwiki.org
+    ServerAlias www.boise.localwiki.org
+    ServerAlias boisewiki.org
+    ServerAlias www.boisewiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/boise/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName boise.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/boise/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+##############################################################################
+# http://chico.localwiki.org, http://www.chico.localwiki.org,
+# http://chicowiki.org, http://www.chicowiki.org
+#
+#     -> https://localwiki.org/chico/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName chico.localwiki.org
+    ServerAlias www.chico.localwiki.org
+    ServerAlias chicowiki.org
+    ServerAlias www.chicowiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/chico/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://conway.localwiki.org, http://www.conway.localwiki.org
+#
+#     -> https://localwiki.org/conway/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName conway.localwiki.org
+    ServerAlias www.conway.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/conway/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName conway.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/conway/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+##############################################################################
+# http://detroit.localwiki.org, http://www.detroit.localwiki.org,
+# http://detroitwiki.org, http://www.detroitwiki.org
+#
+#     -> https://localwiki.org/detroit/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName detroit.localwiki.org
+    ServerAlias www.detroit.localwiki.org
+    ServerAlias detroitwiki.org
+    ServerAlias www.detroitwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/detroit/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://dev.localwiki.org, http://www.dev.localwiki.org,
+# https://dev.localwiki.org
+#
+#     -> https://localwiki.org/dev/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName dev.localwiki.org
+    ServerAlias www.dev.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/dev/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName dev.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/dev/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+##############################################################################
+# http://i18n.localwiki.org
+#
+#     -> https://localwiki.org/main/Translate_LocalWiki
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName i18n.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/main/Translate_LocalWiki [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://org.localwiki.org
+#
+#     -> https://localwiki.org/org/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName org.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/org/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://richmond.localwiki.org, http://www.richmond.localwiki.org,
+# https://richmond.localwiki.org
+#
+#     -> https://localwiki.org/richmond/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName richmond.localwiki.org
+    ServerAlias www.richmond.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/richmond/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName richmond.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/richmond/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+##############################################################################
+# http://richmond_va.localwiki.org, http://www.richmond_va.localwiki.org,
+# https://richmond_va.localwiki.org
+#
+#     -> https://localwiki.org/richmond-va/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName richmond_va.localwiki.org
+    ServerAlias www.richmond_va.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/richmond-va/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName richmond_va.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/richmond-va/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+##############################################################################
+# http://santacruz.localwiki.org, http://www.santacruz.localwiki.org,
+# http://scruzwiki.org, http://www.scruzwiki.org,
+# http://scruzwiki.com, http://www.scruzwiki.com,
+#
+#     -> https://localwiki.org/santacruz/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName santacruz.localwiki.org
+    ServerAlias www.santacruz.localwiki.org
+    ServerAlias scruzwiki.org
+    ServerAlias www.scruzwiki.org
+    ServerAlias scruzwiki.com
+    ServerAlias www.scruzwiki.com
+    
+    RewriteRule ^/(.*) https://localwiki.org/santacruz/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://sf.localwiki.org, http://www.sf.localwiki.org,
+# https://sf.localwiki.org,
+# http://sfwiki.org, http://www.sfwiki.org,
+#
+#     -> https://localwiki.org/sf/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName sf.localwiki.org
+    ServerAlias www.sf.localwiki.org
+    ServerAlias sfwiki.org
+    ServerAlias www.sfwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/sf/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName sf.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/sf/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+##############################################################################
+# http://sydney.localwiki.org, http://www.sydney.localwiki.org,
+# http://www.sydneywiki.org, http://sydneywiki.org,
+# https://sydney.localwiki.org
+#
+#     -> https://localwiki.org/sydney/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName sydney.localwiki.org
+    ServerAlias www.sydney.localwiki.org
+    ServerAlias sydneywiki.org
+    ServerAlias www.sydneywiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/sydney/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName sydney.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/sydney/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+##############################################################################
+# http://tacoma.localwiki.org, http://www.tacoma.localwiki.org,
+# https://tacoma.localwiki.org
+#
+#     -> https://localwiki.org/tacoma/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName tacoma.localwiki.org
+    ServerAlias www.tacoma.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/tacoma/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName tacoma.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/tacoma/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+##############################################################################
+# http://tasmania.localwiki.org, http://www.tasmania.localwiki.org,
+# https://tasmania.localwiki.org
+#
+#     -> https://localwiki.org/tasmania/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName tasmania.localwiki.org
+    ServerAlias www.tasmania.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/tasmania/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName tasmania.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/tasmania/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+##############################################################################
+# http://toronto.localwiki.org, http://www.toronto.localwiki.org,
+# http://torontowiki.org, http://www.torontowiki.org,
+#
+#     -> https://localwiki.org/toronto/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName toronto.localwiki.org
+    ServerAlias www.toronto.localwiki.org
+    ServerAlias torontowiki.org
+    ServerAlias www.torontowiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/toronto/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://triangle.localwiki.org, http://www.triangle.localwiki.org,
+# https://triangle.localwiki.org,
+# http://trianglewiki.org, http://www.trianglewiki.org,
+#
+#     -> https://localwiki.org/raleigh/ (or some other regions, such as /cary)
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName triangle.localwiki.org
+    ServerAlias www.triangle.localwiki.org
+    ServerAlias trianglewiki.org
+    ServerAlias www.trianglewiki.org
+    
+    RewriteRule ^(?i)/(cary_(.*)) https://localwiki.org/cary/$1 [R=301]
+    RewriteRule ^(?i)/(durham_(.*)) https://localwiki.org/durham/$1 [R=301]
+    RewriteRule ^/(.*) https://localwiki.org/raleigh/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName triangle.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/triangle/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+##############################################################################
+# http://tulsa.localwiki.org, http://www.tulsa.localwiki.org,
+# http://tulsawiki.org, http://www.tulsawiki.org,
+#
+#     -> https://localwiki.org/tulsa/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName tulsa.localwiki.org
+    ServerAlias www.tulsa.localwiki.org
+    ServerAlias tulsawiki.org
+    ServerAlias www.tulsawiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/tulsa/$1 [R=301]
+</VirtualHost>
+
+##############################################################################
+# http://sacramento.localwiki.org, http://www.sacramento.localwiki.org,
+# https://sacramento.localwiki.org,
+# http://sacwiki.org, http://www.sacwiki.org,
+#
+#     -> https://localwiki.org/sac/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName sacramento.localwiki.org
+    ServerAlias www.sacramento.localwiki.org
+    ServerAlias sacwiki.org
+    ServerAlias www.sacwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/sac/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+    
+    ServerName sacramento.localwiki.org
+    
+    RewriteRule ^/(.*) https://localwiki.org/sacramento/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+##############################################################################
+# http://guide.localwiki.org, https://guide.localwiki.org
+#
+#     -> https://localwiki.org/main/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+
+    ServerName guide.localwiki.org
+    RewriteRule ^/(.*) https://localwiki.org/main/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+
+    ServerName guide.localwiki.org
+
+    RewriteRule ^/(.*) https://localwiki.org/main/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>
+
+##############################################################################
+# http://austin.localwiki.org, https://austin.localwiki.org
+#
+#     -> https://localwiki.org/austin/
+##############################################################################
+
+<VirtualHost *:80>
+    RewriteEngine On
+    RewriteOptions Inherit
+
+    ServerName austin.localwiki.org
+    RewriteRule ^/(.*) https://localwiki.org/austin/$1 [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    RewriteEngine On
+    RewriteOptions Inherit
+
+    ServerName austin.localwiki.org
+
+    RewriteRule ^/(.*) https://localwiki.org/austin/$1 [R=301]
+
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+</VirtualHost>

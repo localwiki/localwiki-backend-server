@@ -54,6 +54,11 @@ class ExtractLinkTest(TestCase):
         self.assertTrue('Parks' in links)
         self.assertEqual(len(links.keys()), 1)
 
+    def test_ignore_plugins(self):
+        html = """<a class="plugin includepage" href="seed">Include page seed</a></p>"""
+        links = extract_internal_links(html)
+        self.assertEqual(len(links.keys()), 0)
+
 
 class ExtractIncludedPagesTest(TestCase):
     def test_simple_extraction(self):

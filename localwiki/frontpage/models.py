@@ -18,3 +18,6 @@ class FrontPage(models.Model):
     cover_photo_crop_bbox_lower = models.IntegerField(null=True)
 
     region = models.ForeignKey(Region)
+
+
+from . import signals

@@ -137,9 +137,16 @@ textarea, input, select {
         margin-top: 250px;
     }
     /* For an included list of tagged pages */
-    .included_page_wrapper #pagetagset.has_map {
-        margin-top: 290px;
+    #pagetagset.has_map {
+        margin-top: 280px!important;
         display: inline-block;
+    }
+    #pagetagset.has_nearby_map {
+        margin-top: 290px!important;
+        display: inline-block;
+    }
+    #map.secondary {
+        margin: 0.5em 0.5em 0.5em 0px;
     }
 }
 
@@ -262,6 +269,14 @@ textarea, input, select {
     margin-bottom: 0;
     font-size: 110%;
 }
+
+#object_title a.tag_link {
+    background: url(../img/tag-icon.png) no-repeat;
+    background-position: left center;
+    padding-left: 34px;
+    margin-left: 6px;
+}
+
 @media screen and (max-width: 700px) {
     #object_title {
       font-size: 150%;
@@ -473,14 +488,18 @@ textarea, input, select {
 #object_tags .tag-list {
     display: table-cell;
 }
-#object_tags .edit_tags {
+.tagpage .tag-list.tag-info .tag {
+    float: left;
+    clear: left;
+}
+#object_tags .tags_button {
     display: block;
     padding: 13px 10px 14px 8px;
     font-weight: normal;
     margin-top: 0.5em;
     margin-bottom: 1em;
 }
-#object_tags .edit_tags span {
+.tags_button span {
     background: url(../img/tag-icon-small.png) 0 0 no-repeat;
     padding-left: 22px;
 }
@@ -488,6 +507,21 @@ textarea, input, select {
     display: inline-block;
     vertical-align: top;
     margin: 8px;
+}
+
+.tagpage .tags_button {
+    float: none;
+    margin-right: 2em;
+    background-image: url('../img/tag-icon-small.png');
+    padding-top: 0.4em!important;
+    padding-bottom: 0.5em!important;
+    padding-left: 30px!important;
+    padding-right: 0.8em!important;
+    font-size: 90%;
+    background-repeat: no-repeat;
+    background-position: 9px 50%;
+    display: inline-block;
+    font-weight: normal;
 }
 
 #login_info {

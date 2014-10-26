@@ -2,9 +2,7 @@ from django.conf.urls import *
 from django.views.generic import TemplateView 
 from django.contrib.auth import views as auth_views
 
-from registration.views import register
-
-from .views import UserPageView, UserSettingsView, UserDeactivateView, login, logout
+from .views import UserPageView, UserSettingsView, UserDeactivateView, login, logout, register
 
 
 urlpatterns = patterns('',

@@ -8,7 +8,7 @@ from django_hosts.reverse import reverse_full
 def reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=None, current_app=None):
     original_kwargs = kwargs
     if urlconf is None:
-        urlconf = get_urlconf()
+        urlconf = get_urlconf() or settings.ROOT_URLCONF
         # We behave differently if we're using the no-region urlconf with the
         # no-region django-hosts host.
         if urlconf == 'main.urls_no_region':

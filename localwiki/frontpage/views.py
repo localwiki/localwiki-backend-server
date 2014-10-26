@@ -16,22 +16,23 @@ from maps.models import MapData
 from maps.widgets import InfoMap, map_options_for_region
 from regions.views import RegionMixin, RegionAdminRequired, TemplateView, region_404_response
 from regions.models import Region
-from localwiki.utils.views import Custom404Mixin
+from localwiki.utils.views import Custom404Mixin, CacheMixin
 
 from .models import FrontPage
 
 
-class FrontPageView(Custom404Mixin, TemplateView):
+class FrontPageView(CacheMixin, Custom404Mixin, TemplateView):
     template_name = 'frontpage/base.html'
+    cache_timeout = 60 * 60  # 1 hr, and we invalidate after Front Page save
 
     def get(self, *args, **kwargs):
         # If there's no FrontPage defined, let's send the "Front Page" Page object.
         region = self.get_region()
         if not FrontPage.objects.filter(region=region).exists() or region.regionsettings.is_meta_region:
             page_view = PageDetailView()
-            page_view.kwargs = {'slug': 'Front Page', 'region': self.get_region().slug}
+            page_view.kwargs = {'slug': 'front page', 'region': self.get_region().slug}
             page_view.request = self.request
-            return page_view.get(*args, **kwargs)
+            return page_view.get(*args, **page_view.kwargs)
         return super(FrontPageView, self).get(*args, **kwargs)
 
     def get_map_objects(self):
@@ -94,6 +95,13 @@ class FrontPageView(Custom404Mixin, TemplateView):
 
     def handler404(self, request, *args, **kwargs):
         return region_404_response(request, kwargs.get('region'))
+
+    @staticmethod
+    def get_cache_key(*args, **kwargs):
+        from django.core.urlresolvers import get_urlconf
+        urlconf = get_urlconf() or settings.ROOT_URLCONF
+        region = kwargs.get('region')
+        return '%s/%s/' % (urlconf, region)
 
 
 class CoverUploadView(RegionMixin, RegionAdminRequired, View):

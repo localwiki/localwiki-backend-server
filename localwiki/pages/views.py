@@ -35,7 +35,7 @@ from regions.views import RegionMixin, region_404_response
 from maps.widgets import InfoMap
 from users.views import SetPermissionsView, AddContributorsMixin
 
-from .models import slugify, clean_name, Page, PageFile, url_to_name, name_to_url
+from .models import slugify, clean_name, Page, PageFile, url_to_name
 from .forms import PageForm, PageFileForm
 from .utils import is_user_page
 from .exceptions import PageExistsError
@@ -44,7 +44,6 @@ from .exceptions import PageExistsError
 class BasePageDetailView(Custom404Mixin, AddContributorsMixin, RegionMixin, DetailView):
     model = Page
     context_object_name = 'page'
-    cache_keep_forever = True
 
     def get_object(self):
         slug = self.kwargs.get('slug')
@@ -97,13 +96,16 @@ class BasePageDetailView(Custom404Mixin, AddContributorsMixin, RegionMixin, Deta
 
 
 class PageDetailView(CacheMixin, BasePageDetailView):
+    cache_keep_forever = True
+
     @staticmethod
     def get_cache_key(*args, **kwargs):
         from django.core.urlresolvers import get_urlconf
-        urlconf = get_urlconf()
+        urlconf = get_urlconf() or settings.ROOT_URLCONF
         slug = kwargs.get('slug')
         region = kwargs.get('region')
-        return '%s/%s/%s' % (urlconf, region, name_to_url(slug))
+        # Control characters and whitespace not allowed in memcached keys
+        return '%s/%s/%s' % (urlconf, name_to_url(region), slugify(slug).replace(' ', '_')
 
 
 class PageVersionDetailView(BasePageDetailView):

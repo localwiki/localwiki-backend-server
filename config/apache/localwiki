@@ -15,10 +15,35 @@
     WSGIScriptAlias / {{ localwiki_root }}/localwiki.wsgi
 
     CustomLog /var/log/apache2/access.log combined
+    
+    SetEnv no-gzip  # Doesn't play well with Varnish:
+    #  If the content is gzip'ed, then Varnish won't add a Content-Length
+    #  header, which means KeepAlive effectively won't work. Bad. So we
+    #  only do gziping when the response comes /out/ of apache at the
+    #  very end here (*:443 VirtualHost below).
+
+    KeepAlive Off
 
 </VirtualHost>
 
+# Redirect HTTP -> HTTPS
 <VirtualHost *:80>
+    ServerName {{ public_hostname }}
+    ServerAlias www.{{ public_hostname }}
+    ServerAlias *.{{ public_hostname }}
+    {% for domain in custom_domains %}
+    ServerAlias {{ domain }}
+    {% endfor %}
+
+    ServerAdmin {{ server_admin_email }}
+
+    # Redirect www -> no-www
+    RewriteEngine on
+    RewriteCond %{HTTPS} off
+    RewriteRule (.*) https://{{ public_hostname }}%{REQUEST_URI} [R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
     # Virtualhost for routing to either:
     #   1) Static assets, served via apache directly.
     #   2) Application URLs, proxied to varnish first.
@@ -34,15 +59,23 @@
 
     ServerAdmin {{ server_admin_email }}
 
+    Include extra-conf/ssl.conf
+    Include extra-conf/localwiki_certs.conf
+    # Enable this if your want HSTS (recommended, but be careful)
+    # Header add Strict-Transport-Security "max-age=15768000"
+
     # Redirect www -> no-www
     RewriteEngine on
     RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
     RewriteRule ^(.*)$ http://%1$1 [R=301,L]
 
-    # XXX TEMPORARY
-    # TODO remove
-    # mis-named regions
-    RewriteRule ^/stl/(.*)$ http://localwiki.net/st-louis/$1 [R=301]
+    <Location /server-status>
+        SetHandler server-status
+        Order deny,allow
+        Deny from all
+        Allow from 127.0.0.1 ::1
+    #    Allow from 192.0.2.0/24
+    </Location>
 
     # The media directory, which contains user-uploaded content, should be set
     # to force downloads. This is *extremely* important for security reasons.
@@ -82,23 +115,28 @@
     ProxyRequests off
 
     # Route to varnish, except for some static assets
-    SetEnv proxy-nokeepalive 1
-    SetEnv force-proxy-request-1.0
-    
     ProxyPass /static/ !
     ProxyPass /media/ !
     ProxyPass /robots.txt !
     ProxyPass /sitemap.xml !
+    ProxyPass /_monitoring/ !
     ProxyPass /favicon.ico !
-    ProxyPass / http://127.0.0.1:6081/
+    ProxyPass /apple-touch-icon.png !
+    ProxyPass /apple-touch-icon.png/ !
+    ProxyPass / http://127.0.0.1:6081/ keepalive=On retry=0
 
     ProxyPassReverse /static/ !
     ProxyPassReverse /media/ !
     ProxyPassReverse /static/ !
     ProxyPassReverse /robots.txt !
     ProxyPassReverse /sitemap.xml !
+    ProxyPassReverse /_monitoring/ !
     ProxyPassReverse /favicon.ico !
-    ProxyPassReverse / http://127.0.0.1:6081/
+    ProxyPassReverse /apple-touch-icon.png !
+    ProxyPassReverse /apple-touch-icon.png/ !
+    ProxyPassReverse / http://127.0.0.1:6081/ keepalive=On
+
+    RequestHeader set X-Forwarded-Proto "https"
 
     CustomLog /var/log/apache2/access.log combined
 

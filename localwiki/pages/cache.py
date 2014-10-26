@@ -8,31 +8,30 @@ from celery import shared_task
 from varnish import VarnishManager
 
 
-def varnish_invalidate_page(p):
+def varnish_invalidate_url(url, hostname=None):
+    if not hostname:
+        hostname = settings.MAIN_HOSTNAME
+
     ban_path = r'obj.http.x-url ~ ^(?i)(%(url)s(/*)(\\?.*)?)$ && obj.http.x-host ~ ^((?i)(.*\\.)?%(host)s(:[0-9]*)?)$'
 
-    current_urlconf = get_urlconf()
+    url = urllib.unquote(url)  # Varnish needs it unquoted
+    ban_cmd = (ban_path % {'url': url, 'host': hostname}).encode('utf-8')
+    manager = VarnishManager(settings.VARNISH_MANAGEMENT_SERVERS)
+    manager.run('ban', ban_cmd, secret=settings.VARNISH_SECRET)
+
+def varnish_invalidate_page(p):
+    current_urlconf = get_urlconf() or settings.ROOT_URLCONF
 
     if p.region.regionsettings.domain:
         # Has a domain, ugh. Need to clear two URLs on two hosts, in this case
         set_urlconf('main.urls_no_region')
-        url = urllib.unquote(p.get_absolute_url())  # Varnish needs it unquoted
-        ban_cmd = (ban_path % {'url': url, 'host': p.region.regionsettings.domain}).encode('ascii')
-        manager = VarnishManager(settings.VARNISH_MANAGEMENT_SERVERS)
-        manager.run('ban', ban_cmd, secret=settings.VARNISH_SECRET)
+        varnish_invalidate_url(p.get_absolute_url(), hostname=p.region.regionsettings.domain)
 
         # Now invalidate main path on LocalWiki hub
         set_urlconf('main.urls')
-        url = p.get_absolute_url()
-        url = urllib.unquote(p.get_absolute_url())  # Varnish needs it unquoted
-        ban_cmd = ban_path % {'url': url, 'host': settings.MAIN_HOSTNAME}
-        manager = VarnishManager(settings.VARNISH_MANAGEMENT_SERVERS)
-        manager.run('ban', ban_cmd, secret=settings.VARNISH_SECRET)
+        varnish_invalidate_url(p.get_absolute_url())
     else:
-        url = p.get_absolute_url()
-        ban_cmd = ban_path % {'url': url, 'host': settings.MAIN_HOSTNAME}
-        manager = VarnishManager(settings.VARNISH_MANAGEMENT_SERVERS)
-        manager.run('ban', ban_cmd, secret=settings.VARNISH_SECRET)
+        varnish_invalidate_url(p.get_absolute_url())
 
     set_urlconf(current_urlconf)
 
@@ -43,7 +42,7 @@ def django_invalidate_page(p):
 
     from pages.views import PageDetailView
 
-    current_urlconf = get_urlconf()
+    current_urlconf = get_urlconf() or settings.ROOT_URLCONF
 
     if p.region.regionsettings.domain:
         # Has a domain, ugh. Need to clear two URLs on two hosts, in this case

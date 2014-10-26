@@ -101,16 +101,44 @@ def popup_html(mapdata=None, pagename=None):
     return mark_safe('<a href="%s">%s</a>' % (url, pagename))
 
 
-class MapGlobalView(RegionMixin, ListView):
+class MapBaseListView(ListView):
     model = MapData
+    template_name = 'maps/mapdata_list.html'
+    dynamic = False
+    zoom_to_data = True
+    filter_by_zoom = False
+    permalink = True
+
+    def get_context_data(self, **kwargs):
+        context = super(MapBaseListView, self).get_context_data(**kwargs)
+        context['map'] = self.get_map()
+        context['dynamic_map'] = self.dynamic
+        return context
+
+    def get_map_objects(self):
+        return [(obj.geom, popup_html(obj)) for obj in self.object_list]
+
+    def get_map(self):
+        map_objects = self.get_map_objects()
+        options = copy.deepcopy(getattr(settings,
+            'OLWIDGET_DEFAULT_OPTIONS', {}))
+        options.update({
+            'dynamic': self.dynamic,
+            'zoomToDataExtent': self.zoom_to_data,
+            'permalink': self.permalink,
+            'cluster': True
+        })
+        return InfoMap(map_objects, options=options)
+
+
+class MapFullRegionView(RegionMixin, MapBaseListView):
     template_name = 'maps/mapdata_list.html'
     dynamic = True
     zoom_to_data = False
     filter_by_zoom = True
-    permalink = True
 
     def get_queryset(self):
-        queryset = super(MapGlobalView, self).get_queryset()
+        queryset = super(MapFullRegionView, self).get_queryset()
         # XXX TODO TEMPORARY HACK
         queryset = queryset.exclude(page__pagetagset__tags__slug='zipcode')
         queryset = queryset.exclude(page__pagetagset__tags__slug='supervisorialdistrict')
@@ -120,15 +148,6 @@ class MapGlobalView(RegionMixin, ListView):
         # order when rendered by OpenLayers -- this creates the
         # correct stacking order.
         return filter_by_zoom(queryset, 12).order_by('-length')
-
-    def get_context_data(self, **kwargs):
-        context = super(MapGlobalView, self).get_context_data(**kwargs)
-        context['map'] = self.get_map()
-        context['dynamic_map'] = self.dynamic
-        return context
-
-    def get_map_objects(self):
-        return [(obj.geom, popup_html(obj)) for obj in self.object_list]
 
     def get_map(self):
         map_objects = self.get_map_objects()
@@ -142,9 +161,9 @@ class MapGlobalView(RegionMixin, ListView):
         return InfoMap(map_objects, options=options)
 
 
-class MapAllObjectsAsPointsView(MapGlobalView):
+class MapAllObjectsAsPointsView(MapFullRegionView):
     """
-    Like MapGlobalView, but return all objects as points and do not filter by
+    Like MapFullRegionView, but return all objects as points and do not filter by
     zoom.
     """
     dynamic = False
@@ -165,17 +184,18 @@ class EverythingEverywhereAsPointsView(MapAllObjectsAsPointsView):
         return MapData.objects.all()
 
 
-class MapForTag(MapGlobalView):
+class MapForTag(MapFullRegionView):
     """
-    All objects whose pages have a particular tag.
+    All objects whose pages have a particular tag within a region.
     """
     dynamic = False
     zoom_to_data = True
+    template_name = 'maps/mapdata_list_for_tag.html'
 
     def get_queryset(self):
         import tags.models as tags
 
-        qs = super(MapGlobalView, self).get_queryset()
+        qs = super(MapFullRegionView, self).get_queryset()
         region = self.get_region()
         self.tag = tags.Tag.objects.get(
             slug=tags.slugify(self.kwargs['tag']),
@@ -183,7 +203,8 @@ class MapForTag(MapGlobalView):
         )
         tagsets = tags.PageTagSet.objects.filter(tags=self.tag, region=region)
         pages = Page.objects.filter(pagetagset__in=tagsets, region=region)
-        return MapData.objects.filter(page__in=pages).order_by('-length')
+        return MapData.objects.filter(page__in=pages).\
+            select_related('page').defer('page__content').order_by('-length')
 
     def get_map_title(self):
         region = self.get_region()
@@ -195,12 +216,40 @@ class MapForTag(MapGlobalView):
             'tag_name': escape(self.tag.name)
         }
         return (
-            '<a href="%(map_url)s">Map</a> / '
-            '<a href="%(tag_url)s">Tags</a> / '
-            '<a href="%(page_tag_url)s">%(tag_name)s</a>' % d)
+            _('<a href="%(map_url)s">Map</a> for tag "<a href="%(page_tag_url)s">%(tag_name)s</a>"') % d
+        )
 
     def get_context_data(self, **kwargs):
         context = super(MapForTag, self).get_context_data(**kwargs)
+        context['map_title'] = self.get_map_title()
+        return context
+
+
+class GlobalMapForTag(MapBaseListView):
+    """
+    All objects whose pages have a particular tag -- globally.
+    """
+    dynamic = False
+    zoom_to_data = True
+    template_name = 'maps/mapdata_list_for_tag.html'
+
+    def get_queryset(self):
+        self.tag_slug = self.kwargs['tag']
+        return MapData.objects.filter(page__pagetagset__tags__slug=self.tag_slug).\
+            select_related('page').defer('page__content')
+
+    def get_map_title(self):
+        d = {
+            'page_tag_url': reverse('tags:global-tagged',
+                kwargs={'slug': self.tag_slug}),
+            'tag_name': escape(self.tag_slug)
+        }
+        return (
+            _('Map for tag "<a href="%(page_tag_url)s">%(tag_name)s</a>"') % d
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super(GlobalMapForTag, self).get_context_data(**kwargs)
         context['map_title'] = self.get_map_title()
         return context
 

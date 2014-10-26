@@ -1,5 +1,5 @@
 """
-This is the main management script for provisioning and managing the LocalWiki servers.
+This is the main management script for provisioning and managing the LocalWiki infrastructure.
 
 ==== Do this first ====
 
@@ -41,7 +41,7 @@ on your local machine.  Hack on the code that lives inside of
 vagrant_localwiki/localwiki.
 
 Apache, which runs the production-style setup, will be accessible at
-http://127.0.0.1:8081, but you should use :8082, the development server,
+https://127.0.0.1:8443, but you should use :8082, the development server,
 for most active work as it will automatically refresh.
 
 To test a full production-style deploy in vagrant::
@@ -49,7 +49,7 @@ To test a full production-style deploy in vagrant::
     $ cd localwiki/fabric
     $ fab vagrant deploy:local=True
 
-Then visit the production server, http://127.0.0.1:8081, on your
+Then visit the production server, https://127.0.0.1:8443, on your
 local machine.  The 'deploy:local' flag tells us to use your local
 code rather than a fresh git checkout.
 
@@ -76,10 +76,11 @@ To provision a new EC2 instance::
 
     $ fab create_ec2 provision
 
-==== Deploying to production ====
+==== Deploying to LocalWiki.org production ====
 
 After provisioning, make sure you edit `roledefs` below to point
-to the correct hosts. Then::
+to the correct hosts. You'll also need the master LocalWiki credentials
+(see below).  Then::
 
     $ fab production deploy
 
@@ -91,6 +92,7 @@ import random
 import time
 import shutil
 import json
+from copy import copy
 import string
 from collections import defaultdict
 from contextlib import contextmanager as _contextmanager
@@ -99,17 +101,30 @@ from fabric.contrib.files import upload_template, exists
 from fabric.network import disconnect_all
 from fabric.api import settings
 import boto.ec2
+import htpasswd
 from ilogue import fexpect
 
 ####################################################################
 #  Ignore `config_secrets` for development usage.
+# 
+#  Notes for folks deploying code to **localwiki.org (production)**:
+#  
+#    We will likely automate all deployments, making developer
+#    access to config secrets unneccessary for all but a very small
+#    handful of people.
 #
-#  For production deployments, you'll want to:
+#    0. Ask a devops/sysadmin for the config secrets, if necessary.
 #    1. cp config_secrets.example/ to config_secrets/
 #    2. Edit the secrets.json and other files accordingly.
+#    3. Ensure you have valid SSL certificates in config_secrets/ssl/
+#       in the format:
+#           * config_secrets/ssl/<hostname>/
+#           * config_secrets/ssl/<hostname>/<hostname>.crt
+#           * config_secrets/ssl/<hostname>/<hostname>.key
+#           * config_secrets/ssl/<hostname>/intermediate.crt (if present)
 #  
 #  You can provision without setting up these secrets, but this will
-#  allow you to e.g. have SSL, Sentry, and other stuff as we add it.
+#  enable non-self-signed SSL, Sentry, and other stuff as we add it.
 ####################################################################
 
 ####################################################################
@@ -117,7 +132,7 @@ from ilogue import fexpect
 ####################################################################
 
 roledefs = {
-    'web': ['ubuntu@localwiki.net'],
+    'web': ['ubuntu@localwiki.org'],
 }
 
 
@@ -189,7 +204,7 @@ env.localwiki_root = '/srv/localwiki'
 env.src_root = os.path.join(env.localwiki_root, 'src')
 env.virtualenv = os.path.join(env.localwiki_root, 'env')
 env.data_root = os.path.join(env.virtualenv, 'share', 'localwiki')
-env.branch = 'hub'
+env.branch = 'interim_splash_site'
 env.git_hash = None
 
 def production():
@@ -312,7 +327,8 @@ def install_system_requirements():
 
     # Ubuntu system packages
     base_system_pkg = [
-        'git'
+        'git',
+        'unattended-upgrades',
     ] 
     system_python_pkg = [
         'python-dev',
@@ -328,6 +344,7 @@ def install_system_requirements():
     memcached_pkg = ['memcached']
     varnish_pkg = ['varnish']
     web_pkg = ['yui-compressor']
+    monitoring = ['munin', 'munin-node']
 
     if env.host_type == 'test_server':
         # Travis won't start the redis server correctly
@@ -348,7 +365,8 @@ def install_system_requirements():
         varnish_pkg +
         web_pkg +
         redis_pkg + 
-        mailserver_pkg
+        mailserver_pkg +
+        monitoring
     )
     sudo('DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y --force-yes install %s' % ' '.join(packages))
 
@@ -369,12 +387,27 @@ def update_django_settings():
         context=get_context(env), use_jinja=True, use_sudo=True)
 
 def update_apache_settings():
+    # Create our extra config file directory if it doesn't already exist
+    run('mkdir -p /etc/apache2/extra-conf')
+
+    get_ssl_info()
+
     upload_template('config/apache/localwiki', '/etc/apache2/sites-available/localwiki',
         context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/apache2.conf', '/etc/apache2/apache2.conf',
         context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/ports.conf', '/etc/apache2/ports.conf',
         context=get_context(env), use_jinja=True, use_sudo=True)
+    upload_template('config/apache/bad-bots', '/etc/apache2/conf.d/bad-bots',
+        context=get_context(env), use_jinja=True, use_sudo=True)
+    upload_template('config/apache/extra-conf/ssl.conf', '/etc/apache2/extra-conf/ssl.conf',
+        context=get_context(env), use_jinja=True, use_sudo=True)
+    upload_template('config/apache/extra-conf/localwiki_certs.conf', '/etc/apache2/extra-conf/localwiki_certs.conf',
+        context=get_context(env), use_jinja=True, use_sudo=True)
+
+    if config_secrets.get('localwiki_main_production', False):
+        upload_template('config/apache/aaaa_old_localwiki', '/etc/apache2/sites-available/aaaa_old_localwiki',
+            context=get_context(env), use_jinja=True, use_sudo=True)
     sudo('service apache2 restart')
 
 def init_localwiki_install():
@@ -425,8 +458,25 @@ def install_ssl_certs():
     sudo('mkdir -p /etc/apache2/ssl')
     sudo('chown -R www-data:www-data /etc/apache2/ssl')
     sudo('chmod 700 /etc/apache2/ssl')
+
     with settings(warn_only=True):
-        put('config_secrets/ssl/*', '/etc/apache2/ssl/', use_sudo=True)
+        # We only move over our SSL certs if we're running in production:
+        if env.host_type == 'production':
+            put('config_secrets/ssl/*', '/etc/apache2/ssl/', use_sudo=True)
+
+    # If we have no actual SSL certs, let's generate a self-signed one
+    # for testing purposes.
+    ssl_files = sudo('ls -1 /etc/apache2/ssl/', user='www-data').strip().split('\n')
+    if len(ssl_files) <= 1:
+        public_hostname = get_context(env)['public_hostname']
+        # Remove port, if in hostname:
+        public_hostname = public_hostname.split(':')[0]
+        sudo('mkdir /etc/apache2/ssl/%s' % public_hostname, user='www-data')
+        with cd('/etc/apache2/ssl/%s' % public_hostname):
+            sudo('openssl req -x509 -nodes -days 1825 -newkey rsa:2048 '
+                 '-keyout %(hostname)s.key -out %(hostname)s.crt '
+                 '-subj "/C=US/ST=California/L=San Francisco/O=Self-signed cert/CN=*.%(hostname)s"' %
+                    {'hostname': public_hostname}, user='www-data')
 
 def get_ssl_info():
     """
@@ -470,6 +520,9 @@ def setup_apache():
         sudo('a2enmod proxy_http')
         sudo('a2enmod ssl')
 
+        # Disable CGI because it can be insecure
+        sudo('a2dismod cgi')
+
         # Install localwiki.wsgi
         upload_template('config/localwiki.wsgi', os.path.join(env.localwiki_root),
             context=env, use_jinja=True, use_sudo=True)
@@ -491,14 +544,19 @@ def setup_apache():
             context=get_context(env), use_jinja=True, use_sudo=True)
         upload_template('config/apache/apache2.conf', '/etc/apache2/apache2.conf',
             context=get_context(env), use_jinja=True, use_sudo=True)
+        upload_template('config/apache/bad-bots', '/etc/apache2/conf.d/bad-bots',
+            context=get_context(env), use_jinja=True, use_sudo=True)
         upload_template('config/apache/ports.conf', '/etc/apache2/ports.conf',
             context=get_context(env), use_jinja=True, use_sudo=True)
         sudo('a2ensite localwiki')
+        if config_secrets.get('localwiki_main_production', False):
+            sudo('a2ensite aaaa_old_localwiki')
 
         # Restart apache
         sudo('service apache2 restart')
 
-        setup_apache_monitoring()
+        if env.host_type == 'production':
+            setup_apache_monitoring()
 
 def setup_permissions():
     # Add the user we run commands with to the apache user group
@@ -534,7 +592,7 @@ def setup_varnish():
             for i in range(50)
         ])
         # Now, write the varnish secret file
-        sudo('echo %s > /etc/varnish/secret')
+        sudo('echo %s > /etc/varnish/secret' % config_secrets['varnish_secret'])
         update_django_settings()
     update_varnish_settings()
 
@@ -653,6 +711,15 @@ def setup_celery():
     sudo('chmod 660 /var/log/celery.log')
     sudo('service celery start')
 
+def setup_unattended_upgrades():
+    """
+    Enable unattended Ubuntu package updates.
+
+    For now, this is just set to security updates (the Ubuntu defaults).
+    """
+    upload_template('config/apt/apt.conf.d/10periodic', '/etc/apt/apt.conf.d/10periodic',
+        context=get_context(env), use_jinja=True, use_sudo=True)
+
 def setup_hostname():
     public_hostname = get_context(env)['public_hostname']
     sudo('hostname %s' % public_hostname)
@@ -660,6 +727,28 @@ def setup_hostname():
         context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/hostname/hosts', '/etc/hosts',
         context=get_context(env), use_jinja=True, use_sudo=True)
+
+def setup_munin():
+    upload_template('config/munin/apache.conf', '/etc/munin/apache.conf',
+        context=get_context(env), use_jinja=True, use_sudo=True)
+
+    if not config_secrets['munin_auth_info']:
+        # Generate a random password for now.
+        config_secrets['munin_auth_info'] = {'munin': ''.join([random.choice(string.letters + string.digits) for i in range(40)])}
+
+    if not os.path.exists('config_secrets/munin-htpasswd'):
+        f = open('config_secrets/munin-htpasswd', 'w')
+        f.close()
+
+    with htpasswd.Basic("config_secrets/munin-htpasswd") as userdb:
+        for username, password in config_secrets['munin_auth_info'].iteritems():
+            if username not in userdb:
+                userdb.add(username, password)
+            else:
+                userdb.change_password(username, password)
+
+    upload_template('config_secrets/munin-htpasswd', '/etc/munin/munin-htpasswd',
+        context=get_context(env), use_jinja=True, use_sudo=True) 
 
 def setup_mailserver():
     upload_template('config/postfix/main.cf', '/etc/postfix/main.cf',
@@ -683,8 +772,10 @@ def provision():
 
     add_ssh_keys()
     install_system_requirements()
+    setup_unattended_upgrades()
     setup_hostname()
     setup_mailserver()
+    setup_munin()
     setup_postgres()
     setup_memcached()
     setup_jetty()
@@ -789,8 +880,8 @@ def deploy(local=False, update_configs=None, clear_caches=None):
     note_start_deploy()
     try:
         update(local=local)
-        setup_jetty()
         if update_configs:
+            setup_jetty()
             update_apache_settings()
             update_varnish_settings()
             setup_memcached()
@@ -812,7 +903,7 @@ def fix_locale():
 def setup_transifex():
     with virtualenv():
         sudo('apt-get install gettext')
-        run('pip install transifex-client')
+        sudo('pip install transifex-client', user='www-data')
 
         with cd(os.path.join(env.src_root, 'localwiki')):
             run('tx init')
@@ -829,7 +920,7 @@ def pull_translations():
             with cd(os.path.join(env.src_root, 'localwiki')):
                 with virtualenv():
                     run('tx pull -a')
-                    run('localwiki-manage compilemessages')
+                    sudo('localwiki-manage compilemessages', user='www-data')
 
 def push_translations():
     with settings(warn_only=True):
@@ -840,10 +931,10 @@ def push_translations():
 
             with cd(os.path.join(env.src_root, 'localwiki')):
                 with virtualenv():
-                    run('localwiki-manage makemessages -l en')
-                    run('localwiki-manage makemessages -d djangojs -l en')
+                    sudo('localwiki-manage makemessages -l en', user='www-data')
+                    sudo('localwiki-manage makemessages -d djangojs -l en', user='www-data')
                     run('tx push -s -t')
 
 def populate_page_cards():
     with virtualenv():
-        sudo('localwiki-manage populate_page_cards', user='www-data')
+        sudo('localwiki-manage runscript populate_page_cards', user='www-data')
