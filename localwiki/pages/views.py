@@ -105,7 +105,7 @@ class PageDetailView(CacheMixin, BasePageDetailView):
         slug = kwargs.get('slug')
         region = kwargs.get('region')
         # Control characters and whitespace not allowed in memcached keys
-        return '%s/%s/%s' % (urlconf, name_to_url(region), slugify(slug).replace(' ', '_')
+        return '%s/%s/%s' % (urlconf, name_to_url(region), slugify(slug).replace(' ', '_'))
 
 
 class PageVersionDetailView(BasePageDetailView):
