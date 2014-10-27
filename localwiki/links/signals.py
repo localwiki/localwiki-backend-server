@@ -27,6 +27,9 @@ def record_page_links(page):
                 destination = page_exists[0]
             else:
                 destination = None
+            # Exists for some reason already (probably running a script that's moving between regions?)
+            if Link.objects.filter(source=page, destination=destination).exists():
+                continue
             link = Link(
                 source=page,
                 region=region,
