@@ -7,6 +7,19 @@ from tags.models import PageTagSet
 from maps.models import MapData
 
 
+def update_region_for_instance(m, region):
+    if not hasattr(m, 'region'):
+        # Doesn't have an explicit region attribute, so skip.
+        return
+    if is_versioned(m):
+        for m_h in m.versions.all():
+            m_h.region = region
+            m_h.save()
+        m.region = region
+        m.save(track_changes=False)
+    else:
+        m.save()
+
 def move_to_region(region, pages=None, redirects=None):
     """
     Move the provided `pages` and `redirects` to `region`, updating
@@ -17,19 +30,6 @@ def move_to_region(region, pages=None, redirects=None):
     # p.save(comment="Moved region"), etc.
     pages = pages or []
     redirects = redirects or []
-
-    def update_region(m, region):
-        if not hasattr(m, 'region'):
-            # Doesn't have an explicit region attribute, so skip.
-            return
-        if is_versioned(m):
-            for m_h in m.versions.all():
-                m_h.region = region
-                m_h.save()
-            m.region = region
-            m.save(track_changes=False)
-        else:
-            m.save()
 
     for p in pages:
         if Page(slug=p.slug, region=region).exists():
@@ -42,14 +42,14 @@ def move_to_region(region, pages=None, redirects=None):
         slug_rel_objs = p._get_slug_related_objs()
 
         old_region = p.region
-        update_region(p, region)
+        update_region_for_instance(p, region)
 
         for _, rel_obj in rel_objs:
             if isinstance(rel_obj, list):
                 for obj in rel_obj:
-                    update_region(obj, region)
+                    update_region_for_instance(obj, region)
             else:
-                update_region(rel_obj, region)
+                update_region_for_instance(rel_obj, region)
 
         for info in slug_rel_objs:
             unique_together = info["unique_together"]
@@ -68,8 +68,8 @@ def move_to_region(region, pages=None, redirects=None):
                 if obj.__class__.objects.filter(**obj_lookup):
                     # Already exists, so let's skip it.
                     continue
-                update_region(obj, region)
+                update_region_for_instance(obj, region)
 
     for r in redirects:
-        update_region(r.destination, region)
-        update_region(r, region)
+        update_region_for_instance(r.destination, region)
+        update_region_for_instance(r, region)
