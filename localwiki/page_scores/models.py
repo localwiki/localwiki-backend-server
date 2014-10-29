@@ -163,6 +163,9 @@ def _handle_page_score(sender, instance, created, raw, **kws):
     if raw:
         return
     if sender == Page:
+        if getattr(instance, '_in_rename', False):
+            return
+
         _calculate_page_score.delay(instance.id)
     elif sender == MapData:
         _calculate_page_score.delay(instance.page.id)

@@ -122,6 +122,13 @@ class Page(models.Model):
             d['slug'] = new_p.slug
             return d
 
+        def _already_exists(obj):
+            M = obj.__class__
+            unique_vals = unique_lookup_values_for(obj)
+            if not unique_vals:
+                return False
+            return M.objects.filter(**unique_vals).exists()
+
         from redirects.models import Redirect
         from redirects.exceptions import RedirectToSelf
 
@@ -171,6 +178,8 @@ class Page(models.Model):
                     obj.pk = None  # Reset the primary key before saving.
                     try:
                         getattr(new_p, attname).add(obj)
+                        if _already_exists(obj):
+                            continue
                         if is_versioned(obj):
                             obj.save(comment=_("Parent page renamed"))
                         else:
@@ -187,6 +196,9 @@ class Page(models.Model):
                 # This is an easy way to set obj to point to new_p.
                 setattr(new_p, attname, rel_obj)
                 rel_obj.pk = None  # Reset the primary key before saving.
+                if _already_exists(rel_obj):
+                    continue
+
                 if is_versioned(rel_obj):
                     rel_obj.save(comment=_("Parent page renamed"))
                 else:
