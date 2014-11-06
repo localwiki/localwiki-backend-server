@@ -210,7 +210,7 @@ env.virtualenv = os.path.join(env.localwiki_root, 'env')
 env.data_root = os.path.join(env.virtualenv, 'share', 'localwiki')
 env.branch = 'hub'
 env.git_hash = None
-env.keepalive = 30
+env.keepalive = 300
 
 def production():
     # Use the global roledefs
