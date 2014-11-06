@@ -92,6 +92,7 @@ import random
 import time
 import shutil
 import json
+import datetime
 from copy import copy
 import string
 from collections import defaultdict
@@ -103,6 +104,9 @@ from fabric.api import settings
 import boto.ec2
 import htpasswd
 from ilogue import fexpect
+
+import logging
+logging.basicConfig(level=logging.INFO)
 
 ####################################################################
 #  Ignore `config_secrets` for development usage.
@@ -206,6 +210,7 @@ env.virtualenv = os.path.join(env.localwiki_root, 'env')
 env.data_root = os.path.join(env.virtualenv, 'share', 'localwiki')
 env.branch = 'hub'
 env.git_hash = None
+env.keepalive = 30
 
 def production():
     # Use the global roledefs
@@ -247,6 +252,8 @@ def ec2():
     env.aws_access_key_id = config_secrets['aws_access_key_id']
     env.aws_secret_access_key = config_secrets['aws_secret_access_key']
     env.ec2_region = config_secrets['ec2_region']
+    env.ec2_instance_id = config_secrets.get('ec2_instance_id', None)
+    env.backup_ec2_region = config_secrets['backup_ec2_region']
     env.ec2_security_group = config_secrets['ec2_security_group']
     env.ec2_key_name = config_secrets['ec2_key_name']
     env.key_filename = config_secrets['ec2_key_filename']
@@ -895,6 +902,150 @@ def deploy(local=False, update_configs=None, clear_caches=None):
         raise e
     else:
         note_end_deploy()
+
+def create_ami():
+    """
+    Creates an AMI from our primary instance.
+
+    Includes the boot EBS volume as well as the
+    data EBS volume.
+    """
+    ec2()
+    conn = boto.ec2.connect_to_region(env.ec2_region,
+        aws_access_key_id=env.aws_access_key_id,
+        aws_secret_access_key=env.aws_secret_access_key
+    )
+    ami_id = conn.create_image(env.ec2_instance_id, 'localwiki-main-%s' % (int(time.time())), no_reboot=True)
+    ami = conn.get_all_images(image_ids=[ami_id])[0]
+    print "Waiting for instance AMI to be created"
+    while ami.state != 'available':
+        print '.',
+        sys.stdout.flush()
+        time.sleep(5)
+        ami = conn.get_all_images(image_ids=[ami_id])[0]
+    return ami
+
+def create_ami_and_move_to_backup_region():
+    in_region_ami = create_ami()
+
+    conn = boto.ec2.connect_to_region(env.backup_ec2_region,
+        aws_access_key_id=env.aws_access_key_id,
+        aws_secret_access_key=env.aws_secret_access_key
+    )
+    copied_image = conn.copy_image(env.ec2_region, in_region_ami.id)
+    ami = conn.get_all_images(image_ids=[copied_image.image_id])[0]
+    print "Waiting for instance AMI to be copied"
+    while ami.state != 'available':
+        print '.',
+        sys.stdout.flush()
+        time.sleep(5)
+        ami = conn.get_all_images(image_ids=[ami.id])[0]
+    return ami
+
+def run_backup(instance_type='m1.medium'):
+    """
+    You'll need to update the `ec2_instance_id` in your secrets.json for this to work.
+    """
+    ec2()
+
+    ami = create_ami_and_move_to_backup_region()
+
+    conn = boto.ec2.connect_to_region(env.backup_ec2_region,
+        aws_access_key_id=env.aws_access_key_id,
+        aws_secret_access_key=env.aws_secret_access_key
+    )
+
+    res = conn.run_instances(ami.id,
+        placement=env.backup_ec2_region + 'a',
+        key_name=env.ec2_key_name,
+        instance_type=instance_type,
+        security_groups=[env.ec2_security_group]
+    )
+    instance = res.instances[0]
+    exact_region = instance.placement
+
+    print "Spinning up backup instance. Waiting for it to start. "
+    while instance.state != 'running':
+        time.sleep(1)
+        instance.update()
+        print ".",
+        sys.stdout.flush()
+    print "Instance running."
+    print "Hostname: %s" % instance.public_dns_name
+
+    print "Waiting for instance to finish booting up. "
+    time.sleep(20)
+    print "Instance ready to receive connections. "
+
+    env.roledefs['backup_host'] = ['ubuntu@' + instance.public_dns_name]
+    env.host_string = 'ubuntu@' + instance.public_dns_name
+
+    collect_backup(instance)
+
+@roles('backup_host')
+def collect_backup(instance):
+    # Create backup directory on ephemeral storage
+    sudo('mkdir -p /mnt/backup')
+    sudo('chown -R postgres:postgres /mnt/backup')
+
+    # Dump postgres
+    sudo('pg_dumpall > /mnt/backup/pg_dumpall.sql', user='postgres')
+
+    # Remove useless cache files
+    sudo('rm -rf /srv/localwiki/env/share/localwiki/media/cache')
+
+    # Link our data directory
+    sudo('ln -s /srv/ /mnt/backup/srv')
+
+    # Set permissions so material can be easily downloaded
+    sudo('chown -R ubuntu:ubuntu /mnt/backup')
+    sudo('chown -R ubuntu:ubuntu /srv/')
+
+    print "*************************"
+    print "Backup prep complete! Just run this command to download the backup on an off-site machine:"
+    print ""
+    print "rsync -arvzL --stats --progress %s:/mnt/backup backup-%s" % (env.roledefs['backup_host'][0], int(time.time()))
+    print "NOTE: The backup is *not* encrypted, so make sure to store it on encrypted storage or GPG-encrypt it."
+    print "*************************"
+    print ""
+    print ""
+    print "*************************"
+    print "AFTER downloading the backup, run the following to clean up the temporary EC2 resources:"
+    print "fab backup_done:%s" % instance.id
+    print "*************************"
+    print ""
+
+def backup_done(instance_id):
+    ec2()
+
+    conn = boto.ec2.connect_to_region(env.backup_ec2_region,
+        aws_access_key_id=env.aws_access_key_id,
+        aws_secret_access_key=env.aws_secret_access_key
+    )
+
+    reservation = conn.get_all_instances(instance_ids=[instance_id])[0]
+    instance = reservation.instances[0]
+    volume_ids = []
+    for k in instance.block_device_mapping:
+        volume_ids.append(instance.block_device_mapping[k].volume_id)
+    volumes = conn.get_all_volumes(volume_ids=volume_ids)
+
+    print "Terminating the temporary EC2 backup instance"
+    instance.terminate()
+    time.sleep(5)
+
+    reservation = conn.get_all_instances(instance_ids=[instance_id])[0]
+    instance = reservation.instances[0]
+    while instance.state != 'terminated':
+        time.sleep(1)
+        print '.'
+
+    print "Deleting temporary EBS volumes made from the AMI/snapshots"
+    for v in volumes:
+        v.delete()
+    print "----------"
+    print "EC2 cleanup done. The AMI and snapshots have *not* been deleted, as they're good to keep around."
+    print "Consider manually cleaning out old AMIs and snapshots every once and a while!"
 
 def fix_locale():
     sudo('update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8')
