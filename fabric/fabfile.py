@@ -886,10 +886,10 @@ def deploy(local=False, update_configs=None, clear_caches=None):
 
     note_start_deploy()
     try:
-        #update(local=local)
+        update(local=local)
         if update_configs:
-            #setup_jetty()
-            #update_apache_settings()
+            setup_jetty()
+            update_apache_settings()
             update_varnish_settings()
             setup_memcached()
             # In case celery apps have changed:
