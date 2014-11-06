@@ -1,5 +1,5 @@
-Fabric==1.4.0
-boto==2.3.0
+Fabric==1.10
+boto==2.34
 shortuuid==0.2
 pexpect==2.4
 htpasswd
