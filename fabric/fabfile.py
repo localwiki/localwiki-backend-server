@@ -398,7 +398,7 @@ def update_apache_settings(restart=True):
     get_ssl_info()
 
     # Create our extra config file directory if it doesn't already exist
-    run('mkdir -p /etc/apache2/extra-conf')
+    sudo('mkdir -p /etc/apache2/extra-conf')
 
     get_ssl_info()
 
@@ -551,16 +551,7 @@ def setup_apache():
            sudo('a2dissite default')
 
         install_ssl_certs()
-
-        # Install apache config
-        update_apache_settings(restart=False)
-
-        sudo('a2ensite localwiki')
-        if config_secrets.get('localwiki_main_production', False):
-            sudo('a2ensite aaaa_old_localwiki')
-
-        # Restart apache
-        sudo('service apache2 restart')
+        update_apache_settings()
 
         if env.host_type == 'production':
             setup_apache_monitoring()
