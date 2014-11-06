@@ -606,6 +606,7 @@ def setup_varnish():
 def update_varnish_settings():
     # Add our custom configuration
     if env.host_type == 'test_server' or env.host_type == 'varnish':
+        sudo('ls -l /etc/defaults/')
         put('config/varnish/varnish.test', '/etc/defaults/varnish', use_sudo=True)
     else:
         put('config/varnish/varnish', '/etc/defaults/varnish', use_sudo=True)
@@ -886,10 +887,10 @@ def deploy(local=False, update_configs=None, clear_caches=None):
 
     note_start_deploy()
     try:
-        update(local=local)
+        #update(local=local)
         if update_configs:
-            setup_jetty()
-            update_apache_settings()
+            #setup_jetty()
+            #update_apache_settings()
             update_varnish_settings()
             setup_memcached()
             # In case celery apps have changed:
