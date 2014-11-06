@@ -606,10 +606,9 @@ def setup_varnish():
 def update_varnish_settings():
     # Add our custom configuration
     if env.host_type == 'test_server' or env.host_type == 'varnish':
-        sudo('ls -l /etc/defaults/')
-        put('config/varnish/varnish.test', '/etc/defaults/varnish', use_sudo=True)
+        put('config/varnish/varnish.test', '/etc/default/varnish', use_sudo=True)
     else:
-        put('config/varnish/varnish', '/etc/defaults/varnish', use_sudo=True)
+        put('config/varnish/varnish', '/etc/default/varnish', use_sudo=True)
     upload_template('config/varnish/default.vcl', '/etc/varnish/default.vcl',
             context=get_context(env), use_jinja=True, use_sudo=True)
     sudo('service varnish restart')
