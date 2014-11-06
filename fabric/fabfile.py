@@ -1038,7 +1038,9 @@ def backup_done(instance_id):
     instance = reservation.instances[0]
     while instance.state != 'terminated':
         time.sleep(1)
-        print '.'
+        print '.',
+        reservation = conn.get_all_instances(instance_ids=[instance_id])[0]
+        instance = reservation.instances[0]
 
     print "Deleting temporary EBS volumes made from the AMI/snapshots"
     for v in volumes:
