@@ -395,7 +395,7 @@ def update_django_settings():
 
 def update_apache_settings():
     # Create our extra config file directory if it doesn't already exist
-    run('mkdir -p /etc/apache2/extra-conf')
+    sudo('mkdir -p /etc/apache2/extra-conf')
 
     get_ssl_info()
 
@@ -542,25 +542,7 @@ def setup_apache():
            sudo('a2dissite default')
 
         install_ssl_certs()
-
-        # Get SSL information
-        get_ssl_info()
-
-        # Install apache config
-        upload_template('config/apache/localwiki', '/etc/apache2/sites-available/localwiki',
-            context=get_context(env), use_jinja=True, use_sudo=True)
-        upload_template('config/apache/apache2.conf', '/etc/apache2/apache2.conf',
-            context=get_context(env), use_jinja=True, use_sudo=True)
-        upload_template('config/apache/bad-bots', '/etc/apache2/conf.d/bad-bots',
-            context=get_context(env), use_jinja=True, use_sudo=True)
-        upload_template('config/apache/ports.conf', '/etc/apache2/ports.conf',
-            context=get_context(env), use_jinja=True, use_sudo=True)
-        sudo('a2ensite localwiki')
-        if config_secrets.get('localwiki_main_production', False):
-            sudo('a2ensite aaaa_old_localwiki')
-
-        # Restart apache
-        sudo('service apache2 restart')
+        update_apache_settings()
 
         if env.host_type == 'production':
             setup_apache_monitoring()
