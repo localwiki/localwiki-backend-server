@@ -101,7 +101,6 @@ from fabric.api import *
 from fabric.contrib.files import upload_template, exists
 from fabric.network import disconnect_all
 from fabric.api import settings
-import boto.ec2
 import htpasswd
 from ilogue import fexpect
 
