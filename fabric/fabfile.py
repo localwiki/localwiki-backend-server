@@ -249,8 +249,9 @@ def ec2():
 
     setup_config_secrets()
 
-    env.aws_access_key_id = config_secrets['aws_access_key_id']
-    env.aws_secret_access_key = config_secrets['aws_secret_access_key']
+    env.aws_access_key_id = config_secrets.get('aws_access_key_id', None) or os.getenv('AWS_ACCESS_KEY_ID')
+    env.aws_secret_access_key = config_secrets.get('aws_secret_access_key', None) or os.getenv('AWS_SECRET_ACCESS_KEY')
+    env.aws_security_token = config_secrets.get('aws_security_token', None) or os.getenv('AWS_SECURITY_TOKEN')
     env.ec2_region = config_secrets['ec2_region']
     env.ec2_instance_id = config_secrets.get('ec2_instance_id', None)
     env.backup_ec2_region = config_secrets['backup_ec2_region']
@@ -642,7 +643,8 @@ def create_ec2(ami_id=None, instance_type='m1.medium'):
 
     conn = boto.ec2.connect_to_region(env.ec2_region,
         aws_access_key_id=env.aws_access_key_id,
-        aws_secret_access_key=env.aws_secret_access_key
+        aws_secret_access_key=env.aws_secret_access_key,
+        security_token=env.aws_security_token,
     )
     # Don't delete root EBS volume on termination
     root_device = boto.ec2.blockdevicemapping.BlockDeviceType(
@@ -904,7 +906,8 @@ def create_ami():
     ec2()
     conn = boto.ec2.connect_to_region(env.ec2_region,
         aws_access_key_id=env.aws_access_key_id,
-        aws_secret_access_key=env.aws_secret_access_key
+        aws_secret_access_key=env.aws_secret_access_key,
+        security_token=env.aws_security_token,
     )
     ami_id = conn.create_image(env.ec2_instance_id, 'localwiki-main-%s' % (int(time.time())), no_reboot=True)
     ami = conn.get_all_images(image_ids=[ami_id])[0]
@@ -921,7 +924,8 @@ def create_ami_and_move_to_backup_region():
 
     conn = boto.ec2.connect_to_region(env.backup_ec2_region,
         aws_access_key_id=env.aws_access_key_id,
-        aws_secret_access_key=env.aws_secret_access_key
+        aws_secret_access_key=env.aws_secret_access_key,
+        security_token=env.aws_security_token,
     )
     copied_image = conn.copy_image(env.ec2_region, in_region_ami.id)
     ami = conn.get_all_images(image_ids=[copied_image.image_id])[0]
@@ -943,7 +947,8 @@ def run_backup(instance_type='m1.medium'):
 
     conn = boto.ec2.connect_to_region(env.backup_ec2_region,
         aws_access_key_id=env.aws_access_key_id,
-        aws_secret_access_key=env.aws_secret_access_key
+        aws_secret_access_key=env.aws_secret_access_key,
+        security_token=env.aws_security_token,
     )
 
     res = conn.run_instances(ami.id,
@@ -1011,7 +1016,8 @@ def backup_done(instance_id):
 
     conn = boto.ec2.connect_to_region(env.backup_ec2_region,
         aws_access_key_id=env.aws_access_key_id,
-        aws_secret_access_key=env.aws_secret_access_key
+        aws_secret_access_key=env.aws_secret_access_key,
+        security_token=env.aws_security_token,
     )
 
     reservation = conn.get_all_instances(instance_ids=[instance_id])[0]
