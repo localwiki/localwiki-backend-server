@@ -1,5 +1,6 @@
 from django.db.models.signals import post_save
 from django.core.cache import cache
+from django.conf import settings
 from django.core.urlresolvers import set_urlconf, get_urlconf
 
 
