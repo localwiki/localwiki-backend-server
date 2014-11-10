@@ -405,7 +405,6 @@ def register(request, backend, success_url=None, form_class=None,
                               context_instance=context)
 
 
-
 @cache_page(60 * 60 * 24)
 @csrf_exempt
 @sensitive_post_parameters()
@@ -426,7 +425,7 @@ def login(request, template_name='registration/login.html',
 
     if request.user.is_authenticated():
         # Not valid
-        return
+        return HttpResponseRedirect('/')
 
     if request.method == "POST":
         form = authentication_form(data=request.POST)
