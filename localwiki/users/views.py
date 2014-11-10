@@ -344,7 +344,7 @@ def is_safe_url(url):
 def register(request, *args, **kwargs):
     if request.user.is_authenticated():
         # Not valid
-        return
+        return HttpResponseRedirect('/')
     return base_register(request, *args, **kwargs)
 
 
@@ -368,7 +368,7 @@ def login(request, template_name='registration/login.html',
 
     if request.user.is_authenticated():
         # Not valid
-        return
+        return HttpResponseRedirect('/')
 
     if request.method == "POST":
         form = authentication_form(data=request.POST)
