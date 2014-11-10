@@ -54,13 +54,14 @@ class IncludeTagNode(IncludeContentNode):
         try:
             self.tag = Tag.objects.get(slug=slugify(self.name), region=region)
         except Tag.DoesNotExist:
-            self.tag = None
+            context['tag_name'] = self.name
+        else:
+            view = TaggedList()
+            view.kwargs = dict(slug=self.name, region=region.slug)
+            view.request = context['request']
+            view.object_list = view.get_queryset()
 
-        view = TaggedList()
-        view.kwargs = dict(slug=self.name, region=region.slug)
-        view.request = context['request']
-        view.object_list = view.get_queryset()
+            context = copy(context)
+            context.update(view.get_context_data(object_list=view.object_list))
 
-        context = copy(context)
-        context.update(view.get_context_data(object_list=view.object_list))
         return render_to_string('tags/tagged_list_snippet.html', context)
