@@ -15,6 +15,11 @@
     <li class="hide2"><a href="{% url 'blog_index' %}">{% trans "Blog" %}</a></li>
     <li class="hide1"><a href="/donate/">{% trans "Donate" %}</a></li>
     <li class="hide1"><a href="/api">{% trans "API" %}</a></li>
+    {# TODO: Make this dispatch more general #}
+    {% if request.LANGUAGE_CODE == 'ja' %}
+    <li class="hide4"><a href="{% url 'pages:show' slug='Front Page' region='main-ja' %}">{% trans "Help" %}</a></li>
+    {% else %}
     <li class="hide4"><a href="{% url 'pages:show' slug='Front Page' region='main' %}">{% trans "Help" %}</a></li>
+    {% endif %}
   </ul>
 </div>
