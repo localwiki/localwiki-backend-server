@@ -124,6 +124,7 @@ urlpatterns = patterns('',
     url(r'^_create$', PageCreateView.as_view(), name='create'),
 
     url(r'^(?P<slug>.+)/_rename$', PageRenameView.as_view(), name='rename'),
+    url(r'^(?P<slug>.+)/_move_region$', PageMoveRegionView.as_view(), name='move-region'),
 
     ##########################################################
     # Permissions

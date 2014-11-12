@@ -28,7 +28,7 @@ def record_page_links(page):
             else:
                 destination = None
             # Exists for some reason already (probably running a script that's moving between regions?)
-            if Link.objects.filter(source=page, destination=destination).exists():
+            if destination and Link.objects.filter(source=page, destination=destination).exists():
                 continue
             link = Link(
                 source=page,
@@ -49,7 +49,7 @@ def record_page_links(page):
 def _record_page_links(sender, instance, created, raw, **kws):
     # Don't create Links when importing via loaddata - they're already
     # being imported.
-    if raw or getattr(instance, '_in_rename', False):
+    if raw or getattr(instance, '_in_rename', False) or getattr(instance, '_in_move', False):
         return
     record_page_links(instance)
 

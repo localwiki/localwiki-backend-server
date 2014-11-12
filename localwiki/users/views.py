@@ -421,7 +421,7 @@ def logout(request, next_page=None,
         next_page = request.REQUEST[redirect_field_name]
         # Security check -- don't allow redirection to a different host.
         if not is_safe_url(next_page):
-            next_page = request.path
+            next_page = '/'
 
     if next_page:
         # Redirect to this page until the session has been cleared.
