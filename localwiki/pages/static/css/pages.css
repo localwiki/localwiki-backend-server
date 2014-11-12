@@ -152,10 +152,18 @@ a[href$='.DOCX'] {
 }
 
 /* External links */
+a[href^='http:']:before, a[href^='https:']:before {
+    font-family: FontAwesome;
+    font-size: 70%;
+    content: "\f08e  ";
+    color: #969696;
+    position: absolute;
+    margin-left: -1.3em;
+    margin-top: 2px;
+    text-decoration: none;
+}
 a[href^='http:'], a[href^='https:'] {
-    background: url(../img/external_link.png) no-repeat;
-    background-position: left center;
-    padding-left: 16px;
+    padding-left: 1.1em;
 }
 
 a[href^='http://www.facebook.com/'], a[href^='https://www.facebook.com/'] {
