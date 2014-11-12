@@ -59,7 +59,7 @@
     <div id="map">
       <a class="map_cover small" href="{% url 'maps:show' slug=page.pretty_slug region=page.region.slug %}"></a>
       {{ map }}
-      <div class="info"><a class="view tiny button" href="{% url 'maps:show' slug=page.pretty_slug region=page.region.slug %}"><i class="fa fa-search fa-flip-horizontal"></i> {% trans "View" %}</a><a class="edit tiny button" href="{% url 'maps:edit' slug=page.pretty_slug region=page.region.slug %}"><i class="fa fa-pencil-square-o "></i> {% trans "Edit" %}</a></div>
+      <div class="info"><a class="view tiny button" href="{% url 'maps:show' slug=page.pretty_slug region=page.region.slug %}"><i class="fa fa-search fa-flip-horizontal"></i> {% trans "View" %}</a><a class="edit tiny button" href="{% url 'maps:edit' slug=page.pretty_slug region=page.region.slug %}"><i class="fa fa-pencil"></i> {% trans "Edit" %}</a></div>
     </div>
     {% endif %}
 
@@ -76,7 +76,7 @@
     <div class="tags_show">
       {% page_tags page %}
       <a class="tiny button tags_button" href="#" onclick="$(this).closest('div').hide().next().show().find('#tagedit-input').focus(); return false;">
-        <span>{% if page.pagetagset.tags.count %}{% trans "Edit tags" %}{% else %}{% trans "Add tags" %}{% endif %}</span>
+        <span><i class="fa fa-tag fa-flip-horizontal"></i> {% if page.pagetagset.tags.count %}{% trans "Edit tags" %}{% else %}{% trans "Add tags" %}{% endif %}</span>
       </a>
     </div>
     <div class="tags edit" style="display: none">

@@ -215,9 +215,6 @@ textarea, input, select {
 .mapdata #header_bar .inner:before {
     background: url(../img/map-icon.png) 3px 0 no-repeat;
 }
-.tagpage #header_bar .inner:before {
-    background: url(../img/tag-icon.png) no-repeat;
-}
 @media screen and (max-width: 700px) {
     #header_bar {
         /* margin-top: 3.5em; */
@@ -326,9 +323,7 @@ textarea, input, select {
     float: none;
     display: inline-block;
     margin-right: 2em;
-    background-image: url(../img/edit_icon.png);
-
-    padding-left: 25px;
+    padding-left: 12px;
     font-size: 90%;
     background-repeat: no-repeat;
     background-position: 9px 50%;
@@ -509,8 +504,6 @@ textarea, input, select {
     margin-bottom: 1em;
 }
 .tags_button span {
-    background: url(../img/tag-icon-small.png) 0 0 no-repeat;
-    padding-left: 22px;
 }
 #object_tags .edit_tags_cancel {
     display: inline-block;
@@ -1313,6 +1306,11 @@ input.little {
     font-weight: normal;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
+/* Fix font-awesome height on buttons using fa */
+.tiny.button.tags_button {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
 .button.cancel {
 }
 
@@ -1667,8 +1665,17 @@ input:focus {
 }
 
 #activityfeed .tags .changelabel span {
-    background: url(../img/tag-icon-small.png) 0 0 no-repeat;
     padding-left: 20px;
+}
+
+#activityfeed .tags .changelabel span {
+    padding-left: 0;
+}
+#activityfeed .tags .changelabel span:before {
+    font-family: FontAwesome;
+    content: "\f02b";
+    padding-right: 0.3em;
+    color: #969696;
 }
 
 #signup_new_explainer h3 {
@@ -2623,6 +2630,15 @@ table.noborder, table.noborder td {
 .button .fa {
     font-size: 90%;
     color: #969696;
+}
+
+#object_title .fa {
+    color: #969696;
+    margin-right: 0.5em;
+}
+
+#object_title .fa-tag {
+    color: #6B87C0;
 }
 
 /*

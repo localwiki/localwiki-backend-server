@@ -142,7 +142,7 @@
     <div class="tags_show">
       {% page_tags page %}
       <a class="tiny button tags_button" href="#" onclick="$(this).closest('div').hide().next().show().find('#tagedit-input').focus(); return false;">
-        <span>{% if page.pagetagset.tags.count %}{% trans "Edit tags" %}{% else %}{% trans "Add tags" %}{% endif %}</span>
+        <span><i class="fa fa-tag fa-flip-horizontal"></i> {% if page.pagetagset.tags.count %}{% trans "Edit tags" %}{% else %}{% trans "Add tags" %}{% endif %}</span>
       </a>
     </div>
     <div class="tags edit" style="display: none">

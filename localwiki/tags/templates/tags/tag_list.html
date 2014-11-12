@@ -3,7 +3,7 @@
 {% load cache %}
 
 {% block title %}{% trans "Tags" %} - {{ block.super }}{% endblock %}
-{% block header_title %}{% trans "All tags" %}{% endblock %}
+{% block header_title %}<i class="fa fa-tag fa-flip-horizontal"></i> {% trans "All tags" %}{% endblock %}
 
 {% block content %}
   {% if tag_list %}
