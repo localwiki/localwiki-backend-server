@@ -157,6 +157,7 @@ a[href^='http:']:before, a[href^='https:']:before {
     font-size: 70%;
     content: "\f08e  ";
     color: #969696;
+    font-weight: normal!important;
     position: absolute;
     margin-left: -1.3em;
     margin-top: 2px;
@@ -166,16 +167,34 @@ a[href^='http:'], a[href^='https:'] {
     padding-left: 1.1em;
 }
 
+a[href^='http://www.facebook.com/']:before, a[href^='https://www.facebook.com/']:before {
+    font-family: FontAwesome;
+    font-size: 105%;
+    content: "\f082  ";
+    color: #36549d;
+    font-weight: normal!important;
+    position: absolute;
+    margin-left: -1.1em;
+    margin-top: 0px;
+    text-decoration: none;
+}
 a[href^='http://www.facebook.com/'], a[href^='https://www.facebook.com/'] {
-    background: url(../img/facebook_link.png) no-repeat;
-    background-position: left center;
-    padding-left: 16px;
+    padding-left: 1.5em;
 }
 
+a[href^='http://twitter.com/']:before, a[href^='https://twitter.com/']:before {
+    font-family: FontAwesome;
+    font-size: 105%;
+    content: "\f099  ";
+    color: #0099d2;
+    font-weight: normal!important;
+    position: absolute;
+    margin-left: -1.05em;
+    margin-top: 1px;
+    text-decoration: none;
+}
 a[href^='http://twitter.com/'], a[href^='https://twitter.com/'] {
-    background: url(../img/twitter_link.png) no-repeat;
-    background-position: left center;
-    padding-left: 16px;
+    padding-left: 1.5em;
 }
 
 /* Mailto links */
