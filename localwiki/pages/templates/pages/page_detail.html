@@ -59,7 +59,7 @@
     <div id="map">
       <a class="map_cover small" href="{% url 'maps:show' slug=page.pretty_slug region=page.region.slug %}"></a>
       {{ map }}
-      <div class="info"><a class="view tiny button" href="{% url 'maps:show' slug=page.pretty_slug region=page.region.slug %}">{% trans "View" %}</a><a class="edit tiny button" href="{% url 'maps:edit' slug=page.pretty_slug region=page.region.slug %}">{% trans "Edit" %}</a></div>
+      <div class="info"><a class="view tiny button" href="{% url 'maps:show' slug=page.pretty_slug region=page.region.slug %}"><i class="fa fa-search fa-flip-horizontal"></i> {% trans "View" %}</a><a class="edit tiny button" href="{% url 'maps:edit' slug=page.pretty_slug region=page.region.slug %}"><i class="fa fa-pencil-square-o "></i> {% trans "Edit" %}</a></div>
     </div>
     {% endif %}
 

@@ -10,9 +10,9 @@
       {% endif %}
       {{ map }}
       {% if region %}
-      <div class="info"><a class="view tiny button" href="{% url 'maps:tagged' tag=tag.slug region=region.slug %}">{% trans "View" %}</a></div>
+      <div class="info"><a class="view tiny button" href="{% url 'maps:tagged' tag=tag.slug region=region.slug %}"><i class="fa fa-search fa-flip-horizontal"></i> {% trans "View" %}</a></div>
       {% else %}
-      <div class="info"><a class="view tiny button" href="{% url 'maps:global-tagged' tag=tag_name %}">{% trans "View" %}</a></div>
+      <div class="info"><a class="view tiny button" href="{% url 'maps:global-tagged' tag=tag_name %}"><i class="fa fa-search fa-flip-horizontal"></i> {% trans "View" %}</a></div>
       {% endif %}
     </div>
   {% endif %}

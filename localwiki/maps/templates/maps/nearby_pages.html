@@ -41,7 +41,7 @@
       {% else %}
           <div id="map">
             {{ map }}
-            <div class="info"><a id="view_map" class="view tiny button" href="{% url 'maps:global' region=region.slug %}#zoom=15&lat={{ request.GET.lat }}&amp;lon={{ request.GET.lng }}">{% trans "View" %}</a></div>
+            <div class="info"><a id="view_map" class="view tiny button" href="{% url 'maps:global' region=region.slug %}#zoom=15&lat={{ request.GET.lat }}&amp;lon={{ request.GET.lng }}"><i class="fa fa-search fa-flip-horizontal"></i> {% trans "View" %}</a></div>
           </div>
           <div id="nearby_maps">
             <ul>

@@ -14,7 +14,7 @@
           <a class="map_cover small" href="{% url 'map_for_global_search' %}?{{ request.GET.urlencode }}"></a>
           {{ map }}
           <div class="info">
-            <a class="view tiny button" href="{% url 'map_for_global_search' %}?{{ request.GET.urlencode }}">{% trans "View" %}</a>
+            <a class="view tiny button" href="{% url 'map_for_global_search' %}?{{ request.GET.urlencode }}"><i class="fa fa-search fa-flip-horizontal"></i> {% trans "View" %}</a>
             {% if page.has_previous or page.has_next %}
             <div class="simple_pagination">
               {% if page.has_previous %}

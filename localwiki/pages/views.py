@@ -103,6 +103,7 @@ class PageDetailView(CacheMixin, BasePageDetailView):
     @staticmethod
     def get_cache_key(*args, **kwargs):
         from django.core.urlresolvers import get_urlconf
+        from pages.models import name_to_url
         urlconf = get_urlconf() or settings.ROOT_URLCONF
         slug = kwargs.get('slug')
         region = kwargs.get('region')

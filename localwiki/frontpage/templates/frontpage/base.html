@@ -116,7 +116,7 @@ and submit using #cover_form.
         <div id="map">
           <a class="map_cover small" href="{% url 'maps:global' region=page.region.slug %}"></a>
           {{ map }}
-          <div class="info"><a class="view tiny button" href="{% url 'maps:global' region=page.region.slug %}">{% trans "View" %}</a></div>
+          <div class="info"><a class="view tiny button" href="{% url 'maps:global' region=page.region.slug %}"><i class="fa fa-search fa-flip-horizontal"></i> {% trans "View" %}</a></div>
         </div>
         {% endif %}
 
