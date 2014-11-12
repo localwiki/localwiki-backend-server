@@ -20,11 +20,36 @@ def update_region_for_instance(m, region):
     else:
         m.save()
 
+def clear_regenerable_dependencies(page):
+    from links.models import Link, IncludedPage, IncludedTagList
+    from pages.cache import _page_cache_pre_delete
+
+    links_from_here = Link.objects.filter(source=page)
+    links_from_here.delete()
+
+    links_to_here = Link.objects.filter(destination=page)
+    links_to_here.delete()
+
+    pages_included_here = IncludedPage.objects.filter(source=page)
+    pages_included_here.delete()
+
+    pages_that_include_this = IncludedPage.objects.filter(included_page=page)
+    pages_that_include_this.delete()
+
+    included_tags = IncludedTagList.objects.filter(source=page)
+    included_tags.delete()
+
+    # Clear the caches
+    _page_cache_pre_delete(Page, page)
+
 def move_to_region(region, pages=None, redirects=None):
     """
     Move the provided `pages` and `redirects` to `region`, updating
     all related objects accordingly.
     """
+    from tags.models import PageTagSet
+    from tags.tag_utils import fix_tags
+
     # XXX and TODO: right now this just rewrites the version history.  When we're
     # versioning Regions we should make this do something like
     # p.save(comment="Moved region"), etc.
@@ -36,6 +61,10 @@ def move_to_region(region, pages=None, redirects=None):
             # Page already exists in the new region, so let's
             # skip moving it.
             continue
+
+        p._in_move = True
+        clear_regenerable_dependencies(p)
+
 
         # Need to get these before moving the page itself.
         rel_objs = p._get_related_objs()
@@ -69,6 +98,13 @@ def move_to_region(region, pages=None, redirects=None):
                     # Already exists, so let's skip it.
                     continue
                 update_region_for_instance(obj, region)
+
+            p._in_move = False
+
+            fix_tags(region, pts_qs=PageTagSet.objects.filter(page=p))
+
+            # Save page to fire signals
+            p.save(track_changes=False)
 
     for r in redirects:
         update_region_for_instance(r.destination, region)

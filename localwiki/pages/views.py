@@ -541,6 +541,54 @@ class PageRenameView(PermissionRequiredMixin, RegionMixin, FormView):
             kwargs={'region': region.slug, 'slug': self.new_pagename})
 
 
+class MoveRegionForm(forms.Form):
+    new_region = forms.CharField(max_length=255, label=ugettext_lazy("Move to region (short name)"))
+
+
+class PageMoveRegionView(PermissionRequiredMixin, RegionMixin, FormView):
+    form_class = MoveRegionForm
+    template_name = 'pages/page_move_region.html'
+    permission = 'is_staff'
+
+    def get_object(self):
+        page_slug = slugify(self.kwargs['slug'])
+        self.page = Page.objects.get(slug=page_slug, region=self.get_region())
+        return self.page
+
+    def form_valid(self, form):
+        from regions.utils import move_to_region
+
+        self.page = self.get_object()
+        self.new_region_slug = form.cleaned_data['new_region']
+        self.new_region = Region.objects.get(slug__iexact=self.new_region_slug)
+
+        move_to_region(self.new_region, pages=[self.page]) 
+        return HttpResponseRedirect(self.get_success_url())
+
+    def success_msg(self):
+        # NOTE: This is eventually marked as safe when rendered in our
+        # template.  So do *not* allow unescaped user input!
+        return ('<div>' + _('Page moved to <a href="%(page_url)s">%(page_name)s</a> on <a href="%(region_url)s">%(region_slug)s</a>') + '</div>') % {
+            'page_url': self.page.get_absolute_url(),
+            'page_name': self.page.name,
+            'region_url': self.new_region.get_absolute_url(),
+            'region_slug': self.new_region_slug,
+        }
+
+    def get_success_url(self):
+        region = self.get_region()
+        messages.add_message(self.request, messages.SUCCESS,
+            self.success_msg())
+        # Redirect back to the (now empty) page on the old region.
+        return reverse('pages:show',
+            kwargs={'region': region.slug, 'slug': self.page.pretty_slug})
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(PageMoveRegionView, self).get_context_data(*args, **kwargs)
+        context['page'] = self.page
+        return context
+
+
 class PagePermissionsView(SetPermissionsView):
     template_name = 'pages/page_permissions.html'
 

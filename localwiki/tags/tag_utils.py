@@ -27,9 +27,11 @@ def fix_tags(region, pts_qs=None):
                     tag = tag[0]
                 else:
                     # Create new Tag
-                    tag = copy(pts.tag)
-                    tag.pk = None
-                    tag.region = region
+                    tag = Tag(
+                        name=t_h.name,
+                        slug=t_h.slug,
+                        region=region
+                    )
                     tag.save()
                 new_t_h = tag.versions.most_recent()
                 add.append(new_t_h)

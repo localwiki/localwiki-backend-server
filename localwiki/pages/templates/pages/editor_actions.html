@@ -1,4 +1,5 @@
 {% load i18n %}
+
 {% block editor_actions %}
     {% if not page.slug == 'front page' %}
       {% if page.exists %}
@@ -13,5 +14,8 @@
       {% else %}
          <li><a href="{% url 'redirects:permissions' slug=page.name region=page.region.slug %}" class="little button security"><span class="text">{% trans "Security" %}</span></a></li>
       {% endif %}
+    {% endif %}
+    {% if page.exists and request.user.is_staff %}
+      <li><a href="{% url 'pages:move-region' slug=page.pretty_slug region=page.region.slug %}" class="little button"><span class="text">{% trans "Move" %}</span></a></li>
     {% endif %}
     {% endblock %}

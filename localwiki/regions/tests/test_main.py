@@ -149,6 +149,29 @@ class MoveRegionTests(TestCase):
         # ..and page
         self.assertTrue(Page.objects.filter(slug='page content not moved directly', region=self.oak).exists())
 
+    def test_move_with_links(self):
+        from links.models import Link
+
+        other = Page(
+            name="otherexists",
+            content="<p>blah</p>",
+            region=self.sf
+        )
+        other.save()
+
+        p = Page(region=self.sf)
+        p.content = '<p>A page <a href="otherexists">other</a> and <a href="otherdoesnotexist">other</a>.</p>'
+        p.name = "Base page"
+        p.save()
+
+        move_to_region(self.oak, pages=[p])
+        links = Link.objects.filter(source__slug='base page')
+        self.assertEqual(len(links), 2)
+        for link in links:
+            self.assertEqual(link.source.region, self.oak)
+            self.assertEqual(link.destination, None)
+            self.assertEqual(link.region, self.oak)
+
 
 class RegionPermissionTests(TestCase):
     def setUp(self):
