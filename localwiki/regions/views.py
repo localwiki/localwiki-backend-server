@@ -4,6 +4,7 @@ import urllib
 
 from django.conf import settings
 from django.views.generic import TemplateView as DjangoTemplateView
+from django.utils.translation import get_language
 from django.views.generic import View, ListView
 from django.db import connection
 from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
@@ -155,9 +156,13 @@ class RegionListView(ListView):
         olwidget_options = copy.deepcopy(getattr(settings,
             'OLWIDGET_DEFAULT_OPTIONS', {}))
 
-        # Center to show most of the US'ish
-        olwidget_options['default_lat'] = 39.79
-        olwidget_options['default_lon'] = -100.99
+        if get_language() in settings.LANGUAGE_DEFAULT_CENTERS:
+            olwidget_options['default_lat'], olwidget_options['default_lon'] = settings.LANGUAGE_DEFAULT_CENTERS[get_language()]
+            olwidget_options['default_zoom'] =  5
+        else:
+            # Center to show most of the US'ish
+            olwidget_options['default_lon'] = -100.99
+            olwidget_options['default_lat'] = 39.79
         olwidget_options['zoomToDataExtent'] = self.zoom_to_data
 
         map_opts = olwidget_options.get('map_options', {})

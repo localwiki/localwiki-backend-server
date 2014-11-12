@@ -1,5 +1,4 @@
 from django.views.generic import View
-from django.utils.translation import get_language
 
 from regions.models import Region
 from regions.views import RegionListView
@@ -26,9 +25,6 @@ class SplashPageView(RegionListView):
 
         context['regions_for_cards'] = qs
         context['blogs'] = Post.objects.filter(status=2).order_by('-created')[:4]
-        language_main = 'main-%s' % get_language()
-        if Region.objects.filter(slug=language_main).exists():
-            context['main_url'] = Region.objects.get(slug=language_main).get_absolute_url()
         return context
 
 

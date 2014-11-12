@@ -426,6 +426,10 @@ OLWIDGET_DEFAULT_OPTIONS = {
     'map_div_class': 'mapwidget',
 }
 
+LANGUAGE_DEFAULT_CENTERS = {
+    'ja': (37.23, 137.53),
+}
+
 DAISYDIFF_URL = 'http://localhost:8080/daisydiff/diff'
 DAISYDIFF_MERGE_URL = 'http://localhost:8080/daisydiff/merge'
 
