@@ -4,7 +4,7 @@
 {% load cache %}
 
 {% block title %}{% trans "Tags" %} / {{ tag_name }} - {{ block.super }}{% endblock %}
-{% block header_title %}<i class="fa fa-tag fa-flip-horizontal"></i> <a href="#">{% trans "Tags" %}</a> / {{ tag_name }}{% endblock %}
+{% block header_title %}<a href="#">{% trans "Tags" %}</a> / {{ tag_name }}{% endblock %}
 
 {% block content_wrapper %}
 <div id="content_wrapper">

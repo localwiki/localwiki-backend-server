@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block title %}{% trans "Tags for " %} {{ page.name }} - {{ block.super }}{% endblock %}
-{% block header_title %}<i class="fa fa-tag fa-flip-horizontal"></i> {% trans "Tags for" %} <a href="{% url 'pages:show' slug=page.slug region=page.region.slug %}">{{ page.name }}</a>{% endblock %}
+{% block header_title %}{% trans "Tags for" %} <a href="{% url 'pages:show' slug=page.slug region=page.region.slug %}">{{ page.name }}</a>{% endblock %}
 
 {% block content %}
   <div id="object_tags">

@@ -212,6 +212,32 @@ textarea, input, select {
     height: 0;
 }
 
+
+.tagpage #header_bar .inner:before {
+    /* fa boilerplate */
+    font-family: FontAwesome;
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    font-size: 200%;
+    content: "\f02b  ";
+    color: #6B87C0;
+
+    font-weight: normal!important;
+    position: absolute;
+    margin-left: -1.4em;
+    margin-top: 0.2em;
+    text-decoration: none;
+
+    /* Emulate fa-flip-horizontal */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1);
+    -webkit-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+}
+
 .mapdata #header_bar .inner:before {
     /* fa boilerplate */
     font-family: FontAwesome;
@@ -2886,10 +2912,6 @@ i.fa {
 #object_title .fa {
     color: #969696;
     margin-right: 0.5em;
-}
-
-#object_title .fa-tag {
-    color: #6B87C0;
 }
 
 /*

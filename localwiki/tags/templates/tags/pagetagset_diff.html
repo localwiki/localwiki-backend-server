@@ -26,7 +26,7 @@
 {% endblock %}
 
 {% block title %}{% blocktrans with new_name=new.page.name %}Differences for tag versions for {{ new_name }}{% endblocktrans %}{% endblock %}
-{% block header_title %}<i class="fa fa-tag fa-flip-horizontal"></i> {% blocktrans with new_name=new.page.name %}Differences for tag versions for {{ new_name }}{% endblocktrans %}{% endblock %}
+{% block header_title %}{% blocktrans with new_name=new.page.name %}Differences for tag versions for {{ new_name }}{% endblocktrans %}{% endblock %}
 
 {% block content %}
   <table width="100%">
