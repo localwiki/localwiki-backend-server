@@ -3,11 +3,24 @@
     border-bottom: 1px dashed;
 }
 
+.tag_link:before {
+    /* fa boilerplate */
+    font-family: FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    content: "\f02b";
+    padding-right: 0.3em;
+    color: #969696;
+    font-weight: normal!important;
+    position: absolute;
+    margin-left: -1.1em;
+    margin-top: 2px;
+    text-decoration: none;
+}
 .tag_link {
-    background: url(../theme/img/tag-icon-small.png) no-repeat;
-    background-position: left center;
-    padding-left: 18px;
-    margin-left: 1px;
+    padding-left: 1.3em;
 }
 
 /* File icons */
@@ -153,7 +166,12 @@ a[href$='.DOCX'] {
 
 /* External links */
 a[href^='http:']:before, a[href^='https:']:before {
+    /* fa boilerplate */
     font-family: FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
     font-size: 70%;
     content: "\f08e  ";
     color: #969696;
@@ -168,7 +186,12 @@ a[href^='http:'], a[href^='https:'] {
 }
 
 a[href^='http://www.facebook.com/']:before, a[href^='https://www.facebook.com/']:before {
+    /* fa boilerplate */
     font-family: FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
     font-size: 105%;
     content: "\f082  ";
     color: #36549d;
@@ -183,7 +206,12 @@ a[href^='http://www.facebook.com/'], a[href^='https://www.facebook.com/'] {
 }
 
 a[href^='http://twitter.com/']:before, a[href^='https://twitter.com/']:before {
+    /* fa boilerplate */
     font-family: FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
     font-size: 105%;
     content: "\f099  ";
     color: #0099d2;
@@ -198,10 +226,24 @@ a[href^='http://twitter.com/'], a[href^='https://twitter.com/'] {
 }
 
 /* Mailto links */
+a[href^='mailto:']:before {
+    /* fa boilerplate */
+    font-family: FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    font-size: 105%;
+    content: "\f003  ";
+    color: #969696;
+    font-weight: normal!important;
+    position: absolute;
+    margin-left: -1.2em;
+    margin-top: 1px;
+    text-decoration: none;
+}
 a[href^='mailto:'] {
-    background: url(../img/email_link.png) no-repeat;
-    background-position: left center;
-    padding-left: 16px;
+    padding-left: 1.5em;
 }
 
 /* Behavior we want to be specific to page / editor content */

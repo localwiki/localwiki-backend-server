@@ -57,7 +57,7 @@
               <div><a href="{{ user_for_page.userprofile.personal_url }}" rel="nofollow">{{ pretty_personal_url }}</a></div>
               {% endif %}
             {% endif %}
-            <div>{% blocktrans with date_joined=user_for_page.date_joined|date:"M j, Y" %}Joined on {{ date_joined }}{% endblocktrans %}</div>
+            <div><i class="fa fa-clock-o fa-fw"></i> {% blocktrans with date_joined=user_for_page.date_joined|date:"M j, Y" %}Joined on {{ date_joined }}{% endblocktrans %}</div>
         </div>
         <div class="stats_list">
             <div class="stat_number">
@@ -93,14 +93,14 @@
             {% if num_pages_followed %}
             <a href="{% url 'followed-pages' username=user_for_page.username %}">
               <div class="pages_followed">
-              {% blocktrans %}{{ num_pages_followed }} pages starred{% endblocktrans %}
+              <i class="fa fa-file-o fa-fw"></i> {% blocktrans %}{{ num_pages_followed }} pages starred{% endblocktrans %}
               </div>
             </a>
             {% endif %}
             {% if num_users_followed %}
-            <a href="{% url 'followed-users' username=user_for_page.username %}"">
+            <a href="{% url 'followed-users' username=user_for_page.username %}">
             <div class="users_followed">
-            {% blocktrans %}{{ num_users_followed }} users starred{% endblocktrans %}
+            <i class="fa fa-user fa-fw"></i> {% blocktrans %}{{ num_users_followed }} users starred{% endblocktrans %}
             </div>
             </a>
             {% endif %}
@@ -111,7 +111,7 @@
             <h3>{% trans "Regions followed" %}</h3>
             <ul>
               {% for follow in regions_followed %}
-                  <li><a href="{{ follow.target.get_absolute_url }}">{{ follow.target.slug }}</a></li>
+                  <li><a class="region_link" href="{{ follow.target.get_absolute_url }}">{{ follow.target.slug }}</a></li>
               {% endfor %}
             </ul>
           </div>

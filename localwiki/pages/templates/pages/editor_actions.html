@@ -4,7 +4,7 @@
     {% if not page.slug == 'front page' %}
       {% if page.exists %}
         <li><a href="{% url 'maps:edit' slug=page.pretty_slug region=page.region.slug %}" class="little button map"><span class="text">{% trans "Edit map" %}</span></a></li>
-        <li><a href="{% url 'pages:delete' slug=page.pretty_slug region=page.region.slug %}" class="little button">{% trans "Delete page" %}</a></li>
+        <li><a href="{% url 'pages:delete' slug=page.pretty_slug region=page.region.slug %}" class="little button delete"><span class="text">{% trans "Delete" %}</span></a></li>
       {% endif %}
       <li><a href="{% url 'redirects:edit' slug=page.pretty_slug region=page.region.slug %}" class="little button redirect"><span class="text">{% trans "Redirect" %}</span></a></li>
     {% endif %}
@@ -16,6 +16,6 @@
       {% endif %}
     {% endif %}
     {% if page.exists and request.user.is_staff %}
-      <li><a href="{% url 'pages:move-region' slug=page.pretty_slug region=page.region.slug %}" class="little button"><span class="text">{% trans "Move" %}</span></a></li>
+      <li><a href="{% url 'pages:move-region' slug=page.pretty_slug region=page.region.slug %}" class="little button move"><span class="text">{% trans "Move" %}</span></a></li>
     {% endif %}
     {% endblock %}

@@ -157,7 +157,7 @@
           <div id="nearby_regions_bar">
             Nearby LocalWiki regions:
             {% for region in region.get_nearby_regions %}
-                <a href="{% host_url 'frontpage' region=region.slug on hub %}">{{ region.full_name }}</a>
+                <a class="region_link" href="{% host_url 'frontpage' region=region.slug on hub %}">{{ region.full_name }}</a>
             {% endfor %}
           </div>
           {% endif %}
