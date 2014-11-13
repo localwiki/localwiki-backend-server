@@ -14,6 +14,9 @@ body {
 body {
     font: 16px/25px "Cabin", Arial, "Helvetica Neue", "Helvetica", sans-serif;
     color: #444;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -305,13 +308,6 @@ textarea, input, select {
 #object_subtitle.prominent {
     margin-bottom: 0;
     font-size: 110%;
-}
-
-#object_title a.tag_link {
-    background: url(../img/tag-icon.png) no-repeat;
-    background-position: left center;
-    padding-left: 34px;
-    margin-left: 6px;
 }
 
 @media screen and (max-width: 700px) {

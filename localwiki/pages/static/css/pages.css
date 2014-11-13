@@ -15,12 +15,18 @@
     color: #969696;
     font-weight: normal!important;
     position: absolute;
-    margin-left: -1.1em;
+    margin-left: -1.3em;
     margin-top: 2px;
     text-decoration: none;
+
+    /* Emulate fa-flip-horizontal */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1);
+    -webkit-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1);
 }
 .tag_link {
-    padding-left: 1.3em;
+    padding-left: 1.1em;
 }
 
 /* File icons */
