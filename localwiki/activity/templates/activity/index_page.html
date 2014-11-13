@@ -31,7 +31,7 @@
             <span class="revert">{% blocktrans with version_date_timesince=change.version_info.reverted_to_version.version_info.date|timesince %}Reverted to version from {{ version_date_timesince }} ago{% endblocktrans %}</span>
         {% endif %}
 
-        <span class="type">hi</span>
+        <span class="type"></span>
 
         {% if change.classname == 'redirect' %}
             <span class="revert">{% blocktrans with url=change.destination.get_absolute_url destination=change.destination.name %}Redirected to <a href="{{ url }}">{{ destination }}</a>{% endblocktrans %}</span>
