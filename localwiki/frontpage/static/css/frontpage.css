@@ -80,6 +80,13 @@
 #cover .searchbox input {
     margin-top: 0.4em;
 }
+
+.nearby_regions ul {
+    list-style-type: none;
+}
+.nearby_regions li {
+    margin-left: 2em;
+}
 /* The absolute-positioning of the #cover .contents
    means we've got to have a lot of breakpoints here
    to get things right.
