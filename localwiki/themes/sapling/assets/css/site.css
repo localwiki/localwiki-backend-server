@@ -213,7 +213,15 @@ textarea, input, select {
 }
 
 .mapdata #header_bar .inner:before {
-    background: url(../img/map-icon.png) 3px 0 no-repeat;
+    font-family: FontAwesome;
+    font-size: 200%;
+    content: "\f041  ";
+    color: #D86D6D;
+    font-weight: normal!important;
+    position: absolute;
+    margin-left: -1.1em;
+    margin-top: 0.2em;
+    text-decoration: none;
 }
 @media screen and (max-width: 700px) {
     #header_bar {
@@ -1008,9 +1016,15 @@ textarea, input, select {
 #add_map_button .button {
     font-weight: normal;
 }
+#add_map_button .button .text:before {
+    font-family: FontAwesome;
+    content: "\f041  ";
+    color: #D86D6D;
+    font-weight: normal!important;
+    text-decoration: none;
+}
 #add_map_button .button .text {
-    background: url(../img/map-icon-small.png) 0px 66% no-repeat;
-    padding-left: 20px;
+    padding-left: 4px;
 }
 
 /* Map widget, when it's part of page content */
@@ -1496,9 +1510,15 @@ input:focus {
     margin-right: 0.5em;
     margin-top: -0.35em;
 }
+.button.map .text:before {
+    font-family: FontAwesome;
+    content: "\f041  ";
+    color: #D86D6D;
+    font-weight: normal!important;
+    text-decoration: none;
+}
 .button.map .text {
-    background: url(../img/map-icon-small.png) 0px 66% no-repeat;
-    padding-left: 20px;
+    padding-left: 2px;
 }
 .button.redirect .text {
     background: url(../img/arrow-turn-left.png) 2px 2px no-repeat;
@@ -1651,9 +1671,15 @@ input:focus {
     padding-right: 0.5em;
 }
 
+#activityfeed .map .changelabel span:before {
+    font-family: FontAwesome;
+    content: "\f041  ";
+    color: #D86D6D;
+    font-weight: normal!important;
+    text-decoration: none;
+}
 #activityfeed .map .changelabel span {
-    background: url(../img/map-icon-small.png) 0px 66% no-repeat;
-    padding-left: 20px;
+    padding-left: 0px;
 }
 #activityfeed .file .changelabel span {
     background: url(../img/document-block-light.png) 2px 66% no-repeat;
@@ -1663,11 +1689,6 @@ input:focus {
     background: url(../img/arrow-turn-left.png) 2px 2px no-repeat;
     padding-left: 20px;
 }
-
-#activityfeed .tags .changelabel span {
-    padding-left: 20px;
-}
-
 #activityfeed .tags .changelabel span {
     padding-left: 0;
 }
