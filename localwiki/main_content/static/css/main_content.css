@@ -51,9 +51,12 @@
 #splash_page h1, #splash_page h2, #splash_page h3, #splash_page h4 {
     color: #505050;
 }
+#splash_page a[href^="http:"]:before,
+#splash_page a[href^="https:"]:before {
+    content: '';
+}
 #splash_page a[href^="http:"],
 #splash_page a[href^="https:"] {
-    background: none;
     padding-left: 0;
 }
 

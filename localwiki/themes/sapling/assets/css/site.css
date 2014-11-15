@@ -1199,6 +1199,15 @@ textarea, input, select {
     border-bottom: 2px solid #dddddd;
 }
 
+#global_footer [href^="http:"]:before,
+#global_footer a[href^="https:"]:before {
+    content: '';
+}
+#global_footer a[href^="http:"],
+#global_footer a[href^="https:"] {
+    padding-left: 0;
+}
+
 /*
 ====================================
  Lists
