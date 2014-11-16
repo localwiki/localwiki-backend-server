@@ -94,6 +94,8 @@
     padding: 0.8em 1.1em 0.8em 1.1em;
     background-image: none;
     background-color: #5C6;
+    border: none;
+    border-bottom: 3px solid #45A753;
 }
 #splash_page .bring_localwiki .button:hover {
     background-image: none;
