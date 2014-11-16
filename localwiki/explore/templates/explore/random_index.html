@@ -22,6 +22,16 @@
   {% endif %}
 {% endblock %}
 
+{% block body %}
+<body>
+   <div class="content_type explore">
+   {% block everything_wrapper %}
+        {{ block.super }}
+   {% endblock %}
+   </div>
+</body>
+{% endblock %}
+
 {% block media %}{{block.super}}<script type="text/javascript">SaplingMap.show_links_on_hover = false;</script>{% endblock %}
 
 {% block content %}

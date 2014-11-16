@@ -2611,6 +2611,24 @@ input:focus {
   text-align: center;
 }
 
+.explore #header_bar .inner:before {
+    /* fa boilerplate */
+    font-family: FontAwesome;
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    font-size: 200%;
+    content: "\f207  ";
+    color: #969696;
+    font-weight: normal!important;
+    position: absolute;
+    margin-left: -1.3em;
+    margin-top: 0.13em;
+    text-decoration: none;
+}
+
 
 /*
 ====================================
