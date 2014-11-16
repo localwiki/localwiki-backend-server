@@ -334,21 +334,12 @@
     padding-top: 2.5em;
 }
 
-
-
 .full_map #splash_page #map {
    display: block;
    float: none;
    padding: 0;
    margin: 0;
 }
-
-@media screen and (max-width: 994px) {
-  .full_map #splash_page #map {
-     margin-top: 54px;
-  }
-}
-
 
 /* For some pages, e.g. the region explore page, we want the main
  * header to remain fixed */
@@ -416,6 +407,9 @@
 }
 
 @media screen and (max-width: 700px) {
+    #splash_page #map_header_bar {
+        height: 200px!important
+    }
     #splash_page #map_header_bar .mapwidget {
         height: 200px!important;
     }
