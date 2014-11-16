@@ -11,6 +11,10 @@
     padding: 0;
 }
 
+#splash_page #footer {
+    display: none;
+}
+
 #splash_page #header {
     border-bottom: 0;
 }
@@ -157,7 +161,7 @@
 
 #splash_page .recent_blogs {
     padding-top: 3em;
-    padding-bottom: 4em;
+    padding-bottom: 6em;
     padding-left: 20px;
     padding-right: 20px;
     max-width: 700px;
@@ -371,6 +375,9 @@
 }
 #splash_page.default #global_footer {
     background: url('../img/body-bg.png') repeat scroll left top #FAFAFA;
+}
+#splash_page #global_footer a {
+    text-decoration: underline;
 }
 #splash_page.default #content_wrapper {
     background-color: white;

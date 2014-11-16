@@ -1217,10 +1217,27 @@ textarea, input, select {
     max-width: 60em;
     font-size: 80%;
     text-align: center;
-    padding-bottom: 1em;
+    padding-bottom: 2em;
     border-bottom: 2px solid #dddddd;
 }
 
+#global_footer {
+    background-color: #999;
+    border-top: 2px solid #E0E0E0;
+    color: #EFEFEF;
+    font-size: 120%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+#global_footer a, #global_footer a:link {
+    color: #EFEFEF;
+}
+#global_footer a:hover {
+    color: #444;
+}
+#global_footer a:before {
+    color: #EFEFEF;
+}
 #global_footer [href^="http:"]:before,
 #global_footer a[href^="https:"]:before {
     content: '';
@@ -2445,7 +2462,7 @@ input:focus {
 */
 
 #attributions {
-    margin: 1em auto 0 auto;
+    margin: 2em auto 0 auto;
     font-size: 80%;
     text-align: center;
     padding-bottom: 1em;
