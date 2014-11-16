@@ -771,7 +771,7 @@ textarea, input, select {
     -webkit-border-radius: 3px;
     display: table-cell;
     vertical-align: middle;
-    padding: 0 0.5em 0 0.5em;
+    padding: 0.1em 0.6em 0.1em 0.6em;
     height: 1.7em;
     line-height: 100%;
     margin: 0;
@@ -787,6 +787,9 @@ textarea, input, select {
 
 #nav #pull {
     display: static;  
+}
+#nav .fa {
+    margin-right: 0.2em;
 }
 
 /*
