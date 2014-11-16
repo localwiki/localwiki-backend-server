@@ -707,7 +707,7 @@ textarea, input, select {
     #header .site_search {
         width: auto;
         float: none;
-        margin: 5px 0 0 5px;
+        margin: 5px 0 0 0px;
         padding: 0 85px 0 0;
         height: 27px;
         display: block;
@@ -717,8 +717,13 @@ textarea, input, select {
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
     }
+    .search:before {
+        margin-left: 15px;
+        margin-top: 7px;
+    }
     .site_search form {
         height: 100%;
+        margin-left: 5px;
     }
     #header .site_search input {
         float: none;
@@ -1014,6 +1019,9 @@ textarea, input, select {
   display: table;
   padding-top: 10px;
   width: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 #map .info a {
   font-size: 90%;
@@ -1112,6 +1120,9 @@ textarea, input, select {
         left: 0;
         padding-left: 0;
         padding-right: 0;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
     }
     .mapwidget.small {
         border-left: none;
@@ -1120,6 +1131,10 @@ textarea, input, select {
     #map .info {
         padding-left: 1em;
     }
+    #map .map_cover.small {
+        width: 100%;
+    } 
+}
 }
 
 /* Overview map */
