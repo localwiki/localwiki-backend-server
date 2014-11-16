@@ -86,7 +86,7 @@
     margin-top: 2.5em;
     margin-bottom: 2.5em;
     color: white!important;
-    text-shadow: 0px 1px 0px rgba(120, 120, 120, 1);
+    text-shadow: none!important;
     padding: 0.8em 1.1em 0.8em 1.1em;
     background-image: none;
     background-color: #5C6;
@@ -305,8 +305,17 @@
 }
 #splash_page #header_title {
    text-align: center;
-   padding-top: 2.3em;
-   padding-bottom: 2.3em;
+   margin-top: 2.3em;
+   max-width: 600px;
+   width: auto;
+   padding-top: 1.4em;
+   padding-bottom: 1.5em;
+   padding-left: 3.5em;
+   padding-right: 3.5em;
+   margin-left: auto;
+   margin-right: auto;
+   background-color: #F4F4F4;
+   border-bottom: 2px solid #E7E7E7;
 }
 #splash_page #header_title h1 {
     margin: 0;
@@ -351,178 +360,6 @@
 .fixed_header #content_wrapper {
     margin-top: 54px!important;
     padding-top: 1em!important;
-}
-
-
-/******************************* 
-  Region explore page 
- ******************************/
-#region_explore_page #content_wrapper {
-    max-width: none;
-    margin-top: 0!important;
-}
-
-#region_explore_page .option_toggle .as_map {
-    display: none;
-}
-
-#region_explore_page .option_toggle.minimal { margin-top: 1em; }
-
-#region_explore_page #header_title .search {
-    display: inline-block;
-    margin-top: 1.7em;
-}
-#region_explore_page #header_title .search input {
-    margin-bottom: 0;
-    display: inline-block;
-}
-#region_explore_page #header_title .add_region .button {
-    float: none;
-    display: inline-block;
-    font-weight: normal;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    margin-left: 0.3em;
-}
-#region_explore_page #header_title .add_region {
-    color: #868686;
-    display: inline;
-    margin-left: 0.3em;
-}
-#region_explore_page .cards {
-    display: table-cell;
-    text-align: center;
-}
-#region_explore_page .cards .card {
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-}
-#region_explore_page .cards .endless_container .button {
-    float: none;
-    display: block;
-    margin-bottom: 1em;
-}
-#region_explore_page .endless_loading {
-    float: none;
-    display: block;
-    margin-bottom: 1em;
-}
-
-/* Hide this but allow Enter-to-submit */
-#region_explore_page #header_title .search input[type="submit"] {
-    position: absolute;
-    z-index: -1000;
-    left: -1000px;
-}
-
-#region_explore_page #map {
-    float: none;
-    border: 0;
-    padding: 0;
-    margin: 0;
-    position: fixed;
-    z-index: 1;
-    width: 40%;
-    height: 100%;
-    left: 0;
-    margin-top: 54px;
-}
-#region_explore_page #map .mapwidget {
-    width: 100%!important;
-    height: 100%!important;
-    border: none;
-}
-#region_explore_page #main, #region_explore_page #footer, #region_explore_page #attributions, #region_explore_page #about {
-    width: 60%;
-    float: right;
-}
-#region_explore_page #header_title {
-    float: right;
-    width: 60%;
-    margin-top: 54px!important;
-    padding-top: 1.7em;
-    padding-bottom: 1.8em;
-}
-#region_explore_page #header_title h1 {
-    font-size: 200%;
-}
-
-#region_explore_page #header_title .search .twitter-typeahead {
-    float: none;
-}
-
-@media screen and (max-width: 994px) {
-    #region_explore_page #header_title {
-        width: 100%;
-        float: none;
-        margin-top: 0!important;
-    }
-    #region_explore_page #main, #region_explore_page #footer, #region_explore_page #attributions, #region_explore_page #about {
-        width: 100%;
-        float: none;
-    }
-    #region_explore_page #map {
-        position: static;
-        width: 100%;
-        height: 300px;
-        margin-top: 15px;
-    }
-    .fixed_header #common_header {
-        position: static;
-    }
-}
-@media screen and (max-width: 700px) {
-    #region_explore_page #header_title .search input {
-        width: auto!important;
-    }
-}
-@media screen and (max-width: 600px) {
-    #region_explore_page .option_toggle.minimal {
-        float: none!important;
-        margin-left: 0.5em;
-        display: inline-block;
-    }
-    #region_explore_page #content {
-        text-align: center;
-    }
-    #region_explore_page #main {
-        border-top: 1px solid #FFF;
-    }
-    #region_explore_page #content_wrapper {
-        padding-top: 0!important;
-    }
-}
-@media screen and (max-width: 580px) {
-    #region_explore_page #map {
-        display: none;
-    }
-    #region_explore_page .option_toggle .as_map {
-        display: inline;
-    }
-}
-@media screen and (max-width: 417px) {
-    #region_explore_page #header_title .add_region {
-        display: block;
-        font-size: 90%;
-    }
-    #region_explore_page #header_title .add_region .button {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 236px;
-        margin-top: 0.1em;
-        font-size: 100%;
-    }
-    #region_explore_page #map {
-        margin-top: 0;
-    }
-}
-
-
-/* TEMP TEMP TEMP */
-#splash_page #main {
-    background-color: white!important;
 }
 
 
@@ -614,5 +451,222 @@
     #splash_page .highlights p {
         padding-right: 0;
     }
+}
+
+/******************************* 
+  Region explore page 
+ ******************************/
+#region_explore_page #content_wrapper {
+    max-width: none;
+    margin-top: 0!important;
+}
+#region_explore_page #splash_page.default #content_wrapper {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+#region_explore_page .option_toggle .as_map {
+    display: none;
+}
+
+#region_explore_page .option_toggle.minimal { margin-top: 1em; }
+
+#region_explore_page #header_title .search {
+    display: inline-block;
+    margin-top: 1.7em;
+}
+#region_explore_page #header_title .search input {
+    margin-bottom: 0;
+    display: inline-block;
+}
+#region_explore_page #header_title .add_region .button {
+    float: none;
+    display: inline-block;
+    font-weight: normal;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin-left: 0.3em;
+}
+#region_explore_page #header_title .add_region {
+    color: #868686;
+    display: inline;
+    margin-left: 0.3em;
+}
+#region_explore_page .cards {
+    display: table-cell;
+    text-align: center;
+}
+#region_explore_page .cards .card {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+#region_explore_page .cards .endless_container .button {
+    float: none;
+    display: block;
+    margin-bottom: 1em;
+}
+#region_explore_page .endless_loading {
+    float: none;
+    display: block;
+    margin-bottom: 1em;
+}
+
+/* Hide this but allow Enter-to-submit */
+#region_explore_page #header_title .search input[type="submit"] {
+    position: absolute;
+    z-index: -1000;
+    left: -1000px;
+}
+
+/* We center the search box, so we need to re-align the search icon */
+#region_explore_page #header_title .search:before {
+    content: '';
+}
+#region_explore_page #header_title .search {
+    padding-left: 25px;
+}
+#region_explore_page #header_title .search .tt-dropdown-menu {
+    text-align: left;
+}
+#region_explore_page #header_title form:before {
+    /* fa boilerplate */
+    font-family: FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 13px;
+    line-height: 1;
+
+    content: "\f002  ";
+    color: #969696;
+    font-weight: normal!important;
+    text-decoration: none;
+
+    position: absolute;
+    z-index: 1;
+    margin-top: 9px;
+    margin-left: 10px;
+
+    /* Emulate fa-flip-horizontal */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1);
+    -webkit-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1); 
+}
+
+#region_explore_page #map {
+    float: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    z-index: 1;
+    width: 40%;
+    height: 100%;
+    left: 0;
+    margin-top: 54px;
+}
+#region_explore_page #map .mapwidget {
+    width: 100%!important;
+    height: 100%!important;
+    border: none;
+}
+#region_explore_page #main, #region_explore_page #footer, #region_explore_page #attributions, #region_explore_page #about {
+    width: 60%;
+    float: right;
+}
+#region_explore_page #header_title {
+    float: right;
+    width: 60%;
+    margin-top: 54px!important;
+    padding-top: 1.7em;
+    padding-bottom: 1.8em;
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 100%;
+}
+#region_explore_page #header_title h1 {
+    font-size: 200%;
+}
+
+#region_explore_page #header_title .search .twitter-typeahead {
+    float: none;
+}
+
+@media screen and (max-width: 994px) {
+    #region_explore_page #header_title {
+        width: auto;
+        float: none;
+        margin-top: 0!important;
+    }
+    #region_explore_page #main, #region_explore_page #footer, #region_explore_page #attributions, #region_explore_page #about {
+        width: 100%;
+        float: none;
+    }
+    #region_explore_page #map {
+        position: static;
+        width: 100%;
+        height: 300px;
+        margin-top: 0px;
+    }
+    .fixed_header #common_header {
+        position: static;
+    }
+}
+@media screen and (max-width: 700px) {
+    #region_explore_page #header_title .search {
+        padding-left: 0;
+    }
+    #region_explore_page #header_title .search input {
+        width: 205px;
+    }
+}
+@media screen and (max-width: 600px) {
+    #region_explore_page .option_toggle.minimal {
+        float: none!important;
+        margin-left: 0.5em;
+        display: inline-block;
+    }
+    #region_explore_page #content {
+        text-align: center;
+    }
+    #region_explore_page #main {
+        border-top: 1px solid #FFF;
+    }
+    #region_explore_page #content_wrapper {
+        padding-top: 0!important;
+    }
+}
+@media screen and (max-width: 580px) {
+    #region_explore_page #map {
+        display: none;
+    }
+    #region_explore_page .option_toggle .as_map {
+        display: inline;
+    }
+}
+@media screen and (max-width: 417px) {
+    #region_explore_page #header_title .add_region {
+        display: block;
+        font-size: 90%;
+    }
+    #region_explore_page #header_title .add_region .button {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 236px;
+        margin-top: 0.1em;
+        font-size: 100%;
+    }
+    #region_explore_page #map {
+        margin-top: 0;
+    }
+}
+
+
+/* TEMP TEMP TEMP */
+#splash_page #main {
+    background-color: white!important;
 }
 

@@ -189,6 +189,7 @@ a[href^='http:']:before, a[href^='https:']:before {
 }
 a[href^='http:'], a[href^='https:'] {
     padding-left: 1.1em;
+    background: none;
 }
 
 a[href^='http://www.facebook.com/']:before, a[href^='https://www.facebook.com/']:before {

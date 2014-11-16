@@ -586,6 +586,10 @@ textarea, input, select {
 }
 #login_info a, #login_info a:link {
     text-decoration: none;
+    color: #666;
+}
+#login_info a:hover, #login_info a:hover {
+    color: #000;
 }
 @media screen and (max-width: 775px){
     #login_info .welcome {
@@ -679,7 +683,7 @@ textarea, input, select {
   text-decoration: none;
 
   position: absolute;
-  z-index: 100;
+  z-index: 1;
   margin-top: 9px;
   margin-left: 10px;
 
