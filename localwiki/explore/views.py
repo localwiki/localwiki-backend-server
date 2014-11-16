@@ -1,12 +1,12 @@
 import random
 
 from django.db import connection
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 
 from regions.views import RegionMixin
 from maps.widgets import InfoMap
 from pages.models import Page
-from utils.views import MultipleTypesPaginatedView
+from utils.views import MultipleTypesPaginatedView, JSONResponseMixin
 
 
 class BaseExploreList(RegionMixin, MultipleTypesPaginatedView):
@@ -14,7 +14,11 @@ class BaseExploreList(RegionMixin, MultipleTypesPaginatedView):
     items_per_page = 100
 
     def get_object_lists(self):
-        qs = Page.objects.filter(region=self.get_region())
+        qs = Page.objects.all()
+
+        region = self.get_region()
+        if region:
+            qs = Page.objects.filter(region=region)
 
         # Exclude meta stuff
         qs = qs.exclude(slug__startswith='templates/')
@@ -51,6 +55,26 @@ class RandomExploreList(BaseExploreList):
         context['page_type'] = 'random'
         context['random_seed'] = self.random_seed
         return context
+
+
+class RandomTourJSON(JSONResponseMixin, RandomExploreList):
+    region_required = False
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(RandomTourJSON, self).get_context_data(*args, **kwargs)
+        pages = context['pages']
+        context = {}  # Reset context
+
+        # All we want is the URL of the pages here
+        context['urls'] = [p.get_absolute_url() for p in pages]
+        context['page_type'] = 'random'
+        context['random_seed'] = self.random_seed
+        return context
+
+
+class RandomTourView(RegionMixin, TemplateView):
+    region_required = False
+    template_name = 'explore/random_tour.html'
 
 
 class AlphabeticalExploreList(BaseExploreList):

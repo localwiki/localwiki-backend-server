@@ -1,0 +1,62 @@
+{% extends "site/base.html" %}
+
+{% load i18n %}
+
+{% block search_robots %}
+<meta name="robots" content="noindex,nofollow">
+{% endblock %}
+
+{% block title %}{% trans "Random Tour" %} - {{ block.super }}{% endblock %}
+
+{% block body %}
+<div id="controls">
+  <div>
+    <a class="button tiny" id="stop" href="#">{% trans "Stop tour" %}</a>
+    <a class="button tiny" id="start" href="#">{% trans "Start tour" %}</a>
+  </div>
+</div>
+<div id="tour_container">
+  <iframe id="tour0" class="tour" frameborder="0"></iframe>
+  <iframe id="tour1" class="tour" frameborder="0"></iframe>
+</div>
+{% endblock %}
+
+{% block head_extra %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/random_tour.js"></script>
+<style>
+    html, body {
+        width: 100%;
+        height: 100%;
+    }
+    #tour_container {
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+    }
+    .tour1 {
+        //display: none;
+    }
+    .tour {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+    #controls {
+        width: 100%;
+        background-color: #DBECF9;
+        text-align: center;
+        padding: 0.7em 0 0.7em 0;
+        border-bottom: 2px solid rgba(143, 143, 143, 0.05);
+    }
+    #controls .button {
+        float: none;
+        display: block;
+        width: 10em;
+        margin: 0;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 80%;
+        font-weight: normal;
+    }
+</style>
+{% endblock %}
