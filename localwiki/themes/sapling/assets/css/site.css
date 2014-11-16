@@ -790,6 +790,7 @@ textarea, input, select {
 }
 #nav .fa {
     margin-right: 0.2em;
+    color: #787878;
 }
 
 /*
@@ -946,6 +947,9 @@ textarea, input, select {
     }
     #nav li:last-child a:hover, #nav li:last-child a:active {
         border-bottom: none;
+    }
+    #nav .fa {
+        color: #F4F4F4;
     }
     #nav #pull {  
         display: block;
