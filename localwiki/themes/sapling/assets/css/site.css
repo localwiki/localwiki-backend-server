@@ -1355,9 +1355,6 @@ textarea, input, button, .button, select {
     -webkit-border-radius: 3px;
 }
 textarea, input, .button {
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
 }
 input[type="text"], input[type="password"] {
     width: 250px;
@@ -1381,20 +1378,16 @@ select {
 }
 input[type="submit"], input[type="button"], button, .button {
     font: 16px/25px "Cabin", Arial, "Helvetica Neue", "Helvetica", sans-serif;
-    color: #666!important;
+    color: #5C5C5C!important;
     font-weight: bold;
     padding: 6px 10px;
     border: none;
-    /* TODO: explore using purely CSS gradients */
-    background: #e6e6e6 url(../img/gradient.png) repeat-x bottom left;
+    background-color: #E1E1E1;
     margin: 10px 5px 10px 0;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 1);
-    border: 1px solid #bfbfbf;
+    border-bottom: 2px solid #C0C0C0;
     display: block;
     text-decoration: none;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
 }
 .button {
     float: left;
