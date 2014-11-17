@@ -66,10 +66,17 @@ pre, code {
     padding: .5em;
     white-space: pre-wrap;
     overflow: auto;
-    font-family: 'bitstream vera sans mono', 'andale mono', 'lucida console', monospace;
+    font-family: 'Droid Sans Mono', 'Menlo', 'andale mono', 'lucida console', monospace;
     line-height: 20px;
     border: 1px solid #CBCBCB;
-    background-color: #FFF8ED;
+    background-color: #FDF6E3;
+    color: #43565D;
+}
+pre a, code a, pre a:link, code a:link {
+    color: #43565D;
+}
+pre a:hover {
+    color: #111;
 }
 /* API docs is class="content_type api" */
 .content_type.api .request-info, .content_type.api .response-info {
