@@ -1422,7 +1422,8 @@ input.little {
 }
 
 .button.active {
-    background: #dcdcdc url(../img/gradient.png) repeat-x bottom left;
+    background-color: #DCDCDC !important;
+    border-color: #C8CBDE #C8CBDE #A9A9A9;
 }
 
 
@@ -1453,9 +1454,6 @@ div.templates li {
 }
 
 input {
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
      -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
        -o-transition: border linear 0.2s, box-shadow linear 0.2s;
@@ -1777,32 +1775,23 @@ input:focus {
     /* .updated is a button */
     color: #666;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 1);
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
 
-    /* TODO: explore using purely CSS gradients */
-    background: #E8ECEF url(../img/gradient.png) repeat-x bottom left;
-    border: 1px solid #bfbfbf;
+    background-color: #E1E1E1;
+    border: none;
+    border-bottom: 2px solid #C0C0C0;
 
     /* Slightly different padding*/
-    padding-top: 6px;
+    padding-top: 7px;
     padding-bottom: 7px;
 
     text-decoration: none;
 }
 #activityfeed .changelabel.updated:hover
 {
-    background-color: #dcdcdc!important;
+    background-color: #DCDCDC!important;
     border-color: #c8cbde;
     border-bottom-color: #a9a9a9;
 }
-#activityfeed .changelabel.updated:active {
-    box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-}
-
 #activityfeed .changelabel.added {
     background-color: #fdfab4;
     color: #6b6945;
