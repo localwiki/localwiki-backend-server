@@ -80,17 +80,22 @@ pre a:hover {
 }
 /* API docs is class="content_type api" */
 .content_type.api .request-info, .content_type.api .response-info {
-    font-size: 80%;
+    font-size: 85%;
+}
+.content_type.api #description code {
+    font-size: 90%;
 }
 .content_type.api p pre, .content_type.api p code,
 .content_type.api li pre, .content_type.api li code {
     margin: 0;
     padding: inherit;
     overflow: inherit;;
-    font-family: 'bitstream vera sans mono', 'andale mono', 'lucida console', monospace;
     line-height: inherit;
     border: inherit;
     background-color: inherit;
+}
+.content_type.api #footer {
+    display: none;
 }
 
 /* bug fix */
