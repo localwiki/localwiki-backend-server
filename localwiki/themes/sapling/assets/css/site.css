@@ -53,7 +53,7 @@ a, a:link {
     color: #4e58b5;
 }
 a:hover {
-    color: #111;
+    color: #444;
 }
 table {
     margin-bottom: 1em;
@@ -562,7 +562,6 @@ textarea, input, select {
 .tagpage .tags_button {
     float: none;
     margin-right: 2em;
-    background-image: url('../img/tag-icon-small.png');
     padding-top: 0.4em!important;
     padding-bottom: 0.5em!important;
     padding-left: 30px!important;
@@ -573,6 +572,7 @@ textarea, input, select {
     display: inline-block;
     font-weight: normal;
 }
+
 
 #login_info {
     padding-right: 2em;
@@ -1244,6 +1244,7 @@ textarea, input, select {
     font-size: 120%;
     padding-top: 1em;
     padding-bottom: 1em;
+    text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.15);
 }
 #global_footer a, #global_footer a:link {
     color: #EFEFEF;
@@ -1429,6 +1430,9 @@ input.little {
 .tiny.button.tags_button {
     padding-top: 8px;
     padding-bottom: 8px;
+}
+.tiny.button.tags_button .fa {
+    margin-right: 0.4em;
 }
 .button.cancel {
 }
@@ -1720,6 +1724,9 @@ input:focus {
     padding-top: 1em;
     border-top: none;
 }
+#activityfeed .item a {
+    color: inherit;
+}
 #activityfeed h2 {
     font-size: 180%;
     margin-top: 0.7em;
@@ -1765,9 +1772,10 @@ input:focus {
     margin-left: 0;
     padding-left: 30px;
     margin-bottom: 0.7em;
+    color: #666;
 }
 #activityfeed .changelabel {
-    width: 5.2em;
+    width: 6.6em;
     /* This is basically .little.button */
     text-align: center;
     font-weight: bold;
@@ -1777,25 +1785,19 @@ input:focus {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     float: left;
-    padding: 7px 10px 8px 10px;
+    padding: 7px 10px 7px 10px;
     line-height: 100%;
     margin: 0;
     margin-right: 1em;
-    border: 1px solid #bfbfbf;
+    box-sizing: border-box;
 }
 #activityfeed .changelabel.updated {
     /* .updated is a button */
     color: #666;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 1);
-
     background-color: #E1E1E1;
     border: none;
     border-bottom: 2px solid #C0C0C0;
-
-    /* Slightly different padding*/
-    padding-top: 7px;
-    padding-bottom: 7px;
-
     text-decoration: none;
 }
 #activityfeed .changelabel.updated:hover
@@ -1805,21 +1807,14 @@ input:focus {
     border-bottom-color: #a9a9a9;
 }
 #activityfeed .changelabel.added {
-    background-color: #fdfab4;
-    color: #6b6945;
-    border-color: #e1e1e1;
-    border: none;
-    border-radius: 0px;
+    color: #818181;
+    border-radius: 3px;
+    border: 2px solid #C2C2C2;
 }
 #activityfeed .changelabel.deleted {
-    background-color: #f3d8d8;
-    border-color: #dedede;
-    color: #808080;
-    color: #767676;
-    color: #6b6b6b;
-    color: #646464;
-    border: none;
-    border-radius: 0px;
+    color: #818181;
+    border-radius: 3px;
+    border: 2px dashed #C2C2C2;
 }
 #activityfeed .changelabel a {
     text-decoration: none;

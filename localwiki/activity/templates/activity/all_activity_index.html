@@ -18,7 +18,7 @@ $.endlessPaginate();
 {% endblock %}
 
 {% block header_title %}
-  {% trans "All activity on LocalWiki" %}
+  <a href="#">{% trans "All activity on LocalWiki" %}</a>
 {% endblock %}
 
 {% block content %}
@@ -31,4 +31,7 @@ $.endlessPaginate();
     </div>
 
   </div>
+{% endblock %}
+
+{% block footer_wrapper %}
 {% endblock %}
