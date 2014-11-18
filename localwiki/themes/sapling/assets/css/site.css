@@ -1809,12 +1809,12 @@ input:focus {
 #activityfeed .changelabel.added {
     color: #818181;
     border-radius: 3px;
-    border: 2px solid #C2C2C2;
+    border: 1px solid #d1d1d1;
 }
 #activityfeed .changelabel.deleted {
     color: #818181;
     border-radius: 3px;
-    border: 2px dashed #C2C2C2;
+    border: 1px dashed #C2C2C2;
 }
 #activityfeed .changelabel a {
     text-decoration: none;
