@@ -429,10 +429,14 @@ textarea, input, select {
 #region_title a:hover {
     color: #111;
 }
-/* When we're not in a region, we don't have a #region_title so we will
- * need to increase the nav padding */
-#region_header.not_in_region #nav {
-    padding-left: 1.5em;
+
+/* Not in a region, so there's nothing here.  Let's add a border. */
+#region_header.not_in_region {
+    padding: 0;
+    border-bottom: 1px solid #E3E3E3;
+}
+.fixed_header #region_header.not_in_region {
+    border: 0;
 }
 
 @media screen and (max-width: 700px) {
@@ -802,7 +806,7 @@ textarea, input, select {
 }
 #nav .fa {
     margin-right: 0.2em;
-    color: #787878;
+    color: #898989;
 }
 #nav .fa-bus {
     padding-left: 0.2em;
@@ -1558,7 +1562,7 @@ input:focus {
     background-color: #feffc9;
     margin-top: 1em;
     margin-bottom: 0;
-    color: #2A2A2A;
+    color: #4E4E4E;
     padding: 1em 1em 0 1em;
     list-style-type: none;
 }

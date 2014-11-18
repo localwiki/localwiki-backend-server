@@ -565,6 +565,7 @@
     height: 100%;
     left: 0;
     margin-top: 54px;
+    border-right: 2px solid #E7E7E7;
 }
 #region_explore_page #map .mapwidget {
     width: 100%!important;
