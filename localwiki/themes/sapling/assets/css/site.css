@@ -804,6 +804,9 @@ textarea, input, select {
     margin-right: 0.2em;
     color: #787878;
 }
+#nav .fa-bus {
+    padding-left: 0.2em;
+}
 
 /*
 ====================================
@@ -1599,7 +1602,7 @@ input:focus {
     -moz-border-radius: 5px 5px 5px 5px;
     -webkit-border-radius: 5px 5px 5px 5px;
     padding: 1em;
-    color: #000000;
+    color: #2A2A2A;
     margin-bottom: 1em;
     margin-top: 0.8em;
 }
@@ -2485,10 +2488,10 @@ input:focus {
 .option_toggle a, .option_toggle span { background: #fff; display: block; color: #444; text-decoration: none; float: left; padding: 0.3em 0.5em; border: 1px solid #bfbfbf; border-left: none; }
 .option_toggle a.disabled, .option_toggle span.disabled,
 .option_toggle a.disabled:hover, .option_toggle span.disabled:hover { color: #999; background: #fff; }
-.option_toggle a:hover { background: url("../img/gradient-light.png") repeat-x scroll left bottom #f6f6f6; }
+.option_toggle a:hover { background-color: #f6f6f6; }
 .option_toggle .next { border-right: 1px solid #bfbfbf; }
 .option_toggle a:first-child { border-left: 1px solid #bfbfbf; }
-.option_toggle .current, .option_toggle .current:hover { color: #444; background: url("../img/gradient-light.png") repeat-x scroll left bottom #d9d9d9; }
+.option_toggle .current, .option_toggle .current:hover { color: #444; background-color: #d9d9d9; }
 
 .option_toggle.minimal { padding: 0; }
 .option_toggle.minimal a { color: rgba(102, 102, 102, 1); font-size: 90%; }
@@ -2506,9 +2509,7 @@ input:focus {
   margin-right: 1em;
   margin-top: 1em;
   border: 1px solid #d8d8d8;
-  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.06);
-  -moz-box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.06);
-  -webkit-box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.06);
+  border-bottom: 3px solid #D5D5D5;
   text-align: center;
 }
 .card:hover {
@@ -2516,7 +2517,7 @@ input:focus {
 }
 .card a {
   text-decoration: none;
-  color: #484848;
+  color: #636363;
 }
 .card img {
   display: block;

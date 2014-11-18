@@ -359,7 +359,6 @@
     padding-top: 1em!important;
 }
 
-
 /* *********************** */
 /* Default / flatpage style. This is for content on a non-wiki,
  * non-special page.
@@ -374,9 +373,6 @@
     background: none!important;
     background-color: none!important;
     background-image: none!important;
-}
-#splash_page.default #global_footer {
-    background: url('../img/body-bg.png') repeat scroll left top #FAFAFA;
 }
 #splash_page #global_footer a {
     text-decoration: underline;
@@ -666,6 +662,17 @@
         margin-top: 0;
     }
 }
+
+
+/* Fix for fixed_header floating #global_footer */
+.fixed_header #splash_page {
+    background-image: none;
+    background-color: #999;
+}
+.fixed_header #global_footer {
+    display: inline-block;
+}
+
 
 
 /* TEMP TEMP TEMP */
