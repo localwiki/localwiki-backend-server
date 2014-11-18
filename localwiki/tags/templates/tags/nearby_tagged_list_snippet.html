@@ -17,5 +17,5 @@
   </div>
 {% endif %}
 {% if more_tags %}
-<a class="little button tags_button" href="{% url 'tags:global-tagged' slug=tag.slug %}">{% blocktrans with tag=tag.slug %}All LocalWiki pages tagged {{ tag }}{% endblocktrans %}</a>
+<a class="little button tags_button" href="{% url 'tags:global-tagged' slug=tag.slug %}"><i class="fa fa-tag fa-flip-horizontal"></i> {% blocktrans with tag=tag.slug %}All LocalWiki pages tagged {{ tag }}{% endblocktrans %}</a>
 {% endif %}
