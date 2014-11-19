@@ -21,6 +21,18 @@
 #splash_page a, #splash_page a:link {
     text-decoration: none;
 }
+#blog_page .body a, #blog_page .body a:link, #splash_page.default #content a, #splash_page.default #content a:link {
+    text-decoration: underline;
+}
+#blog_page .body a.button, #splash_page.default #content a.button {
+    text-decoration: none;
+}
+#blog_page .title a, #blog_page .title a:link {
+    text-decoration: none!important;
+}
+#blog_page .title a:hover {
+    text-decoration: underline!important;
+}
 #splash_page .simple_pagination a {
     float: none;
     display: inline-block;
@@ -33,6 +45,13 @@
     margin: 0;
     border: none;
     padding: 0;
+}
+#splash_page #map_header_bar #map a {
+    text-decoration: underline;
+    color: #54649B;
+}
+#splash_page #map_header_bar #map a:hover {
+    color: #565656;
 }
 
 /* TEMP */
@@ -87,6 +106,7 @@
 #splash_page .bring_localwiki .button {
     float: none;
     display: inline-block;
+    font-size: 105%;
     margin-top: 2.5em;
     margin-bottom: 2.5em;
     color: white!important;
@@ -108,6 +128,10 @@
 }
 #splash_page .interesting_cards .explore_more a {
     margin-top: 1em;
+    padding: 0.5em 0.8em 0.5em 0.8em;
+}
+#splash_page .interesting_cards .explore_more .fa-globe {
+    margin-right: 0.3em;
 }
 #splash_page .interesting_cards h2 {
     text-align: center; 
@@ -144,6 +168,7 @@
     margin-right: 4em;
 }
 #splash_page .highlights .description {
+    color: #565656;
 }
 #splash_page .highlights .item:nth-child(odd) .description {
     padding-left: 363px;
@@ -181,14 +206,18 @@
    padding: 1.5em 2em 2em 2em;
    line-height: 1.1;
    clear: both;
+   color: #565656;
 }
 #splash_page .recent_blogs li:last-child {
    margin-bottom: 0;
 }
 #splash_page .recent_blogs li:hover {
     background-color: #ebebeb;
-    color: #111;
+    color: #414141;
     cursor: pointer;
+}
+#splash_page .recent_blogs li:hover h4 a:link, #splash_page .recent_blogs li:hover h4 a {
+    color: #444;
 }
 #splash_page .recent_blogs .image_frame {
    float: left;
@@ -249,7 +278,7 @@
 #splash_page #blog_page .item {
     border-bottom: 1px solid #E4E4E4;
     padding-bottom: 1em;
-    margin-bottom: 4em;
+    margin-bottom: 2.3em;
 }
 #splash_page #blog_page .item:last-child {
     border-bottom: none;
@@ -281,34 +310,49 @@
 }
 
 #blog_page blockquote {
-  display: block;
-  padding: 1.5em 0 0 2em;
-  max-width: 23em;
-  color: rgba(149, 149, 149, 1);
-  font-size: 130%;
-  line-height: 1.3;
+    display: block;
+    padding: 1.5em 0 0 2em;
+    max-width: 23em;
+    color: rgba(149, 149, 149, 1);
+    font-size: 130%;
+    line-height: 1.3;
 }
 
 #blog_page blockquote:before, #blog_page blockquote:after {
-  color: #69c;
-  display: block;
-  font-size: 300%;
-  width: 50px;
+    color: #69c;
+    display: block;
+    font-size: 300%;
+    width: 50px;
 }
 #blog_page blockquote:before {
-  content: "“";
-  height: 0;
-  margin-left: -0.45em;
-  float: left;
-  margin-top: -0.7em;
-  font-family: Georgia, "Times New Roman", Times, serif;
+    content: "“";
+    height: 0;
+    margin-left: -0.45em;
+    float: left;
+    margin-top: -0.7em;
+    font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 
 /* For a flat page on the main site, or for the blog, we use the splash_page styles. */
 #splash_page #content {
-  margin: 0;
+    margin: 0;
+    color: #565656;
 }
+#splash_page.default #content a, #splash_page.default #content a:link {
+    color: #616ABD;
+}
+#splash_page.default #content a:hover {
+    color: #444;
+}
+#blog_page .title a, #blog_page .user a {
+    color: inherit!important;
+    text-decoration: inherit!important;
+}
+#blog_page .user a:hover {
+    text-decoration: underline!important;
+}
+
 #splash_page #header_title {
    text-align: center;
    margin-top: 2.3em;
@@ -321,7 +365,7 @@
    margin-left: auto;
    margin-right: auto;
    background-color: #F4F4F4;
-   border-bottom: 2px solid #E7E7E7;
+   border-bottom: 3px solid #E3E3E3;
 }
 #splash_page #header_title h1 {
     margin: 0;
@@ -379,7 +423,7 @@
 }
 #splash_page.default #content_wrapper {
     background-color: white;
-    padding: 2.5em 3.5em 2.5em 3.5em;
+    padding: 1.5em 3.5em 2.5em 3.5em;
 }
 
 
