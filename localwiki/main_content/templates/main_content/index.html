@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load cache %}
 {% load cards_tags %}
+{% load static %}
 {% load thumbnail %}
 
 {% block header_bar_wrapper %}
@@ -11,6 +12,15 @@
       {{ map }}
       </div>    
   </div>
+{% endblock %}
+
+{% block title %}{{ block.super }} - {% trans "The grassroots effort to collect, share and open the world's local knowledge" %}{% endblock %}
+
+{% block head_extra %}
+<meta property="og:site_name" content="LocalWiki"/>
+<meta property="og:image" content="https://7da2e4f6.ngrok.com{% static 'theme/img/img_fb_share.jpg' %}" />
+<meta property="og:title" content="{% trans "Join us and share what you love about where you live." %}"/>
+<meta property="og:description" content="{% trans "LocalWiki is a grassroots effort to collect, share and open the world's local knowledge." %}"/>
 {% endblock %}
 
 {% block main_wrapper %}
