@@ -283,6 +283,16 @@ textarea, input, select {
         margin-right: 0.2em;
         background-size: auto 88%;
     }
+    .mapdata #header_bar .inner:before {
+        position: static;
+        margin-top: 0.06em;
+        margin-right: 0;
+    }
+    .tagpage #header_bar .inner:before {
+        position: static;
+        margin-top: 0.06em;
+        margin-right: 0.3em;
+    }
 }
 @media screen and (max-width: 500px) {
     #header {
@@ -2646,6 +2656,19 @@ input:focus {
     margin-left: -1.3em;
     margin-top: 0.13em;
     text-decoration: none;
+}
+@media screen and (max-width: 700px) {
+    .explore #header_bar .inner:before {
+        position: static;
+        margin-left: 0;
+        margin-top: -0.0em;
+    }
+}
+@media screen and (max-width: 500px) {
+    .explore #header_bar .inner:before {
+        content: '';
+        display: none;
+    }
 }
 
 
