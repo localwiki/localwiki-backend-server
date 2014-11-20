@@ -160,6 +160,11 @@ class MapFullRegionView(RegionMixin, MapBaseListView):
         })
         return InfoMap(map_objects, options=options)
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(MapFullRegionView, self).get_context_data(*args, **kwargs)
+        context['allow_near_you'] = True
+        return context
+
 
 class MapAllObjectsAsPointsView(MapFullRegionView):
     """

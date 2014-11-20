@@ -4,7 +4,6 @@
     <li><a href="{% url 'explore' region=region.slug %}"><i class="fa fa-bus"></i> {% trans "Explore" %}</a></li>
     {% if not region.regionsettings.is_meta_region %}
       <li><a href="{% url 'maps:global' region=region.slug %}"><i class="fa fa-map-marker"></i> {% trans "Map" %}</a></li>
-      <li><a href="{% url 'maps:nearby' region=region.slug %}"><i class="fa fa-location-arrow"></i> {% trans "Near You" %}</a></li>
     {% endif %}
     <li><a href="{% url 'region-activity' region=region.slug %}"><i class="fa fa-rss"></i> {% trans "Activity" %}</a></li>
     {% if is_region_admin %}

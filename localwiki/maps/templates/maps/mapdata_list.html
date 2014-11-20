@@ -31,6 +31,14 @@
   {% endif %}
 {% endblock %}
 
+{% block object_actions %}
+  {% if allow_near_you %}
+  <ul>
+      <li><a href="{% url 'maps:nearby' region=region.slug %}" rel="nofollow" class="button"><i class="fa fa-location-arrow"></i> {% trans "Near You" %}</a></li>
+  </ul>
+  {% endif %}
+{% endblock %}
+
 {% block main_wrapper %}
     <div id="main" class="mapdata_detail">
         {% block main %}
