@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.views.generic import RedirectView
-from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import user_passes_test
 from django.views.decorators.cache import cache_control
 
 import pages
@@ -72,7 +72,7 @@ urlpatterns = patterns('',
     (r'^_tools/dashboard/', include(dashboard.site.urls)),
 
     (r'^admin$', RedirectView.as_view(url='/admin/')),
-    (r'^admin/subscribers/$', staff_member_required(SubscribedList.as_view())),
+    (r'^admin/subscribers/$', user_passes_test(lambda u: u.is_superuser)(SubscribedList.as_view())),
     (r'^admin/', include(admin.site.urls)),
 
     # Search engine sitemap
