@@ -36,5 +36,5 @@ admin.site.register(User, CensoredUserAdmin)
 
 
 class SubscribedList(ListView):
-    queryset = UserProfile.objects.filter(subscribed=True)
+    queryset = UserProfile.objects.filter(subscribed=True, user__is_active=True)
     template_name = 'users/subscribed_list.html'
