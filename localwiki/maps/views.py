@@ -497,15 +497,17 @@ class MapNearbyView(RegionMixin, ListView):
         if not self.request.GET.get('lat'):
             return None
 
-        nearby_degrees = 0.02
+        nearby_degrees = 0.3
 
         lat = float(self.request.GET.get('lat'))
         lng = float(self.request.GET.get('lng'))
         user_location = Point(lng, lat)
 
-        points = MapData.objects.filter(points__dwithin=(user_location, nearby_degrees)).distance(user_location, field_name='points').order_by('distance')[:30]
-        polys = MapData.objects.filter(polys__dwithin=(user_location, nearby_degrees)).distance(user_location, field_name='polys').order_by('distance')[:30]
-        lines = MapData.objects.filter(lines__dwithin=(user_location, nearby_degrees)).distance(user_location, field_name='lines').order_by('distance')[:30]
+        near_user = user_location.buffer(nearby_degrees)
+
+        points = MapData.objects.filter(points__contained=near_user).distance(user_location, field_name='points').order_by('distance')[:30]
+        polys = MapData.objects.filter(polys__contained=near_user).distance(user_location, field_name='polys').order_by('distance')[:30]
+        lines = MapData.objects.filter(lines__contained=near_user).distance(user_location, field_name='lines').order_by('distance')[:30]
 
         queryset = sorted(list(points)+list(polys)+list(lines), key=attrgetter('distance'))[:30]
         return queryset
