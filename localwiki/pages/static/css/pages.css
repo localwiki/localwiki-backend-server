@@ -265,13 +265,20 @@ a[href^='mailto:'] {
 
 /* Making it easier to select a horizontal rule */
 hr {
-    height: 3px;
     border-left: none;
     border-right: none;
     border-bottom: none;
-    border-top-width: 2px;
+    border-top-width: 1px;
     border-top-style: groove;
+    background: none!important;
+    color: rgba(0, 0, 0, 0.1) !important;
+
+    height: 5px;
+    margin-top: 2em;
+    margin-bottom: 1.5em;
 }
+
+
 hr:hover {
     cursor: default;
 }

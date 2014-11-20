@@ -24,6 +24,12 @@
 #blog_page .body a, #blog_page .body a:link, #splash_page.default #content a, #splash_page.default #content a:link {
     text-decoration: underline;
 }
+#splash_page.default #header_title a {
+    color: inherit!important;
+}
+#splash_page.default #header_title a:hover {
+    text-decoration: underline;
+}
 #blog_page .body a.button, #splash_page.default #content a.button {
     text-decoration: none;
 }
@@ -237,7 +243,7 @@
 #splash_page #blog_page .title {
     text-align: center;
     margin-bottom: 0;
-    font-size: 200%;
+    font-size: 190%;
 }
 #splash_page #blog_page .title a {
     color: inherit;
@@ -277,7 +283,7 @@
 }
 #splash_page #blog_page .item {
     border-bottom: 1px solid #E4E4E4;
-    padding-bottom: 1em;
+    padding-bottom: 2em;
     margin-bottom: 2.3em;
 }
 #splash_page #blog_page .item:last-child {
@@ -345,6 +351,10 @@
 #splash_page.default #content a:hover {
     color: #444;
 }
+#region_explore_page #splash_page.default #content a, #region_explore_page #splash_page.default #content a:link {
+    color: inherit;
+    text-decoration: inherit;
+}
 #blog_page .title a, #blog_page .user a {
     color: inherit!important;
     text-decoration: inherit!important;
@@ -366,6 +376,11 @@
    margin-right: auto;
    background-color: #F4F4F4;
    border-bottom: 3px solid #E3E3E3;
+}
+@media screen and (max-width: 715px) {
+    #splash_page.default #header_title {
+        margin-top: 0;
+    }
 }
 #splash_page #header_title h1 {
     margin: 0;
@@ -511,6 +526,7 @@
 #region_explore_page .option_toggle .as_map {
     display: none;
 }
+
 
 #region_explore_page .option_toggle.minimal { margin-top: 1em; }
 
