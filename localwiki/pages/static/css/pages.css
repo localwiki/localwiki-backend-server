@@ -126,10 +126,16 @@ a[href$='.DOCX'] {
     width: auto;
     height: auto!important;
 }
+iframe {
+    /* Responsive scale of image */
+    max-width: 100%;
+}
+
 .image_frame > a {
     line-height: 0;
     display: block;
 }
+
 /* outline instead of border b/c we use width 100%
    to deal with responsive resizing, and otherwise
    the border width gets included in the width %
