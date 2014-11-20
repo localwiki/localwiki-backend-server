@@ -1098,7 +1098,7 @@ textarea, input, select {
     min-width: 250px;
 }
 #new_map_form.with_results, #add_map_button.with_results {
-    margin-left: 25em;
+    margin-left: 33em;
 }
 
 /* Hide this but allow Enter-to-submit */
@@ -1138,6 +1138,14 @@ textarea, input, select {
     margin: 0.5em;
     margin-left: 0;
 }
+@media screen and (max-width: 800px) {
+    #add_map_button {
+        margin-left: 15px;
+    }
+    #new_map_form {
+        margin-left: 15px;
+    }
+}
 @media screen and (max-width: 700px) {
     #map {
         float: none;
@@ -1170,6 +1178,12 @@ textarea, input, select {
     #map .map_cover.small {
         width: 100%;
     } 
+    #add_map_button {
+        margin-top: 15px;
+    }
+    #new_map_form {
+        margin-top: 15px;
+    }
 }
 }
 

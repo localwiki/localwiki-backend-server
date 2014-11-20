@@ -5,7 +5,7 @@
 }
 
 #results_pane {
-	padding: 0em 1em;
+    padding: 1em 1em 0em 2em;
 	overflow-y: auto;
 	float: left;
 	width: 400px;
