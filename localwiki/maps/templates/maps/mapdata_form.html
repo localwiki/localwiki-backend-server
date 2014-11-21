@@ -11,6 +11,10 @@
 {% endblock %}
 
 <script type="text/javascript">
+    {% if region.geom %}
+      var region_viewboxlbrt = '{{ region.geom.extent.0 }},{{ region.geom.extent.1 }},{{ region.geom.extent.2 }},{{ region.geom.extent.3 }}';
+    {% endif %}
+
     function size_map() {
         /* We want to size the map to the size of the container when the
         window is resized. */
