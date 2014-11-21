@@ -167,7 +167,7 @@ install_requires = [
     'raven==4.2.1',
     'django-xsession==0.1-custom2',
     'django-hosts==0.6-custom4',
-    'johnny-cache==1.6a',
+    'johnny-cache==1.6.1a',
     'python-varnish==0.2.1',
     'django-phased==0.6.1-custom3',
     'django_compressor==1.4',
@@ -206,7 +206,7 @@ setup(
         'https://github.com/philipn/django-xsession/tarball/localwiki#egg=django-xsession-0.1-custom2',
         'https://github.com/philipn/django-hosts/tarball/localwiki#egg=django-hosts-0.6-custom4',
         'https://github.com/philipn/django-phased/tarball/localwiki#egg=django-phased-0.6.1-custom3',
-        'https://github.com/philipn/johnny-cache/tarball/localwiki#egg=johnny-cache-1.6a',
+        'https://github.com/philipn/johnny-cache/tarball/localwiki#egg=johnny-cache-1.6.1a',
     ],
     entry_points={
         'console_scripts': ['localwiki-manage=localwiki.manage:main'],
