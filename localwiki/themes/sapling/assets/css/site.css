@@ -1624,6 +1624,10 @@ input:focus {
     margin-left: 0;
 }
 
+.messages .share_message > div {
+    padding-top: 0.8em;
+}
+
 #create_page_dialog {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0.05);
     border-radius: 5px 5px 5px 5px;
@@ -2228,6 +2232,11 @@ input:focus {
     position: absolute;
     margin-left: -0.4em;
     margin-top: -0.05em;
+}
+.messages .follow_item:hover .follow .text:after {
+    /* We have a block of text inside follow item here, so figuring out where to put :after
+     * is too complicated.. */
+    display: none;
 }
 .follow_item:hover .follow .text {
     text-shadow: none!important;
@@ -3077,5 +3086,3 @@ i.fa {
 .divider_list .follow_item {
     margin-top: -0.1em;
 }
-
-

@@ -1,5 +1,6 @@
 from dateutil.parser import parse as dateparser
 import time
+import urllib
 import copy
 
 from django.conf import settings
@@ -149,6 +150,7 @@ class PageUpdateView(PermissionRequiredMixin, CreateObjectMixin,
         log_in_message = ''
         map_create_link = ''
         follow_message = ''
+        share_message = ''
 
         if not self.request.user.is_authenticated():
             default_message = '<div>%s</div>' % (_('Changes saved! To use your name when editing, please '
@@ -191,7 +193,24 @@ class PageUpdateView(PermissionRequiredMixin, CreateObjectMixin,
                 })
                 follow_message = '<div>%s</div>' % (_("%(follow_page_notice)s for updates!") % {'follow_page_notice': t.render(c)})
 
-        return '%s%s%s' % (default_message, map_create_link, follow_message)
+        if not map_create_link:
+            # Translators: Keep under < 100 characters
+            twitter_status = _("I just edited %(page)s on @localwiki! %(page_url)s") % {
+                'page': self.object.name,
+                'page_url': ('https://localwiki.org%s' % self.object.get_url_for_share(self.request)),
+            }
+            twitter_status = urllib.quote(twitter_status)
+            share_message = _("Want to share this page?")
+            share_message = "%(share_message)s<div>%(fb_link)s %(twitter_link)s</div>" % {
+                'share_message': share_message,
+                'fb_link': ('<a target="_blank" class="button tiny" href="https://www.facebook.com/sharer/sharer.php?u=https://localwiki.org%s"></a>' %
+                    self.object.get_url_for_share(self.request)),
+                'twitter_link': ('<a target="_blank" class="button tiny" href="https://twitter.com/home?status=%s"></a>' % twitter_status)
+            }
+            share_message = '<div class="share_message">%s</div>' % share_message
+            
+            
+        return '%s%s%s%s' % (default_message, map_create_link, follow_message, share_message)
 
     def get_success_url(self):
         region = self.get_region()

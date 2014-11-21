@@ -30,6 +30,9 @@
 #splash_page.default #header_title a:hover {
     text-decoration: underline;
 }
+#region_explore_page #splash_page.default #header_title a:hover {
+    text-decoration: none;
+}
 #blog_page .body a.button, #splash_page.default #content a.button {
     text-decoration: none;
 }

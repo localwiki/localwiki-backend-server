@@ -7,6 +7,8 @@ from lxml.html import fragments_fromstring
 from copy import copy
 
 from django.contrib.gis.db import models
+from django.conf import settings
+from django.core.urlresolvers import set_urlconf, get_urlconf
 from django.template.defaultfilters import stringfilter
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
@@ -48,6 +50,17 @@ class Page(models.Model):
 
     def get_absolute_url(self):
         return page_url(self.name, self.region)
+
+    def get_url_for_share(self, request):
+        # Want to use a semi-canonical URL here
+        if request.host.name == settings.DEFAULT_HOST:
+            return self.get_absolute_url()
+        else:
+            current_urlconf = get_urlconf() or settings.ROOT_URLCONF
+            set_urlconf(settings.ROOT_URLCONF)
+            url = self.get_absolute_url()
+            set_urlconf(current_urlconf)
+            return url
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)

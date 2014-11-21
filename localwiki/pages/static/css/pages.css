@@ -197,7 +197,9 @@ a[href^='http:'], a[href^='https:'] {
     padding-left: 1.1em;
     background: none;
 }
-
+a.button[href^='http:'], a.button[href^='https:'] {
+    background-color: #DCDCDC !important;
+}
 a[href^='http://www.facebook.com/']:before, a[href^='https://www.facebook.com/']:before {
     /* fa boilerplate */
     font-family: FontAwesome;
@@ -216,6 +218,13 @@ a[href^='http://www.facebook.com/']:before, a[href^='https://www.facebook.com/']
 }
 a[href^='http://www.facebook.com/'], a[href^='https://www.facebook.com/'] {
     padding-left: 1.5em;
+}
+a.button[href^='http://www.facebook.com/']:before, a.button[href^='https://www.facebook.com/']:before {
+    margin-left: -0.388em;
+    margin-top: 0.05em;
+}
+a.button.tiny[href^='http://www.facebook.com/'], a.button.tiny[href^='https://www.facebook.com/'] {
+    padding: 0.8em;
 }
 
 a[href^='http://twitter.com/']:before, a[href^='https://twitter.com/']:before {
@@ -236,6 +245,12 @@ a[href^='http://twitter.com/']:before, a[href^='https://twitter.com/']:before {
 }
 a[href^='http://twitter.com/'], a[href^='https://twitter.com/'] {
     padding-left: 1.5em;
+}
+a.button.tiny[href^='http://twitter.com/']:before, a.button.tiny[href^='https://twitter.com/']:before {
+    margin-left: -0.4em;
+}
+a.button.tiny[href^='http://twitter.com/'], a.button.tiny[href^='https://twitter.com/'] {
+    padding: 0.8em;
 }
 
 /* Mailto links */
