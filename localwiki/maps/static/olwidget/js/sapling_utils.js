@@ -592,13 +592,12 @@ SaplingMap = {
                 url: geoCodeURL,
                 replace: function(url, uriEncodedQuery) {
                     var q = decodeURIComponent(uriEncodedQuery);
-                    // Did they use a coma to specify the city, etc?
-                    var didnt_specify_region = q.indexOf(',') === -1;
-                    if (didnt_specify_region) {
-                        // Let's throw in the region name to improve geocoding.
-                        q += ', ' + region_name;
+                    if (region_viewboxlbrt) {
+                        return (url + '?q=' + encodeURIComponent(q)) + '&viewboxlbrt=' + region_viewboxlbrt + '&bounded=1&format=json';
                     }
-                    return (url + '?q=' + encodeURIComponent(q)) + '&format=json';
+                    else {
+                        return (url + '?q=' + encodeURIComponent(q)) + '&bounded=1&format=json';
+                    }
                 }
             }
         });
