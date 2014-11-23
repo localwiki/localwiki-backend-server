@@ -4,7 +4,7 @@ from django.template import Library
 from django.conf import settings
 from django.core.urlresolvers import set_urlconf, get_urlconf, reverse, resolve
 
-from django_hosts.defaults import HOST_SCHEME
+HOST_SCHEME = 'https://'
 
 register = Library()
 
