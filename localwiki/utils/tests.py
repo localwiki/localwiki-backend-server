@@ -141,7 +141,7 @@ class CanonicalURLTests(TestCase):
             view = FrontPageView.as_view()
             response = view(request)
 
-            canonical_url = '//%s/sf/' % settings.MAIN_HOSTNAME
+            canonical_url = 'https://%s/sf/' % settings.MAIN_HOSTNAME
             response.render()
             self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
@@ -157,7 +157,7 @@ class CanonicalURLTests(TestCase):
             view = FrontPageView.as_view()
             response = view(request)
 
-            canonical_url = '//%s/sf/' % settings.MAIN_HOSTNAME
+            canonical_url = 'https://%s/sf/' % settings.MAIN_HOSTNAME
             response.render()
             self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
@@ -212,7 +212,7 @@ class CanonicalURLTests(TestCase):
             view = slugify(PageDetailView.as_view())
             response = view(request, slug='Parks')
 
-            canonical_url = '//%s/sf/Parks' % settings.MAIN_HOSTNAME
+            canonical_url = 'https://%s/sf/Parks' % settings.MAIN_HOSTNAME
             response.render()
             self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
@@ -228,7 +228,7 @@ class CanonicalURLTests(TestCase):
             view = slugify(PageDetailView.as_view())
             response = view(request, slug='PArkS')
 
-            canonical_url = '//%s/sf/Parks' % settings.MAIN_HOSTNAME
+            canonical_url = 'https://%s/sf/Parks' % settings.MAIN_HOSTNAME
             response.render()
             self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
@@ -281,7 +281,7 @@ class CanonicalURLTests(TestCase):
             view = haystack_search
             response = view(request)
 
-            canonical_url = '//%s/_rsearch/sf?q=parks' % settings.MAIN_HOSTNAME
+            canonical_url = 'https://%s/_rsearch/sf?q=parks' % settings.MAIN_HOSTNAME
             self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
         #####################################################
@@ -316,7 +316,7 @@ class CanonicalURLTests(TestCase):
             view = RegionActivity.as_view()
             response = view(request)
 
-            canonical_url = '//%s/sf/_activity' % settings.MAIN_HOSTNAME
+            canonical_url = 'https://%s/sf/_activity' % settings.MAIN_HOSTNAME
             response.render()
             self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
@@ -353,7 +353,7 @@ class CanonicalURLTests(TestCase):
             view = MapFullRegionView.as_view()
             response = view(request)
 
-            canonical_url = '//%s/sf/map/' % settings.MAIN_HOSTNAME
+            canonical_url = 'https://%s/sf/map/' % settings.MAIN_HOSTNAME
             response.render()
             self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
@@ -391,7 +391,7 @@ class CanonicalURLTests(TestCase):
             view = TaggedList.as_view()
             response = view(request, slug='park')
 
-            canonical_url = '//%s/sf/tags/park' % settings.MAIN_HOSTNAME
+            canonical_url = 'https://%s/sf/tags/park' % settings.MAIN_HOSTNAME
             response.render()
             self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
@@ -429,7 +429,7 @@ class CanonicalURLTests(TestCase):
             view = MapForTag.as_view()
             response = view(request, tag='park')
 
-            canonical_url = '//%s/sf/map/tags/park' % settings.MAIN_HOSTNAME
+            canonical_url = 'https://%s/sf/map/tags/park' % settings.MAIN_HOSTNAME
             response.render()
             self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
@@ -467,7 +467,7 @@ class CanonicalURLTests(TestCase):
             view = slugify(PageVersionsList.as_view())
             response = view(request, slug='Parks')
 
-            canonical_url = '//%s/sf/Parks/_history/' % settings.MAIN_HOSTNAME
+            canonical_url = 'https://%s/sf/Parks/_history/' % settings.MAIN_HOSTNAME
             response.render()
             self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 
@@ -505,7 +505,7 @@ class CanonicalURLTests(TestCase):
             view = slugify(PageCompareView.as_view())
             response = view(request, slug='Parks', version1='2', version2='1')
 
-            canonical_url = '//%s/sf/Parks/_history/2...1' % settings.MAIN_HOSTNAME
+            canonical_url = 'https://%s/sf/Parks/_history/2...1' % settings.MAIN_HOSTNAME
             response.render()
             self.assertTrue(self.has_canonical_url(canonical_url, request, response))
 

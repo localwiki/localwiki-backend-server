@@ -38,9 +38,6 @@ DATABASES = {
     }
 }
 
-if not DEBUG:
-    HOST_SCHEME = 'https://'
-
 # For testing, you can start the python debugging smtp server like so:
 # sudo python -m smtpd -n -c DebuggingServer localhost:25
 EMAIL_HOST = 'localhost'
