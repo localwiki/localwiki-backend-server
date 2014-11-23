@@ -157,6 +157,12 @@ a[href^='http:'], a[href^='https:'] {
     background-position: left center;
     padding-left: 16px;
 }
+a[href^='http:'][href*='localwiki.org'], a[href^='https:'][href*='localwiki.org'],
+a[href^='http:'][href*='localhost'], a[href^='https:'][href*='localhost']
+{
+    background: none;
+    padding-left: inherit!important;
+}
 
 a[href^='http://www.facebook.com/'], a[href^='https://www.facebook.com/'] {
     background: url(../img/facebook_link.png) no-repeat;
