@@ -3,7 +3,6 @@
 {% load cache %}
 {% load hosts %}
 {% load phased_tags %}
-{% load django_xsession %}
 {% load canonical_urls %}
 
 <!DOCTYPE html>
@@ -49,7 +48,10 @@
     {% include "site/static_media.html" %}
     {% include "site/extra_media.html" %}
 
+    {% phased %}
+    {% load django_xsession %}
     {% xsession_loader %}
+    {% endphased %}
   {% endblock %}
 
   {% block analytics %}

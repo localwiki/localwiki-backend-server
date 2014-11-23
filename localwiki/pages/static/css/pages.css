@@ -197,6 +197,15 @@ a[href^='http:'], a[href^='https:'] {
     padding-left: 1.1em;
     background: none;
 }
+a[href^='http:'][href*='localwiki.org'], a[href^='https:'][href*='localwiki.org'],
+a[href^='http:'][href*='localhost'], a[href^='https:'][href*='localhost'] {
+    padding-left: inherit;
+}
+a[href^='http:'][href*='localwiki.org']:before, a[href^='https:'][href*='localwiki.org']:before,
+a[href^='http:'][href*='localhost']:before, a[href^='https:'][href*='localhost']:before {
+    content: "";
+}
+
 a.button[href^='http:'], a.button[href^='https:'] {
     background-color: #DCDCDC !important;
 }
