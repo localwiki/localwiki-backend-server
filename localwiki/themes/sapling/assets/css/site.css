@@ -366,6 +366,9 @@ textarea, input, select {
     padding-left: 1.5em;
     width: 130px;
 }
+#common_title a[href^="http:"], #common_title a[href^="https:"] {
+    padding-left: inherit;
+}
 
 #region_header #new_page_area {
   float: right;
