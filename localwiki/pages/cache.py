@@ -14,7 +14,6 @@ def varnish_invalidate_url(url, hostname=None):
 
     ban_path = r'obj.http.x-url ~ ^(?i)(%(url)s(/*)(\\?.*)?)$ && obj.http.x-host ~ ^((?i)(.*\\.)?%(host)s(:[0-9]*)?)$'
 
-    url = urllib.unquote(url)  # Varnish needs it unquoted
     if type(url) != unicode:
         url = url.decode('utf-8')
     ban_cmd = (ban_path % {'url': url, 'host': hostname}).encode('utf-8')
