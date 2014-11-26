@@ -7,6 +7,10 @@ from django.core.cache import cache
 from celery import shared_task
 from varnish import VarnishManager
 
+rfc_3986_reserved = """!*'();:@&=+$,/?#[]"""
+rfc_3986_unreserved = """ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.~"""
+VARNISH_SAFE = rfc_3986_reserved + rfc_3986_unreserved
+
 
 def varnish_invalidate_url(url, hostname=None):
     if not hostname:
@@ -14,6 +18,9 @@ def varnish_invalidate_url(url, hostname=None):
 
     ban_path = r'obj.http.x-url ~ ^(?i)(%(url)s(/*)(\\?.*)?)$ && obj.http.x-host ~ ^((?i)(.*\\.)?%(host)s(:[0-9]*)?)$'
 
+    # Varnish needs it quoted, but has a wonky way of encoding URLs :/
+    url = urllib.unquote(url)
+    url = urllib.quote(url, safe=VARNISH_SAFE)
     if type(url) != unicode:
         url = url.decode('utf-8')
     ban_cmd = (ban_path % {'url': url, 'host': hostname}).encode('utf-8')
