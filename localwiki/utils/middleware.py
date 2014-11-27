@@ -119,6 +119,36 @@ class SessionMiddleware(SessionMiddleware):
         return response
 
 
+#class ClearSessionMiddleware(object):
+#    def process_request(self, request):
+#        import pdb;pdb.set_trace()
+#        self._clear_session = False
+#
+#        if request.session.keys() or request.user.is_authenticated():
+#            return
+#
+#        cookie = getattr(settings, 'SESSION_COOKIE_NAME', 'sessionid')
+#        if request.COOKIES.get(cookie, None):
+#            self._clear_session = True
+#
+#    def process_response(self, request, response):
+#        from regions.models import Region
+#        import pdb;pdb.set_trace()
+#        if self._clear_session:
+#            cookie = getattr(settings, 'SESSION_COOKIE_NAME', 'sessionid')
+#            session_cookie_domain = settings.SESSION_COOKIE_DOMAIN
+#            hostname = request.META.get('HTTP_HOST', '')
+#            if session_cookie_domain:
+#                # Using a custom domain
+#                if Region.objects.filter(regionsettings__domain=hostname):
+#                    session_cookie_domain = '.%s' % hostname.split(':')[0]
+#                elif not hostname.startswith(session_cookie_domain.lstrip('.')):
+#                    session_cookie_domain = ''
+#            response.delete_cookie(cookie, path=settings.SESSION_COOKIE_PATH, domain=session_cookie_domain)
+#
+#        return response
+
+
 # NOTE: Thread-local is usually a bad idea.  However, in this case
 # it is the most elegant way for us to store per-request data
 # and retrieve it from somewhere else.  Our goal is to allow a

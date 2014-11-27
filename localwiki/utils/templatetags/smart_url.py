@@ -21,7 +21,7 @@ def url(parser, token):
     """
     A smarter version of the default Django {% url %} tag that will render
     host-aware URLs.  E.g. if the requested URL is within this LocalWiki
-    region, it will be relative.  If the rquested URL is /from/ a 
+    region, it will be relative.  If the requested URL is /from/ a 
     LocalWiki region with a custom domain /to/ the rest of LocalWiki, it
     will be rendered as absolute.
 
@@ -71,23 +71,21 @@ class CustomURLConfURLNode(URLNode):
         try:
             url = reverse(view_name, args=args, kwargs=kwargs, current_app=context.current_app, urlconf=self.urlconf)
         except NoReverseMatch as e:
-            try:
-                url = reverse(view_name, args=args, kwargs=kwargs, current_app=context.current_app)
-            except NoReverseMatch:
-                if self.urlconf != settings.ROOT_URLCONF:
-                    # Re-try to match on the base urlconf instead, and render as an absolute URL.
-                    try:
-                        host = settings.DEFAULT_HOST
-                        host_args, host_kwargs = (), {}
-                        return HostURLNode(host, self.view_name, host_args, host_kwargs, self.args, self.original_kwargs, self.asvar).render(context)
-                    except:
-                        pass
+            if self.urlconf != settings.ROOT_URLCONF:
+                # Re-try to match on the base urlconf instead, and render as an absolute URL.
+                try:
+                    host = settings.DEFAULT_HOST
+                    host_args, host_kwargs = (), {}
+                    return HostURLNode(host, self.view_name, host_args, host_kwargs, self.args, self.original_kwargs, self.asvar).render(context)
+                except:
+                    pass
 
-                if self.asvar is None:
-                    # Re-raise the original exception, not the one with
-                    # the path relative to the project. This makes a
-                    # better error message.
-                    raise e
+            if self.asvar is None:
+                # Re-raise the original exception, not the one with
+                # the path relative to the project. This makes a
+                # better error message.
+                raise e
+
         if self.asvar:
             context[self.asvar] = url
             return ''
@@ -171,7 +169,7 @@ class SmartURLNode(Node):
         urlconf = None
 
         if self.region_linking_to_slug:
-            region_linking_to_slug = self.region_linking_to_slug.resolve('context')
+            region_linking_to_slug = self.region_linking_to_slug.resolve(context)
         else:
             region_linking_to_slug = None
 

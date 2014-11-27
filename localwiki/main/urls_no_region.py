@@ -33,9 +33,6 @@ urlpatterns = patterns('',
     (r'^_follow/', include('follow.urls')),
     (r'^_stars/', include('stars.urls')),
 
-    # Region routing URLs
-    (r'^', include(regions.site.urls)),
-    
     # Internal API URLs
     (r'^_api/', include('main.api.internal_urls')),
 
