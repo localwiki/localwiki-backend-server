@@ -2,6 +2,7 @@ from copy import copy
 
 from django import template
 from django.template.loader import render_to_string
+from django.http import Http404
 
 from pages.templatetags.pages_tags import IncludeContentNode
 from regions.models import Region
@@ -59,7 +60,10 @@ class IncludeTagNode(IncludeContentNode):
             view = TaggedList()
             view.kwargs = dict(slug=self.name, region=region.slug)
             view.request = context['request']
-            view.object_list = view.get_queryset()
+            try:
+                view.object_list = view.get_queryset()
+            except Http404:
+                view.object_list = []
 
             context = copy(context)
             context.update(view.get_context_data(object_list=view.object_list))
