@@ -24,8 +24,8 @@ backend splash {
 }
 
 sub vcl_recv {
-    # unless sessionid/csrftoken is in the request, don't pass ANY cookies (referral_source, utm, etc)
-    if (req.request == "GET" && (req.url ~ "^/static" || req.url ~ "^/media" || (req.http.cookie !~ "sessionid" && req.http.cookie !~ "csrftoken"))) {
+    # unless sessionid/csrftoken/messages is in the request, don't pass ANY cookies (referral_source, utm, etc)
+    if (req.request == "GET" && (req.url ~ "^/static" || req.url ~ "^/media" || (req.http.cookie !~ "sessionid" && req.http.cookie !~ "csrftoken" && req.http.cookie !~ "messages"))) {
         remove req.http.Cookie;
     }
     # Some Django URLs to always, always cache.
@@ -148,8 +148,8 @@ sub vcl_fetch {
        return (deliver);
     }
 
-    # pass through for anything with a session/csrftoken set
-    if (beresp.http.set-cookie ~ "sessionid" || beresp.http.set-cookie ~ "csrftoken") {
+    # pass through for anything with a session/csrftoken/messages set
+    if (beresp.http.set-cookie ~ "sessionid" || beresp.http.set-cookie ~ "csrftoken" || beresp.http.set-cookie ~ "messages") {
        return (hit_for_pass);
     } else {
        return (deliver);
