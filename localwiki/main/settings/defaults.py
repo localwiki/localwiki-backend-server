@@ -106,6 +106,8 @@ AUTHENTICATION_BACKENDS = (
     'users.backends.RestrictiveBackend',
 )
 
+MESSAGE_STORAGE = 'utils.messages.storage.FallbackStorageCrossDomain'
+
 AUTH_PROFILE_MODULE = 'users.UserProfile'
 
 # users app settings
