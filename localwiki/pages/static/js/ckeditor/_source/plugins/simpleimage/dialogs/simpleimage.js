@@ -131,7 +131,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 						height = dialog.getValueOf( 'info', 'txtHeight' ),
 						originalRatio = oImageOriginal.$.width * 1000 / oImageOriginal.$.height,
 						thisRatio = width * 1000 / height;
-					dialog.lockRatio  = false;		// Default: unlock ratio
+					dialog.lockRatio  = true;		// Default: lock ratio
 
 					if ( !width && !height )
 						dialog.lockRatio = true;
