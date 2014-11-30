@@ -314,6 +314,11 @@ textarea, input, select {
 #common_title a[href^="http:"], #common_title a[href^="https:"] {
     padding-left: inherit;
 }
+#object_actions a.button[href^="http:"],
+#object_actions a.button[href^="https:"] {
+    padding-left: 10px;
+    background: #e6e6e6 url(../img/gradient.png) repeat-x bottom left;
+}
 
 #region_header #new_page_area {
   float: right;

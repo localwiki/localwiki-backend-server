@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load cache %}
+{% load hosts %}
 
 {% block title %}{% blocktrans with region_name=region.full_name %}Explore {{ region_name }}{% endblocktrans %} - {{ block.super }}{% endblock %}
 
@@ -9,7 +10,7 @@
 
 {% block object_actions %}
   <ul>
-      <li><a href="{% url 'random-tour' region=region.slug %}" rel="nofollow" class="button">{% trans "Take tour" %}</a></li>
+      <li><a href="{% host_url 'random-tour' region=region.slug %}" rel="nofollow" class="button">{% trans "Take tour" %}</a></li>
   </ul>
 {% endblock %}
 
