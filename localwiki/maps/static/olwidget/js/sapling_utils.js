@@ -647,7 +647,7 @@ SaplingMap = {
             $('.mapwidget').prepend('<div class="loading"></div>');
             $('.mapwidget .loading').height($('.mapwidget').height());
 
-            $.get('/' + region_slug + '/map/_get_osm/', { 'display_name': datum.display_name, 'osm_id': datum.osm_id, 'osm_type': datum.osm_type }, function(data){
+            $.get('//' + home_hostname + '/' + region_slug + '/map/_get_osm/', { 'display_name': datum.display_name, 'osm_id': datum.osm_id, 'osm_type': datum.osm_type }, function(data){
                 if (data.geom == "GEOMETRYCOLLECTION EMPTY" && datum.lat && datum.lon) {
                     _add_as_point(datum);
                 }
