@@ -403,6 +403,8 @@ def update_apache_settings(restart=True):
 
     get_ssl_info()
 
+    upload_template('config/apache/main_router.conf', '/etc/apache2/extra-conf/main_router.conf',
+        context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/localwiki', '/etc/apache2/sites-available/localwiki',
         context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/apache2.conf', '/etc/apache2/apache2.conf',
