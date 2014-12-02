@@ -400,6 +400,8 @@ def update_apache_settings():
 
     get_ssl_info()
 
+    upload_template('config/apache/main_router.conf', '/etc/apache2/extra-conf/main_router.conf',
+        context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/localwiki', '/etc/apache2/sites-available/localwiki',
         context=get_context(env), use_jinja=True, use_sudo=True)
     upload_template('config/apache/apache2.conf', '/etc/apache2/apache2.conf',
@@ -464,6 +466,7 @@ def switch_branch(branch):
 def install_ssl_certs():
     # Install our SSL certs for apache
     sudo('mkdir -p /etc/apache2/ssl')
+    sudo('mkdir -p /etc/apache2/extra-ssl')
     sudo('chown -R www-data:www-data /etc/apache2/ssl')
     sudo('chmod 700 /etc/apache2/ssl')
 
@@ -471,6 +474,7 @@ def install_ssl_certs():
         # We only move over our SSL certs if we're running in production:
         if env.host_type == 'production':
             put('config_secrets/ssl/*', '/etc/apache2/ssl/', use_sudo=True)
+            put('config_secrets/extra-ssl/*', '/etc/apache2/extra-ssl/', use_sudo=True)
 
     # If we have no actual SSL certs, let's generate a self-signed one
     # for testing purposes.

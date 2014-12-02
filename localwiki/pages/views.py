@@ -104,6 +104,8 @@ class PageDetailView(CacheMixin, BasePageDetailView):
         urlconf = get_urlconf() or settings.ROOT_URLCONF
         slug = kwargs.get('slug')
         region = kwargs.get('region')
+        if urlconf == 'main.urls_no_region':
+            region = None
         # Control characters and whitespace not allowed in memcached keys
         return '%s/%s/%s' % (urlconf, name_to_url(region), slugify(slug).replace(' ', '_'))
 

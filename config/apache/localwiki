@@ -31,9 +31,7 @@
     ServerName {{ public_hostname }}
     ServerAlias www.{{ public_hostname }}
     ServerAlias *.{{ public_hostname }}
-    {% for domain in custom_domains %}
-    ServerAlias {{ domain }}
-    {% endfor %}
+    
 
     ServerAdmin {{ server_admin_email }}
 
@@ -43,101 +41,65 @@
     RewriteRule (.*) https://{{ public_hostname }}%{REQUEST_URI} [R=301]
 </VirtualHost>
 
+# Redirect HTTP -> HTTPS for wonky custom domains
+{% for domain in custom_domains %}
+<VirtualHost *:80>
+    ServerName {{ domain }}
+    ServerAlias www.{{ domain }}
+    ServerAlias *.{{ domain }}
+    
+
+    ServerAdmin {{ server_admin_email }}
+
+    # Redirect www -> no-www
+    RewriteEngine on
+    RewriteCond %{HTTPS} off
+    RewriteRule (.*) https://{{ domain }}%{REQUEST_URI} [R=301]
+</VirtualHost>
+{% endfor %}
+
 <VirtualHost *:443>
     # Virtualhost for routing to either:
     #   1) Static assets, served via apache directly.
     #   2) Application URLs, proxied to varnish first.
     #      a) Varnish will then use localhost:8084
     #         to get the application content.
-
+    
     ServerName {{ public_hostname }}
     ServerAlias www.{{ public_hostname }}
     ServerAlias *.{{ public_hostname }}
-    {% for domain in custom_domains %}
-    ServerAlias {{ domain }}
-    {% endfor %}
+    
+    Include extra-conf/localwiki_certs.conf
+    Include conf.d/main_router.conf
 
     ServerAdmin {{ server_admin_email }}
 
-    Include extra-conf/ssl.conf
-    Include extra-conf/localwiki_certs.conf
     # Enable this if your want HSTS (recommended, but be careful)
     # Header add Strict-Transport-Security "max-age=15768000"
-
-    # Redirect www -> no-www
-    RewriteEngine on
-    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-    RewriteRule ^(.*)$ http://%1$1 [R=301,L]
-
-    <Location /server-status>
-        SetHandler server-status
-        Order deny,allow
-        Deny from all
-        Allow from 127.0.0.1 ::1
-    #    Allow from 192.0.2.0/24
-    </Location>
-
-    # The media directory, which contains user-uploaded content, should be set
-    # to force downloads. This is *extremely* important for security reasons.
-    # Note: The /media/ directory must be writable by the www-data user
-    Alias /media/ {{ data_root }}/media/
-    <Location /media/>
-        Header set Content-Disposition attachment
-    </Location>
-
-    Alias /static/ {{ data_root }}/static/
-    Alias /robots.txt {{ data_root }}/static/robots.txt
-    Alias /sitemap.xml {{ data_root }}/static/sitemap.xml
-    Alias /favicon.ico {{ data_root }}/static/favicon.ico
-
-    # Make sure we send Expires and Cache-control headers for
-    # static & media content.
-    <Location /media/>
-        ExpiresDefault "access plus 1 year"
-        ExpiresActive On
-    </Location>
-    <Location /static/>
-        ExpiresDefault "access plus 1 year"
-        ExpiresActive On
-    </Location>
-
-    <Directory {{ data_root }}>
-        Options -Indexes FollowSymLinks MultiViews
-        AllowOverride None
-        Order allow,deny
-        Allow from all
-    </Directory>
-
-    <Proxy *>
-        Order deny,allow
-        Allow from all
-    </Proxy>
-    ProxyRequests off
-
-    # Route to varnish, except for some static assets
-    ProxyPass /static/ !
-    ProxyPass /media/ !
-    ProxyPass /robots.txt !
-    ProxyPass /sitemap.xml !
-    ProxyPass /_monitoring/ !
-    ProxyPass /favicon.ico !
-    ProxyPass /apple-touch-icon.png !
-    ProxyPass /apple-touch-icon.png/ !
-    ProxyPass / http://127.0.0.1:6081/ keepalive=On retry=0
-
-    ProxyPassReverse /static/ !
-    ProxyPassReverse /media/ !
-    ProxyPassReverse /static/ !
-    ProxyPassReverse /robots.txt !
-    ProxyPassReverse /sitemap.xml !
-    ProxyPassReverse /_monitoring/ !
-    ProxyPassReverse /favicon.ico !
-    ProxyPassReverse /apple-touch-icon.png !
-    ProxyPassReverse /apple-touch-icon.png/ !
-    ProxyPassReverse / http://127.0.0.1:6081/ keepalive=On
-
-    RequestHeader set X-Forwarded-Proto "https"
-
-    CustomLog /var/log/apache2/access.log combined
-
 </VirtualHost>
+
+{% for domain in custom_domains %}
+<VirtualHost *:443>
+    # Virtualhost for routing to either:
+    #   1) Static assets, served via apache directly.
+    #   2) Application URLs, proxied to varnish first.
+    #      a) Varnish will then use localhost:8084
+    #         to get the application content.
+    
+    ServerName {{ domain }}
+    ServerAlias www.{{ domain }}
+    ServerAlias *.{{ domain }}
+   
+    # Assume that these are named according to the domain and in extra-ssl
+    SSLCertificateFile /etc/apache2/extra-ssl/{{ domain }}/{{ domain }}.crt
+    SSLCertificateKeyFile /etc/apache2/extra-ssl/{{ domain }}/{{ domain }}.key
+    {% if ssl_intermediate %}SSLCACertificateFile /etc/apache2/extra-ssl/{{ domain }}/{{ ssl_intermediate }}{% endif %}
+
+    Include conf.d/main_router.conf
+
+    ServerAdmin {{ server_admin_email }}
+
+    # Enable this if your want HSTS (recommended, but be careful)
+    # Header add Strict-Transport-Security "max-age=15768000"
+</VirtualHost>
+{% endfor %}

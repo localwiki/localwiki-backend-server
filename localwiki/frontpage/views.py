@@ -101,6 +101,8 @@ class FrontPageView(CacheMixin, Custom404Mixin, TemplateView):
         from django.core.urlresolvers import get_urlconf
         urlconf = get_urlconf() or settings.ROOT_URLCONF
         region = kwargs.get('region')
+        if urlconf == 'main.urls_no_region':
+            region = None
         return '%s/%s/' % (urlconf, region)
 
 
