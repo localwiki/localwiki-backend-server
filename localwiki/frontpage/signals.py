@@ -17,12 +17,20 @@ def _clear_frontpage(region):
     if region.regionsettings.domain:
         # Has a domain, ugh. Need to clear two URLs on two hosts, in this case
         set_urlconf('main.urls_no_region')
+
+        key = FrontPageView.get_cache_key(region=region.slug)
+        cache.delete(key)
         varnish_invalidate_url(region.get_absolute_url(), hostname=region.regionsettings.domain)
 
         # Now invalidate main path on LocalWiki hub
         set_urlconf('main.urls')
+
+        key = FrontPageView.get_cache_key(region=region.slug)
+        cache.delete(key)
         varnish_invalidate_url(region.get_absolute_url())
     else:
+        key = FrontPageView.get_cache_key(region=region.slug)
+        cache.delete(key)
         varnish_invalidate_url(region.get_absolute_url())
 
     set_urlconf(current_urlconf)
