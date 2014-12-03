@@ -94,7 +94,7 @@ class TaggedList(Custom404Mixin, RegionMixin, ListView):
         nearby_pts = PageTagSet.objects.exclude(region=region).\
             exclude(region__regionsettings=None).exclude(region__regionsettings__region_center=None).\
             filter(region__regionsettings__region_center__dwithin=(center, 0.5))
-        nearby_pts = nearby_pts.filter(tags__slug=self.tag)
+        nearby_pts = nearby_pts.filter(tags__slug=self.tag.slug)
         nearby_pts = nearby_pts.select_related('page__mapdata')
 
         self.nearby_pagetagset_list = nearby_pts
