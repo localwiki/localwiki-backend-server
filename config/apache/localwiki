@@ -32,7 +32,6 @@
     ServerAlias www.{{ public_hostname }}
     ServerAlias *.{{ public_hostname }}
     
-
     ServerAdmin {{ server_admin_email }}
 
     # Redirect www -> no-www
@@ -47,7 +46,6 @@
     ServerName {{ domain }}
     ServerAlias www.{{ domain }}
     ServerAlias *.{{ domain }}
-    
 
     ServerAdmin {{ server_admin_email }}
 
@@ -70,7 +68,7 @@
     ServerAlias *.{{ public_hostname }}
     
     Include extra-conf/localwiki_certs.conf
-    Include conf.d/main_router.conf
+    Include extra-conf/main_router.conf
 
     ServerAdmin {{ server_admin_email }}
 
@@ -95,7 +93,7 @@
     SSLCertificateKeyFile /etc/apache2/extra-ssl/{{ domain }}/{{ domain }}.key
     {% if ssl_intermediate %}SSLCACertificateFile /etc/apache2/extra-ssl/{{ domain }}/{{ ssl_intermediate }}{% endif %}
 
-    Include conf.d/main_router.conf
+    Include extra-conf/main_router.conf
 
     ServerAdmin {{ server_admin_email }}
 
