@@ -36,31 +36,29 @@ sub vcl_recv {
     # Allow the backend to serve up stale content if it is responding slowly.
     set req.grace = 6h;
 
-    # XXX TODO TEMPORARY UNTIL SPLASH SITE IS FULLY INTEGRATED
-    # REMOVE THIS CONDITIONAL AFTER
-    if (req.url ~ "^/blog" || req.url ~ "^/about" || req.url ~ "^/donate" || req.url ~ "^/signup" || req.url ~ "^/_start_new" || req.url ~ "^/static_old" || req.url ~ "^/media_old") {
+    if (req.http.x-forwarded-host == "www.localwiki.org" || req.http.x-forwarded-host == "localwiki.org") {
+        set req.http.host = "localwiki.org";
 
-        # In these cases, always serve from the old splash site backend
-        set req.backend = splash;
-    }
-    else {
         # XXX TODO TEMPORARY UNTIL SPLASH SITE IS FULLY INTEGRATED
         # REMOVE THIS CONDITIONAL AFTER
-        if (req.http.cookie !~ "sessionid" && req.url ~ "^/$") {
-            # Serve main page from splash backend if not logged in
+        if (req.url ~ "^/blog" || req.url ~ "^/about" || req.url ~ "^/donate" || req.url ~ "^/signup" || req.url ~ "^/_start_new" || req.url ~ "^/static_old" || req.url ~ "^/media_old" || req.url ~ "^/first_year") {
+        # In these cases, always serve from the old splash site backend
             set req.backend = splash;
         }
         else {
-            # XXX TODO extract this bit back up after splash
-            # is integrated:
-            if (req.http.x-forwarded-host == "www.localwiki.org" || req.http.x-forwarded-host == "localwiki.org") {
-               set req.http.host = "localwiki.org";
-               set req.backend = localwiki;
-            } else {
-               set req.http.host = req.http.x-forwarded-host;
+            # XXX TODO TEMPORARY UNTIL SPLASH SITE IS FULLY INTEGRATED
+            # REMOVE THIS CONDITIONAL AFTER
+            if (req.http.cookie !~ "sessionid" && req.url ~ "^/$") {
+                # Serve main page from splash backend if not logged in
+                set req.backend = splash;
+            }
+            else {
                set req.backend = localwiki;
             }
         }
+     } else {
+         set req.http.host = req.http.x-forwarded-host;
+         set req.backend = localwiki;
     }
 
     if (req.http.x-forwarded-for) {
