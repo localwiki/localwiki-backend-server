@@ -224,6 +224,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 XSESSION_FILENAME = '_utils/xsession_loader.js'
+SESSION_COOKIE_AGE = 15552000  # 6 months
 
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
