@@ -42,7 +42,7 @@ django_registration_urls = patterns('',
 )
 
 user_page_urls = patterns('',
-    url(r'(?P<slug>[^/]+/[^/]+)$', slugify(PageContentInUsersNamespaceView.as_view()), name="user-page-content-view"),
+    url(r'(?P<slug>[^/]+/[^/_]+)$', slugify(PageContentInUsersNamespaceView.as_view()), name="user-page-content-view"),
     url(r'(?P<username>[^/]*)/*$', UserPageView.as_view(), name="user-page"),
 )
 
