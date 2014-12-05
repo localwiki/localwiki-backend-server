@@ -2,6 +2,9 @@ from django.conf.urls import *
 from django.views.generic import TemplateView 
 from django.contrib.auth import views as auth_views
 
+from pages.views import PageContentInUsersNamespaceView
+from pages.urls import slugify
+
 from .views import UserPageView, UserSettingsView, UserDeactivateView, login, logout, register
 
 
@@ -40,7 +43,8 @@ django_registration_urls = patterns('',
 )
 
 user_page_urls = patterns('',
-    url(r'(?P<username>[^/]*)/*(?P<rest>.*)', UserPageView.as_view(), name="user-page"),
+    url(r'(?P<slug>[^/]+/[^/]+)$', slugify(PageContentInUsersNamespaceView.as_view()), name="user-page-content-view"),
+    url(r'(?P<username>[^/]*)/*$', UserPageView.as_view(), name="user-page"),
 )
 
 urlpatterns += django_registration_urls + user_page_urls

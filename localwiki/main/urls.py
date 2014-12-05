@@ -62,7 +62,7 @@ urlpatterns = patterns('',
     (r'^', include('explore.global_urls')),
 
     # Region userpage -> global userpage redirect
-    (r'^(?P<region>[^/]+?)/((?i)Users)/(?P<username>[^/]+?)$', GlobalUserpageRedirectView.as_view()),
+    (r'^(?P<region>[^/]+?)/((?i)Users)/(?P<username>[^/]+?)/*(?P<rest>(/[^/]+)|)$', GlobalUserpageRedirectView.as_view()),
 
     # Historical URL for dashboard:
     (r'^(?P<region>[^/]+?)/tools/dashboard/?$', NamedRedirectView.as_view(name='dashboard:main')),

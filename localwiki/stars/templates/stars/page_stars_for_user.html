@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block header_title %}
-  {% url 'user-page' username=user_for_page.username rest='' as user_link %}
+  {% url 'user-page' username=user_for_page.username as user_link %}
   {% if user_for_page == request.user %}
     {% blocktrans %}
     Pages <a href="{{ user_link }}">you</a> follow:
