@@ -636,6 +636,38 @@ class PageRandomView(RegionMixin, RedirectView):
         return pgs_in_region.order_by('?')[0].get_absolute_url()
 
 
+class PageContentInUsersNamespaceView(PageDetailView):
+    def get_object(self):
+        region = self.get_region()
+        return get_object_or_404(Page,
+            slug=slugify(self.kwargs['slug']), region=region)
+
+    def get_region(self, *args, **kwargs):
+        if not hasattr(self, 'kwargs'):
+            self.kwargs = kwargs['kwargs']
+
+        if self.kwargs['slug'].startswith('users/'):
+            username = self.kwargs['slug'].split('/')[1]
+        else:
+            username = self.kwargs['slug'].split('/')[0]
+            self.kwargs['slug'] = 'users/%s' % self.kwargs['slug']
+            self.kwargs['original_slug'] = 'Users/%s' % self.kwargs['original_slug']
+
+        user_pagename = 'Users/%s' % username
+        user_pages = Page.objects.filter(slug=slugify(user_pagename))
+        if user_pages:
+            # Just pick the first one
+            return user_pages[0].region
+        else:
+            return Http404
+
+    def handler404(self, request, *args, **kwargs):
+        kwargs['slug'] = 'users/%s' % kwargs['slug']
+        kwargs['original_slug'] = 'Users/%s' % kwargs['original_slug']
+
+        return super(PageContentInUsersNamespaceView, self).handler404(request, *args, **kwargs)
+
+
 def suggest(request, *args, **kwargs):
     """
     Simple page suggest.

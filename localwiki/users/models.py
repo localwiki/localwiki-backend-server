@@ -49,7 +49,7 @@ def first_last_to_name(self):
 
 
 def get_absolute_url(self):
-    return reverse('user-page', kwargs={'username': smart_str(self.username), 'rest': ''})
+    return reverse('user-page', kwargs={'username': smart_str(self.username)})
 
 
 User.name = property(first_last_to_name, name_to_first_last)

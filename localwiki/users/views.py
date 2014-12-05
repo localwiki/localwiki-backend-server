@@ -156,8 +156,14 @@ class GlobalUserpageRedirectView(RedirectView):
     permanent = True
 
     def get_redirect_url(self, **kwargs):
-        username = kwargs.get('username')
-        return reverse('user-page', kwargs={'username': username, 'rest': ''})
+        username = kwargs.get('username', None)
+        rest = kwargs.get('rest', '')
+        if rest:
+            slug = "%s%s" % (username , rest)
+            return reverse('user-page-content-view', kwargs={'slug': slug})
+        else:
+            return reverse('user-page', kwargs={'username': username})
+        return 
 
 
 class SetPermissionsView(RegionAdminRequired, RegionMixin, FormView):
