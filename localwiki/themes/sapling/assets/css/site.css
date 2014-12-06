@@ -1970,6 +1970,17 @@ input:focus {
     vertical-align: middle;
     margin-top: -2px;
 }
+#activityfeed .title {
+    margin-right: 0.2em;
+}
+#activityfeed .region_link:before {
+    font-size: 100%;
+    margin-left: -1.1em;
+}
+#activityfeed .region_link {
+    padding-left: 1.25em;
+    padding-right: 0.2em;
+}
 
 @media screen and (max-width: 700px) {
     #activityfeed #limit_to {
