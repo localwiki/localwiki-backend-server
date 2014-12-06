@@ -1302,6 +1302,26 @@ textarea, input, select {
     padding-left: 0;
 }
 
+#nearby_regions_bar a.region_link:before {
+    /* fa boilerplate */
+    font-family: FontAwesome!important;
+    text-rendering: auto!important;
+    -webkit-font-smoothing: antialiased!important;
+    -moz-osx-font-smoothing: grayscale!important;
+
+    font-size: 105%!important;
+    content: "\f0ac  ";
+    color: #EFEFEF!important;
+    font-weight: normal!important;
+    position: static!important;
+    margin-left: 0.5em !important;
+    margin-top: 1px!important;
+    text-decoration: none!important;
+}
+#nearby_regions_bar a.region_link:before { 
+    padding-left: 0!important;
+}
+
 /*
 ====================================
  Lists
