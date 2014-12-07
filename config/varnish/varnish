@@ -44,7 +44,8 @@ DAEMON_OPTS="-a :6081 \
              -T localhost:6082 \
              -f /etc/varnish/default.vcl \
              -S /etc/varnish/secret \
-             -s malloc,712m"
+ 	         -s file,/mnt/varnish/$INSTANCE/varnish_storage.bin,20G"
+#             -s malloc,712m"
 
 
 ## Alternative 3, Advanced configuration
