@@ -23,6 +23,10 @@ class SaplingBackend(SimpleBackend):
             # They clicked "login" and then clicked "register," so
             # let's redirect to the front page.
             self._redirect_to = '/'
+        parsed_url = urlparse(self._redirect_to)
+        # Sanity check for some Sentry errors
+        if not parsed_url.scheme and parsed_url.path != '' and not parsed_url.path.startswith('/'):
+            self._redirect_to = '/' 
         return (self._redirect_to, (), {})
 
     def get_form_class(self, request):
