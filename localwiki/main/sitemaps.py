@@ -30,6 +30,11 @@ WHERE
 """)
     return cursor.fetchall()
 
+def skip_page(pagename):
+    if pagename.lower().endswith('/talk'):
+        return True
+    return False
+
 MockRegion = namedtuple('MockRegion', ['slug'])
 
 class PageSitemap(Sitemap):
@@ -40,6 +45,8 @@ class PageSitemap(Sitemap):
         self.lastmod_lookup = {}
         
         for pagename, region_slug, lastmod in pages_with_last_mod():
+            if skip_page(pagename):
+                continue
             self.lastmod_lookup[(pagename, region_slug)] = lastmod
             items.append((pagename, region_slug))
         return items
