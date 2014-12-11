@@ -32,6 +32,8 @@ WHERE
 MockRegion = namedtuple('MockRegion', ['slug'])
 
 class PageSitemap(Sitemap):
+    protocol = 'https'
+
     def items(self):
         items = []
         self.lastmod_lookup = {}
@@ -51,11 +53,15 @@ class PageSitemap(Sitemap):
         
 
 class RegionSitemap(Sitemap):
+    protocol = 'https'
+
     def items(self):
         return Region.objects.all().exclude(is_active=False)
 
 
 class StaticViewSitemap(Sitemap):
+    protocol = 'https'
+
     def items(self):
         return [
             'main-page',
