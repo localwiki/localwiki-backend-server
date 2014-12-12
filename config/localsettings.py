@@ -83,6 +83,7 @@ HAYSTACK_CONNECTIONS = {
 
 BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+STATICSITEMAPS_URL = 'https://{{ public_hostname }}/static/'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
