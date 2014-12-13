@@ -80,10 +80,11 @@ class MoveRegionTests(TestCase):
 
         # Check to see that version history was moved as well
         self.assertEquals(p.versions.all().count(), 1)
-        self.assertEqual(len(MapData.versions.filter(page=p, region=self.oak)), 1)
+        ph = p.versions.most_recent()
+        self.assertEqual(len(MapData.versions.filter(page=ph, region=self.oak)), 1)
         for pts in p.pagetagset.tags.all():
             self.assertEqual(pts.versions.all().count(), 1)
-        self.assertEqual(len(Redirect.versions.filter(destination=p, region=self.oak)), 1)
+        self.assertEqual(len(Redirect.versions.filter(destination=ph, region=self.oak)), 1)
         self.assertEqual(len(PageFile.versions.filter(slug=p.slug, region=self.oak)), 1)
 
         # ..and that the page is no longer in the SF region

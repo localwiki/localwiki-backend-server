@@ -2,6 +2,7 @@ import re
 
 from django.contrib.gis.db import models
 from django.db.utils import IntegrityError
+from django.utils.encoding import smart_text
 from django.template.defaultfilters import stringfilter
 from django.utils.html import strip_tags
 from django.utils.translation import ugettext_lazy as _
@@ -20,6 +21,7 @@ class Tag(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
+        self.name = smart_text(self.name)
         self.name = strip_tags(self.name)
         self.slug = slugify(self.name)
         if not self.slug:
