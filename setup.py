@@ -128,7 +128,7 @@ def find_packages_in(dirs):
 
 install_requires = [
     'setuptools',
-    'django==1.5.4',
+    'django==1.6.8',
     'html5lib==0.95',
     'requests==2.0.0',
     'python-memcached==1.53',
@@ -141,7 +141,7 @@ install_requires = [
     'South==0.8.1-custom2',
     'python-flot-utils==0.2.1',
     'django-registration==0.8.0',
-    'django-olwidget==0.46-custom3',
+    'django-olwidget==0.46-custom4',
     'django-honeypot==0.4.0-custom3',
     'django-qsstats-magic==0.7',
     'django-picklefield==0.3.0',
@@ -157,7 +157,7 @@ install_requires = [
     'django-cors-headers==0.12',
     'django-gravatar2==1.1.3',
     'django-endless-pagination==2.0',
-    'django-follow==0.6.1',
+    'django-follow==0.6.1-custom1',
     'django-templated-email==0.4.9',
     'django-block-ip==0.1.6',
     'django-static-sitemaps==2.1.0-custom1',
@@ -169,7 +169,7 @@ install_requires = [
     'django-hosts==0.6-custom4',
     'johnny-cache==1.6.1a',
     'python-varnish==0.2.1',
-    'django-phased==0.6.1-custom3',
+    'django-phased==0.6.1-custom4',
     'django_compressor==1.4',
     'django-statici18n==1.1',
 ]
@@ -192,7 +192,7 @@ setup(
     package_data=find_package_data(exclude_directories=standard_exclude_directories + ('deb_utils',) ),
     install_requires=install_requires,
     dependency_links=[
-        'https://github.com/philipn/olwidget/tarball/b366d4d626e6a48d4b18458a4fb33239d938774f#egg=django-olwidget-0.46-custom3',
+        'https://github.com/philipn/olwidget/tarball/8478580c23709866b82a269e787f45f2b49c562b#egg=django-olwidget-0.46-custom4',
         'https://github.com/philipn/django-honeypot/tarball/localwiki#egg=django-honeypot-0.4.0-custom3',
         'https://github.com/philipn/sorl-thumbnail/tarball/localwiki#egg=sorl-thumbnail-11.12-custom5',
         'https://github.com/philipn/django-south/tarball/localwiki_master#egg=South-0.8.1-custom2',
@@ -204,8 +204,9 @@ setup(
         'https://github.com/philipn/django-static-sitemaps/tarball/localwiki#egg=django-static-sitemaps-2.1.0-custom1',
         'https://github.com/philipn/django-celery-email/tarball/localwiki#egg=django-celery-email-1.0.4-custom1',
         'https://github.com/philipn/django-xsession/tarball/localwiki#egg=django-xsession-0.1-custom4',
+        'https://github.com/philipn/django-follow/tarball/localwiki#egg=django-follow-0.6.1-custom1',
         'https://github.com/philipn/django-hosts/tarball/localwiki#egg=django-hosts-0.6-custom4',
-        'https://github.com/philipn/django-phased/tarball/localwiki#egg=django-phased-0.6.1-custom3',
+        'https://github.com/philipn/django-phased/tarball/localwiki#egg=django-phased-0.6.1-custom4',
         'https://github.com/philipn/johnny-cache/tarball/localwiki#egg=johnny-cache-1.6.1a',
     ],
     entry_points={

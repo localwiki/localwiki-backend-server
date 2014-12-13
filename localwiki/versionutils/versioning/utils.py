@@ -220,7 +220,7 @@ def is_pk_recycle_a_problem(instance):
             return True
 
 
-def pickle_friendly__getstate__(s):
+def pickle_friendly__reduce__(s):
     from copy import copy
 
     state = copy(s.__dict__)
@@ -230,4 +230,5 @@ def pickle_friendly__getstate__(s):
         del state['_rel_objs_methods']
     if '_save_with' in state:
         del state['_save_with']
-    return state
+    s.__dict__ = state
+    return models.Model.__reduce__(s)
