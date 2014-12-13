@@ -352,7 +352,7 @@ def install_system_requirements():
     memcached_pkg = ['memcached']
     varnish_pkg = ['varnish']
     web_pkg = ['yui-compressor']
-    monitoring = ['munin', 'munin-node']
+    monitoring = ['munin', 'munin-node', 'libdbd-pg-perl']
 
     if env.host_type == 'test_server':
         # Travis won't start the redis server correctly
@@ -745,6 +745,10 @@ def setup_munin():
 
     upload_template('config_secrets/munin-htpasswd', '/etc/munin/munin-htpasswd',
         context=get_context(env), use_jinja=True, use_sudo=True) 
+
+    # Install postgresql munin plugin, among others:
+    sudo("munin-node-configure --shell | sudo sh")
+    sudo("service munin-node restart")
 
 def setup_mailserver():
     upload_template('config/postfix/main.cf', '/etc/postfix/main.cf',
