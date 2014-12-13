@@ -4,6 +4,7 @@ import re
 
 from django.utils.cache import patch_vary_headers
 from django.utils.http import cookie_date
+from django.db import transaction
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.conf import settings
 from django.utils import translation
@@ -165,3 +166,29 @@ class RequestURIMiddleware(object):
     """
     def process_request(self, request):
         _threadlocal.base_uri = request.build_absolute_uri('/')[:-1]
+
+
+class TransactionMiddleware(object):
+    """
+    Just like django.middleware.transaction.TransactionMiddleware, except this
+    commits the lingering transaction regardless of whether or not it's `dirty`.
+
+    Please see http://thebuild.com/blog/2010/10/25/django-and-postgresql-idle-in-transaction-connections/
+    for rationale.
+
+    TODO: XXX: NOTE: Revamp / rework this once on Django 1.6, which has a different transaction
+        handling default.
+    """
+    def process_request(self, request):
+        transaction.enter_transaction_management()
+        transaction.managed(True)
+
+    def process_exception(self, request, exception):
+        transaction.rollback()
+        transaction.leave_transaction_management()
+
+    def process_response(self, request, response):
+        if transaction.is_managed():
+            transaction.commit()
+            transaction.leave_transaction_management()
+        return response
