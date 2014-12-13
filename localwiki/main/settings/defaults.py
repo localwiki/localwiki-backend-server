@@ -267,6 +267,8 @@ TEMPLATE_DIRS = (
 
 SOUTH_TESTS_MIGRATE = True
 
+TEST_RUNNER = 'django.test.simple.DjangoTestSuiteRunner'
+
 INSTALLED_APPS = (
     # Django-provided apps
     'django.contrib.auth',
