@@ -375,21 +375,21 @@ def suggest_tags(request):
     region_id = request.GET.get('region_id', None)
     if region_id is not None:
         results = Tag.objects.filter(
-            name__istartswith=term,
+            slug__startswith=slugify(term),
             region__id=int(region_id)).exclude(pagetagset=None)
 
         if len(results) < 5:
             # Set a sane limit before adding
             results = results.values('slug').distinct().values('slug', 'name').order_by('slug')[:20]
             global_results = Tag.objects.filter(
-                name__istartswith=term).exclude(pagetagset=None).values('slug').distinct().values('slug', 'name').order_by('slug')[:20]
+                slug__startswith=slugify(term)).exclude(pagetagset=None).values('slug').distinct().values('slug', 'name').order_by('slug')[:20]
             results = _make_unique(list(results) + list(global_results))[:20]
         else:
             results = results.values('slug').distinct().values('slug', 'name').order_by('slug')[:20]
 
     else:
         results = Tag.objects.filter(
-            name__istartswith=term).exclude(pagetagset=None).values('slug').distinct().values('slug', 'name').order_by('slug')[:20]
+            slug__startswith=slugify(term)).exclude(pagetagset=None).values('slug').distinct().values('slug', 'name').order_by('slug')[:20]
 
     results = [t['name'] for t in results]
     return HttpResponse(json.dumps(results))
