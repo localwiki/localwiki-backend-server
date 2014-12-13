@@ -13,7 +13,7 @@ from versionutils import versioning, diff
 
 class Tag(models.Model):
     name = models.CharField(max_length=100, blank=False)
-    slug = models.CharField(editable=False, max_length=100, blank=False)
+    slug = models.CharField(editable=False, max_length=100, blank=False, db_index=True)
     region = models.ForeignKey(Region, null=True)
 
     def __unicode__(self):
