@@ -54,7 +54,7 @@ def avg_incoming_links_for_region(region):
     else:
         avg = 0
 
-    cache.set('avg_incoming_links:%s' % region.slug, avg, 60 * 5)
+    cache.set('avg_incoming_links:%s' % region.slug, avg, 60 * 15)
     return avg
 
 def avg_page_length(region):    
@@ -70,7 +70,7 @@ def avg_page_length(region):
 
     avg = qs.aggregate(avg=Avg('score__page_content_length'))['avg']
 
-    cache.set('avg_page_length:%s' % region.slug, avg, 60 * 5)
+    cache.set('avg_page_length:%s' % region.slug, avg, 60 * 15)
     return avg
 
 def _compute_score(page):
