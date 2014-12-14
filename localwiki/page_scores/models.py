@@ -41,20 +41,16 @@ def avg_incoming_links_for_region(region):
     if avg is not None:
         return avg
 
-    qs = Page.objects.filter(region=region)
     # XXX TODO remove this once all
     # /User/ pages are moved to a single global namespace
     if SKIP_USER_PAGES_FOR_PAGESCORE:
-        qs = qs.exclude(slug__istartswith='users/')
+        num_pages = Page.objects.filter(region=region).exclude(slug__startswith='users/').count()
+    else:
+        num_pages = Page.objects.filter(region=region).count()
 
-    num_vs = qs.\
-        annotate(num_links_here=models.Count('links_to_here')).\
-        order_by('-num_links_here').\
-        only('num_links_here').\
-        values('num_links_here')
-    count = num_vs.count()
-    if count:
-        avg = (sum(i['num_links_here'] for i in num_vs) * 1.0)/ (num_vs.count())
+    num_links = Link.objects.filter(region=region).count()
+    if num_links:
+        avg = (num_links * 1.0) / num_pages
     else:
         avg = 0
 
