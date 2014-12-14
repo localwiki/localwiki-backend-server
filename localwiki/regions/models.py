@@ -22,7 +22,7 @@ class Region(models.Model):
         help_text=ugettext_lazy("A very short name for this region that will appear in URLs, e.g. 'sf'. "
             "Keep it short and memorable!"))
     geom = models.MultiPolygonField(null=True, blank=True)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True, db_index=True)
 
     objects = models.GeoManager()
 
@@ -77,7 +77,7 @@ class RegionSettings(models.Model):
     default_language = models.CharField(max_length=7, blank=True, null=True, choices=LANGUAGES)
 
     # Admin-only options
-    domain = models.CharField(max_length=200, null=True, blank=True)
+    domain = models.CharField(max_length=200, null=True, blank=True, db_index=True)
     logo = models.ImageField("logo", upload_to="regions/logos/",
         storage=RandomFilenameFileSystemStorage(), null=True, blank=True)
     is_meta_region = models.BooleanField(default=False)
