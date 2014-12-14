@@ -51,7 +51,7 @@ def get_history_fields(self, model):
         'history__object': HistoricalObjectDescriptor(model),
         'history__object_rel_populated': HistoricalObjectDescriptor(
             model, populate_related=True),
-        'history_date': models.DateTimeField(default=datetime.datetime.now),
+        'history_date': models.DateTimeField(default=datetime.datetime.now, db_index=True),
         'history_version_number': version_number_of,
         'history_type': models.SmallIntegerField(choices=TYPE_CHOICES),
         'history_type_verbose': type_to_verbose,
