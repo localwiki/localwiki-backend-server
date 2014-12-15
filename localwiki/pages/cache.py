@@ -7,6 +7,8 @@ from django.core.cache import cache
 from celery import shared_task
 from varnish import VarnishManager
 
+from regions.models import Region
+
 rfc_3986_reserved = """!*'();:@&=+$,/?#[]"""
 rfc_3986_unreserved = """ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.~"""
 VARNISH_SAFE = rfc_3986_reserved + rfc_3986_unreserved
@@ -64,6 +66,22 @@ def django_invalidate_page(p):
 
     set_urlconf(current_urlconf)
 
+def invalidate_region_tag_views(slug, region):
+    from tags.cache import django_invalidate_tag_view, varnish_invalidate_tag_view
+
+    # Clear on the region itself
+    varnish_invalidate_tag_view(slug, region)
+    django_invalidate_tag_view(slug, region)
+
+    # Clear on nearby regions
+    center = region.regionsettings.region_center
+    if not center:
+        return
+    nearby_regions = Region.objects.filter(regionsettings__region_center__dwithin=(center, 0.5))
+    for region in nearby_regions:
+        varnish_invalidate_tag_view(slug, region)
+        django_invalidate_tag_view(slug, region)
+
 @shared_task(ignore_result=True)
 def _async_cache_post_edit(instance, created=False, deleted=False, raw=False):
     from pages.models import Page
@@ -107,8 +125,7 @@ def _async_cache_post_edit(instance, created=False, deleted=False, raw=False):
 
         # Clear tag list views
         for slug in changed:
-            varnish_invalidate_tag_view(slug, instance.region)
-            django_invalidate_tag_view(slug, instance.region)
+            invalidate_region_tag_views(slug, instance.region)
 
         # Clear out the pages that include a 'list of tagged pages' of the deleted
         # tags:
@@ -141,7 +158,6 @@ def _page_cache_post_edit(sender, instance, created=False, deleted=False, raw=Fa
 def _async_pagetagset_m2m_changed(instance):
     from links.models import IncludedTagList
     from versionutils.diff import diff
-    from tags.cache import django_invalidate_tag_view, varnish_invalidate_tag_view
 
     varnish_invalidate_page(instance.page)
     django_invalidate_page(instance.page)
@@ -162,8 +178,7 @@ def _async_pagetagset_m2m_changed(instance):
 
     # Clear tag list views
     for slug in changed:
-        varnish_invalidate_tag_view(slug, instance.region)
-        django_invalidate_tag_view(slug, instance.region)
+        invalidate_region_tag_views(slug, instance.region)
 
     # Clear caches of pages that include these tags as "list of tagged pages"
     for tl in IncludedTagList.objects.filter(included_tag__slug__in=changed):
