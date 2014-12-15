@@ -21,6 +21,7 @@ from versionutils.versioning.constants import *
 import time
 
 COMPLETE_CACHE_TIME = 60 * 60 * 5
+FOREVER_CACHE_TIME = 60 * 60 * 24 * 365 * 2
 EASIER_CACHE_TIME = 60  # cache easier stuff for 60 seconds.
 
 
@@ -77,7 +78,7 @@ class DashboardRenderView(JSONView):
             if not qs.exists():
                 return None
             oldest = qs[0].version_info.date
-            cache.set('%s:dashboard_oldest' % prefix, oldest, COMPLETE_CACHE_TIME)
+            cache.set('%s:dashboard_oldest' % prefix, oldest, FOREVER_CACHE_TIME)
         return oldest
 
     def get_context_data_for_chart(self, function, key):

@@ -22,7 +22,7 @@ from forms import PageTagSetForm
 from pages.models import Page
 
 from utils.views import CreateObjectMixin, PermissionRequiredMixin,\
-    Custom404Mixin, RevertView
+    Custom404Mixin, RevertView, CacheMixin
 
 
 class PageNotFoundMixin(Custom404Mixin):
@@ -40,8 +40,9 @@ class TagListView(RegionMixin, ListView):
                     num_pages=Count('pagetagset')).filter(num_pages__gt=0)
 
 
-class TaggedList(Custom404Mixin, RegionMixin, ListView):
+class TaggedList(CacheMixin, Custom404Mixin, RegionMixin, ListView):
     model = PageTagSet
+    cache_keep_forever = True
 
     def get_queryset(self):
         self.tag_name = slugify(self.kwargs['slug'])
@@ -170,6 +171,17 @@ class TaggedList(Custom404Mixin, RegionMixin, ListView):
              tag_name)
         html = render_to_string('404.html', {'message': msg}, RequestContext(request))
         return HttpResponseNotFound(html)
+
+    #@staticmethod
+    #def get_cache_key(*args, **kwargs):
+    #    from django.core.urlresolvers import get_urlconf
+    #    urlconf = get_urlconf() or settings.ROOT_URLCONF
+    #    slug = kwargs.get('slug')
+    #    region = kwargs.get('region')
+    #    if urlconf == 'main.urls_no_region':
+    #        region = None
+    #    # Control characters and whitespace not allowed in memcached keys
+    #    return '%s/%s/%s' % (urlconf, name_to_url(region), slugify(slug).replace(' ', '_'))
 
 
 class GlobalTaggedList(ListView):

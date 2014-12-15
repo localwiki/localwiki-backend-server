@@ -6,6 +6,15 @@ from tags.models import Tag
 from regions.models import Region
 
 
+def validate_page_slug(slug):
+    from pages.models import slugify
+
+    if slugify(slug) != slug:
+        raise ValidationError(_('Provided slug is invalid. Slugs must be lowercase, '
+            'contain no trailing or leading whitespace, and contain only alphanumber '
+            'characters along with %(KEEP_CHARACTERS)s') % {'KEEP_CHARACTERS': SLUGIFY_KEEP})
+
+
 class Link(models.Model):
     """
     Model representing an internal href link between two
@@ -15,6 +24,8 @@ class Link(models.Model):
     destination = models.ForeignKey(Page, related_name='links_to_here', null=True, on_delete=models.SET_NULL)
     # We can link to pages that don't yet exist, so we record the page name as well.
     destination_name = models.CharField(max_length=255, editable=False, blank=False)
+    destination_slug = models.CharField(max_length=255, editable=False, blank=False, db_index=True,
+        validators=[validate_page_slug])
     count = models.PositiveSmallIntegerField(
         help_text=_("The number of times the source page links to the destination page."))
 
@@ -41,6 +52,8 @@ class IncludedPage(models.Model):
     included_page = models.ForeignKey(Page, related_name='pages_that_include_this', null=True, on_delete=models.SET_NULL)
     # We can include pages that don't yet exist, so we record the page name as well.
     included_page_name = models.CharField(max_length=255, editable=False, blank=False)
+    included_page_slug = models.CharField(max_length=255, editable=False, blank=False, db_index=True,
+        validators=[validate_page_slug])
 
     region = models.ForeignKey(Region)
 
