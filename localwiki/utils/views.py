@@ -46,7 +46,7 @@ class CacheMixin(object):
     cache_keep_forever = False
 
     @staticmethod
-    def get_cache_key(*args, **kwargs):
+    def get_cache_key(request=None, **kwargs):
         raise NotImplementedError
 
     def _should_cache(self, request, response):
@@ -64,7 +64,7 @@ class CacheMixin(object):
         return True
 
     def _get_from_cache(self, method, request, *args, **kwargs):
-        key = self.get_cache_key(request, *args, **kwargs)
+        key = self.get_cache_key(request=request, **kwargs)
 
         response = cache.get(key)
         if response is None:
