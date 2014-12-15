@@ -70,6 +70,7 @@ def _async_cache_post_edit(instance, created=False, deleted=False, raw=False):
     from maps.models import MapData
     from tags.models import PageTagSet
     from links.models import Link, IncludedPage, IncludedTagList
+    from tags.cache import django_invalidate_tag_view, varnish_invalidate_tag_view
 
     if isinstance(instance, Page):
         # First, let's clear out the Varnish cache for this page
@@ -104,6 +105,11 @@ def _async_cache_post_edit(instance, created=False, deleted=False, raw=False):
         varnish_invalidate_page(instance.page)
         django_invalidate_page(instance.page)
 
+        # Clear tag list views
+        for slug in changed:
+            varnish_invalidate_tag_view(slug, instance.region)
+            django_invalidate_tag_view(slug, instance.region)
+
         # Clear out the pages that include a 'list of tagged pages' of the deleted
         # tags:
         slugs_before_delete = [t.slug for t in instance.versions.all()[1].tags.all()]
@@ -135,6 +141,7 @@ def _page_cache_post_edit(sender, instance, created=False, deleted=False, raw=Fa
 def _async_pagetagset_m2m_changed(instance):
     from links.models import IncludedTagList
     from versionutils.diff import diff
+    from tags.cache import django_invalidate_tag_view, varnish_invalidate_tag_view
 
     varnish_invalidate_page(instance.page)
     django_invalidate_page(instance.page)
@@ -153,6 +160,12 @@ def _async_pagetagset_m2m_changed(instance):
         items = diff(v1, v2).get_diff()['tags'].get_diff()
         changed = [t.slug for t in set.union(items['added'], items['deleted'])]
 
+    # Clear tag list views
+    for slug in changed:
+        varnish_invalidate_tag_view(slug, instance.region)
+        django_invalidate_tag_view(slug, instance.region)
+
+    # Clear caches of pages that include these tags as "list of tagged pages"
     for tl in IncludedTagList.objects.filter(included_tag__slug__in=changed):
         varnish_invalidate_page(tl.source)
         django_invalidate_page(tl.source)
