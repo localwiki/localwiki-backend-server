@@ -91,6 +91,19 @@ class CacheMixin(object):
     def head(self, request, *args, **kwargs):
         return self._get_from_cache('head', request, *args, **kwargs)
 
+    @classmethod
+    def get_region_slug_param(*args, **kwargs):
+        from regions.models import RegionSettings
+
+        if kwargs.get('region'):
+            return kwargs.get('region')
+
+        if not kwargs.get('request'):
+            raise KeyError("Need either `request` or a `region` parameter.")
+
+        request = kwargs.get('request')
+        return RegionSettings.objects.get(domain=request.META['HTTP_HOST']).region.slug
+
 
 class Custom404Mixin(object):
     @classonlymethod

@@ -103,9 +103,7 @@ class PageDetailView(CacheMixin, BasePageDetailView):
         from django.core.urlresolvers import get_urlconf
         urlconf = get_urlconf() or settings.ROOT_URLCONF
         slug = kwargs.get('slug')
-        region = kwargs.get('region')
-        if urlconf == 'main.urls_no_region':
-            region = None
+        region = CacheMixin.get_region_slug_param(*args, **kwargs)
         # Control characters and whitespace not allowed in memcached keys
         return '%s/%s/%s' % (urlconf, name_to_url(region), slugify(slug).replace(' ', '_'))
 

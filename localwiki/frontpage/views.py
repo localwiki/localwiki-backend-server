@@ -100,9 +100,8 @@ class FrontPageView(CacheMixin, Custom404Mixin, TemplateView):
     def get_cache_key(*args, **kwargs):
         from django.core.urlresolvers import get_urlconf
         urlconf = get_urlconf() or settings.ROOT_URLCONF
-        region = kwargs.get('region')
-        if urlconf == 'main.urls_no_region':
-            region = None
+        region = CacheMixin.get_region_slug_param(*args, **kwargs)
+
         return '%s/%s/' % (urlconf, region)
 
 
