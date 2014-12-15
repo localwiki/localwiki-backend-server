@@ -82,6 +82,12 @@ def invalidate_region_tag_views(slug, region):
         varnish_invalidate_tag_view(slug, region)
         django_invalidate_tag_view(slug, region)
 
+def invalidate_global_tag_view(slug):
+    from tags.cache import django_invalidate_global_tag_view, varnish_invalidate_global_tag_view
+
+    varnish_invalidate_global_tag_view(slug)
+    django_invalidate_global_tag_view(slug)
+
 @shared_task(ignore_result=True)
 def _async_cache_post_edit(instance, created=False, deleted=False, raw=False):
     from pages.models import Page
@@ -126,6 +132,7 @@ def _async_cache_post_edit(instance, created=False, deleted=False, raw=False):
         # Clear tag list views
         for slug in changed:
             invalidate_region_tag_views(slug, instance.region)
+            invalidate_global_tag_view(slug)
 
         # Clear out the pages that include a 'list of tagged pages' of the deleted
         # tags:
@@ -179,6 +186,7 @@ def _async_pagetagset_m2m_changed(instance):
     # Clear tag list views
     for slug in changed:
         invalidate_region_tag_views(slug, instance.region)
+        invalidate_global_tag_view(slug)
 
     # Clear caches of pages that include these tags as "list of tagged pages"
     for tl in IncludedTagList.objects.filter(included_tag__slug__in=changed):

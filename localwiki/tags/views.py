@@ -184,7 +184,7 @@ class TaggedList(CacheMixin, Custom404Mixin, RegionMixin, ListView):
         return 'tags:%s/%s/%s' % (urlconf, name_to_url(region), slugify(slug).replace(' ', '_'))
 
 
-class GlobalTaggedList(ListView):
+class GlobalTaggedList(CacheMixin, ListView):
     model = PageTagSet
     template_name = 'tags/global_pagetagset_list.html'
 
@@ -229,6 +229,15 @@ class GlobalTaggedList(ListView):
                 map_objects,
                 options=olwidget_options)
         return context
+
+    @staticmethod
+    def get_cache_key(*args, **kwargs):
+        from django.core.urlresolvers import get_urlconf
+        from pages.models import name_to_url
+
+        slug = kwargs.get('slug')
+        # Control characters and whitespace not allowed in memcached keys
+        return 'globaltags:%s' % slugify(slug).replace(' ', '_')
 
 
 class PageTagSetUpdateView(PageNotFoundMixin, PermissionRequiredMixin,
