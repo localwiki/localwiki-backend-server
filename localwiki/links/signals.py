@@ -11,9 +11,8 @@ def record_page_links(page):
     region = page.region
     links = extract_internal_links(page.content)
     for pagename, count in links.iteritems():
-        link_exists = Link.objects.filter(
-            source=page, region=region,
-            destination_name__iexact=pagename)
+        qs = Link.objects.filter(source=page, region=region)
+        link_exists = qs.filter(destination_slug=slugify(pagename)) | qs.filter(destination__slug=slugify(pagename))
         if link_exists:
             link = link_exists[0]
             if link.count == count:
@@ -36,6 +35,7 @@ def record_page_links(page):
                 region=region,
                 destination=destination,
                 destination_name=pagename,
+                destination_slug=slugify(pagename),
                 count=count,
             )
         link.save()
@@ -56,7 +56,7 @@ def _check_destination_created(sender, instance, created, raw, **kws):
         return
 
     # The destination page has been created, so let's record that.
-    links = Link.objects.filter(destination_name__iexact=instance.slug, region=instance.region)
+    links = Link.objects.filter(destination_slug=instance.slug, region=instance.region)
     for link in links:
         # May have already been added via a revert
         if Link.objects.filter(destination=instance, source=link.source, region=instance.region).exists():
@@ -75,7 +75,7 @@ def record_page_includes(page):
     for pagename in included:
         included_pg_exists = IncludedPage.objects.filter(
             source=page, region=region,
-            included_page_name__iexact=pagename)
+            included_page_slug=slugify(pagename))
         if not included_pg_exists:
             page_exists = Page.objects.filter(slug=slugify(pagename), region=region)
             if page_exists:
@@ -87,8 +87,15 @@ def record_page_includes(page):
                 region=region,
                 included_page=included_page,
                 included_page_name=pagename,
+                included_page_slug=slugify(pagename),
             )
             m.save()
+
+    included = [slugify(pagename) for pagename in included]
+    # Remove included pages they've removed from the page
+    to_delete = IncludedPage.objects.filter(source=page, region=region).exclude(included_page_slug__in=included)
+    for m in to_delete:
+        m.delete()
 
 def _record_page_includes(sender, instance, created, raw, **kws):
     # Don't create IncludedPages when importing via loaddata - they're already
@@ -107,7 +114,7 @@ def _check_included_page_created(sender, instance, created, raw, **kws):
 
     # The included page has been created, so let's record that.
     pages_that_include_this = IncludedPage.objects.filter(
-        included_page_name__iexact=instance.slug, region=instance.region)
+        included_page_slug=instance.slug, region=instance.region)
     for m in pages_that_include_this:
         m.included_page = instance
         m.save()
