@@ -1,7 +1,6 @@
 from django.db.models.signals import post_save, post_delete
 from django.utils.translation import ugettext as _
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.core.mail.utils import DNS_NAME
 from django.conf import settings
@@ -12,6 +11,7 @@ from follow.signals import followed as followed_signal
 from templated_email import send_templated_mail
 
 from utils import get_base_uri
+from utils.urlresolvers import reverse
 from versionutils.versioning.constants import TYPE_REVERTED, TYPE_DELETED_CASCADE, TYPE_REVERTED_DELETED_CASCADE
 from pages.models import Page
 from regions.models import Region
