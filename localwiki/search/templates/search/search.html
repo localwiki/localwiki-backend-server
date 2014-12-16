@@ -10,7 +10,7 @@
 {% block content %}
     <div id="search_results">
     {% if query %}
-        {% if not page_exists_for_query %}
+        {% if allow_page_creation %}
           <div id="create_page_dialog">
 			  {% blocktrans %}No page with the exact title "{{ query }}" exists.{% endblocktrans %}
               <div><a href="{% url 'pages:edit' slug=query_slug region=region.slug %}" class="button">{% trans "Create this page" %}</a></div>
