@@ -25,7 +25,7 @@
 
 {% block main_wrapper %}
   <div class="callout">
-      <h1>{% trans "LocalWiki is a grassroots effort to collect, share and open the world's local knowledge" %}</h1>
+      <h1>{% blocktrans %}LocalWiki is a grassroots effort to collect, share and <span class="highlight">open the world's local knowledge</span>{% endblocktrans %}</h1>
   </div>
   <div class="bring_localwiki">
       <a href="{% url 'regions:add' %}" class="button">{% trans "Bring LocalWiki to your community" %}</a>
