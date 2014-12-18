@@ -8,9 +8,8 @@
 {{ block.super }}
 <script type="text/javascript">
     $(document).ready(function() {
-        var next = location.search.split("next=")[1];
-        var action = $('#register_form').attr("action");
-        $('#register_form').attr("action", action + '?next=' + next);
+        var qs = location.search;
+        $('#register_form')[0].action += qs;
     });
 </script>
 {% endblock %}

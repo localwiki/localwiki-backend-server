@@ -9,9 +9,8 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        var next = location.search.split("next=")[1];
-        var input = $('<input>').attr("type", "hidden").attr("name", "next").val(next);
-        $('#login_form').append($(input));
+        var qs = location.search;
+        $('#login_form')[0].action += qs;
     });
 </script>
 {% endblock %}
