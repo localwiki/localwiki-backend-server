@@ -737,7 +737,47 @@
     display: inline-block;
 }
 
-
+#splash_page .quote_pull_wrapper {
+    background-color: white;
+}
+#splash_page .quote_pull {
+    text-align: center;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    line-height: 1.2;
+    font-size: 199%;
+    max-width: 21em;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+}
+#splash_page .quote_pull .qstart {
+    font-family: Georgia,"Times New Roman",Times,serif;
+    color: #969696;
+    font-size: 120%;
+    margin-right: 0.1em;
+}
+#splash_page .quote_pull .qend {
+    font-family: Georgia,"Times New Roman",Times,serif;
+    color: #969696;
+    font-size: 120%;
+    margin-left: 0.1em;
+}
+#splash_page .quote_pull .author {
+    font-size: 70%;
+    display: block;
+    margin-top: 0.4em;
+    color: #969696;
+    font-weight: normal;
+}
+@media screen and (max-width: 715px) {
+    #splash_page .quote_pull {
+        font-size: 149%;
+        padding: 1.5em 0.5em;
+    }
+}
 
 /* TEMP TEMP TEMP */
 #splash_page #main {
