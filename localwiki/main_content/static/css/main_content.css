@@ -94,20 +94,44 @@
 
 #splash_page .callout {
     text-align: center;
-    background-color: #f3f3f3;
-    padding: 3em 0 3em 0;
+    padding: 0;
+    height: 80vh;
+    background-image: url('../img/domes_by_refractionless_cc_by_nc_nd.jpg');
+    /*background-image: url('../img/prelinger_lib_editathon.jpg');*/
+    background-width: 100%;
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: 24% 50%;
+
+    display: table;
+    width: 100%;
+    vertical-align: middle;
 }
 .callout .highlight {
-    background-color: #FEFFC2;
+    /*background-color: #FEFFC2;
     padding-left: 0.1em;
     padding-right: 0.1em;
+    */
 }
-#splash_page .callout h1 {
+#splash_page .callout .tagline {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+#splash_page .callout .tagline h1 {
     max-width: 700px;
-    display: inline-block;
-    margin: 0;
-    color: #505050;
+    margin-left: auto;
+    margin-right: auto;
+    color: #FFF;
     font-size: 35px;
+    padding-top: 0;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+
+    background-color: rgba(0, 0, 0, 0.59);
+
+    text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
+
+    /*background-color: white;*/
 }
 
 #splash_page .bring_localwiki {
@@ -487,7 +511,7 @@
     }
     #splash_page .recent_blogs {
     }
-    #splash_page .callout h1 {
+    #splash_page .callout .tagline h1 {
         font-size: 20px;
         max-width: 400px;
         padding-left: 20px;
@@ -753,7 +777,6 @@
     padding-bottom: 1.5em;
     line-height: 1.2;
     font-size: 199%;
-    max-width: 21em;
     margin-left: auto;
     margin-right: auto;
     font-weight: bold;

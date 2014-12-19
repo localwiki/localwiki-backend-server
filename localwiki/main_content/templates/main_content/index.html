@@ -7,11 +7,6 @@
 {% load thumbnail %}
 
 {% block header_bar_wrapper %}
-  <div id="map_header_bar">
-      <div id="map">
-      {{ map }}
-      </div>    
-  </div>
 {% endblock %}
 
 {% block title %}{{ block.super }} - {% trans "The grassroots effort to collect, share and open the world's local knowledge" %}{% endblock %}
@@ -25,11 +20,11 @@
 
 {% block main_wrapper %}
   <div class="callout">
-      <h1>{% blocktrans %}LocalWiki is a grassroots effort to collect, share and <span class="highlight">open the world's local knowledge</span>{% endblocktrans %}</h1>
+     <div class="tagline">
+        <h1>{% blocktrans %}LocalWiki is a grassroots effort to collect, share and <span class="highlight">open the world's local knowledge</span>{% endblocktrans %}</h1>
+      </div>
   </div>
-  <div class="bring_localwiki">
-      <a href="{% url 'regions:add' %}" class="button">{% trans "Bring LocalWiki to your community" %}</a>
-  </div>
+  
   <div class="interesting_cards">
       <h2>{% trans "Explore LocalWiki communities" %}</h2>
       {% cache 300 int_main_regions request.META.HTTP_HOST %}
@@ -43,6 +38,10 @@
             <a class="button" href="{% url 'regions:list' %}"><i class="fa fa-globe"></i> {% trans "Explore all communities" %}</a>
           </div>
       {% endcache %}
+  </div>
+
+  <div class="bring_localwiki">
+      <a href="{% url 'regions:add' %}" class="button">{% trans "Bring LocalWiki to your community" %}</a>
   </div>
 
   <div class="highlights">
@@ -86,13 +85,20 @@
 
   <div class="quote_pull_wrapper">
      <div class="quote_pull">
-     <span class="qstart">“</span>{% trans "Yelp is aimed at the consumer in us. LocalWiki..inspires the citizen in us." %}<span class="qend">”</span>
+     <span class="qstart">“</span>{% trans "Yelp is aimed at the consumer in us. LocalWiki inspires the citizen in us." %}<span class="qend">”</span>
        <span class="author">{% trans "Sue Gardner, Former Executive Director, Wikimedia Foundation" %}</span>
      </div>
   </div>
 
   <div class="bring_localwiki">
       <a href="{% url 'regions:add' %}" class="button">{% trans "Bring LocalWiki to your community" %}</a>
+  </div>
+
+  
+  <div class="quote_pull_wrapper">
+     <div class="quote_pull">
+     <img src="http://mathburritos.org/Screen%20Shot%202014-12-18%20at%203.11.47%20AM.png"/>
+     </div>
   </div>
 
   <div class="recent_blogs">
