@@ -496,8 +496,8 @@
    padding-right: 3.5em;
    margin-left: auto;
    margin-right: auto;
-   background-color: #F4F4F4;
-   border-bottom: 3px solid #E3E3E3;
+   background: url("../theme/img/header-bg.png") repeat scroll left top #E8ECEF;
+   border-bottom: 1px solid #E3E3E3;
 }
 @media screen and (max-width: 715px) {
     #splash_page.default #header_title {
@@ -561,6 +561,11 @@
 #splash_page.default #content_wrapper {
     background-color: white;
     padding: 1.5em 3.5em 2.5em 3.5em;
+}
+@media screen and (max-width: 500px) {
+    #splash_page.default #content_wrapper {
+        padding: 1.5em 1.5em 2.5em 1.5em;
+    }
 }
 
 
