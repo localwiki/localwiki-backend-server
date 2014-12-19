@@ -146,6 +146,30 @@
 
     /*background-color: white;*/
 }
+@media screen and (max-width: 800px) {
+    #splash_page .callout .tagline h1 {
+        font-size: 26px;
+        max-width: 500px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+@media screen and (max-width: 600px) {
+    #splash_page .callout .tagline h1 {
+        font-size: 20px;
+        max-width: 400px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    #splash_page .callout {
+        height: 70vh;
+    }
+}
+@media screen and (max-width: 500px) {
+    #splash_page .callout {
+        height: 60vh;
+    }
+}
 
 #splash_page .bring_localwiki {
     text-align: center;
@@ -523,12 +547,6 @@
         height: 200px!important;
     }
     #splash_page .recent_blogs {
-    }
-    #splash_page .callout .tagline h1 {
-        font-size: 20px;
-        max-width: 400px;
-        padding-left: 20px;
-        padding-right: 20px;
     }
     #splash_page .interesting_cards h2 {
         font-size: 140%;
