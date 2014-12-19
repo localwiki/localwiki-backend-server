@@ -1258,6 +1258,7 @@ textarea, input, select {
 
 #about {
     padding-top: 1em;
+    padding-bottom: 1em;
     margin-left: auto;
     margin-right: auto;
     max-width: 60em;

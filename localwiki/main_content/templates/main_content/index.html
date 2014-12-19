@@ -121,6 +121,21 @@
     {% endfor %}
     </ul>
     <p><a class="button" href="/blog/">{% trans "More blog posts" %}</a></p>
+  </div>
 
+{% endblock %}
+
+{% block attributions %}
+{{ block.super }}
+<div class="supporters_footer">
+<p>
+{% blocktrans %}
+Supported by
+{% endblocktrans %}
+<br/>
+<a href="http://knightfoundation.org" target="_blank"><img src="{% static 'img/knight-logo-gray.png' %}" style="height: 25px; width: 193px;"></a>
+<br/>
+and <a href="http://www.patreon.com/localwiki" target="_blank">people like you</a>.
+</p>
 </div>
 {% endblock %}
