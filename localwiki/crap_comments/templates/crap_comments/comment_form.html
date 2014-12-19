@@ -4,7 +4,7 @@
 <h2>{{ title }}</h2>
 {% if can_comment %}
     {{ form.errors }}
-    <form method="post" action="{% url comments:add slug=page.slug %}">{% csrf_token %}
+    <form method="post" action="{% url 'comments:add' slug=page.slug %}">{% csrf_token %}
         {{ form.content }}
         <p><input class="button" type="submit" value="{% trans "Add Comment" %}"/></p>
     </form>
