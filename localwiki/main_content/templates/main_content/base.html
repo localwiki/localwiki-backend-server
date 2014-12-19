@@ -1,6 +1,7 @@
 {% extends "pages/base.html" %}
 
 {% load i18n %}
+{% load static %}
 
 {% block title %}{% trans "LocalWiki" %}{% endblock %}
 
@@ -29,4 +30,19 @@
 {% endblock %}
 
 {% block footer %}
+{% endblock %}
+
+{% block attributions %}
+{{ block.super }}
+<div class="supporters_footer">
+<p>
+{% blocktrans %}
+Supported by
+{% endblocktrans %}
+<br/>
+<a href="http://knightfoundation.org" target="_blank"><img src="{% static 'img/knight-logo-gray.png' %}" style="height: 24px; width: 182px;"></a>
+<br/>
+and <a href="http://www.patreon.com/localwiki" target="_blank">people like you</a>.
+</p>
+</div>
 {% endblock %}
