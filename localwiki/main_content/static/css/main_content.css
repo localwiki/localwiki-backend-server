@@ -193,21 +193,30 @@
     margin-top: 1em;
     margin-bottom: 1em;
 }
+#splash_page #stats_map .mapwidget {
+    width: 500px!important;
+}
 #splash_page .stats_with_map #stats_map:hover,
 #splash_page .stats_with_map .mapwidget:hover {
     cursor: pointer!important;
 }
 @media screen and (max-width: 700px) {
-    #splash_page .stats_with_map a,
-    #splash_page #stats_map {
-        width: 100%; 
-    }
+
     #splash_page .stats_with_map {
         padding-top: 2em;
         padding-bottom: 2em;
     }
     #splash_page .stats_with_map .num {
         font-size: 110%;
+    }
+}
+@media screen and (max-width: 500px) {
+    #splash_page .stats_with_map a,
+    #splash_page #stats_map {
+        width: 100%; 
+    }
+    #splash_page #stats_map .mapwidget {
+        width: 100%!important;
     }
 }
 
@@ -331,8 +340,12 @@
     color: #414141;
     cursor: pointer;
 }
-#splash_page .recent_blogs li:hover h4 a:link, #splash_page .recent_blogs li:hover h4 a {
+#splash_page .recent_blogs li:hover h4 a:link, #splash_page .recent_blogs li:hover h4 a,
+#splash_page .recent_blogs a:link, #splash_page .recent_blogs a {
     color: #444;
+}
+#splash_page .recent_blogs a:hover {
+    text-decoration: underline;
 }
 #splash_page .recent_blogs .image_frame {
    float: left;
