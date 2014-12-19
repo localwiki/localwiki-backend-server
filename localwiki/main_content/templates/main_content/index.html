@@ -5,6 +5,7 @@
 {% load cards_tags %}
 {% load static %}
 {% load thumbnail %}
+{% load humanize %}
 
 {% block header_bar_wrapper %}
 {% endblock %}
@@ -93,12 +94,23 @@
   <div class="bring_localwiki">
       <a href="{% url 'regions:add' %}" class="button">{% trans "Bring LocalWiki to your community" %}</a>
   </div>
-
   
-  <div class="quote_pull_wrapper">
-     <div class="quote_pull">
-     <img src="http://mathburritos.org/Screen%20Shot%202014-12-18%20at%203.11.47%20AM.png"/>
-     </div>
+  <div class="stats_with_map">
+    {% url 'regions:list' as regions_list %}
+    {% blocktrans with map_media=map.media page_count=page_count|intcomma %}
+    <div>
+    <span class="num">{{ page_count }}+</span> pages across <span class="num">{{ region_count }}</span> regions
+    {{ map_media }}
+    </div>
+    <a href="{{ regions_list }}" target="_blank" style="display: inline-block;">
+    <div id="stats_map">
+      {{ map }}
+    </div>
+    </a>
+    <div>
+    in <span class="num">{{ countries_count }}</span> countries and <span class="num">{{ languages_count }}</span> languages.
+    </div>
+    {% endblocktrans %}
   </div>
 
   <div class="recent_blogs">

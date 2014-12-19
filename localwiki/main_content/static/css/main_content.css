@@ -171,6 +171,46 @@
     }
 }
 
+#splash_page .stats_with_map {
+    background-color: white;
+    text-align: center;
+    padding-top: 4em;
+    padding-bottom: 4em;
+    font-size: 110%;
+}
+#splash_page .stats_with_map .num {
+    color: #EA3;
+    text-shadow: 1px 1px 1px rgba(84, 84, 84, 0.26);
+    font-size: 300%;
+    font-weight: 700;
+}
+#splash_page .stats_with_map #stats_map {
+    float: none;
+    border: none;
+    margin: 0;
+    background: none;
+    display: inline-block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+#splash_page .stats_with_map #stats_map:hover,
+#splash_page .stats_with_map .mapwidget:hover {
+    cursor: pointer!important;
+}
+@media screen and (max-width: 700px) {
+    #splash_page .stats_with_map a,
+    #splash_page #stats_map {
+        width: 100%; 
+    }
+    #splash_page .stats_with_map {
+        padding-top: 2em;
+        padding-bottom: 2em;
+    }
+    #splash_page .stats_with_map .num {
+        font-size: 110%;
+    }
+}
+
 #splash_page .bring_localwiki {
     text-align: center;
     display: block;

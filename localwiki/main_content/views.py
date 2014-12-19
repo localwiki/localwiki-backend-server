@@ -10,6 +10,9 @@ class SplashPageView(RegionListView):
     zoom_to_data = False
 
     def get_context_data(self, *args, **kwargs):
+        from pages.models import Page
+        from regions.models import Region
+
         context = super(SplashPageView, self).get_context_data(*args, **kwargs)
 
         qs = Region.objects.exclude(regionsettings__is_meta_region=True)
@@ -25,7 +28,28 @@ class SplashPageView(RegionListView):
 
         context['regions_for_cards'] = qs
         context['blogs'] = Post.objects.filter(status=2).order_by('-created')[:4]
+
+        context['page_count'] = (Page.objects.all().count() // 1000) * 1000
+        context['region_count'] = Region.objects.all().count()
+        context['countries_count'] = 15
+        context['languages_count'] = 7
         return context
+
+    def get_map_options(self):
+        olwidget_options = super(SplashPageView, self).get_map_options()
+        map_opts = olwidget_options.get('map_options', {})
+        map_opts['controls'] = []
+        olwidget_options['overlay_style'] = {
+            'strokeDashstyle': 'solid',
+            'strokeColor': '#444',
+            'strokeOpacity': 0.2,
+            'fillOpacity': 1,
+            'fillColor': '#eA3',
+            'strokeWidth': 0.5,
+            'pointRadius': 2
+        }
+        olwidget_options['default_zoom'] = 1
+        return olwidget_options
 
 
 class MainPageView(View):
