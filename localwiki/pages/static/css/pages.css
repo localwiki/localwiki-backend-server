@@ -197,8 +197,8 @@ a[href^='http:'], a[href^='https:'] {
     padding-left: 1.1em;
     background: none;
 }
-a[href^='http:'][href*='localwiki.org']:before, a[href^='https:'][href*='localwiki.org']:before,
-a[href^='http:'][href*='localhost']:before, a[href^='https:'][href*='localhost']:before {
+a[href*='localwiki.org']:before, a[href*='localwiki.org']:before,
+a[href*='localhost']:before, a[href*='localhost']:before {
     content: none;
 }
 

@@ -200,7 +200,7 @@ class PageUpdateView(PermissionRequiredMixin, CreateObjectMixin,
                 'page_url': ('https://localwiki.org%s' % self.object.get_url_for_share(self.request)),
             }
             twitter_status = urllib.quote(twitter_status)
-            share_message = _("Want to share this page?")
+            share_message = _("Tell the world about this page:")
             share_message = "%(share_message)s<div>%(fb_link)s %(twitter_link)s</div>" % {
                 'share_message': share_message,
                 'fb_link': ('<a target="_blank" class="button tiny" href="https://www.facebook.com/sharer/sharer.php?u=https://localwiki.org%s"></a>' %

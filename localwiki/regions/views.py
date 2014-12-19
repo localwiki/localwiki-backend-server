@@ -69,6 +69,23 @@ def create_region(request, region=None, form=None, slug=None, full_name=None,
         "We've set you up as an admin for this region. "
         "Learn more about <a href=\"http://localwiki.net/main/Local_Adminship_Hub\" target=\"_blank\">LocalWiki adminship here</a>."
     )
+
+    # Translators: Keep under < 100 characters
+    twitter_status = _("Help me bring LocalWiki to %(region_name)s! I've just started this here: %(region_url)s") % {
+        'region_name': region.full_name,
+        'region_url': 'https://localwiki.org%s' % region.get_absolute_url(),
+    }
+    twitter_status = urllib.quote(twitter_status)
+    share_message = _("Let the world know you're starting to build something beautiful:")
+    share_message = "%(share_message)s<div>%(fb_link)s %(twitter_link)s</div>" % {
+        'share_message': share_message,
+        'fb_link': ('<a target="_blank" class="button tiny" href="https://www.facebook.com/sharer/sharer.php?u=https://localwiki.org%s"></a>' %
+            region.get_absolute_url()),
+        'twitter_link': ('<a target="_blank" class="button tiny" href="https://twitter.com/home?status=%s"></a>' % twitter_status)
+    }
+    share_message = '<br/><div class="share_message">%s</div>' % share_message
+
+    msg += share_message
     messages.add_message(request, messages.SUCCESS, msg)
 
 

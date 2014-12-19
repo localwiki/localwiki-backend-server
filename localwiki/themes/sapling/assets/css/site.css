@@ -1655,6 +1655,11 @@ input:focus {
 .messages .share_message > div {
     padding-top: 0.8em;
 }
+.messages .share_message a {
+    min-width: 30px;
+    text-align: center;
+    font-size: 115%;
+}
 
 #create_page_dialog {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0.05);
