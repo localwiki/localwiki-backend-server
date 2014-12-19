@@ -9,6 +9,14 @@ import models
 from fields import WikiHTMLField
 
 
+_editor_plugins = [
+    'insertimage', 'simpleimage', 'domcleanup', 'seamless',
+    'simpletable', 'simpletabletools', 'customenterkey',
+    'pagelink', 'inheritcss', 'customstylescombo',
+    'customsourcearea', 'ckfixes', 'wikiplugins', 'includepage',
+    'includetag', 'embed', 'searchbox'
+]
+
 class WikiEditor(CKEditor):
     def get_config(self):
         config = super(WikiEditor, self).get_config()
@@ -54,13 +62,7 @@ class WikiEditor(CKEditor):
                 'toolbar,undo,wysiwygarea,wsc,selection')
 
     def get_extra_plugins(self):
-        plugins = ['insertimage', 'simpleimage', 'domcleanup', 'seamless',
-                   'simpletableresize', 'simpletable', 'simpletabletools',
-                   'customenterkey', 'pagelink', 'inheritcss',
-                   'customstylescombo', 'customsourcearea', 'ckfixes',
-                   'wikiplugins', 'includepage', 'includetag', 'embed',
-                   'searchbox']
-        return ','.join(plugins)
+        return ','.join(_editor_plugins)
 
     def get_toolbar(self):
         basic_styles = ['Bold', 'Italic', 'Underline', 'Strike']
@@ -96,3 +98,7 @@ class WikiEditor(CKEditor):
         js = (
               static_url('js/ckeditor/sapling_utils.js'),
         )
+
+
+def register_editor_plugin(plugin_name):
+    _editor_plugins.append(plugin_name)

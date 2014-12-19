@@ -9,6 +9,7 @@ from django.views.decorators.cache import cache_control
 import pages
 import maps
 import redirects
+import crap_comments
 import dashboard
 import links
 import regions
@@ -37,6 +38,7 @@ urlpatterns = patterns('',
 
     # Users / registration URLs
     (r'^(?i)Users/', include('users.urls')),
+    (r'^_comment/', include(crap_comments.site.urls)),
 
     # Follow-related URLs
     (r'^_follow/', include('follow.urls')),

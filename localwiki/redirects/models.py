@@ -7,6 +7,8 @@ from pages.models import Page, validate_page_slug
 from regions.models import Region
 from versionutils import versioning
 
+from pages.models import Page
+
 import exceptions
 
 
