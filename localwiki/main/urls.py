@@ -38,7 +38,7 @@ urlpatterns = patterns('',
 
     # Users / registration URLs
     (r'^(?i)Users/', include('users.urls')),
-    (r'^_comment/', include(crap_comments.site.urls)),
+    (r'^_comment/(?P<region>[^/]+?)/', include(crap_comments.site.urls)),
 
     # Follow-related URLs
     (r'^_follow/', include('follow.urls')),
