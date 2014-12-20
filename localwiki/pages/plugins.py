@@ -249,18 +249,18 @@ def handle_image(elem, context=None):
     return False
 
 
-_tag_imports = ['{% load pages_tags %}',
+tag_imports = ['{% load pages_tags %}',
                '{% load thumbnail %}',
                '{% load tags_tags %}',
               ]
 
 
-_tag_handlers = {"a": [handle_link],
+tag_handlers = {"a": [handle_link],
                 "img": [handle_image],
                }
 
 
-_plugin_handlers = {"includepage": include_page,
+plugin_handlers = {"includepage": include_page,
                    "includetag": include_tag,
                    "embed": embed_code,
                    "searchbox": searchbox,
@@ -277,7 +277,7 @@ def register(cls_name, handler):
                   as a custom plugin class name.
         handler: The callable to run when encountering this class.
     """
-    _plugin_handlers[cls_name] = handler
+    plugin_handlers[cls_name] = handler
 
 
 def html_to_template_text(unsafe_html, context=None, render_plugins=True):
@@ -301,15 +301,15 @@ def html_to_template_text(unsafe_html, context=None, render_plugins=True):
             classes = elem.attrib['class'].split()
             if 'plugin' in classes and render_plugins:
                 for p in classes:
-                    if p in _plugin_handlers:
+                    if p in plugin_handlers:
                         try:
-                            _plugin_handlers[p](elem, context)
+                            plugin_handlers[p](elem, context)
                         except:
                             pass
                 continue
-        if not elem.tag in _tag_handlers:
+        if not elem.tag in tag_handlers:
             continue
-        for handler in _tag_handlers[elem.tag]:
+        for handler in tag_handlers[elem.tag]:
             try:
                 can_continue = handler(elem, context)
                 if can_continue is False:
@@ -321,7 +321,7 @@ def html_to_template_text(unsafe_html, context=None, render_plugins=True):
                      for elem in container]
     container_text = escape(container.text or '').encode('UTF-8')
     template_text = sanitize_final(''.join(
-        _tag_imports + [container_text] + template_bits))
+        tag_imports + [container_text] + template_bits))
     # Restore img src for thumbnails
     template_text = template_text.replace('src_thumb', 'src')
     template_text = template_text.replace('srcset_thumb', 'srcset')
