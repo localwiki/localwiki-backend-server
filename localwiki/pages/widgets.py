@@ -62,17 +62,7 @@ class WikiEditor(CKEditor):
                 'toolbar,undo,wysiwygarea,wsc,selection')
 
     def get_extra_plugins(self):
-<<<<<<< HEAD
-        plugins = ['insertimage', 'simpleimage', 'domcleanup', 'seamless',
-                   'simpletableresize', 'simpletable', 'simpletabletools',
-                   'customenterkey', 'pagelink', 'inheritcss',
-                   'customstylescombo', 'customsourcearea', 'ckfixes',
-                   'wikiplugins', 'includepage', 'includetag', 'embed',
-                   'searchbox']
-        return ','.join(plugins)
-=======
         return ','.join(_editor_plugins)
->>>>>>> davis_master
 
     def get_toolbar(self):
         basic_styles = ['Bold', 'Italic', 'Underline', 'Strike']
