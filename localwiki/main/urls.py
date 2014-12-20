@@ -54,7 +54,7 @@ urlpatterns = patterns('',
     (r'^_api/', include('main.api.internal_urls')),
 
     # Comments
-    (r'^_comment/', include(crap_comments.site.urls)),
+    (r'^_comment/(?P<region>[^/]+?)/', include(crap_comments.site.urls)),
 
     (r'^(?P<region>[^/]+?)/map$', NamedRedirectView.as_view(name='maps:global')),
     (r'^', include(maps.site.urls)),

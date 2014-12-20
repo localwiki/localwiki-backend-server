@@ -3025,6 +3025,7 @@ form .item li {
 .comments_section textarea {
     width: 100%;
     height: 3em;
+    font: 16px/25px "Cabin", Arial, "Helvetica Neue", "Helvetica", sans-serif;
 }
 
 
