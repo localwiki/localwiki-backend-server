@@ -6,6 +6,10 @@
 
 		beforeInit : function( editor )
 		{
+            /* Only enable this plugin in Davis region for now */
+            if (region_slug != 'davis') {
+                return;
+            }
 			var config = editor.config;
 			if(!config.wikiplugins_menu)
 				config.wikiplugins_menu = {};
@@ -15,11 +19,14 @@
 					command : 'commentbox',
 					icon : this.path + 'images/balloon-white.png'
 				}
-			
 		},
 		
 		init : function( editor )
 		{
+            /* Only enable this plugin in Davis region for now */
+            if (region_slug != 'davis') {
+                return;
+            }
 			editor.addCommand( 'commentbox', new CKEDITOR.dialogCommand( 'commentbox' ) );
 			CKEDITOR.dialog.add( 'commentbox', this.path + 'dialogs/commentbox.js' );
 			editor.on( 'doubleclick', function( evt )

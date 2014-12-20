@@ -15,6 +15,10 @@ def comments(context, title):
     request = context['request']
     page = context['object']
 
+    # Only enable on Davis region for now.
+    if not page.region.slug == 'davis':
+        return ''
+
     if request.method == 'POST':
         form = CommentForm(request.POST)
     else:
@@ -24,6 +28,6 @@ def comments(context, title):
     return t.render(RequestContext(request, {
         'title': title or _('Comments:'),
         'page': page,
-        'can_comment': request.user.has_perm('pages.change_page', page),
+        'can_comment': request.user.is_authenticated() and request.user.has_perm('pages.change_page', page),
         'form': CommentForm(),
     }))
