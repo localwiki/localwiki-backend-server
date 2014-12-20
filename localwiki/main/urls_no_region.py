@@ -12,6 +12,7 @@ import redirects
 import dashboard
 import regions
 import tags
+import crap_comments
 from regions.views import MainPageView
 from users.views import GlobalUserpageRedirectView
 from utils.views import NamedRedirectView
@@ -35,6 +36,9 @@ urlpatterns = patterns('',
 
     # Internal API URLs
     (r'^_api/', include('main.api.internal_urls')),
+    
+    # Comments
+    (r'^_comment/', include(crap_comments.site.urls)),
 
     (r'^map$', NamedRedirectView.as_view(name='maps:global')),
     (r'^', include(maps.site.urls_no_region)),

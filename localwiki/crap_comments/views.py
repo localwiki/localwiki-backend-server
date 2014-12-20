@@ -9,40 +9,37 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 
 from pages.models import Page
+from regions.views import RegionMixin
+from utils.views import AuthenticationRequired
 
 from forms import CommentForm
 
-class AddCommentView(FormView):
+
+class AddCommentView(RegionMixin, AuthenticationRequired, FormView):
     form_class = CommentForm
 
     def form_valid(self, form):
         comment = form.cleaned_data.get('content')
-        page = Page.objects.get(slug=self.kwargs.get('slug'))
+        self.page = Page.objects.get(slug=self.kwargs.get('slug'), region=self.get_region())
 
-        if self.request.user.is_authenticated():
-            # Because we're embedding this URL in the page's semi-special
-            # HTML content, we don't want it to have a leading slash --
-            # all wiki-links are relative, at least right now.
-            user_url = self.request.user.get_absolute_url()[1:]
-            user_info = '<a href="%s">%s</a>' % (user_url, self.request.user)
-        else:
-            if getattr(settings, 'SHOW_IP_ADDRESSES', True):
-                user_info = self.request.META.get('REMOTE_ADDR', None)
-            else:
-                user_info = 'unknown'
+        # Because we're embedding this URL in the page's semi-special
+        # HTML content, we don't want it to have a leading slash --
+        # all wiki-links are relative, at least right now.
+        user_url = self.request.user.get_absolute_url()[1:]
+        user_info = '<a href="%s">%s</a>' % (user_url, self.request.user)
 
         new_page_content = u"""%(current_html)s
 <hr><p>
 <em>%(datetime)s</em> &nbsp; %(comment)s —%(user_info)s
 </p>""" % {
-            'current_html': page.content,
+            'current_html': self.page.content,
             'datetime': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
             'comment': comment,
             'user_info': user_info,
         }
 
-        page.content = new_page_content
-        page.save(comment=_("Comment added"))
+        self.page.content = new_page_content
+        self.page.save(comment=_("Comment added"))
         messages.add_message(self.request, messages.SUCCESS, self.success_msg())
 
         return super(AddCommentView, self).form_valid(form)
@@ -53,4 +50,4 @@ class AddCommentView(FormView):
         return ('<div>' + _('Your comment was added. ') + '</div>')
 
     def get_success_url(self):
-        return reverse('pages:show', args=[self.kwargs['slug']])
+        return self.page.get_absolute_url()

@@ -4,7 +4,7 @@
 <h2>{{ title }}</h2>
 {% if can_comment %}
     {{ form.errors }}
-    <form method="post" action="{% url comments:add slug=page.slug %}">{% csrf_token %}
+    <form method="post" action="{% url 'comments:add' slug=page.slug region=page.region.slug %}">{% csrf_token %}
         {{ form.content }}
         <p><input class="button" type="submit" value="{% trans "Add Comment" %}"/></p>
     </form>
@@ -12,8 +12,14 @@
     {% if request.user.is_authenticated %}
         <p>{% trans "You are not allowed to comment on this page." %}</p>
     {% else %}
-        <p>{% blocktrans %}You must be logged in to comment on this page.  Please <a href="/Users/login/">log in</a>.{% endblocktrans %}</p>
+        {% url 'auth_login' as login_url %}
+        <p>{% blocktrans %}You must be logged in to comment on this page.  Please <a href="{{ login_url }}?next=//{{ request.get_host }}{{ request.path }}" rel="nofollow">log in</a>.{% endblocktrans %}</p>
     {% endif %}
 {% endif %}
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.comments_section textarea').autosize();
+    });
+</script>
 <div style="clear: both;"></div>
