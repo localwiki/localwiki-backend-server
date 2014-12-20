@@ -9,6 +9,7 @@ from django.views.decorators.cache import cache_control
 import pages
 import maps
 import redirects
+import crap_comments
 import dashboard
 import links
 import regions
@@ -51,6 +52,9 @@ urlpatterns = patterns('',
 
     # Internal API URLs
     (r'^_api/', include('main.api.internal_urls')),
+
+    # Comments
+    (r'^_comment/', include(crap_comments.site.urls)),
 
     (r'^(?P<region>[^/]+?)/map$', NamedRedirectView.as_view(name='maps:global')),
     (r'^', include(maps.site.urls)),
