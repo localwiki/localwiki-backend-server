@@ -129,6 +129,14 @@ def _async_cache_post_edit(instance, created=False, deleted=False, raw=False):
         varnish_invalidate_page(instance.page)
         django_invalidate_page(instance.page)
 
+        if instance.versions.all().count() == 1:
+            changed = [t.slug for t in instance.tags.all()]
+        else:
+            # Most recent two versions
+            v2, v1 = instance.versions.all()[:2]
+            items = diff(v1, v2).get_diff()['tags'].get_diff()
+            changed = [t.slug for t in set.union(items['added'], items['deleted'])]
+
         # Clear tag list views
         for slug in changed:
             invalidate_region_tag_views(slug, instance.region)
