@@ -8,6 +8,8 @@ from subprocess import call
 # url to monitor, hostname only
 url = sys.argv[1]
 
+CONN_TIMEOUT = 25
+
 def log(msg):
     import datetime
     timestamp = str(datetime.datetime.now())
@@ -33,7 +35,7 @@ def get_site_status(url):
 def get_response(url):
     '''Return response object from URL'''
     try:
-        conn = HTTPSConnection(url)
+        conn = HTTPSConnection(url, timeout=CONN_TIMEOUT)
         conn.request('HEAD', '/')
         return conn.getresponse()
     except socket.error, e:
