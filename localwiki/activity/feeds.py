@@ -11,7 +11,7 @@ from .utils import merge_changes
 from .views import IGNORE_TYPES
 from . import get_changes_classes
 
-MAX_CHANGES = 500
+MAX_CHANGES = 250
 
 region_routing_pattern = re.compile(
     '^/(?P<region>[^/]+?)/.*'
