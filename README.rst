@@ -4,9 +4,9 @@ LocalWiki
 
 LocalWiki is a grassroots effort to collect, share and open the world's local knowledge.
 
-To edit LocalWiki or to bring LocalWiki to your community, please visit http://localwiki.net.
+To edit LocalWiki or to bring LocalWiki to your community, please visit https://localwiki.org.
 
-For information on the LocalWiki API, please see http://localwiki.net/api.
+For information on the LocalWiki API, please see https://localwiki.org/api.
 
 This repository contains the backend server software used to run the LocalWiki project.  For
 information on running this backend code in a local development environment, see `INSTALL`.
