@@ -127,7 +127,7 @@ def find_packages_in(dirs):
 
 
 install_requires = [
-    'setuptools',
+    'setuptools==8.0.4',
     'django==1.5.4',
     'html5lib==0.95',
     'requests==2.0.0',
