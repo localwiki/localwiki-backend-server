@@ -211,17 +211,4 @@ setup(
     entry_points={
         'console_scripts': ['localwiki-manage=localwiki.manage:main'],
     },
-    classifiers=[
-        'Development Status :: 3 - Alpha',
-        'Environment :: Web Environment',
-        'Framework :: Django',
-        'Intended Audience :: Other Audience',
-        'License :: OSI Approved :: GNU General Public License (GPL)',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Topic :: Internet',
-        'Topic :: Communications :: Conferencing',
-        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
-        'Topic :: Office/Business :: Groupware',
-    ],
 )
