@@ -665,6 +665,12 @@ class PageContentInUsersNamespaceView(PageDetailView):
 
         return super(PageContentInUsersNamespaceView, self).handler404(request, *args, **kwargs)
 
+    @staticmethod
+    def get_cache_key(*args, **kwargs):
+        if not 'region' in kwargs:
+            kwargs['region'] = 'users'
+        return PageDetailView.get_cache_key(*args, **kwargs)
+
 
 def suggest(request, *args, **kwargs):
     """
