@@ -1,17 +1,20 @@
-{% extends "site/base.html" %}
+{% comment %}
+SECURITY NOTE:
 
-{% block title %}Server error{% endblock %}
+If you inherit from .e.g site/base.html here, you need to be **VERY** careful that certain conditions
+don't cause the {% phased %} tag to leak secret information.
 
-{% block everything_wrapper %}
-  <div id="header">
-    <div id="header_bar">
-      <h1 id="object_title">Server error</h1>
-    </div>
-  </div>
-  <div id="main">
-    <ul class="messages">
-      <li>Looks like something went wrong and we're unable to display the page you requested.</li>
-      <li>Please try again in a few minutes.</li>
-    </ul>
-  </div>
-{% endblock %}
+It's best to just leave this as a 100% static page.
+
+If we need to customize this, do it by hand using *no* Django tags.
+{% endcomment %}
+
+<html>
+<head>
+  <title>Server error</title>
+</head>
+<body>
+ <p>Looks like something went wrong and we're unable to display the page you requested.</p>
+ <p>Please try again in a few minutes.</p>
+</body>
+</html>
