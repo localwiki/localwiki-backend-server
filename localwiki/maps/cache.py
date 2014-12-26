@@ -31,7 +31,7 @@ def django_invalidate_region_map(region_id):
     set_urlconf(current_urlconf)
 
 def _map_cache_post_edit(sender, instance, **kwargs):
-    django_invalidate_region_map(instance.region.id)
+    django_invalidate_region_map.delay(instance.region.id)
 
 def _map_cache_post_save(sender, instance, created, raw, **kwargs):
     _map_cache_post_edit(sender, instance, **kwargs)
