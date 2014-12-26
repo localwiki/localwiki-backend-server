@@ -13,6 +13,7 @@ from django.views.generic.list import BaseListView
 from olwidget.widgets import InfoMap as OLInfoMap
 from django.contrib.gis.geos.polygon import Polygon
 from django.contrib.gis.geos import Point
+from django.core.cache import cache
 from django.utils.translation import ugettext as _
 from django.contrib.gis.measure import D
 from django.utils.safestring import mark_safe
@@ -33,6 +34,7 @@ from .widgets import InfoMap, map_options_for_region
 from .models import MapData
 from .forms import MapForm
 from .osm import get_osm_geom
+from localwiki.utils.views import CacheMixin
 
 
 class MapDetailView(Custom404Mixin, AddContributorsMixin, RegionMixin, DetailView):
@@ -131,7 +133,7 @@ class MapBaseListView(ListView):
         return InfoMap(map_objects, options=options)
 
 
-class MapFullRegionView(RegionMixin, MapBaseListView):
+class MapFullRegionView(CacheMixin, RegionMixin, MapBaseListView):
     template_name = 'maps/mapdata_list.html'
     dynamic = True
     zoom_to_data = False
@@ -158,7 +160,18 @@ class MapFullRegionView(RegionMixin, MapBaseListView):
             'permalink': self.permalink,
             'cluster': True
         })
-        return InfoMap(map_objects, options=options)
+        _map = InfoMap(map_objects, options=options)
+        return _map
+
+    @staticmethod
+    def get_cache_key(*args, **kwargs):
+        from django.core.urlresolvers import get_urlconf
+        from pages.models import name_to_url
+
+        urlconf = get_urlconf() or settings.ROOT_URLCONF
+        region = CacheMixin.get_region_slug_param(*args, **kwargs)
+        # Control characters and whitespace not allowed in memcached keys
+        return 'map:%s/%s/main_map' % (urlconf, name_to_url(region))
 
 
 class MapAllObjectsAsPointsView(MapFullRegionView):
