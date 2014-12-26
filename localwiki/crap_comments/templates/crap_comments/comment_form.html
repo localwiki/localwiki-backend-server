@@ -1,7 +1,8 @@
-{% load i18n %}
-
+{% load phased_tags %}
 <div class="comments_section">
 <h2>{{ title }}</h2>
+{% phased with can_comment page form %}
+{% load i18n %}
 {% if can_comment %}
     {{ form.errors }}
     <form method="post" action="{% url 'comments:add' slug=page.slug region=page.region.slug %}">{% csrf_token %}
@@ -16,6 +17,7 @@
         <p>{% blocktrans %}You must be logged in to comment on this page.  Please <a href="{{ login_url }}?next=//{{ request.get_host }}{{ request.path }}" rel="nofollow">log in</a>.{% endblocktrans %}</p>
     {% endif %}
 {% endif %}
+{% endphased %}
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
