@@ -29,6 +29,5 @@ def comments(context, title):
     return t.render(RequestContext(request, {
         'title': title or _('Comments:'),
         'page': page,
-        'can_comment': request.user.is_authenticated() and request.user.has_perm('pages.change_page', page),
         'form': CommentForm(),
     }))

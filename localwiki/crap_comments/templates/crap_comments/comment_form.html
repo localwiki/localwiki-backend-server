@@ -1,21 +1,25 @@
 {% load phased_tags %}
 <div class="comments_section">
 <h2>{{ title }}</h2>
-{% phased with can_comment page form %}
+{% phased with page form %}
 {% load i18n %}
-{% if can_comment %}
+{% load guardian_tags %}
+
+{% get_obj_perms request.user for page as "page_perms" %}
+
+{% if request.user.is_authenticated %}
+  {% if 'change_page' in page_perms %}
     {{ form.errors }}
     <form method="post" action="{% url 'comments:add' slug=page.slug region=page.region.slug %}">{% csrf_token %}
         {{ form.content }}
         <p><input class="button" type="submit" value="{% trans "Add Comment" %}"/></p>
     </form>
+  {% else %}
+    <p>{% trans "You are not allowed to comment on this page." %}</p>
+  {% endif %}
 {% else %}
-    {% if request.user.is_authenticated %}
-        <p>{% trans "You are not allowed to comment on this page." %}</p>
-    {% else %}
-        {% url 'auth_login' as login_url %}
-        <p>{% blocktrans %}You must be logged in to comment on this page.  Please <a href="{{ login_url }}?next=//{{ request.get_host }}{{ request.path }}" rel="nofollow">log in</a>.{% endblocktrans %}</p>
-    {% endif %}
+  {% url 'auth_login' as login_url %}
+    <p>{% blocktrans %}You must be logged in to comment on this page.  Please <a href="{{ login_url }}?next=//{{ request.get_host }}{{ request.path }}" rel="nofollow">log in</a>.{% endblocktrans %}</p>
 {% endif %}
 {% endphased %}
 </div>
