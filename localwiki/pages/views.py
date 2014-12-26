@@ -657,6 +657,9 @@ class PageContentInUsersNamespaceView(PageDetailView):
             # Just pick the first one
             return user_pages[0].region
         else:
+            # Pick the region the user most recently edited in
+            if Page.versions.filter(version_info__user__username__iexact=username):
+                return Page.versions.filter(version_info__user__username__iexact=username)[0].region
             return Http404
 
     def handler404(self, request, *args, **kwargs):
