@@ -40,3 +40,4 @@ versioning.register(MapData)
 
 # For registration calls
 import feeds
+import signals
