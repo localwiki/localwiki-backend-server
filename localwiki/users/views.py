@@ -83,7 +83,7 @@ def get_user_page(user, request):
         # Check to see if they've edited a region recently
         edited_pages = Page.versions.filter(version_info__user=user)
         referer = request.META.get('HTTP_REFERER')
-        if edited_pages:
+        if edited_pages.exists():
             region = edited_pages[0].region
             return Page(name=pagename, region=region)
         # Let's try and guess by the previous URL. Ugh!
