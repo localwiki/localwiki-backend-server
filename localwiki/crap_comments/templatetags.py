@@ -7,16 +7,17 @@ from django.utils.text import unescape_string_literal
 
 # Register this template tag as a pages template tag
 from pages.templatetags.pages_tags import register
+from pages.utils import is_user_page
 
 from forms import CommentForm
 
 @register.simple_tag(takes_context=True)
 def comments(context, title):
     request = context['request']
-    page = context['object']
+    page = context['page']
 
-    # Only enable on Davis region for now.
-    if not page.region.slug == 'davis':
+    # Only enable on Davis region or user pages for now.
+    if not (page.region.slug == 'davis' or is_user_page(page)):
         return ''
 
     if request.method == 'POST':

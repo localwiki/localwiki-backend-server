@@ -6,8 +6,8 @@
 
 		beforeInit : function( editor )
 		{
-            /* Only enable this plugin in Davis region for now */
-            if (region_slug != 'davis') {
+            /* Only enable this plugin in Davis region & user pages for now */
+            if (region_slug != 'davis' || window.location.pathname.toLowerCase().indexOf('/users/') != 0) {
                 return;
             }
 			var config = editor.config;
@@ -23,8 +23,8 @@
 		
 		init : function( editor )
 		{
-            /* Only enable this plugin in Davis region for now */
-            if (region_slug != 'davis') {
+            /* Only enable this plugin in Davis region & user pages for now */
+            if (region_slug != 'davis' || window.location.pathname.toLowerCase().indexOf('/users/') != 0) {
                 return;
             }
 			editor.addCommand( 'commentbox', new CKEDITOR.dialogCommand( 'commentbox' ) );
