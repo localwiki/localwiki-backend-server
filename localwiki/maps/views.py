@@ -133,14 +133,14 @@ class MapBaseListView(ListView):
         return InfoMap(map_objects, options=options)
 
 
-class MapFullRegionView(CacheMixin, RegionMixin, MapBaseListView):
+class BaseMapRegionView(RegionMixin, MapBaseListView):
     template_name = 'maps/mapdata_list.html'
     dynamic = True
     zoom_to_data = False
     filter_by_zoom = True
 
     def get_queryset(self):
-        queryset = super(MapFullRegionView, self).get_queryset()
+        queryset = super(BaseMapRegionView, self).get_queryset()
         # XXX TODO TEMPORARY HACK
         queryset = queryset.exclude(page__pagetagset__tags__slug='zipcode')
         queryset = queryset.exclude(page__pagetagset__tags__slug='supervisorialdistrict')
@@ -163,6 +163,8 @@ class MapFullRegionView(CacheMixin, RegionMixin, MapBaseListView):
         _map = InfoMap(map_objects, options=options)
         return _map
 
+    
+class MapFullRegionView(CacheMixin, BaseMapRegionView):
     @staticmethod
     def get_cache_key(*args, **kwargs):
         from django.core.urlresolvers import get_urlconf
@@ -179,7 +181,7 @@ class MapFullRegionView(CacheMixin, RegionMixin, MapBaseListView):
         return context
 
 
-class MapAllObjectsAsPointsView(MapFullRegionView):
+class MapAllObjectsAsPointsView(BaseMapRegionView):
     """
     Like MapFullRegionView, but return all objects as points and do not filter by
     zoom.
@@ -202,7 +204,7 @@ class EverythingEverywhereAsPointsView(MapAllObjectsAsPointsView):
         return MapData.objects.all()
 
 
-class MapForTag(MapFullRegionView):
+class MapForTag(BaseMapRegionView):
     """
     All objects whose pages have a particular tag within a region.
     """
@@ -213,7 +215,7 @@ class MapForTag(MapFullRegionView):
     def get_queryset(self):
         import tags.models as tags
 
-        qs = super(MapFullRegionView, self).get_queryset()
+        qs = super(BaseMapRegionView, self).get_queryset()
         region = self.get_region()
         self.tag = tags.Tag.objects.get(
             slug=tags.slugify(self.kwargs['tag']),
