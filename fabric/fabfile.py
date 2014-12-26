@@ -296,16 +296,18 @@ def setup_postgres(test_server=False):
     else:
         put('config/postgresql/postgresql_test.conf', '/etc/postgresql/9.1/main/postgresql.conf', use_sudo=True)
 
+    set_postgresql_shmmax()
+    sudo('service postgresql start')
+
+def set_postgresql_shmmax():
     # Increase system shared memory limits
     # (allow for 768MB shared_buffer in PostgreSQL)
-    shmmax = 805306368 
+    shmmax = 1633894400
     shmall = int(shmmax * 1.0 / 4096)
     sudo('echo "%s" > /proc/sys/kernel/shmmax' % shmmax)
     sudo('echo "%s" > /proc/sys/kernel/shmall' % shmall)
     sudo('echo "\nkernel.shmmax = %s\nkernel.shmall = %s" > /etc/sysctl.conf' % (shmmax, shmall))
     sudo('sysctl -p')
-
-    sudo('service postgresql start')
 
 def setup_jetty():
     put("config/default/jetty", "/etc/default/", use_sudo=True)
