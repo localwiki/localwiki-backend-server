@@ -434,7 +434,7 @@ textarea, input, select {
     color: #111;
 }
 #region_title img {
-    height: 56px;
+    height: 50px;
     padding-right: 0.5em;
     display: block; /* region_title contains either an h1 (block) or an img,
                        so let's make this more consistent */
