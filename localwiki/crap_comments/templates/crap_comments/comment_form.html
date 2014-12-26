@@ -1,20 +1,26 @@
 {% load phased_tags %}
-<div class="comments_section">
-<h2>{{ title }}</h2>
-{% phased with page form %}
 {% load i18n %}
 
-{% if request.user.is_authenticated %}
-    {{ form.errors }}
-    <form method="post" action="{% url 'comments:add' slug=page.slug region=page.region.slug %}">{% csrf_token %}
-        {{ form.content }}
-        <p><input class="button" type="submit" value="{% trans "Add Comment" %}"/></p>
-    </form>
+<div class="comments_section">
+<h2>{{ title }}</h2>
+{% if page.versions %}
+  {% phased with page form %}
+  {% load i18n %}
+  
+  {% if request.user.is_authenticated %}
+      {{ form.errors }}
+      <form method="post" action="{% url 'comments:add' slug=page.slug region=page.region.slug %}">{% csrf_token %}
+          {{ form.content }}
+          <p><input class="button" type="submit" value="{% trans "Add Comment" %}"/></p>
+      </form>
+  {% else %}
+    {% url 'auth_login' as login_url %}
+      <p>{% blocktrans %}You must be logged in to comment on this page.  Please <a href="{{ login_url }}?next=//{{ request.get_host }}{{ request.path }}" rel="nofollow">log in</a>.{% endblocktrans %}</p>
+  {% endif %}
+  {% endphased %}
 {% else %}
-  {% url 'auth_login' as login_url %}
-    <p>{% blocktrans %}You must be logged in to comment on this page.  Please <a href="{{ login_url }}?next=//{{ request.get_host }}{{ request.path }}" rel="nofollow">log in</a>.{% endblocktrans %}</p>
+      <p>{% blocktrans %}You can only comment on the current version of this page, not a historical version. Please view the current version of this page instead.{% endblocktrans %}</p>
 {% endif %}
-{% endphased %}
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
