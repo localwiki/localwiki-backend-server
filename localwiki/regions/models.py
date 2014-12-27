@@ -3,6 +3,7 @@ import unicodedata
 from urllib import unquote_plus
 
 from django.db import IntegrityError
+from django.db.models import Count
 from django.conf import settings
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
@@ -41,7 +42,7 @@ class Region(models.Model):
             raise IntegrityError(_("Region already has pages in it"))
         populate_region(self)
 
-    def get_nearby_regions(self, limit=6):
+    def get_nearby_regions(self, limit=6, show_emptyish_regions=False):
         # XXX CACHE
         if not self.geom:
             return
@@ -49,7 +50,11 @@ class Region(models.Model):
         rgs = Region.objects.exclude(geom__isnull=True).exclude(id=self.id).exclude(regionsettings__is_meta_region=True).exclude(is_active=False).distance(center).order_by('distance')
         # Return 6 nearest now. TODO: Rank by page count?
         if limit is not None:
-            return rgs[:limit]
+            # Buffer by 10 to allow the num_pages filter to drop some, if needed
+            rgs_ids = [r.id for r in rgs[:limit+10]]
+            rgs = Region.objects.filter(id__in=rgs_ids).annotate(num_pages=Count('page'))
+            # Region must have at least 5 pages to show up here
+            rgs = rgs.filter(num_pages__gte=5)[:limit]
         return rgs
 
     def is_admin(self, user):
