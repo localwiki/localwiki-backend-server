@@ -241,7 +241,7 @@ class PageRevertView(PermissionRequiredMixin, RegionMixin, RevertView):
 class PageVersionsList(RegionMixin, VersionsList):
     def get_queryset(self):
         p = Page(slug=self.kwargs['slug'], region=self.get_region())
-        all_page_versions = p.versions.all().defer('content')
+        all_page_versions = p.versions.all().defer('content').select_related('history_user')
         # We set self.page to the most recent historical instance of the
         # page.
         if all_page_versions:
