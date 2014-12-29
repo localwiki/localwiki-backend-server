@@ -373,8 +373,9 @@ class PageFileInfo(RegionMixin, VersionsList):
         return context
 
 
-class PageCompareView(RegionMixin, diff.views.CompareView):
+class PageCompareView(CacheMixin, RegionMixin, diff.views.CompareView):
     model = Page
+    cache_timeout = 60 * 60 * 4
 
     def get_object(self):
         ph = Page(slug=self.kwargs['slug'], region=self.get_region()).versions.most_recent()
@@ -384,6 +385,20 @@ class PageCompareView(RegionMixin, diff.views.CompareView):
         context = super(PageCompareView, self).get_context_data(**kwargs)
         context['page_diff'] = diff.diff(context['old'], context['new'])
         return context
+
+    @staticmethod
+    def get_cache_key(*args, **kwargs):
+        from django.core.urlresolvers import get_urlconf
+        import urllib
+        urlconf = get_urlconf() or settings.ROOT_URLCONF
+        region = CacheMixin.get_region_slug_param(*args, **kwargs)
+        slug = kwargs.get('slug')
+        date1 = kwargs.get('date1', '')
+        date2 = kwargs.get('date2', '')
+        version1 = kwargs.get('version1', '')
+        version2 = kwargs.get('version2', '')
+        # Control characters and whitespace not allowed in memcached keys
+        return 'diff:%s/%s/%s/%s/%s/%s/%s' % (urlconf, name_to_url(region), date1, date2, version1, version2, slugify(slug).replace(' ', '_'))
 
 
 class PageCreateView(RegionMixin, RedirectView):
