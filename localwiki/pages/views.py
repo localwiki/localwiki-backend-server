@@ -417,7 +417,7 @@ class PageCompareView(CacheMixin, RegionMixin, diff.views.CompareView):
         slug = kwargs.get('slug')
         # Control characters and whitespace not allowed in memcached keys
         date1 = name_to_url(kwargs.get('date1', ''))
-        date2 = name_to_url(kwargs.get('date2', '')
+        date2 = name_to_url(kwargs.get('date2', ''))
         version1 = name_to_url(kwargs.get('version1', ''))
         version2 = name_to_url(kwargs.get('version2', ''))
         return 'diff:%s/%s/%s/%s/%s/%s/%s' % (urlconf, name_to_url(region), date1, date2, version1, version2, slugify(slug).replace(' ', '_'))
