@@ -22,10 +22,7 @@ class AddCommentView(RegionMixin, AuthenticationRequired, FormView):
         comment = form.cleaned_data.get('content')
         self.page = Page.objects.get(slug=self.kwargs.get('slug'), region=self.get_region())
 
-        # Because we're embedding this URL in the page's semi-special
-        # HTML content, we don't want it to have a leading slash --
-        # all wiki-links are relative, at least right now.
-        user_url = self.request.user.get_absolute_url()[1:]
+        user_url = 'Users/%s' % self.request.user.username
         user_info = '<a href="%s">%s</a>' % (user_url, self.request.user)
 
         new_page_content = u"""%(current_html)s
