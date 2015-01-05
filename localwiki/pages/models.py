@@ -339,6 +339,8 @@ versioning.register(PageFile)
 def clean_name(name):
     # underscores are used to namespace special URLs, so let's remove them
     name = re.sub('_', ' ', name).strip()
+    # No pound signs - they're used for anchors
+    name = re.sub('#', '', name).strip()
     # we allow / in page names so we want to strip each bit between slashes
     name = '/'.join([part.strip()
                      for part in name.split('/') if slugify(part)])
