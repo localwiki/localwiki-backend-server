@@ -173,6 +173,9 @@ def searchbox(elem, context=None):
 
 def handle_link(elem, context=None):
     if not 'href' in elem.attrib:
+        if 'name' in elem.attrib:
+            # An anchor link. Quote it properly (' ' -> '_')
+            elem.attrib['name'] = name_to_url(url_to_name(elem.attrib['name']))
         return
 
     href = desanitize(elem.attrib['href'])
