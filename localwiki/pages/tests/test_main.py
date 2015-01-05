@@ -567,6 +567,12 @@ class HTMLToTemplateTextTest(TestCase):
         html = template.render(context)
         self.assertEqual(html, u'<a href="/test-region/A_Page#anchor" class="missing_link">dummy</a>')
 
+        a.content = (u'<a href="#justanchor">dummy</a>')
+        context = Context({'page': a, 'region': self.region})
+        template = Template(html_to_template_text(a.content, context))
+        html = template.render(context)
+        self.assertEqual(html, u'<a href="#justanchor">dummy</a>')
+
     def test_nbsp_outside_of_element(self):
         html = u'a\xa0<strong>\xa0</strong>\n'
         imports = ''.join(tag_imports)
