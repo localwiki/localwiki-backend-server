@@ -110,10 +110,10 @@ class CoverUploadView(RegionMixin, RegionAdminRequired, View):
 
         photo = self.request.FILES.get('file')
 
-        client_cover_w = int(self.request.POST.get('client_w'))
-        client_cover_h = int(self.request.POST.get('client_h'))
-        client_position_x = abs(int(self.request.POST.get('position_x')))
-        client_position_y = abs(int(self.request.POST.get('position_y')))
+        client_cover_w = int(float(self.request.POST.get('client_w')))
+        client_cover_h = int(float(self.request.POST.get('client_h')))
+        client_position_x = abs(int(float(self.request.POST.get('position_x'))))
+        client_position_y = abs(int(float(self.request.POST.get('position_y'))))
         axis = self.request.POST.get('cover_position_axis')
 
         if client_cover_w <= 0 or client_cover_h <= 0:
