@@ -226,18 +226,20 @@ hr.selected {
     float: left;
     clear: left;
     margin-bottom: 1em;
-    margin-left: 1em;
+    padding-left: 1em;
+    box-sizing: border-box;
 }
 .includepage_right {
     float: right;
     clear: right;
     margin-bottom: 1em;
-    margin-left: 1em;
+    padding-left: 1em;
+    box-sizing: border-box;
 }
 @media screen and (max-width: 700px) {
     .includepage_right, .includepage_left {
         float: none;
-        margin-left: 0;
+        padding-left: 0;
         width: auto!important;
     }
 }
