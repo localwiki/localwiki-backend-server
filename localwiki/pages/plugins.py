@@ -362,16 +362,22 @@ class LinkNode(Node):
                     cls = ' class="tag_link"'
                     url = unquote_plus(url)
                 else:
+                    # Convert to proper URL: My%20page -> My_page
+                    url = name_to_url(url_to_name(url))
+
+                    # Handle relative page links with anchors
+                    url_parts = urlparse(url)
+                    path = url_parts.path
+                    fragment = '#%s' % url_parts.fragment
+
                     try:
-                        page = Page.objects.get(slug__exact=slugify(url), region=region)
-                        url = reverse('pages:show', kwargs={'region': region.slug, 'slug': page.pretty_slug})
+                        page = Page.objects.get(slug__exact=slugify(path), region=region)
+                        url = reverse('pages:show', kwargs={'region': region.slug, 'slug': page.pretty_slug}) + fragment
                     except Page.DoesNotExist:
                         # Check if Redirect exists.
-                        if not Redirect.objects.filter(source=slugify(url), region=region):
+                        if not Redirect.objects.filter(source=slugify(path), region=region):
                             cls = ' class="missing_link"'
-                        # Convert to proper URL: My%20page -> My_page
-                        url = name_to_url(url_to_name(url))
-                        url = reverse('pages:show', kwargs={'region': region.slug, 'slug': url})
+                        url = reverse('pages:show', kwargs={'region': region.slug, 'slug': path}) + fragment
             # External links + nofollow flag (e.g. on User pages) => render as nofollow:
             elif nofollow:
                 return '<a rel="nofollow" href="%s"%s>%s</a>' % (url, cls, self.nodelist.render(context))
@@ -383,8 +389,7 @@ class LinkNode(Node):
 
     def is_relative_link(self, url):
         url_parts = urlparse(url)
-        return (not url_parts.scheme and not url_parts.netloc
-                and not url_parts.fragment)
+        return (not url_parts.scheme and not url_parts.netloc)
 
 
 class EmbedCodeNode(Node):

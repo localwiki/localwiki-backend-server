@@ -374,7 +374,7 @@ def name_to_url(value):
     value = value.strip().replace(' ', '_').replace('\t', '_'
         ).replace('\r', '_').replace('\n', '_')
     # url-encode
-    value = quote(value.encode('utf-8'))
+    value = quote(value.encode('utf-8'), safe='/#')
     return mark_safe(value)
 name_to_url = stringfilter(name_to_url)
 
