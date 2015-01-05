@@ -371,7 +371,7 @@ class LinkNode(Node):
                     # Handle relative page links with anchors
                     url_parts = urlparse(url)
                     path = url_parts.path
-                    fragment = '#%s' % url_parts.fragment
+                    fragment = '#%s' % url_parts.fragment if url_parts.fragment else ''
 
                     try:
                         page = Page.objects.get(slug__exact=slugify(path), region=region)
