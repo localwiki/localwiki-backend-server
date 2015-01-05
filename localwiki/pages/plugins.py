@@ -373,14 +373,17 @@ class LinkNode(Node):
                     path = url_parts.path
                     fragment = '#%s' % url_parts.fragment if url_parts.fragment else ''
 
-                    try:
-                        page = Page.objects.get(slug__exact=slugify(path), region=region)
-                        url = reverse('pages:show', kwargs={'region': region.slug, 'slug': page.pretty_slug}) + fragment
-                    except Page.DoesNotExist:
-                        # Check if Redirect exists.
-                        if not Redirect.objects.filter(source=slugify(path), region=region):
-                            cls = ' class="missing_link"'
-                        url = reverse('pages:show', kwargs={'region': region.slug, 'slug': path}) + fragment
+                    if fragment and not path.strip():
+                        url = fragment
+                    else:
+                        try:
+                            page = Page.objects.get(slug__exact=slugify(path), region=region)
+                            url = reverse('pages:show', kwargs={'region': region.slug, 'slug': page.pretty_slug}) + fragment
+                        except Page.DoesNotExist:
+                            # Check if Redirect exists.
+                            if not Redirect.objects.filter(source=slugify(path), region=region):
+                                cls = ' class="missing_link"'
+                            url = reverse('pages:show', kwargs={'region': region.slug, 'slug': path}) + fragment
             # External links + nofollow flag (e.g. on User pages) => render as nofollow:
             elif nofollow:
                 return '<a rel="nofollow" href="%s"%s>%s</a>' % (url, cls, self.nodelist.render(context))
