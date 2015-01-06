@@ -4,7 +4,7 @@
 {% load user_tags %}
 
 {% block type_and_by %}
-    <span class="type_and_by">{% with version_info.type_verbose as type %}{% trans type %}{% endwith %} {% trans "by" %} {% user_link version_info.user region=region %}</span>
+    <span class="type_and_by">{% with version_info.type_verbose as type %}{% trans type %}{% endwith %} {% trans "by" %} {% user_link version_info.user region=region ip=version_info.user_ip %}</span>
 {% endblock %}
 
 {% block version_info_extras %}
