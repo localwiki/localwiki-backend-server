@@ -522,6 +522,9 @@ textarea, input, select {
         padding-left: 0.6em;
         margin-top: -0.3em;
     }
+    #object_actions ul.hideable {
+        display: none;
+    }
 }
 
 #object_tags {
