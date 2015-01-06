@@ -17,7 +17,20 @@ $.endlessPaginate();
 });</script>
 {% endblock %}
 
-{% block header_title %}<a href="{% url 'region-activity' region=region.slug %}">{% trans "Activity" %}</a>{% endblock %}
+{% block header_title %}
+  {% url 'region-activity' region=region.slug as region_activity %}
+  {% url 'frontpage' region=region.slug as region_main_url %}
+  {% blocktrans with region_name=region.full_name %}<a href="{{ region_activity }}">Activity</a> on <a href="{{ region_main_url }}">{{ region_name }}</a>{% endblocktrans %}</a>
+{% endblock %}
+
+{% block object_actions %}
+  <ul>
+      {% if request.user.is_authenticated %}
+      <li><a href="{% url 'main-page' %}" rel="nofollow" class="button">{% trans "Your Feed" %}</a></li>
+      {% endif %}
+      <li><a href="{% url 'all-activity' %}" rel="nofollow" class="button"><i class="fa fa-globe"></i> {% trans "All LocalWiki" %}</a></li>
+  </ul>
+{% endblock %}
 
 {% block content %}
   <div id="activityfeed">

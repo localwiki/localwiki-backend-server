@@ -17,6 +17,13 @@ $.endlessPaginate();
 
 {% block header_title %}<a href="#">{% trans "News Feed" %}</a>{% endblock %}
 
+{% block object_actions %}
+  <ul>
+      <li><a href="{% url 'main-page' %}" rel="nofollow" class="button active">{% trans "Your Feed" %}</a></li>
+      <li><a href="{% url 'all-activity' %}" rel="nofollow" class="button"><i class="fa fa-globe"></i> {% trans "All LocalWiki" %}</a></li>
+  </ul>
+{% endblock %}
+
 {% block content %}
   <div id="activityfeed">
     {% if changes %}

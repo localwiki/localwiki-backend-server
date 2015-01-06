@@ -21,6 +21,16 @@ $.endlessPaginate();
   <a href="#">{% trans "All activity on LocalWiki" %}</a>
 {% endblock %}
 
+
+{% block object_actions %}
+  <ul>
+      {% if request.user.is_authenticated %}
+      <li><a href="{% url 'main-page' %}" rel="nofollow" class="button">{% trans "Your Feed" %}</a></li>
+      {% endif %}
+      <li><a href="{% url 'all-activity' %}" rel="nofollow" class="button"><i class="fa fa-globe"></i> {% trans "All LocalWiki" %}</a></li>
+  </ul>
+{% endblock %}
+
 {% block content %}
   <div id="activityfeed">
     {% include "activity/followed_activity_page.html" %}
