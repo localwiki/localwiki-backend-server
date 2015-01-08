@@ -11,7 +11,11 @@
     <li class="hide5"><a href="{% url 'main-page' %}">{% trans "News Feed" %}</a></li>
     {% endif %}
     <li class="hide5"><a href="{% url 'regions:list' %}">{% trans "Explore" %}</a></li>
+    {% if request.LANGUAGE_CODE == 'ja' %}
+    <li class="hide3"><a href="https://ja.localwiki.org/main-ja/about">{% trans "About" %}</a></li>
+    {% else %}
     <li class="hide3"><a href="/about/">{% trans "About" %}</a></li>
+    {% endif %}
     <li class="hide2"><a href="{% url 'blog_index' %}">{% trans "Blog" %}</a></li>
     <li class="hide1"><a href="/donate/">{% trans "Donate" %}</a></li>
     <li class="hide1"><a href="/api">{% trans "API" %}</a></li>
