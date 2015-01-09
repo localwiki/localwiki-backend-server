@@ -423,6 +423,10 @@ def update_apache_settings(restart=True):
     if config_secrets.get('localwiki_main_production', False):
         upload_template('config/apache/aaaa_old_localwiki', '/etc/apache2/sites-available/aaaa_old_localwiki',
             context=get_context(env), use_jinja=True, use_sudo=True)
+
+    upload_template('config/logrotate.d/apache2', '/etc/logrotate.d/apache2',
+        context=get_context(env), use_jinja=True, use_sudo=True)
+
     if restart:
         sudo('service apache2 restart')
 
