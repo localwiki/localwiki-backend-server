@@ -354,7 +354,7 @@ REST_FRAMEWORK = {
         'rest_framework.serializers.HyperlinkedModelSerializer',
 
     'DEFAULT_FILTER_BACKENDS': (
-        'rest_framework.filters.DjangoFilterBackend', 'rest_framework.filters.OrderingFilter',
+        'rest_framework_filters.backends.DjangoFilterBackend', 'rest_framework.filters.OrderingFilter',
     ),
 
     'DEFAULT_AUTHENTICATION_CLASSES': (

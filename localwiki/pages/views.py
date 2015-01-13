@@ -389,6 +389,7 @@ class PageCompareView(CacheMixin, RegionMixin, diff.views.CompareView):
     @staticmethod
     def get_cache_key(*args, **kwargs):
         from django.core.urlresolvers import get_urlconf
+        from pages.models import name_to_url
         import urllib
         urlconf = get_urlconf() or settings.ROOT_URLCONF
         region = CacheMixin.get_region_slug_param(*args, **kwargs)
