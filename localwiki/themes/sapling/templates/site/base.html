@@ -36,8 +36,8 @@
             var region_name = '{{ region.full_name }}';
             var home_hostname = '{{ MAIN_HOSTNAME }}';
             var region_viewboxlbrt = null;
-            {% phased with is_region_admin %}
-              {% if is_region_admin %}
+            {% phased with region %}
+              {% if request.user in region.regionsettings.admins.all %}
               var region_is_admin = true;
               {% else %}
               var region_is_admin = false;
