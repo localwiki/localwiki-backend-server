@@ -201,6 +201,10 @@ a[href*='localwiki.org']:before, a[href*='localwiki.org']:before,
 a[href*='localhost']:before, a[href*='localhost']:before {
     content: none;
 }
+a[href*='localwiki.org'], a[href*='localwiki.org']
+a[href*='localhost'], a[href*='localhost'] {
+    padding-left: 0;
+}
 
 a.button[href^='http:'], a.button[href^='https:'] {
     background-color: #DCDCDC !important;
