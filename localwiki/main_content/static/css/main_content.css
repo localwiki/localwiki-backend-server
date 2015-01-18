@@ -288,7 +288,7 @@
 
     max-width: 800px;
 }
-#splash_page .highlights img {
+#splash_page .highlights .img {
     margin-right: 4em;
 }
 #splash_page .highlights .description {
@@ -303,10 +303,10 @@
 #splash_page .highlights .item:nth-child(odd) {
     background-color: white;
 }
-#splash_page .highlights .item:nth-child(odd) img {
+#splash_page .highlights .item:nth-child(odd) .img {
     float: left;
 }
-#splash_page .highlights .item:nth-child(even) img {
+#splash_page .highlights .item:nth-child(even) .img {
     float: right;
 }
 
@@ -465,7 +465,13 @@
 /* For a flat page on the main site, or for the blog, we use the splash_page styles. */
 #splash_page #content {
     margin: 0;
+    margin-top: 0.5em;
     color: #565656;
+}
+@media screen and (max-width: 700px) {
+    #splash_page #content {
+        margin-top: 0;
+    }
 }
 #splash_page.default #content a, #splash_page.default #content a:link {
     color: #616ABD;
@@ -496,8 +502,8 @@
    padding-right: 3.5em;
    margin-left: auto;
    margin-right: auto;
-   background: url("../theme/img/header-bg.png") repeat scroll left top #E8ECEF;
    border-bottom: 1px solid #E3E3E3;
+   background-color: #F4F4F4;
 }
 @media screen and (max-width: 715px) {
     #splash_page.default #header_title {
@@ -685,6 +691,9 @@
     float: none;
     display: block;
     margin-bottom: 1em;
+}
+#region_explore_page #id_region_q {
+    border: none;
 }
 #region_explore_page .endless_loading {
     float: none;
