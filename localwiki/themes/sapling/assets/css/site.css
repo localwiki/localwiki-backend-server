@@ -932,14 +932,12 @@ textarea, input, select {
         height: auto;
     }
     #nav {
-        width: 100%;
         color: #666!important;
         font-weight: bold;
         border: none;
         margin-bottom: 0;
-        /* TODO: explore using purely CSS gradients */
-        background: #e6e6e6 url(../img/gradient.png) repeat-x bottom left;
-        border-bottom: 1px solid #bfbfbf;
+        border-bottom: 1px solid #CECECE;
+        background-color: #DCDCDC;
         text-decoration: none;
         display: block!important;
         padding-left: 0;
