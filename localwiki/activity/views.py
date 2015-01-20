@@ -119,6 +119,11 @@ class FollowedActivity(MultipleTypesPaginatedView):
                 change_obj.region = follow.target_region
                 change_set = change_set | change_obj.queryset().filter(region=follow.target_region)
 
+            if change_class == 'page':
+                # Special case: own user pages
+                # TODO: use users.views.get_user_page() here once we unify user pages
+                change_sets = change_set | Page.versions.filter(slug=slugify('users/%s' % self.request.user.username))
+
             change_sets.append(change_set)
 
         ###############################################
@@ -133,9 +138,6 @@ class FollowedActivity(MultipleTypesPaginatedView):
             action_set = action_set | actor_stream(follow.target_user)
         change_sets.append(action_set)
 
-        # Special case: own user pages
-        # TODO: use users.views.get_user_page() here once we unify user pages
-        change_sets.append(Page.versions.filter(slug=slugify('users/%s' % self.request.user.username)))
 
         return change_sets
 
