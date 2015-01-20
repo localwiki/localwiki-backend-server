@@ -5,14 +5,15 @@
 # Translators:
 # Julián Rodriguez Orihuela <julianrod@gmail.com>, 2013
 # Julián Rodriguez Orihuela <julianrod@gmail.com>, 2013
+# Julián Rodriguez Orihuela <julianrod@gmail.com>, 2013-2014
 # Philip Neustrom <philip@localwiki.org>, 2013
 # Philip Neustrom <philip@localwiki.org>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-11 06:04-0500\n"
-"PO-Revision-Date: 2014-10-11 11:23+0000\n"
+"POT-Creation-Date: 2015-01-19 00:26-0600\n"
+"PO-Revision-Date: 2015-01-19 06:27+0000\n"
 "Last-Translator: Philip Neustrom <philip@localwiki.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/localwiki/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -21,31 +22,45 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: maps/static/olwidget/js/sapling_utils.js:208
+#: crap_comments/static/js/ckeditor/_source/plugins/commentbox/plugin.js:18
+#: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:16
+#: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:17
+msgid "Comment Box"
+msgstr ""
+
+#: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:23
+msgid "Title:"
+msgstr ""
+
+#: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:30
+msgid "Comments:"
+msgstr ""
+
+#: maps/static/olwidget/js/sapling_utils.js:211
 msgid " for "
 msgstr "para"
 
-#: maps/static/olwidget/js/sapling_utils.js:253
+#: maps/static/olwidget/js/sapling_utils.js:256
 msgid ""
 "You've made changes but haven't saved.  Are you sure you want to leave this "
 "page?"
 msgstr "Has realizado cambios pero no los has guardado. ¿Estás seguro de que deseas abandonar esta página?"
 
-#: maps/static/olwidget/js/sapling_utils.js:364
+#: maps/static/olwidget/js/sapling_utils.js:367
 msgid "Things on this map:"
 msgstr "Cosas en este mapa:"
 
-#: maps/static/olwidget/js/sapling_utils.js:380
+#: maps/static/olwidget/js/sapling_utils.js:383
 msgid "Things inside "
 msgstr "Cosas dentro"
 
-#: maps/static/olwidget/js/sapling_utils.js:394
+#: maps/static/olwidget/js/sapling_utils.js:397
 msgid "Things near "
 msgstr "Cosas cerca"
 
-#: maps/static/olwidget/js/sapling_utils.js:620
+#: maps/static/olwidget/js/sapling_utils.js:635
 msgid "Add marker for lat, lon \"{{ value }}\""
-msgstr ""
+msgstr "Agregar marcador para lat, lon \"{{ value }}\""
 
 #: pages/static/js/ckeditor/_source/plugins/embed/plugin.js:14
 #: pages/static/js/ckeditor/_source/plugins/embed/dialogs/embed.js:17
@@ -242,11 +257,12 @@ msgstr "Insertar objeto"
 
 #: themes/sapling/assets/js/base.js:122
 msgid "Search for \"{{ value }}\""
-msgstr ""
+msgstr "Buscar \"{{ value }}\""
 
 #: themes/sapling/assets/js/base.js:136 themes/sapling/assets/js/base.js:173
+#: themes/sapling/assets/js/base.js:203
 msgid "Search all of LocalWiki"
-msgstr ""
+msgstr "Buscar en todo LocalWiki"
 
 #: versionutils/diff/static/js/diff/htmldiff.js:24
 msgid "Previous"

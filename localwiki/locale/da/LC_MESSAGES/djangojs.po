@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-11 06:04-0500\n"
-"PO-Revision-Date: 2014-10-11 11:23+0000\n"
+"POT-Creation-Date: 2015-01-19 00:26-0600\n"
+"PO-Revision-Date: 2015-01-19 06:27+0000\n"
 "Last-Translator: Philip Neustrom <philip@localwiki.org>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/localwiki/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -17,29 +17,43 @@ msgstr ""
 "Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: maps/static/olwidget/js/sapling_utils.js:208
+#: crap_comments/static/js/ckeditor/_source/plugins/commentbox/plugin.js:18
+#: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:16
+#: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:17
+msgid "Comment Box"
+msgstr ""
+
+#: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:23
+msgid "Title:"
+msgstr ""
+
+#: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:30
+msgid "Comments:"
+msgstr ""
+
+#: maps/static/olwidget/js/sapling_utils.js:211
 msgid " for "
 msgstr "for"
 
-#: maps/static/olwidget/js/sapling_utils.js:253
+#: maps/static/olwidget/js/sapling_utils.js:256
 msgid ""
 "You've made changes but haven't saved.  Are you sure you want to leave this "
 "page?"
 msgstr "Du har lavet ændringer, men har ikke gemt. Er du sikker på at du vil forlade siden?"
 
-#: maps/static/olwidget/js/sapling_utils.js:364
+#: maps/static/olwidget/js/sapling_utils.js:367
 msgid "Things on this map:"
 msgstr "Ting på dette kort:"
 
-#: maps/static/olwidget/js/sapling_utils.js:380
+#: maps/static/olwidget/js/sapling_utils.js:383
 msgid "Things inside "
 msgstr "Ting indenfor"
 
-#: maps/static/olwidget/js/sapling_utils.js:394
+#: maps/static/olwidget/js/sapling_utils.js:397
 msgid "Things near "
 msgstr "Ting i nærheden"
 
-#: maps/static/olwidget/js/sapling_utils.js:620
+#: maps/static/olwidget/js/sapling_utils.js:635
 msgid "Add marker for lat, lon \"{{ value }}\""
 msgstr ""
 
@@ -241,6 +255,7 @@ msgid "Search for \"{{ value }}\""
 msgstr ""
 
 #: themes/sapling/assets/js/base.js:136 themes/sapling/assets/js/base.js:173
+#: themes/sapling/assets/js/base.js:203
 msgid "Search all of LocalWiki"
 msgstr ""
 
