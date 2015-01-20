@@ -30,7 +30,7 @@ from .forms import RegionForm, RegionSettingsForm, AdminSetForm, BannedSetForm
 
 def region_404_response(request, slug):
     region_add = reverse('regions:add')
-    msg = _('<p>Region "%s" not found. Would you like to <a href="%s" rel="nofollow">create it</a>?</p>' %
+    msg = (_('<p>Region "%s" not found. Would you like to <a href="%s" rel="nofollow">create it</a>?</p>') %
         (slug, region_add))
     html = render_to_string('404.html', {'message': msg}, RequestContext(request))
     return HttpResponseNotFound(html)

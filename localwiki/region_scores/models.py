@@ -16,7 +16,7 @@ class RegionScore(models.Model):
     score = models.PositiveIntegerField()
 
     def __unicode__(self):
-        return _("Region score %s: %s") % (self.region, self.score)
+        return _("Region score %s: %s" % (self.region, self.score))
 
 
 def normalize_score(score):

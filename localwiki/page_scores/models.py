@@ -26,7 +26,7 @@ class PageScore(models.Model):
     page_content_length = models.PositiveIntegerField()  # Needed for some score metrics
 
     def __unicode__(self):
-        return _("Page score %s: %s") % (self.page, self.score)
+        return (_("Page score %s: %s") % (self.page, self.score))
 
 
 def is_internal(url):
