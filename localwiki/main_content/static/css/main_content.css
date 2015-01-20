@@ -109,8 +109,8 @@
     text-align: center;
     padding: 0;
     height: 80vh;
-    background-image: url('../img/domes_by_refractionless_cc_by_nc_nd.jpg');
-    /*background-image: url('../img/prelinger_lib_editathon.jpg');*/
+    /*background-image: url('../img/domes_by_refractionless_cc_by_nc_nd.jpg');*/
+    background-image: url('../img/prelinger_lib_editathon.jpg');
     background-width: 100%;
     background-repeat: no-repeat;
     background-size:cover;
@@ -304,6 +304,10 @@
 #splash_page .highlights .description a:link
 {
     text-decoration: underline;
+    color: #5B62A7;
+}
+#splash_page .highlights .description a:hover {
+    color: #444;
 }
 #splash_page .highlights .item:nth-child(odd) > div {
 }
@@ -347,12 +351,11 @@
 }
 #splash_page .recent_blogs li:hover {
     background-color: #ebebeb;
-    color: #414141;
     cursor: pointer;
 }
 #splash_page .recent_blogs li:hover h4 a:link, #splash_page .recent_blogs li:hover h4 a,
 #splash_page .recent_blogs a:link, #splash_page .recent_blogs a {
-    color: #444;
+    color: #545454;
 }
 #splash_page .recent_blogs a:hover {
     text-decoration: underline;
@@ -484,7 +487,7 @@
     }
 }
 #splash_page.default #content a, #splash_page.default #content a:link {
-    color: #616ABD;
+    color: #5B62A7;
 }
 #splash_page.default #content a:hover {
     color: #444;
