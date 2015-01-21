@@ -1,5 +1,8 @@
 from django.views.generic import View
+from django.utils.translation import get_language
+from django.db.models import Q
 
+from localwiki.utils.models import MultiQuerySet
 from regions.models import Region
 from regions.views import RegionListView
 from blog.models import Post
@@ -22,6 +25,17 @@ class SplashPageView(RegionListView):
         qs = qs.exclude(score=None)
 
         qs = qs.order_by('-score__score', '?')
+
+        # First, all results in their language, then all other results following their language's results:
+        language = get_language()
+        if language == 'en':
+            qs_our_language = qs.filter(
+                Q(regionsettings__default_language=language) | Q(regionsettings__default_language__isnull=True)
+            )
+        else:
+            qs_our_language = qs.filter(regionsettings__default_language=language)
+        qs_rest = qs.exclude(regionsettings__default_language=language)
+        qs = MultiQuerySet(qs_our_language, qs_rest)
 
         ## Just grab 5 items
         qs = qs[:5]

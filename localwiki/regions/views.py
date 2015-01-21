@@ -1,9 +1,11 @@
 import copy
 import random
 import urllib
+from itertools import chain
 
 from django.conf import settings
 from django.views.generic import TemplateView as DjangoTemplateView
+from django.db.models import Q
 from django.utils.translation import get_language
 from django.views.generic import View, ListView
 from django.db import connection
@@ -22,6 +24,7 @@ from follow.utils import follow as do_follow
 from actstream import action
 
 from localwiki.utils.views import CreateObjectMixin, AuthenticationRequired, MultipleTypesPaginatedView
+from localwiki.utils.models import MultiQuerySet
 from localwiki.utils.urlresolvers import reverse
 
 from .models import Region, RegionSettings, BannedFromRegion, slugify
@@ -256,6 +259,18 @@ class RegionExploreView(MultipleTypesPaginatedView):
         cursor.execute("SELECT setseed(%s);" % self.random_seed)
 
         qs = qs.order_by('-score__score', '?')
+
+        # First, all results in their language, then all other results following their language's results:
+        language = get_language()
+        if language == 'en':
+            qs_our_language = qs.filter(
+                Q(regionsettings__default_language=language) | Q(regionsettings__default_language__isnull=True)
+            )
+        else:
+            qs_our_language = qs.filter(regionsettings__default_language=language)
+        qs_rest = qs.exclude(regionsettings__default_language=language)
+
+        qs = MultiQuerySet(qs_our_language, qs_rest)
 
         return [qs]
 
