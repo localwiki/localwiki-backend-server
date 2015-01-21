@@ -615,10 +615,13 @@ textarea, input, select {
 }
 #login_info .actions {
     color: #868686;
+    display: table-cell;
+    vertical-align: middle;
 }
 #login_info .actions .button {
     margin-left: 0.1em;
     margin-right: 0.1em;
+    vertical-align: top;
 }
 #login_info a, #login_info a:link {
     text-decoration: none;
@@ -2680,17 +2683,29 @@ input:focus {
 
 /* Some kinda specific tweaks to make cards flow correctly */
 
-@media screen and (max-width: 1314px) {
+@media screen and (max-width: 1543px) {
+    .interesting_cards .cards .card:nth-child(n+6) {
+        display: none;
+    }
+}
+@media screen and (max-width: 1320px) {
     .interesting_cards .cards .card:nth-child(n+5) {
         display: none;
     }
 }
-@media screen and (max-width: 880px) {
-    .interesting_cards .cards {
+@media screen and (max-width: 1090px) {
+    .interesting_cards .cards .card:nth-child(n+6) {
+        display: inline-block;
+    }
+    .interesting_cards .cards .card:nth-child(n+5) {
+        display: inline-block;
     }
 }
-@media screen and (max-width: 473px) {
-    .interesting_cards .cards .card:nth-child(n+4) {
+@media screen and (max-width: 471px) {
+    .interesting_cards .cards .card:nth-child(n+6) {
+        display: none;
+    }
+    .interesting_cards .cards .card:nth-child(n+5) {
         display: none;
     }
 }

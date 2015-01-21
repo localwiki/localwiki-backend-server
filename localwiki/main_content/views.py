@@ -37,8 +37,8 @@ class SplashPageView(RegionListView):
         qs_rest = qs.exclude(regionsettings__default_language=language)
         qs = MultiQuerySet(qs_our_language, qs_rest)
 
-        ## Just grab 5 items
-        qs = qs[:5]
+        ## Just grab 6 items
+        qs = qs[:6]
 
         context['regions_for_cards'] = qs
         context['blogs'] = Post.objects.filter(status=2).order_by('-created')[:4]

@@ -249,6 +249,46 @@
     padding-top: 3em;
     padding-bottom: 1.5em;
 }
+
+/* Some kinda specific tweaks to make cards flow correctly */
+@media screen and (max-width: 1404px) {
+    #splash_page .interesting_cards .cards .card:nth-child(n+6) {
+        display: none;
+    }
+}
+@media screen and (max-width: 1104px) {
+    #splash_page .interesting_cards .cards .card:nth-child(n+5) {
+        display: none;
+    }
+}
+@media screen and (max-width: 880px) {
+    #splash_page .interesting_cards .cards .card:nth-child(n+5) {
+        display: inline-block;
+    }
+    #splash_page .interesting_cards .cards .card:nth-child(n+6) {
+        display: inline-block;
+    }
+}
+@media screen and (max-width: 440px) {
+    #splash_page .interesting_cards .cards .card:nth-child(n+5) {
+        display: none;
+    }
+    #splash_page .interesting_cards .cards .card:nth-child(n+6) {
+        display: none;
+    }
+}
+@media screen and (max-width: 440px) and (max-height: 516px) {
+    #splash_page .interesting_cards .cards .card:nth-child(n+4) {
+        display: none;
+    }
+    #splash_page .interesting_cards .cards .card:nth-child(n+5) {
+        display: none;
+    }
+    #splash_page .interesting_cards .cards .card:nth-child(n+6) {
+        display: none;
+    }
+}
+
 #splash_page .interesting_cards .explore_more a {
     margin-top: 1em;
     padding: 0.5em 0.8em 0.5em 0.8em;
@@ -277,7 +317,9 @@
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    display: -webkit-flex;
     display: flex;
+    -webkit-align-items: center;
     align-items: center;
 
     padding-top: 100px;
@@ -291,6 +333,8 @@
 }
 #splash_page .highlights .img {
     border: 1px solid #D8D8D8;
+    -webkit-flex: none;
+    flex: none;
 }
 #splash_page .highlights .img.noborder {
     border: none;
@@ -312,6 +356,7 @@
 #splash_page .highlights .item:nth-child(odd) > div {
 }
 #splash_page .highlights .item:nth-child(even) > div {
+    -webkit-flex-direction: row-reverse;
     flex-direction: row-reverse;
 }
 #splash_page .highlights .item:nth-child(odd) {

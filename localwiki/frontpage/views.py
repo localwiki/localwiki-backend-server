@@ -77,8 +77,8 @@ class FrontPageView(CacheMixin, Custom404Mixin, TemplateView):
 
         qs = qs.defer('content').select_related('region').order_by('-score__score', '?')
 
-        # Just grab 5 items
-        return qs[:5]
+        # Just grab 6 items
+        return qs[:6]
 
     def get_context_data(self, *args, **kwargs):
         context = super(FrontPageView, self).get_context_data() 
