@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-19 00:25-0600\n"
-"PO-Revision-Date: 2015-01-19 06:26+0000\n"
+"POT-Creation-Date: 2015-01-21 00:19-0600\n"
+"PO-Revision-Date: 2015-01-21 06:33+0000\n"
 "Last-Translator: Philip Neustrom <philip@localwiki.org>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/localwiki/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -627,19 +627,21 @@ msgstr ""
 
 #: main/settings/defaults.py:43
 msgid ""
-"<p>By clicking \"Save Changes\" you are agreeing to release your "
-"contribution under the <a rel=\"license\" "
-"href=\"http://creativecommons.org/publicdomain/zero/1.0/\" "
-"target=\"_blank\">CC0 Public Domain license</a>, unless noted otherwise. See"
-" <a href=\"/Copyrights\" target=\"_blank\">Copyrights</a>.</p>"
+"By clicking the \"Save changes\" button, you agree to the <a "
+"href=\"https://localwiki.org/main/Terms_of_Use\" target=\"_blank\">Terms of "
+"Use</a>, and you irrevocably agree to release your contribution under the "
+"CC-BY 4.0 License. See <a href=\"https://localwiki.org/main/Copyrights\" "
+"target=\"_blank\">Copyrights</a>."
 msgstr ""
 
 #: main/settings/defaults.py:45
 msgid ""
-"I agree to release my contributions under the <a rel=\"license\" "
-"href=\"http://creativecommons.org/publicdomain/zero/1.0/\" "
-"target=\"_blank\">CC0 Public Domain license</a>, unless noted otherwise. See"
-" <a href=\"/Copyrights\" target=\"_blank\">Copyrights</a>."
+"I agree to the <a href=\"https://localwiki.org/main/Terms_of_Use\" "
+"target=\"_blank\">Terms of Use</a>, which includes agreeing to release my "
+"contributions, unless noted otherwise, under the <a "
+"href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">CC-"
+"BY 4.0 License</a>. See <a href=\"https://localwiki.org/main/Copyrights\" "
+"target=\"_blank\">Copyrights</a>."
 msgstr ""
 
 #: main/settings/defaults.py:47
@@ -777,7 +779,7 @@ msgstr ""
 #: main_content/templates/main_content/index.html:95
 msgid ""
 "\n"
-"              Like a park or a public library, LocalWiki is a public good. LocalWiki is free for anyone to <a href=\"/main/Copyrights\" target=\"_blank\">read, copy and reuse for any purpose</a>, and the backend code powering LocalWiki is open-source. We do not run any advertisements, and we are a 501(c)(3) non-profit organization. You can <a href=\"https://localwiki.org/donate/\" target=\"_blank\">donate to support LocalWiki here</a>.\n"
+"              Like a park or a public library, LocalWiki is a public good. LocalWiki is free for anyone to <a href=\"/main/Copyrights\" target=\"_blank\">read, copy and reuse for any purpose</a>, and the backend code powering LocalWiki is open-source. We do not run any advertisements, and we are a 501(c)(3) non-profit organization. You can <a href=\"https://www.patreon.com/localwiki\" target=\"_blank\">donate to support LocalWiki here</a>.\n"
 "              "
 msgstr ""
 
@@ -897,12 +899,11 @@ msgid ""
 msgstr ""
 
 #: maps/templates/maps/attribution.html:2
-msgid "Map data"
-msgstr "Dati mappa"
-
-#: maps/templates/maps/attribution.html:2
-msgid "Map tiles via"
-msgstr "Tile di mappa via"
+msgid ""
+"Map data <a href=\"http://www.openstreetmap.org/copyright\" "
+"target=\"_blank\">© OpenStreetMap contributors</a>. Map tiles via <a "
+"href=\"http://mapbox.com\" target=\"_blank\">MapBox</a>."
+msgstr ""
 
 #: maps/templates/maps/base.html:6
 msgid "Recent changes on this Map"
@@ -2110,17 +2111,20 @@ msgid "Privacy Policy"
 msgstr ""
 
 #: themes/sapling/templates/site/base.html:175
+msgid "Terms of Use"
+msgstr ""
+
+#: themes/sapling/templates/site/base.html:176
 #: themes/sapling/templates/site/common_nav.html:20
 #: themes/sapling/templates/site/nav.html:23
 msgid "Donate"
 msgstr ""
 
-#: themes/sapling/templates/site/base.html:186
+#: themes/sapling/templates/site/base.html:187
 msgid ""
 "<p>Except where otherwise noted, this content is licensed under a <a "
-"rel=\"license\" "
-"href=\"http://creativecommons.org/licenses/by/3.0/\">Creative Commons "
-"Attribution License</a>. See <a "
+"rel=\"license\" href=\"http://creativecommons.org/licenses/by/4.0/\" "
+"target=\"_blank\">Creative Commons Attribution License</a>. See <a "
 "href=\"https://localwiki.org/main/Copyrights\">Copyrights</a>.</p>"
 msgstr ""
 

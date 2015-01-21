@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-20 06:06-0600\n"
+"POT-Creation-Date: 2015-01-21 00:19-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -639,19 +639,21 @@ msgstr ""
 
 #: main/settings/defaults.py:43
 msgid ""
-"<p>By clicking \"Save Changes\" you are agreeing to release your "
-"contribution under the <a rel=\"license\" href=\"http://creativecommons.org/"
-"publicdomain/zero/1.0/\" target=\"_blank\">CC0 Public Domain license</a>, "
-"unless noted otherwise. See <a href=\"/Copyrights\" target=\"_blank"
-"\">Copyrights</a>.</p>"
+"By clicking the \"Save changes\" button, you agree to the <a href=\"https://"
+"localwiki.org/main/Terms_of_Use\" target=\"_blank\">Terms of Use</a>, and "
+"you irrevocably agree to release your contribution under the CC-BY 4.0 "
+"License. See <a href=\"https://localwiki.org/main/Copyrights\" target="
+"\"_blank\">Copyrights</a>."
 msgstr ""
 
 #: main/settings/defaults.py:45
 msgid ""
-"I agree to release my contributions under the <a rel=\"license\" href="
-"\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\">CC0 "
-"Public Domain license</a>, unless noted otherwise. See <a href=\"/Copyrights"
-"\" target=\"_blank\">Copyrights</a>."
+"I agree to the <a href=\"https://localwiki.org/main/Terms_of_Use\" target="
+"\"_blank\">Terms of Use</a>, which includes agreeing to release my "
+"contributions, unless noted otherwise, under the <a href=\"https://"
+"creativecommons.org/licenses/by/4.0/\" target=\"_blank\">CC-BY 4.0 License</"
+"a>. See <a href=\"https://localwiki.org/main/Copyrights\" target=\"_blank"
+"\">Copyrights</a>."
 msgstr ""
 
 #: main/settings/defaults.py:47
@@ -944,11 +946,10 @@ msgid ""
 msgstr ""
 
 #: maps/templates/maps/attribution.html:2
-msgid "Map data"
-msgstr ""
-
-#: maps/templates/maps/attribution.html:2
-msgid "Map tiles via"
+msgid ""
+"Map data <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank"
+"\">© OpenStreetMap contributors</a>. Map tiles via <a href=\"http://mapbox."
+"com\" target=\"_blank\">MapBox</a>."
 msgstr ""
 
 #: maps/templates/maps/base.html:6
@@ -2171,17 +2172,21 @@ msgid "Privacy Policy"
 msgstr ""
 
 #: themes/sapling/templates/site/base.html:175
+msgid "Terms of Use"
+msgstr ""
+
+#: themes/sapling/templates/site/base.html:176
 #: themes/sapling/templates/site/common_nav.html:20
 #: themes/sapling/templates/site/nav.html:23
 msgid "Donate"
 msgstr ""
 
-#: themes/sapling/templates/site/base.html:186
+#: themes/sapling/templates/site/base.html:187
 msgid ""
 "<p>Except where otherwise noted, this content is licensed under a <a rel="
-"\"license\" href=\"http://creativecommons.org/licenses/by/3.0/\">Creative "
-"Commons Attribution License</a>. See <a href=\"https://localwiki.org/main/"
-"Copyrights\">Copyrights</a>.</p>"
+"\"license\" href=\"http://creativecommons.org/licenses/by/4.0/\" target="
+"\"_blank\">Creative Commons Attribution License</a>. See <a href=\"https://"
+"localwiki.org/main/Copyrights\">Copyrights</a>.</p>"
 msgstr ""
 
 #: themes/sapling/templates/site/common_nav.html:13

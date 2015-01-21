@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-19 00:25-0600\n"
-"PO-Revision-Date: 2015-01-19 06:26+0000\n"
+"POT-Creation-Date: 2015-01-21 00:19-0600\n"
+"PO-Revision-Date: 2015-01-21 06:33+0000\n"
 "Last-Translator: Philip Neustrom <philip@localwiki.org>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/localwiki/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: activity/feeds.py:40 activity/feeds.py:46
 #, python-format
 msgid "Activity on %s"
-msgstr ""
+msgstr "Aktivität auf %s"
 
 #: activity/feeds.py:81 activity/feeds.py:177
 #, python-format
@@ -49,19 +49,19 @@ msgstr "Änderungen für %(title)s auf %(site_name)s"
 #: activity/templates/activity/all_activity_index.html:6
 #: activity/templates/activity/all_activity_index.html:18
 msgid "All activity on LocalWiki"
-msgstr ""
+msgstr "Alle Aktivitäten auf LocalWiki"
 
 #: activity/templates/activity/all_activity_index.html:24
 #: activity/templates/activity/followed_activity_index.html:19
 #: activity/templates/activity/index.html:25
 msgid "Your Feed"
-msgstr ""
+msgstr "Dein Feed"
 
 #: activity/templates/activity/all_activity_index.html:26
 #: activity/templates/activity/followed_activity_index.html:20
 #: activity/templates/activity/index.html:27
 msgid "All LocalWiki"
-msgstr ""
+msgstr "Gesamtes LocalWiki"
 
 #: activity/templates/activity/all_activity_index.html:36
 #: activity/templates/activity/followed_activity_index.html:42
@@ -70,36 +70,36 @@ msgstr ""
 msgid ""
 "Need help? Want advice? Check out the <a href=\"%(guide_url)s\">LocalWiki "
 "guide</a>."
-msgstr ""
+msgstr "Brauchst du Hilfe oder einen Ratschlag? Schau dir den <a href=\"%(guide_url)s\">LocalWiki-Guide</a> an."
 
 #: activity/templates/activity/followed_activity_index.html:15
 #: themes/sapling/templates/site/common_nav.html:11
 #: themes/sapling/templates/site/nav.html:18
 msgid "News Feed"
-msgstr ""
+msgstr "News-Feed"
 
 #: activity/templates/activity/followed_activity_index.html:30
 msgid "Welcome to LocalWiki! What's next?"
-msgstr ""
+msgstr "Willkommen bei LocalWiki! Wie geht es weiter?"
 
 #: activity/templates/activity/followed_activity_index.html:32
 msgid "Explore LocalWiki communities"
-msgstr ""
+msgstr "Erkunde LocalWiki Communities"
 
 #: activity/templates/activity/followed_activity_index.html:34
 msgid "Create a new LocalWiki region"
-msgstr ""
+msgstr "Erstelle eine neuen LocalWiki-Region"
 
 #: activity/templates/activity/followed_activity_index.html:35
 msgid "Follow <strong>@localwiki</strong> on Twitter"
-msgstr ""
+msgstr "Folge <strong>@localwiki</strong> auf Twitter"
 
 #: activity/templates/activity/followed_activity_index.html:44
 #, python-format
 msgid ""
 "Want to see <strong><a href=\"%(all_activity_url)s\">all activity across "
 "LocalWiki</a>?</strong>"
-msgstr ""
+msgstr "Willst du <strong><a href=\"%(all_activity_url)s\">alle Aktivitäten auf LocalWiki</a> sehen?</strong>"
 
 #: activity/templates/activity/followed_activity_page.html:22
 #, python-format
@@ -186,20 +186,20 @@ msgstr ""
 #: activity/templates/activity/index_page.html:62
 #: explore/templates/explore/page.html:14
 msgid "More"
-msgstr ""
+msgstr "Mehr"
 
 #: activity/templates/activity/index.html:6
 #: activity/templates/activity/index.html:9
 #: themes/sapling/templates/site/nav.html:9
 msgid "Activity"
-msgstr ""
+msgstr "Aktivität"
 
 #: activity/templates/activity/index.html:19
 #, python-format
 msgid ""
 "<a href=\"%(region_activity)s\">Activity</a> on <a "
 "href=\"%(region_main_url)s\">%(region_name)s</a>"
-msgstr ""
+msgstr "<a href=\"%(region_activity)s\">Activity</a> in <a href=\"%(region_main_url)s\">%(region_name)s</a>"
 
 #: activity/templates/activity/index.html:37
 #, python-format
@@ -211,89 +211,89 @@ msgstr "Statistiken über Seiten, Karten und mehr finden sich im <a href=\"%(das
 #: activity/templates/activity/user_activity_index.html:10
 #, python-format
 msgid "%(username)s contribution history"
-msgstr ""
+msgstr "%(username)s Beitragsverlauf"
 
 #: activity/templates/activity/user_activity_index.html:24
 #, python-format
 msgid "%(user_link)s page contribution history"
-msgstr ""
+msgstr "Beitragsverlauf von %(user_link)s"
 
 #: activity/templates/activity/user_activity_index.html:26
 #, python-format
 msgid "%(user_link)s map contribution history"
-msgstr ""
+msgstr "%(user_link)s Karten-Beitragsverlauf"
 
 #: activity/templates/activity/user_activity_index.html:28
 #, python-format
 msgid "%(user_link)s total contribution history"
-msgstr ""
+msgstr "%(user_link)s vollständige Beitragsübersicht"
 
 #: blog/models.py:18
 msgid "Draft"
-msgstr ""
+msgstr "Entwurf"
 
 #: blog/models.py:19
 msgid "Public"
-msgstr ""
+msgstr "Öffentlich"
 
 #: blog/models.py:21
 msgid "title"
-msgstr ""
+msgstr "Titel"
 
 #: blog/models.py:22
 msgid "slug"
-msgstr ""
+msgstr "Kürzel"
 
 #: blog/models.py:24
 msgid "body"
-msgstr ""
+msgstr "Körper"
 
 #: blog/models.py:25
 msgid "tease"
-msgstr ""
+msgstr "kitzeln"
 
 #: blog/models.py:25
 msgid "Concise text suggested. Does not appear in RSS feed."
-msgstr ""
+msgstr "Kurztext vorgeschlagen. Erscheint nicht im RSS-Feed."
 
 #: blog/models.py:26
 msgid "status"
-msgstr ""
+msgstr "Status"
 
 #: blog/models.py:27
 msgid "publish"
-msgstr ""
+msgstr "Veröffentlichen"
 
 #: blog/models.py:28
 msgid "created"
-msgstr ""
+msgstr "Erstellt"
 
 #: blog/models.py:29
 msgid "modified"
-msgstr ""
+msgstr "geändert"
 
 #: blog/models.py:35
 msgid "post"
-msgstr ""
+msgstr "Posten"
 
 #: blog/models.py:36
 msgid "posts"
-msgstr ""
+msgstr "Posts"
 
 #: blog/templates/blog/base_blog.html:16
 #: themes/sapling/templates/site/common_nav.html:19
 #: themes/sapling/templates/site/nav.html:22
 msgid "Blog"
-msgstr ""
+msgstr "Blog"
 
 #: blog/templates/blog/post_archive.html:6
 #: blog/templates/blog/post_detail.html:6
 msgid "LocalWiki blog"
-msgstr ""
+msgstr "LocalWiki-Blog"
 
 #: blog/templates/blog/post_archive.html:16
 msgid "View this post"
-msgstr ""
+msgstr "Diesen Post betrachten"
 
 #: blog/templates/blog/post_archive.html:20
 #: blog/templates/blog/post_detail.html:20
@@ -312,23 +312,23 @@ msgstr "von"
 
 #: blog/templates/blog/post_archive.html:31
 msgid "View older posts"
-msgstr ""
+msgstr "Ältere Posts ansehen"
 
 #: blog/templates/blog/post_archive.html:31
 msgid "Older"
-msgstr ""
+msgstr "Ältere"
 
 #: blog/templates/blog/post_archive.html:34
 msgid "View newer posts"
-msgstr ""
+msgstr "Neuere Posts ansehen"
 
 #: blog/templates/blog/post_archive.html:34
 msgid "Newer"
-msgstr ""
+msgstr "Neuere"
 
 #: blog/templates/blog/post_detail.html:16
 msgid "View this object"
-msgstr ""
+msgstr "Dieses Objekt anschauen"
 
 #: ckeditor/models.py:30
 msgid "This field contains invalid data."
@@ -360,19 +360,19 @@ msgstr "Ergebnis des Hochladens"
 
 #: crap_comments/templatetags.py:30
 msgid "Comments:"
-msgstr ""
+msgstr "Kommentare:"
 
 #: crap_comments/views.py:39
 msgid "Comment added"
-msgstr ""
+msgstr "Kommentar hinzugefügt"
 
 #: crap_comments/views.py:47
 msgid "Your comment was added. "
-msgstr ""
+msgstr "Dein Kommentar wurde hinzugefügt"
 
 #: crap_comments/templates/crap_comments/comment_form.html:14
 msgid "Add Comment"
-msgstr ""
+msgstr "Einen Kommentar hinzufügen"
 
 #: crap_comments/templates/crap_comments/comment_form.html:18
 #, python-format
@@ -380,13 +380,13 @@ msgid ""
 "You must be logged in to comment on this page.  Please <a "
 "href=\"%(login_url)s?next=//%(request.get_host)s%(request.path)s\" "
 "rel=\"nofollow\">log in</a>."
-msgstr ""
+msgstr "Du musst angemeldet sein, um auf dieser Seite zu kommentieren. Bitte <a href=\"%(login_url)s?next=//%(request.get_host)s%(request.path)s\" rel=\"nofollow\">melde dich an</a>."
 
 #: crap_comments/templates/crap_comments/comment_form.html:22
 msgid ""
 "You can only comment on the current version of this page, not a historical "
 "version. Please view the current version of this page instead."
-msgstr ""
+msgstr "Du kannst nur auf der aktuellen Version der Seite kommentieren, nicht auf einer älteren Version. Schau dir bitte stattdessen die aktuelle Version der Seite an."
 
 #: dashboard/views.py:194 dashboard/views.py:207
 msgid "pages"
@@ -471,20 +471,20 @@ msgstr "Verlauf der registrierten Benutzer"
 #: explore/templates/explore/random_index.html:7
 #, python-format
 msgid "Explore %(region_name)s"
-msgstr ""
+msgstr "Erkunde %(region_name)s"
 
 #: explore/templates/explore/alphabetical_index.html:8
 #: explore/templates/explore/random_index.html:9
 #, python-format
 msgid "Explore <a href=\"%(region_url)s\">%(region_name)s</a>"
-msgstr ""
+msgstr "Erkunde <a href=\"%(region_url)s\">%(region_name)s</a>"
 
 #: explore/templates/explore/alphabetical_index.html:42
 #: explore/templates/explore/just_list.html:32
 #: explore/templates/explore/random_index.html:47
 #: regions/templates/regions/region_explore_index.html:58
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #: explore/templates/explore/alphabetical_index.html:43
 #: explore/templates/explore/just_list.html:33
@@ -497,27 +497,27 @@ msgstr "Alphabetisch"
 #: explore/templates/explore/just_list.html:34
 #: explore/templates/explore/random_index.html:49
 msgid "List"
-msgstr ""
+msgstr "Liste"
 
 #: explore/templates/explore/just_list.html:9
 msgid "Explore - All Pages"
-msgstr ""
+msgstr "Erkunden - Alle Seiten"
 
 #: explore/templates/explore/random_index.html:13
 msgid "Take tour"
-msgstr ""
+msgstr "Rundgang beginnen"
 
 #: explore/templates/explore/random_tour.html:9
 msgid "Random Tour"
-msgstr ""
+msgstr "Zufällige Tour"
 
 #: explore/templates/explore/random_tour.html:14
 msgid "Stop tour"
-msgstr ""
+msgstr "Rundgang abbrechen"
 
 #: explore/templates/explore/random_tour.html:15
 msgid "Start tour"
-msgstr ""
+msgstr "Tour beginnen"
 
 #: frontpage/views.py:161
 msgid "Cover photo updated!"
@@ -526,7 +526,7 @@ msgstr "Cover-Foto aktualisiert!"
 #: frontpage/templates/frontpage/base.html:38
 #: pages/templates/pages/follow_page.html:12
 msgid "region"
-msgstr ""
+msgstr "Region"
 
 #: frontpage/templates/frontpage/base.html:60
 #, python-format
@@ -575,25 +575,25 @@ msgstr "Ansicht"
 
 #: frontpage/templates/frontpage/base.html:125
 msgid "Some interesting pages"
-msgstr ""
+msgstr "Einige interessante Seiten"
 
 #: frontpage/templates/frontpage/base.html:134
 msgid "Explore more pages"
-msgstr ""
+msgstr "Mehr Seiten erkunden"
 
 #: frontpage/templates/frontpage/base.html:138
 msgid "There are no pages yet.  Add some!"
-msgstr ""
+msgstr "Es sind noch keine Seiten vorhanden. Füge eine hinzu!"
 
 #: frontpage/templates/frontpage/base.html:139
 #: themes/sapling/templates/site/add_page_area.html:5
 #: themes/sapling/templates/site/add_page_area.html:9
 msgid "Add a new page"
-msgstr ""
+msgstr "Eine neue Seite hinzufügen"
 
 #: frontpage/templates/frontpage/base.html:147
 msgid "Explore nearby regions"
-msgstr ""
+msgstr "Regionen in der Nähe erkunden"
 
 #: links/models.py:13 pages/models.py:33
 #, python-format
@@ -601,11 +601,11 @@ msgid ""
 "Provided slug is invalid. Slugs must be lowercase, contain no trailing or "
 "leading whitespace, and contain only alphanumber characters along with "
 "%(KEEP_CHARACTERS)s"
-msgstr ""
+msgstr "Eingegebenes Kürzel ist ungültig. Kürzel müssen aus Kleinbuchstaben bestehen, keine Leerzeichen am Anfang oder Ende haben und dürfen nur Buchstaben, Ziffern sowie %(KEEP_CHARACTERS)s enthalten."
 
 #: links/models.py:30
 msgid "The number of times the source page links to the destination page."
-msgstr ""
+msgstr "Die Anzahl der Verlinkungen von der Quellseite zur Zielseite."
 
 #: links/templates/links/links_for_page.html:15
 #, python-format
@@ -631,20 +631,22 @@ msgstr "\n<h3>Seiten <a href=\"%(page_url)s\">%(page_name)s</a> verlinken auf:</
 
 #: main/settings/defaults.py:43
 msgid ""
-"<p>By clicking \"Save Changes\" you are agreeing to release your "
-"contribution under the <a rel=\"license\" "
-"href=\"http://creativecommons.org/publicdomain/zero/1.0/\" "
-"target=\"_blank\">CC0 Public Domain license</a>, unless noted otherwise. See"
-" <a href=\"/Copyrights\" target=\"_blank\">Copyrights</a>.</p>"
-msgstr "<p>Durch das Klicken auf \"Änderungen speichern\" stimmst du zu deine Änderungen unter der <a rel=\"license\" href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\">Creative Commons BY-Lizenz</a> zu lizensieren, sofern nicht anderweitig vermerkt. Siehe dazu <a href=\"/Copyrights\" target=\"_blank\">Urheberrechte</a>.</p>"
+"By clicking the \"Save changes\" button, you agree to the <a "
+"href=\"https://localwiki.org/main/Terms_of_Use\" target=\"_blank\">Terms of "
+"Use</a>, and you irrevocably agree to release your contribution under the "
+"CC-BY 4.0 License. See <a href=\"https://localwiki.org/main/Copyrights\" "
+"target=\"_blank\">Copyrights</a>."
+msgstr ""
 
 #: main/settings/defaults.py:45
 msgid ""
-"I agree to release my contributions under the <a rel=\"license\" "
-"href=\"http://creativecommons.org/publicdomain/zero/1.0/\" "
-"target=\"_blank\">CC0 Public Domain license</a>, unless noted otherwise. See"
-" <a href=\"/Copyrights\" target=\"_blank\">Copyrights</a>."
-msgstr "Ich stimme zu meine Beiträge unter der <a rel=\"license\" href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\">Creative Commons BY-Lizenz</a> zu lizensieren, sofern nicht anders vermerkt. Siehe dazu <a href=\"/Copyrights\" target=\"_blank\">Urheberrechte</a>."
+"I agree to the <a href=\"https://localwiki.org/main/Terms_of_Use\" "
+"target=\"_blank\">Terms of Use</a>, which includes agreeing to release my "
+"contributions, unless noted otherwise, under the <a "
+"href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">CC-"
+"BY 4.0 License</a>. See <a href=\"https://localwiki.org/main/Copyrights\" "
+"target=\"_blank\">Copyrights</a>."
+msgstr ""
 
 #: main/settings/defaults.py:47
 msgid ""
@@ -661,11 +663,11 @@ msgstr "Japanisch"
 
 #: main/settings/defaults.py:73
 msgid "French"
-msgstr ""
+msgstr "Französisch"
 
 #: main/settings/defaults.py:74
 msgid "Spanish"
-msgstr ""
+msgstr "Spanisch"
 
 #: main/settings/defaults.py:75
 msgid "German"
@@ -673,11 +675,11 @@ msgstr "Deutsch"
 
 #: main/settings/defaults.py:76
 msgid "Dutch"
-msgstr ""
+msgstr "Niederländisch"
 
 #: main/settings/defaults.py:77
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukrainisch"
 
 #: main_content/templates/main_content/base.html:6
 #: main_content/templates/main_content/base.html:28
@@ -696,43 +698,43 @@ msgstr ""
 #: main_content/templates/main_content/index.html:13
 msgid ""
 "The grassroots effort to collect, share and open the world's local knowledge"
-msgstr ""
+msgstr "Der Basisversuch, um das lokale Wissen der Welt zu sammeln, teilen und zu eröffnen."
 
 #: main_content/templates/main_content/index.html:18
 msgid "Join us and share what you love about where you live."
-msgstr ""
+msgstr "Komm zu uns und teile, was du an der Region, in der du wohnst, magst."
 
 #: main_content/templates/main_content/index.html:19
 msgid ""
 "LocalWiki is a grassroots effort to collect, share and open the world's "
 "local knowledge."
-msgstr ""
+msgstr "LocalWiki ist ein Basisversuch, das lokale Wissen der Welt zu sammeln, zu teilen und zu eröffnen."
 
 #: main_content/templates/main_content/index.html:25
 msgid ""
 "LocalWiki is a grassroots effort to collect, share and <span "
 "class=\"highlight\">open the world's local knowledge</span>"
-msgstr ""
+msgstr "LocalWiki ist der Basisversuch, <span class=\"highlight\">das lokale Wissen der Welt zu sammeln, zu teilen und zu eröffnen.</span>"
 
 #: main_content/templates/main_content/index.html:30
 #: regions/templates/regions/region_explore_index.html:27
 #: regions/templates/regions/region_list.html:18
 msgid "Explore LocalWiki"
-msgstr ""
+msgstr "LocalWiki erkunden"
 
 #: main_content/templates/main_content/index.html:39
 msgid "Explore all communities"
-msgstr ""
+msgstr "Erkunde alle Communities"
 
 #: main_content/templates/main_content/index.html:45
 #: main_content/templates/main_content/index.html:138
 msgid "Bring LocalWiki to your community"
-msgstr ""
+msgstr "Bringe LocalWike zu deiner Community"
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:54
 msgid "A community knowledge commons"
-msgstr ""
+msgstr "Ein Gemeingut für Gemeindewissen"
 
 #. Translators: 'A community knowledge commons' descriptive text for main home
 #. page
@@ -747,7 +749,7 @@ msgstr ""
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:67
 msgid "A collaborative storytelling tool"
-msgstr ""
+msgstr "Ein gemeinschaftliches Werkzeug, um Geschichten zu erzählen"
 
 #. Translators: 'A collaborative storytelling tool' descriptive text for main
 #. home page
@@ -761,7 +763,7 @@ msgstr ""
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:80
 msgid "A global effort"
-msgstr ""
+msgstr "Eine globale Anstrengung"
 
 #. Translators: 'A global effort' descriptive text for main home page
 #: main_content/templates/main_content/index.html:82
@@ -774,21 +776,21 @@ msgstr ""
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:93
 msgid "Free, open and non-profit"
-msgstr ""
+msgstr "Gratis, offen und non-profit"
 
 #. Translators: 'Free, open and non-profit' descriptive text for main home
 #. page
 #: main_content/templates/main_content/index.html:95
 msgid ""
 "\n"
-"              Like a park or a public library, LocalWiki is a public good. LocalWiki is free for anyone to <a href=\"/main/Copyrights\" target=\"_blank\">read, copy and reuse for any purpose</a>, and the backend code powering LocalWiki is open-source. We do not run any advertisements, and we are a 501(c)(3) non-profit organization. You can <a href=\"https://localwiki.org/donate/\" target=\"_blank\">donate to support LocalWiki here</a>.\n"
+"              Like a park or a public library, LocalWiki is a public good. LocalWiki is free for anyone to <a href=\"/main/Copyrights\" target=\"_blank\">read, copy and reuse for any purpose</a>, and the backend code powering LocalWiki is open-source. We do not run any advertisements, and we are a 501(c)(3) non-profit organization. You can <a href=\"https://www.patreon.com/localwiki\" target=\"_blank\">donate to support LocalWiki here</a>.\n"
 "              "
 msgstr ""
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:106
 msgid "An API for your city"
-msgstr ""
+msgstr "Ein API für deine Stadt"
 
 #. Translators: 'An API for your city' descriptive text for main home page
 #: main_content/templates/main_content/index.html:108
@@ -801,7 +803,7 @@ msgstr ""
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:119
 msgid "It's easy!"
-msgstr ""
+msgstr "Es ist ganz leicht!"
 
 #. Translators: 'It's easy!' descriptive text for main home page
 #: main_content/templates/main_content/index.html:121
@@ -815,11 +817,11 @@ msgstr ""
 #: main_content/templates/main_content/index.html:132
 msgid ""
 "Yelp is aimed at the consumer in us. LocalWiki inspires the citizen in us."
-msgstr ""
+msgstr "Yelp richtet sich an den Konsumenten in uns. LocalWiki inspiriert den Bürger in uns."
 
 #: main_content/templates/main_content/index.html:133
 msgid "Sue Gardner, Former Executive Director, Wikimedia Foundation"
-msgstr ""
+msgstr "Sue Gardner, ehemalige Geschäftsführerin der Wikimedia Foundation"
 
 #: main_content/templates/main_content/index.html:143
 #, python-format
@@ -842,17 +844,17 @@ msgstr ""
 
 #: main_content/templates/main_content/index.html:160
 msgid "Recent blog posts"
-msgstr ""
+msgstr "Vor kurzem erstellte Blog Posts"
 
 #: main_content/templates/main_content/index.html:178
 msgid "More blog posts"
-msgstr ""
+msgstr "Mehr Blog-Posts"
 
 #: main_content/templates/main_content/index.html:184
 msgid ""
 "Bridge photo CC-BY Stuart Seeger. Janes Walk photo by HiMY SYeD. Notice "
 "board photo CC-BY-SA-NC Bettina Walter."
-msgstr ""
+msgstr "Brückenfoto CC-BY Stuart Seeger. Janes Walk Foto von HiMY SYeD. Notizbrettfoto CC-BY-SA-NC Bettina Walter."
 
 #: maps/feeds.py:26 maps/feeds.py:45
 #, python-format
@@ -869,7 +871,7 @@ msgstr "Auf das Attribut '%(fieldname)s' kann nur von Instanzen von %(ownername)
 #: maps/fields.py:217
 #, python-format
 msgid "cannot set %(cname)s CollectionFrom with value of type: %(vtype)s"
-msgstr ""
+msgstr "CollectionFrom %(cname)s kann nicht auf einen Wert vom Typ %(vtype)s gesetzt werden"
 
 #: maps/validators.py:14
 #, python-format
@@ -881,12 +883,12 @@ msgstr "Kartenfehler: %s."
 msgid ""
 "<a href=\"%(map_url)s\">Map</a> for tag \"<a "
 "href=\"%(page_tag_url)s\">%(tag_name)s</a>\""
-msgstr ""
+msgstr "<a href=\"%(map_url)s\">Karte</a> für Markierung \"<a href=\"%(page_tag_url)s\">%(tag_name)s</a>\""
 
 #: maps/views.py:268
 #, python-format
 msgid "Map for tag \"<a href=\"%(page_tag_url)s\">%(tag_name)s</a>\""
-msgstr ""
+msgstr "Übersicht für den tag \"<a href=\"%(page_tag_url)s\">}%(tag_name)s</a>\""
 
 #: maps/views.py:387 pages/views.py:222
 #, python-format
@@ -898,15 +900,14 @@ msgstr "<p>Was wissen Sie über %s?</p>"
 msgid ""
 "Map saved! You should probably go <a href=\"%s\">edit the page that was "
 "created</a>, too."
+msgstr "Karte gesichert! Du solltest vermutlich ebenfalls <a href=\"%s\">die neue erstellte Seite bearbeiten</a>."
+
+#: maps/templates/maps/attribution.html:2
+msgid ""
+"Map data <a href=\"http://www.openstreetmap.org/copyright\" "
+"target=\"_blank\">© OpenStreetMap contributors</a>. Map tiles via <a "
+"href=\"http://mapbox.com\" target=\"_blank\">MapBox</a>."
 msgstr ""
-
-#: maps/templates/maps/attribution.html:2
-msgid "Map data"
-msgstr "Kartendaten"
-
-#: maps/templates/maps/attribution.html:2
-msgid "Map tiles via"
-msgstr "Kartenkacheln"
 
 #: maps/templates/maps/base.html:6
 msgid "Recent changes on this Map"
@@ -1023,16 +1024,16 @@ msgstr "Abbrechen"
 
 #: maps/templates/maps/mapdata_list.html:37
 msgid "Near You"
-msgstr ""
+msgstr "In deiner Nähe"
 
 #: maps/templates/maps/mapdata_list.html:52
 #: maps/templates/maps/mapdata_list.html:56
 msgid "Add a new map"
-msgstr ""
+msgstr "Neue Karte hinzufügen"
 
 #: maps/templates/maps/mapdata_list.html:54
 msgid "What's here? (Name of page)"
-msgstr ""
+msgstr "Was gibt es hier? (Name der Seite)"
 
 #: maps/templates/maps/mapdata_new.html:6
 msgid "Map for page not found"
@@ -1057,16 +1058,16 @@ msgstr "Ältere Versionen der Karte für"
 #: maps/templates/maps/nearby_pages.html:27
 #: maps/templates/maps/nearby_pages.html:28
 msgid "Pages near you"
-msgstr ""
+msgstr "Seiten in deiner Nähe"
 
 #: maps/templates/maps/nearby_pages.html:40
 msgid "No pages near you. Make some!"
-msgstr ""
+msgstr "Keine Seiten in deiner Nähe. Erstelle eine!"
 
 #: page_scores/models.py:29
 #, python-format
 msgid "Page score %s: %s"
-msgstr ""
+msgstr "Seitenbewertung %s: %s"
 
 #: pages/feeds.py:52 pages/feeds.py:96
 #, python-format
@@ -1161,22 +1162,22 @@ msgstr "<p class=\"create_map\">Für diese Seite <a href=\"%s\" class=\"button l
 
 #: pages/views.py:192
 msgid "Follow this page"
-msgstr ""
+msgstr "Dieser Seite folgen"
 
 #: pages/views.py:194
 #, python-format
 msgid "%(follow_page_notice)s for updates!"
-msgstr ""
+msgstr "%(follow_page_notice)s für Updates!"
 
 #. Translators: Keep under < 100 characters
 #: pages/views.py:198
 #, python-format
 msgid "I just edited %(page)s on @localwiki! %(page_url)s"
-msgstr ""
+msgstr "Ich habe gerade %(page)s auf @localwiki bearbeitet! %(page_url)s"
 
 #: pages/views.py:203
 msgid "Tell the world about this page:"
-msgstr ""
+msgstr "Erzähle der Welt von dieser Seite:"
 
 #: pages/views.py:437
 msgid "You must provide a page name when creating a page."
@@ -1202,14 +1203,14 @@ msgstr "Seite umbenannt in \"%s\""
 
 #: pages/views.py:581
 msgid "Move to region (short name)"
-msgstr ""
+msgstr "Zur Region (Kurzname) wechseln"
 
 #: pages/views.py:607
 #, python-format
 msgid ""
 "Page moved to <a href=\"%(page_url)s\">%(page_name)s</a> on <a "
 "href=\"%(region_url)s\">%(region_slug)s</a>"
-msgstr ""
+msgstr "Seite verschoben auf <a href=\"%(page_url)s\">%(page_name)s</a> über <a href=\"%(region_url)s\">%(region_slug)s</a>"
 
 #: pages/widgets.py:37
 msgid "Normal"
@@ -1250,11 +1251,11 @@ msgstr "Weiterleiten"
 
 #: pages/templates/pages/editor_actions.html:19
 msgid "Move"
-msgstr ""
+msgstr "Bewegen"
 
 #: pages/templates/pages/follow_page.html:9
 msgid "page"
-msgstr ""
+msgstr "Seite"
 
 #: pages/templates/pages/page_detail.html:36
 msgid "Redirected from"
@@ -1384,7 +1385,7 @@ msgid ""
 " Looking for <a href=\"../_files/\">files</a>, <a "
 "href=\"%(page_links_url)s\" rel=\"nofollow\">links</a>, or <a "
 "href=\"../_tags/_history/\" rel=\"nofollow\">tags</a>?"
-msgstr ""
+msgstr "Suchst du <a href=\"../_files/\">Dateien</a>, <a href=\"%(page_links_url)s\" rel=\"nofollow\">Links</a>, oder <a href=\"../_tags/_history/\" rel=\"nofollow\">Tags</a>?"
 
 #: pages/templates/pages/pagefile_diff.html:34
 #, python-format
@@ -1532,7 +1533,7 @@ msgstr "Wer kann diese Weiterleitung ändern?"
 #: region_scores/models.py:19
 #, python-format
 msgid "Region score %s: %s"
-msgstr ""
+msgstr "Bewertung der Region %s: %s"
 
 #: regions/forms.py:35 regions/forms.py:56
 msgid "Default language"
@@ -1544,14 +1545,14 @@ msgstr "Die Sprache für die Region"
 
 #: regions/forms.py:46
 msgid "Please draw a region with the map drawing tool."
-msgstr ""
+msgstr "Bitte zeichne eine Karte mit dem Zeichnungswerkzeug"
 
 #: regions/forms.py:48
 msgid ""
 "The region you drew is too large. Please draw a region that's about the size"
 " of a city (or smaller). If you need a bigger region than that, please email"
 " contact@localwiki.org."
-msgstr ""
+msgstr "Die Region, die du gezeichnet hast, ist zu groß. Zeichne eine Region, die in etwa der Größe einer Stadt (oder kleiner) entspricht. Wenn du eine größere Region benötigst, dann sende eine E-mail an contact@localwiki.org."
 
 #: regions/forms.py:53
 msgid "Full name"
@@ -1580,7 +1581,7 @@ msgstr "Region hat bereits Seiten"
 msgid ""
 "<p>Region \"%s\" not found. Would you like to <a href=\"%s\" "
 "rel=\"nofollow\">create it</a>?</p>"
-msgstr ""
+msgstr "<p>Region \"%s\" nicht gefunden. Möchtest du sie <a href=\"%s\" rel=\"nofollow\">erstellen</a>?</p>"
 
 #: regions/views.py:68
 msgid ""
@@ -1588,7 +1589,7 @@ msgid ""
 " region. Learn more about <a "
 "href=\"http://localwiki.net/main/Local_Adminship_Hub\" "
 "target=\"_blank\">LocalWiki adminship here</a>."
-msgstr ""
+msgstr "Du hasst eine neuen LocalWiki-Region erstellt. Du bist nun Administrator für diesen Abschnitt. Erfahre hier mehr über <a href=\"http://localwiki.net/main/Local_Adminship_Hub\" target=\"_blank\">LocalWiki-Administratorrechte</a>."
 
 #. Translators: Keep under < 100 characters
 #: regions/views.py:74
@@ -1596,16 +1597,16 @@ msgstr ""
 msgid ""
 "Help me bring LocalWiki to %(region_name)s! I've just started this here: "
 "%(region_url)s"
-msgstr ""
+msgstr "Hilf mir, LocalWiki nach %(region_name)s zu bringen! Ich habe gerade das hier angefangen: %(region_url)s"
 
 #: regions/views.py:79
 msgid "Let the world know you're starting to build something beautiful:"
-msgstr ""
+msgstr "Zeige der Welt, dass du damit beginnst, etwas Schönes zu erschaffen."
 
 #: regions/views.py:122
 #, python-format
 msgid "Region '%s' was deleted."
-msgstr ""
+msgstr "Die Region '%s' wurde gelöscht."
 
 #: regions/views.py:147 utils/views.py:176 utils/views.py:238
 msgid "Sorry, you are not allowed to perform this action."
@@ -1615,7 +1616,7 @@ msgstr "Du bist nicht berechtigt, diese Aktion durchzuführen."
 msgid ""
 "There was a problem with the map area you drew. Please re-draw it and try "
 "again."
-msgstr ""
+msgstr "Beim Kartenbereich, den du gezeichnet hast, gibt es ein Problem. Bitte zeichne den Bereich noch einmal und versuche es dann erneut."
 
 #: regions/views.py:389
 msgid "Settings updated!"
@@ -1639,7 +1640,7 @@ msgid ""
 "    <p>\n"
 "    \tYou can edit this and any other page by clicking the <strong>Edit</strong> button.</p>\n"
 "    <p>Need <strong>help</strong>? Please see the <a href=\"http://localwiki.net/main/Help\">help page</a> on the <a href=\"http://localwiki.net/main/\">LocalWiki Guide</a>!</p>"
-msgstr ""
+msgstr "<p>\nWillkommen auf der neuen Local-Wiki-Region für %(region)s!\n<p>\nKlicke auf <strong>Erkunden</strong> oben auf der Seite, um zu sehen, was es hier gibt.</p>\n<p>Du kannst diese und andere Seiten bearbeiten, indem du auf den <strong>Bearbeiten</strong>-Knopf drückst.</p>\n<p>Brauchst du <strong>Hilfe</strong>? Schau dir die <a href=\"http://localwiki.net/main/Help\">Hilfe-Seite</a> im <a href=\"http://localwiki.net/main/\">LocalWiki Guide</a> an!</p>"
 
 #: regions/templates/regions/admins_update.html:6
 #: regions/templates/regions/banned_update.html:6
@@ -1664,32 +1665,32 @@ msgstr "Gesperrte Benutzer"
 #: regions/templates/regions/region_explore_index.html:17
 #: regions/templates/regions/region_list.html:8
 msgid "Explore - LocalWiki"
-msgstr ""
+msgstr "Erkunde - LocalWiki"
 
 #: regions/templates/regions/region_explore_index.html:30
 #: regions/templates/regions/region_list.html:21
 msgid "Find a LocalWiki region"
-msgstr ""
+msgstr "Eine LocalWiki-Region suchen"
 
 #: regions/templates/regions/region_explore_index.html:36
 #: regions/templates/regions/region_list.html:27
 #, python-format
 msgid "or <a href=\"%(region_add_url)s\" class=\"button little\">add a new region</a>"
-msgstr ""
+msgstr "oder <a href=\"%(region_add_url)s\" class=\"button little\">füge eine neuen Region hinzu</a>"
 
 #: regions/templates/regions/region_explore_index.html:52
 #: regions/templates/regions/region_form.html:7
 #: regions/templates/regions/region_list.html:45
 msgid "Add a new LocalWiki region"
-msgstr ""
+msgstr "Eine neue LocalWiki-Region hinzufügen"
 
 #: regions/templates/regions/region_explore_index.html:60
 msgid "As List"
-msgstr ""
+msgstr "Als Liste"
 
 #: regions/templates/regions/region_explore_page.html:14
 msgid "Load More"
-msgstr ""
+msgstr "Mehr laden"
 
 #: regions/templates/regions/region_form.html:50
 msgid "Draw the rough area the region will cover"
@@ -1697,7 +1698,7 @@ msgstr "Zeichne den groben Bereich den die Region abdeckt ein"
 
 #: regions/templates/regions/region_form.html:51
 msgid "When drawing your shape, <strong>double click to close it</strong>!"
-msgstr ""
+msgstr "Wenn du deine Umriss malst, <strong>doppelklicke, um ihn zu schließen</strong>!"
 
 #: regions/templates/regions/region_form.html:52
 #: regions/templates/regions/settings.html:69
@@ -1716,7 +1717,7 @@ msgstr ""
 
 #: regions/templates/regions/region_list_map.html:30
 msgid "Communities - LocalWiki"
-msgstr ""
+msgstr "Communities LocalWiki"
 
 #: regions/templates/regions/settings.html:9
 #, python-format
@@ -1794,12 +1795,12 @@ msgstr "Nach Seiten suchen:"
 #: stars/signals.py:72 stars/signals.py:114
 #, python-format
 msgid "Their edit comment was \"%s\"."
-msgstr ""
+msgstr "Ihr Kommentar zur Bearbeitung lautet \"%s\""
 
 #: stars/templates/stars/page_stars_for_user.html:8
 #, python-format
 msgid "Pages %(username)s follows"
-msgstr ""
+msgstr "Seiten, denen %(username)s folgt"
 
 #: stars/templates/stars/page_stars_for_user.html:14
 #, python-format
@@ -1820,7 +1821,7 @@ msgstr ""
 #: stars/templates/stars/user_stars_for_user.html:9
 #, python-format
 msgid "Users %(username)s follows"
-msgstr ""
+msgstr "Der Benutzer %(username)s folgt"
 
 #: stars/templates/stars/user_stars_for_user.html:15
 #, python-format
@@ -1889,16 +1890,16 @@ msgstr "Tags"
 #: tags/views.py:170
 #, python-format
 msgid "<p>No pages tagged \"%s\".</p>"
-msgstr ""
+msgstr "<p>Keine Seiten mit \"%s\" markiert.</p>"
 
 #: tags/templates/tags/nearby_tagged_list_snippet.html:4
 msgid "Other nearby pages"
-msgstr ""
+msgstr "Ander Seiten in der Nähe"
 
 #: tags/templates/tags/nearby_tagged_list_snippet.html:20
 #, python-format
 msgid "All LocalWiki pages tagged %(tag)s"
-msgstr ""
+msgstr "Alle LocalWiki-Seite mit dem Tag %(tag)s"
 
 #: tags/templates/tags/pagetagset_diff.html:28
 #: tags/templates/tags/pagetagset_diff.html:29
@@ -1954,12 +1955,12 @@ msgstr "Es gibt keine Seiten mit dem Tag \"%(tag_name)s\"."
 #: templates/follow/form.html:9
 #, python-format
 msgid "Stop following this %(object_type)s"
-msgstr ""
+msgstr "Beende die Verfolgung dieses %(object_type)s"
 
 #: templates/follow/form.html:12
 #, python-format
 msgid "Start following this %(object_type)s"
-msgstr ""
+msgstr "Folge diesen %(object_type)s"
 
 #: templates/registration/login.html:5
 msgid "Log in"
@@ -2088,15 +2089,15 @@ msgstr "Benutzerkonto erstellen"
 
 #: themes/sapling/templates/404.html:5 themes/sapling/templates/404.html:7
 msgid "Not found"
-msgstr ""
+msgstr "Nicht gefunden"
 
 #: themes/sapling/templates/404.html:14
 msgid "Item not found"
-msgstr ""
+msgstr "Gegenstand nicht gefunden"
 
 #: themes/sapling/templates/site/add_page_area.html:7
 msgid "Name of page"
-msgstr ""
+msgstr "Name der Seite"
 
 #: themes/sapling/templates/site/base.html:168
 msgid ""
@@ -2107,24 +2108,27 @@ msgstr ""
 
 #: themes/sapling/templates/site/base.html:173
 msgid "Learn more"
-msgstr ""
+msgstr "Erfahre mehr"
 
 #: themes/sapling/templates/site/base.html:174
 msgid "Privacy Policy"
-msgstr ""
+msgstr "Datenschutzbestimmungen"
 
 #: themes/sapling/templates/site/base.html:175
+msgid "Terms of Use"
+msgstr ""
+
+#: themes/sapling/templates/site/base.html:176
 #: themes/sapling/templates/site/common_nav.html:20
 #: themes/sapling/templates/site/nav.html:23
 msgid "Donate"
-msgstr ""
+msgstr "Spende"
 
-#: themes/sapling/templates/site/base.html:186
+#: themes/sapling/templates/site/base.html:187
 msgid ""
 "<p>Except where otherwise noted, this content is licensed under a <a "
-"rel=\"license\" "
-"href=\"http://creativecommons.org/licenses/by/3.0/\">Creative Commons "
-"Attribution License</a>. See <a "
+"rel=\"license\" href=\"http://creativecommons.org/licenses/by/4.0/\" "
+"target=\"_blank\">Creative Commons Attribution License</a>. See <a "
 "href=\"https://localwiki.org/main/Copyrights\">Copyrights</a>.</p>"
 msgstr ""
 
@@ -2132,7 +2136,7 @@ msgstr ""
 #: themes/sapling/templates/site/nav.html:5
 #: themes/sapling/templates/site/nav.html:20
 msgid "Explore"
-msgstr ""
+msgstr "Erkunde"
 
 #: themes/sapling/templates/site/common_nav.html:15
 #: themes/sapling/templates/site/common_nav.html:17
@@ -2143,7 +2147,7 @@ msgstr "Über"
 #: themes/sapling/templates/site/common_nav.html:21
 #: themes/sapling/templates/site/nav.html:24
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: themes/sapling/templates/site/common_nav.html:24
 #: themes/sapling/templates/site/common_nav.html:26
@@ -2153,7 +2157,7 @@ msgstr "Hilfe"
 
 #: themes/sapling/templates/site/login_info.html:14
 msgid "settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: themes/sapling/templates/site/login_info.html:15
 msgid "log out"
@@ -2178,11 +2182,11 @@ msgstr "Einstellungen"
 #: themes/sapling/templates/site/search_form.html:5
 #, python-format
 msgid "Search %(region_name)s"
-msgstr ""
+msgstr "Suche %(region_name)s"
 
 #: themes/sapling/templates/site/search_form.html:10
 msgid "Search LocalWiki "
-msgstr ""
+msgstr "LocalWiki durchsuchen"
 
 #: users/__init__.py:7
 msgid "You are now logged out."
@@ -2218,27 +2222,27 @@ msgstr "Dein Name"
 
 #: users/forms.py:31
 msgid "Email address"
-msgstr ""
+msgstr "E-mail-Adresse"
 
 #: users/forms.py:32
 msgid "Gravatar email (private)"
-msgstr ""
+msgstr "Gravatar E-mail (privat)"
 
 #: users/forms.py:36
 msgid "Disable this account permanently"
-msgstr ""
+msgstr "Deaktiviere dieses Konto dauerhaft"
 
 #: users/models.py:63
 msgid "Gravatar Email (Private)"
-msgstr ""
+msgstr "Gravatar Email (Privat)"
 
 #: users/models.py:64
 msgid "Show email publicly (Helps with communication)"
-msgstr ""
+msgstr "Diese E-mail öffentlich zeigen (Hilft bei der Kommunikation)"
 
 #: users/models.py:65
 msgid "Personal website"
-msgstr ""
+msgstr "Persönliche Webseite"
 
 #: users/views.py:219
 msgid "Permissions updated!"
@@ -2246,19 +2250,19 @@ msgstr "Berechtigungen aktualisiert!"
 
 #: users/views.py:230 users/views.py:265 users/views.py:275
 msgid "You must be logged in to change user settings."
-msgstr ""
+msgstr "Du must angemeldet sein, um Benutzeeinstellungen zu ändern."
 
 #: users/views.py:244
 msgid "User settings updated!"
-msgstr ""
+msgstr "Benutzereinstellungen aktualisiert!"
 
 #: users/views.py:281
 msgid "Your account has been de-activated."
-msgstr ""
+msgstr "Dein Konto wurde deaktiviert."
 
 #: users/views.py:504
 msgid "Logged out"
-msgstr ""
+msgstr "Abgemeldet"
 
 #: users/registration_backend/__init__.py:65
 msgid "You are signed up and logged in!"
@@ -2301,20 +2305,20 @@ msgstr "Diese Email-Adresse wird bereits verwendet. Bitte gib eine andere Email-
 
 #: users/templates/users/deactivate.html:9
 msgid "Deactivate account"
-msgstr ""
+msgstr "Konto deaktivieren"
 
 #: users/templates/users/settings.html:10
 msgid "User settings"
-msgstr ""
+msgstr "Benutzereinstellungen"
 
 #: users/templates/users/settings.html:33
 msgid "Change your user icon at Gravatar.com"
-msgstr ""
+msgstr "Ändere dein User-Icon auf Gravatar.com"
 
 #: users/templates/users/settings.html:39
 #, python-format
 msgid "You can also <a href=\"%(deactivate_url)s\">deactivate your account</a>."
-msgstr ""
+msgstr "Du kannst auch <a href=\"%(deactivate_url)s\">dein Konto deaktivieren</a>."
 
 #: users/templates/users/subscribed_list.html:4
 msgid "List of subscribers"
@@ -2326,46 +2330,46 @@ msgstr "Email-Adressen der Teilnehmenden:"
 
 #: users/templates/users/user_page.html:24
 msgid "user"
-msgstr ""
+msgstr "Benutzer"
 
 #: users/templates/users/user_page.html:44
 msgid "This user account is disabled."
-msgstr ""
+msgstr "Diesers Benutzerkonto ist deaktiviert.."
 
 #: users/templates/users/user_page.html:60
 #, python-format
 msgid "Joined on %(date_joined)s"
-msgstr ""
+msgstr "Am %(date_joined)s beigetreten"
 
 #: users/templates/users/user_page.html:67
 msgid "total contributions"
-msgstr ""
+msgstr "Gesamte Beiträge"
 
 #: users/templates/users/user_page.html:76
 msgid "pages edited"
-msgstr ""
+msgstr "Seite bearbeitet"
 
 #: users/templates/users/user_page.html:85
 msgid "maps edited"
-msgstr ""
+msgstr "Karten bearbeitet"
 
 #: users/templates/users/user_page.html:96
 #, python-format
 msgid "%(num_pages_followed)s pages starred"
-msgstr ""
+msgstr "%(num_pages_followed)s Seiten mit Stern markiert"
 
 #: users/templates/users/user_page.html:103
 #, python-format
 msgid "%(num_users_followed)s users starred"
-msgstr ""
+msgstr "%(num_users_followed)s Nutzer mit Stern markiert"
 
 #: users/templates/users/user_page.html:111
 msgid "Regions followed"
-msgstr ""
+msgstr "Verfolgte Regionen"
 
 #: users/templatetags/user_tags.py:26
 msgid "Unknown"
-msgstr ""
+msgstr "Unbekannt"
 
 #: utils/views.py:177
 msgid ""
@@ -2473,11 +2477,11 @@ msgstr "Grund für Löschung"
 
 #: versionutils/versioning/forms.py:49
 msgid "Permanently remove older versions"
-msgstr ""
+msgstr "Ältere Versionen dauerhaft entfernen"
 
 #: versionutils/versioning/forms.py:50 versionutils/versioning/forms.py:62
 msgid "Don't log this change"
-msgstr ""
+msgstr "Diese Änderung nicht protokollieren."
 
 #: versionutils/versioning/forms.py:60
 msgid "Reason for revert"
@@ -2485,7 +2489,7 @@ msgstr "Grund für Zurücksetzung"
 
 #: versionutils/versioning/forms.py:61
 msgid "Permanently remove newer versions"
-msgstr ""
+msgstr "Neuere Versionen dauerhaft entfernen"
 
 #: versionutils/versioning/views.py:68
 msgid "Your attention to detail is appreciated."

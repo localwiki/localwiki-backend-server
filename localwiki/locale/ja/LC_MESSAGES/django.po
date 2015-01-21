@@ -4,13 +4,14 @@
 # 
 # Translators:
 # nyampire <nyampire@gmail.com>, 2013-2014
-# Taro Matsuzawa <taro@georepublic.co.jp>, 2014
+# Shu Higashi <higa432@gmail.com>, 2015
+# Taro Matsuzawa <taro@georepublic.co.jp>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-19 00:25-0600\n"
-"PO-Revision-Date: 2015-01-19 06:26+0000\n"
+"POT-Creation-Date: 2015-01-21 00:19-0600\n"
+"PO-Revision-Date: 2015-01-21 06:33+0000\n"
 "Last-Translator: Philip Neustrom <philip@localwiki.org>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/localwiki/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -53,13 +54,13 @@ msgstr "Localwiki上の全ての活動"
 #: activity/templates/activity/followed_activity_index.html:19
 #: activity/templates/activity/index.html:25
 msgid "Your Feed"
-msgstr ""
+msgstr "あなたのフィード"
 
 #: activity/templates/activity/all_activity_index.html:26
 #: activity/templates/activity/followed_activity_index.html:20
 #: activity/templates/activity/index.html:27
 msgid "All LocalWiki"
-msgstr ""
+msgstr "全てのLocalWiki"
 
 #: activity/templates/activity/all_activity_index.html:36
 #: activity/templates/activity/followed_activity_index.html:42
@@ -97,7 +98,7 @@ msgstr "Twitter で <strong>@localwiki</strong> をフォロー"
 msgid ""
 "Want to see <strong><a href=\"%(all_activity_url)s\">all activity across "
 "LocalWiki</a>?</strong>"
-msgstr ""
+msgstr "<strong><a href=\"%(all_activity_url)s\">LocalWiki内の全活動</a></strong>を見ますか？"
 
 #: activity/templates/activity/followed_activity_page.html:22
 #, python-format
@@ -197,7 +198,7 @@ msgstr "活動"
 msgid ""
 "<a href=\"%(region_activity)s\">Activity</a> on <a "
 "href=\"%(region_main_url)s\">%(region_name)s</a>"
-msgstr ""
+msgstr " <a href=\"%(region_main_url)s\">%(region_name)s</a>での<a href=\"%(region_activity)s\">活動</a>"
 
 #: activity/templates/activity/index.html:37
 #, python-format
@@ -228,70 +229,70 @@ msgstr "%(user_link)s の全ての編集履歴"
 
 #: blog/models.py:18
 msgid "Draft"
-msgstr ""
+msgstr "ドラフト"
 
 #: blog/models.py:19
 msgid "Public"
-msgstr ""
+msgstr "公開"
 
 #: blog/models.py:21
 msgid "title"
-msgstr ""
+msgstr "タイトル"
 
 #: blog/models.py:22
 msgid "slug"
-msgstr ""
+msgstr "スラッグ（URL変更）"
 
 #: blog/models.py:24
 msgid "body"
-msgstr ""
+msgstr "本文"
 
 #: blog/models.py:25
 msgid "tease"
-msgstr ""
+msgstr "ティーザー"
 
 #: blog/models.py:25
 msgid "Concise text suggested. Does not appear in RSS feed."
-msgstr ""
+msgstr "概要が分かる簡潔な文章。RSSフィードには表示されません。"
 
 #: blog/models.py:26
 msgid "status"
-msgstr ""
+msgstr "状態"
 
 #: blog/models.py:27
 msgid "publish"
-msgstr ""
+msgstr "公開する"
 
 #: blog/models.py:28
 msgid "created"
-msgstr ""
+msgstr "作成済"
 
 #: blog/models.py:29
 msgid "modified"
-msgstr ""
+msgstr "変更済"
 
 #: blog/models.py:35
 msgid "post"
-msgstr ""
+msgstr "投稿"
 
 #: blog/models.py:36
 msgid "posts"
-msgstr ""
+msgstr "投稿"
 
 #: blog/templates/blog/base_blog.html:16
 #: themes/sapling/templates/site/common_nav.html:19
 #: themes/sapling/templates/site/nav.html:22
 msgid "Blog"
-msgstr ""
+msgstr "ブログ"
 
 #: blog/templates/blog/post_archive.html:6
 #: blog/templates/blog/post_detail.html:6
 msgid "LocalWiki blog"
-msgstr ""
+msgstr "LocalWiki ブログ"
 
 #: blog/templates/blog/post_archive.html:16
 msgid "View this post"
-msgstr ""
+msgstr "この投稿を見る"
 
 #: blog/templates/blog/post_archive.html:20
 #: blog/templates/blog/post_detail.html:20
@@ -310,23 +311,23 @@ msgstr "作成者"
 
 #: blog/templates/blog/post_archive.html:31
 msgid "View older posts"
-msgstr ""
+msgstr "過去の投稿を見る"
 
 #: blog/templates/blog/post_archive.html:31
 msgid "Older"
-msgstr ""
+msgstr "旧"
 
 #: blog/templates/blog/post_archive.html:34
 msgid "View newer posts"
-msgstr ""
+msgstr "新しい投稿を見る"
 
 #: blog/templates/blog/post_archive.html:34
 msgid "Newer"
-msgstr ""
+msgstr "新"
 
 #: blog/templates/blog/post_detail.html:16
 msgid "View this object"
-msgstr ""
+msgstr "このオブジェクトを見る"
 
 #: ckeditor/models.py:30
 msgid "This field contains invalid data."
@@ -358,19 +359,19 @@ msgstr "アップロード結果"
 
 #: crap_comments/templatetags.py:30
 msgid "Comments:"
-msgstr ""
+msgstr "コメント："
 
 #: crap_comments/views.py:39
 msgid "Comment added"
-msgstr ""
+msgstr "コメントが追加されました"
 
 #: crap_comments/views.py:47
 msgid "Your comment was added. "
-msgstr ""
+msgstr "あなたのコメントが追加されました"
 
 #: crap_comments/templates/crap_comments/comment_form.html:14
 msgid "Add Comment"
-msgstr ""
+msgstr "コメントを追加"
 
 #: crap_comments/templates/crap_comments/comment_form.html:18
 #, python-format
@@ -378,13 +379,13 @@ msgid ""
 "You must be logged in to comment on this page.  Please <a "
 "href=\"%(login_url)s?next=//%(request.get_host)s%(request.path)s\" "
 "rel=\"nofollow\">log in</a>."
-msgstr ""
+msgstr "このページにコメントする前にログインが必要です。<a href=\"%(login_url)s?next=//%(request.get_host)s%(request.path)s\" rel=\"nofollow\">ログイン</a>してください。"
 
 #: crap_comments/templates/crap_comments/comment_form.html:22
 msgid ""
 "You can only comment on the current version of this page, not a historical "
 "version. Please view the current version of this page instead."
-msgstr ""
+msgstr "コメントできるのは過去のバージョンではなく現在のバージョンだけです。代わりにこのページの現在のバージョンを開いてください。"
 
 #: dashboard/views.py:194 dashboard/views.py:207
 msgid "pages"
@@ -469,20 +470,20 @@ msgstr "ユーザ登録数の経時比較"
 #: explore/templates/explore/random_index.html:7
 #, python-format
 msgid "Explore %(region_name)s"
-msgstr ""
+msgstr "%(region_name)s を探索"
 
 #: explore/templates/explore/alphabetical_index.html:8
 #: explore/templates/explore/random_index.html:9
 #, python-format
 msgid "Explore <a href=\"%(region_url)s\">%(region_name)s</a>"
-msgstr ""
+msgstr "<a href=\"%(region_url)s\">%(region_name)s</a> を探索"
 
 #: explore/templates/explore/alphabetical_index.html:42
 #: explore/templates/explore/just_list.html:32
 #: explore/templates/explore/random_index.html:47
 #: regions/templates/regions/region_explore_index.html:58
 msgid "Default"
-msgstr ""
+msgstr "既定値"
 
 #: explore/templates/explore/alphabetical_index.html:43
 #: explore/templates/explore/just_list.html:33
@@ -495,27 +496,27 @@ msgstr "アルファベット順"
 #: explore/templates/explore/just_list.html:34
 #: explore/templates/explore/random_index.html:49
 msgid "List"
-msgstr ""
+msgstr "リスト"
 
 #: explore/templates/explore/just_list.html:9
 msgid "Explore - All Pages"
-msgstr ""
+msgstr "探す - 全ページ"
 
 #: explore/templates/explore/random_index.html:13
 msgid "Take tour"
-msgstr ""
+msgstr "ツアーを始める"
 
 #: explore/templates/explore/random_tour.html:9
 msgid "Random Tour"
-msgstr ""
+msgstr "ランダム・ツアー"
 
 #: explore/templates/explore/random_tour.html:14
 msgid "Stop tour"
-msgstr ""
+msgstr "ツアーを中断"
 
 #: explore/templates/explore/random_tour.html:15
 msgid "Start tour"
-msgstr ""
+msgstr "ツアーを開始"
 
 #: frontpage/views.py:161
 msgid "Cover photo updated!"
@@ -573,15 +574,15 @@ msgstr "マップを閲覧"
 
 #: frontpage/templates/frontpage/base.html:125
 msgid "Some interesting pages"
-msgstr ""
+msgstr "興味深いページ"
 
 #: frontpage/templates/frontpage/base.html:134
 msgid "Explore more pages"
-msgstr ""
+msgstr "他のページを探す"
 
 #: frontpage/templates/frontpage/base.html:138
 msgid "There are no pages yet.  Add some!"
-msgstr ""
+msgstr "まだページがありません。ぜひ追加してください！"
 
 #: frontpage/templates/frontpage/base.html:139
 #: themes/sapling/templates/site/add_page_area.html:5
@@ -603,7 +604,7 @@ msgstr "与えられたスラッグが不正です。スラッグは終端及び
 
 #: links/models.py:30
 msgid "The number of times the source page links to the destination page."
-msgstr ""
+msgstr "元のページから目的のページへのリンク回数"
 
 #: links/templates/links/links_for_page.html:15
 #, python-format
@@ -611,7 +612,7 @@ msgid ""
 "\n"
 "             Links for <a href=\"%(page_url)s\">%(page_name)s</a>\n"
 "          "
-msgstr ""
+msgstr "\n             <a href=\"%(page_url)s\">%(page_name)s</a>へのリンク\n          "
 
 #: links/templates/links/links_for_page.html:25
 #, python-format
@@ -629,20 +630,22 @@ msgstr "\n<h3>ページ <a href=\"%(page_url)s\">%(page_name)s</a> のリンク:
 
 #: main/settings/defaults.py:43
 msgid ""
-"<p>By clicking \"Save Changes\" you are agreeing to release your "
-"contribution under the <a rel=\"license\" "
-"href=\"http://creativecommons.org/publicdomain/zero/1.0/\" "
-"target=\"_blank\">CC0 Public Domain license</a>, unless noted otherwise. See"
-" <a href=\"/Copyrights\" target=\"_blank\">Copyrights</a>.</p>"
-msgstr "<p>\"変更を保存\" をクリックすると、特段の記載がない限り、あなたの投稿は <a rel=\"license\" href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\">CC0 Public Domain license</a>として公開されます。 詳しくは <a href=\"/Copyrights\" target=\"_blank\">著作権</a> を参照ください。</p>"
+"By clicking the \"Save changes\" button, you agree to the <a "
+"href=\"https://localwiki.org/main/Terms_of_Use\" target=\"_blank\">Terms of "
+"Use</a>, and you irrevocably agree to release your contribution under the "
+"CC-BY 4.0 License. See <a href=\"https://localwiki.org/main/Copyrights\" "
+"target=\"_blank\">Copyrights</a>."
+msgstr ""
 
 #: main/settings/defaults.py:45
 msgid ""
-"I agree to release my contributions under the <a rel=\"license\" "
-"href=\"http://creativecommons.org/publicdomain/zero/1.0/\" "
-"target=\"_blank\">CC0 Public Domain license</a>, unless noted otherwise. See"
-" <a href=\"/Copyrights\" target=\"_blank\">Copyrights</a>."
-msgstr "特段の記載がない限り、私の投稿を <a rel=\"license\" href=\"http://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\">CC0 Public Domain license</a> として公開することに同意します。詳しくは <a href=\"/Copyrights\" target=\"_blank\">著作権</a>を参照。"
+"I agree to the <a href=\"https://localwiki.org/main/Terms_of_Use\" "
+"target=\"_blank\">Terms of Use</a>, which includes agreeing to release my "
+"contributions, unless noted otherwise, under the <a "
+"href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">CC-"
+"BY 4.0 License</a>. See <a href=\"https://localwiki.org/main/Copyrights\" "
+"target=\"_blank\">Copyrights</a>."
+msgstr ""
 
 #: main/settings/defaults.py:47
 msgid ""
@@ -689,48 +692,48 @@ msgstr "LocalWiki"
 msgid ""
 "\n"
 "Supported by\n"
-msgstr ""
+msgstr "\nサポート：\n"
 
 #: main_content/templates/main_content/index.html:13
 msgid ""
 "The grassroots effort to collect, share and open the world's local knowledge"
-msgstr ""
+msgstr "世界中のローカルな知識を収集、共有してオープンにする活動"
 
 #: main_content/templates/main_content/index.html:18
 msgid "Join us and share what you love about where you live."
-msgstr ""
+msgstr "あなたも参加して自分の住んでいる地域の好きなところを共有しませんか。"
 
 #: main_content/templates/main_content/index.html:19
 msgid ""
 "LocalWiki is a grassroots effort to collect, share and open the world's "
 "local knowledge."
-msgstr ""
+msgstr "LocalWiki は世界中のローカルな知識を収集、共有してオープンにする活動です。"
 
 #: main_content/templates/main_content/index.html:25
 msgid ""
 "LocalWiki is a grassroots effort to collect, share and <span "
 "class=\"highlight\">open the world's local knowledge</span>"
-msgstr ""
+msgstr "LocalWiki は<span class=\"highlight\">世界中のローカルな知識をオープンにする</span>収集、共有の活動です"
 
 #: main_content/templates/main_content/index.html:30
 #: regions/templates/regions/region_explore_index.html:27
 #: regions/templates/regions/region_list.html:18
 msgid "Explore LocalWiki"
-msgstr ""
+msgstr "LocalWikiを探す"
 
 #: main_content/templates/main_content/index.html:39
 msgid "Explore all communities"
-msgstr ""
+msgstr "全てのコメントを探す"
 
 #: main_content/templates/main_content/index.html:45
 #: main_content/templates/main_content/index.html:138
 msgid "Bring LocalWiki to your community"
-msgstr ""
+msgstr "LocalWiki をあなたのコミュニティに導入しよう"
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:54
 msgid "A community knowledge commons"
-msgstr ""
+msgstr "コミュニティの知識の共有地"
 
 #. Translators: 'A community knowledge commons' descriptive text for main home
 #. page
@@ -740,12 +743,12 @@ msgid ""
 "\n"
 "What if there was somewhere you could go to learn all about where you live? A place to learn about your <a href=\"/oakland/Neighborhoods\" target=\"_blank\">neighborhoods</a>, about your local <a href=\"/santacruz/Parks_and_Open_Spaces\" target=\"_blank\">parks</a>, about being a <a href=\"/davis/Parenting\" target=\"_blank\">parent in your city</a>, about <a href=\"/tags/history\" target=\"_blank\">history</a>, <a href=\"/detroit/Detroit_Department_of_Transportation_%%28DDOT%%29\" target=\"_blank\">politics</a> &ndash; anything and everything useful and beautiful about your community. With LocalWiki, everybody has a way to share and learn about where they live.\n"
 "            "
-msgstr ""
+msgstr "\nあなたの住むまちについて全て学べる場所があったとしたらどうでしょうか？<a href=\"/oakland/Neighborhoods\" target=\"_blank\">ご近所さん</a>、地域の<a href=\"/santacruz/Parks_and_Open_Spaces\" target=\"_blank\">公園</a>、<a href=\"/davis/Parenting\" target=\"_blank\">あなたのまちでの子育て</a>、<a href=\"/tags/history\" target=\"_blank\">歴史</a>、 <a href=\"/detroit/Detroit_Department_of_Transportation_%%28DDOT%%29\" target=\"_blank\">政治</a>など &ndash; あなたのコミュニティについてのあらゆる有益で美しいものごとを学べる場所です。LocalWikiがあれば、誰でも自分の住む場所について共有し、学ぶ手段を手に入れることができるのです。          "
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:67
 msgid "A collaborative storytelling tool"
-msgstr ""
+msgstr "みんなで作る物語用のツール"
 
 #. Translators: 'A collaborative storytelling tool' descriptive text for main
 #. home page
@@ -754,12 +757,12 @@ msgid ""
 "\n"
 "            Whether it's knowing about <a href=\"/sf/Green_Hairstreak_Butterfly_Corridor\" target=\"_blank\">butterfly corridors</a> or the history of a <a href=\"/islavista/Coal_Oil_Point\" target=\"_blank\">local beach</a>, everyone holds a piece of the puzzle of what it's like to live in their community. And unlike a news site or a blog, anyone can add and modify LocalWiki pages. LocalWiki lets you and your neighbors tell the story of your community, together.\n"
 "            "
-msgstr ""
+msgstr "\n            <a href=\"/sf/Green_Hairstreak_Butterfly_Corridor\" target=\"_blank\">蝶の回廊</a>の知識であれ or the history of a <a href=\"/islavista/Coal_Oil_Point\" target=\"_blank\">地域の海辺local beach</a>の知識であれ、誰もが自分のコミュニティで暮らすことがどういうことなのかを知るためのパズルのピースを持っています。ニュースサイトやブログとは異なり、誰でもLocalWikiのページを追加したり変更することができます。LocalWiki はあなたやご近所さんにあなたのコミュニティの物語を教えてくれるのです。\n            "
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:80
 msgid "A global effort"
-msgstr ""
+msgstr "世界規模の活動"
 
 #. Translators: 'A global effort' descriptive text for main home page
 #: main_content/templates/main_content/index.html:82
@@ -767,26 +770,26 @@ msgid ""
 "\n"
 "              From <a href=\"https://ja.localwiki.org/sapporo/\" target=\"_blank\">Sapporo, Japan</a> to <a href=\"/oakland/\" target=\"_blank\">Oakland, California</a>, communities across the world use LocalWiki to share their local knowledge. Learn about the issues that affect nearby communities, and communities halfway across the globe. There is a whole world to discover!\n"
 "              "
-msgstr ""
+msgstr "\n              <a href=\"https://ja.localwiki.org/sapporo/\" target=\"_blank\">日本の札幌</a>から<a href=\"/oakland/\" target=\"_blank\">カリフォルニアのオークランド</a>まで、世界中のコミュニティがLocalWikiを使って地域の知識を共有しています。近くのコミュニティや地球をまたぐコミュニティに影響を及ぼす課題について学びましょう。世界には発見すべきことがたくさんあります！\n              "
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:93
 msgid "Free, open and non-profit"
-msgstr ""
+msgstr "フリー、オープン、非営利"
 
 #. Translators: 'Free, open and non-profit' descriptive text for main home
 #. page
 #: main_content/templates/main_content/index.html:95
 msgid ""
 "\n"
-"              Like a park or a public library, LocalWiki is a public good. LocalWiki is free for anyone to <a href=\"/main/Copyrights\" target=\"_blank\">read, copy and reuse for any purpose</a>, and the backend code powering LocalWiki is open-source. We do not run any advertisements, and we are a 501(c)(3) non-profit organization. You can <a href=\"https://localwiki.org/donate/\" target=\"_blank\">donate to support LocalWiki here</a>.\n"
+"              Like a park or a public library, LocalWiki is a public good. LocalWiki is free for anyone to <a href=\"/main/Copyrights\" target=\"_blank\">read, copy and reuse for any purpose</a>, and the backend code powering LocalWiki is open-source. We do not run any advertisements, and we are a 501(c)(3) non-profit organization. You can <a href=\"https://www.patreon.com/localwiki\" target=\"_blank\">donate to support LocalWiki here</a>.\n"
 "              "
-msgstr ""
+msgstr "\n              公園や公共図書館のように、LocalWiki は公共財です。LocalWiki は誰でも自由に<a href=\"/main/Copyrights\" target=\"_blank\">目的を問わず読んだり、コピーしたり、再利用</a>することができ、LocalWiki を動かしているバックエンドのコードはオープンソースです。私たちはいかなり広告も掲載しません。私たちは501(c)(3) 非営利組織です。<a href=\"https://www.patreon.com/localwiki\" target=\"_blank\">こちらでLocalWiki を支援するための寄付</a>をすることができます。\n              "
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:106
 msgid "An API for your city"
-msgstr ""
+msgstr "あなたの街のためのAPI"
 
 #. Translators: 'An API for your city' descriptive text for main home page
 #: main_content/templates/main_content/index.html:108
@@ -794,12 +797,12 @@ msgid ""
 "\n"
 "            LocalWiki represents a free, universally-accessible collection of the world's local knowledge upon which we hope countless civic and locally-relevant applications will be built. Our <a href=\"/api/\" target=\"_blank\">geospatially-aware, read-write API</a> makes it easy to integrate LocalWiki with your application, or to import useful local data from elsewhere!\n"
 "              "
-msgstr ""
+msgstr "\n            LocalWiki は、私たちがその上に多数の市民や地域に関連するアプリケーションが構築されて欲しいと願う、フリーで、ユニバーサルにアクセスできる世界のローカルな知識を代表しています。私たちの<a href=\"/api/\" target=\"_blank\">地理空間的な知見や読み書き用のAPI</a> を利用すればあなたのアプリケーションにlLocalWikiを統合したり、別のところから役に立つローカルデータをインポートのはとても簡単にできます！\n              "
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:119
 msgid "It's easy!"
-msgstr ""
+msgstr "簡単です！"
 
 #. Translators: 'It's easy!' descriptive text for main home page
 #: main_content/templates/main_content/index.html:121
@@ -808,16 +811,16 @@ msgid ""
 "\n"
 "              Adding to LocalWiki is as easy as making a Facebook post – contributing <a href=\"/main/Help\" target=\"_blank\">requires no technical knowledge</a> or academic background. We have no complicated rules for how to format a page, or even <a href=\"/main/What_can_I_write_about%%3F\" target=\"_blank\">what to write about</a>: if it's useful or beautiful to your community, then it's worth sharing!\n"
 "              "
-msgstr ""
+msgstr "\n              LocalWiki への追加はfacebookへの投稿のように簡単です – 貢献するためにはアカデミックな背景や<a href=\"/main/Help\" target=\"_blank\">技術的な知識は不要</a> です。ページを整えたり、<a href=\"/main/What_can_I_write_about%%3F\" target=\"_blank\">どんなことを書くべきか</a>といったことですら、複雑な規則は一切ありません。：あなたのコミュニティにとって有益であったり美しいものであれば、それは共有に値します！         "
 
 #: main_content/templates/main_content/index.html:132
 msgid ""
 "Yelp is aimed at the consumer in us. LocalWiki inspires the citizen in us."
-msgstr ""
+msgstr "Yelp のターゲットは私たちの中の消費者ですが、 LocalWiki は私たちの中の市民をインスパイアします。"
 
 #: main_content/templates/main_content/index.html:133
 msgid "Sue Gardner, Former Executive Director, Wikimedia Foundation"
-msgstr ""
+msgstr "Sue Gardner, Former Executive Director, Wikimedia Foundation"
 
 #: main_content/templates/main_content/index.html:143
 #, python-format
@@ -836,21 +839,21 @@ msgid ""
 "    in <span class=\"num\">%(countries_count)s</span> countries and <span class=\"num\">%(languages_count)s</span> languages.\n"
 "    </div>\n"
 "    "
-msgstr ""
+msgstr "\n    <div>\n    <span class=\"num\">%(region_count)s</span> リージョン内ページ数：<span class=\"num\">%(page_count)s+</span> ページ \n    %(map_media)s\n    </div>\n    <a href=\"%(regions_list)s\" target=\"_blank\" style=\"display: inline-block; margin-bottom: 1em;\">\n    <div id=\"stats_map\">\n      %(map)s\n    </div>\n    </a>\n    <div>\n    <span class=\"num\">%(countries_count)s</span> の国と <span class=\"num\">%(languages_count)s</span> の言語。\n    </div>\n    "
 
 #: main_content/templates/main_content/index.html:160
 msgid "Recent blog posts"
-msgstr ""
+msgstr "最近のブログ投稿"
 
 #: main_content/templates/main_content/index.html:178
 msgid "More blog posts"
-msgstr ""
+msgstr "その他のブログ投稿"
 
 #: main_content/templates/main_content/index.html:184
 msgid ""
 "Bridge photo CC-BY Stuart Seeger. Janes Walk photo by HiMY SYeD. Notice "
 "board photo CC-BY-SA-NC Bettina Walter."
-msgstr ""
+msgstr "Bridge photo CC-BY Stuart Seeger. Janes Walk photo by HiMY SYeD. Notice board photo CC-BY-SA-NC Bettina Walter."
 
 #: maps/feeds.py:26 maps/feeds.py:45
 #, python-format
@@ -879,12 +882,12 @@ msgstr "マップのエラー: %s。"
 msgid ""
 "<a href=\"%(map_url)s\">Map</a> for tag \"<a "
 "href=\"%(page_tag_url)s\">%(tag_name)s</a>\""
-msgstr ""
+msgstr " \"<a href=\"%(page_tag_url)s\">%(tag_name)s</a>\"というタグ用の<a href=\"%(map_url)s\">マップ</a>"
 
 #: maps/views.py:268
 #, python-format
 msgid "Map for tag \"<a href=\"%(page_tag_url)s\">%(tag_name)s</a>\""
-msgstr ""
+msgstr "\"<a href=\"%(page_tag_url)s\">%(tag_name)s</a>\"というタグ用のマップ"
 
 #: maps/views.py:387 pages/views.py:222
 #, python-format
@@ -899,12 +902,11 @@ msgid ""
 msgstr "マップを保存しました！たぶん<a href=\"%s\">作成されたページも編集</a>したいでしょう。"
 
 #: maps/templates/maps/attribution.html:2
-msgid "Map data"
-msgstr "マップデータ"
-
-#: maps/templates/maps/attribution.html:2
-msgid "Map tiles via"
-msgstr "マップタイル配信元"
+msgid ""
+"Map data <a href=\"http://www.openstreetmap.org/copyright\" "
+"target=\"_blank\">© OpenStreetMap contributors</a>. Map tiles via <a "
+"href=\"http://mapbox.com\" target=\"_blank\">MapBox</a>."
+msgstr ""
 
 #: maps/templates/maps/base.html:6
 msgid "Recent changes on this Map"
@@ -1064,7 +1066,7 @@ msgstr "あなたの近くのページはありません。なにか作りまし
 #: page_scores/models.py:29
 #, python-format
 msgid "Page score %s: %s"
-msgstr ""
+msgstr "ページのスコア %s: %s"
 
 #: pages/feeds.py:52 pages/feeds.py:96
 #, python-format
@@ -1170,11 +1172,11 @@ msgstr "更新を確認するために %(follow_page_notice)s ！"
 #: pages/views.py:198
 #, python-format
 msgid "I just edited %(page)s on @localwiki! %(page_url)s"
-msgstr ""
+msgstr "@localwiki! %(page_url)s 上で %(page)s を編集しました"
 
 #: pages/views.py:203
 msgid "Tell the world about this page:"
-msgstr ""
+msgstr "このページを世界に発信してください："
 
 #: pages/views.py:437
 msgid "You must provide a page name when creating a page."
@@ -1200,14 +1202,14 @@ msgstr "ページは \"%s\" にリネームされました"
 
 #: pages/views.py:581
 msgid "Move to region (short name)"
-msgstr ""
+msgstr "リージョンを移動 (short name)"
 
 #: pages/views.py:607
 #, python-format
 msgid ""
 "Page moved to <a href=\"%(page_url)s\">%(page_name)s</a> on <a "
 "href=\"%(region_url)s\">%(region_slug)s</a>"
-msgstr ""
+msgstr "このページは <a href=\"%(region_url)s\">%(region_slug)s</a> の <a href=\"%(page_url)s\">%(page_name)s</a> に移動しました。"
 
 #: pages/widgets.py:37
 msgid "Normal"
@@ -1248,7 +1250,7 @@ msgstr "リダイレクト"
 
 #: pages/templates/pages/editor_actions.html:19
 msgid "Move"
-msgstr ""
+msgstr "移動"
 
 #: pages/templates/pages/follow_page.html:9
 msgid "page"
@@ -1382,7 +1384,7 @@ msgid ""
 " Looking for <a href=\"../_files/\">files</a>, <a "
 "href=\"%(page_links_url)s\" rel=\"nofollow\">links</a>, or <a "
 "href=\"../_tags/_history/\" rel=\"nofollow\">tags</a>?"
-msgstr ""
+msgstr " <a href=\"../_files/\">ファイル</a>、 <a href=\"%(page_links_url)s\" rel=\"nofollow\">リンク</a>、<a href=\"../_tags/_history/\" rel=\"nofollow\">タグ</a>をお探しですか？"
 
 #: pages/templates/pages/pagefile_diff.html:34
 #, python-format
@@ -1530,7 +1532,7 @@ msgstr "このリダイレクト設定を変更できるユーザ"
 #: region_scores/models.py:19
 #, python-format
 msgid "Region score %s: %s"
-msgstr ""
+msgstr "リージョンのスコア %s: %s"
 
 #: regions/forms.py:35 regions/forms.py:56
 msgid "Default language"
@@ -1542,14 +1544,14 @@ msgstr "この地域の言語"
 
 #: regions/forms.py:46
 msgid "Please draw a region with the map drawing tool."
-msgstr ""
+msgstr "マップ描画ツールでリージョンを描いてください。"
 
 #: regions/forms.py:48
 msgid ""
 "The region you drew is too large. Please draw a region that's about the size"
 " of a city (or smaller). If you need a bigger region than that, please email"
 " contact@localwiki.org."
-msgstr ""
+msgstr "あなたの描いたリージョンは大きすぎます。リージョンはひとつの都市(またはそれ以下)のサイズくらいまでにとどめてください。より大きなリージョンが必要な場合は contact@localwiki.org までメールしてください。"
 
 #: regions/forms.py:53
 msgid "Full name"
@@ -1594,11 +1596,11 @@ msgstr "あなたは LocalWiki の地域を作成しました！あなたをこ�
 msgid ""
 "Help me bring LocalWiki to %(region_name)s! I've just started this here: "
 "%(region_url)s"
-msgstr ""
+msgstr "%(region_name)s へのLocalWiki の導入を手伝ってください！こちらで始めました： %(region_url)s"
 
 #: regions/views.py:79
 msgid "Let the world know you're starting to build something beautiful:"
-msgstr ""
+msgstr "あなたが何か美しいものを作っていることを世界に発信しましょう："
 
 #: regions/views.py:122
 #, python-format
@@ -1613,7 +1615,7 @@ msgstr "申し訳ありません、あなたにはこの操作の権限があり
 msgid ""
 "There was a problem with the map area you drew. Please re-draw it and try "
 "again."
-msgstr ""
+msgstr "あなたの描いたマップエリアに問題がありました。もういちど描いて試してください。"
 
 #: regions/views.py:389
 msgid "Settings updated!"
@@ -1637,7 +1639,7 @@ msgid ""
 "    <p>\n"
 "    \tYou can edit this and any other page by clicking the <strong>Edit</strong> button.</p>\n"
 "    <p>Need <strong>help</strong>? Please see the <a href=\"http://localwiki.net/main/Help\">help page</a> on the <a href=\"http://localwiki.net/main/\">LocalWiki Guide</a>!</p>"
-msgstr ""
+msgstr "<p>\n    \tWelcome to the new LocalWiki region for %(region)s!\n    <p>\n    \tC先頭の<strong>探す</strong> をクリックして現在ここにある内容をご覧ください。</p>\n    <p>\n    \t<strong>編集</strong> ボタンをクリックすると、どのページでも編集できます。</p>\n    <p><strong>ヘルプ</strong>が必要ですか？ <a href=\"http://localwiki.net/main/\">LocalWiki ガイド</a>にある<a href=\"http://localwiki.net/main/Help\">ヘルプページ</a> を参照してください！</p>"
 
 #: regions/templates/regions/admins_update.html:6
 #: regions/templates/regions/banned_update.html:6
@@ -1662,18 +1664,18 @@ msgstr "禁止ユーザ"
 #: regions/templates/regions/region_explore_index.html:17
 #: regions/templates/regions/region_list.html:8
 msgid "Explore - LocalWiki"
-msgstr ""
+msgstr "探す - LocalWiki"
 
 #: regions/templates/regions/region_explore_index.html:30
 #: regions/templates/regions/region_list.html:21
 msgid "Find a LocalWiki region"
-msgstr ""
+msgstr "LocalWiki のリージョンを探す"
 
 #: regions/templates/regions/region_explore_index.html:36
 #: regions/templates/regions/region_list.html:27
 #, python-format
 msgid "or <a href=\"%(region_add_url)s\" class=\"button little\">add a new region</a>"
-msgstr ""
+msgstr "または <a href=\"%(region_add_url)s\" class=\"button little\">新しいリージョンを追加</a>"
 
 #: regions/templates/regions/region_explore_index.html:52
 #: regions/templates/regions/region_form.html:7
@@ -1683,11 +1685,11 @@ msgstr "新しい LocalWiki の地域を追加する"
 
 #: regions/templates/regions/region_explore_index.html:60
 msgid "As List"
-msgstr ""
+msgstr "As List"
 
 #: regions/templates/regions/region_explore_page.html:14
 msgid "Load More"
-msgstr ""
+msgstr "もっとロードする"
 
 #: regions/templates/regions/region_form.html:50
 msgid "Draw the rough area the region will cover"
@@ -1695,7 +1697,7 @@ msgstr "その地域がカバーするおおまかな範囲"
 
 #: regions/templates/regions/region_form.html:51
 msgid "When drawing your shape, <strong>double click to close it</strong>!"
-msgstr ""
+msgstr "図形を描くときは <strong>最後にダブルクリックして閉じてください</strong>!"
 
 #: regions/templates/regions/region_form.html:52
 #: regions/templates/regions/settings.html:69
@@ -1710,11 +1712,11 @@ msgid ""
 "      <h2>..you're almost done!</h2>\n"
 "      <p>Now you just need to <a class=\"button\" href=\"%(login_url)s?%(qs)s&amp;next=%(next)s\">log in</a> or <a class=\"button\" href=\"%(register_url)s?%(qs)s&amp;next=%(next)s\">create an account</a></p>\n"
 "  "
-msgstr ""
+msgstr "\n      <h2>..もうひといきで完成です！</h2>\n      <p><a class=\"button\" href=\"%(login_url)s?%(qs)s&amp;next=%(next)s\">ログイン</a> するか <a class=\"button\" href=\"%(register_url)s?%(qs)s&amp;next=%(next)s\">アカウントを作成</a>してください</p>\n  "
 
 #: regions/templates/regions/region_list_map.html:30
 msgid "Communities - LocalWiki"
-msgstr ""
+msgstr "コミュニティ - LocalWiki"
 
 #: regions/templates/regions/settings.html:9
 #, python-format
@@ -1883,16 +1885,16 @@ msgstr "タグ"
 #: tags/views.py:170
 #, python-format
 msgid "<p>No pages tagged \"%s\".</p>"
-msgstr ""
+msgstr "<p>\"%s\" というタグの付いたページはありません。</p>"
 
 #: tags/templates/tags/nearby_tagged_list_snippet.html:4
 msgid "Other nearby pages"
-msgstr ""
+msgstr "似たページ"
 
 #: tags/templates/tags/nearby_tagged_list_snippet.html:20
 #, python-format
 msgid "All LocalWiki pages tagged %(tag)s"
-msgstr ""
+msgstr "%(tag)s とタグ付けされた全てのLocalWikiのページ"
 
 #: tags/templates/tags/pagetagset_diff.html:28
 #: tags/templates/tags/pagetagset_diff.html:29
@@ -2097,28 +2099,31 @@ msgid ""
 "\n"
 "        LocalWiki is a grassroots effort to collect, share and open the world’s local knowledge.  We are a 501(c)3 non-profit organization.\n"
 "        "
-msgstr ""
+msgstr "\n        LocalWiki は草の根で収集、共有して世界中の知識をオープンにする活動です。私たちは 501(c)3 非営利組織です。        "
 
 #: themes/sapling/templates/site/base.html:173
 msgid "Learn more"
-msgstr ""
+msgstr "もっと調べる"
 
 #: themes/sapling/templates/site/base.html:174
 msgid "Privacy Policy"
-msgstr ""
+msgstr "プライバシー・ポリシー"
 
 #: themes/sapling/templates/site/base.html:175
+msgid "Terms of Use"
+msgstr ""
+
+#: themes/sapling/templates/site/base.html:176
 #: themes/sapling/templates/site/common_nav.html:20
 #: themes/sapling/templates/site/nav.html:23
 msgid "Donate"
-msgstr ""
+msgstr "寄付"
 
-#: themes/sapling/templates/site/base.html:186
+#: themes/sapling/templates/site/base.html:187
 msgid ""
 "<p>Except where otherwise noted, this content is licensed under a <a "
-"rel=\"license\" "
-"href=\"http://creativecommons.org/licenses/by/3.0/\">Creative Commons "
-"Attribution License</a>. See <a "
+"rel=\"license\" href=\"http://creativecommons.org/licenses/by/4.0/\" "
+"target=\"_blank\">Creative Commons Attribution License</a>. See <a "
 "href=\"https://localwiki.org/main/Copyrights\">Copyrights</a>.</p>"
 msgstr ""
 
@@ -2126,7 +2131,7 @@ msgstr ""
 #: themes/sapling/templates/site/nav.html:5
 #: themes/sapling/templates/site/nav.html:20
 msgid "Explore"
-msgstr ""
+msgstr "探す"
 
 #: themes/sapling/templates/site/common_nav.html:15
 #: themes/sapling/templates/site/common_nav.html:17
@@ -2252,7 +2257,7 @@ msgstr "あなたのアカウントは無効になりました"
 
 #: users/views.py:504
 msgid "Logged out"
-msgstr ""
+msgstr "ログアウトしました"
 
 #: users/registration_backend/__init__.py:65
 msgid "You are signed up and logged in!"
