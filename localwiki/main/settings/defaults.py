@@ -437,6 +437,7 @@ OLWIDGET_DEFAULT_OPTIONS = {
 
 LANGUAGE_DEFAULT_CENTERS = {
     'ja': (37.23, 137.53),
+    'de': (50.33, 9.75),
 }
 
 DAISYDIFF_URL = 'http://localhost:8080/daisydiff/diff'

@@ -676,7 +676,10 @@
 }
 
 
-#region_explore_page .option_toggle.minimal { margin-top: 1em; }
+#region_explore_page .option_toggle.minimal {
+    margin-top: 1em;
+    font-size: 91%;
+}
 
 #region_explore_page #header_title .search {
     display: inline-block;
