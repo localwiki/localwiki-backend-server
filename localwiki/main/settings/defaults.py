@@ -40,9 +40,9 @@ SOUTH_MIGRATION_MODULES = {
     'follow': 'utils.external_migrations.follow',
 }
 
-EDIT_LICENSE_NOTE = _("""<p>By clicking "Save Changes" you are agreeing to release your contribution under the <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0 Public Domain license</a>, unless noted otherwise. See <a href="/Copyrights" target="_blank">Copyrights</a>.</p>""")
+EDIT_LICENSE_NOTE = _("""By clicking the "Save changes" button, you agree to the <a href="https://localwiki.org/main/Terms_of_Service" target="_blank">Terms of Service</a>, and you irrevocably agree to release your contribution under the CC-BY 4.0 License. See <a href="https://localwiki.org/main/Copyrights" target="_blank">Copyrights</a>.""")
 
-SIGNUP_TOS = _("""I agree to release my contributions under the <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0 Public Domain license</a>, unless noted otherwise. See <a href="/Copyrights" target="_blank">Copyrights</a>.""")
+SIGNUP_TOS = _("""I agree to the <a href="https://localwiki.org/main/Terms_of_Service" target="_blank">Terms of Service</a>, which includes agreeing to release my contributions, unless noted otherwise, under the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC-BY 4.0 License</a>. See <a href="https://localwiki.org/main/Copyrights" target="_blank">Copyrights</a>.""")
 
 SUBSCRIBE_MESSAGE = _("""I would like to receive occasional updates about this project via email.""")
 
