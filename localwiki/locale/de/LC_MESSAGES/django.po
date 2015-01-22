@@ -6,13 +6,14 @@
 # Daniel Kastl, 2013
 # Daniel Kastl, 2013
 # hng <signin@henningschumann.org>, 2013
+# Philip Neustrom <philip@localwiki.org>, 2015
 # hng <signin@henningschumann.org>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-21 00:19-0600\n"
-"PO-Revision-Date: 2015-01-21 06:33+0000\n"
+"PO-Revision-Date: 2015-01-22 07:23+0000\n"
 "Last-Translator: Philip Neustrom <philip@localwiki.org>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/localwiki/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -107,7 +108,7 @@ msgid ""
 "\n"
 "            <span class=\"user\">%(actor_link)s</span> started following %(user_followed_link)s <span class=\"weak\">%(timesince)s ago</span>\n"
 "          "
-msgstr ""
+msgstr "\n<span class=\"user\">%(actor_link)s</span> startete Folgendes %(user_followed_link)s <span class=\"weak\">vor %(timesince)s</span>"
 
 #: activity/templates/activity/followed_activity_page.html:27
 #, python-format
@@ -115,7 +116,7 @@ msgid ""
 "\n"
 "            <span class=\"user\">%(actor_link)s</span> created page <a href=\"%(page_url)s\">%(page_name)s</a> on <a href=\"%(region_url)s\">%(region_name)s</a> <span class=\"weak\">%(timesince)s ago</span>\n"
 "          "
-msgstr ""
+msgstr "\n<span class=\"user\">%(actor_link)s</span> erstellt Seite <a href=\"%(page_url)s\">%(page_name)s</a> auf <a href=\"%(region_url)s\">%(region_name)s</a> <span class=\"weak\">vor %(timesince)s</span>"
 
 #: activity/templates/activity/followed_activity_page.html:32
 #, python-format
@@ -123,7 +124,7 @@ msgid ""
 "\n"
 "            <span class=\"user\">%(actor_link)s</span> created region <a href=\"%(region_url)s\">%(region_name)s</a> <span class=\"weak\">%(timesince)s ago</span>\n"
 "          "
-msgstr ""
+msgstr "\n<span class=\"user\">%(actor_link)s</span> erstellt Region <a href=\"%(region_url)s\">%(region_name)s</a> <span class=\"weak\">vor %(timesince)s</span>"
 
 #: activity/templates/activity/followed_activity_page.html:37
 #, python-format
@@ -131,7 +132,7 @@ msgid ""
 "\n"
 "            <span class=\"user\">%(actor_link)s</span> starred <a href=\"%(page_url)s\">%(page_name)s</a> on <a href=\"%(region_url)s\">%(region_name)s</a> <span class=\"weak\">%(timesince)s ago</span>\n"
 "          "
-msgstr ""
+msgstr "\n<span class=\"user\">%(actor_link)s</span> mit Sternen markiert <a href=\"%(page_url)s\">%(page_name)s</a> auf <a href=\"%(region_url)s\">%(region_name)s</a> <span class=\"weak\">vor %(timesince)s ago</span>"
 
 #: activity/templates/activity/followed_activity_page.html:42
 #, python-format
@@ -139,7 +140,7 @@ msgid ""
 "\n"
 "            <span class=\"user\">%(actor_link)s</span> starred <a href=\"%(region_url)s\">%(region_name)s</a> <span class=\"weak\">%(timesince)s ago</span>\n"
 "          "
-msgstr ""
+msgstr "\n<span class=\"user\">%(actor_link)s</span> hat <a href=\"%(region_url)s\">%(region_name)s</a> <span class=\"weak\">vor %(timesince)s mit Stern markiert</span>"
 
 #: activity/templates/activity/followed_activity_page.html:53
 #: activity/templates/activity/index_page.html:15
@@ -180,7 +181,7 @@ msgid ""
 "\n"
 "                via %(user_ip)s\n"
 "                "
-msgstr ""
+msgstr "\nüber %(user_ip)s"
 
 #: activity/templates/activity/followed_activity_page.html:110
 #: activity/templates/activity/index_page.html:62
@@ -613,7 +614,7 @@ msgid ""
 "\n"
 "             Links for <a href=\"%(page_url)s\">%(page_name)s</a>\n"
 "          "
-msgstr ""
+msgstr "\nLinks für <a href=\"%(page_url)s\">%(page_name)s</a>"
 
 #: links/templates/links/links_for_page.html:25
 #, python-format
@@ -636,7 +637,7 @@ msgid ""
 "Use</a>, and you irrevocably agree to release your contribution under the "
 "CC-BY 4.0 License. See <a href=\"https://localwiki.org/main/Copyrights\" "
 "target=\"_blank\">Copyrights</a>."
-msgstr ""
+msgstr "Indem Sie auf \"Änderungen speichern\" klicken, akzeptieren Sie die <a href=\"https://localwiki.org/main/Terms_of_Use\" target=\"_blank\">Nutzungsbedingungen</a>, und Sie stimmen unwiderruflich zu, Ihren Beitrag unter der CC-BY 4.0 Lizenz zu veröffentlichen. Siehe <a href=\"https://localwiki.org/main/Copyrights\" target=\"_blank\">Copyrights</a>. "
 
 #: main/settings/defaults.py:45
 msgid ""
@@ -646,7 +647,7 @@ msgid ""
 "href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">CC-"
 "BY 4.0 License</a>. See <a href=\"https://localwiki.org/main/Copyrights\" "
 "target=\"_blank\">Copyrights</a>."
-msgstr ""
+msgstr "Ich akzeptiere die <a href=\"https://localwiki.org/main/Terms_of_Use\" target=\"_blank\">Nutzungsbedingungen</a>, dies schließt ein, dass ich damit einverstanden bin, meine Beiträge, sofern nicht anders angegeben, unter der <a href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">CC-BY 4.0 Lizenz</a> zu veröffentlichen. Siehe <a href=\"https://localwiki.org/main/Copyrights\" target=\"_blank\">Copyrights</a>. "
 
 #: main/settings/defaults.py:47
 msgid ""
@@ -693,7 +694,7 @@ msgstr "LocalWiki"
 msgid ""
 "\n"
 "Supported by\n"
-msgstr ""
+msgstr "\nUnterstützt von\n"
 
 #: main_content/templates/main_content/index.html:13
 msgid ""
@@ -744,7 +745,7 @@ msgid ""
 "\n"
 "What if there was somewhere you could go to learn all about where you live? A place to learn about your <a href=\"/oakland/Neighborhoods\" target=\"_blank\">neighborhoods</a>, about your local <a href=\"/santacruz/Parks_and_Open_Spaces\" target=\"_blank\">parks</a>, about being a <a href=\"/davis/Parenting\" target=\"_blank\">parent in your city</a>, about <a href=\"/tags/history\" target=\"_blank\">history</a>, <a href=\"/detroit/Detroit_Department_of_Transportation_%%28DDOT%%29\" target=\"_blank\">politics</a> &ndash; anything and everything useful and beautiful about your community. With LocalWiki, everybody has a way to share and learn about where they live.\n"
 "            "
-msgstr ""
+msgstr "\nWenn es etwas gäbe, wo man über den eigenen Wohnort alles erfahren könnte? Wo man etwas über seine <a href=\"/oakland/Neighborhoods\" target=\"_blank\">Nachbarschaft</a>, über die <a href=\"/santacruz/Parks_and_Open_Spaces\" target=\"_blank\">Parks</a> vor Ort erfahren könnte, etwas über <a href=\"/davis/Parenting\" target=\"_blank\">das Elternsein in der eigenen Stadt</a>, etwas über <a href=\"/tags/history\" target=\"_blank\">Geschichte</a>, <a href=\"/detroit/Detroit_Department_of_Transportation_%%28DDOT%%29\" target=\"_blank\">Politik</a> &ndash; einfach alles Nützliche und Schöne der eigenen Gemeinde. Mit LocalWiki kann jedermann teilen und sich über seinen Wohnort informieren."
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:67
@@ -758,7 +759,7 @@ msgid ""
 "\n"
 "            Whether it's knowing about <a href=\"/sf/Green_Hairstreak_Butterfly_Corridor\" target=\"_blank\">butterfly corridors</a> or the history of a <a href=\"/islavista/Coal_Oil_Point\" target=\"_blank\">local beach</a>, everyone holds a piece of the puzzle of what it's like to live in their community. And unlike a news site or a blog, anyone can add and modify LocalWiki pages. LocalWiki lets you and your neighbors tell the story of your community, together.\n"
 "            "
-msgstr ""
+msgstr "\nOb es um <a href=\"/sf/Green_Hairstreak_Butterfly_Corridor\" target=\"_blank\">Grünpfade für Schmetterlinge</a> oder um die Geschichte eines <a href=\"/islavista/Coal_Oil_Point\" target=\"_blank\">örtlichen Strands</a> geht, jeder kennt ein Puzzleteil davon, was es bedeutet, an einem bestimmten Ort zu leben. Und anders als bei einer News-Website oder einem Blog kann bei LocalWiki jeder Seiten anlegen und ändern. Mit LocalWiki könnt ihr und eure Nachbarn selbst gemeinsam von Ihrer Heimat erzählen."
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:80
@@ -771,7 +772,7 @@ msgid ""
 "\n"
 "              From <a href=\"https://ja.localwiki.org/sapporo/\" target=\"_blank\">Sapporo, Japan</a> to <a href=\"/oakland/\" target=\"_blank\">Oakland, California</a>, communities across the world use LocalWiki to share their local knowledge. Learn about the issues that affect nearby communities, and communities halfway across the globe. There is a whole world to discover!\n"
 "              "
-msgstr ""
+msgstr "\nGemeinden in der ganzen Welt, von <a href=\"https://ja.localwiki.org/sapporo/\" target=\"_blank\">Sapporo, Japan</a>bis <a href=\"/oakland/\" target=\"_blank\">Oakland, Kalifornien</a>, benutzen LocalWiki, um Wissen vor Ort zu teilen. Informiere dich über die Themen, die Gemeinden in nächster Nähe sowie Gemeinden am anderen Ende der Welt betreffen. Du kannst eine ganz neue Welt entdecken!"
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:93
@@ -785,7 +786,7 @@ msgid ""
 "\n"
 "              Like a park or a public library, LocalWiki is a public good. LocalWiki is free for anyone to <a href=\"/main/Copyrights\" target=\"_blank\">read, copy and reuse for any purpose</a>, and the backend code powering LocalWiki is open-source. We do not run any advertisements, and we are a 501(c)(3) non-profit organization. You can <a href=\"https://www.patreon.com/localwiki\" target=\"_blank\">donate to support LocalWiki here</a>.\n"
 "              "
-msgstr ""
+msgstr "\nWie ein Park oder die Bücherei, ist auch LocalWiki für den öffentlichen Gebrauch. Alle können LocalWiki kostenlos <a href=\"/main/Copyrights\" target=\"_blank\">lesen, kopieren und wiederverwenden - für jeden Verwendungszweck</a>, und der Backend-Code, der LocalWiki betreibt ist Open-Source. Wir werben nicht und wir sind eine 501(c)(3) gemeinnützige Organisation. Du kannst <a href=\"https://www.patreon.com/localwiki\" target=\"_blank\">hier spenden, um LocalWiki zu unterstützen</a>."
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:106
@@ -798,7 +799,7 @@ msgid ""
 "\n"
 "            LocalWiki represents a free, universally-accessible collection of the world's local knowledge upon which we hope countless civic and locally-relevant applications will be built. Our <a href=\"/api/\" target=\"_blank\">geospatially-aware, read-write API</a> makes it easy to integrate LocalWiki with your application, or to import useful local data from elsewhere!\n"
 "              "
-msgstr ""
+msgstr "\nLocalWiki ist eine kostenlose, allgemein zugängliche Sammlung von lokalem Wissen weltweit, und wir hoffen, dass unzählige lokal relevante und Gemeinde-Anwendungen darauf bauen. Mit unserem <a href=\"/api/\" target=\"_blank\">geopathisch-sensibilisierten Schreib-Lese-API</a> ist es einfach, LocalWiki in dein App zu integrieren oder nützliche lokale Daten von anderswoher zu importieren!"
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:119
@@ -812,7 +813,7 @@ msgid ""
 "\n"
 "              Adding to LocalWiki is as easy as making a Facebook post – contributing <a href=\"/main/Help\" target=\"_blank\">requires no technical knowledge</a> or academic background. We have no complicated rules for how to format a page, or even <a href=\"/main/What_can_I_write_about%%3F\" target=\"_blank\">what to write about</a>: if it's useful or beautiful to your community, then it's worth sharing!\n"
 "              "
-msgstr ""
+msgstr "\nEtwas zu LocalWiki hinzuzufügen ist genauso einfach wie auf Facebook zu posten - um etwas beizutragen <a href=\"/main/Help\" target=\"_blank\"> benötigt man keinerlei technisches Wissen</a> oder akademische Ausbildung. Hier gibt es keine komplizierten Regeln zum Formatieren einer Seite oder <a href=\"/main/What_can_I_write_about%%3F\" target=\"_blank\">worüber geschrieben werden soll</a>: wenn es für deine Gemeinschaft nützlich oder schön ist, dann solltest du es teilen!"
 
 #: main_content/templates/main_content/index.html:132
 msgid ""
@@ -840,7 +841,7 @@ msgid ""
 "    in <span class=\"num\">%(countries_count)s</span> countries and <span class=\"num\">%(languages_count)s</span> languages.\n"
 "    </div>\n"
 "    "
-msgstr ""
+msgstr "\n<div>\n<span class=\"num\">%(page_count)s+</span> Seiten über <span class=\"num\">%(region_count)s</span> Regionen\n%(map_media)s\n</div>\n<a href=\"%(regions_list)s\" target=\"_blank\" style=\"display: inline-block; margin-bottom: 1em;\">\n<div id=\"stats_map\">\n%(map)s\n</div>\n</a>\n<div>\nin <span class=\"num\">%(countries_count)s</span> Ländern <span class=\"num\">%(languages_count)s</span> Sprachen.\n</div>"
 
 #: main_content/templates/main_content/index.html:160
 msgid "Recent blog posts"
@@ -907,7 +908,7 @@ msgid ""
 "Map data <a href=\"http://www.openstreetmap.org/copyright\" "
 "target=\"_blank\">© OpenStreetMap contributors</a>. Map tiles via <a "
 "href=\"http://mapbox.com\" target=\"_blank\">MapBox</a>."
-msgstr ""
+msgstr "Kartendaten <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">© OpenStreetMap contributors</a>. Kartentitel über <a href=\"http://mapbox.com\" target=\"_blank\">MapBox</a>. "
 
 #: maps/templates/maps/base.html:6
 msgid "Recent changes on this Map"
@@ -969,7 +970,7 @@ msgid ""
 "\n"
 "        Contributed by <span class=\"contributor_list\">%(contributors_html)s</span> and <a href=\"%(request_path)s/_history/\">%(contributors_number)s</a> others.\n"
 "        "
-msgstr ""
+msgstr "\nBeigesteuert von <span class=\"contributor_list\">%(contributors_html)s</span> und <a href=\"%(request_path)s/_history/\">%(contributors_number)s</a> anderen."
 
 #: maps/templates/maps/mapdata_detail.html:55
 #: pages/templates/pages/page_detail.html:99
@@ -978,7 +979,7 @@ msgid ""
 "\n"
 "        Contributed by <span class=\"contributor_list\">%(contributors_html)s</span>\n"
 "        "
-msgstr ""
+msgstr "\nBeigesteuert von <span class=\"contributor_list\">%(contributors_html)s</span>"
 
 #: maps/templates/maps/mapdata_diff.html:52
 msgid "Differences for map on"
@@ -1713,7 +1714,7 @@ msgid ""
 "      <h2>..you're almost done!</h2>\n"
 "      <p>Now you just need to <a class=\"button\" href=\"%(login_url)s?%(qs)s&amp;next=%(next)s\">log in</a> or <a class=\"button\" href=\"%(register_url)s?%(qs)s&amp;next=%(next)s\">create an account</a></p>\n"
 "  "
-msgstr ""
+msgstr "\n<h2>... du bist gleich fertig!</h2>\n<p>Jetzt musst du dich nur <a class=\"button\" href=\"%(login_url)s?%(qs)s&amp;next=%(next)s\">einloggen</a> oder <a class=\"button\" href=\"%(register_url)s?%(qs)s&amp;next=%(next)s\">ein Konto erstellen</a></p>"
 
 #: regions/templates/regions/region_list_map.html:30
 msgid "Communities - LocalWiki"
@@ -1782,7 +1783,7 @@ msgid ""
 "\n"
 "            Want to <a href=\"%(global_search)s?q=%(query)s\">search all of LocalWiki for \"%(query)s\"</a>?\n"
 "            "
-msgstr ""
+msgstr "\n Möchtest du <a href=\"%(global_search)s?q=%(query)s\"> \"%(query)s\" im ganzen LocalWiki suchen</a>?"
 
 #: search/templates/search/search.html:81
 msgid "Create a new page:"
@@ -1808,7 +1809,7 @@ msgid ""
 "\n"
 "    Pages <a href=\"%(user_link)s\">you</a> follow:\n"
 "    "
-msgstr ""
+msgstr "\n<a href=\"%(user_link)s\">Du</a> folgst Seiten:"
 
 #: stars/templates/stars/page_stars_for_user.html:18
 #, python-format
@@ -1816,7 +1817,7 @@ msgid ""
 "\n"
 "        Pages <a href=\"%(user_link)s\">%(username)s</a> follows:\n"
 "        "
-msgstr ""
+msgstr "\n Seiten, denen <a href=\"%(user_link)s\">%(username)s</a> folgt:"
 
 #: stars/templates/stars/user_stars_for_user.html:9
 #, python-format
@@ -1829,7 +1830,7 @@ msgid ""
 "\n"
 "    Users <a href=\"%(user_link)s\">you</a> follow:\n"
 "    "
-msgstr ""
+msgstr "\n <a href=\"%(user_link)s\">Du</a> folgst Benutzern:"
 
 #: stars/templates/stars/user_stars_for_user.html:19
 #, python-format
@@ -1837,7 +1838,7 @@ msgid ""
 "\n"
 "        Users <a href=\"%(user_link)s\">%(username)s</a> follows:\n"
 "        "
-msgstr ""
+msgstr "\nBenutzer, denen <a href=\"%(user_link)s\">%(username)s</a> folgt:"
 
 #: tags/forms.py:98
 #, python-format
@@ -2104,7 +2105,7 @@ msgid ""
 "\n"
 "        LocalWiki is a grassroots effort to collect, share and open the world’s local knowledge.  We are a 501(c)3 non-profit organization.\n"
 "        "
-msgstr ""
+msgstr "\nLocalWiki setzt sich aus den Bemühungen Einzelner zusammen, die lokales Wissen sammeln und teilen - weltweit. Wir sind eine 501(c)3 gemeinnützige Organisation."
 
 #: themes/sapling/templates/site/base.html:173
 msgid "Learn more"
@@ -2116,7 +2117,7 @@ msgstr "Datenschutzbestimmungen"
 
 #: themes/sapling/templates/site/base.html:175
 msgid "Terms of Use"
-msgstr ""
+msgstr "Nutzungsbedingungen"
 
 #: themes/sapling/templates/site/base.html:176
 #: themes/sapling/templates/site/common_nav.html:20
@@ -2130,7 +2131,7 @@ msgid ""
 "rel=\"license\" href=\"http://creativecommons.org/licenses/by/4.0/\" "
 "target=\"_blank\">Creative Commons Attribution License</a>. See <a "
 "href=\"https://localwiki.org/main/Copyrights\">Copyrights</a>.</p>"
-msgstr ""
+msgstr "<p>Außer wenn anders angegeben, ist dieser Inhalt lizenziert unter einer <a rel=\"license\" href=\"http://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">Creative Commons Attribution License</a>. Siehe <a href=\"https://localwiki.org/main/Copyrights\">Copyrights</a>.</p>"
 
 #: themes/sapling/templates/site/common_nav.html:13
 #: themes/sapling/templates/site/nav.html:5
