@@ -1,5 +1,10 @@
 /* LICENSE and credits: please see LICENSE.txt in this directory */
 
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
     z-index: 0;
     background: #fafafa url(../img/body-bg.png) top left repeat;
