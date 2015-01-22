@@ -482,6 +482,9 @@ textarea, input, select {
         padding-right: 0.6em;
         margin-right: 1.13em;
     }
+    #region_header.not_in_region {
+        display: none;
+    }
 }
 @media screen and (max-width: 500px) {
     #region_header {
@@ -679,6 +682,9 @@ textarea, input, select {
 }
 #header .site_search input {
     float: left;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .search input::-webkit-input-placeholder {
