@@ -1172,6 +1172,11 @@ textarea, input, select {
         width: 100%!important;
         height: 200px!important;
     }
+    #map .map_cover.small {
+        height: 200px;
+        width: 100%;
+        left: 0;
+    }
 }
 @media screen and (max-width: 500px) {
     #map {
