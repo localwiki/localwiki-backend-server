@@ -2600,7 +2600,8 @@ input:focus {
   background-color: white;
   padding: 0;
   display: inline-block;
-  margin-right: 1em;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
   margin-top: 1em;
   border: 1px solid #d8d8d8;
   border-bottom: 3px solid #D5D5D5;
