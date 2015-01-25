@@ -623,7 +623,7 @@ textarea, input, select {
 }
 #login_info .actions {
     color: #868686;
-    display: table-cell;
+    /*display: table-cell;*/
     vertical-align: middle;
 }
 #login_info .actions .button {

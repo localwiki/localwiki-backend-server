@@ -1,5 +1,5 @@
 """
-This is the main management script for provisioning and managing the LocalWiki infrastructure.
+This is the main management script for provisioning and managing the LocalWiki server infrastructure.
 
 ==== Do this first ====
 
