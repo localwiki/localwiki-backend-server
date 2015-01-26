@@ -471,7 +471,7 @@ def setup_repo():
     sudo('mkdir -p %s' % env.localwiki_root)
     sudo('chown -R %s:%s %s' % (env.user, env.user, env.localwiki_root))
     if not exists(env.src_root):
-        run('git clone https://github.com/localwiki/localwiki.git %s' % env.src_root)
+        run('git clone https://github.com/localwiki/localwiki-backend-server.git %s' % env.src_root)
     switch_branch(env.branch)
 
 def switch_branch(branch):
