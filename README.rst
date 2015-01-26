@@ -8,7 +8,7 @@ LocalWiki is a grassroots effort to collect, share and open the world's local kn
 
 For information on the LocalWiki API, please see https://localwiki.org/api.
 
-This repository contains the backend server software used to run the LocalWiki project.  For
+This repository contains the primary backend server software used to run the LocalWiki project.  For
 information on running this backend code in a local development environment, see ``INSTALL``.
 
 Development
