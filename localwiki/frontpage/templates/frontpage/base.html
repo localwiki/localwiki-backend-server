@@ -47,6 +47,7 @@
 {% endblock %}
 
 {% block main_wrapper %}
+  {% phased with messages %} 
   {% if messages %}
   <ul class="messages">
     {% for message in messages %}
@@ -54,6 +55,7 @@
     {% endfor %}
   </ul>
   {% endif %}
+  {% endphased %}
 
 <div id="cover">
     <div class="contents">
