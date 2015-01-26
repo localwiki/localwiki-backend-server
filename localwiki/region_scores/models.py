@@ -20,8 +20,10 @@ class RegionScore(models.Model):
 
 
 def normalize_score(score):
-    if score > 2000:
-       score = 2000
+    if score > 10000:
+       score = 10000
+    elif score > 4000:
+       score = 5000
     elif score > 1000:
        score = 1000
     elif score > 100:
