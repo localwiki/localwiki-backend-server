@@ -374,6 +374,10 @@ td, th {
     min-width: 10px;
 }
 
+/* Hacks */
+
+.explore #object_actions a.button { padding: 6px 10px; }
+
 /*
 ====================================
  Autocomplete inside CKeditor
