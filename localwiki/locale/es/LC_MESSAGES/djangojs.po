@@ -8,13 +8,14 @@
 # Julián Rodriguez Orihuela <julianrod@gmail.com>, 2013-2014
 # Philip Neustrom <philip@localwiki.org>, 2013
 # Philip Neustrom <philip@localwiki.org>, 2013
+# ykciV <vknoxsironi@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-19 00:26-0600\n"
-"PO-Revision-Date: 2015-01-19 06:27+0000\n"
-"Last-Translator: Philip Neustrom <philip@localwiki.org>\n"
+"POT-Creation-Date: 2015-01-22 02:01-0600\n"
+"PO-Revision-Date: 2015-01-26 05:27+0000\n"
+"Last-Translator: ykciV <vknoxsironi@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/localwiki/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,15 +27,15 @@ msgstr ""
 #: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:16
 #: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:17
 msgid "Comment Box"
-msgstr ""
+msgstr "Campo de Comentario"
 
 #: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:23
 msgid "Title:"
-msgstr ""
+msgstr "Título:"
 
 #: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:30
 msgid "Comments:"
-msgstr ""
+msgstr "Comentario:"
 
 #: maps/static/olwidget/js/sapling_utils.js:211
 msgid " for "
