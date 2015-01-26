@@ -24,7 +24,7 @@ Development
 :Issues:        https://github.com/localwiki/localwiki-backend-server/issues
 :Dev Docs:      https://localwiki.org/dev/
 :IRC:           irc://irc.freenode.net/localwiki
-:License:       GPLv2; see COPYING file
+:License:       GPLv2, see COPYING file
 
 Legal Stuff
 ===========
