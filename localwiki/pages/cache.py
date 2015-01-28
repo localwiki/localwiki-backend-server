@@ -95,6 +95,7 @@ def _async_cache_post_edit(instance, created=False, deleted=False, raw=False):
     from tags.models import PageTagSet
     from links.models import Link, IncludedPage, IncludedTagList
     from tags.cache import django_invalidate_tag_view, varnish_invalidate_tag_view
+    from versionutils.diff import diff
 
     if isinstance(instance, Page):
         # First, let's clear out the Varnish cache for this page
