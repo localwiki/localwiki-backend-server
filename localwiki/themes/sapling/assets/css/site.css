@@ -1813,7 +1813,7 @@ input:focus {
     border-top: none;
 }
 #activityfeed .item a {
-    color: inherit;
+    color: #666;
 }
 #activityfeed h2 {
     font-size: 180%;
