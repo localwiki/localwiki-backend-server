@@ -1812,8 +1812,13 @@ input:focus {
     padding-top: 1em;
     border-top: none;
 }
-#activityfeed .item a {
+#activityfeed .item ul a,
+#activityfeed .item ul a:link
+{
     color: #666;
+}
+#activityfeed .item ul a:hover {
+    color: #111;
 }
 #activityfeed h2 {
     font-size: 180%;
