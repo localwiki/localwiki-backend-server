@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-26 00:58-0600\n"
+"POT-Creation-Date: 2015-01-28 11:13-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -534,17 +534,17 @@ msgstr ""
 msgid "region"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:60
+#: frontpage/templates/frontpage/base.html:62
 #, python-format
 msgid "Welcome to the %(region_name)s LocalWiki!"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:61
+#: frontpage/templates/frontpage/base.html:63
 #, python-format
 msgid "A website about %(region_name)s that <em>anyone</em> can edit"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:63
+#: frontpage/templates/frontpage/base.html:65
 msgid ""
 "\n"
 "        I want to make a page about <span class=\"searchbox\"><input type="
@@ -553,15 +553,15 @@ msgid ""
 "        "
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:84
+#: frontpage/templates/frontpage/base.html:86
 msgid "Change cover"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:86
+#: frontpage/templates/frontpage/base.html:88
 msgid "Save cover"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:109
+#: frontpage/templates/frontpage/base.html:111
 #: pages/templates/pages/page_detail.html:53
 #: users/templates/users/user_page.html:37
 #, python-format
@@ -570,7 +570,7 @@ msgid ""
 "          (%(date)s by %(user_link)s)"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:119
+#: frontpage/templates/frontpage/base.html:121
 #: maps/templates/maps/nearby_pages.html:44
 #: pages/templates/pages/page_detail.html:62
 #: search/templates/search/global_search.html:17
@@ -581,25 +581,25 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:125
+#: frontpage/templates/frontpage/base.html:127
 msgid "Some interesting pages"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:134
+#: frontpage/templates/frontpage/base.html:136
 msgid "Explore more pages"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:138
+#: frontpage/templates/frontpage/base.html:140
 msgid "There are no pages yet.  Add some!"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:139
+#: frontpage/templates/frontpage/base.html:141
 #: themes/sapling/templates/site/add_page_area.html:5
 #: themes/sapling/templates/site/add_page_area.html:9
 msgid "Add a new page"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:147
+#: frontpage/templates/frontpage/base.html:149
 msgid "Explore nearby regions"
 msgstr ""
 

@@ -127,7 +127,8 @@ def _compute_score(page):
     avg_links_to = avg_incoming_links_for_region(page.region)
     num_links_to_here = page.links_to_here.count()
     if num_links_to_here >= avg_links_to:
-        score += min(int((num_links_to_here * 1.0) / avg_links_to), 5)
+        if avg_links_to > 0:
+            score += min(int((num_links_to_here * 1.0) / avg_links_to), 5)
 
     # Normalize to get more randomness.  Otherwise we'd see the top few pages all the time on Explore
     score = min(score, 8)
