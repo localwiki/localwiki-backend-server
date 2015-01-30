@@ -346,7 +346,7 @@ class RegionCreateView(CreateView):
             'default_language': form.cleaned_data['default_language'],
             'geom': form.cleaned_data['geom'].wkt,
             'slug': form.cleaned_data['slug'],
-            'full_name': form.cleaned_data['full_name'],
+            'full_name': form.cleaned_data['full_name'].encode('utf-8'),
             'post_save': 'create_region',
         }
         return urllib.urlencode(d)
