@@ -78,7 +78,7 @@ def create_region(request, region=None, form=None, slug=None, full_name=None,
         'region_name': region.full_name,
         'region_url': 'https://localwiki.org%s' % region.get_absolute_url(),
     }
-    twitter_status = urllib.quote(twitter_status)
+    twitter_status = urllib.quote(twitter_status.encode('utf-8'))
     share_message = _("Let the world know you're starting to build something beautiful:")
     share_message = "%(share_message)s<div>%(fb_link)s %(twitter_link)s</div>" % {
         'share_message': share_message,
