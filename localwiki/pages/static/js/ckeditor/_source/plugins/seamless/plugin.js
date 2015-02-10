@@ -91,7 +91,7 @@
 		{
 		    createStyles(editor);
 		    editor.on('instanceReady', fixToolbar);
-			for ( var eventName in { instanceReady:1, contentDom:1, key:1, selectionChange:1, insertElement:1, insertHtml:1 } )
+			for ( var eventName in { instanceReady:1, contentDom:1, selectionChange:1, insertElement:1, insertHtml:1 } )
 			{
 				editor.on( eventName, function( evt )
 				{
