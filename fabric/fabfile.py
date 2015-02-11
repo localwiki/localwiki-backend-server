@@ -208,7 +208,7 @@ env.localwiki_root = '/srv/localwiki'
 env.src_root = os.path.join(env.localwiki_root, 'src')
 env.virtualenv = os.path.join(env.localwiki_root, 'env')
 env.data_root = os.path.join(env.virtualenv, 'share', 'localwiki')
-env.branch = 'master'
+env.branch = 'test_why_travis_broke_2015_2_10'
 env.git_hash = None
 env.keepalive = 300
 
@@ -445,12 +445,11 @@ def init_localwiki_install():
 
     with virtualenv():
         with cd(env.src_root):
-            # Force setuptools 7.0 because of issues with
-            # setuptools 8.x and PEP 440, or maybe just a bug
-            # in setuptools 8.x. TODO XXX Research this further.
-            run('pip install setuptools==7.0')
+            # Force update to setuptools
+            run('pip install --upgrade setuptools')
 
             # Install core localwiki module as well as python dependencies
+            run('pip install -r requirements.txt')
             run('python setup.py develop')
 
             # Set up the default media, static, conf, etc directories
@@ -851,6 +850,7 @@ def update(local=False):
             sudo("python setup.py clean --all", user="www-data")
             sudo("rm -rf dist localwiki.egg-info", user="www-data")
             update_django_settings()
+            sudo('pip install -r requirements.txt')
             sudo("python setup.py develop", user="www-data")
             #sudo("python setup.py install")
             sudo("localwiki-manage setup_all", user="www-data")
