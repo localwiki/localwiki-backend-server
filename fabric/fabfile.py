@@ -450,6 +450,7 @@ def init_localwiki_install():
 
             # Install core localwiki module as well as python dependencies
             run('python setup.py develop')
+            run('pip install -r requirements.txt')
 
             # Set up the default media, static, conf, etc directories
             run('mkdir -p %s/share' % env.virtualenv)
@@ -850,6 +851,7 @@ def update(local=False):
             sudo("rm -rf dist localwiki.egg-info", user="www-data")
             update_django_settings()
             sudo("python setup.py develop", user="www-data")
+            sudo('pip install -r requirements.txt')
             #sudo("python setup.py install")
             sudo("localwiki-manage setup_all", user="www-data")
 
