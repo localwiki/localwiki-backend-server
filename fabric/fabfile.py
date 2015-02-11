@@ -445,10 +445,8 @@ def init_localwiki_install():
 
     with virtualenv():
         with cd(env.src_root):
-            # Force setuptools 7.0 because of issues with
-            # setuptools 8.x and PEP 440, or maybe just a bug
-            # in setuptools 8.x. TODO XXX Research this further.
-            run('pip install setuptools==7.0')
+            # Force update to setuptools
+            run('pip install --upgrade setuptools')
 
             # Install core localwiki module as well as python dependencies
             run('python setup.py develop')
