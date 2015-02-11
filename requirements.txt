@@ -3,43 +3,43 @@ django==1.5.4
 html5lib==0.95
 requests==2.0.0
 python-memcached==1.53
--e git+https://github.com/philipn/sorl-thumbnail/tarball/localwiki#egg=sorl-thumbnail-11.12-5
+-e git+https://github.com/philipn/sorl-thumbnail.git@localwiki#egg=sorl-thumbnail-11.12-5
 python-dateutil==1.5
 pysolr==2.1.0-beta
 django-haystack==2.1.0
 django-randomfilenamestorage==1.1
 django-guardian==1.1.1
--e git+https://github.com/philipn/django-south/tarball/localwiki_master#egg=South-0.8.1-2
+-e git+https://github.com/philipn/django-south.git@localwiki_master#egg=South-0.8.1-2
 python-flot-utils==0.2.1
 django-registration==0.8.0
--e git+https://github.com/philipn/olwidget/tarball/localwiki#egg=django-olwidget-0.46-4
--e git+https://github.com/philipn/django-honeypot/tarball/localwiki#egg=django-honeypot-0.4.0-3
+-e git+https://github.com/philipn/olwidget.git@localwiki#egg=django-olwidget-0.46-4
+-e git+https://github.com/philipn/django-honeypot.git@localwiki#egg=django-honeypot-0.4.0-3
 django-qsstats-magic==0.7
 django-picklefield==0.3.0
--e git+https://github.com/philipn/django-constance/tarball/localwiki#egg=django-constance-0.6-1
+-e git+https://github.com/philipn/django-constance.git@localwiki#egg=django-constance-0.6-1
 celery[redis]==3.1.3
 celery-haystack==0.7.2
 django-extensions==1.2.5
--e git+https://github.com/philipn/django-rest-framework/tarball/localwiki#egg=djangorestframework-2.3.13-1
+-e git+https://github.com/philipn/django-rest-framework.git@localwiki#egg=djangorestframework-2.3.13-1
 django-filter==0.7
--e git+https://github.com/philipn/django-rest-framework-gis/tarball/localwiki#egg=djangorestframework-gis-0.1.0-3
+-e git+https://github.com/philipn/django-rest-framework-gis.git@localwiki#egg=djangorestframework-gis-0.1.0-3
 markdown==2.3.1
 django-cors-headers==0.12
 django-gravatar2==1.1.3
--e git+https://github.com/philipn/django-endless-pagination/tarball/zip_safe#egg=django-endless-pagination-2.0
+-e git+https://github.com/philipn/django-endless-pagination.git@zip_safe#egg=django-endless-pagination-2.0
 django-follow==0.6.1
 django-templated-email==0.4.9
 django-block-ip==0.1.6
 djangorestframework-filters==0.2.2
--e git+https://github.com/philipn/django-static-sitemaps/tarball/localwiki#egg=django-static-sitemaps-2.1.0-1
--e git+https://github.com/philipn/django-celery-email/tarball/localwiki#egg=django-celery-email-1.0.4-1
+-e git+https://github.com/philipn/django-static-sitemaps.git@localwiki#egg=django-static-sitemaps-2.1.0-1
+-e git+https://github.com/philipn/django-celery-email.git@localwiki#egg=django-celery-email-1.0.4-1
 django-activity-stream==0.4.5beta1
 django-jsonfield==0.9.12
 raven==4.2.1
--e git+https://github.com/philipn/django-xsession/tarball/localwiki#egg=django-xsession-0.1-4
--e git+https://github.com/philipn/django-hosts/tarball/localwiki#egg=django-hosts-0.6-4
--e git+https://github.com/philipn/johnny-cache/tarball/localwiki#egg=johnny-cache-1.6.1a
+-e git+https://github.com/philipn/django-xsession.git@localwiki#egg=django-xsession-0.1-4
+-e git+https://github.com/philipn/django-hosts.git@localwiki#egg=django-hosts-0.6-4
+-e git+https://github.com/philipn/johnny-cache.git@localwiki#egg=johnny-cache-1.6.1a
 python-varnish==0.2.1
--e git+https://github.com/philipn/django-phased/tarball/localwiki#egg=django-phased-0.6.1-4
+-e git+https://github.com/philipn/django-phased.git@localwiki#egg=django-phased-0.6.1-4
 django_compressor==1.4
 django-statici18n==1.1
