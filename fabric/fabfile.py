@@ -208,7 +208,7 @@ env.localwiki_root = '/srv/localwiki'
 env.src_root = os.path.join(env.localwiki_root, 'src')
 env.virtualenv = os.path.join(env.localwiki_root, 'env')
 env.data_root = os.path.join(env.virtualenv, 'share', 'localwiki')
-env.branch = 'test_why_travis_broke_2015_2_10'
+env.branch = 'master'
 env.git_hash = None
 env.keepalive = 300
 
