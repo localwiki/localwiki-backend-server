@@ -8,7 +8,7 @@ class CookieStorageCrossDomain(CookieStorage):
     def _update_cookie(self, encoded_data, response):
         hostname = self.request.META.get('HTTP_HOST', '').split(':')[0]
         session_domain = settings.SESSION_COOKIE_DOMAIN
-        if session_domain.endswith(hostname):
+        if session_domain and session_domain.endswith(hostname):
             domain = session_domain
         else:
             domain = ''
