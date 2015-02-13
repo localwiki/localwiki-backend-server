@@ -7,6 +7,7 @@ from django.conf import settings
 from django.views.generic import TemplateView as DjangoTemplateView
 from django.db.models import Q
 from django.utils.translation import get_language
+from django.utils import translation
 from django.views.generic import View, ListView
 from django.db import connection
 from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
@@ -321,7 +322,39 @@ class RegionCreateView(CreateView):
     form_class = RegionForm
 
     def get_success_url(self):
-        return reverse('frontpage', kwargs={'region': self.object.slug})
+        front_path = reverse('frontpage', kwargs={'region': self.object.slug})
+
+        # Send them to the subdomain appropriate for the language,
+        # in order to avoid the redirect. If we wait for the language
+        # redirect here, then the messages cookie could get set on the
+        # base domain, and then never cleared when viewed on the
+        # language subdomain.
+        region_lang = self._default_language
+        request_lang = getattr(self.request, 'LANGUAGE_CODE', settings.LANGUAGE_CODE)
+        translation.activate(region_lang)
+        self.request.LANGUAGE_CODE = region_lang
+
+        if request_lang != region_lang:
+            host = self.request.get_host().split('.')
+
+            # We keep the language code in the subdomain, unless we're on the default language.
+            if request_lang == settings.LANGUAGE_CODE:
+                base_hostname = '.'.join(host)
+            else:
+                base_hostname = '.'.join(host[1:])
+
+            if region_lang != settings.LANGUAGE_CODE:
+                domain = '%s.%s' % (region_lang, base_hostname)
+            else:
+                domain = base_hostname
+
+            return '%s://%s%s' % (
+                self.request.is_secure() and 'https' or 'http',
+                domain,
+                front_path
+            )
+
+        return front_path
 
     def get_form_kwargs(self):
         kwargs = super(RegionCreateView, self).get_form_kwargs()
@@ -359,6 +392,7 @@ class RegionCreateView(CreateView):
             url = '%s?%s' % (reverse('regions:post-save-log-in'), self.form_to_qs(form))
             return HttpResponseRedirect(url)
 
+        self._default_language = form.cleaned_data['default_language']
         response = super(RegionCreateView, self).form_valid(form)
         create_region(self.request, region=self.object, form=form)
         return response
