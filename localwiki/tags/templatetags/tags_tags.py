@@ -1,6 +1,7 @@
 from copy import copy
 
 from django import template
+from django.utils.translation import ugettext as _
 from django.template.loader import render_to_string
 from django.http import Http404
 
@@ -48,7 +49,7 @@ class IncludeTagNode(IncludeContentNode):
         super(IncludeTagNode, self).__init__(*args, **kwargs)
 
     def get_title(self, context):
-        return 'Pages tagged &ldquo;%s&rdquo;' % self.name
+        return _('Pages tagged &ldquo;%s&rdquo;') % self.name
 
     def get_content(self, context):
         region = context['region']
