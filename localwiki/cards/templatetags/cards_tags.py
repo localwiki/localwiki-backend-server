@@ -5,7 +5,7 @@ from django.core.cache import get_cache
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.db.models.signals import post_save
-from django.core.urlresolvers import get_urlconf
+from django.core.urlresolvers import get_urlconf, set_urlconf
 
 from regions.models import Region
 from pages.models import Page
@@ -82,6 +82,9 @@ def render_region_card(context, region):
     if card:
         return card
 
+    urlconf = get_urlconf()
+    set_urlconf('main.urls')
+
     _file, _map, front_page_content = None, None, None
     is_meta_region = hasattr(region, 'regionsettings') and region.regionsettings.is_meta_region
 
@@ -112,6 +115,8 @@ def render_region_card(context, region):
         'content': front_page_content,
     })
     cache.set('rcard:%s' % region.id, card)
+
+    set_urlconf(urlconf)
     return card
 
     
