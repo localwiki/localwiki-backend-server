@@ -362,6 +362,7 @@ REST_FRAMEWORK = {
     'PAGINATE_BY_PARAM': 'limit',  
     # Maximum limit allowed when using `?limit=xxx`.
     'MAX_PAGINATE_BY': 100,
+    'PAGINATE_KWARG': 'p',
     # Use hyperlinked styles by default.
     # Only used if the `serializer_class` attribute is not set on a view.
     'DEFAULT_MODEL_SERIALIZER_CLASS':
