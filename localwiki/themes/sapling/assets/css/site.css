@@ -1913,6 +1913,9 @@ input:focus {
     text-decoration: none;
     color: #666;
 }
+#activityfeed .changelabel:hover {
+    color: #666!important;
+}
 #activityfeed .comment {
     padding-right: 0.5em;
 }
