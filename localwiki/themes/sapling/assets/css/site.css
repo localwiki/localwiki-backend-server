@@ -1549,6 +1549,10 @@ div.templates li {
 }
 
 input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
   -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
      -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
        -o-transition: border linear 0.2s, box-shadow linear 0.2s;
