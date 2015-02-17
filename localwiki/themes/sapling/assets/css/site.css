@@ -2281,6 +2281,14 @@ input:focus {
     margin-left: -0.4em;
     margin-top: -0.05em;
 }
+#main .follow_item .follow .text:before {
+    margin-left: -1.1em;
+    margin-top: 0.05em;
+}
+#main #signup_new_explainer .follow_item .follow .text:before {
+    margin-left: -0.4em;
+    margin-top: -0.05em;
+}
 .follow_item .follow .text {
     padding-left: 0;
     text-align: center;
