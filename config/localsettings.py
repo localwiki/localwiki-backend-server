@@ -18,7 +18,7 @@ def _remove_port(s):
 
 SESSION_COOKIE_DOMAIN = _remove_port('.{{ public_hostname }}')
 if SESSION_COOKIE_DOMAIN.endswith('.localhost'):
-    SESSION_COOKIE_DOMAIN = None
+    SESSION_COOKIE_DOMAIN = ''
 
 if not DEBUG:
     SESSION_COOKIE_SECURE = True
