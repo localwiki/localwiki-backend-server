@@ -2090,6 +2090,17 @@ input:focus {
     clear: both;
 }
 
+.see_also .follow_item {
+    float: none;
+    display: inline-block;
+    margin-top: 0;
+    vertical-align: bottom;
+}
+.see_also .follow_item .follow .text:before {
+    margin-left: -0.4em!important;
+    margin-top: -0.05em!important;
+}
+
 .endless_more {
     display: block;
     width: 100%;

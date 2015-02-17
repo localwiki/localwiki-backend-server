@@ -2,6 +2,7 @@ from django.db.models.signals import pre_save, post_save, pre_delete, m2m_change
 from django.utils.translation import ugettext as _
 from django.conf import settings
 
+from celery import shared_task
 from actstream import action
 
 from redirects.models import Redirect
@@ -48,6 +49,36 @@ def _created_page_action(sender, instance, created, raw, **kws):
     action.send(user_edited, verb='created page', action_object=instance)
 
 
+@shared_task(ignore_result=True)
+def _maybe_follow_region(page):
+    from follow.models import Follow
+
+    user_edited = page.versions.most_recent().version_info.user
+    if not user_edited:
+        return
+
+    # User doesn't follow any regions yet.
+    if not Follow.objects.filter(user=user_edited).exclude(target_region=None).exists():
+        # Auto-follow this region
+        Follow(user=user_edited, target_region=page.region).save()
+
+
+def _post_save_maybe_follow(sender, instance, created, raw, **kws):
+    """
+    Follow this region after this page has been edited, in some cases.
+    """
+    if raw:
+        return
+
+    if settings.IN_API_TEST:
+        # XXX TODO Due to some horrible, difficult to figure out bug in
+        # how force_authenticate() works in the API tests,
+        # we have to skip signals here :/
+        return
+
+    _maybe_follow_region.delay(instance)
+
+
 # When a Redirect is created we want to delete the source Page if it
 # exists.  This is so the redirect (which works via 404 fall-through)
 # will be immediately functional.
@@ -59,6 +90,7 @@ pre_save.connect(_delete_redirect, sender=Page)
 
 if not settings.DISABLE_FOLLOW_SIGNALS:
     post_save.connect(_created_page_action, sender=Page)
+    post_save.connect(_post_save_maybe_follow, sender=Page)
 
 # Clear Page-related caches after a page, or a related object that's displayed
 # inside the page, is modified.

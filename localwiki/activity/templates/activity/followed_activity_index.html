@@ -29,7 +29,7 @@ $.endlessPaginate();
           <h3>{% trans "Welcome to LocalWiki! What's next?" %}</h3>
           <ul>
             <li><a href="{% url 'regions:list' %}">{% trans "Explore LocalWiki communities" %}</a></li>
-            <li>Follow pages, regions and people when you see <div class="follow_item"><div class="follow little button"><span class="text"></span></div></div> Then activity will show up here!</li>
+            <li>{% blocktrans %}Follow pages, regions and people when you see <div class="follow_item"><div class="follow little button"><span class="text"></span></div></div> Then activity will show up here!{% endblocktrans %}</li>
             <li><a href="{% url 'regions:add' %}">{% trans "Create a new LocalWiki region" %}</a></li>
             <li><a href="http://twitter.com/localwiki" target="_blank">{% trans "Follow <strong>@localwiki</strong> on Twitter" %}</a></li>
           </ul>
@@ -37,10 +37,12 @@ $.endlessPaginate();
     {% endif %}
 
     <div class="see_also">
+      {% blocktrans %}Follow pages, regions and people when you see <div class="follow_item"><div class="follow little button"><span class="text"></span></div></div> Then activity will show up here!{% endblocktrans %}
+      <br/>
+      <br/>
+
       {% url 'frontpage' region='main' as guide_url %}
       <p>{% blocktrans %}Need help? Want advice? Check out the <a href="{{ guide_url }}">LocalWiki guide</a>.{% endblocktrans %}</p>
-      {% url 'all-activity' as all_activity_url %}
-      <p>{% blocktrans %}Want to see <strong><a href="{{ all_activity_url }}">all activity across LocalWiki</a>?</strong>{% endblocktrans %}</p>
     </div>
 
   </div>
