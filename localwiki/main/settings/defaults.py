@@ -209,7 +209,7 @@ MIDDLEWARE_CLASSES = (
     'johnny.middleware.QueryCacheMiddleware',
     'django_hosts.middleware.HostsMiddlewareRequest',
     'django.middleware.common.CommonMiddleware',
-    'utils.middleware.XForwardedForMiddleware',
+    'x_forwarded_for.middleware.XForwardedForMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
     'utils.middleware.SessionMiddleware',
     'django_xsession.middleware.XSessionMiddleware',

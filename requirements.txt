@@ -43,3 +43,4 @@ python-varnish==0.2.1
 -e git+https://github.com/philipn/django-phased.git@localwiki#egg=django-phased
 django_compressor==1.4
 django-statici18n==1.1
+django-xforwardedfor-middleware==1.0

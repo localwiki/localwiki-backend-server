@@ -9,21 +9,6 @@ from django.contrib.sessions.middleware import SessionMiddleware
 from django.conf import settings
 from django.utils import translation
 
-class XForwardedForMiddleware():
-    """
-    For our Varnish configuration.
-    """
-    def process_request(self, request):
-        if 'HTTP_X_FORWARDED_FOR' in request.META:
-            parts = request.META['HTTP_X_FORWARDED_FOR'].split(',')
-            if len(parts) > 1:
-                # Get the second-to-last, in our case. Skip varnish (the last value)
-                ip = parts[-2].strip()
-            else:
-                ip = parts[0]
-            request.META['REMOTE_ADDR'] = ip
-        return None
-
 
 class AutoTrackUserInfoMiddleware(object):
     """
