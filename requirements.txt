@@ -29,7 +29,7 @@ django-gravatar2==1.1.3
 -e git+https://github.com/philipn/django-endless-pagination.git@zip_safe#egg=django-endless-pagination
 django-follow==0.6.1
 django-templated-email==0.4.9
-django-block-ip==0.1.6
+django-block-ip==0.2.0
 djangorestframework-filters==0.2.2
 -e git+https://github.com/philipn/django-static-sitemaps.git@localwiki#egg=django-static-sitemaps
 -e git+https://github.com/philipn/django-celery-email.git@localwiki#egg=django-celery-email
