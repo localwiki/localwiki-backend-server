@@ -259,7 +259,7 @@ $(document).ready(function() {
        .on('typeahead:selected', function(e, datum) {
           var pagename = datum.value;
           $(this).parent().find('form .page_name').val(pagename);
-          var form = $(this).parent().find('form');
+          var form = $(this).parent().parent().parent().find('form');
           form.submit();
        });
 

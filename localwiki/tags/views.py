@@ -1,7 +1,7 @@
 import copy
 from dateutil.parser import parse as dateparser
 
-from django.core.urlresolvers import reverse
+from localwiki.utils.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseNotFound
 from django.utils.translation import ugettext as _
 from django.template.context import RequestContext
@@ -362,24 +362,34 @@ class AddSingleTagView(PermissionRequiredMixin, RegionMixin, CreateObjectMixin, 
 
     def form_valid(self, form):
         tag_slug = form.cleaned_data['tag_slug']
+
+        if not self.object:
+            # Page doesn't exist yet, so let's redirect to page creation screen
+            page_name = form.cleaned_data['page_name']
+            p = Page(name=page_name, region=self.get_region())
+            url = reverse('pages:edit', kwargs={'slug': page_name, 'region': self.get_region()})
+            return HttpResponseRedirect('%s?tag=%s' % (url, tag_slug))
+
         t = Tag.objects.get(slug=tag_slug, region=self.get_region())
         pts = PageTagSet.objects.filter(page=self.object, region=self.get_region())
         if pts.exists():
             pts = pts[0]
         else:
             pts = PageTagSet(page=self.object, region=self.get_region()) 
-            pts.save()
+
+        tag_name = Tag._meta.verbose_name.lower()
+        pts.save(comment=_("added %(name)s %(added)s.") % {'name': tag_name, 'added': tag_slug})
 
         if pts.tags and t not in pts.tags.all():
             pts.tags.add(t)
-            tag_name = Tag._meta.verbose_name.lower()
-            pts.save(comment=_("added %(name)s %(added)s.") % {'name': tag_name, 'added': tag_slug})
 
         return super(AddSingleTagView, self).form_valid(form)
 
     def get_object(self):
         from pages.models import slugify
-        return Page.objects.get(slug=slugify(self.request.POST['page_name']), region=self.get_region())
+        p = Page.objects.filter(slug=slugify(self.request.POST['page_name']), region=self.get_region())
+        if p.exists():
+            return p[0]
 
     def get_success_url(self):
         return self.request.POST.get('next')

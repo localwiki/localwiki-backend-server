@@ -217,6 +217,28 @@ class PageUpdateView(PermissionRequiredMixin, CreateObjectMixin,
         return reverse('pages:show',
             kwargs={'region': region.slug, 'slug': self.object.pretty_slug})
 
+    def form_valid(self, form):
+        from tags.models import PageTagSet, Tag
+        from tags.models import slugify as tag_slugify
+
+        val = super(PageUpdateView, self).form_valid(form)
+
+        if 'tag' in self.request.GET:
+            # Add tag to page
+            t = self.request.GET.get('tag')
+            t = Tag.objects.get(slug=tag_slugify(t), region=self.object.region)
+            if PageTagSet.objects.filter(page=self.object, region=self.object.region).exists():
+                pts = self.object.pagetagset
+            else:
+                pts = PageTagSet(page=self.object, region=self.object.region)
+
+            tag_name = Tag._meta.verbose_name.lower()
+            pts.save(comment=_("added %(name)s %(added)s.") % {'name': tag_name, 'added': t})
+
+            pts.tags.add(t)
+
+        return val
+
     def create_object(self):
         pagename = clean_name(self.kwargs['original_slug'])
         content = _('<p>What do you know about %s?</p>') % pagename

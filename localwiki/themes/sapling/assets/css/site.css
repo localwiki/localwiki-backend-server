@@ -598,6 +598,9 @@ textarea, input, select {
     display: none;
 }
 .new_tagged_page form input[type="submit"] {
+    position: absolute;
+    z-index: -1000;
+    left: -1000px;
 }
 
 .tagpage .tags_button,
@@ -612,7 +615,7 @@ textarea, input, select {
     font-weight: normal;
 }
 #pagetagset .little.button {
-    padding: 0.3em 0.7em 0.4em !important;
+    padding: 0.4em 0.7em 0.4em !important;
 }
 .tagpage .tags_button .fa {
     margin-right: 0.3em;
