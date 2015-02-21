@@ -591,7 +591,17 @@ textarea, input, select {
     margin: 8px;
 }
 
-.tagpage .tags_button {
+#pagetagset {
+    margin-bottom: 1em;
+}
+.new_tagged_page form {
+    display: none;
+}
+.new_tagged_page form input[type="submit"] {
+}
+
+.tagpage .tags_button,
+#pagetagset .little.button {
     float: none;
     margin-right: 2em;
     padding: 0.4em 1em 0.5em 1em !important;
@@ -600,6 +610,9 @@ textarea, input, select {
     background-position: 9px 50%;
     display: inline-block;
     font-weight: normal;
+}
+#pagetagset .little.button {
+    padding: 0.3em 0.7em 0.4em !important;
 }
 .tagpage .tags_button .fa {
     margin-right: 0.3em;

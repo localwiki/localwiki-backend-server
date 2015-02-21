@@ -154,3 +154,8 @@ class PageTagSetForm(MergeMixin, CommentMixin, forms.ModelForm):
         merged = your_set.union(their_set).difference(old_set).union(common)
         yours['tags'] = Tag.objects.filter(pk__in=merged)
         return yours
+
+
+class SingleTagForm(forms.Form):
+    tag_slug = forms.CharField(max_length=100)
+    page_name = forms.CharField(max_length=255)

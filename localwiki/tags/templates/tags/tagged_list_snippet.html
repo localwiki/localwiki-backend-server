@@ -26,6 +26,17 @@
     {% endif %}
   {% endfor %}
   </ul>
+  {% if region %}
+  <div class="new_tagged_page">
+    <a class="little button start" href="#"><i class="fa fa-plus-circle"></i> {% blocktrans %}Add new {{ tag_name }}{% endblocktrans %}</a>
+    <form method="POST" action="{% url 'tags:add-single' region=region.slug %}">
+      <input type="text" name="page_name" class="page_name" placeholder="{% trans 'Name of page' %}"/>
+      <input type="hidden" name="tag_slug" value="{{ tag.slug }}"/>
+      <input type="hidden" name="next" value="{{ request.path }}"/>
+      <input type="submit" name="enter_to_submit"/>
+    </form>
+  </div>
+  {% endif %}
 {% else %}
   {% blocktrans %}There are no pages with the tag "{{ tag_name }}".{% endblocktrans %}
 {% endif %}

@@ -12,13 +12,14 @@ from django.shortcuts import get_object_or_404, render
 from django.db.models.aggregates import Count
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import FormView
 
 from versionutils.versioning.views import VersionsList, UpdateView
 from versionutils.diff.views import CompareView
 from regions.models import Region
 from regions.views import RegionMixin
 from models import PageTagSet, Tag, slugify
-from forms import PageTagSetForm
+from forms import PageTagSetForm, SingleTagForm
 from pages.models import Page
 
 from utils.views import CreateObjectMixin, PermissionRequiredMixin,\
@@ -350,6 +351,38 @@ class PageTagSetRevertView(PermissionRequiredMixin, RegionMixin, RevertView):
         # Redirect back to the file info page.
         return reverse('pages:tags-history',
             args=[self.kwargs['region'], self.kwargs['slug']])
+
+
+class AddSingleTagView(PermissionRequiredMixin, RegionMixin, CreateObjectMixin, FormView):
+    """
+    A convenience view that's used with the "add a new page to tag list" button.
+    """
+    form_class = SingleTagForm
+    permission = 'pages.change_page'
+
+    def form_valid(self, form):
+        tag_slug = form.cleaned_data['tag_slug']
+        t = Tag.objects.get(slug=tag_slug, region=self.get_region())
+        pts = PageTagSet.objects.filter(page=self.object, region=self.get_region())
+        if pts.exists():
+            pts = pts[0]
+        else:
+            pts = PageTagSet(page=self.object, region=self.get_region()) 
+            pts.save()
+
+        if pts.tags and t not in pts.tags.all():
+            pts.tags.add(t)
+            tag_name = Tag._meta.verbose_name.lower()
+            pts.save(comment=_("added %(name)s %(added)s.") % {'name': tag_name, 'added': tag_slug})
+
+        return super(AddSingleTagView, self).form_valid(form)
+
+    def get_object(self):
+        from pages.models import slugify
+        return Page.objects.get(slug=slugify(self.request.POST['page_name']), region=self.get_region())
+
+    def get_success_url(self):
+        return self.request.POST.get('next')
 
 
 def suggest_tags(request):

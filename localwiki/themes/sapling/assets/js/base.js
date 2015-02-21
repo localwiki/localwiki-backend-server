@@ -227,6 +227,7 @@ var setup_lazy_csrf = function(selector) {
 $(document).ready(function () {
     setup_lazy_csrf('#pagetagset_form');
     setup_lazy_csrf('#file_replace_upload');
+    setup_lazy_csrf('.new_tagged_page form');
 });
 
 /* Add page button */
@@ -235,6 +236,37 @@ $(document).ready(function() {
        $(this).hide()
        $('#new_page_form').show();
        $('#new_page_form #pagename').focus();
+    });
+});
+
+/* Add new tagged-page button */
+$(document).ready(function() {
+    var pages_remote_url = '/_api/pages/suggest?term=%QUERY&region_id=' + region_id;
+    var autoPages = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: pages_remote_url
+    });
+    autoPages.initialize();
+
+    $('.new_tagged_page .start').click(function() {
+       $(this).parent().find('.page_name').typeahead(null,
+           {
+             name: 'new_tagged_pages',
+             source: autoPages.ttAdapter()
+           }
+       )
+       .on('typeahead:selected', function(e, datum) {
+          var pagename = datum.value;
+          $(this).parent().find('form .page_name').val(pagename);
+          var form = $(this).parent().find('form');
+          form.submit();
+       });
+
+       $(this).parent().find('.start').hide();
+       $(this).parent().find('form').show();
+       $(this).parent().find('form .page_name').focus();
+
     });
 });
 
