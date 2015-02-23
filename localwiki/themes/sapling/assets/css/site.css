@@ -602,6 +602,9 @@ textarea, input, select {
     z-index: -1000;
     left: -1000px;
 }
+.new_tagged_page .twitter-typeahead {
+    float: none;
+}
 
 .tagpage .tags_button,
 #pagetagset .little.button {
