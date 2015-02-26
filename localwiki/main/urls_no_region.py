@@ -34,7 +34,7 @@ urlpatterns = patterns('',
     (r'^_stars/', include('stars.urls')),
 
     # Region routing URLs
-    (r'^', include(regions.site.urls)),
+    (r'^', include(regions.site.urls_no_region)),
     
     # Internal API URLs
     (r'^_api/', include('main.api.internal_urls')),
