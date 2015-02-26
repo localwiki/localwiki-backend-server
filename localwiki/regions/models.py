@@ -54,7 +54,15 @@ class Region(models.Model):
             rgs_ids = [r.id for r in rgs[:limit+10]]
             rgs = Region.objects.filter(id__in=rgs_ids).annotate(num_pages=Count('page'))
             # Region must have at least 5 pages to show up here
-            rgs = rgs.filter(num_pages__gte=5)[:limit]
+            rgs = rgs.filter(num_pages__gte=5)
+    
+            # Preserve original distance order
+            good_regions_ids = [r.id for r in rgs]
+            ids = [i for i in rgs_ids if i in good_regions_ids]
+    
+            rgs = [Region.objects.get(id=i) for i in ids]
+            rgs = rgs[:limit]
+    
         return rgs
 
     def is_admin(self, user):
