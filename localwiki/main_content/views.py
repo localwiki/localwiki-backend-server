@@ -45,7 +45,7 @@ class SplashPageView(RegionListView):
 
         context['page_count'] = (Page.objects.all().count() // 1000) * 1000
         context['region_count'] = Region.objects.all().count()
-        context['countries_count'] = 36
+        context['countries_count'] = 15
         context['languages_count'] = 7
         return context
 
