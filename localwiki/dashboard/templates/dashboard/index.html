@@ -26,7 +26,9 @@
     <div id="num_files" class="stat_number"><div class="type">{% trans "Files" %}</div></div>
     <div id="num_maps" class="stat_number"><div class="type">{% trans "Maps" %}</div></div>
     <div id="num_redirects" class="stat_number"><div class="type">{% trans "Redirects" %}</div></div>
+    {% if is_global_dashboard %}
     <div id="num_users" class="stat_number"><div class="type">{% trans "Users" %}</div></div>
+    {% endif %}
   </td></tr></thead>
 
 <tr><td>
@@ -59,6 +61,7 @@
 </div>
 </td></tr>
 
+{% if is_global_dashboard %}
 <tr><td>
 <div class="stat_detail">
     <h2>{% trans "Users registered over time" %}</h2>
@@ -68,6 +71,7 @@
     <div id="users_registered_over_time" class="graph"></div>
 </div>
 </td></tr>
+{% endif %}
 
 </table>
 

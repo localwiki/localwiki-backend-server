@@ -32,6 +32,9 @@ class DashboardView(TemplateView):
         context = super(TemplateView, self).get_context_data(*args, **kwargs)
         if self.kwargs.get('region'):
             context['region'] = Region.objects.get(slug=self.kwargs.get('region'))
+            context['is_global_dashboard'] = False
+        else:
+            context['is_global_dashboard'] = True
         return context
 
 
@@ -41,12 +44,12 @@ def humanize(i):
 
 class DashboardRenderView(JSONView):
     def get_filters(self):
-        if self.kwargs.get('region'):
+        if not self.is_global_dashboard:
             return {'region': Region.objects.get(slug=self.kwargs.get('region'))}
         return {}
 
     def cache_prefix(self):
-        if self.kwargs.get('region'):
+        if not self.is_global_dashboard:
             return 'region:%s' % self.kwargs.get('region')
         return ''
 
@@ -56,6 +59,7 @@ class DashboardRenderView(JSONView):
         nums = cache.get('%s:dashboard_nums' % prefix)
         if nums is None:
             nums = {
+                'is_global_dashboard': self.is_global_dashboard,
                 'num_pages': humanize(Page.objects.filter(**filters).count()),
                 'num_files': humanize(PageFile.objects.filter(**filters).count()),
                 'num_maps': humanize(MapData.objects.filter(**filters).count()),
@@ -104,7 +108,9 @@ class DashboardRenderView(JSONView):
 
         cache.set('%s:dashboard_generating_%s' % (prefix, key), True, 60)
 
-        context = {}
+        context = {
+            'is_global_dashboard': self.is_global_dashboard,
+        }
         context[key] = function(oldest, filters)
 
         context['_built'] = time.time()
@@ -119,6 +125,11 @@ class DashboardRenderView(JSONView):
         return context
 
     def get_context_data(self, *args, **kwargs):
+        self.is_global_dashboard = True
+
+        if self.kwargs.get('region'):
+            self.is_global_dashboard = False
+
         if 'graph' in self.request.GET:
             if self.request.GET.get('graph', None) == 'num_items_over_time':
                 return self.get_context_data_for_chart(items_over_time, 'num_items_over_time')
