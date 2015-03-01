@@ -15,7 +15,7 @@
     {% if not forloop.first %}
     {% ifnotequal version_info.type_verbose "Deleted" %}
         {# This assumes a certain URL format #}
-        <a class="tiny button" href="../_revert/{{ forloop.revcounter }}">{% trans "revert" %}</a>
+        <a class="tiny button" href="../_revert/{{ forloop.revcounter }}">{% trans "restore" %}</a>
     {% endifnotequal %}
     {% endif %}
   </td>

@@ -57,6 +57,6 @@ class RevertForm(forms.Form):
     Contains a single comment field.
     """
     comment = forms.CharField(max_length=150, required=False,
-        label=_("Reason for revert"))
+        label=_("Reason for restoring"))
     delete_newer = forms.BooleanField(required=False, label=_("Permanently remove newer versions"))
     dont_log = forms.BooleanField(required=False, label=_("Don't log this change"))

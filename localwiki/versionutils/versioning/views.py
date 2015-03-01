@@ -153,7 +153,7 @@ class RevertView(DeleteView):
 
     def success_msg(self):
         version_number = self.object.version_info.version_number()
-        return _('Reverted to version %s.') % version_number
+        return _('Restored version %s.') % version_number
 
     def revert(self, *args, **kwargs):
         form = self.get_form(self.get_form_class())

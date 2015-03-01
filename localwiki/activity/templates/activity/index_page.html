@@ -28,7 +28,7 @@
         {% endif %}{% endif %}
 
         {% if change.version_info.type in reverted_types %}
-            <span class="revert">{% blocktrans with version_date_timesince=change.version_info.reverted_to_version.version_info.date|timesince %}Reverted to version from {{ version_date_timesince }} ago{% endblocktrans %}</span>
+            <span class="revert">{% blocktrans with version_date_timesince=change.version_info.reverted_to_version.version_info.date|timesince %}Restored version from {{ version_date_timesince }} ago{% endblocktrans %}</span>
         {% endif %}
 
         <span class="type"></span>
