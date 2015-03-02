@@ -11,7 +11,7 @@ from users.models import UserProfile
 attrs_dict = {'class': 'required'}
 
 # We don't allow certain characters in usernames
-username_regex = re.compile(r'^[\w0-9.+-]+$', re.UNICODE)
+username_regex = re.compile(r'^[\w0-9.-]+$', re.UNICODE)
 
 
 class RegistrationForm(forms.Form):
