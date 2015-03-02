@@ -452,7 +452,7 @@ class PageCreateView(RegionMixin, RedirectView):
     page) or to the page (if it already exists).
     """
     def get_redirect_url(self, **kwargs):
-        pagename = self.request.GET.get('pagename')
+        pagename = self.request.GET.get('pagename', '')
         if not pagename.strip():
             # No page name provided, so let's return a useful error message.
             messages.add_message(self.request, messages.SUCCESS,
