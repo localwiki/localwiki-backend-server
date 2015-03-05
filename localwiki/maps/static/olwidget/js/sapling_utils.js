@@ -77,6 +77,8 @@ SaplingMap = {
             map.addControl(new OpenLayers.Control.Permalink({anchor: true}));
         }
 
+        this.add_additional_styling(map);
+
         if (this.show_links_on_hover) {
             this.setup_link_hover_activation(map);
         }
@@ -138,6 +140,50 @@ SaplingMap = {
                     SaplingMap._highlightResult(this, feature, map, true);
                 });
             }
+        });
+    },
+
+    _fix_line_thickness: function(layer, map) {
+        var zoom = map.getZoom();
+
+        var strokeWidth = 2;
+        if (zoom >= 14) {
+            strokeWidth += (zoom - 13)
+        }
+
+        var defaultStyle = $.extend({},
+            layer.styleMap.styles['default'].defaultStyle,
+            // TODO: Not sure why we have to explicitly set
+            // strokeWidth and label here. It's like we need to somehow pass
+            // the variables' context in but I couldn't figure out
+            // how.
+            { strokeWidth: strokeWidth, label: null });
+
+        var selectStyle = $.extend({},
+            layer.styleMap.styles['select'].defaultStyle,
+            // TODO: Not sure why we have to explicitly set
+            // strokeWidth and label here. It's like we need to somehow pass
+            // the variables' context in but I couldn't figure out
+            // how.
+            { strokeWidth: strokeWidth, label: null });
+
+        var styleMap = new OpenLayers.StyleMap({'default': defaultStyle, 'select': selectStyle});
+        layer.styleMap = styleMap;
+
+        //for(var i=0; i<layer.features.length; ++i) {
+        //    var feature = layer.features[i];
+        //    feature.style = lineStyle;
+        //}
+        layer.redraw();
+    },
+
+    add_additional_styling: function(map) {
+        var layer = map.vectorLayers[0];
+
+        this._fix_line_thickness(layer, map); 
+
+        map.events.register("zoomend", null, function(evt) {
+            SaplingMap._fix_line_thickness(layer, map);
         });
     },
 
