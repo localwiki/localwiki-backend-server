@@ -71,13 +71,14 @@ SaplingMap = {
         if(map.opts.dynamic) {
             this.setup_dynamic_map(map);
         }
+        else {
+            this.add_additional_styling(map);
+        }
         this._open_editing(map);
 
         if(map.opts.permalink) {
             map.addControl(new OpenLayers.Control.Permalink({anchor: true}));
         }
-
-        this.add_additional_styling(map);
 
         if (this.show_links_on_hover) {
             this.setup_link_hover_activation(map);
@@ -147,8 +148,12 @@ SaplingMap = {
         var zoom = map.getZoom();
 
         var strokeWidth = 2;
+        var strokeOpacity = 1;
         if (zoom >= 14) {
             strokeWidth += (zoom - 13)
+        }
+        if (zoom >= 15) {
+            strokeOpacity = 0.9;
         }
 
         var defaultStyle = $.extend({},
@@ -157,7 +162,7 @@ SaplingMap = {
             // strokeWidth and label here. It's like we need to somehow pass
             // the variables' context in but I couldn't figure out
             // how.
-            { strokeWidth: strokeWidth, label: null });
+            { strokeWidth: strokeWidth, strokeOpacity: strokeOpacity, label: null });
 
         var selectStyle = $.extend({},
             layer.styleMap.styles['select'].defaultStyle,
@@ -167,13 +172,39 @@ SaplingMap = {
             // how.
             { strokeWidth: strokeWidth, label: null });
 
-        var styleMap = new OpenLayers.StyleMap({'default': defaultStyle, 'select': selectStyle});
-        layer.styleMap = styleMap;
+        //var styleMap = new OpenLayers.StyleMap({'default': defaultStyle, 'select': selectStyle});
+        //layer.styleMap = styleMap;
 
-        //for(var i=0; i<layer.features.length; ++i) {
-        //    var feature = layer.features[i];
-        //    feature.style = lineStyle;
-        //}
+        for(var i=0; i<layer.features.length; ++i) {
+            var feature = layer.features[i];
+            if(feature.geometry.CLASS_NAME == "OpenLayers.Geometry.LineString") {
+                feature.style = defaultStyle;
+            }
+        }
+
+        layer.events.register("featureselected", null, function(evt) {
+              var selectedFeature = layer.selectedFeatures && layer.selectedFeatures[0];
+              // Hack to maintain selected feature state throughout events.
+              // Not sure why this is required.
+              layer._selectedFeature = selectedFeature;
+              var feature = evt.feature;
+              if(feature.geometry.CLASS_NAME == "OpenLayers.Geometry.LineString") {
+                feature.style = selectStyle;
+                layer.redraw();
+              }
+            });
+            layer.events.register("featureunselected", null, function(evt) {
+              var selectedFeature = layer.selectedFeatures && layer.selectedFeatures[0];
+              layer._selectedFeature = selectedFeature;
+              var feature = evt.feature;
+              // Hack to maintain selected feature state throughout events.
+              // Not sure why this is required.
+              if(feature.geometry.CLASS_NAME == "OpenLayers.Geometry.LineString") {
+                feature.style = defaultStyle;
+                layer.redraw();
+              }
+            })
+
         layer.redraw();
     },
 
