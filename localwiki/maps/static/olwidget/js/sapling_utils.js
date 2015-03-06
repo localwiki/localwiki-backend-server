@@ -3,6 +3,7 @@ SaplingMap = {
     is_dirty: false,
     show_links_on_hover: true,
     cluster_all_zoom_levels: true,
+    _in_map_diff: false,
 
     init_openlayers: function() {
         OpenLayers.Control.Navigation.prototype.dragPanOptions = {enableKinetic: true};
@@ -72,7 +73,9 @@ SaplingMap = {
             this.setup_dynamic_map(map);
         }
         else {
-            this.add_additional_styling(map);
+            if (!SaplingMap._in_map_diff) {
+                this.add_additional_styling(map);
+            }
         }
         this._open_editing(map);
 
