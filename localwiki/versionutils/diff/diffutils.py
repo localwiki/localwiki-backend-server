@@ -9,8 +9,9 @@ from django import forms
 from django.conf import settings
 from django.contrib.gis.db import models as gis_models
 from django.utils.translation import ugettext as _
+from django.core.urlresolvers import reverse_lazy
 
-from utils import static_url, reverse_lazy
+from utils import static_url
 import diff_match_patch
 import daisydiff
 from versionutils.versioning.utils import is_historical_instance
