@@ -243,7 +243,7 @@ PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.SHA1PasswordHasher',
     'django.contrib.auth.hashers.MD5PasswordHasher',
     'django.contrib.auth.hashers.CryptPasswordHasher',
-    'users.auth.UnsaltedSHA1PasswordHasher',  # For legacy imports
+    'django.contrib.auth.hashers.UnsaltedSHA1PasswordHasher',  # For legacy imports
 )
 
 # Dummy cache
