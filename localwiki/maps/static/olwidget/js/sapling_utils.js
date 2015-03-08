@@ -793,7 +793,7 @@ SaplingMap = {
         
         OpenLayers.Strategy.Cluster.prototype.cluster = function(event) {
         
-            if((!event || event.zoomChanged) && this.features) {
+            if((!event || event.zoomChanged) && this.features && !this.clustering) {
                 var resolution = this.layer.map.getResolution();
 
                 this.resolution = resolution;
@@ -867,7 +867,12 @@ SaplingMap = {
                     this.clustering = false;
                 }
                 this.clusters = clusters;
+
+                this.clustering = true;
+                SaplingMap._fix_line_thickness(this.layer, this.layer.map);
+                this.clustering = false;
             }
+
         }
     },
 };
