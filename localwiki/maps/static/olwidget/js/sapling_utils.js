@@ -796,83 +796,84 @@ SaplingMap = {
             if((!event || event.zoomChanged) && this.features && !this.clustering) {
                 var resolution = this.layer.map.getResolution();
 
-                this.resolution = resolution;
-                var clusters = [];
-                var feature, clustered, cluster;
-                for(var i=0; i<this.features.length; ++i) {
-                    feature = this.features[i];
-                    if(feature.geometry) {
-                        clustered = false;
-                        for(var j=clusters.length-1; j>=0; --j) {
-                            cluster = clusters[j];
-                            if(this.shouldCluster(cluster, feature, this.layer.map.opts.dynamic, resolution)) {
-                                this.addToCluster(cluster, feature);
-                                clustered = true;
-                                break;
+                if(resolution != this.resolution || !this.clustersExist()) {
+                    this.resolution = resolution;
+                    var clusters = [];
+                    var feature, clustered, cluster;
+                    for(var i=0; i<this.features.length; ++i) {
+                        feature = this.features[i];
+                        if(feature.geometry) {
+                            clustered = false;
+                            for(var j=clusters.length-1; j>=0; --j) {
+                                cluster = clusters[j];
+                                if(this.shouldCluster(cluster, feature, this.layer.map.opts.dynamic, resolution)) {
+                                    this.addToCluster(cluster, feature);
+                                    clustered = true;
+                                    break;
+                                }
                             }
-                        }
-                        if(!clustered) {
-                            if(this.features[i].geometry.CLASS_NAME == "OpenLayers.Geometry.Point") {
-                               clusters.push(this.createCluster(this.features[i]));
-                            }
-                            else {
-                               var cluster = this.features[i];
-                               cluster.cluster = [this.features[i]];
-                               clusters.push(cluster);
+                            if(!clustered) {
+                                if(this.features[i].geometry.CLASS_NAME == "OpenLayers.Geometry.Point") {
+                                   clusters.push(this.createCluster(this.features[i]));
+                                }
+                                else {
+                                   var cluster = this.features[i];
+                                   cluster.cluster = [this.features[i]];
+                                   clusters.push(cluster);
+                                }
                             }
                         }
                     }
-                }
-                // Different clustering strategy for dynamic and non-dynamic maps.
-                if (!this.layer.map.opts.dynamic) {
-                    
-                    for(var i=0; i<clusters.length; i++) {
-                        var cluster = clusters[i];
+                    // Different clustering strategy for dynamic and non-dynamic maps.
+                    if (!this.layer.map.opts.dynamic) {
+                        
+                        for(var i=0; i<clusters.length; i++) {
+                            var cluster = clusters[i];
 
-                        /* Weird edge case / bug. TODO: fix this, or just move to leaflet already */
-                        if (typeof cluster.cluster[0].old_geometry !== 'undefined') {
-                            cluster.old_geometry = cluster.cluster[0].old_geometry;
-                        }
+                            /* Weird edge case / bug. TODO: fix this, or just move to leaflet already */
+                            if (typeof cluster.cluster[0].old_geometry !== 'undefined') {
+                                cluster = cluster.cluster[0];
+                            }
 
-                        if (cluster.cluster.length > 1 && cluster.geometry.CLASS_NAME != "OpenLayers.Geometry.Point") {
-                            cluster.old_geometry = cluster.geometry;
-                            cluster.geometry = cluster.geometry.getCentroid();
-                        }
-                        else if ((cluster.cluster.length == 1 || resolution <= 76) && cluster.old_geometry && cluster.old_geometry.CLASS_NAME != "OpenLayers.Geometry.Point") {
-                            cluster.geometry = cluster.old_geometry;
-                            cluster.old_geometry = null;
-                        }
-                    }
-                }
-                this.layer.removeAllFeatures();
-                if(clusters.length > 0) {
-                    if(this.threshold > 1) {
-                        var clone = clusters.slice();
-                        clusters = [];
-                        var candidate;
-                        for(var i=0, len=clone.length; i<len; ++i) {
-                            candidate = clone[i];
-                            if(candidate.attributes.count < this.threshold) {
-                                Array.prototype.push.apply(clusters, candidate.cluster);
-                            } else {
-                                clusters.push(candidate);
+                            if (cluster.cluster.length > 1 && cluster.geometry.CLASS_NAME != "OpenLayers.Geometry.Point") {
+                                cluster.old_geometry = cluster.geometry;
+                                cluster.geometry = cluster.geometry.getCentroid();
+                            }
+                            else if ((cluster.cluster.length == 1 || resolution <= 76) && cluster.old_geometry && cluster.old_geometry.CLASS_NAME != "OpenLayers.Geometry.Point") {
+                                cluster.geometry = cluster.old_geometry;
+                                cluster.old_geometry = null;
                             }
                         }
                     }
+                    this.layer.removeAllFeatures();
+                    if(clusters.length > 0) {
+                        if(this.threshold > 1) {
+                            var clone = clusters.slice();
+                            clusters = [];
+                            var candidate;
+                            for(var i=0, len=clone.length; i<len; ++i) {
+                                candidate = clone[i];
+                                if(candidate.attributes.count < this.threshold) {
+                                    Array.prototype.push.apply(clusters, candidate.cluster);
+                                } else {
+                                    clusters.push(candidate);
+                                }
+                            }
+                        }
+                        this.clustering = true;
+                        // A legitimate feature addition could occur during this
+                        // addFeatures call.  For clustering to behave well, features
+                        // should be removed from a layer before requesting a new batch.
+                        this.layer.addFeatures(clusters);
+                        this.clustering = false;
+                    }
+                    this.clusters = clusters;
+
                     this.clustering = true;
-                    // A legitimate feature addition could occur during this
-                    // addFeatures call.  For clustering to behave well, features
-                    // should be removed from a layer before requesting a new batch.
-                    this.layer.addFeatures(clusters);
+                    SaplingMap._fix_line_thickness(this.layer, this.layer.map);
                     this.clustering = false;
                 }
-                this.clusters = clusters;
-
-                this.clustering = true;
-                SaplingMap._fix_line_thickness(this.layer, this.layer.map);
-                this.clustering = false;
             }
-
         }
     },
 };
