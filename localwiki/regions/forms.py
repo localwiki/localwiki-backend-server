@@ -1,13 +1,13 @@
 from django.conf import settings
 from django import forms
 from django.utils.translation import ugettext_lazy
+from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 
 from olwidget.widgets import EditableMap
 from olwidget.forms import MapModelForm
 
-from localwiki.utils import reverse_lazy
 from localwiki.utils.static_helpers import static_url
 
 from models import Region, RegionSettings, BannedFromRegion, LANGUAGES

@@ -5,9 +5,9 @@
 from copy import copy
 
 from django.conf import settings
+from django.core.urlresolvers import reverse_lazy
 
 from olwidget import widgets
-from utils import reverse_lazy
 from utils.static_helpers import static_url
 
 OUR_JS = [
