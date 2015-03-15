@@ -3260,3 +3260,13 @@ i.fa {
 .divider_list .follow_item {
     margin-top: -0.1em;
 }
+
+ul.errorlist {
+    margin-bottom: 0.5em;
+    list-style-type: none;
+}
+ul.errorlist li {
+    margin-left: 0;
+    background-color: #FFCACA;
+    padding: 0.5em;
+}
