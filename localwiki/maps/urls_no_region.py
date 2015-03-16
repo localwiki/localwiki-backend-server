@@ -2,10 +2,8 @@ from django.conf.urls import *
 from django.views.generic import TemplateView
 
 from utils.constants import DATETIME_REGEXP
-
-from .views import *
-from .feeds import MapChangesFeed
-
+from views import *
+from feeds import MapChangesFeed
 
 urlpatterns = patterns('',
     url(r'^map/$', MapFullRegionView.as_view(), name='global'),

@@ -1,10 +1,8 @@
 from django.conf.urls import *
 
 from utils.constants import DATETIME_REGEXP
-
-from .views import *
-from .feeds import MapChangesFeed
-
+from views import *
+from feeds import MapChangesFeed
 
 urlpatterns = patterns('',
     url(r'^map/tags/(?P<tag>.+)', GlobalMapForTag.as_view(), name='global-tagged'),

@@ -29,12 +29,12 @@ from pages.models import Page, slugify, name_to_url, page_url
 from regions.views import RegionMixin, region_404_response
 from regions.models import Region
 from users.views import AddContributorsMixin
-from localwiki.utils.views import CacheMixin
 
 from .widgets import InfoMap, map_options_for_region
 from .models import MapData
 from .forms import MapForm
 from .osm import get_osm_geom
+from localwiki.utils.views import CacheMixin
 
 
 class MapDetailView(Custom404Mixin, AddContributorsMixin, RegionMixin, DetailView):

@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from regions.models import Region
 from versionutils import versioning
 
-from .fields import FlatCollectionFrom
+from fields import FlatCollectionFrom
 
 
 class MapData(models.Model):
@@ -39,5 +39,5 @@ versioning.register(MapData)
 
 
 # For registration calls
-import .feeds
-import .signals
+import feeds
+import signals

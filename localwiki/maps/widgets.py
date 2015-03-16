@@ -10,7 +10,6 @@ from django.core.urlresolvers import reverse_lazy
 from olwidget import widgets
 from utils.static_helpers import static_url
 
-
 OUR_JS = [
     static_url('olwidget/js/sapling_utils.js'),
 ]
