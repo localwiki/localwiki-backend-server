@@ -6,8 +6,10 @@ from olwidget.forms import MapModelForm
 
 from versionutils.merging.forms import MergeMixin
 from versionutils.versioning.forms import CommentMixin
-from models import MapData
-from widgets import MediaMixin
+
+from .models import MapData
+from .widgets import MediaMixin
+
 
 OLWIDGET_OPTIONS = None
 if hasattr(settings, 'OLWIDGET_DEFAULT_OPTIONS'):
