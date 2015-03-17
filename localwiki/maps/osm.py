@@ -1,13 +1,14 @@
+from cStringIO import StringIO
 from subprocess import Popen, PIPE, STDOUT
 from urlparse import urljoin
-from lxml import etree
 import csv
 import os
-from cStringIO import StringIO
 
+from lxml import etree
 import requests
 
 from django.contrib.gis.geos import GEOSGeometry, GeometryCollection
+
 
 OSM_OVERPASS_API = 'http://overpass-api.de/api/interpreter'
 OSM_REVERSE_GEOCODE_API = 'http://nominatim.openstreetmap.org/reverse'

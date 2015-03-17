@@ -2,7 +2,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.gis.db import models
 from django.contrib.gis.geos import *
 
-from validators import validate_geometry
+from .validators import validate_geometry
 
 
 def flatten_collection(geoms):
