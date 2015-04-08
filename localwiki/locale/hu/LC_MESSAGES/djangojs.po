@@ -1,285 +1,285 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# 
+# Translators:
+# Rev01Yeti <rev01yeti@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-07 23:16-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2015-01-28 11:15-0600\n"
+"PO-Revision-Date: 2015-01-27 02:59+0000\n"
+"Last-Translator: Rev01Yeti <rev01yeti@gmail.com>\n"
+"Language-Team: Hungarian (http://www.transifex.com/projects/p/localwiki/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: crap_comments/static/js/ckeditor/_source/plugins/commentbox/plugin.js:18
 #: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:16
 #: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:17
 msgid "Comment Box"
-msgstr ""
+msgstr "Megjegyzésdoboz"
 
 #: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:23
 msgid "Title:"
-msgstr ""
+msgstr "Cím:"
 
 #: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:30
 msgid "Comments:"
-msgstr ""
+msgstr "Megjegyzések:"
 
-#: maps/static/olwidget/js/sapling_utils.js:290
+#: maps/static/olwidget/js/sapling_utils.js:211
 msgid " for "
-msgstr ""
+msgstr "ennek:"
 
-#: maps/static/olwidget/js/sapling_utils.js:335
+#: maps/static/olwidget/js/sapling_utils.js:256
 msgid ""
 "You've made changes but haven't saved.  Are you sure you want to leave this "
 "page?"
-msgstr ""
+msgstr "Megváltoztattál dolgokat, de nem mentettél. Biztos, hogy elhagyod ezt az oldalt?"
 
-#: maps/static/olwidget/js/sapling_utils.js:446
+#: maps/static/olwidget/js/sapling_utils.js:367
 msgid "Things on this map:"
-msgstr ""
+msgstr "Dolgok ezen a térképen:"
 
-#: maps/static/olwidget/js/sapling_utils.js:462
+#: maps/static/olwidget/js/sapling_utils.js:383
 msgid "Things inside "
-msgstr ""
+msgstr "Dolgok ezen belül:"
 
-#: maps/static/olwidget/js/sapling_utils.js:476
+#: maps/static/olwidget/js/sapling_utils.js:397
 msgid "Things near "
-msgstr ""
+msgstr "Dolgok ekörül:"
 
-#: maps/static/olwidget/js/sapling_utils.js:714
+#: maps/static/olwidget/js/sapling_utils.js:635
 msgid "Add marker for lat, lon \"{{ value }}\""
-msgstr ""
+msgstr "Földrajzi szél. és hossz. jelző hozzáadása: „{{ value }}”"
 
 #: pages/static/js/ckeditor/_source/plugins/embed/plugin.js:14
 #: pages/static/js/ckeditor/_source/plugins/embed/dialogs/embed.js:17
 #: pages/static/js/ckeditor/_source/plugins/embed/dialogs/embed.js:18
 msgid "Embed media"
-msgstr ""
+msgstr "Média beágyazása"
 
 #: pages/static/js/ckeditor/_source/plugins/embed/dialogs/embed.js:24
 msgid "Paste the embed code below:"
-msgstr ""
+msgstr "Ide illeszd be a beágyazókódot:"
 
 #: pages/static/js/ckeditor/_source/plugins/embed/dialogs/embed.js:29
 msgid "Please enter the embed code"
-msgstr ""
+msgstr "Kérjük, add meg a beágyazókódot"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/plugin.js:14
 msgid "Include page"
-msgstr ""
+msgstr "Oldal belefoglalása"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:11
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:17
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:18
 msgid "Include Page"
-msgstr ""
+msgstr "Oldal belefoglalása"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:24
 msgid "Page name"
-msgstr ""
+msgstr "Oldalnév"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:45
 msgid "Please enter a page name"
-msgstr ""
+msgstr "Kérünk, adj meg egy oldalnevet"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:64
 msgid "Show page title"
-msgstr ""
+msgstr "Oldalcím mutatása"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:84
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:84
 msgid "Width"
-msgstr ""
+msgstr "Szélesség"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:110
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:110
 msgid "pixels"
-msgstr ""
+msgstr "pixel"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:111
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:111
 msgid "percent"
-msgstr ""
+msgstr "százalék"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:126
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:126
 msgid "Align"
-msgstr ""
+msgstr "Igazítás"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:131
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:131
 #: pages/static/js/ckeditor/_source/plugins/simpleimage/dialogs/simpleimage.js:822
 msgid "None"
-msgstr ""
+msgstr "Nincs"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:213
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:236
 #, c-format
 msgid "Include page %s"
-msgstr ""
+msgstr "%s oldal belefoglalása"
 
 #: pages/static/js/ckeditor/_source/plugins/includetag/plugin.js:14
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:11
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:17
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:18
 msgid "List of tagged pages"
-msgstr ""
+msgstr "Felcímkézett oldalak listája"
 
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:24
 msgid "Tag"
-msgstr ""
+msgstr "Címkézés"
 
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:45
 msgid "Please enter a tag"
-msgstr ""
+msgstr "Kérünk, adj meg egy címkét"
 
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:64
 msgid "Show title"
-msgstr ""
+msgstr "Cím mutatása"
 
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:216
 #, c-format
 msgid "List of pages tagged \"%s\""
-msgstr ""
+msgstr "„%s” címkéjű oldalak listája"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/plugin.js:34
 msgid "Attach file"
-msgstr ""
+msgstr "Fájlcsatolás"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:93
 msgid "Uploading your file..."
-msgstr ""
+msgstr "Fájl feltöltése…"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:110
 msgid "Loading files..."
-msgstr ""
+msgstr "Fájlok betöltése…"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:111
 msgid "No files attached to this page"
-msgstr ""
+msgstr "Nincs fájl csatolva ehhez az oldalhoz"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:114
 msgid "Loading images..."
-msgstr ""
+msgstr "Képek betöltése…"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:115
 msgid "No images attached to this page"
-msgstr ""
+msgstr "Nincs kép csatolva ehhez az oldalhoz"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:170
 msgid "Attach File"
-msgstr ""
+msgstr "Fájlcsatolás"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:170
 msgid "Insert Image"
-msgstr ""
+msgstr "Képbeszúrás"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:249
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:253
 msgid "Choose a file from your computer"
-msgstr ""
+msgstr "Válassz ki egy fájlt a számítógépedről"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:339
 msgid "Select a file"
-msgstr ""
+msgstr "Válassz egy fájlt"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:339
 msgid "Select an image"
-msgstr ""
+msgstr "Válassz egy képet"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:347
 msgid "or <a href=\"#\">use a file from the web</a>"
-msgstr ""
+msgstr "vagy <a href=\"#\">használj egy fájlt a webről</a>"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:347
 msgid "or <a href=\"#\">use an image from the web</a>"
-msgstr ""
+msgstr "vagy <a href=\"#\">használj egy képet a webről</a>"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:358
 msgid "File URL"
-msgstr ""
+msgstr "Fájl-URL"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:358
 msgid "Image URL"
-msgstr ""
+msgstr "Kép-URL"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:396
 msgid "No file selected"
-msgstr ""
+msgstr "Nincs fájl kiválasztva"
 
 #: pages/static/js/ckeditor/_source/plugins/pagelink/dialogs/pageanchor.js:60
 msgid "Anchor name"
-msgstr ""
+msgstr "Horgonynév"
 
 #: pages/static/js/ckeditor/_source/plugins/pagelink/dialogs/pagelink.js:143
 msgid "Page name or URL"
-msgstr ""
+msgstr "Oldalnév vagy URL"
 
 #: pages/static/js/ckeditor/_source/plugins/searchbox/plugin.js:14
 #: pages/static/js/ckeditor/_source/plugins/searchbox/dialogs/searchbox.js:10
 #: pages/static/js/ckeditor/_source/plugins/searchbox/dialogs/searchbox.js:16
 #: pages/static/js/ckeditor/_source/plugins/searchbox/dialogs/searchbox.js:17
 msgid "Search Box"
-msgstr ""
+msgstr "Keresődoboz"
 
 #: pages/static/js/ckeditor/_source/plugins/searchbox/dialogs/searchbox.js:23
 msgid "Search query"
-msgstr ""
+msgstr "Keresőkifejezés"
 
 #: pages/static/js/ckeditor/_source/plugins/simpleimage/plugin.js:83
 msgid "Add a caption"
-msgstr ""
+msgstr "Képaláírás hozzáadása"
 
 #: pages/static/js/ckeditor/_source/plugins/simpletable/dialogs/simpletable.js:469
 msgid "Advanced settings..."
-msgstr ""
+msgstr "Haladó beállítások…"
 
 #: pages/static/js/ckeditor/_source/plugins/simpletable/dialogs/simpletable.js:478
 msgid "CSS classes"
-msgstr ""
+msgstr "CSS-osztályok"
 
 #: pages/static/js/ckeditor/_source/plugins/wikiplugins/plugin.js:23
 #: pages/static/js/ckeditor/_source/plugins/wikiplugins/plugin.js:24
 msgid "Insert Object"
-msgstr ""
+msgstr "Elembeszúrás"
 
 #: themes/sapling/assets/js/base.js:122
 msgid "Search for \"{{ value }}\""
-msgstr ""
+msgstr "Keresés erre: „{{ value }}”"
 
 #: themes/sapling/assets/js/base.js:136 themes/sapling/assets/js/base.js:173
 #: themes/sapling/assets/js/base.js:203
 msgid "Search all of LocalWiki"
-msgstr ""
+msgstr "Keresés az egész LocalWikin"
 
 #: versionutils/diff/static/js/diff/htmldiff.js:24
 msgid "Previous"
-msgstr ""
+msgstr "Előző"
 
 #: versionutils/diff/static/js/diff/htmldiff.js:26
 msgid "Next"
-msgstr ""
+msgstr "Következő"
 
 #: versionutils/diff/static/js/diff/htmldiff.js:54
 msgid "Review changes"
-msgstr ""
+msgstr "Változások átnézése"
 
 #: versionutils/diff/static/js/diff/htmldiff.js:59
 msgid "You can use the &larr; and &rarr; keys, too."
-msgstr ""
+msgstr "Használhatod a &larr; és &rarr; billentyűket is."
 
 #: versionutils/diff/static/js/diff/htmldiff.js:69
 msgid "Content was deleted"
-msgstr ""
+msgstr "A tartalom törölve lett"
 
 #: versionutils/diff/static/js/diff/htmldiff.js:70
 msgid "Content was added"
-msgstr ""
+msgstr "A tartalom hozzá lett adva"

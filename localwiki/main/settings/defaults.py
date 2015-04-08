@@ -73,6 +73,7 @@ LANGUAGES = (
     ('fr', _('French')),
     ('es', _('Spanish')),
     ('de', _('German')),
+    ('hu', _('Hungarian')),
     ('nl', _('Dutch')),
     ('uk', _('Ukrainian')),
 )
