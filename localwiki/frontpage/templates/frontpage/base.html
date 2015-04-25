@@ -4,6 +4,7 @@
 {% load i18n %}
 {% load phased_tags %}
 {% load cache %}
+{% load hosts %}
 {% load canonical_urls %}
 {% load pages_tags %}
 {% load cards_tags %}
@@ -149,7 +150,7 @@ and submit using #cover_form.
             <h2>{% trans "Explore nearby regions" %}</h2>
             <ul>
                 {% for region in region.get_nearby_regions %}
-                    <li><a class="region_link" href="{% url 'frontpage' region=region.slug %}">{{ region.full_name }}</a></li>
+                    <li><a class="region_link" href="{% host_url 'frontpage' region=region.slug on hub %}">{{ region.full_name }}</a></li>
                 {% endfor %}
             </ul>
             <p>Or maybe you want to <a href="{% url 'regions:list' %}">see all LocalWiki regions</a>?</p>

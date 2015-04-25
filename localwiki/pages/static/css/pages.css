@@ -206,6 +206,15 @@ a[href*='localhost'], a[href*='localhost'] {
     padding-left: 0;
 }
 
+a.region_link[href*='localwiki.org']:before, a.region_link[href*='localwiki.org']:before,
+a.region_link[href*='localhost']:before, a.region_link[href*='localhost']:before {
+    content: "\f0ac  ";
+}
+a.region_link[href*='localwiki.org'], a.region_link[href*='localwiki.org'],
+a.region_link[href*='localhost'], a.region_link[href*='localhost'] {
+    padding-left: 1.5em;
+}
+
 a.button[href^='http:'], a.button[href^='https:'] {
     background-color: #DCDCDC !important;
 }
