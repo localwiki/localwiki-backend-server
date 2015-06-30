@@ -158,6 +158,10 @@ def _record_tag_includes(sender, instance, created, raw, **kws):
         return
     record_tag_includes(instance)
 
+#########################
+# Attach all the signals
+#########################
+
 # TODO: make these happen in the background using a task queue.
 # Links signals
 post_save.connect(_record_page_links, sender=Page)
