@@ -28,9 +28,9 @@ Development
 
 Legal Stuff
 ===========
-Copyright (c) 2010-2015 by Philip Neustrom <philip@localwiki.org>
+Copyright (c) 2010-2015 by Philip Neustrom <philipn@gmail.com>
 
-Copyright (c) 2010-2013 by Mike Ivanov <mike@localwiki.org>
+Copyright (c) 2010-2013 by Mike Ivanov <mivanov@gmail.com>
 
 All rights reserved, see COPYING for details.
 
