@@ -17,7 +17,7 @@
       <div class="info">
         <div class="date">{{ object.publish|date:"j F Y" }}</div>
         {% if object.author %}
-          <div class="user">{% trans "by" %} <a target="_blank" href="{{ object.author.get_absolute_url }}" target="_blank"><img src="{% gravatar_url object.author.userprofile.gravatar_email 25 %}"/>{{ object.author.first_name }} {{ object.author.last_name }}</a></div>
+          <div class="user">{% trans "by" %} <a target="_blank" href="{{ object.author.get_absolute_url }}" target="_blank"><img src="{% gravatar_url object.author.userprofile.gravatar_email 25 %}" width="25" height="25"/>{{ object.author.first_name }} {{ object.author.last_name }}</a></div>
         {% endif %}
       </div>
       <div class="body">{{ object.body|safe }}</div>
