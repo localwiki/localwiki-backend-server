@@ -12,3 +12,10 @@ Disallow: /*/_feed/
 
 User-agent: *
 Disallow: /*/Talk
+
+
+User-agent: Yandex
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
