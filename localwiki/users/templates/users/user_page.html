@@ -62,7 +62,7 @@
         <div class="stats_list">
             <div class="stat_number">
                 {% if num_contributions %}
-                    <a href="{% url 'user-activity' username=user_for_page.username %}">
+                    <a rel="nofollow" href="{% url 'user-activity' username=user_for_page.username %}">
                 {% endif %}
                 {{ num_contributions }} <div class="type">{% trans "total contributions" %}</div>
                 {% if num_contributions %}
@@ -71,7 +71,7 @@
             </div>
             <div class="stat_number">
                 {% if num_pages_edited %}
-                    <a href="{% url 'user-activity' username=user_for_page.username %}?type=page">
+                    <a rel="nofollow" href="{% url 'user-activity' username=user_for_page.username %}?type=page">
                 {% endif %}
                 {{ num_pages_edited }} <div class="type">{% trans "pages edited" %}</div>
                 {% if num_pages_edited %}
@@ -80,7 +80,7 @@
             </div>
             <div class="stat_number">
                 {% if num_maps_edited %}
-                    <a href="{% url 'user-activity' username=user_for_page.username %}?type=map">
+                    <a rel="nofollow" href="{% url 'user-activity' username=user_for_page.username %}?type=map">
                 {% endif %}
                 {{ num_maps_edited }} <div class="type">{% trans "maps edited" %}</div>
                 {% if num_maps_edited %}
@@ -91,14 +91,14 @@
         
         <div class="objects_followed">
             {% if num_pages_followed %}
-            <a href="{% url 'followed-pages' username=user_for_page.username %}">
+            <a rel="nofollow" href="{% url 'followed-pages' username=user_for_page.username %}">
               <div class="pages_followed">
               <i class="fa fa-file-o fa-fw"></i> {% blocktrans %}{{ num_pages_followed }} pages starred{% endblocktrans %}
               </div>
             </a>
             {% endif %}
             {% if num_users_followed %}
-            <a href="{% url 'followed-users' username=user_for_page.username %}">
+            <a rel="nofollow" href="{% url 'followed-users' username=user_for_page.username %}">
             <div class="users_followed">
             <i class="fa fa-user fa-fw"></i> {% blocktrans %}{{ num_users_followed }} users starred{% endblocktrans %}
             </div>
