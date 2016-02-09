@@ -48,9 +48,8 @@ class PageForm(MergeMixin, CommentMixin, forms.ModelForm):
 
     def clean(self):
         cleaned_data = super(PageForm, self).clean()
-        name = self.cleaned_data['name']
         content = self.cleaned_data['content']
-        if _has_blacklist_title(name) or _has_blacklist_content(content):
+        if _has_blacklist_content(content):
             raise forms.ValidationError()
         return cleaned_data
 
@@ -64,6 +63,10 @@ class PageForm(MergeMixin, CommentMixin, forms.ModelForm):
                 )
         except Page.DoesNotExist:
             pass
+
+        if _has_blacklist_title(name):
+            raise forms.ValidationError()
+
         return name
 
 
