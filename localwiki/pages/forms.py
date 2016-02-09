@@ -10,6 +10,15 @@ from pages.widgets import WikiEditor
 from versionutils.diff.daisydiff.daisydiff import daisydiff_merge
 
 
+def _has_blacklist_title(name):
+    if re.match(r'844.?414.?4868', name):
+        return True
+
+def _has_blacklist_content(content):
+    if re.match(r'844.?414.?4868', content):
+        return True
+
+
 class PageForm(MergeMixin, CommentMixin, forms.ModelForm):
     conflict_error = _(
         "Warning: someone else saved this page before you.  "
@@ -36,6 +45,14 @@ class PageForm(MergeMixin, CommentMixin, forms.ModelForm):
         else:
             yours['content'] = merged_content
         return yours
+
+    def clean(self):
+        cleaned_data = super(PageForm, self).clean()
+        name = self.cleaned_data['name']
+        content = self.cleaned_data['content']
+        if _has_blacklist_title(name) or _has_blacklist_content(content):
+            raise forms.ValidationError()
+        return cleaned_data
 
     def clean_name(self):
         name = self.cleaned_data['name']
