@@ -11,24 +11,40 @@ from pages.widgets import WikiEditor
 from versionutils.diff.daisydiff.daisydiff import daisydiff_merge
 
 
-def _has_blacklist_title(name):
-    if re.search(r'844.?414.?4868', content):
+def _has_blacklist_title(content):
+    if re.search(r'844(.{0,3})?414(.{0,3})?4868', content):
         return True
-    if re.search(r'855.?855.?3090', content):
+    if re.search(r'855(.{0,3})?855(.{0,3})?3(0|o|O)9(0|o|O)', content):
         return True
-    if re.search(r'866.?769.?8127', content):
+    if re.search(r'866(.{0,3})?769(.{0,3})?8127', content):
         return True
-    if re.search(r'844.?461.?2828', content):
+    if re.search(r'844(.{0,3})?461(.{0,3})?2828', content):
+        return True
+    if re.search(r'8(0|o|O)(0|o|O)(.{0,3})?298(.{0,3})?2(0|o|O)42', content):
+        return True
+    if re.search(r'866(.{0,3})?570(.{0,3})?8594', content):
+        return True
+    if re.search(r'877(.{0,3})?523(.{0,3})?3678', content):
+        return True
+    if re.search(r'866(.{0,3})?644(.{0,3})?6697', content):
         return True
 
 def _has_blacklist_content(content):
-    if re.search(r'844.?414.?4868', content):
+    if re.search(r'844(.{0,3})?414(.{0,3})?4868', content):
         return True
-    if re.search(r'855.?855.?3090', content):
+    if re.search(r'855(.{0,3})?855(.{0,3})?3(0|o|O)9(0|o|O)', content):
         return True
-    if re.search(r'866.?769.?8127', content):
+    if re.search(r'866(.{0,3})?769(.{0,3})?8127', content):
         return True
-    if re.search(r'844.?461.?2828', content):
+    if re.search(r'844(.{0,3})?461(.{0,3})?2828', content):
+        return True
+    if re.search(r'8(0|o|O)(0|o|O)(.{0,3})?298(.{0,3})?2(0|o|O)42', content):
+        return True
+    if re.search(r'866(.{0,3})?570(.{0,3})?8594', content):
+        return True
+    if re.search(r'877(.{0,3})?523(.{0,3})?3678', content):
+        return True
+    if re.search(r'866(.{0,3})?644(.{0,3})?6697', content):
         return True
 
 
