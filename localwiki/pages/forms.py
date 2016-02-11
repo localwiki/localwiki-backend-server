@@ -12,11 +12,23 @@ from versionutils.diff.daisydiff.daisydiff import daisydiff_merge
 
 
 def _has_blacklist_title(name):
-    if re.search(r'844.?414.?4868', name):
+    if re.search(r'844.?414.?4868', content):
+        return True
+    if re.search(r'855.?855.?3090', content):
+        return True
+    if re.search(r'866.?769.?8127', content):
+        return True
+    if re.search(r'844.?461.?2828', content):
         return True
 
 def _has_blacklist_content(content):
     if re.search(r'844.?414.?4868', content):
+        return True
+    if re.search(r'855.?855.?3090', content):
+        return True
+    if re.search(r'866.?769.?8127', content):
+        return True
+    if re.search(r'844.?461.?2828', content):
         return True
 
 
