@@ -12,6 +12,10 @@ from versionutils.diff.daisydiff.daisydiff import daisydiff_merge
 
 
 def _has_blacklist_title(content):
+    if re.search(r'quickbooks.*phone.*', content):
+        return True
+    if re.search(r'quickbooks.*toll.*free', content):
+        return True
     if re.search(r'844(.{0,3})?414(.{0,3})?4868', content):
         return True
     if re.search(r'855(.{0,3})?855(.{0,3})?3(0|o|O)9(0|o|O)', content):
@@ -27,6 +31,8 @@ def _has_blacklist_title(content):
     if re.search(r'877(.{0,3})?523(.{0,3})?3678', content):
         return True
     if re.search(r'866(.{0,3})?644(.{0,3})?6697', content):
+        return True
+    if re.search(r'877(.{0,3})?875(.{0,3})?4888', content):
         return True
 
 def _has_blacklist_content(content):
@@ -45,6 +51,8 @@ def _has_blacklist_content(content):
     if re.search(r'877(.{0,3})?523(.{0,3})?3678', content):
         return True
     if re.search(r'866(.{0,3})?644(.{0,3})?6697', content):
+        return True
+    if re.search(r'877(.{0,3})?875(.{0,3})?4888', content):
         return True
 
 
