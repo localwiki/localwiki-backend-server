@@ -16,6 +16,10 @@ def _has_blacklist_title(content):
         return True
     if re.search(r'quickbooks.*toll.*free', content):
         return True
+    if re.search(r'customer service phone', content):
+        return True
+    if re.search(r'(phone number).*(phone number)', content):
+        return True
     if re.search(r'844(.{0,3})?414(.{0,3})?4868', content):
         return True
     if re.search(r'855(.{0,3})?855(.{0,3})?3(0|o|O)9(0|o|O)', content):
