@@ -18,6 +18,8 @@ def _has_blacklist_title(content):
         return True
     if re.search(r'customer service phone', content):
         return True
+    if re.search(r'customer(.*)phone number', content):
+        return True
     if re.search(r'(phone number).*(phone number)', content):
         return True
     if re.search(r'844(.{0,3})?414(.{0,3})?4868', content):
@@ -41,6 +43,8 @@ def _has_blacklist_title(content):
     if re.search(r'800(.{0,3})?533(.{0,3})?9155', content):
         return True
     if re.search(r'888(.{0,3})?300(.{0,3})?7747', content):
+        return True
+    if re.search(r'800(.{0,3})?420(.{0,3})?5166', content):
         return True
 
 
@@ -66,6 +70,8 @@ def _has_blacklist_content(content):
     if re.search(r'800(.{0,3})?533(.{0,3})?9155', content):
         return True
     if re.search(r'888(.{0,3})?300(.{0,3})?7747', content):
+        return True
+    if re.search(r'800(.{0,3})?420(.{0,3})?5166', content):
         return True
 
 
