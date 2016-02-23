@@ -899,9 +899,9 @@ def deploy(local=False, update_configs=None, clear_caches=None):
             update_apache_settings()
             update_varnish_settings()
             setup_memcached()
-            # In case celery apps have changed:
-            sudo('service celery restart')
         touch_wsgi()
+        # In case celery apps have changed:
+        sudo('service celery restart')
         if clear_caches:
             _clear_caches()
     except Exception as e:
