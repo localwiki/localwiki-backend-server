@@ -48,6 +48,24 @@ def _has_blacklist_title(content):
         return True
     if re.search(r'800(.{0,3})?860(.{0,3})?9230', content):
         return True
+    if re.search(r'customer(.*) number', content):
+        return True
+    if re.search(r'support(.*) number', content):
+        return True
+
+    if re.search(r'800(.{0,3})?[0-9][0-9][0-9](.{0,3})?[0-9][0-9][0-9][0-9]', content):
+        return True
+    if re.search(r'888(.{0,3})?[0-9][0-9][0-9](.{0,3})?[0-9][0-9][0-9][0-9]', content):
+        return True
+    if re.search(r'8422(.{0,3})?[0-9][0-9][0-9](.{0,3})?[0-9][0-9][0-9][0-9]', content):
+        return True
+
+    if re.search(r'888(.{0,3})?898(.{0,3})?7342', content):
+        return True
+    if re.search(r'844(.{0,3})?334(.{0,3})?9099', content):
+        return True
+    if re.search(r'800(.{0,3})?298(.{0,3})?2042', content):
+        return True
 
 
 def _has_blacklist_content(content):
@@ -76,6 +94,13 @@ def _has_blacklist_content(content):
     if re.search(r'800(.{0,3})?420(.{0,3})?5166', content):
         return True
     if re.search(r'800(.{0,3})?860(.{0,3})?9230', content):
+        return True
+
+    if re.search(r'888(.{0,3})?898(.{0,3})?7342', content):
+        return True
+    if re.search(r'844(.{0,3})?334(.{0,3})?9099', content):
+        return True
+    if re.search(r'800(.{0,3})?298(.{0,3})?2042', content):
         return True
 
 
