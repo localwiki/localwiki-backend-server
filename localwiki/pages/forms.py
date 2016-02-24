@@ -20,6 +20,10 @@ def _has_blacklist_title(content):
         return True
     if re.search(r'customer(.*)phone number', content):
         return True
+    if re.search(r'support(.*)phone number', content):
+        return True
+    if re.search(r'phone number', content):
+        return True
     if re.search(r'(phone number).*(phone number)', content):
         return True
     if re.search(r'844(.{0,3})?414(.{0,3})?4868', content):
@@ -55,9 +59,11 @@ def _has_blacklist_title(content):
 
     if re.search(r'800(.{0,3})?[0-9][0-9][0-9](.{0,3})?[0-9][0-9][0-9][0-9]', content):
         return True
+    if re.search(r'[0-9][0-9][0-9](.{0,3})?[0-9][0-9][0-9][0-9]', content):
+        return True
     if re.search(r'888(.{0,3})?[0-9][0-9][0-9](.{0,3})?[0-9][0-9][0-9][0-9]', content):
         return True
-    if re.search(r'8422(.{0,3})?[0-9][0-9][0-9](.{0,3})?[0-9][0-9][0-9][0-9]', content):
+    if re.search(r'844(.{0,3})?[0-9][0-9][0-9](.{0,3})?[0-9][0-9][0-9][0-9]', content):
         return True
 
     if re.search(r'888(.{0,3})?898(.{0,3})?7342', content):
@@ -136,6 +142,8 @@ class PageForm(MergeMixin, CommentMixin, forms.ModelForm):
         content = self.cleaned_data['content']
         if _has_blacklist_content(content):
             raise forms.ValidationError()
+        
+        self.clean_name()
         return cleaned_data
 
     def clean_name(self):
