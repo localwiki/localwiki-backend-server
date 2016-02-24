@@ -70,6 +70,7 @@
     <form method="post" action="">{% csrf_token %}
       {{ form.content }}
       {{ form.version_date }}
+      <input type="hidden" name="name" value="{{ name }}"/>
 
       {% block content_footer %}
       <div id="content_footer">
