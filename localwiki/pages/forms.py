@@ -118,7 +118,7 @@ class PageForm(MergeMixin, CommentMixin, forms.ModelForm):
 
     class Meta:
         model = Page
-        fields = ('content',)
+        fields = ('content', 'name')
         widgets = {'content': WikiEditor()}
 
     def merge(self, yours, theirs, ancestor):
@@ -143,7 +143,6 @@ class PageForm(MergeMixin, CommentMixin, forms.ModelForm):
         if _has_blacklist_content(content):
             raise forms.ValidationError()
         
-        #self.clean_name()
         return cleaned_data
 
     def clean_name(self):
