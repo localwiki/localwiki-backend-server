@@ -143,7 +143,7 @@ class PageForm(MergeMixin, CommentMixin, forms.ModelForm):
         if _has_blacklist_content(content):
             raise forms.ValidationError()
         
-        self.clean_name()
+        #self.clean_name()
         return cleaned_data
 
     def clean_name(self):
