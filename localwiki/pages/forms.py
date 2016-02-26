@@ -147,15 +147,6 @@ class PageForm(MergeMixin, CommentMixin, forms.ModelForm):
 
     def clean_name(self):
         name = self.cleaned_data['name']
-        try:
-            page = Page.objects.get(slug__exact=slugify(name))
-            if self.instance != page:
-                raise forms.ValidationError(
-                    _('A page with this name already exists')
-                )
-        except Page.DoesNotExist:
-            pass
-
         if _has_blacklist_title(name):
             raise forms.ValidationError()
 
