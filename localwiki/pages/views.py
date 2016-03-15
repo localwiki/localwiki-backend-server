@@ -37,7 +37,7 @@ from maps.widgets import InfoMap
 from users.views import SetPermissionsView, AddContributorsMixin
 
 from .models import slugify, clean_name, Page, PageFile, url_to_name
-from .forms import PageForm, PageFileForm
+from .forms import PageForm, PageFileForm, _has_blacklist_title
 from .utils import is_user_page
 from .exceptions import PageExistsError
 
@@ -553,6 +553,13 @@ class RenameForm(forms.Form):
     # Translators: This is for the page rename form.
     pagename = forms.CharField(max_length=255, label=ugettext_lazy("New page name"))
     comment = forms.CharField(max_length=150, required=False, label=ugettext_lazy("Comment"))
+
+    def clean_pagename(self):
+        name = self.cleaned_data['pagename']
+        if _has_blacklist_title(name):
+            raise forms.ValidationError()
+
+        return name
 
 
 class PageRenameView(PermissionRequiredMixin, RegionMixin, FormView):
