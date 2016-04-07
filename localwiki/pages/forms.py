@@ -65,7 +65,8 @@ def _has_blacklist_title(content):
         return True
     if re.search(r'844(.{0,3})?[0-9][0-9][0-9](.{0,3})?[0-9][0-9][0-9][0-9]', content):
         return True
-
+    if re.search(r'[0-9]\s*[0-9]\s*[0-9]\s*(.{0,3})?[0-9]\s*[0-9]\s*[0-9]\s*[0-9]\s*', content):
+        return True
     if re.search(r'888(.{0,3})?898(.{0,3})?7342', content):
         return True
     if re.search(r'844(.{0,3})?334(.{0,3})?9099', content):
