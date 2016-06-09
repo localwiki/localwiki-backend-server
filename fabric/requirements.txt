@@ -1,4 +1,4 @@
-Fabric==1.10
+Fabric==1.10.3
 boto==2.34
 shortuuid==0.2
 pexpect==2.4
