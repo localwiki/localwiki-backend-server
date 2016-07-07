@@ -110,9 +110,9 @@ logging.basicConfig(level=logging.INFO)
 
 ####################################################################
 #  Ignore `config_secrets` for development usage.
-# 
+#
 #  Notes for folks deploying code to **localwiki.org (production)**:
-#  
+#
 #    We will likely automate all deployments, making developer
 #    access to config secrets unneccessary for all but a very small
 #    handful of people.
@@ -126,7 +126,7 @@ logging.basicConfig(level=logging.INFO)
 #           * config_secrets/ssl/<hostname>/<hostname>.crt
 #           * config_secrets/ssl/<hostname>/<hostname>.key
 #           * config_secrets/ssl/<hostname>/intermediate.crt (if present)
-#  
+#
 #  You can provision without setting up these secrets, but this will
 #  enable non-self-signed SSL, Sentry, and other stuff as we add it.
 ####################################################################
@@ -160,7 +160,7 @@ def get_ec2_ami(region):
 #
 # ec2-allocate-address
 # ec2-associate-address -i <instance id> <ip address>
-# 
+#
 # and set up a reverse DNS:
 # https://portal.aws.amazon.com/gp/aws/html-forms-controller/contactus/ec2-email-limit-rdns-request
 #
@@ -220,7 +220,7 @@ def production():
     env.host_type = 'production'
 
     setup_config_secrets()
- 
+
 def vagrant():
     # connect to the port-forwarded ssh
     env.roledefs = {
@@ -341,7 +341,7 @@ def install_system_requirements():
     base_system_pkg = [
         'git',
         'unattended-upgrades',
-    ] 
+    ]
     system_python_pkg = [
         'python-dev',
         'python-setuptools',
@@ -368,7 +368,7 @@ def install_system_requirements():
 
     mailserver_pkg = ['postfix']
     packages = (
-        base_system_pkg + 
+        base_system_pkg +
         system_python_pkg +
         solr_pkg +
         apache_pkg +
@@ -376,7 +376,7 @@ def install_system_requirements():
         memcached_pkg +
         varnish_pkg +
         web_pkg +
-        redis_pkg + 
+        redis_pkg +
         mailserver_pkg +
         monitoring
     )
@@ -717,7 +717,7 @@ def setup_ec2():
     create_swap()
 
 def setup_celery():
-    if env.host_type == 'vagrant':   
+    if env.host_type == 'vagrant':
         put('config/init/celery_vagrant.conf', '/etc/init/celery.conf', use_sudo=True)
     else:
         put('config/init/celery.conf', '/etc/init/celery.conf', use_sudo=True)
@@ -763,7 +763,7 @@ def setup_munin():
                 userdb.change_password(username, password)
 
     upload_template('config_secrets/munin-htpasswd', '/etc/munin/munin-htpasswd',
-        context=get_context(env), use_jinja=True, use_sudo=True) 
+        context=get_context(env), use_jinja=True, use_sudo=True)
 
 def setup_mailserver():
     upload_template('config/postfix/main.cf', '/etc/postfix/main.cf',
@@ -797,7 +797,7 @@ def provision():
     setup_repo()
     init_localwiki_install()
     setup_db_based_cache()
-    setup_permissions() 
+    setup_permissions()
     setup_celery()
     setup_varnish()
 
