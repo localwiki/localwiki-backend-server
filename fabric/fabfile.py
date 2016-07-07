@@ -324,6 +324,7 @@ def setup_memcached():
 
 def install_system_requirements():
     # Update package list
+    sudo('apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 2EA8F35793D8809A')
     sudo('apt-get update')
     sudo('apt-get -y install python-software-properties')
 
@@ -332,6 +333,7 @@ def install_system_requirements():
 
     # Need GDAL >= 1.10 and PostGIS 2, so we use this
     # PPA.
+    sudo('apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 314DF160')
     sudo('apt-add-repository -y ppa:ubuntugis/ubuntugis-unstable')
     sudo('apt-get update')
 
