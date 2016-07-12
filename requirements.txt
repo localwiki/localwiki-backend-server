@@ -19,6 +19,7 @@ django-picklefield==0.3.0
 -e git+https://github.com/philipn/django-constance.git@localwiki#egg=django-constance
 celery[redis]==3.1.7
 celery-haystack==0.7.2
+django-celery-transactions==0.1.2
 django-extensions==1.2.5
 -e git+https://github.com/philipn/django-rest-framework.git@localwiki#egg=djangorestframework
 django-filter==0.7
