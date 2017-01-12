@@ -392,7 +392,7 @@ REST_FRAMEWORK = {
 
 # Allow Cross-Origin Resource Sharing headers on API urls
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_URLS_REGEX = r'^/api/.*$'
+CORS_URLS_REGEX = r'(^/api/.*$)|(^/(.+)/map/_get_osm/[^/]*$)'
 
 ENDLESS_PAGINATION_PER_PAGE = 50
 
