@@ -2413,7 +2413,7 @@ msgstr "Advarsel: En anden bruger har lavet ændringer mens du redigerede dette.
 
 #: versionutils/merging/forms.py:55
 msgid ""
-"Someone else made changes before you but yourchanges were successfully "
+"Someone else made changes before you but your changes were successfully "
 "merged."
 msgstr "En anden bruger har lavet ændringer mens du redigerede dette men det er lykkedes at sammenføje dine ændringer til den anden brugers"
 
