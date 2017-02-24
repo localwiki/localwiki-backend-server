@@ -2416,7 +2416,7 @@ msgstr "Waarschuwing: iemand anders heeft reeds wijzigingen aangebracht. Bekijk 
 
 #: versionutils/merging/forms.py:55
 msgid ""
-"Someone else made changes before you but yourchanges were successfully "
+"Someone else made changes before you but your changes were successfully "
 "merged."
 msgstr "Iemand anders voor jou heeft reeds wijzigingen gemaakt, maar je wijzigingen zijn succesvol samengevoegd. "
 

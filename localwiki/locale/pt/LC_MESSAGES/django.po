@@ -2414,7 +2414,7 @@ msgstr "Aviso: alguém gravou alterações antes de si. Por favor verifique as a
 
 #: versionutils/merging/forms.py:55
 msgid ""
-"Someone else made changes before you but yourchanges were successfully "
+"Someone else made changes before you but your changes were successfully "
 "merged."
 msgstr "Alguém gravou alterações antes de si mas as suas alterações foram introduzidas com sucesso."
 

@@ -2419,7 +2419,7 @@ msgstr "Atención: alguien más realizó cambios antes de ti. Por favor revisa l
 
 #: versionutils/merging/forms.py:55
 msgid ""
-"Someone else made changes before you but yourchanges were successfully "
+"Someone else made changes before you but your changes were successfully "
 "merged."
 msgstr "Alguien más hizo cambios antes de ti pero sus cambios fueron combinados satisfactoriamente."
 

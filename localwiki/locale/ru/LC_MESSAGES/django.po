@@ -2417,7 +2417,7 @@ msgstr "Внимание! Кто-то изменил и сохранил ран�
 
 #: versionutils/merging/forms.py:55
 msgid ""
-"Someone else made changes before you but yourchanges were successfully "
+"Someone else made changes before you but your changes were successfully "
 "merged."
 msgstr "Кто-то изменил и сохранил раньше вас, но ваши правки удалось объединить."
 

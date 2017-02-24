@@ -2418,7 +2418,7 @@ msgstr "Warnung: jemand anderes hat für Dich Änderungen vorgenommen. Bitte üb
 
 #: versionutils/merging/forms.py:55
 msgid ""
-"Someone else made changes before you but yourchanges were successfully "
+"Someone else made changes before you but your changes were successfully "
 "merged."
 msgstr "Jemand anderes hat für Dich Änderungen vorgenommen, aber Deine Änderungen wurden erfolgreich vereinigt."
 

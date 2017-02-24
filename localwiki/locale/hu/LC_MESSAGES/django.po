@@ -2417,7 +2417,7 @@ msgstr "Figyelem: valaki már módosítást hajtott végre. Először nézd meg 
 
 #: versionutils/merging/forms.py:55
 msgid ""
-"Someone else made changes before you but yourchanges were successfully "
+"Someone else made changes before you but your changes were successfully "
 "merged."
 msgstr "Valaki már módosította, de a te változtatásaiddal sikeresen összevontuk."
 

@@ -2413,7 +2413,7 @@ msgstr "警告： あなたの前に別の人が変更しました。変更を�
 
 #: versionutils/merging/forms.py:55
 msgid ""
-"Someone else made changes before you but yourchanges were successfully "
+"Someone else made changes before you but your changes were successfully "
 "merged."
 msgstr "あなたの前に別の人が変更しましたが、あなたの変更は正しくマージされました。"
 
