@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-07 23:15-0500\n"
+"POT-Creation-Date: 2017-08-08 23:30-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -530,22 +530,22 @@ msgstr ""
 msgid "Cover photo updated!"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:38
+#: frontpage/templates/frontpage/base.html:39
 #: pages/templates/pages/follow_page.html:12
 msgid "region"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:62
+#: frontpage/templates/frontpage/base.html:63
 #, python-format
 msgid "Welcome to the %(region_name)s LocalWiki!"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:63
+#: frontpage/templates/frontpage/base.html:64
 #, python-format
 msgid "A website about %(region_name)s that <em>anyone</em> can edit"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:65
+#: frontpage/templates/frontpage/base.html:66
 msgid ""
 "\n"
 "        I want to make a page about <span class=\"searchbox\"><input type="
@@ -554,15 +554,15 @@ msgid ""
 "        "
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:86
+#: frontpage/templates/frontpage/base.html:87
 msgid "Change cover"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:88
+#: frontpage/templates/frontpage/base.html:89
 msgid "Save cover"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:111
+#: frontpage/templates/frontpage/base.html:112
 #: pages/templates/pages/page_detail.html:53
 #: users/templates/users/user_page.html:37
 #, python-format
@@ -571,7 +571,7 @@ msgid ""
 "          (%(date)s by %(user_link)s)"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:121
+#: frontpage/templates/frontpage/base.html:122
 #: maps/templates/maps/nearby_pages.html:44
 #: pages/templates/pages/page_detail.html:62
 #: search/templates/search/global_search.html:17
@@ -582,25 +582,25 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:127
+#: frontpage/templates/frontpage/base.html:128
 msgid "Some interesting pages"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:136
+#: frontpage/templates/frontpage/base.html:137
 msgid "Explore more pages"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:140
+#: frontpage/templates/frontpage/base.html:141
 msgid "There are no pages yet.  Add some!"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:141
+#: frontpage/templates/frontpage/base.html:142
 #: themes/sapling/templates/site/add_page_area.html:5
 #: themes/sapling/templates/site/add_page_area.html:9
 msgid "Add a new page"
 msgstr ""
 
-#: frontpage/templates/frontpage/base.html:149
+#: frontpage/templates/frontpage/base.html:150
 msgid "Explore nearby regions"
 msgstr ""
 
@@ -671,22 +671,30 @@ msgid "Japanese"
 msgstr ""
 
 #: main/settings/defaults.py:73
-msgid "French"
+msgid "Chinese"
 msgstr ""
 
 #: main/settings/defaults.py:74
-msgid "Spanish"
+msgid "French"
 msgstr ""
 
 #: main/settings/defaults.py:75
-msgid "German"
+msgid "Spanish"
 msgstr ""
 
 #: main/settings/defaults.py:76
-msgid "Dutch"
+msgid "German"
 msgstr ""
 
 #: main/settings/defaults.py:77
+msgid "Hungarian"
+msgstr ""
+
+#: main/settings/defaults.py:78
+msgid "Dutch"
+msgstr ""
+
+#: main/settings/defaults.py:79
 msgid "Ukrainian"
 msgstr ""
 
@@ -968,14 +976,14 @@ msgstr ""
 #: maps/templates/maps/mapdata_versions.html:25
 #: pages/templates/pages/base.html:29
 #: pages/templates/pages/page_detail.html:62
-#: pages/templates/pages/page_form.html:98
+#: pages/templates/pages/page_form.html:99
 #: pages/templates/pages/page_versions.html:27
 msgid "Edit"
 msgstr ""
 
 #: maps/templates/maps/base.html:28 maps/templates/maps/mapdata_form.html:91
 #: maps/templates/maps/mapdata_versions.html:26
-#: pages/templates/pages/base.html:30 pages/templates/pages/page_form.html:99
+#: pages/templates/pages/base.html:30 pages/templates/pages/page_form.html:100
 #: pages/templates/pages/page_versions.html:28
 msgid "Info"
 msgstr ""
@@ -1056,13 +1064,13 @@ msgid "Please comment about this change:"
 msgstr ""
 
 #: maps/templates/maps/mapdata_form.html:72
-#: pages/templates/pages/page_form.html:80
+#: pages/templates/pages/page_form.html:81
 msgid "Save changes"
 msgstr ""
 
 #: maps/templates/maps/mapdata_form.html:73
 #: pages/templates/pages/page_detail.html:84
-#: pages/templates/pages/page_form.html:81
+#: pages/templates/pages/page_form.html:82
 #: users/templates/users/deactivate.html:17
 #: users/templates/users/user_page.html:150
 msgid "Cancel"
@@ -1125,17 +1133,13 @@ msgstr ""
 msgid "Page %s does not exist!  Please enter a valid page name."
 msgstr ""
 
-#: pages/forms.py:15
+#: pages/forms.py:119
 msgid ""
 "Warning: someone else saved this page before you.  Please resolve edit "
 "conflicts and save again."
 msgstr ""
 
-#: pages/forms.py:46
-msgid "A page with this name already exists"
-msgstr ""
-
-#: pages/forms.py:62
+#: pages/forms.py:169
 msgid "The new file should be of the same type"
 msgstr ""
 
@@ -1247,16 +1251,16 @@ msgstr ""
 msgid "Comment"
 msgstr ""
 
-#: pages/views.py:591
+#: pages/views.py:598
 #, python-format
 msgid "Page renamed to \"%s\""
 msgstr ""
 
-#: pages/views.py:603
+#: pages/views.py:610
 msgid "Move to region (short name)"
 msgstr ""
 
-#: pages/views.py:629
+#: pages/views.py:636
 #, python-format
 msgid ""
 "Page moved to <a href=\"%(page_url)s\">%(page_name)s</a> on <a href="
@@ -1371,7 +1375,7 @@ msgstr ""
 msgid "Editing page \"%(name)s\" - %(super)s"
 msgstr ""
 
-#: pages/templates/pages/page_form.html:76
+#: pages/templates/pages/page_form.html:77
 msgid "Please describe this change:"
 msgstr ""
 
