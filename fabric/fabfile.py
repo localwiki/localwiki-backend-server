@@ -1073,7 +1073,8 @@ def fix_locale():
 def setup_transifex():
     with virtualenv():
         sudo('apt-get install gettext')
-        sudo('pip install transifex-client', user='www-data')
+        sudo('pip install urllib3[secure]')
+        sudo('pip install transifex-client')
 
         with cd(os.path.join(env.src_root, 'localwiki')):
             run('tx init')

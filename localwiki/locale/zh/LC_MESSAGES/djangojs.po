@@ -3,19 +3,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# passerbyid <passerbyid@gmail.com>, 2014
-# passerbyid <passerbyid@gmail.com>, 2014
+# Dongpo Deng <dongpo.deng@gmail.com>, 2016
+# Yuer Lee <passerbyid@gmail.com>, 2014
+# Yuer Lee <passerbyid@gmail.com>, 2014
 # Planetoid Hsu <planetoid@gmail.com>, 2014
 # whisky <whisky@ystaiwan.org.tw>, 2013
 # whisky <whisky@ystaiwan.org.tw>, 2013
+# charlesc <yeouhsin@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-19 00:26-0600\n"
-"PO-Revision-Date: 2015-01-19 06:27+0000\n"
-"Last-Translator: Philip Neustrom <philip@localwiki.org>\n"
-"Language-Team: Chinese (http://www.transifex.com/projects/p/localwiki/language/zh/)\n"
+"POT-Creation-Date: 2015-04-07 23:16-0500\n"
+"PO-Revision-Date: 2017-08-04 04:22+0000\n"
+"Last-Translator: charlesc <yeouhsin@gmail.com>\n"
+"Language-Team: Chinese (http://www.transifex.com/localwiki/localwiki/language/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,47 +28,47 @@ msgstr ""
 #: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:16
 #: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:17
 msgid "Comment Box"
-msgstr ""
+msgstr "意見欄"
 
 #: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:23
 msgid "Title:"
-msgstr ""
+msgstr "標題:"
 
 #: crap_comments/static/js/ckeditor/_source/plugins/commentbox/dialogs/commentbox.js:30
 msgid "Comments:"
-msgstr ""
+msgstr "意見:"
 
-#: maps/static/olwidget/js/sapling_utils.js:211
+#: maps/static/olwidget/js/sapling_utils.js:290
 msgid " for "
-msgstr ""
+msgstr "至"
 
-#: maps/static/olwidget/js/sapling_utils.js:256
+#: maps/static/olwidget/js/sapling_utils.js:335
 msgid ""
 "You've made changes but haven't saved.  Are you sure you want to leave this "
 "page?"
-msgstr "變動還未儲存，確定要離開頁面？"
+msgstr "還未儲存更動，確定要離開頁面？"
 
-#: maps/static/olwidget/js/sapling_utils.js:367
+#: maps/static/olwidget/js/sapling_utils.js:446
 msgid "Things on this map:"
-msgstr ""
+msgstr "在這地圖上的東西"
 
-#: maps/static/olwidget/js/sapling_utils.js:383
+#: maps/static/olwidget/js/sapling_utils.js:462
 msgid "Things inside "
-msgstr ""
+msgstr "在裡面的東西"
 
-#: maps/static/olwidget/js/sapling_utils.js:397
+#: maps/static/olwidget/js/sapling_utils.js:476
 msgid "Things near "
-msgstr ""
+msgstr "在附近的東西"
 
-#: maps/static/olwidget/js/sapling_utils.js:635
+#: maps/static/olwidget/js/sapling_utils.js:714
 msgid "Add marker for lat, lon \"{{ value }}\""
-msgstr ""
+msgstr "增加經緯度 \"{{value}}\" 的地圖標記"
 
 #: pages/static/js/ckeditor/_source/plugins/embed/plugin.js:14
 #: pages/static/js/ckeditor/_source/plugins/embed/dialogs/embed.js:17
 #: pages/static/js/ckeditor/_source/plugins/embed/dialogs/embed.js:18
 msgid "Embed media"
-msgstr "影片嵌入"
+msgstr "嵌入影片"
 
 #: pages/static/js/ckeditor/_source/plugins/embed/dialogs/embed.js:24
 msgid "Paste the embed code below:"
@@ -74,17 +76,17 @@ msgstr "將嵌入程式碼轉貼在此 :"
 
 #: pages/static/js/ckeditor/_source/plugins/embed/dialogs/embed.js:29
 msgid "Please enter the embed code"
-msgstr ""
+msgstr " 請鍵入嵌入的代碼"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/plugin.js:14
 msgid "Include page"
-msgstr ""
+msgstr "包含頁面"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:11
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:17
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:18
 msgid "Include Page"
-msgstr ""
+msgstr "包含頁面"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:24
 msgid "Page name"
@@ -116,7 +118,7 @@ msgstr "百分比"
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:126
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:126
 msgid "Align"
-msgstr ""
+msgstr "對齊"
 
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:131
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:131
@@ -128,14 +130,14 @@ msgstr "無"
 #: pages/static/js/ckeditor/_source/plugins/includepage/dialogs/includepage.js:236
 #, c-format
 msgid "Include page %s"
-msgstr ""
+msgstr "包含頁面%s"
 
 #: pages/static/js/ckeditor/_source/plugins/includetag/plugin.js:14
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:11
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:17
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:18
 msgid "List of tagged pages"
-msgstr ""
+msgstr "列出已標籤的頁面"
 
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:24
 msgid "Tag"
@@ -152,7 +154,7 @@ msgstr "顯示標題"
 #: pages/static/js/ckeditor/_source/plugins/includetag/dialogs/includetag.js:216
 #, c-format
 msgid "List of pages tagged \"%s\""
-msgstr ""
+msgstr "列出有 \"%s\"標籤的頁面"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/plugin.js:34
 msgid "Attach file"
@@ -168,7 +170,7 @@ msgstr "載入檔案..."
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:111
 msgid "No files attached to this page"
-msgstr ""
+msgstr "這個頁面沒有附加檔案"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:114
 msgid "Loading images..."
@@ -176,7 +178,7 @@ msgstr "載入圖檔..."
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:115
 msgid "No images attached to this page"
-msgstr ""
+msgstr "這個頁面沒有附加照片"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:170
 msgid "Attach File"
@@ -189,43 +191,43 @@ msgstr "插入圖檔"
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:249
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:253
 msgid "Choose a file from your computer"
-msgstr ""
+msgstr "從你的電腦中選擇檔案"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:339
 msgid "Select a file"
-msgstr ""
+msgstr "選擇檔案"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:339
 msgid "Select an image"
-msgstr ""
+msgstr "選擇照片"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:347
 msgid "or <a href=\"#\">use a file from the web</a>"
-msgstr ""
+msgstr "或 <a href=\"#\">使用網路上的檔案</a>"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:347
 msgid "or <a href=\"#\">use an image from the web</a>"
-msgstr ""
+msgstr "或 <a href=\"#\">使用網路上的照片</a>"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:358
 msgid "File URL"
-msgstr "檔案 URL"
+msgstr "檔案的網址"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:358
 msgid "Image URL"
-msgstr "圖檔 URL"
+msgstr "圖檔的網址"
 
 #: pages/static/js/ckeditor/_source/plugins/insertimage/dialogs/insertimage.js:396
 msgid "No file selected"
-msgstr ""
+msgstr "沒有選取檔案"
 
 #: pages/static/js/ckeditor/_source/plugins/pagelink/dialogs/pageanchor.js:60
 msgid "Anchor name"
-msgstr ""
+msgstr "錨點名稱"
 
 #: pages/static/js/ckeditor/_source/plugins/pagelink/dialogs/pagelink.js:143
 msgid "Page name or URL"
-msgstr ""
+msgstr "頁面名稱或網址"
 
 #: pages/static/js/ckeditor/_source/plugins/searchbox/plugin.js:14
 #: pages/static/js/ckeditor/_source/plugins/searchbox/dialogs/searchbox.js:10
@@ -236,11 +238,11 @@ msgstr "搜尋框"
 
 #: pages/static/js/ckeditor/_source/plugins/searchbox/dialogs/searchbox.js:23
 msgid "Search query"
-msgstr ""
+msgstr "尋找查尋"
 
 #: pages/static/js/ckeditor/_source/plugins/simpleimage/plugin.js:83
 msgid "Add a caption"
-msgstr "加上標題"
+msgstr "加上圖說"
 
 #: pages/static/js/ckeditor/_source/plugins/simpletable/dialogs/simpletable.js:469
 msgid "Advanced settings..."
@@ -248,7 +250,7 @@ msgstr "進階設定..."
 
 #: pages/static/js/ckeditor/_source/plugins/simpletable/dialogs/simpletable.js:478
 msgid "CSS classes"
-msgstr ""
+msgstr "CSS的類別"
 
 #: pages/static/js/ckeditor/_source/plugins/wikiplugins/plugin.js:23
 #: pages/static/js/ckeditor/_source/plugins/wikiplugins/plugin.js:24
@@ -257,12 +259,12 @@ msgstr "插入物件"
 
 #: themes/sapling/assets/js/base.js:122
 msgid "Search for \"{{ value }}\""
-msgstr ""
+msgstr "搜尋 \"{{value}}\""
 
 #: themes/sapling/assets/js/base.js:136 themes/sapling/assets/js/base.js:173
 #: themes/sapling/assets/js/base.js:203
 msgid "Search all of LocalWiki"
-msgstr ""
+msgstr "搜尋所有 LocalWiki"
 
 #: versionutils/diff/static/js/diff/htmldiff.js:24
 msgid "Previous"
@@ -278,7 +280,7 @@ msgstr "預覽更動"
 
 #: versionutils/diff/static/js/diff/htmldiff.js:59
 msgid "You can use the &larr; and &rarr; keys, too."
-msgstr ""
+msgstr "你可以使用 &larr; 和 &larr; （左右鍵）"
 
 #: versionutils/diff/static/js/diff/htmldiff.js:69
 msgid "Content was deleted"

@@ -3,20 +3,23 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# passerbyid <passerbyid@gmail.com>, 2014
-# passerbyid <passerbyid@gmail.com>, 2014
+# Yuer Lee <passerbyid@gmail.com>, 2014
+# Yuer Lee <passerbyid@gmail.com>, 2014
 # Planetoid Hsu <planetoid@gmail.com>, 2014
+# Pomin Wu <pomin5@gmail.com>, 2016
 # whisky <whisky@ystaiwan.org.tw>, 2013
-# whisky <whisky@ystaiwan.org.tw>, 2013
+# whisky <whisky@ystaiwan.org.tw>, 2013,2017
+# charlesc <yeouhsin@gmail.com>, 2017
 # 張育章 <tmas68@gmail.com>, 2014
+# 程緯 林 <qqoaoa399@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-22 02:00-0600\n"
-"PO-Revision-Date: 2015-01-22 08:06+0000\n"
-"Last-Translator: Philip Neustrom <philip@localwiki.org>\n"
-"Language-Team: Chinese (http://www.transifex.com/projects/p/localwiki/language/zh/)\n"
+"POT-Creation-Date: 2015-04-07 23:15-0500\n"
+"PO-Revision-Date: 2017-08-05 06:14+0000\n"
+"Last-Translator: charlesc <yeouhsin@gmail.com>\n"
+"Language-Team: Chinese (http://www.transifex.com/localwiki/localwiki/language/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,82 +29,83 @@ msgstr ""
 #: activity/feeds.py:40 activity/feeds.py:46
 #, python-format
 msgid "Activity on %s"
-msgstr ""
+msgstr "%s 的活動"
 
 #: activity/feeds.py:81 activity/feeds.py:177
 #, python-format
 msgid "to version %s"
-msgstr ""
+msgstr "到版本%s"
 
 #: activity/feeds.py:88 activity/feeds.py:184
 #, python-format
 msgid " with comment \"%s\""
-msgstr ""
+msgstr "有 評論 \"%s\""
 
 #: activity/feeds.py:89 activity/feeds.py:185
 #, python-format
 msgid "%(title)s was %(change_type)s by %(user)s%(comment)s."
-msgstr ""
+msgstr "%(title)s 的%(change_type)s是由 %(user)s%(comment)s "
 
 #: activity/feeds.py:148 activity/feeds.py:154
 #, python-format
 msgid "Changes for %(title)s on %(site_name)s"
-msgstr ""
+msgstr "在%(site_name)s上%(title)s的改變"
 
 #: activity/templates/activity/all_activity_index.html:6
 #: activity/templates/activity/all_activity_index.html:18
 msgid "All activity on LocalWiki"
-msgstr ""
+msgstr "所有在 LocalWiki 的活動"
 
 #: activity/templates/activity/all_activity_index.html:24
 #: activity/templates/activity/followed_activity_index.html:19
 #: activity/templates/activity/index.html:25
 msgid "Your Feed"
-msgstr ""
+msgstr "你的貢獻"
 
 #: activity/templates/activity/all_activity_index.html:26
 #: activity/templates/activity/followed_activity_index.html:20
 #: activity/templates/activity/index.html:27
 msgid "All LocalWiki"
-msgstr ""
+msgstr "所有 LocalWiki"
 
 #: activity/templates/activity/all_activity_index.html:36
-#: activity/templates/activity/followed_activity_index.html:42
+#: activity/templates/activity/followed_activity_index.html:46
 #: activity/templates/activity/user_activity_index.html:38
 #, python-format
 msgid ""
 "Need help? Want advice? Check out the <a href=\"%(guide_url)s\">LocalWiki "
 "guide</a>."
-msgstr ""
+msgstr "需要幫助嗎? 想要來點建議嗎? 看看<a href=\"%(guide_url)s\">LocalWiki指南</a>吧！"
 
 #: activity/templates/activity/followed_activity_index.html:15
 #: themes/sapling/templates/site/common_nav.html:11
 #: themes/sapling/templates/site/nav.html:18
 msgid "News Feed"
-msgstr ""
+msgstr "最新資訊"
 
 #: activity/templates/activity/followed_activity_index.html:30
 msgid "Welcome to LocalWiki! What's next?"
-msgstr ""
+msgstr "歡迎來到 LocalWiki！接下來呢？"
 
 #: activity/templates/activity/followed_activity_index.html:32
 msgid "Explore LocalWiki communities"
-msgstr ""
+msgstr "探索 LocalWiki 社群"
+
+#: activity/templates/activity/followed_activity_index.html:33
+#: activity/templates/activity/followed_activity_index.html:41
+msgid ""
+"Follow pages, regions and people when you see <div "
+"class=\"follow_item\"><div class=\"follow little button\"><span "
+"class=\"text\"></span></div></div> Then activity will show up here!"
+msgstr "當你看到<div class=\"follow_item\"><div class=\"follow little button\"><span class=\"text\"></span></div></div>，可以按下去以追蹤頁面、地區和人，然後最新的資訊就會顯示在這裡！"
 
 #: activity/templates/activity/followed_activity_index.html:34
 msgid "Create a new LocalWiki region"
-msgstr ""
+msgstr "新增一個 LocalWiki 地區"
 
 #: activity/templates/activity/followed_activity_index.html:35
 msgid "Follow <strong>@localwiki</strong> on Twitter"
-msgstr ""
-
-#: activity/templates/activity/followed_activity_index.html:44
-#, python-format
-msgid ""
-"Want to see <strong><a href=\"%(all_activity_url)s\">all activity across "
-"LocalWiki</a>?</strong>"
-msgstr ""
+msgstr "在 Twitter上追蹤<strong>@localwiki</strong>"
 
 #: activity/templates/activity/followed_activity_page.html:22
 #, python-format
@@ -109,7 +113,7 @@ msgid ""
 "\n"
 "            <span class=\"user\">%(actor_link)s</span> started following %(user_followed_link)s <span class=\"weak\">%(timesince)s ago</span>\n"
 "          "
-msgstr ""
+msgstr "\n<span class=\"user\">%(actor_link)s</span>已開始追蹤%(user_followed_link)s（在<span class=\"weak\">%(timesince)s之前</span>）"
 
 #: activity/templates/activity/followed_activity_page.html:27
 #, python-format
@@ -117,7 +121,7 @@ msgid ""
 "\n"
 "            <span class=\"user\">%(actor_link)s</span> created page <a href=\"%(page_url)s\">%(page_name)s</a> on <a href=\"%(region_url)s\">%(region_name)s</a> <span class=\"weak\">%(timesince)s ago</span>\n"
 "          "
-msgstr ""
+msgstr "\n<span class=\"user\">%(actor_link)s</span>於<span class=\"weak\">%(timesince)s前</span>在<a href=\"%(region_url)s\">%(region_name)s</a>新增頁面<a href=\"%(page_url)s\">%(page_name)s</a>"
 
 #: activity/templates/activity/followed_activity_page.html:32
 #, python-format
@@ -125,7 +129,7 @@ msgid ""
 "\n"
 "            <span class=\"user\">%(actor_link)s</span> created region <a href=\"%(region_url)s\">%(region_name)s</a> <span class=\"weak\">%(timesince)s ago</span>\n"
 "          "
-msgstr ""
+msgstr "\n<span class=\"user\">%(actor_link)s</span>於<span class=\"weak\">%(timesince)s前</span>新增地區<a href=\"%(region_url)s\">%(region_name)s</a>"
 
 #: activity/templates/activity/followed_activity_page.html:37
 #, python-format
@@ -133,7 +137,7 @@ msgid ""
 "\n"
 "            <span class=\"user\">%(actor_link)s</span> starred <a href=\"%(page_url)s\">%(page_name)s</a> on <a href=\"%(region_url)s\">%(region_name)s</a> <span class=\"weak\">%(timesince)s ago</span>\n"
 "          "
-msgstr ""
+msgstr "\n<span class=\"user\">%(actor_link)s</span>於<span class=\"weak\">%(timesince)s前</span>開始追蹤<a href=\"%(region_url)s\">%(region_name)s</a>的<a href=\"%(page_url)s\">%(page_name)s</a>"
 
 #: activity/templates/activity/followed_activity_page.html:42
 #, python-format
@@ -141,18 +145,18 @@ msgid ""
 "\n"
 "            <span class=\"user\">%(actor_link)s</span> starred <a href=\"%(region_url)s\">%(region_name)s</a> <span class=\"weak\">%(timesince)s ago</span>\n"
 "          "
-msgstr ""
+msgstr "\n<span class=\"user\">%(actor_link)s</span>於<span class=\"weak\">%(timesince)s前</span>開始追蹤<a href=\"%(region_url)s\">%(region_name)s</a>"
 
 #: activity/templates/activity/followed_activity_page.html:53
 #: activity/templates/activity/index_page.html:15
 #, python-format
 msgid "last modified %(version_date)s ago"
-msgstr ""
+msgstr "最新變更於%(version_date)s前"
 
 #: activity/templates/activity/followed_activity_page.html:61
 #: activity/templates/activity/index_page.html:23
 msgid "new"
-msgstr ""
+msgstr "新增"
 
 #: activity/templates/activity/followed_activity_page.html:63
 #: activity/templates/activity/index_page.html:25
@@ -162,19 +166,19 @@ msgstr "已刪除"
 #: activity/templates/activity/followed_activity_page.html:65
 #: activity/templates/activity/index_page.html:27
 msgid "changes"
-msgstr ""
+msgstr "變更"
 
 #: activity/templates/activity/followed_activity_page.html:69
 #: activity/templates/activity/index_page.html:31
 #, python-format
-msgid "Reverted to version from %(version_date_timesince)s ago"
-msgstr ""
+msgid "Restored version from %(version_date_timesince)s ago"
+msgstr "恢復到 %(version_date_timesince)s前的版本"
 
 #: activity/templates/activity/followed_activity_page.html:75
 #: activity/templates/activity/index_page.html:37
 #, python-format
 msgid "Redirected to <a href=\"%(url)s\">%(destination)s</a>"
-msgstr ""
+msgstr "重新導向至<a href=\"%(url)s\">%(destination)s</a>"
 
 #: activity/templates/activity/followed_activity_page.html:87
 #, python-format
@@ -182,7 +186,7 @@ msgid ""
 "\n"
 "                via %(user_ip)s\n"
 "                "
-msgstr ""
+msgstr "\n透過%(user_ip)s"
 
 #: activity/templates/activity/followed_activity_page.html:110
 #: activity/templates/activity/index_page.html:62
@@ -194,114 +198,114 @@ msgstr "更多資訊"
 #: activity/templates/activity/index.html:9
 #: themes/sapling/templates/site/nav.html:9
 msgid "Activity"
-msgstr ""
+msgstr "活動"
 
 #: activity/templates/activity/index.html:19
 #, python-format
 msgid ""
 "<a href=\"%(region_activity)s\">Activity</a> on <a "
 "href=\"%(region_main_url)s\">%(region_name)s</a>"
-msgstr ""
+msgstr "<a href=\"%(region_main_url)s\">%(region_name)s</a>上的<a href=\"%(region_activity)s\">活動</a>"
 
 #: activity/templates/activity/index.html:37
 #, python-format
 msgid ""
 "For statistics about pages, maps, and more, check out the <a "
 "href=\"%(dashboard_main_url)s\">dashboard</a>"
-msgstr ""
+msgstr "有關頁面、地圖和其他統計資料，請查看<a href=\"%(dashboard_main_url)s\">儀表板</a>"
 
 #: activity/templates/activity/user_activity_index.html:10
 #, python-format
 msgid "%(username)s contribution history"
-msgstr ""
+msgstr "%(username)s的貢獻紀錄"
 
 #: activity/templates/activity/user_activity_index.html:24
 #, python-format
 msgid "%(user_link)s page contribution history"
-msgstr ""
+msgstr "%(user_link)s的頁面貢獻紀錄"
 
 #: activity/templates/activity/user_activity_index.html:26
 #, python-format
 msgid "%(user_link)s map contribution history"
-msgstr ""
+msgstr "%(user_link)s地圖貢獻紀錄"
 
 #: activity/templates/activity/user_activity_index.html:28
 #, python-format
 msgid "%(user_link)s total contribution history"
-msgstr ""
+msgstr "%(user_link)s所有貢獻紀錄"
 
 #: blog/models.py:18
 msgid "Draft"
-msgstr ""
+msgstr "草稿"
 
 #: blog/models.py:19
 msgid "Public"
-msgstr ""
+msgstr "公開"
 
 #: blog/models.py:21
 msgid "title"
-msgstr ""
+msgstr "標題"
 
 #: blog/models.py:22
 msgid "slug"
-msgstr ""
+msgstr "文章代稱"
 
 #: blog/models.py:24
 msgid "body"
-msgstr ""
+msgstr "內容"
 
 #: blog/models.py:25
 msgid "tease"
-msgstr ""
+msgstr "摘要"
 
 #: blog/models.py:25
 msgid "Concise text suggested. Does not appear in RSS feed."
-msgstr ""
+msgstr "建議採用精確的字詞。不會出現在 RSS 裡。"
 
 #: blog/models.py:26
 msgid "status"
-msgstr ""
+msgstr "狀態"
 
 #: blog/models.py:27
 msgid "publish"
-msgstr ""
+msgstr "發表"
 
 #: blog/models.py:28
 msgid "created"
-msgstr ""
+msgstr "已建立"
 
 #: blog/models.py:29
 msgid "modified"
-msgstr ""
+msgstr "已更改"
 
 #: blog/models.py:35
 msgid "post"
-msgstr ""
+msgstr "貼文"
 
 #: blog/models.py:36
 msgid "posts"
-msgstr ""
+msgstr "貼文"
 
 #: blog/templates/blog/base_blog.html:16
 #: themes/sapling/templates/site/common_nav.html:19
 #: themes/sapling/templates/site/nav.html:22
 msgid "Blog"
-msgstr ""
+msgstr "部落格"
 
 #: blog/templates/blog/post_archive.html:6
 #: blog/templates/blog/post_detail.html:6
 msgid "LocalWiki blog"
-msgstr ""
+msgstr "LocalWiki 部落格"
 
 #: blog/templates/blog/post_archive.html:16
 msgid "View this post"
-msgstr ""
+msgstr "觀看這則貼文"
 
 #: blog/templates/blog/post_archive.html:20
 #: blog/templates/blog/post_detail.html:20
 #: maps/templates/maps/mapdata_detail.html:36
-#: maps/templates/maps/mapdata_diff.html:63
-#: maps/templates/maps/mapdata_diff.html:68
+#: maps/templates/maps/mapdata_diff.html:65
+#: maps/templates/maps/mapdata_diff.html:70
 #: redirects/templates/redirects/redirect_diff.html:44
 #: redirects/templates/redirects/redirect_diff.html:49
 #: tags/templates/tags/pagetagset_diff.html:38
@@ -314,43 +318,43 @@ msgstr "由"
 
 #: blog/templates/blog/post_archive.html:31
 msgid "View older posts"
-msgstr ""
+msgstr "觀看較舊的貼文"
 
 #: blog/templates/blog/post_archive.html:31
 msgid "Older"
-msgstr ""
+msgstr "較舊的"
 
 #: blog/templates/blog/post_archive.html:34
 msgid "View newer posts"
-msgstr ""
+msgstr "觀看較新的貼文"
 
 #: blog/templates/blog/post_archive.html:34
 msgid "Newer"
-msgstr ""
+msgstr "較新的"
 
 #: blog/templates/blog/post_detail.html:16
 msgid "View this object"
-msgstr ""
+msgstr "檢視這個物件"
 
 #: ckeditor/models.py:30
 msgid "This field contains invalid data."
-msgstr ""
+msgstr "這個欄位的資料格式不合。"
 
 #: ckeditor/models.py:178
 msgid "XML text"
-msgstr ""
+msgstr "XML 文字"
 
 #: ckeditor/models.py:188
 msgid "XHTML text"
-msgstr ""
+msgstr "XHTML文字"
 
 #: ckeditor/models.py:197
 msgid "HTML5 text"
-msgstr ""
+msgstr "HTML5文字"
 
 #: ckeditor/models.py:229
 msgid "HTML5 fragment text"
-msgstr ""
+msgstr "HTML5 片段文字"
 
 #: ckeditor/views.py:14
 msgid "Unable to upload"
@@ -362,19 +366,19 @@ msgstr "上傳結果"
 
 #: crap_comments/templatetags.py:30
 msgid "Comments:"
-msgstr ""
+msgstr "評論:"
 
 #: crap_comments/views.py:39
 msgid "Comment added"
-msgstr ""
+msgstr "已新增評論"
 
 #: crap_comments/views.py:47
 msgid "Your comment was added. "
-msgstr ""
+msgstr "已新增你的評論"
 
 #: crap_comments/templates/crap_comments/comment_form.html:14
 msgid "Add Comment"
-msgstr ""
+msgstr "新增評論"
 
 #: crap_comments/templates/crap_comments/comment_form.html:18
 #, python-format
@@ -382,27 +386,27 @@ msgid ""
 "You must be logged in to comment on this page.  Please <a "
 "href=\"%(login_url)s?next=//%(request.get_host)s%(request.path)s\" "
 "rel=\"nofollow\">log in</a>."
-msgstr ""
+msgstr "你必須登入才能夠對此頁面進行評論。請<a href=\"%(login_url)s?next=//%(request.get_host)s%(request.path)s\" rel=\"nofollow\">登入</a>。"
 
 #: crap_comments/templates/crap_comments/comment_form.html:22
 msgid ""
 "You can only comment on the current version of this page, not a historical "
 "version. Please view the current version of this page instead."
-msgstr ""
+msgstr "您只能對此頁面目前的版本進行評論，而非過去的版本。請查看此頁面目前的版本。"
 
-#: dashboard/views.py:194 dashboard/views.py:207
+#: dashboard/views.py:205 dashboard/views.py:218
 msgid "pages"
 msgstr "頁面"
 
-#: dashboard/views.py:195 dashboard/views.py:210
+#: dashboard/views.py:206 dashboard/views.py:221
 msgid "maps"
 msgstr "地圖"
 
-#: dashboard/views.py:196 dashboard/views.py:213
+#: dashboard/views.py:207 dashboard/views.py:224
 msgid "files"
 msgstr "檔案"
 
-#: dashboard/views.py:198 dashboard/views.py:216
+#: dashboard/views.py:209 dashboard/views.py:227
 msgid "redirects"
 msgstr "重新導向"
 
@@ -412,7 +416,7 @@ msgstr "儀表板"
 
 #: dashboard/templates/dashboard/index.html:20
 msgid "Statistics loading.  This may take several minutes the first time."
-msgstr ""
+msgstr "統計資料載入中。第一次載入時可能會需要花上幾分鐘。"
 
 #: dashboard/templates/dashboard/index.html:25
 #: dashboard/templates/dashboard/render.html:4
@@ -436,90 +440,90 @@ msgstr "地圖"
 msgid "Redirects"
 msgstr "重新導向"
 
-#: dashboard/templates/dashboard/index.html:29
+#: dashboard/templates/dashboard/index.html:30
 #: dashboard/templates/dashboard/render.html:8
 msgid "Users"
 msgstr "使用者"
 
-#: dashboard/templates/dashboard/index.html:34
+#: dashboard/templates/dashboard/index.html:36
 #: dashboard/templates/dashboard/render.html:13
 msgid "Growth over time"
-msgstr ""
+msgstr "成長量（依時間）"
 
-#: dashboard/templates/dashboard/index.html:36
-#: dashboard/templates/dashboard/index.html:46
-#: dashboard/templates/dashboard/index.html:56
-#: dashboard/templates/dashboard/index.html:66
+#: dashboard/templates/dashboard/index.html:38
+#: dashboard/templates/dashboard/index.html:48
+#: dashboard/templates/dashboard/index.html:58
+#: dashboard/templates/dashboard/index.html:69
 msgid "Generating graph..."
 msgstr "圖表產生中..."
 
-#: dashboard/templates/dashboard/index.html:44
+#: dashboard/templates/dashboard/index.html:46
 #: dashboard/templates/dashboard/render.html:20
 msgid "Edits over time"
-msgstr ""
+msgstr "編輯數量（依時間）"
 
-#: dashboard/templates/dashboard/index.html:54
+#: dashboard/templates/dashboard/index.html:56
 #: dashboard/templates/dashboard/render.html:27
 msgid "Page content growth over time"
-msgstr ""
+msgstr "頁面內容成長（依時間）"
 
-#: dashboard/templates/dashboard/index.html:64
+#: dashboard/templates/dashboard/index.html:67
 #: dashboard/templates/dashboard/render.html:34
 msgid "Users registered over time"
-msgstr ""
+msgstr "使用者註冊數量（依時間）"
 
 #: explore/templates/explore/alphabetical_index.html:6
 #: explore/templates/explore/just_list.html:7
 #: explore/templates/explore/random_index.html:7
 #, python-format
 msgid "Explore %(region_name)s"
-msgstr ""
+msgstr "探索%(region_name)s"
 
 #: explore/templates/explore/alphabetical_index.html:8
 #: explore/templates/explore/random_index.html:9
 #, python-format
 msgid "Explore <a href=\"%(region_url)s\">%(region_name)s</a>"
-msgstr ""
+msgstr "探索<a href=\"%(region_url)s\">%(region_name)s</a>"
 
 #: explore/templates/explore/alphabetical_index.html:42
 #: explore/templates/explore/just_list.html:32
 #: explore/templates/explore/random_index.html:47
 #: regions/templates/regions/region_explore_index.html:58
 msgid "Default"
-msgstr ""
+msgstr "預設"
 
 #: explore/templates/explore/alphabetical_index.html:43
 #: explore/templates/explore/just_list.html:33
 #: explore/templates/explore/random_index.html:48
 #: tags/templates/tags/tag_list.html:12
 msgid "Alphabetical"
-msgstr ""
+msgstr "按照字母順序"
 
 #: explore/templates/explore/alphabetical_index.html:44
 #: explore/templates/explore/just_list.html:34
 #: explore/templates/explore/random_index.html:49
 msgid "List"
-msgstr ""
+msgstr "清單"
 
 #: explore/templates/explore/just_list.html:9
 msgid "Explore - All Pages"
-msgstr ""
+msgstr "探索-所有頁面"
 
 #: explore/templates/explore/random_index.html:13
 msgid "Take tour"
-msgstr ""
+msgstr "帶您導覽"
 
 #: explore/templates/explore/random_tour.html:9
 msgid "Random Tour"
-msgstr ""
+msgstr "隨機導覽"
 
 #: explore/templates/explore/random_tour.html:14
 msgid "Stop tour"
-msgstr ""
+msgstr "暫停導覽"
 
 #: explore/templates/explore/random_tour.html:15
 msgid "Start tour"
-msgstr ""
+msgstr "繼續導覽"
 
 #: frontpage/views.py:161
 msgid "Cover photo updated!"
@@ -528,43 +532,43 @@ msgstr "封面照片更新成功!"
 #: frontpage/templates/frontpage/base.html:38
 #: pages/templates/pages/follow_page.html:12
 msgid "region"
-msgstr ""
+msgstr "地區"
 
-#: frontpage/templates/frontpage/base.html:60
+#: frontpage/templates/frontpage/base.html:62
 #, python-format
 msgid "Welcome to the %(region_name)s LocalWiki!"
-msgstr "歡迎到 %(region_name)s 的 LocalWiki!"
-
-#: frontpage/templates/frontpage/base.html:61
-#, python-format
-msgid "A website about %(region_name)s that <em>anyone</em> can edit"
-msgstr ""
+msgstr "歡迎到 %(region_name)s 的 LocalWiki！"
 
 #: frontpage/templates/frontpage/base.html:63
+#, python-format
+msgid "A website about %(region_name)s that <em>anyone</em> can edit"
+msgstr "一個關於%(region_name)s、<em>每個人</em>都可以編輯的網頁。"
+
+#: frontpage/templates/frontpage/base.html:65
 msgid ""
 "\n"
 "        I want to make a page about <span class=\"searchbox\"><input type=\"text\" name=\"q\" value=\"\"><input type=\"submit\" value=\"Search or create page\"></span>\n"
 "        "
-msgstr ""
+msgstr "\n我想建立一個關於 <span class=\"searchbox\"><input type=\"text\" name=\"q\" value=\"\"><input type=\"submit\" value=\"搜尋或建立頁面\"></span> 的頁面"
 
-#: frontpage/templates/frontpage/base.html:84
+#: frontpage/templates/frontpage/base.html:86
 msgid "Change cover"
 msgstr "更改封面照片"
 
-#: frontpage/templates/frontpage/base.html:86
+#: frontpage/templates/frontpage/base.html:88
 msgid "Save cover"
 msgstr "儲存封面照片"
 
-#: frontpage/templates/frontpage/base.html:109
+#: frontpage/templates/frontpage/base.html:111
 #: pages/templates/pages/page_detail.html:53
 #: users/templates/users/user_page.html:37
 #, python-format
 msgid ""
 "Revision %(version_number)s\n"
 "          (%(date)s by %(user_link)s)"
-msgstr ""
+msgstr "第%(version_number)s個修訂版\n(%(date)s由%(user_link)s)"
 
-#: frontpage/templates/frontpage/base.html:119
+#: frontpage/templates/frontpage/base.html:121
 #: maps/templates/maps/nearby_pages.html:44
 #: pages/templates/pages/page_detail.html:62
 #: search/templates/search/global_search.html:17
@@ -575,27 +579,27 @@ msgstr ""
 msgid "View"
 msgstr "檢視"
 
-#: frontpage/templates/frontpage/base.html:125
+#: frontpage/templates/frontpage/base.html:127
 msgid "Some interesting pages"
-msgstr ""
+msgstr "你可能感興趣的頁面"
 
-#: frontpage/templates/frontpage/base.html:134
+#: frontpage/templates/frontpage/base.html:136
 msgid "Explore more pages"
-msgstr ""
+msgstr "探索更多頁面"
 
-#: frontpage/templates/frontpage/base.html:138
+#: frontpage/templates/frontpage/base.html:140
 msgid "There are no pages yet.  Add some!"
-msgstr ""
+msgstr "現在尚未有頁面。新增一些頁面吧！"
 
-#: frontpage/templates/frontpage/base.html:139
+#: frontpage/templates/frontpage/base.html:141
 #: themes/sapling/templates/site/add_page_area.html:5
 #: themes/sapling/templates/site/add_page_area.html:9
 msgid "Add a new page"
-msgstr ""
+msgstr "新增一個頁面"
 
-#: frontpage/templates/frontpage/base.html:147
+#: frontpage/templates/frontpage/base.html:149
 msgid "Explore nearby regions"
-msgstr ""
+msgstr "探索附近的地區"
 
 #: links/models.py:13 pages/models.py:33
 #, python-format
@@ -603,11 +607,11 @@ msgid ""
 "Provided slug is invalid. Slugs must be lowercase, contain no trailing or "
 "leading whitespace, and contain only alphanumber characters along with "
 "%(KEEP_CHARACTERS)s"
-msgstr ""
+msgstr "您提供的頁面簡稱是無效的。必須採用英文小寫、前後不包含空格、且只允許英數字存在%(KEEP_CHARACTERS)s。"
 
 #: links/models.py:30
 msgid "The number of times the source page links to the destination page."
-msgstr ""
+msgstr "來源頁面連結至目標頁面的次數。"
 
 #: links/templates/links/links_for_page.html:15
 #, python-format
@@ -615,21 +619,21 @@ msgid ""
 "\n"
 "             Links for <a href=\"%(page_url)s\">%(page_name)s</a>\n"
 "          "
-msgstr ""
+msgstr "\n關於 <a href=\"%(page_url)s\">%(page_name)s</a> 的連結"
 
 #: links/templates/links/links_for_page.html:25
 #, python-format
 msgid ""
 "\n"
 "<h3>Pages that link to <a href=\"%(page_url)s\">%(page_name)s</a>:</h3>\n"
-msgstr ""
+msgstr "\n<h3>連結到<a href=\"%(page_url)s\">%(page_name)s</a>的頁面：</h3>\n"
 
 #: links/templates/links/links_for_page.html:34
 #, python-format
 msgid ""
 "\n"
 "<h3>Pages <a href=\"%(page_url)s\">%(page_name)s</a> links to:</h3>\n"
-msgstr ""
+msgstr "\n<h3>頁面<a href=\"%(page_url)s\">%(page_name)s</a>連結到：</h3>\n"
 
 #: main/settings/defaults.py:43
 msgid ""
@@ -638,7 +642,7 @@ msgid ""
 "Use</a>, and you irrevocably agree to release your contribution under the "
 "CC-BY 4.0 License. See <a href=\"https://localwiki.org/main/Copyrights\" "
 "target=\"_blank\">Copyrights</a>."
-msgstr ""
+msgstr "按下「儲存變更」按鈕，表示您同意我們的 <a href=\"https://localwiki.org/main/Terms_of_Use\" target=\"_blank\">使用條款</a>，並同意採用創用 CC 姓名標示 4.0 的授權條款來發表你的貢獻。詳見 <a href=\"https://localwiki.org/main/Copyrights\" target=\"_blank\">著作權</a>。"
 
 #: main/settings/defaults.py:45
 msgid ""
@@ -648,16 +652,16 @@ msgid ""
 "href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">CC-"
 "BY 4.0 License</a>. See <a href=\"https://localwiki.org/main/Copyrights\" "
 "target=\"_blank\">Copyrights</a>."
-msgstr ""
+msgstr "我同意<a href=\"https://localwiki.org/main/Terms_of_Use\" target=\"_blank\">使用條款</a>，除非另有說明，也一併同意採用<a href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">創用CC 姓名標示 4.0條款</a>來發佈我的貢獻。詳見<a href=\"https://localwiki.org/main/Copyrights\" target=\"_blank\">著作權</a>。"
 
 #: main/settings/defaults.py:47
 msgid ""
 "I would like to receive occasional updates about this project via email."
-msgstr ""
+msgstr "我想透過電子郵件收到有關 LocalWiki 的不定期更新資訊。"
 
 #: main/settings/defaults.py:71
 msgid "English"
-msgstr "英語"
+msgstr "英文"
 
 #: main/settings/defaults.py:72
 msgid "Japanese"
@@ -665,23 +669,23 @@ msgstr "日文"
 
 #: main/settings/defaults.py:73
 msgid "French"
-msgstr ""
+msgstr "法文"
 
 #: main/settings/defaults.py:74
 msgid "Spanish"
-msgstr ""
+msgstr "西班牙文"
 
 #: main/settings/defaults.py:75
 msgid "German"
-msgstr ""
+msgstr "德文"
 
 #: main/settings/defaults.py:76
 msgid "Dutch"
-msgstr ""
+msgstr "荷蘭文"
 
 #: main/settings/defaults.py:77
 msgid "Ukrainian"
-msgstr ""
+msgstr "烏克蘭文"
 
 #: main_content/templates/main_content/base.html:6
 #: main_content/templates/main_content/base.html:28
@@ -695,48 +699,48 @@ msgstr "LocalWiki"
 msgid ""
 "\n"
 "Supported by\n"
-msgstr ""
+msgstr "\n支持單位：\n"
 
 #: main_content/templates/main_content/index.html:13
 msgid ""
 "The grassroots effort to collect, share and open the world's local knowledge"
-msgstr ""
+msgstr "蒐集、分享、開放全世界的在地知識的草根運動"
 
 #: main_content/templates/main_content/index.html:18
 msgid "Join us and share what you love about where you live."
-msgstr ""
+msgstr "加入我們，並分享您對於現居地區的喜愛。"
 
 #: main_content/templates/main_content/index.html:19
 msgid ""
 "LocalWiki is a grassroots effort to collect, share and open the world's "
 "local knowledge."
-msgstr ""
+msgstr "LocalWiki 是一個蒐集、分享、開放全世界的在地知識的草根運動。"
 
 #: main_content/templates/main_content/index.html:25
 msgid ""
 "LocalWiki is a grassroots effort to collect, share and <span "
 "class=\"highlight\">open the world's local knowledge</span>"
-msgstr ""
+msgstr "LocalWiki 是一個蒐集、分享、 <span class=\"highlight\">開放全世界的在地知識</span>的草根運動。 "
 
 #: main_content/templates/main_content/index.html:30
 #: regions/templates/regions/region_explore_index.html:27
 #: regions/templates/regions/region_list.html:18
 msgid "Explore LocalWiki"
-msgstr ""
+msgstr "探索 LocalWiki"
 
 #: main_content/templates/main_content/index.html:39
 msgid "Explore all communities"
-msgstr ""
+msgstr "探索所有社群"
 
 #: main_content/templates/main_content/index.html:45
 #: main_content/templates/main_content/index.html:138
 msgid "Bring LocalWiki to your community"
-msgstr ""
+msgstr "把 LocalWiki 帶到您的社群"
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:54
 msgid "A community knowledge commons"
-msgstr ""
+msgstr "社群知識共享"
 
 #. Translators: 'A community knowledge commons' descriptive text for main home
 #. page
@@ -746,12 +750,12 @@ msgid ""
 "\n"
 "What if there was somewhere you could go to learn all about where you live? A place to learn about your <a href=\"/oakland/Neighborhoods\" target=\"_blank\">neighborhoods</a>, about your local <a href=\"/santacruz/Parks_and_Open_Spaces\" target=\"_blank\">parks</a>, about being a <a href=\"/davis/Parenting\" target=\"_blank\">parent in your city</a>, about <a href=\"/tags/history\" target=\"_blank\">history</a>, <a href=\"/detroit/Detroit_Department_of_Transportation_%%28DDOT%%29\" target=\"_blank\">politics</a> &ndash; anything and everything useful and beautiful about your community. With LocalWiki, everybody has a way to share and learn about where they live.\n"
 "            "
-msgstr ""
+msgstr "\n如果有個地方可以讓你學習所有有關你居住的地方的知識呢？\n一個可以了解你<a href=\"/oakland/Neighborhoods\" target=\"_blank\">居住的社區</a>、附近<a href=\"/santacruz/Parks_and_Open_Spaces\" target=\"_blank\">公園</a>，有關<a href=\"/davis/Parenting\" target=\"_blank\">這個城市</a><a href=\"/tags/history\" target=\"_blank\">歷史</a>、<a href=\"/detroit/Detroit_Department_of_Transportation_%%28DDOT%%29\" target=\"_blank\">政治</a>等等；任何所有你的社區有用且美麗之處的地方。\n有了LocalWiki，任何人都可以分享並學習有關他們所居住的社區知識。"
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:67
 msgid "A collaborative storytelling tool"
-msgstr ""
+msgstr "一起說故事的工具"
 
 #. Translators: 'A collaborative storytelling tool' descriptive text for main
 #. home page
@@ -760,12 +764,12 @@ msgid ""
 "\n"
 "            Whether it's knowing about <a href=\"/sf/Green_Hairstreak_Butterfly_Corridor\" target=\"_blank\">butterfly corridors</a> or the history of a <a href=\"/islavista/Coal_Oil_Point\" target=\"_blank\">local beach</a>, everyone holds a piece of the puzzle of what it's like to live in their community. And unlike a news site or a blog, anyone can add and modify LocalWiki pages. LocalWiki lets you and your neighbors tell the story of your community, together.\n"
 "            "
-msgstr ""
+msgstr "\n不論是有關<a href=\"/sf/Green_Hairstreak_Butterfly_Corridor\" target=\"_blank\">蝴蝶走廊</a>或是<a href=\"/islavista/Coal_Oil_Point\" target=\"_blank\">當地海灘</a>的歷史，每個人手中都握有一片他們居住社區樣貌的拼圖。與新聞網站或部落格不同，任何人都可以在這裡新增或修改 LocalWiki 的頁面。LocalWiki 讓您和您的鄰居「一起」訴說社區的故事。"
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:80
 msgid "A global effort"
-msgstr ""
+msgstr "全世界的共同努力"
 
 #. Translators: 'A global effort' descriptive text for main home page
 #: main_content/templates/main_content/index.html:82
@@ -773,12 +777,12 @@ msgid ""
 "\n"
 "              From <a href=\"https://ja.localwiki.org/sapporo/\" target=\"_blank\">Sapporo, Japan</a> to <a href=\"/oakland/\" target=\"_blank\">Oakland, California</a>, communities across the world use LocalWiki to share their local knowledge. Learn about the issues that affect nearby communities, and communities halfway across the globe. There is a whole world to discover!\n"
 "              "
-msgstr ""
+msgstr "\n從<a href=\"https://ja.localwiki.org/sapporo/\" target=\"_blank\">日本的札幌</a>到<a href=\"/oakland/\" target=\"_blank\">加州的奧克蘭</a>，世界各地的社群都使用LocalWiki 來分享他們的在地知識，了解影響附近社區、和全球各地社區的議題。這裡有一整個世界可以探索！"
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:93
 msgid "Free, open and non-profit"
-msgstr ""
+msgstr "自由、開放、非營利"
 
 #. Translators: 'Free, open and non-profit' descriptive text for main home
 #. page
@@ -787,12 +791,12 @@ msgid ""
 "\n"
 "              Like a park or a public library, LocalWiki is a public good. LocalWiki is free for anyone to <a href=\"/main/Copyrights\" target=\"_blank\">read, copy and reuse for any purpose</a>, and the backend code powering LocalWiki is open-source. We do not run any advertisements, and we are a 501(c)(3) non-profit organization. You can <a href=\"https://www.patreon.com/localwiki\" target=\"_blank\">donate to support LocalWiki here</a>.\n"
 "              "
-msgstr ""
+msgstr "\n就像是公園或公共圖書館，LocalWiki 是一種共益服務。LocalWiki 可以免費讓任何人<a href=\"/main/Copyrights\" target=\"_blank\">ㄐㄧ進行任何目的的閱讀、複製、再利用</a>，LocalWiki 的後端程式碼也是開放原始碼。我們並不刊登任何廣告，我們是一個屬於美國501(c)(3)規範的非營利組織。您可以<a href=\"https://www.patreon.com/localwiki\" target=\"_blank\">捐款支持 LocalWiki</a>。"
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:106
 msgid "An API for your city"
-msgstr ""
+msgstr "屬於您的城市的 API（應用程式介面）"
 
 #. Translators: 'An API for your city' descriptive text for main home page
 #: main_content/templates/main_content/index.html:108
@@ -800,12 +804,12 @@ msgid ""
 "\n"
 "            LocalWiki represents a free, universally-accessible collection of the world's local knowledge upon which we hope countless civic and locally-relevant applications will be built. Our <a href=\"/api/\" target=\"_blank\">geospatially-aware, read-write API</a> makes it easy to integrate LocalWiki with your application, or to import useful local data from elsewhere!\n"
 "              "
-msgstr ""
+msgstr "\nLocalWiki 代表的是一個自由的、人人可取用的世界各地知識，我們希望可以依此建立在許多公共的、在地的應用。我們提供<a href=\"/api/\" target=\"_blank\">包含地理資訊的可讀寫的應用程式介面</a>，將有助於把 LocalWiki 整合到您的應用系統、或是從其他地方匯入有用的在地資料。"
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:119
 msgid "It's easy!"
-msgstr ""
+msgstr "這很簡單！"
 
 #. Translators: 'It's easy!' descriptive text for main home page
 #: main_content/templates/main_content/index.html:121
@@ -814,16 +818,16 @@ msgid ""
 "\n"
 "              Adding to LocalWiki is as easy as making a Facebook post – contributing <a href=\"/main/Help\" target=\"_blank\">requires no technical knowledge</a> or academic background. We have no complicated rules for how to format a page, or even <a href=\"/main/What_can_I_write_about%%3F\" target=\"_blank\">what to write about</a>: if it's useful or beautiful to your community, then it's worth sharing!\n"
 "              "
-msgstr ""
+msgstr "\n想要在LocalWiki有所貢獻<a href=\"/main/Help\" target=\"_blank\">完全不需要任何技術性知識</a>或學術背景，就像在臉書PO文一樣簡單。我們也沒有複雜的規則去要求一個頁面的形式，甚至是<a href=\"/main/What_can_I_write_about%%3F\" target=\"_blank\">你所寫的內容</a>: 如果這是有用或是你的社區的美麗之處，那就是值得分享的了！"
 
 #: main_content/templates/main_content/index.html:132
 msgid ""
 "Yelp is aimed at the consumer in us. LocalWiki inspires the citizen in us."
-msgstr ""
+msgstr "Yelp 的目標是針對我們之中的消費者。LocalWiki 的目標則是激勵我們之中的公民。"
 
 #: main_content/templates/main_content/index.html:133
 msgid "Sue Gardner, Former Executive Director, Wikimedia Foundation"
-msgstr ""
+msgstr "Sue Gardner，維基媒體基金會前任執行總監"
 
 #: main_content/templates/main_content/index.html:143
 #, python-format
@@ -841,78 +845,78 @@ msgid ""
 "    in <span class=\"num\">%(countries_count)s</span> countries and <span class=\"num\">%(languages_count)s</span> languages.\n"
 "    </div>\n"
 "    "
-msgstr ""
+msgstr "\n<div>\n<span class=\"num\">%(page_count)s+</span>個頁面、<span class=\"num\">%(region_count)s</span>個地區\n%(map_media)s\n</div>\n<a href=\"%(regions_list)s\" target=\"_blank\" id=\"stats_map_cover\"></a>\n<div id=\"stats_map\">\n%(map)s\n</div>\n<div>\n在<span class=\"num\">%(countries_count)s</span>個國家、有<span class=\"num\">%(languages_count)s</span>種語言。\n</div>"
 
 #: main_content/templates/main_content/index.html:159
 msgid "Recent blog posts"
-msgstr ""
+msgstr "最新的部落格文章"
 
 #: main_content/templates/main_content/index.html:177
 msgid "More blog posts"
-msgstr ""
+msgstr "更多部落格文章"
 
 #: main_content/templates/main_content/index.html:183
 msgid ""
 "Bridge photo CC-BY Stuart Seeger. Janes Walk photo by HiMY SYeD. Notice "
 "board photo CC-BY-SA-NC Bettina Walter."
-msgstr ""
+msgstr "Bridge photo CC-BY Stuart Seeger. Janes Walk photo by HiMY SYeD. Notice board photo CC-BY-SA-NC Bettina Walter."
 
 #: maps/feeds.py:26 maps/feeds.py:45
 #, python-format
 msgid "Map for \"%s\""
-msgstr ""
+msgstr "%s的地圖"
 
 #: maps/fields.py:172
 #, python-format
 msgid ""
 "The '%(fieldname)s' attribute can only be accessed from %(ownername)s "
 "instances."
-msgstr ""
+msgstr "%(fieldname)s的屬性只能被%(ownername)s實體取用"
 
 #: maps/fields.py:217
 #, python-format
 msgid "cannot set %(cname)s CollectionFrom with value of type: %(vtype)s"
-msgstr ""
+msgstr "%(cname)s CollectionFrom 無法以 %(vtype)s 為類型值進行設定"
 
 #: maps/validators.py:14
 #, python-format
 msgid "Map error: %s."
-msgstr ""
+msgstr "地圖錯誤:%s。"
 
 #: maps/views.py:239
 #, python-format
 msgid ""
 "<a href=\"%(map_url)s\">Map</a> for tag \"<a "
 "href=\"%(page_tag_url)s\">%(tag_name)s</a>\""
-msgstr ""
+msgstr "<a href=\"%(map_url)s\">地圖</a>有標籤\"<a href=\"%(page_tag_url)s\">%(tag_name)s</a>\""
 
 #: maps/views.py:268
 #, python-format
 msgid "Map for tag \"<a href=\"%(page_tag_url)s\">%(tag_name)s</a>\""
-msgstr ""
+msgstr "有\"<a href=\"%(page_tag_url)s\">%(tag_name)s</a>\" 標籤的地圖"
 
-#: maps/views.py:387 pages/views.py:222
+#: maps/views.py:387 pages/views.py:244
 #, python-format
 msgid "<p>What do you know about %s?</p>"
-msgstr ""
+msgstr "<p>關於%s，你知道些甚麼呢？</p>"
 
 #: maps/views.py:406
 #, python-format
 msgid ""
 "Map saved! You should probably go <a href=\"%s\">edit the page that was "
 "created</a>, too."
-msgstr ""
+msgstr "已儲存地圖！您也可以去<a href=\"%s\">編輯其他已經建立好的頁面</a>。"
 
 #: maps/templates/maps/attribution.html:2
 msgid ""
 "Map data <a href=\"http://www.openstreetmap.org/copyright\" "
 "target=\"_blank\">© OpenStreetMap contributors</a>. Map tiles via <a "
 "href=\"http://mapbox.com\" target=\"_blank\">MapBox</a>."
-msgstr ""
+msgstr "圖資提供：<a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">© OpenStreetMap 貢獻者</a>。圖磚提供： <a href=\"http://mapbox.com\" target=\"_blank\">MapBox</a>。"
 
 #: maps/templates/maps/base.html:6
 msgid "Recent changes on this Map"
-msgstr ""
+msgstr "此地圖最新的更改"
 
 #: maps/templates/maps/base.html:10 maps/templates/maps/mapdata_list.html:24
 #: maps/templates/maps/mapdata_list.html:30
@@ -946,15 +950,15 @@ msgstr "刪除地圖"
 #: pages/templates/pages/editor_actions.html:13
 #: pages/templates/pages/editor_actions.html:15
 msgid "Security"
-msgstr "安全"
+msgstr "安全性"
 
 #: maps/templates/maps/mapdata_detail.html:21
 msgid "Map for"
-msgstr ""
+msgstr "地圖"
 
 #: maps/templates/maps/mapdata_detail.html:35
-#: maps/templates/maps/mapdata_diff.html:62
-#: maps/templates/maps/mapdata_diff.html:67
+#: maps/templates/maps/mapdata_diff.html:64
+#: maps/templates/maps/mapdata_diff.html:69
 #: redirects/templates/redirects/redirect_diff.html:43
 #: redirects/templates/redirects/redirect_diff.html:48
 #: tags/templates/tags/pagetagset_diff.html:37
@@ -970,7 +974,7 @@ msgid ""
 "\n"
 "        Contributed by <span class=\"contributor_list\">%(contributors_html)s</span> and <a href=\"%(request_path)s/_history/\">%(contributors_number)s</a> others.\n"
 "        "
-msgstr ""
+msgstr "\n由<span class=\"contributor_list\">%(contributors_html)s</span>和<a href=\"%(request_path)s/_history/\">%(contributors_number)s</a>以及其他人所貢獻"
 
 #: maps/templates/maps/mapdata_detail.html:55
 #: pages/templates/pages/page_detail.html:99
@@ -979,36 +983,36 @@ msgid ""
 "\n"
 "        Contributed by <span class=\"contributor_list\">%(contributors_html)s</span>\n"
 "        "
-msgstr ""
+msgstr "\n由<span class=\"contributor_list\">%(contributors_html)s</span>貢獻"
 
-#: maps/templates/maps/mapdata_diff.html:52
+#: maps/templates/maps/mapdata_diff.html:54
 msgid "Differences for map on"
-msgstr ""
+msgstr "地圖的差異"
 
-#: maps/templates/maps/mapdata_diff.html:53
+#: maps/templates/maps/mapdata_diff.html:55
 #, python-format
 msgid "Differences for <a href=\"%(maps_global)s\">Map</a>"
-msgstr ""
+msgstr "<a href=\"%(maps_global)s\">地圖</a>的差異"
 
-#: maps/templates/maps/mapdata_diff.html:73
+#: maps/templates/maps/mapdata_diff.html:75
 #: pages/templates/pages/page_diff.html:57
 #: tags/templates/tags/pagetagset_diff.html:48
 msgid "Deletions are marked like this"
-msgstr ""
+msgstr "刪除的部分會被標記成這樣"
 
-#: maps/templates/maps/mapdata_diff.html:76
+#: maps/templates/maps/mapdata_diff.html:78
 #: pages/templates/pages/page_diff.html:60
 #: tags/templates/tags/pagetagset_diff.html:51
 msgid "Additions are marked like this"
-msgstr ""
+msgstr "新增的部分會被標記成這樣"
 
 #: maps/templates/maps/mapdata_form.html:38
 msgid "Editing map for"
-msgstr ""
+msgstr "編輯地圖"
 
 #: maps/templates/maps/mapdata_form.html:68
 msgid "Please comment about this change:"
-msgstr ""
+msgstr "請留下有關這個改變的註解:"
 
 #: maps/templates/maps/mapdata_form.html:72
 #: pages/templates/pages/page_form.html:80
@@ -1025,28 +1029,28 @@ msgstr "取消"
 
 #: maps/templates/maps/mapdata_list.html:37
 msgid "Near You"
-msgstr ""
+msgstr "在你附近"
 
 #: maps/templates/maps/mapdata_list.html:52
 #: maps/templates/maps/mapdata_list.html:56
 msgid "Add a new map"
-msgstr ""
+msgstr "新增一個地圖"
 
 #: maps/templates/maps/mapdata_list.html:54
 msgid "What's here? (Name of page)"
-msgstr ""
+msgstr "這是哪裡？（頁面名稱）"
 
 #: maps/templates/maps/mapdata_new.html:6
 msgid "Map for page not found"
-msgstr ""
+msgstr "找不到此頁面的地圖"
 
 #: maps/templates/maps/mapdata_new.html:7
 msgid "Map for page"
-msgstr ""
+msgstr "頁面的地圖"
 
 #: maps/templates/maps/mapdata_new.html:7
 msgid "does not exist (yet!)"
-msgstr ""
+msgstr "尚未存在"
 
 #: maps/templates/maps/mapdata_new.html:15
 msgid "Create this map"
@@ -1054,45 +1058,45 @@ msgstr "建立地圖"
 
 #: maps/templates/maps/mapdata_versions.html:16
 msgid "Previous versions of map for"
-msgstr ""
+msgstr "先前的地圖版本"
 
 #: maps/templates/maps/nearby_pages.html:27
 #: maps/templates/maps/nearby_pages.html:28
 msgid "Pages near you"
-msgstr ""
+msgstr "你附近的頁面"
 
 #: maps/templates/maps/nearby_pages.html:40
 msgid "No pages near you. Make some!"
-msgstr ""
+msgstr "你附近沒有頁面耶，新增一些頁面吧！"
 
 #: page_scores/models.py:29
 #, python-format
 msgid "Page score %s: %s"
-msgstr ""
+msgstr "頁面分數%s:%s"
 
 #: pages/feeds.py:52 pages/feeds.py:96
 #, python-format
 msgid "File %(filename)s on page \"%(pagename)s\""
-msgstr ""
+msgstr "%(filename)s檔案在\"%(pagename)s\"頁面"
 
 #: pages/fields.py:81
 #, python-format
 msgid "Page %s does not exist!  Please enter a valid page name."
-msgstr ""
+msgstr "%s頁面不存在！請輸入有效的頁面名稱。"
 
 #: pages/forms.py:15
 msgid ""
 "Warning: someone else saved this page before you.  Please resolve edit "
 "conflicts and save again."
-msgstr ""
+msgstr "警告: 有其他人已經在你之前先儲存了這個頁面。請解決此不一致的問題，並再重新儲存一次。"
 
 #: pages/forms.py:46
 msgid "A page with this name already exists"
-msgstr ""
+msgstr "已經有相同名稱的頁面了"
 
 #: pages/forms.py:62
 msgid "The new file should be of the same type"
-msgstr ""
+msgstr "新的檔案必須是同樣的檔案類型。"
 
 #: pages/models.py:72
 msgid "Page name is invalid."
@@ -1101,16 +1105,16 @@ msgstr "頁面名稱錯誤."
 #: pages/models.py:153 pages/models.py:166
 #, python-format
 msgid "Renamed from \"%s\""
-msgstr ""
+msgstr "重新命名\"%s\""
 
 #: pages/models.py:157
 #, python-format
 msgid "The page '%s' already exists!"
-msgstr ""
+msgstr "已經存在這個 %s頁面！"
 
 #: pages/models.py:197 pages/models.py:216 pages/models.py:238
 msgid "Parent page renamed"
-msgstr ""
+msgstr "已重新命名父頁面"
 
 #: pages/models.py:280
 msgid "file"
@@ -1120,11 +1124,11 @@ msgstr "檔案"
 msgid ""
 "The embedded URL is not on the list of approved providers.  Contact the site"
 " administrator to add it."
-msgstr ""
+msgstr "我們目前無法使用您所提供的嵌入網址。請聯繫網站管理員。"
 
 #: pages/plugins.py:453
 msgid "Invalid embed code"
-msgstr "嵌入碼錯誤"
+msgstr "無效的嵌入碼"
 
 #: pages/plugins.py:465 search/templates/search/base.html:17
 #: search/templates/search/base.html:61
@@ -1133,17 +1137,17 @@ msgstr "嵌入碼錯誤"
 msgid "Search or create page"
 msgstr "搜尋或建立頁面"
 
-#: pages/signals.py:19
+#: pages/signals.py:20
 msgid "Redirect created"
-msgstr ""
+msgstr "已建立重新導向"
 
-#: pages/signals.py:25
+#: pages/signals.py:26
 msgid "Page created"
-msgstr "頁面已建立"
+msgstr "已建立頁面"
 
 #: pages/views.py:148
 msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr ""
+msgstr "感謝您的修改。您對細節的重視是值得讚賞的！"
 
 #: pages/views.py:156
 #, python-format
@@ -1152,94 +1156,99 @@ msgid ""
 "href=\"%(login_url)s?next=%(current_path)s\"><strong>log in</strong></a> or "
 "<a href=\"%(register_url)s?next=%(current_path)s\"><strong>create an "
 "account</strong></a>."
-msgstr ""
+msgstr "已儲存所做的修改！為了使用您的名稱進行編輯，請<a href=\"%(login_url)s?next=%(current_path)s\"><strong>登入</strong></a>或<a href=\"%(register_url)s?next=%(current_path)s\"><strong>新增一個帳號</strong></a>。"
 
 #: pages/views.py:167
 #, python-format
 msgid ""
 "<p class=\"create_map\"><a href=\"%s\" class=\"button little map\"><span "
 "class=\"text\">Create a map</span></a> for this page?</p>"
-msgstr ""
+msgstr "<p class=\"create_map\">為這個頁面</p><a href=\"%s\" class=\"button little map\"><span class=\"text\">新增一個地圖</span></a>？"
 
 #: pages/views.py:192
 msgid "Follow this page"
-msgstr ""
+msgstr "追蹤這個頁面"
 
 #: pages/views.py:194
 #, python-format
 msgid "%(follow_page_notice)s for updates!"
-msgstr ""
+msgstr "%(follow_page_notice)s更新！"
 
 #. Translators: Keep under < 100 characters
 #: pages/views.py:198
 #, python-format
 msgid "I just edited %(page)s on @localwiki! %(page_url)s"
-msgstr ""
+msgstr "我剛才在＠localwiki編輯%(page)s！%(page_url)s"
 
 #: pages/views.py:203
 msgid "Tell the world about this page:"
-msgstr ""
+msgstr "告訴其他人有關這個頁面的資訊："
 
-#: pages/views.py:437
+#: pages/views.py:236 tags/forms.py:118 tags/views.py:381
+#, python-format
+msgid "added %(name)s %(added)s."
+msgstr "新增%(name)s%(added)s"
+
+#: pages/views.py:459
 msgid "You must provide a page name when creating a page."
-msgstr "建立新頁面，必須輸入頁面名稱"
+msgstr "建立新頁面時，必須輸入頁面名稱。"
 
-#: pages/views.py:518
+#: pages/views.py:540
 msgid "A file with this name already exists"
 msgstr "存在相同檔名的檔案"
 
 #. Translators: This is for the page rename form.
-#: pages/views.py:532
+#: pages/views.py:554
 msgid "New page name"
 msgstr "新頁面名稱"
 
-#: pages/views.py:533 versionutils/versioning/forms.py:18
+#: pages/views.py:555 versionutils/versioning/forms.py:18
 msgid "Comment"
-msgstr "註記"
+msgstr "評論"
 
-#: pages/views.py:569
+#: pages/views.py:591
 #, python-format
 msgid "Page renamed to \"%s\""
-msgstr ""
+msgstr "重新命名頁面為\"%s\""
 
-#: pages/views.py:581
+#: pages/views.py:603
 msgid "Move to region (short name)"
-msgstr ""
+msgstr "移至地區（簡稱）"
 
-#: pages/views.py:607
+#: pages/views.py:629
 #, python-format
 msgid ""
 "Page moved to <a href=\"%(page_url)s\">%(page_name)s</a> on <a "
 "href=\"%(region_url)s\">%(region_slug)s</a>"
-msgstr ""
+msgstr "頁面移至<a href=\"%(page_url)s\">%(page_name)s</a>（於<a href=\"%(region_url)s\">%(region_slug)s</a>）"
 
 #: pages/widgets.py:37
 msgid "Normal"
-msgstr "正常"
+msgstr "一般"
 
 #: pages/widgets.py:38
 msgid "Heading 1"
-msgstr "Heading 1"
+msgstr "標題 1"
 
 #: pages/widgets.py:39
 msgid "Heading 2"
-msgstr "Heading 2"
+msgstr "標題 2"
 
 #: pages/widgets.py:40
 msgid "Heading 3"
-msgstr "Heading 3"
+msgstr "標題 3"
 
 #: pages/widgets.py:41
 msgid "Formatted"
-msgstr "格式化"
+msgstr "加上框線"
 
 #: pages/widgets.py:42
 msgid "Typewriter"
-msgstr ""
+msgstr "打字機字體"
 
 #: pages/templates/pages/editor_actions.html:6
 msgid "Edit map"
-msgstr ""
+msgstr "編輯地圖"
 
 #: pages/templates/pages/editor_actions.html:7
 #: versionutils/templates/versionutils/delete_form.html:11
@@ -1252,15 +1261,15 @@ msgstr "重新導向"
 
 #: pages/templates/pages/editor_actions.html:19
 msgid "Move"
-msgstr ""
+msgstr "移動"
 
 #: pages/templates/pages/follow_page.html:9
 msgid "page"
-msgstr ""
+msgstr "頁面"
 
 #: pages/templates/pages/page_detail.html:36
 msgid "Redirected from"
-msgstr ""
+msgstr "重新導向："
 
 #: pages/templates/pages/page_detail.html:79
 #: users/templates/users/user_page.html:145
@@ -1275,12 +1284,12 @@ msgstr "新增標籤"
 #: pages/templates/pages/page_diff.html:19
 #, python-format
 msgid "Differences for %(name)s"
-msgstr ""
+msgstr "%(name)s的差異"
 
 #: pages/templates/pages/page_diff.html:20
 #, python-format
 msgid "Differences for <a href=\"%(pretty_slug)s\">%(new_name)s</a>"
-msgstr ""
+msgstr "<a href=\"%(pretty_slug)s\">%(new_name)s</a>的差異"
 
 #: pages/templates/pages/page_diff.html:31
 #, python-format
@@ -1288,7 +1297,7 @@ msgid ""
 "\n"
 "                        Revision %(version_number)s ( %(date)s by %(user_link)s)\n"
 "                    "
-msgstr ""
+msgstr "\n修訂版%(version_number)s（%(date)s由%(user_link)s）"
 
 #: pages/templates/pages/page_diff.html:35
 #: pages/templates/pages/page_diff.html:48
@@ -1297,7 +1306,7 @@ msgid ""
 "\n"
 "                        , \"%(comment)s\"\n"
 "                        "
-msgstr ""
+msgstr "\n，\"%(comment)s\""
 
 #: pages/templates/pages/page_diff.html:44
 #, python-format
@@ -1305,11 +1314,11 @@ msgid ""
 "\n"
 "\t\t\t        Revision %(version_number)s (%(date)s by %(user_link)s)\n"
 "\t\t          "
-msgstr ""
+msgstr "\n\t\t\t修訂版%(version_number)s（%(date)s由%(user_link)s）\n\t\t"
 
 #: pages/templates/pages/page_files.html:26
 msgid "Files attached to this page:"
-msgstr ""
+msgstr "這個頁面的附加檔案："
 
 #: pages/templates/pages/page_files.html:41
 msgid "View page"
@@ -1318,11 +1327,11 @@ msgstr "檢視頁面"
 #: pages/templates/pages/page_form.html:5
 #, python-format
 msgid "Editing page \"%(name)s\" - %(super)s"
-msgstr ""
+msgstr "編輯頁面＂%(name)s＂－%(super)s"
 
 #: pages/templates/pages/page_form.html:76
 msgid "Please describe this change:"
-msgstr "請描述這次的變動:"
+msgstr "請簡要描述本次修改:"
 
 #: pages/templates/pages/page_move_region.html:14
 #: pages/templates/pages/page_rename.html:14
@@ -1331,38 +1340,38 @@ msgstr "送出"
 
 #: pages/templates/pages/page_new.html:5
 msgid "Page not found"
-msgstr "頁面不存在"
+msgstr "找不到網頁"
 
 #: pages/templates/pages/page_new.html:6
 #, python-format
 msgid "Page \"%(name)s\" does not exist (yet!)"
-msgstr ""
+msgstr "頁面＂%(name)s＂並不存在！"
 
 #: pages/templates/pages/page_new.html:15
 #: search/templates/search/search.html:16
 #: search/templates/search/search.html:84
 msgid "Create this page"
-msgstr ""
+msgstr "建立此頁面"
 
 #: pages/templates/pages/page_permissions.html:5
 #, python-format
 msgid "Permissions for page \"%(name)s\" - %(super)s"
-msgstr ""
+msgstr "頁面＂%(name)s＂－%(super)s的權限"
 
 #: pages/templates/pages/page_permissions.html:13
 msgid "Who can change this page?"
-msgstr ""
+msgstr "誰可以修改此頁面？"
 
 #: pages/templates/pages/page_permissions.html:15
 #: redirects/templates/redirects/redirect_permissions.html:17
 #: users/forms.py:12
 msgid "Everyone"
-msgstr ""
+msgstr "所有人"
 
 #: pages/templates/pages/page_permissions.html:16
 #: redirects/templates/redirects/redirect_permissions.html:18
 msgid "Only these users:"
-msgstr ""
+msgstr "只有下列使用者："
 
 #: pages/templates/pages/page_permissions.html:22
 #: redirects/templates/redirects/redirect_permissions.html:24
@@ -1378,7 +1387,7 @@ msgstr "儲存"
 #: pages/templates/pages/page_versions.html:14
 #, python-format
 msgid "Previous versions of page \"%(name)s\" - %(super)s"
-msgstr ""
+msgstr "頁面＂%(name)s＂的先前版本 －%(super)s"
 
 #: pages/templates/pages/page_versions.html:20
 #, python-format
@@ -1386,19 +1395,19 @@ msgid ""
 " Looking for <a href=\"../_files/\">files</a>, <a "
 "href=\"%(page_links_url)s\" rel=\"nofollow\">links</a>, or <a "
 "href=\"../_tags/_history/\" rel=\"nofollow\">tags</a>?"
-msgstr ""
+msgstr "尋找<a href=\"../_files/\">檔案</a>，<a href=\"%(page_links_url)s\" rel=\"nofollow\">連結</a>，或<a href=\"../_tags/_history/\" rel=\"nofollow\">標籤</a>？"
 
 #: pages/templates/pages/pagefile_diff.html:34
 #, python-format
 msgid "Differences for %(new_name)s on %(new_slug)s"
-msgstr ""
+msgstr "%(new_name)s於%(new_slug)s的差異"
 
 #: pages/templates/pages/pagefile_diff.html:35
 #, python-format
 msgid ""
 "Differences for %(new_name)s on <a "
 "href=\"%(url_pages_show)s\">%(new_attached_to_page)s</a>"
-msgstr ""
+msgstr "%(new_name)s於<a href=\"%(url_pages_show)s\">%(new_attached_to_page)s</a>的差異"
 
 #: pages/templates/pages/pagefile_diff.html:44
 #, python-format
@@ -1406,7 +1415,7 @@ msgid ""
 "\n"
 "                      Revision %(version_number)s ( %(date)s by %(user_link)s)\n"
 "                  "
-msgstr ""
+msgstr "\n修訂版%(version_number)s（%(date)s由%(user_link)s）"
 
 #: pages/templates/pages/pagefile_diff.html:48
 #: pages/templates/pages/pagefile_diff.html:61
@@ -1415,7 +1424,7 @@ msgid ""
 "\n"
 "                      , \"%(comment)s\"\n"
 "                      "
-msgstr ""
+msgstr "\n，＂%(comment)s＂"
 
 #: pages/templates/pages/pagefile_diff.html:57
 #, python-format
@@ -1423,36 +1432,36 @@ msgid ""
 "\n"
 "\t\t          Revision %(version_number)s (%(date)s by %(user_link)s)\n"
 "\t\t        "
-msgstr ""
+msgstr "\n\t\t修訂版%(version_number)s（%(date)s由%(user_link)s）\n\t\t"
 
 #: pages/templates/pages/pagefile_diff.html:85
 msgid "File info"
-msgstr ""
+msgstr "檔案資訊"
 
 #: pages/templates/pages/pagefile_info.html:5
 msgid "Recent changes for this file"
-msgstr ""
+msgstr "此檔案最近的修改"
 
 #: pages/templates/pages/pagefile_info.html:12
 #, python-format
 msgid "Information about \"%(name)s\" on %(slug)s - %(super)s"
-msgstr ""
+msgstr "關於%(name)s的資訊（%(slug)s－%(super)s）"
 
 #: pages/templates/pages/pagefile_info.html:13
 #, python-format
 msgid ""
 "Information about \"%(name)s\" on <a "
 "href=\"%(pages_show_url)s\">%(attached_to_page)s</a>"
-msgstr ""
+msgstr "關於＂%(name)s＂的資訊（於<a href=\"%(pages_show_url)s\">%(attached_to_page)s</a>頁面）"
 
 #: pages/templates/pages/pagefile_info.html:37
 #, python-format
 msgid "Download %(name)s"
-msgstr ""
+msgstr "下載%(name)s"
 
 #: pages/templates/pages/pagefile_info.html:42
 msgid "Upload a new version"
-msgstr ""
+msgstr "上傳一個新的版本"
 
 #: pages/templates/pages/pagefile_info.html:54
 msgid "Upload"
@@ -1461,80 +1470,80 @@ msgstr "上傳"
 #: pages/templates/pages/pagefile_info.html:60
 #: tags/templates/tags/pagetagset_versions.html:30
 msgid "Previous versions:"
-msgstr ""
+msgstr "先前的版本："
 
 #: pages/templatetags/pages_tags.py:126
 #, python-format
 msgid ""
 "Unable to include <a href=\"%(page_url)s\" "
 "class=\"missing_link\">%(page_name)s</a>"
-msgstr ""
+msgstr "無法包含<a href=\"%(page_url)s\" class=\"missing_link\">%(page_name)s</a>"
 
 #: pages/templatetags/pages_tags.py:134
 #, python-format
 msgid ""
 "Unable to include <a href=\"%(page_url)s\">%(page_name)s</a>: endless "
 "include loop."
-msgstr ""
+msgstr "無法包含<a href=\"%(page_url)s\">%(page_name)s</a>：無限循環"
 
 #: redirects/feeds.py:30
 #, python-format
 msgid "Redirect %(objsrc)s --> %(objdest)s"
-msgstr ""
+msgstr "重新導向%(objsrc)s-->%(objdest)s"
 
 #: redirects/forms.py:17
 msgid "Destination"
-msgstr ""
+msgstr "目的地"
 
 #: redirects/models.py:35
 msgid "You cannot redirect a page to itself"
-msgstr ""
+msgstr "您無法重新導向此頁面至它本身"
 
 #: redirects/views.py:51 redirects/views.py:117
 #: versionutils/versioning/views.py:67
 msgid "Thank you for your changes. "
-msgstr ""
+msgstr "感謝您的修改"
 
 #: redirects/views.py:52
 #, python-format
 msgid "This page now redirects to <a href=\"%(url)s\">%(obj)s</a>."
-msgstr ""
+msgstr "此頁面現在會重新導向至<a href=\"%(url)s\">%(obj)s</a>。"
 
 #: redirects/views.py:118
 msgid "The redirect has been deleted"
-msgstr ""
+msgstr "該重新導向已經被刪除"
 
 #: redirects/templates/redirects/redirect_diff.html:34
 #: redirects/templates/redirects/redirect_diff.html:35
 #, python-format
 msgid "Differences for %(new.source)s redirect"
-msgstr ""
+msgstr "%(new.source)s 重新導向的差異"
 
 #: redirects/templates/redirects/redirect_form.html:27
 msgid "Update redirect"
-msgstr ""
+msgstr "更新重新導向"
 
 #: redirects/templates/redirects/redirect_form.html:28
 msgid "Delete redirect"
-msgstr ""
+msgstr "刪除重新導向"
 
 #: redirects/templates/redirects/redirect_form.html:30
 msgid "Create redirect"
-msgstr ""
+msgstr "新增重新導向"
 
 #: redirects/templates/redirects/redirect_permissions.html:7
 #, python-format
 msgid "Permissions for redirect \"%(name)s\" - %(super)s"
-msgstr ""
+msgstr "重新導向\"%(name)s\"的權限 -%(super)s"
 
 #: redirects/templates/redirects/redirect_permissions.html:15
 msgid "Who can change this redirect?"
-msgstr ""
+msgstr "誰可以修改這個重新導向？"
 
 #: region_scores/models.py:19
 #, python-format
 msgid "Region score %s: %s"
-msgstr ""
+msgstr "地區分數%s：%s"
 
 #: regions/forms.py:35 regions/forms.py:56
 msgid "Default language"
@@ -1542,94 +1551,94 @@ msgstr "預設語言"
 
 #: regions/forms.py:37
 msgid "The language for the region"
-msgstr ""
+msgstr "此地區的語言"
 
 #: regions/forms.py:46
 msgid "Please draw a region with the map drawing tool."
-msgstr ""
+msgstr "請使用畫地圖工具描繪此地區"
 
 #: regions/forms.py:48
 msgid ""
 "The region you drew is too large. Please draw a region that's about the size"
 " of a city (or smaller). If you need a bigger region than that, please email"
 " contact@localwiki.org."
-msgstr ""
+msgstr "您畫的地區範圍太大。請畫出大約一個城市大小（或更小）的地區範圍。如果您還是想要新增一個很大的地區，請用電子郵件聯繫 contact@localwiki.org 。"
 
 #: regions/forms.py:53
 msgid "Full name"
-msgstr ""
+msgstr "全名"
 
 #: regions/forms.py:54 regions/models.py:21
 msgid "The full name of this region, e.g. 'San Francisco'"
-msgstr ""
+msgstr "此地區的全名，例如＂臺中市＂"
 
 #: regions/forms.py:75
 msgid "You cannot delete yourself as an admin"
-msgstr ""
+msgstr "您是本地區的管理員，所以不可以刪除自己。"
 
 #: regions/models.py:23
 msgid ""
 "A very short name for this region that will appear in URLs, e.g. 'sf'. Keep "
 "it short and memorable!"
-msgstr ""
+msgstr "一個地區的簡稱，會出現在網址裡，例如：'tw' 表示臺灣Taiwan。請保持簡短且好記！"
 
 #: regions/models.py:42
 msgid "Region already has pages in it"
-msgstr ""
+msgstr "此地區已經有建立頁面了。"
 
-#: regions/views.py:36
+#: regions/views.py:37
 #, python-format
 msgid ""
 "<p>Region \"%s\" not found. Would you like to <a href=\"%s\" "
 "rel=\"nofollow\">create it</a>?</p>"
-msgstr ""
+msgstr "<p>找不到 \"%s\" 。您想要 <a href=\"%s\" rel=\"nofollow\">新增一個</a>嗎？</p>"
 
-#: regions/views.py:71
+#: regions/views.py:72
 msgid ""
 "You've created a new LocalWiki region! We've set you up as an admin for this"
 " region. Learn more about <a "
 "href=\"http://localwiki.net/main/Local_Adminship_Hub\" "
 "target=\"_blank\">LocalWiki adminship here</a>."
-msgstr ""
+msgstr "您已經建立一個 LocalWiki 的地區了！我們將您設為此地區的管理員。您可在此了解更多有關<a href=\"http://localwiki.net/main/Local_Adminship_Hub\" target=\"_blank\">LocalWiki的管理方式</a>。"
 
 #. Translators: Keep under < 100 characters
-#: regions/views.py:77
+#: regions/views.py:78
 #, python-format
 msgid ""
 "Help me bring LocalWiki to %(region_name)s! I've just started this here: "
 "%(region_url)s"
-msgstr ""
+msgstr "協助我們將 LocalWiki 帶進%(region_name)s！從這裡 %(region_url)s開始！"
 
-#: regions/views.py:82
+#: regions/views.py:83
 msgid "Let the world know you're starting to build something beautiful:"
-msgstr ""
+msgstr "讓大家知道您正在進行的貢獻："
 
-#: regions/views.py:125
+#: regions/views.py:126
 #, python-format
 msgid "Region '%s' was deleted."
-msgstr ""
+msgstr "＂%s＂地區已被刪除。"
 
-#: regions/views.py:150 utils/views.py:176 utils/views.py:238
+#: regions/views.py:151 utils/views.py:176 utils/views.py:238
 msgid "Sorry, you are not allowed to perform this action."
-msgstr ""
+msgstr "抱歉，您不被允許執行這個動作。"
 
-#: regions/views.py:338
+#: regions/views.py:371
 msgid ""
 "There was a problem with the map area you drew. Please re-draw it and try "
 "again."
-msgstr ""
+msgstr "您畫的地圖區域出現了些問題。請您再重新畫一次。"
 
-#: regions/views.py:404
+#: regions/views.py:438
 msgid "Settings updated!"
-msgstr ""
+msgstr "已更新設定！"
 
-#: regions/views.py:429
+#: regions/views.py:463
 msgid "Region admins updated!"
-msgstr ""
+msgstr "已更新此地區的管理員！"
 
-#: regions/views.py:450
+#: regions/views.py:484
 msgid "Banned users updated."
-msgstr ""
+msgstr "已經更新被封鎖的使用者名單。"
 
 #: regions/initial_data/__init__.py:19
 #, python-format
@@ -1641,13 +1650,13 @@ msgid ""
 "    <p>\n"
 "    \tYou can edit this and any other page by clicking the <strong>Edit</strong> button.</p>\n"
 "    <p>Need <strong>help</strong>? Please see the <a href=\"http://localwiki.net/main/Help\">help page</a> on the <a href=\"http://localwiki.net/main/\">LocalWiki Guide</a>!</p>"
-msgstr ""
+msgstr "<p>\n\t歡迎來到新建立的 LocalWiki 地區，%(region)s！\n<p>\n\t請按上方的<strong>探索</strong>來看看現在這裡有什麼。</p>\n<p>\n\t您可以按<strong>編輯</strong>按紐來編輯此頁面。</p>\n<p>需要<strong>幫助</strong>嗎？詳細請見</a>小幫手</a>，就在<a href=\"http://localwiki.net/main/\">LocalWiki指南</a>！</p>"
 
 #: regions/templates/regions/admins_update.html:6
 #: regions/templates/regions/banned_update.html:6
 #: regions/templates/regions/settings.html:6
 msgid "LocalWiki - Settings"
-msgstr ""
+msgstr "LocalWiki - 設定"
 
 #: regions/templates/regions/admins_update.html:10
 #: regions/templates/regions/banned_update.html:10
@@ -1656,56 +1665,56 @@ msgid ""
 "\n"
 "        <a href=\"%(region_settings)s\">Settings</a> for <a href=\"%(url)s\">%(region_slug)s</a>\n"
 "    "
-msgstr ""
+msgstr "\n<a href=\"%(url)s\">%(region_slug)s</a>的<a href=\"%(region_settings)s\">設定</a>"
 
 #: regions/templates/regions/banned_update.html:20
 #: regions/templates/regions/settings.html:54
 msgid "Banned users"
-msgstr ""
+msgstr "被封鎖的使用者"
 
 #: regions/templates/regions/region_explore_index.html:17
 #: regions/templates/regions/region_list.html:8
 msgid "Explore - LocalWiki"
-msgstr ""
+msgstr "探索 - LocalWiki"
 
 #: regions/templates/regions/region_explore_index.html:30
 #: regions/templates/regions/region_list.html:21
 msgid "Find a LocalWiki region"
-msgstr ""
+msgstr "尋找一個 LocalWiki 的地區"
 
 #: regions/templates/regions/region_explore_index.html:36
 #: regions/templates/regions/region_list.html:27
 #, python-format
 msgid "or <a href=\"%(region_add_url)s\" class=\"button little\">add a new region</a>"
-msgstr ""
+msgstr "或<a href=\"%(region_add_url)s\" class=\"button little\">新增一個地區</a>"
 
 #: regions/templates/regions/region_explore_index.html:52
 #: regions/templates/regions/region_form.html:7
 #: regions/templates/regions/region_list.html:45
 msgid "Add a new LocalWiki region"
-msgstr ""
+msgstr "新增一個 LocalWiki 的地區"
 
 #: regions/templates/regions/region_explore_index.html:60
 msgid "As List"
-msgstr ""
+msgstr "如列表"
 
 #: regions/templates/regions/region_explore_page.html:14
 msgid "Load More"
-msgstr ""
+msgstr "載入更多"
 
 #: regions/templates/regions/region_form.html:50
 msgid "Draw the rough area the region will cover"
-msgstr ""
+msgstr "請大略畫出此地區所涵蓋的範圍"
 
 #: regions/templates/regions/region_form.html:51
 msgid "When drawing your shape, <strong>double click to close it</strong>!"
-msgstr ""
+msgstr "<strong>點擊兩下</strong>以結束您畫的範圍！"
 
 #: regions/templates/regions/region_form.html:52
 #: regions/templates/regions/settings.html:69
 msgid ""
 "Pick an area roughly the size of a city. Don't worry about being exact!"
-msgstr ""
+msgstr "選擇一塊大約一個城市大小的地方。別擔心，不一定要很準確！"
 
 #: regions/templates/regions/region_form_log_in.html:10
 #, python-format
@@ -1714,11 +1723,11 @@ msgid ""
 "      <h2>..you're almost done!</h2>\n"
 "      <p>Now you just need to <a class=\"button\" href=\"%(login_url)s?%(qs)s&amp;next=%(next)s\">log in</a> or <a class=\"button\" href=\"%(register_url)s?%(qs)s&amp;next=%(next)s\">create an account</a></p>\n"
 "  "
-msgstr ""
+msgstr "\n<h2>..您就快完成了！</h2>\n<p>您現在只需要<a class=\"button\" href=\"%(login_url)s?%(qs)s&amp;next=%(next)s\">登入</a>或<a class=\"button\" href=\"%(register_url)s?%(qs)s&amp;next=%(next)s\">新增一個帳號</a></p>"
 
 #: regions/templates/regions/region_list_map.html:30
 msgid "Communities - LocalWiki"
-msgstr ""
+msgstr "社群 - LocalWiki"
 
 #: regions/templates/regions/settings.html:9
 #, python-format
@@ -1726,30 +1735,30 @@ msgid ""
 "\n"
 "        Settings for <a href=\"%(url)s\">%(region_slug)s</a>\n"
 "    "
-msgstr ""
+msgstr "\n<a href=\"%(url)s\">%(region_slug)s</a>的設定"
 
 #: regions/templates/regions/settings.html:45
 msgid "Admins"
-msgstr ""
+msgstr "管理員"
 
 #: regions/templates/regions/settings.html:57
 msgid "Nobody is banned. Hooray!"
-msgstr ""
+msgstr "目前沒有人被禁止。好耶！"
 
 #: regions/templates/regions/settings.html:68
 msgid "The rough area the region covers"
-msgstr ""
+msgstr "此地區約略涵蓋的範圍"
 
 #: search/templates/search/base.html:14 search/templates/search/base.html:58
 #: search/templates/search/map_for_search.html:10
 #: search/templates/search/map_for_search.html:30
 msgid "Search results for"
-msgstr ""
+msgstr "搜尋結果："
 
 #: search/templates/search/base.html:19 search/templates/search/base.html:63
 #: search/templates/search/search.html:91
 msgid "Search"
-msgstr ""
+msgstr "搜尋"
 
 #: search/templates/search/global_search.html:21
 #: search/templates/search/global_search.html:61
@@ -1757,7 +1766,7 @@ msgstr ""
 #: search/templates/search/search.html:29
 #: search/templates/search/search.html:63
 msgid "Previous"
-msgstr ""
+msgstr "上一個"
 
 #: search/templates/search/global_search.html:24
 #: search/templates/search/global_search.html:64
@@ -1765,17 +1774,17 @@ msgstr ""
 #: search/templates/search/search.html:32
 #: search/templates/search/search.html:66
 msgid "Next"
-msgstr ""
+msgstr "下一個"
 
 #: search/templates/search/global_search.html:54
 #: search/templates/search/search.html:56
 msgid "No results found."
-msgstr ""
+msgstr "沒有找到任何結果"
 
 #: search/templates/search/search.html:15
 #, python-format
 msgid "No page with the exact title \"%(query)s\" exists."
-msgstr ""
+msgstr "沒有完全符合＂%(query)s＂名稱的標題。"
 
 #: search/templates/search/search.html:73
 #, python-format
@@ -1783,25 +1792,25 @@ msgid ""
 "\n"
 "            Want to <a href=\"%(global_search)s?q=%(query)s\">search all of LocalWiki for \"%(query)s\"</a>?\n"
 "            "
-msgstr ""
+msgstr "\n你想要<a href=\"%(global_search)s?q=%(query)s\">搜尋所有 LocalWiki 裡的 \"%(query)s\"</a>嗎？"
 
 #: search/templates/search/search.html:81
 msgid "Create a new page:"
-msgstr ""
+msgstr "新增一個頁面："
 
 #: search/templates/search/search.html:88
 msgid "Search for pages:"
-msgstr ""
+msgstr "搜尋頁面："
 
 #: stars/signals.py:72 stars/signals.py:114
 #, python-format
 msgid "Their edit comment was \"%s\"."
-msgstr ""
+msgstr "他們編輯的評論是＂%s＂。"
 
 #: stars/templates/stars/page_stars_for_user.html:8
 #, python-format
 msgid "Pages %(username)s follows"
-msgstr ""
+msgstr "%(username)s追蹤的頁面"
 
 #: stars/templates/stars/page_stars_for_user.html:14
 #, python-format
@@ -1809,7 +1818,7 @@ msgid ""
 "\n"
 "    Pages <a href=\"%(user_link)s\">you</a> follow:\n"
 "    "
-msgstr ""
+msgstr "\n<a href=\"%(user_link)s\">你</a>追蹤的頁面："
 
 #: stars/templates/stars/page_stars_for_user.html:18
 #, python-format
@@ -1817,12 +1826,12 @@ msgid ""
 "\n"
 "        Pages <a href=\"%(user_link)s\">%(username)s</a> follows:\n"
 "        "
-msgstr ""
+msgstr "\n<a href=\"%(user_link)s\">%(username)s</a>追蹤的頁面："
 
 #: stars/templates/stars/user_stars_for_user.html:9
 #, python-format
 msgid "Users %(username)s follows"
-msgstr ""
+msgstr "%(username)s追蹤"
 
 #: stars/templates/stars/user_stars_for_user.html:15
 #, python-format
@@ -1830,7 +1839,7 @@ msgid ""
 "\n"
 "    Users <a href=\"%(user_link)s\">you</a> follow:\n"
 "    "
-msgstr ""
+msgstr "\n<a href=\"%(user_link)s\">你</a>追蹤的使用者："
 
 #: stars/templates/stars/user_stars_for_user.html:19
 #, python-format
@@ -1838,43 +1847,37 @@ msgid ""
 "\n"
 "        Users <a href=\"%(user_link)s\">%(username)s</a> follows:\n"
 "        "
-msgstr ""
+msgstr "\n<a href=\"%(user_link)s\">%(username)s</a>追蹤的使用者："
 
 #: tags/forms.py:98
 #, python-format
 msgid "removed %(name)s %(deleted)s."
 msgid_plural "removed %(name)s %(deleted)s."
-msgstr[0] ""
+msgstr[0] "移除%(name)s%(deleted)s。"
 
 #: tags/forms.py:107
 #, python-format
 msgid "removed %(count)i %(name)s."
 msgid_plural "removed %(count)i %(name)s."
-msgstr[0] ""
-
-#: tags/forms.py:118
-#, python-format
-msgid "added %(name)s %(added)s."
-msgid_plural "added %(name)s %(added)s."
-msgstr[0] ""
+msgstr[0] "移除%(count)i%(name)s。"
 
 #: tags/forms.py:127
 #, python-format
 msgid "added %(count)i %(name)s."
 msgid_plural "added %(count)i %(name)s."
-msgstr[0] ""
+msgstr[0] "新增 %(count)i 個 %(name)s"
 
 #: tags/forms.py:136
 msgid "no changes made"
-msgstr ""
+msgstr "並無任何修改"
 
 #: tags/forms.py:137 tags/forms.py:140
 msgid " and "
-msgstr ""
+msgstr "和"
 
 #: tags/models.py:35
 msgid "Tag"
-msgstr ""
+msgstr "標籤"
 
 #: tags/models.py:36 tags/templates/tags/global_pagetagset_list.html:5
 #: tags/templates/tags/global_pagetagset_list.html:6
@@ -1882,43 +1885,43 @@ msgstr ""
 #: tags/templates/tags/pagetagset_list.html:6
 #: tags/templates/tags/tag_list.html:5
 msgid "Tags"
-msgstr ""
+msgstr "標籤"
 
-#: tags/views.py:170
+#: tags/views.py:171
 #, python-format
 msgid "<p>No pages tagged \"%s\".</p>"
-msgstr ""
+msgstr "<p>沒有頁面有＂%s＂標籤。</p>"
 
 #: tags/templates/tags/nearby_tagged_list_snippet.html:4
 msgid "Other nearby pages"
-msgstr ""
+msgstr "其他附近的頁面"
 
 #: tags/templates/tags/nearby_tagged_list_snippet.html:20
 #, python-format
 msgid "All LocalWiki pages tagged %(tag)s"
-msgstr ""
+msgstr "所有有 %(tag)s 標籤的 LocalWiki 頁面"
 
 #: tags/templates/tags/pagetagset_diff.html:28
 #: tags/templates/tags/pagetagset_diff.html:29
 #, python-format
 msgid "Differences for tag versions for %(new_name)s"
-msgstr ""
+msgstr "%(new_name)s的標籤版本的差異"
 
 #: tags/templates/tags/pagetagset_diff.html:61
 msgid "Tags history"
-msgstr ""
+msgstr "標籤歷史紀錄"
 
 #: tags/templates/tags/pagetagset_form.html:14
 #: tags/templates/tags/pagetagset_form.html:15
 #: tags/templates/tags/pagetagset_version_detail.html:18
 #: tags/templates/tags/pagetagset_versions.html:16
 msgid "Tags for"
-msgstr ""
+msgstr "標籤"
 
 #: tags/templates/tags/pagetagset_version_detail.html:17
 #: tags/templates/tags/pagetagset_versions.html:15
 msgid "Tags for "
-msgstr ""
+msgstr "標籤"
 
 #: tags/templates/tags/pagetagset_versions.html:24
 #, python-format
@@ -1926,69 +1929,84 @@ msgid ""
 "\n"
 "        This page has no tags.  <a href=\"%(page_url)s\">Add some!</a>\n"
 "    "
-msgstr ""
+msgstr "\n此頁面沒有標籤。<a href=\"%(page_url)s\">新增一些吧！</a>"
 
 #: tags/templates/tags/tag_list.html:6
 msgid "All tags"
-msgstr ""
+msgstr "所有標籤"
 
 #: tags/templates/tags/tag_list.html:13
 msgid "Most popular"
-msgstr ""
+msgstr "最受歡迎的"
 
 #: tags/templates/tags/tag_list.html:14
 msgid "As a cloud"
-msgstr ""
+msgstr "標籤雲"
 
 #: tags/templates/tags/tag_list.html:59
 msgid "There are no tags. Add some!"
-msgstr ""
+msgstr "這裡沒有標籤。新增一些吧！"
 
-#: tags/templates/tags/tagged_list_snippet.html:30
+#: tags/templates/tags/tagged_list_snippet.html:31
+#, python-format
+msgid "Add new \"%(tag_name)s\""
+msgstr "新增＂%(tag_name)s＂"
+
+#: tags/templates/tags/tagged_list_snippet.html:33
+#: themes/sapling/templates/site/add_page_area.html:7
+msgid "Name of page"
+msgstr "頁面名稱"
+
+#: tags/templates/tags/tagged_list_snippet.html:41
 #, python-format
 msgid "There are no pages with the tag \"%(tag_name)s\"."
-msgstr ""
+msgstr "沒有包含＂%(tag_name)s＂標籤的頁面"
+
+#: tags/templatetags/tags_tags.py:52
+#, python-format
+msgid "Pages tagged &ldquo;%s&rdquo;"
+msgstr "有 &ldquo;%s&rdquo; 標籤的頁面"
 
 #: templates/follow/form.html:9
 #, python-format
 msgid "Stop following this %(object_type)s"
-msgstr ""
+msgstr "停止追蹤此%(object_type)s"
 
 #: templates/follow/form.html:12
 #, python-format
 msgid "Start following this %(object_type)s"
-msgstr ""
+msgstr "開始追蹤此%(object_type)s"
 
 #: templates/registration/login.html:5
 msgid "Log in"
-msgstr ""
+msgstr "登入"
 
 #: templates/registration/login.html:20
 msgid "Your username and password didn't match. Please try again."
-msgstr ""
+msgstr "您的使用者名稱和密碼不符。請重新再試一次。"
 
 #: templates/registration/login.html:21 templates/registration/login.html:31
 msgid "Forgot your password?"
-msgstr ""
+msgstr "忘記您的密碼？"
 
 #: templates/registration/login.html:28
 #: templates/registration/registration_form.html:43
 msgid "login"
-msgstr ""
+msgstr "登入"
 
 #: templates/registration/password_reset_complete.html:5
 #: templates/registration/password_reset_complete.html:6
 #: templates/registration/password_reset_complete.html:9
 msgid "Password reset complete"
-msgstr ""
+msgstr "密碼重設已完成"
 
 #: templates/registration/password_reset_complete.html:11
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr ""
+msgstr "您的密碼已經設定完成。您現在已經可以登入了。"
 
 #: templates/registration/password_reset_complete.html:13
 msgid "Sign in"
-msgstr ""
+msgstr "登入"
 
 #: templates/registration/password_reset_confirm.html:4
 #: templates/registration/password_reset_confirm.html:6
@@ -1996,130 +2014,126 @@ msgstr ""
 #: templates/registration/password_reset_form.html:5
 #: templates/registration/password_reset_form.html:8
 msgid "Password reset"
-msgstr ""
+msgstr "重設密碼"
 
 #: templates/registration/password_reset_confirm.html:11
 msgid "Enter new password"
-msgstr ""
+msgstr "輸入新密碼"
 
 #: templates/registration/password_reset_confirm.html:13
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
-msgstr ""
+msgstr "請輸入您的新密碼兩次，以便我們確認您輸入的密碼是正確的。"
 
 #: templates/registration/password_reset_confirm.html:17
 msgid "New password:"
-msgstr ""
+msgstr "新的密碼："
 
 #: templates/registration/password_reset_confirm.html:19
 msgid "Confirm password:"
-msgstr ""
+msgstr "確認密碼："
 
 #: templates/registration/password_reset_confirm.html:20
 msgid "Change my password"
-msgstr ""
+msgstr "修改我的密碼"
 
 #: templates/registration/password_reset_confirm.html:24
 msgid "Password reset unsuccessful"
-msgstr ""
+msgstr "密碼重設不成功"
 
 #: templates/registration/password_reset_confirm.html:26
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset."
-msgstr ""
+msgstr "密碼重設連結無效，可能是因為已經點過該連結了。請重新去申請新密碼。"
 
 #: templates/registration/password_reset_done.html:4
 #: templates/registration/password_reset_done.html:5
 #: templates/registration/password_reset_done.html:8
 msgid "Password reset successful"
-msgstr ""
+msgstr "密碼重新設定完成"
 
 #: templates/registration/password_reset_done.html:10
 msgid ""
 "We've e-mailed you instructions for setting your password to the e-mail "
 "address you submitted. You should be receiving it shortly."
-msgstr ""
+msgstr "我們已經寄信至您的電子郵件位址，說明該如何設定密碼。您將很快地收到信件。"
 
 #: templates/registration/password_reset_email.html:2
 #, python-format
 msgid ""
 "You're receiving this e-mail because you requested a password reset for your"
 " user account at %(site_name)s."
-msgstr ""
+msgstr "您收到此封電子郵件，代表您要求將您在%(site_name)s的帳號重新設定一組密碼。"
 
 #: templates/registration/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
-msgstr ""
+msgstr "請至下列頁面並選擇一組新的密碼："
 
 #: templates/registration/password_reset_email.html:8
 msgid "Your username, in case you've forgotten:"
-msgstr ""
+msgstr "您的使用者名稱，以防您忘記："
 
 #: templates/registration/password_reset_email.html:10
 msgid "Thanks for using our site!"
-msgstr ""
+msgstr "感謝您使用我們的網站！"
 
 #: templates/registration/password_reset_email.html:12
 #, python-format
 msgid "The %(site_name)s team"
-msgstr ""
+msgstr "%(site_name)s團隊"
 
 #: templates/registration/password_reset_form.html:10
 msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll e-mail "
 "instructions for setting a new one."
-msgstr ""
+msgstr "忘記您的密碼？請在下方輸入您的電子郵件位址，我們會寄信給您、說明如何設定一組新的密碼。"
 
 #: templates/registration/password_reset_form.html:14
 msgid "E-mail address:"
-msgstr ""
+msgstr "電子郵件地址:"
 
 #: templates/registration/password_reset_form.html:14
 msgid "Reset my password"
-msgstr ""
+msgstr "重設我的密碼"
 
 #: templates/registration/registration_form.html:5
 msgid "Create account"
-msgstr ""
+msgstr "註冊"
 
 #: themes/sapling/templates/404.html:5 themes/sapling/templates/404.html:7
 msgid "Not found"
-msgstr ""
+msgstr "找不到"
 
 #: themes/sapling/templates/404.html:14
 msgid "Item not found"
-msgstr ""
-
-#: themes/sapling/templates/site/add_page_area.html:7
-msgid "Name of page"
-msgstr ""
+msgstr "找不到此項目"
 
 #: themes/sapling/templates/site/base.html:168
 msgid ""
 "\n"
 "        LocalWiki is a grassroots effort to collect, share and open the world’s local knowledge.  We are a 501(c)3 non-profit organization.\n"
 "        "
-msgstr ""
+msgstr "\nLocalWiki 是一個蒐集、分享、開放全世界的在地知識的草根運動。我們是一家符合 501(c)3 規範的非營利組織。"
 
 #: themes/sapling/templates/site/base.html:173
 msgid "Learn more"
-msgstr ""
+msgstr "瞭解更多"
 
 #: themes/sapling/templates/site/base.html:174
 msgid "Privacy Policy"
-msgstr ""
+msgstr "隱私權政策"
 
 #: themes/sapling/templates/site/base.html:175
 msgid "Terms of Use"
-msgstr ""
+msgstr "使用條款"
 
 #: themes/sapling/templates/site/base.html:176
 #: themes/sapling/templates/site/common_nav.html:20
 #: themes/sapling/templates/site/nav.html:23
 msgid "Donate"
-msgstr ""
+msgstr "捐款"
 
 #: themes/sapling/templates/site/base.html:187
 msgid ""
@@ -2127,13 +2141,13 @@ msgid ""
 "rel=\"license\" href=\"http://creativecommons.org/licenses/by/4.0/\" "
 "target=\"_blank\">Creative Commons Attribution License</a>. See <a "
 "href=\"https://localwiki.org/main/Copyrights\">Copyrights</a>.</p>"
-msgstr ""
+msgstr "<p>除非有特別註記，否則此內容為<a rel=\"license\" href=\"http://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">創用CC授權條款 - 姓名標示</a>。詳見<a href=\"https://localwiki.org/main/Copyrights\">隱私權政策</a>。</p>"
 
 #: themes/sapling/templates/site/common_nav.html:13
 #: themes/sapling/templates/site/nav.html:5
 #: themes/sapling/templates/site/nav.html:20
 msgid "Explore"
-msgstr ""
+msgstr "探索"
 
 #: themes/sapling/templates/site/common_nav.html:15
 #: themes/sapling/templates/site/common_nav.html:17
@@ -2144,7 +2158,7 @@ msgstr "關於"
 #: themes/sapling/templates/site/common_nav.html:21
 #: themes/sapling/templates/site/nav.html:24
 msgid "API"
-msgstr ""
+msgstr "應用程式介面"
 
 #: themes/sapling/templates/site/common_nav.html:24
 #: themes/sapling/templates/site/common_nav.html:26
@@ -2158,84 +2172,76 @@ msgstr "設定"
 
 #: themes/sapling/templates/site/login_info.html:15
 msgid "log out"
-msgstr ""
+msgstr "登出"
 
 #: themes/sapling/templates/site/login_info.html:19
 msgid "log in"
-msgstr ""
+msgstr "登入"
 
 #: themes/sapling/templates/site/login_info.html:19
 msgid "or"
-msgstr ""
+msgstr "或"
 
 #: themes/sapling/templates/site/login_info.html:19
 msgid "create account"
-msgstr ""
+msgstr "註冊"
 
 #: themes/sapling/templates/site/nav.html:13
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 #: themes/sapling/templates/site/search_form.html:5
 #, python-format
 msgid "Search %(region_name)s"
-msgstr ""
+msgstr "搜尋 %(region_name)s 裡的頁面"
 
 #: themes/sapling/templates/site/search_form.html:10
 msgid "Search LocalWiki "
-msgstr ""
+msgstr "搜尋 LocalWiki"
 
 #: users/__init__.py:7
 msgid "You are now logged out."
-msgstr ""
+msgstr "您現在已經登出"
 
 #: users/admin.py:16
 msgid "Personal info"
-msgstr ""
+msgstr "個人資訊"
 
 #: users/admin.py:17
 msgid "Permissions"
-msgstr ""
+msgstr "權限"
 
 #: users/admin.py:19
 msgid "Important dates"
-msgstr ""
-
-#: users/auth.py:34
-msgid "algorithm"
-msgstr ""
-
-#: users/auth.py:35
-msgid "hash"
-msgstr ""
+msgstr "重要日期"
 
 #: users/forms.py:13
 msgid "Only these users"
-msgstr ""
+msgstr "只有這些使用者"
 
 #: users/forms.py:30 users/registration_backend/forms.py:44
 msgid "Your name"
-msgstr ""
+msgstr "你的姓名"
 
 #: users/forms.py:31
 msgid "Email address"
-msgstr ""
+msgstr "電子郵件位址"
 
 #: users/forms.py:32
 msgid "Gravatar email (private)"
-msgstr ""
+msgstr "Gravatar 電子郵件(不公開)"
 
 #: users/forms.py:36
 msgid "Disable this account permanently"
-msgstr ""
+msgstr "永久停用此帳號"
 
 #: users/models.py:63
 msgid "Gravatar Email (Private)"
-msgstr ""
+msgstr "Gravatar 電子郵件(不公開)"
 
 #: users/models.py:64
 msgid "Show email publicly (Helps with communication)"
-msgstr "公開 email (方便溝通)"
+msgstr "公開 email (有助於溝通聯絡)"
 
 #: users/models.py:65
 msgid "Personal website"
@@ -2243,7 +2249,7 @@ msgstr "個人網站"
 
 #: users/views.py:219
 msgid "Permissions updated!"
-msgstr ""
+msgstr "已更新權限！"
 
 #: users/views.py:230 users/views.py:265 users/views.py:275
 msgid "You must be logged in to change user settings."
@@ -2255,54 +2261,54 @@ msgstr "使用設定 更新成功!"
 
 #: users/views.py:281
 msgid "Your account has been de-activated."
-msgstr ""
+msgstr "您的帳戶已被停用。"
 
 #: users/views.py:504
 msgid "Logged out"
-msgstr ""
+msgstr "登出"
 
 #: users/registration_backend/__init__.py:65
 msgid "You are signed up and logged in!"
-msgstr ""
+msgstr "您已註冊並登入！"
 
 #: users/registration_backend/__init__.py:67
 #, python-format
 msgid "Tell us who you are by <a href=\"%s\">creating a page for yourself!</a>"
-msgstr ""
+msgstr "<a href=\"%s\">建立一個您的個人頁面</a>來告訴我們你是誰！"
 
 #: users/registration_backend/forms.py:33
 msgid "Username"
-msgstr ""
+msgstr "帳號"
 
 #: users/registration_backend/forms.py:35
 msgid "This value may contain only letters (a-z), numbers, +, - and ."
-msgstr ""
+msgstr "只能包含字母ａ到ｚ，數字，＋，－，和．"
 
 #: users/registration_backend/forms.py:40
 msgid "E-mail"
-msgstr ""
+msgstr "電子郵件"
 
 #: users/registration_backend/forms.py:43
 msgid "Password"
-msgstr ""
+msgstr "密碼"
 
 #: users/registration_backend/forms.py:49
 msgid "You must agree to the terms to register"
-msgstr ""
+msgstr "你必須同意這些條款才能註冊"
 
 #: users/registration_backend/forms.py:64
 msgid "A user with that username already exists."
-msgstr ""
+msgstr "已經有人使用了這個使用者名稱。"
 
 #: users/registration_backend/forms.py:73
 msgid ""
 "This email address is already in use. Please supply a different email "
 "address."
-msgstr ""
+msgstr "已有人使用此電子郵件位址。請提供其他電子郵件位址。"
 
 #: users/templates/users/deactivate.html:9
 msgid "Deactivate account"
-msgstr ""
+msgstr "停用帳號"
 
 #: users/templates/users/settings.html:10
 msgid "User settings"
@@ -2310,59 +2316,59 @@ msgstr "使用設定"
 
 #: users/templates/users/settings.html:33
 msgid "Change your user icon at Gravatar.com"
-msgstr ""
+msgstr "到 Gravatar.com 變更您的大頭貼"
 
 #: users/templates/users/settings.html:39
 #, python-format
 msgid "You can also <a href=\"%(deactivate_url)s\">deactivate your account</a>."
-msgstr ""
+msgstr "您也可以<a href=\"%(deactivate_url)s\">停用你的帳號</a>。"
 
 #: users/templates/users/subscribed_list.html:4
 msgid "List of subscribers"
-msgstr ""
+msgstr "訂閱者列表"
 
 #: users/templates/users/subscribed_list.html:8
 msgid "Subscriber emails:"
-msgstr ""
+msgstr "訂閱者的電子郵件："
 
 #: users/templates/users/user_page.html:24
 msgid "user"
-msgstr ""
+msgstr "使用者"
 
 #: users/templates/users/user_page.html:44
 msgid "This user account is disabled."
-msgstr ""
+msgstr "該使用者帳號已被停用"
 
 #: users/templates/users/user_page.html:60
 #, python-format
 msgid "Joined on %(date_joined)s"
-msgstr ""
+msgstr "加入時間：%(date_joined)s"
 
 #: users/templates/users/user_page.html:67
 msgid "total contributions"
-msgstr ""
+msgstr "所有貢獻"
 
 #: users/templates/users/user_page.html:76
 msgid "pages edited"
-msgstr ""
+msgstr "編輯的頁面"
 
 #: users/templates/users/user_page.html:85
 msgid "maps edited"
-msgstr ""
+msgstr "編輯的地圖"
 
 #: users/templates/users/user_page.html:96
 #, python-format
 msgid "%(num_pages_followed)s pages starred"
-msgstr ""
+msgstr "%(num_pages_followed)s個已追蹤的頁面"
 
 #: users/templates/users/user_page.html:103
 #, python-format
 msgid "%(num_users_followed)s users starred"
-msgstr ""
+msgstr "%(num_users_followed)s個已追蹤的使用者"
 
 #: users/templates/users/user_page.html:111
 msgid "Regions followed"
-msgstr ""
+msgstr "已追蹤的地區"
 
 #: users/templatetags/user_tags.py:26
 msgid "Unknown"
@@ -2372,56 +2378,56 @@ msgstr "未知"
 msgid ""
 "Anonymous users may not perform this action. Please <a "
 "href=\"/Users/login/\">log in</a>."
-msgstr ""
+msgstr "匿名使用者無法操作這個步驟。請您<a href=\"/Users/login/\">登入</a>。"
 
 #: utils/templates/utils/history/form.html:18
-msgid "revert"
-msgstr ""
+msgid "restore"
+msgstr "復原"
 
-#: versionutils/diff/diffutils.py:114 versionutils/diff/diffutils.py:224
-#: versionutils/diff/diffutils.py:316 versionutils/diff/diffutils.py:336
-#: versionutils/diff/diffutils.py:402 versionutils/diff/diffutils.py:419
-#: versionutils/diff/diffutils.py:524
+#: versionutils/diff/diffutils.py:115 versionutils/diff/diffutils.py:225
+#: versionutils/diff/diffutils.py:317 versionutils/diff/diffutils.py:337
+#: versionutils/diff/diffutils.py:403 versionutils/diff/diffutils.py:420
+#: versionutils/diff/diffutils.py:525
 msgid "No differences found"
-msgstr ""
+msgstr "沒有發現不同"
 
-#: versionutils/diff/diffutils.py:559 versionutils/diff/diffutils.py:569
-#: versionutils/diff/diffutils.py:582 versionutils/diff/diffutils.py:592
+#: versionutils/diff/diffutils.py:560 versionutils/diff/diffutils.py:570
+#: versionutils/diff/diffutils.py:583 versionutils/diff/diffutils.py:593
 msgid "Stayed the same"
-msgstr ""
+msgstr "保持原樣"
 
-#: versionutils/diff/diffutils.py:562 versionutils/diff/diffutils.py:574
+#: versionutils/diff/diffutils.py:563 versionutils/diff/diffutils.py:575
 msgid "Removed"
-msgstr ""
+msgstr "移除的"
 
-#: versionutils/diff/diffutils.py:585 versionutils/diff/diffutils.py:597
+#: versionutils/diff/diffutils.py:586 versionutils/diff/diffutils.py:598
 #: versionutils/versioning/constants.py:14
 msgid "Added"
-msgstr ""
+msgstr "新增"
 
 #: versionutils/diff/templates/diff/file_diff.html:8
 msgid "Download deleted version"
-msgstr ""
+msgstr "下載刪除的版本"
 
 #: versionutils/diff/templates/diff/file_diff.html:9
 msgid "Download added version"
-msgstr ""
+msgstr "下載新增的版本"
 
 #: versionutils/merging/forms.py:53
 msgid ""
 "Warning: someone else made changes before you.  Please review the changes "
 "and save again."
-msgstr ""
+msgstr "警告: 有其他人在你之前先做了修改。請重新查看你做的修改並且再儲存一次。"
 
 #: versionutils/merging/forms.py:55
 msgid ""
 "Someone else made changes before you but yourchanges were successfully "
 "merged."
-msgstr ""
+msgstr "有其他人在你之前先做了修改，但是你做的修改也成功地一起合併了。"
 
 #: versionutils/templates/versionutils/revert_form.html:12
-msgid "Revert"
-msgstr ""
+msgid "Restore"
+msgstr "恢復"
 
 #: versionutils/templates/versionutils/history/form.html:8
 #: versionutils/templates/versionutils/history/form.html:15
@@ -2430,67 +2436,67 @@ msgstr "比較"
 
 #: versionutils/templates/versionutils/history/form.html:47
 msgid "There is no revision history."
-msgstr ""
+msgstr "此無修改歷史紀錄"
 
 #: versionutils/templates/versionutils/history/media.html:46
 msgid "Please select two versions to compare"
-msgstr ""
+msgstr "請選擇兩種版本來做比較"
 
 #: versionutils/versioning/constants.py:15
 msgid "Updated"
-msgstr ""
+msgstr "已更新的"
 
 #: versionutils/versioning/constants.py:16
 msgid "Deleted"
-msgstr ""
+msgstr "刪除"
 
 #: versionutils/versioning/constants.py:17
 msgid "Deleted via cascade"
-msgstr ""
+msgstr "級聯刪除（Deleted via cascade）"
 
 #: versionutils/versioning/constants.py:18
 msgid "Reverted"
-msgstr ""
+msgstr "回復"
 
 #: versionutils/versioning/constants.py:19
 msgid "Reverted/Added"
-msgstr ""
+msgstr "回復/新增"
 
 #: versionutils/versioning/constants.py:20
 msgid "Reverted/Deleted"
-msgstr ""
+msgstr "回復/刪除"
 
 #: versionutils/versioning/constants.py:21
 msgid "Reverted/Deleted via cascade"
-msgstr ""
+msgstr "級聯回復/刪除（Reverted/Deleted via cascade）"
 
 #: versionutils/versioning/constants.py:22
 msgid "Reverted via cascade"
-msgstr ""
+msgstr "級聯回復（Reverted via cascade）"
 
 #: versionutils/versioning/forms.py:48
 msgid "Reason for deletion"
-msgstr ""
+msgstr "刪除的原因"
 
 #: versionutils/versioning/forms.py:49
 msgid "Permanently remove older versions"
-msgstr ""
+msgstr "永久移除先前的版本"
 
 #: versionutils/versioning/forms.py:50 versionutils/versioning/forms.py:62
 msgid "Don't log this change"
-msgstr ""
+msgstr "不要記錄此更改"
 
 #: versionutils/versioning/forms.py:60
-msgid "Reason for revert"
-msgstr ""
+msgid "Reason for restoring"
+msgstr "恢復先前版本的原因"
 
 #: versionutils/versioning/forms.py:61
 msgid "Permanently remove newer versions"
-msgstr ""
+msgstr "永久移除較新的版本"
 
 #: versionutils/versioning/views.py:68
 msgid "Your attention to detail is appreciated."
-msgstr ""
+msgstr "感謝您對細節的注意。"
 
 #: versionutils/versioning/views.py:103
 msgid "Successfully deleted!"
@@ -2498,5 +2504,5 @@ msgstr "成功刪除!"
 
 #: versionutils/versioning/views.py:156
 #, python-format
-msgid "Reverted to version %s."
-msgstr ""
+msgid "Restored version %s."
+msgstr "恢復版本%s"

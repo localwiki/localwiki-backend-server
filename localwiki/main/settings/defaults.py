@@ -70,6 +70,7 @@ LOCALE_PATHS = (
 LANGUAGES = (
     ('en', _('English')),
     ('ja', _('Japanese')),
+    ('zh', _('Chinese')),
     ('fr', _('French')),
     ('es', _('Spanish')),
     ('de', _('German')),

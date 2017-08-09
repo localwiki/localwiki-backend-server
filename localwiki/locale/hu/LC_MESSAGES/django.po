@@ -4,17 +4,20 @@
 # 
 # Translators:
 # Andi Maria Vida <andi.maria.vida@gmail.com>, 2015
-# madaraszcsaba <madarasz.csaba@gmail.com>, 2015
+# Bihari Kristóf <bihari.kristof@gmail.com>, 2015
+# Csaba Madarász <madarasz.csaba@gmail.com>, 2015
+# Csaba Madarász <madarasz.csaba@gmail.com>, 2015
+# Rev01Yeti <rev01yeti@gmail.com>, 2015
 # Rev01Yeti <rev01yeti@gmail.com>, 2015
 # Syabó Sebestyén <schabby@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-28 11:13-0600\n"
-"PO-Revision-Date: 2015-03-27 15:53+0000\n"
-"Last-Translator: madaraszcsaba <madarasz.csaba@gmail.com>\n"
-"Language-Team: Hungarian (http://www.transifex.com/projects/p/localwiki/language/hu/)\n"
+"POT-Creation-Date: 2015-04-07 23:15-0500\n"
+"PO-Revision-Date: 2015-04-10 11:29+0000\n"
+"Last-Translator: Bihari Kristóf <bihari.kristof@gmail.com>\n"
+"Language-Team: Hungarian (http://www.transifex.com/localwiki/localwiki/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +27,7 @@ msgstr ""
 #: activity/feeds.py:40 activity/feeds.py:46
 #, python-format
 msgid "Activity on %s"
-msgstr "%s – kapcsolódó tevékenységek"
+msgstr "%s:  kapcsolódó tevékenységek"
 
 #: activity/feeds.py:81 activity/feeds.py:177
 #, python-format
@@ -64,7 +67,7 @@ msgid "All LocalWiki"
 msgstr "Az egész LocalWiki"
 
 #: activity/templates/activity/all_activity_index.html:36
-#: activity/templates/activity/followed_activity_index.html:42
+#: activity/templates/activity/followed_activity_index.html:46
 #: activity/templates/activity/user_activity_index.html:38
 #, python-format
 msgid ""
@@ -86,6 +89,14 @@ msgstr "Üdv a LocalWikin! Mi jön most?"
 msgid "Explore LocalWiki communities"
 msgstr "LocalWiki-közösségek felfedezése"
 
+#: activity/templates/activity/followed_activity_index.html:33
+#: activity/templates/activity/followed_activity_index.html:41
+msgid ""
+"Follow pages, regions and people when you see <div "
+"class=\"follow_item\"><div class=\"follow little button\"><span "
+"class=\"text\"></span></div></div> Then activity will show up here!"
+msgstr "Kövess oldalakat, régiókat vagy felhasználókat a <div class=\"follow_item\"><div class=\"follow little button\"><span class=\"text\"></span></div></div> jelre kattintva, A tevékenységüket utána itt fogod látni."
+
 #: activity/templates/activity/followed_activity_index.html:34
 msgid "Create a new LocalWiki region"
 msgstr "Új LocalWiki-régió létrehozása"
@@ -93,13 +104,6 @@ msgstr "Új LocalWiki-régió létrehozása"
 #: activity/templates/activity/followed_activity_index.html:35
 msgid "Follow <strong>@localwiki</strong> on Twitter"
 msgstr "Kövesd a <strong>@localwiki</strong>-t Twitteren"
-
-#: activity/templates/activity/followed_activity_index.html:44
-#, python-format
-msgid ""
-"Want to see <strong><a href=\"%(all_activity_url)s\">all activity across "
-"LocalWiki</a>?</strong>"
-msgstr "Látni akarod <strong><a href=\"%(all_activity_url)s\">az összes tevékenységet az egész LocalWikiről</a></strong>?"
 
 #: activity/templates/activity/followed_activity_page.html:22
 #, python-format
@@ -165,8 +169,8 @@ msgstr "változások"
 #: activity/templates/activity/followed_activity_page.html:69
 #: activity/templates/activity/index_page.html:31
 #, python-format
-msgid "Reverted to version from %(version_date_timesince)s ago"
-msgstr "%(version_date_timesince)s ezelőtti változatra visszaállítva"
+msgid "Restored version from %(version_date_timesince)s ago"
+msgstr "A korábbi állapot: %(version_date_timesince)s tárolt verziói"
 
 #: activity/templates/activity/followed_activity_page.html:75
 #: activity/templates/activity/index_page.html:37
@@ -298,8 +302,8 @@ msgstr "Bejegyzés megtekintése"
 #: blog/templates/blog/post_archive.html:20
 #: blog/templates/blog/post_detail.html:20
 #: maps/templates/maps/mapdata_detail.html:36
-#: maps/templates/maps/mapdata_diff.html:63
-#: maps/templates/maps/mapdata_diff.html:68
+#: maps/templates/maps/mapdata_diff.html:65
+#: maps/templates/maps/mapdata_diff.html:70
 #: redirects/templates/redirects/redirect_diff.html:44
 #: redirects/templates/redirects/redirect_diff.html:49
 #: tags/templates/tags/pagetagset_diff.html:38
@@ -388,19 +392,19 @@ msgid ""
 "version. Please view the current version of this page instead."
 msgstr "Ennek az oldalnak csak a jelenlegi változatához tudsz megjegyzést fűzni, régebbiekhez nem. Kérjük, tekintsd meg ezen oldal jelenlegi változatát."
 
-#: dashboard/views.py:194 dashboard/views.py:207
+#: dashboard/views.py:205 dashboard/views.py:218
 msgid "pages"
 msgstr "oldal"
 
-#: dashboard/views.py:195 dashboard/views.py:210
+#: dashboard/views.py:206 dashboard/views.py:221
 msgid "maps"
 msgstr "térkép"
 
-#: dashboard/views.py:196 dashboard/views.py:213
+#: dashboard/views.py:207 dashboard/views.py:224
 msgid "files"
 msgstr "fájl"
 
-#: dashboard/views.py:198 dashboard/views.py:216
+#: dashboard/views.py:209 dashboard/views.py:227
 msgid "redirects"
 msgstr "átirányít"
 
@@ -434,34 +438,34 @@ msgstr "Térképek"
 msgid "Redirects"
 msgstr "Átirányítások"
 
-#: dashboard/templates/dashboard/index.html:29
+#: dashboard/templates/dashboard/index.html:30
 #: dashboard/templates/dashboard/render.html:8
 msgid "Users"
 msgstr "Felhasználók"
 
-#: dashboard/templates/dashboard/index.html:34
+#: dashboard/templates/dashboard/index.html:36
 #: dashboard/templates/dashboard/render.html:13
 msgid "Growth over time"
 msgstr "Időbeli gyarapodás"
 
-#: dashboard/templates/dashboard/index.html:36
-#: dashboard/templates/dashboard/index.html:46
-#: dashboard/templates/dashboard/index.html:56
-#: dashboard/templates/dashboard/index.html:66
+#: dashboard/templates/dashboard/index.html:38
+#: dashboard/templates/dashboard/index.html:48
+#: dashboard/templates/dashboard/index.html:58
+#: dashboard/templates/dashboard/index.html:69
 msgid "Generating graph..."
 msgstr "Grafikon generálása…"
 
-#: dashboard/templates/dashboard/index.html:44
+#: dashboard/templates/dashboard/index.html:46
 #: dashboard/templates/dashboard/render.html:20
 msgid "Edits over time"
 msgstr "Szerkesztések az idő múlásával"
 
-#: dashboard/templates/dashboard/index.html:54
+#: dashboard/templates/dashboard/index.html:56
 #: dashboard/templates/dashboard/render.html:27
 msgid "Page content growth over time"
 msgstr "Oldaltartalom időbeli gyarapodása"
 
-#: dashboard/templates/dashboard/index.html:64
+#: dashboard/templates/dashboard/index.html:67
 #: dashboard/templates/dashboard/render.html:34
 msgid "Users registered over time"
 msgstr "Regisztrált felhasználók időbeli követése"
@@ -771,7 +775,7 @@ msgid ""
 "\n"
 "              From <a href=\"https://ja.localwiki.org/sapporo/\" target=\"_blank\">Sapporo, Japan</a> to <a href=\"/oakland/\" target=\"_blank\">Oakland, California</a>, communities across the world use LocalWiki to share their local knowledge. Learn about the issues that affect nearby communities, and communities halfway across the globe. There is a whole world to discover!\n"
 "              "
-msgstr "\nA közösségek világszerte, <a href=\"https://ja.localwiki.org/sapporo/\" target=\"_blank\">Sapporótól</a> <a href=\"/oakland/\" target=\"_blank\">Oaklandig</a>  LocalWikin keresztül osztják meg helyi tudásukat. Tanulmányozd a témákat, amik helyi közösségeteknek és globális közösségeknek egyaránt fontosak lehetnek!  Egy egész világ várja, hogy felfedezd!\n              "
+msgstr "\nA közösségek világszerte, <a href=\"https://ja.localwiki.org/sapporo/\" target=\"_blank\">a japán Szapporótól</a> <a href=\"/oakland/\" target=\"_blank\">a kaliforniai Oaklandig</a>  a LocalWikin keresztül osztják meg helyi tudásukat. Tudj meg többet a környező vagy akár a világ másik végén lévő közösségeket érintő ügyekről.  Egy egész világ várja, hogy felfedezd!\n              "
 
 #. Translators: heading for main home page
 #: main_content/templates/main_content/index.html:93
@@ -817,7 +821,7 @@ msgstr "\nA LocalWikihez tartalmat adni olyan egyszerű, mint a Facebookra poszt
 #: main_content/templates/main_content/index.html:132
 msgid ""
 "Yelp is aimed at the consumer in us. LocalWiki inspires the citizen in us."
-msgstr "A sikítás a bennünk rejlő fogyasztóra irányul. A LocalWiki a bennünk lakozó polgárt inspirálja."
+msgstr "A Yelp a bennünk élő fogyasztónak szól. A LocalWiki a bennünk lakozó polgárt inspirálja."
 
 #: main_content/templates/main_content/index.html:133
 msgid "Sue Gardner, Former Executive Director, Wikimedia Foundation"
@@ -839,7 +843,7 @@ msgid ""
 "    in <span class=\"num\">%(countries_count)s</span> countries and <span class=\"num\">%(languages_count)s</span> languages.\n"
 "    </div>\n"
 "    "
-msgstr "\n    <div>\n    A <span class=\"num\">%(region_count)s</span>régiók<span class=\"num\">%(page_count)s+</span> oldalai\n    %(map_media)s\n    </div>\n    <a href=\"%(regions_list)s\" target=\"_blank\" id=\"stats_map_cover\"></a>\n    <div id=\"stats_map\">\n      %(map)s\n    </div>\n    <div>\n    az alábbi<span class=\"num\">%(countries_count)s</span> országokban és <span class=\"num\">%(languages_count)s</span> nyelveken.\n    </div>\n    "
+msgstr "\n    <div>\n    <span class=\"num\">Több, mint %(page_count)s+</span> oldal <span class=\"num\">%(region_count)s</span> régióban,\n    %(map_media)s\n    </div>\n    <a href=\"%(regions_list)s\" target=\"_blank\" id=\"stats_map_cover\"></a>\n    <div id=\"stats_map\">\n      %(map)s\n    </div>\n    <div>\n    <span class=\"num\">%(countries_count)s</span> országban, <span class=\"num\">%(languages_count)s</span> nyelven.\n    </div>\n    "
 
 #: main_content/templates/main_content/index.html:159
 msgid "Recent blog posts"
@@ -853,7 +857,7 @@ msgstr "Több blogbejegyzés"
 msgid ""
 "Bridge photo CC-BY Stuart Seeger. Janes Walk photo by HiMY SYeD. Notice "
 "board photo CC-BY-SA-NC Bettina Walter."
-msgstr "Bridge fotó: CC-BY Stuart Seeger. Janes Walk fotó: HiMY SYeD-vel. Hirdetőtábla fotó: CC-BY-SA-NC Bettina Walter."
+msgstr "Híd fotó: Stuart Seeger (CC-BY). Jane's Walk fotó: HiMY SYeD. Hirdetőtábla fotó:  Bettina Walter (CC-BY-SA-NC)."
 
 #: maps/feeds.py:26 maps/feeds.py:45
 #, python-format
@@ -889,7 +893,7 @@ msgstr "<a href=\"%(map_url)s\">Térkép</a> a \"<a href=\"%(page_tag_url)s\">%(
 msgid "Map for tag \"<a href=\"%(page_tag_url)s\">%(tag_name)s</a>\""
 msgstr "Térkép a cimkéhez \"<a href=\"%(page_tag_url)s\">%(tag_name)s</a>\""
 
-#: maps/views.py:387 pages/views.py:222
+#: maps/views.py:387 pages/views.py:244
 #, python-format
 msgid "<p>What do you know about %s?</p>"
 msgstr "<p>Mit tudsz a %s-ról?</p>"
@@ -951,8 +955,8 @@ msgid "Map for"
 msgstr "Térkép:"
 
 #: maps/templates/maps/mapdata_detail.html:35
-#: maps/templates/maps/mapdata_diff.html:62
-#: maps/templates/maps/mapdata_diff.html:67
+#: maps/templates/maps/mapdata_diff.html:64
+#: maps/templates/maps/mapdata_diff.html:69
 #: redirects/templates/redirects/redirect_diff.html:43
 #: redirects/templates/redirects/redirect_diff.html:48
 #: tags/templates/tags/pagetagset_diff.html:37
@@ -979,26 +983,26 @@ msgid ""
 "        "
 msgstr "\n        Közreműködők: <span class=\"contributor_list\">%(contributors_html)s</span>\n        "
 
-#: maps/templates/maps/mapdata_diff.html:52
+#: maps/templates/maps/mapdata_diff.html:54
 msgid "Differences for map on"
 msgstr "Eltérések a térképen"
 
-#: maps/templates/maps/mapdata_diff.html:53
+#: maps/templates/maps/mapdata_diff.html:55
 #, python-format
 msgid "Differences for <a href=\"%(maps_global)s\">Map</a>"
 msgstr "A <a href=\"%(maps_global)s\">térkép</a> eltérései"
 
-#: maps/templates/maps/mapdata_diff.html:73
+#: maps/templates/maps/mapdata_diff.html:75
 #: pages/templates/pages/page_diff.html:57
 #: tags/templates/tags/pagetagset_diff.html:48
 msgid "Deletions are marked like this"
-msgstr "Így jelölt törlések"
+msgstr "A törléseket így jelöljük"
 
-#: maps/templates/maps/mapdata_diff.html:76
+#: maps/templates/maps/mapdata_diff.html:78
 #: pages/templates/pages/page_diff.html:60
 #: tags/templates/tags/pagetagset_diff.html:51
 msgid "Additions are marked like this"
-msgstr "Így jelölt kiegészítések"
+msgstr "A kiegészítéseket így jelöljük"
 
 #: maps/templates/maps/mapdata_form.html:38
 msgid "Editing map for"
@@ -1131,11 +1135,11 @@ msgstr "Érvénytelen beágyazott kód"
 msgid "Search or create page"
 msgstr "Keresés vagy oldal létrehozása"
 
-#: pages/signals.py:19
+#: pages/signals.py:20
 msgid "Redirect created"
 msgstr "Létrehozott átirányítás"
 
-#: pages/signals.py:25
+#: pages/signals.py:26
 msgid "Page created"
 msgstr "Létrehozott oldal"
 
@@ -1178,33 +1182,38 @@ msgstr "Épp most szerkesztettem %(page)s oldalát a @localwiki! %(page_url)s-be
 msgid "Tell the world about this page:"
 msgstr "Mesélj a világnak erről az oldalról:"
 
-#: pages/views.py:437
+#: pages/views.py:236 tags/forms.py:118 tags/views.py:381
+#, python-format
+msgid "added %(name)s %(added)s."
+msgstr "%(name)s %(added)s hozzáadva."
+
+#: pages/views.py:459
 msgid "You must provide a page name when creating a page."
 msgstr "Új oldal létrehozásához adj új oldalnevet!"
 
-#: pages/views.py:518
+#: pages/views.py:540
 msgid "A file with this name already exists"
 msgstr "Ilyen nevű fájl már létezik"
 
 #. Translators: This is for the page rename form.
-#: pages/views.py:532
+#: pages/views.py:554
 msgid "New page name"
 msgstr "Új oldal neve"
 
-#: pages/views.py:533 versionutils/versioning/forms.py:18
+#: pages/views.py:555 versionutils/versioning/forms.py:18
 msgid "Comment"
 msgstr "Megjegyzés"
 
-#: pages/views.py:569
+#: pages/views.py:591
 #, python-format
 msgid "Page renamed to \"%s\""
 msgstr "Oldal átnevezése, új név: \"%s\""
 
-#: pages/views.py:581
+#: pages/views.py:603
 msgid "Move to region (short name)"
 msgstr "Áthelyezés ide (rövid név)"
 
-#: pages/views.py:607
+#: pages/views.py:629
 #, python-format
 msgid ""
 "Page moved to <a href=\"%(page_url)s\">%(page_name)s</a> on <a "
@@ -1575,14 +1584,14 @@ msgstr "A régió nagyon rövid neve, ami az URL-mezőben meg fog jelenni, pl. \
 msgid "Region already has pages in it"
 msgstr "Ehhez a régióhoz már tartoznak oldalak."
 
-#: regions/views.py:36
+#: regions/views.py:37
 #, python-format
 msgid ""
 "<p>Region \"%s\" not found. Would you like to <a href=\"%s\" "
 "rel=\"nofollow\">create it</a>?</p>"
 msgstr "<p>\"%s\" nevű régió nem található. Szeretnél egyet <a href=\"%s\" rel=\"nofollow\">létrehozni</a>?</p>"
 
-#: regions/views.py:71
+#: regions/views.py:72
 msgid ""
 "You've created a new LocalWiki region! We've set you up as an admin for this"
 " region. Learn more about <a "
@@ -1591,41 +1600,41 @@ msgid ""
 msgstr "Új LocalWiki régiót hoztál létre! Ennek te lettél az adminisztrátora. A <a href=\"http://localwiki.net/main/Local_Adminship_Hub\" target=\"_blank\">LocalWiki adminisztrátori teendőiről</a> itt olvashatsz részletesen."
 
 #. Translators: Keep under < 100 characters
-#: regions/views.py:77
+#: regions/views.py:78
 #, python-format
 msgid ""
 "Help me bring LocalWiki to %(region_name)s! I've just started this here: "
 "%(region_url)s"
 msgstr "Segíts eljuttatni a LocalWikit a %(region_name)s régióba! Itt kezdtem: %(region_url)s"
 
-#: regions/views.py:82
+#: regions/views.py:83
 msgid "Let the world know you're starting to build something beautiful:"
 msgstr "Tudasd a világgal: valami fenségest kezdesz építeni: "
 
-#: regions/views.py:125
+#: regions/views.py:126
 #, python-format
 msgid "Region '%s' was deleted."
 msgstr "A '%s' régiót már törölték."
 
-#: regions/views.py:150 utils/views.py:176 utils/views.py:238
+#: regions/views.py:151 utils/views.py:176 utils/views.py:238
 msgid "Sorry, you are not allowed to perform this action."
 msgstr "Sajnos, erre a műveletre nem vagy jogosult."
 
-#: regions/views.py:338
+#: regions/views.py:371
 msgid ""
 "There was a problem with the map area you drew. Please re-draw it and try "
 "again."
 msgstr "Valami nincs rendben a térképpel, amit rajzoltál. Rajzold meg újra, és próbáld megint elmenteni."
 
-#: regions/views.py:404
+#: regions/views.py:438
 msgid "Settings updated!"
 msgstr "A beállítások frissítve!"
 
-#: regions/views.py:429
+#: regions/views.py:463
 msgid "Region admins updated!"
 msgstr "A régió adminisztrátorai frissítve"
 
-#: regions/views.py:450
+#: regions/views.py:484
 msgid "Banned users updated."
 msgstr "Kitiltott felhasználók frissítve"
 
@@ -1852,13 +1861,6 @@ msgid_plural "removed %(count)i %(name)s."
 msgstr[0] ""
 msgstr[1] ""
 
-#: tags/forms.py:118
-#, python-format
-msgid "added %(name)s %(added)s."
-msgid_plural "added %(name)s %(added)s."
-msgstr[0] ""
-msgstr[1] ""
-
 #: tags/forms.py:127
 #, python-format
 msgid "added %(count)i %(name)s."
@@ -1886,7 +1888,7 @@ msgstr "Címke"
 msgid "Tags"
 msgstr "Címkék"
 
-#: tags/views.py:170
+#: tags/views.py:171
 #, python-format
 msgid "<p>No pages tagged \"%s\".</p>"
 msgstr "<p>Nincs ilyen címkéjű oldal: \"%s\".</p>"
@@ -1946,10 +1948,25 @@ msgstr "Felhőként"
 msgid "There are no tags. Add some!"
 msgstr "Nincs címke. Adj hozzá!"
 
-#: tags/templates/tags/tagged_list_snippet.html:30
+#: tags/templates/tags/tagged_list_snippet.html:31
+#, python-format
+msgid "Add new \"%(tag_name)s\""
+msgstr "Új \"%(tag_name)s\" hozzáadása"
+
+#: tags/templates/tags/tagged_list_snippet.html:33
+#: themes/sapling/templates/site/add_page_area.html:7
+msgid "Name of page"
+msgstr "Az oldal neve"
+
+#: tags/templates/tags/tagged_list_snippet.html:41
 #, python-format
 msgid "There are no pages with the tag \"%(tag_name)s\"."
 msgstr "Nincs ilyen címkéjű oldal: \"%(tag_name)s\"."
+
+#: tags/templatetags/tags_tags.py:52
+#, python-format
+msgid "Pages tagged &ldquo;%s&rdquo;"
+msgstr " &ldquo;%s&rdquo; felcímkézett oldalak"
 
 #: templates/follow/form.html:9
 #, python-format
@@ -2094,10 +2111,6 @@ msgstr "Nem található"
 msgid "Item not found"
 msgstr "Ez nem található"
 
-#: themes/sapling/templates/site/add_page_area.html:7
-msgid "Name of page"
-msgstr "Az oldal neve"
-
 #: themes/sapling/templates/site/base.html:168
 msgid ""
 "\n"
@@ -2129,7 +2142,7 @@ msgid ""
 "rel=\"license\" href=\"http://creativecommons.org/licenses/by/4.0/\" "
 "target=\"_blank\">Creative Commons Attribution License</a>. See <a "
 "href=\"https://localwiki.org/main/Copyrights\">Copyrights</a>.</p>"
-msgstr "<p>\nEgyéb kivételektől eltekintve, ez a tartalom a <a rel=\"license\" href=\"http://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">Creative Commons Attribution License</a> szerint védett. Lásd<a href=\"https://localwiki.org/main/Copyrights\">Szerzői jogok</a>.</p>"
+msgstr "<p>\nHa másként nincs jelölve, az oldal tartalma a <a rel=\"license\" href=\"http://creativecommons.org/licenses/by/4.0/\" target=\"_blank\">Creative Commons Attribution License</a> szerint védett. Lásd a <a href=\"https://localwiki.org/main/Copyrights\">Szerzői jogokat</a>.</p>"
 
 #: themes/sapling/templates/site/common_nav.html:13
 #: themes/sapling/templates/site/nav.html:5
@@ -2202,14 +2215,6 @@ msgstr "Engedélyek"
 #: users/admin.py:19
 msgid "Important dates"
 msgstr "Fontos dátumok"
-
-#: users/auth.py:34
-msgid "algorithm"
-msgstr "algoritmus"
-
-#: users/auth.py:35
-msgid "hash"
-msgstr "azonosító címke"
 
 #: users/forms.py:13
 msgid "Only these users"
@@ -2377,26 +2382,26 @@ msgid ""
 msgstr "Anonim felhasználók nem hajthatják végre ezt a műveletet. Kérlek, <a href=\"/Users/login/\">jelentkezz be</a>."
 
 #: utils/templates/utils/history/form.html:18
-msgid "revert"
-msgstr "visszaállítás"
+msgid "restore"
+msgstr "tárolás"
 
-#: versionutils/diff/diffutils.py:114 versionutils/diff/diffutils.py:224
-#: versionutils/diff/diffutils.py:316 versionutils/diff/diffutils.py:336
-#: versionutils/diff/diffutils.py:402 versionutils/diff/diffutils.py:419
-#: versionutils/diff/diffutils.py:524
+#: versionutils/diff/diffutils.py:115 versionutils/diff/diffutils.py:225
+#: versionutils/diff/diffutils.py:317 versionutils/diff/diffutils.py:337
+#: versionutils/diff/diffutils.py:403 versionutils/diff/diffutils.py:420
+#: versionutils/diff/diffutils.py:525
 msgid "No differences found"
 msgstr "Nincs eltérés"
 
-#: versionutils/diff/diffutils.py:559 versionutils/diff/diffutils.py:569
-#: versionutils/diff/diffutils.py:582 versionutils/diff/diffutils.py:592
+#: versionutils/diff/diffutils.py:560 versionutils/diff/diffutils.py:570
+#: versionutils/diff/diffutils.py:583 versionutils/diff/diffutils.py:593
 msgid "Stayed the same"
 msgstr "Ugyanaz maradt"
 
-#: versionutils/diff/diffutils.py:562 versionutils/diff/diffutils.py:574
+#: versionutils/diff/diffutils.py:563 versionutils/diff/diffutils.py:575
 msgid "Removed"
 msgstr "Törölve"
 
-#: versionutils/diff/diffutils.py:585 versionutils/diff/diffutils.py:597
+#: versionutils/diff/diffutils.py:586 versionutils/diff/diffutils.py:598
 #: versionutils/versioning/constants.py:14
 msgid "Added"
 msgstr "Hozzáadva"
@@ -2422,8 +2427,8 @@ msgid ""
 msgstr "Valaki már módosította, de a te változtatásaiddal sikeresen összevontuk."
 
 #: versionutils/templates/versionutils/revert_form.html:12
-msgid "Revert"
-msgstr "Visszaállítás"
+msgid "Restore"
+msgstr "Tárolás"
 
 #: versionutils/templates/versionutils/history/form.html:8
 #: versionutils/templates/versionutils/history/form.html:15
@@ -2483,8 +2488,8 @@ msgid "Don't log this change"
 msgstr "Változás naplózás nélkül"
 
 #: versionutils/versioning/forms.py:60
-msgid "Reason for revert"
-msgstr "Visszaállítás indoka"
+msgid "Reason for restoring"
+msgstr "Tárolás indoklása"
 
 #: versionutils/versioning/forms.py:61
 msgid "Permanently remove newer versions"
@@ -2500,5 +2505,5 @@ msgstr "Sikeresen törölve."
 
 #: versionutils/versioning/views.py:156
 #, python-format
-msgid "Reverted to version %s."
-msgstr "A %s verzió visszaállítása"
+msgid "Restored version %s."
+msgstr "Tárolt verziók: %s."

@@ -12,10 +12,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-22 02:00-0600\n"
-"PO-Revision-Date: 2015-01-22 08:09+0000\n"
+"POT-Creation-Date: 2015-04-07 23:15-0500\n"
+"PO-Revision-Date: 2015-04-08 04:17+0000\n"
 "Last-Translator: Philip Neustrom <philip@localwiki.org>\n"
-"Language-Team: German (http://www.transifex.com/projects/p/localwiki/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/localwiki/localwiki/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -65,7 +65,7 @@ msgid "All LocalWiki"
 msgstr "Gesamtes LocalWiki"
 
 #: activity/templates/activity/all_activity_index.html:36
-#: activity/templates/activity/followed_activity_index.html:42
+#: activity/templates/activity/followed_activity_index.html:46
 #: activity/templates/activity/user_activity_index.html:38
 #, python-format
 msgid ""
@@ -87,6 +87,14 @@ msgstr "Willkommen bei LocalWiki! Wie geht es weiter?"
 msgid "Explore LocalWiki communities"
 msgstr "Erkunde LocalWiki Communities"
 
+#: activity/templates/activity/followed_activity_index.html:33
+#: activity/templates/activity/followed_activity_index.html:41
+msgid ""
+"Follow pages, regions and people when you see <div "
+"class=\"follow_item\"><div class=\"follow little button\"><span "
+"class=\"text\"></span></div></div> Then activity will show up here!"
+msgstr ""
+
 #: activity/templates/activity/followed_activity_index.html:34
 msgid "Create a new LocalWiki region"
 msgstr "Erstelle eine neuen LocalWiki-Region"
@@ -94,13 +102,6 @@ msgstr "Erstelle eine neuen LocalWiki-Region"
 #: activity/templates/activity/followed_activity_index.html:35
 msgid "Follow <strong>@localwiki</strong> on Twitter"
 msgstr "Folge <strong>@localwiki</strong> auf Twitter"
-
-#: activity/templates/activity/followed_activity_index.html:44
-#, python-format
-msgid ""
-"Want to see <strong><a href=\"%(all_activity_url)s\">all activity across "
-"LocalWiki</a>?</strong>"
-msgstr "Willst du <strong><a href=\"%(all_activity_url)s\">alle Aktivitäten auf LocalWiki</a> sehen?</strong>"
 
 #: activity/templates/activity/followed_activity_page.html:22
 #, python-format
@@ -166,8 +167,8 @@ msgstr "Änderungen"
 #: activity/templates/activity/followed_activity_page.html:69
 #: activity/templates/activity/index_page.html:31
 #, python-format
-msgid "Reverted to version from %(version_date_timesince)s ago"
-msgstr "Zurückgesetzt auf Version von vor %(version_date_timesince)s"
+msgid "Restored version from %(version_date_timesince)s ago"
+msgstr ""
 
 #: activity/templates/activity/followed_activity_page.html:75
 #: activity/templates/activity/index_page.html:37
@@ -299,8 +300,8 @@ msgstr "Diesen Post betrachten"
 #: blog/templates/blog/post_archive.html:20
 #: blog/templates/blog/post_detail.html:20
 #: maps/templates/maps/mapdata_detail.html:36
-#: maps/templates/maps/mapdata_diff.html:63
-#: maps/templates/maps/mapdata_diff.html:68
+#: maps/templates/maps/mapdata_diff.html:65
+#: maps/templates/maps/mapdata_diff.html:70
 #: redirects/templates/redirects/redirect_diff.html:44
 #: redirects/templates/redirects/redirect_diff.html:49
 #: tags/templates/tags/pagetagset_diff.html:38
@@ -389,19 +390,19 @@ msgid ""
 "version. Please view the current version of this page instead."
 msgstr "Du kannst nur auf der aktuellen Version der Seite kommentieren, nicht auf einer älteren Version. Schau dir bitte stattdessen die aktuelle Version der Seite an."
 
-#: dashboard/views.py:194 dashboard/views.py:207
+#: dashboard/views.py:205 dashboard/views.py:218
 msgid "pages"
 msgstr "Seiten"
 
-#: dashboard/views.py:195 dashboard/views.py:210
+#: dashboard/views.py:206 dashboard/views.py:221
 msgid "maps"
 msgstr "Karten"
 
-#: dashboard/views.py:196 dashboard/views.py:213
+#: dashboard/views.py:207 dashboard/views.py:224
 msgid "files"
 msgstr "Dateien"
 
-#: dashboard/views.py:198 dashboard/views.py:216
+#: dashboard/views.py:209 dashboard/views.py:227
 msgid "redirects"
 msgstr "Weiterleitungen"
 
@@ -435,34 +436,34 @@ msgstr "Karten"
 msgid "Redirects"
 msgstr "Weiterleitungen"
 
-#: dashboard/templates/dashboard/index.html:29
+#: dashboard/templates/dashboard/index.html:30
 #: dashboard/templates/dashboard/render.html:8
 msgid "Users"
 msgstr "Benutzer"
 
-#: dashboard/templates/dashboard/index.html:34
+#: dashboard/templates/dashboard/index.html:36
 #: dashboard/templates/dashboard/render.html:13
 msgid "Growth over time"
 msgstr "Verlauf des Wachstums"
 
-#: dashboard/templates/dashboard/index.html:36
-#: dashboard/templates/dashboard/index.html:46
-#: dashboard/templates/dashboard/index.html:56
-#: dashboard/templates/dashboard/index.html:66
+#: dashboard/templates/dashboard/index.html:38
+#: dashboard/templates/dashboard/index.html:48
+#: dashboard/templates/dashboard/index.html:58
+#: dashboard/templates/dashboard/index.html:69
 msgid "Generating graph..."
 msgstr "Generierung des Graphen..."
 
-#: dashboard/templates/dashboard/index.html:44
+#: dashboard/templates/dashboard/index.html:46
 #: dashboard/templates/dashboard/render.html:20
 msgid "Edits over time"
 msgstr "Verlauf der Änderungen"
 
-#: dashboard/templates/dashboard/index.html:54
+#: dashboard/templates/dashboard/index.html:56
 #: dashboard/templates/dashboard/render.html:27
 msgid "Page content growth over time"
 msgstr "Verlauf des Seiteninhaltswachstums"
 
-#: dashboard/templates/dashboard/index.html:64
+#: dashboard/templates/dashboard/index.html:67
 #: dashboard/templates/dashboard/render.html:34
 msgid "Users registered over time"
 msgstr "Verlauf der registrierten Benutzer"
@@ -529,32 +530,32 @@ msgstr "Cover-Foto aktualisiert!"
 msgid "region"
 msgstr "Region"
 
-#: frontpage/templates/frontpage/base.html:60
+#: frontpage/templates/frontpage/base.html:62
 #, python-format
 msgid "Welcome to the %(region_name)s LocalWiki!"
 msgstr "Willkommen auf dem %(region_name)s LocalWiki!"
 
-#: frontpage/templates/frontpage/base.html:61
+#: frontpage/templates/frontpage/base.html:63
 #, python-format
 msgid "A website about %(region_name)s that <em>anyone</em> can edit"
 msgstr "Eine Webseite über %(region_name)s die <em>jeder</em> bearbeiten kann"
 
-#: frontpage/templates/frontpage/base.html:63
+#: frontpage/templates/frontpage/base.html:65
 msgid ""
 "\n"
 "        I want to make a page about <span class=\"searchbox\"><input type=\"text\" name=\"q\" value=\"\"><input type=\"submit\" value=\"Search or create page\"></span>\n"
 "        "
 msgstr "\n        Erstelle eine Seite über <span class=\"searchbox\"><input type=\"text\" name=\"q\" value=\"\"><input type=\"submit\" value=\"Suche oder erstelle Seite\"></span>\n        "
 
-#: frontpage/templates/frontpage/base.html:84
+#: frontpage/templates/frontpage/base.html:86
 msgid "Change cover"
 msgstr "Cover ändern"
 
-#: frontpage/templates/frontpage/base.html:86
+#: frontpage/templates/frontpage/base.html:88
 msgid "Save cover"
 msgstr "Cover speichern"
 
-#: frontpage/templates/frontpage/base.html:109
+#: frontpage/templates/frontpage/base.html:111
 #: pages/templates/pages/page_detail.html:53
 #: users/templates/users/user_page.html:37
 #, python-format
@@ -563,7 +564,7 @@ msgid ""
 "          (%(date)s by %(user_link)s)"
 msgstr "Version %(version_number)s\n(%(date)s von %(user_link)s)"
 
-#: frontpage/templates/frontpage/base.html:119
+#: frontpage/templates/frontpage/base.html:121
 #: maps/templates/maps/nearby_pages.html:44
 #: pages/templates/pages/page_detail.html:62
 #: search/templates/search/global_search.html:17
@@ -574,25 +575,25 @@ msgstr "Version %(version_number)s\n(%(date)s von %(user_link)s)"
 msgid "View"
 msgstr "Ansicht"
 
-#: frontpage/templates/frontpage/base.html:125
+#: frontpage/templates/frontpage/base.html:127
 msgid "Some interesting pages"
 msgstr "Einige interessante Seiten"
 
-#: frontpage/templates/frontpage/base.html:134
+#: frontpage/templates/frontpage/base.html:136
 msgid "Explore more pages"
 msgstr "Mehr Seiten erkunden"
 
-#: frontpage/templates/frontpage/base.html:138
+#: frontpage/templates/frontpage/base.html:140
 msgid "There are no pages yet.  Add some!"
 msgstr "Es sind noch keine Seiten vorhanden. Füge eine hinzu!"
 
-#: frontpage/templates/frontpage/base.html:139
+#: frontpage/templates/frontpage/base.html:141
 #: themes/sapling/templates/site/add_page_area.html:5
 #: themes/sapling/templates/site/add_page_area.html:9
 msgid "Add a new page"
 msgstr "Eine neue Seite hinzufügen"
 
-#: frontpage/templates/frontpage/base.html:147
+#: frontpage/templates/frontpage/base.html:149
 msgid "Explore nearby regions"
 msgstr "Regionen in der Nähe erkunden"
 
@@ -890,7 +891,7 @@ msgstr "<a href=\"%(map_url)s\">Karte</a> für Markierung \"<a href=\"%(page_tag
 msgid "Map for tag \"<a href=\"%(page_tag_url)s\">%(tag_name)s</a>\""
 msgstr "Übersicht für den tag \"<a href=\"%(page_tag_url)s\">}%(tag_name)s</a>\""
 
-#: maps/views.py:387 pages/views.py:222
+#: maps/views.py:387 pages/views.py:244
 #, python-format
 msgid "<p>What do you know about %s?</p>"
 msgstr "<p>Was wissen Sie über %s?</p>"
@@ -952,8 +953,8 @@ msgid "Map for"
 msgstr "Karte für"
 
 #: maps/templates/maps/mapdata_detail.html:35
-#: maps/templates/maps/mapdata_diff.html:62
-#: maps/templates/maps/mapdata_diff.html:67
+#: maps/templates/maps/mapdata_diff.html:64
+#: maps/templates/maps/mapdata_diff.html:69
 #: redirects/templates/redirects/redirect_diff.html:43
 #: redirects/templates/redirects/redirect_diff.html:48
 #: tags/templates/tags/pagetagset_diff.html:37
@@ -980,22 +981,22 @@ msgid ""
 "        "
 msgstr "\nBeigesteuert von <span class=\"contributor_list\">%(contributors_html)s</span>"
 
-#: maps/templates/maps/mapdata_diff.html:52
+#: maps/templates/maps/mapdata_diff.html:54
 msgid "Differences for map on"
 msgstr "Unterschiede in Karte für"
 
-#: maps/templates/maps/mapdata_diff.html:53
+#: maps/templates/maps/mapdata_diff.html:55
 #, python-format
 msgid "Differences for <a href=\"%(maps_global)s\">Map</a>"
 msgstr "Unterschiede für <a href=\"%(maps_global)s\">Karte</a>"
 
-#: maps/templates/maps/mapdata_diff.html:73
+#: maps/templates/maps/mapdata_diff.html:75
 #: pages/templates/pages/page_diff.html:57
 #: tags/templates/tags/pagetagset_diff.html:48
 msgid "Deletions are marked like this"
 msgstr "Löschungen sind so markiert"
 
-#: maps/templates/maps/mapdata_diff.html:76
+#: maps/templates/maps/mapdata_diff.html:78
 #: pages/templates/pages/page_diff.html:60
 #: tags/templates/tags/pagetagset_diff.html:51
 msgid "Additions are marked like this"
@@ -1132,11 +1133,11 @@ msgstr "Ungültiger Einbettungs-Code"
 msgid "Search or create page"
 msgstr "Seite suchen oder erstellen"
 
-#: pages/signals.py:19
+#: pages/signals.py:20
 msgid "Redirect created"
 msgstr "Weiterleitung erstellt"
 
-#: pages/signals.py:25
+#: pages/signals.py:26
 msgid "Page created"
 msgstr "Seite erstellt"
 
@@ -1179,33 +1180,38 @@ msgstr "Ich habe gerade %(page)s auf @localwiki bearbeitet! %(page_url)s"
 msgid "Tell the world about this page:"
 msgstr "Erzähle der Welt von dieser Seite:"
 
-#: pages/views.py:437
+#: pages/views.py:236 tags/forms.py:118 tags/views.py:381
+#, python-format
+msgid "added %(name)s %(added)s."
+msgstr ""
+
+#: pages/views.py:459
 msgid "You must provide a page name when creating a page."
 msgstr "Du musst einen Seitennamen angeben um eine Seite zu erstellen."
 
-#: pages/views.py:518
+#: pages/views.py:540
 msgid "A file with this name already exists"
 msgstr "Eine Datei mit diesem Namen existiert bereits"
 
 #. Translators: This is for the page rename form.
-#: pages/views.py:532
+#: pages/views.py:554
 msgid "New page name"
 msgstr "Neuer Seitenname"
 
-#: pages/views.py:533 versionutils/versioning/forms.py:18
+#: pages/views.py:555 versionutils/versioning/forms.py:18
 msgid "Comment"
 msgstr "Kommentar"
 
-#: pages/views.py:569
+#: pages/views.py:591
 #, python-format
 msgid "Page renamed to \"%s\""
 msgstr "Seite umbenannt in \"%s\""
 
-#: pages/views.py:581
+#: pages/views.py:603
 msgid "Move to region (short name)"
 msgstr "Zur Region (Kurzname) wechseln"
 
-#: pages/views.py:607
+#: pages/views.py:629
 #, python-format
 msgid ""
 "Page moved to <a href=\"%(page_url)s\">%(page_name)s</a> on <a "
@@ -1576,14 +1582,14 @@ msgstr "Ein sehr kurzer Name für diese Region welcher in URLs erscheinen wird, 
 msgid "Region already has pages in it"
 msgstr "Region hat bereits Seiten"
 
-#: regions/views.py:36
+#: regions/views.py:37
 #, python-format
 msgid ""
 "<p>Region \"%s\" not found. Would you like to <a href=\"%s\" "
 "rel=\"nofollow\">create it</a>?</p>"
 msgstr "<p>Region \"%s\" nicht gefunden. Möchtest du sie <a href=\"%s\" rel=\"nofollow\">erstellen</a>?</p>"
 
-#: regions/views.py:71
+#: regions/views.py:72
 msgid ""
 "You've created a new LocalWiki region! We've set you up as an admin for this"
 " region. Learn more about <a "
@@ -1592,41 +1598,41 @@ msgid ""
 msgstr "Du hasst eine neuen LocalWiki-Region erstellt. Du bist nun Administrator für diesen Abschnitt. Erfahre hier mehr über <a href=\"http://localwiki.net/main/Local_Adminship_Hub\" target=\"_blank\">LocalWiki-Administratorrechte</a>."
 
 #. Translators: Keep under < 100 characters
-#: regions/views.py:77
+#: regions/views.py:78
 #, python-format
 msgid ""
 "Help me bring LocalWiki to %(region_name)s! I've just started this here: "
 "%(region_url)s"
 msgstr "Hilf mir, LocalWiki nach %(region_name)s zu bringen! Ich habe gerade das hier angefangen: %(region_url)s"
 
-#: regions/views.py:82
+#: regions/views.py:83
 msgid "Let the world know you're starting to build something beautiful:"
 msgstr "Zeige der Welt, dass du damit beginnst, etwas Schönes zu erschaffen."
 
-#: regions/views.py:125
+#: regions/views.py:126
 #, python-format
 msgid "Region '%s' was deleted."
 msgstr "Die Region '%s' wurde gelöscht."
 
-#: regions/views.py:150 utils/views.py:176 utils/views.py:238
+#: regions/views.py:151 utils/views.py:176 utils/views.py:238
 msgid "Sorry, you are not allowed to perform this action."
 msgstr "Du bist nicht berechtigt, diese Aktion durchzuführen."
 
-#: regions/views.py:338
+#: regions/views.py:371
 msgid ""
 "There was a problem with the map area you drew. Please re-draw it and try "
 "again."
 msgstr "Beim Kartenbereich, den du gezeichnet hast, gibt es ein Problem. Bitte zeichne den Bereich noch einmal und versuche es dann erneut."
 
-#: regions/views.py:404
+#: regions/views.py:438
 msgid "Settings updated!"
 msgstr "Einstellungen aktualisiert!"
 
-#: regions/views.py:429
+#: regions/views.py:463
 msgid "Region admins updated!"
 msgstr "Regionale Administratoren aktualisiert!"
 
-#: regions/views.py:450
+#: regions/views.py:484
 msgid "Banned users updated."
 msgstr "Gesperrte Benutzer aktualisiert."
 
@@ -1853,13 +1859,6 @@ msgid_plural "removed %(count)i %(name)s."
 msgstr[0] "%(count)i %(name)s entfernt."
 msgstr[1] "%(count)i %(name)s entfernt."
 
-#: tags/forms.py:118
-#, python-format
-msgid "added %(name)s %(added)s."
-msgid_plural "added %(name)s %(added)s."
-msgstr[0] "%(name)s %(added)s hinzugefügt."
-msgstr[1] "%(name)s %(added)s hinzugefügt."
-
 #: tags/forms.py:127
 #, python-format
 msgid "added %(count)i %(name)s."
@@ -1887,7 +1886,7 @@ msgstr "Tag"
 msgid "Tags"
 msgstr "Tags"
 
-#: tags/views.py:170
+#: tags/views.py:171
 #, python-format
 msgid "<p>No pages tagged \"%s\".</p>"
 msgstr "<p>Keine Seiten mit \"%s\" markiert.</p>"
@@ -1947,10 +1946,25 @@ msgstr "Als Wolke"
 msgid "There are no tags. Add some!"
 msgstr "Es sind keine Tags vorhanden. Füge welche hinzu!"
 
-#: tags/templates/tags/tagged_list_snippet.html:30
+#: tags/templates/tags/tagged_list_snippet.html:31
+#, python-format
+msgid "Add new \"%(tag_name)s\""
+msgstr ""
+
+#: tags/templates/tags/tagged_list_snippet.html:33
+#: themes/sapling/templates/site/add_page_area.html:7
+msgid "Name of page"
+msgstr "Name der Seite"
+
+#: tags/templates/tags/tagged_list_snippet.html:41
 #, python-format
 msgid "There are no pages with the tag \"%(tag_name)s\"."
 msgstr "Es gibt keine Seiten mit dem Tag \"%(tag_name)s\"."
+
+#: tags/templatetags/tags_tags.py:52
+#, python-format
+msgid "Pages tagged &ldquo;%s&rdquo;"
+msgstr ""
 
 #: templates/follow/form.html:9
 #, python-format
@@ -2095,10 +2109,6 @@ msgstr "Nicht gefunden"
 msgid "Item not found"
 msgstr "Gegenstand nicht gefunden"
 
-#: themes/sapling/templates/site/add_page_area.html:7
-msgid "Name of page"
-msgstr "Name der Seite"
-
 #: themes/sapling/templates/site/base.html:168
 msgid ""
 "\n"
@@ -2203,14 +2213,6 @@ msgstr "Berechtigungen"
 #: users/admin.py:19
 msgid "Important dates"
 msgstr "Wichtige Daten"
-
-#: users/auth.py:34
-msgid "algorithm"
-msgstr "Algorithmus"
-
-#: users/auth.py:35
-msgid "hash"
-msgstr "Hash"
 
 #: users/forms.py:13
 msgid "Only these users"
@@ -2378,26 +2380,26 @@ msgid ""
 msgstr "Anonyme Benutzer dürfen diese Aktion nicht ausführen. Bitte <a href=\"/Users/login/\">melde dich an</a>."
 
 #: utils/templates/utils/history/form.html:18
-msgid "revert"
-msgstr "wiederherstellen"
+msgid "restore"
+msgstr ""
 
-#: versionutils/diff/diffutils.py:114 versionutils/diff/diffutils.py:224
-#: versionutils/diff/diffutils.py:316 versionutils/diff/diffutils.py:336
-#: versionutils/diff/diffutils.py:402 versionutils/diff/diffutils.py:419
-#: versionutils/diff/diffutils.py:524
+#: versionutils/diff/diffutils.py:115 versionutils/diff/diffutils.py:225
+#: versionutils/diff/diffutils.py:317 versionutils/diff/diffutils.py:337
+#: versionutils/diff/diffutils.py:403 versionutils/diff/diffutils.py:420
+#: versionutils/diff/diffutils.py:525
 msgid "No differences found"
 msgstr "Keine Unterschiede gefunden"
 
-#: versionutils/diff/diffutils.py:559 versionutils/diff/diffutils.py:569
-#: versionutils/diff/diffutils.py:582 versionutils/diff/diffutils.py:592
+#: versionutils/diff/diffutils.py:560 versionutils/diff/diffutils.py:570
+#: versionutils/diff/diffutils.py:583 versionutils/diff/diffutils.py:593
 msgid "Stayed the same"
 msgstr "Blieb unverändert"
 
-#: versionutils/diff/diffutils.py:562 versionutils/diff/diffutils.py:574
+#: versionutils/diff/diffutils.py:563 versionutils/diff/diffutils.py:575
 msgid "Removed"
 msgstr "Entfernt"
 
-#: versionutils/diff/diffutils.py:585 versionutils/diff/diffutils.py:597
+#: versionutils/diff/diffutils.py:586 versionutils/diff/diffutils.py:598
 #: versionutils/versioning/constants.py:14
 msgid "Added"
 msgstr "Hinzugefügt"
@@ -2423,8 +2425,8 @@ msgid ""
 msgstr "Jemand anderes hat für Dich Änderungen vorgenommen, aber Deine Änderungen wurden erfolgreich vereinigt."
 
 #: versionutils/templates/versionutils/revert_form.html:12
-msgid "Revert"
-msgstr "Zurücksetzen"
+msgid "Restore"
+msgstr ""
 
 #: versionutils/templates/versionutils/history/form.html:8
 #: versionutils/templates/versionutils/history/form.html:15
@@ -2484,8 +2486,8 @@ msgid "Don't log this change"
 msgstr "Diese Änderung nicht protokollieren."
 
 #: versionutils/versioning/forms.py:60
-msgid "Reason for revert"
-msgstr "Grund für Zurücksetzung"
+msgid "Reason for restoring"
+msgstr ""
 
 #: versionutils/versioning/forms.py:61
 msgid "Permanently remove newer versions"
@@ -2501,5 +2503,5 @@ msgstr "Erfolgreich gelöscht!"
 
 #: versionutils/versioning/views.py:156
 #, python-format
-msgid "Reverted to version %s."
-msgstr "Zurückgesetzt auf Version %s."
+msgid "Restored version %s."
+msgstr ""

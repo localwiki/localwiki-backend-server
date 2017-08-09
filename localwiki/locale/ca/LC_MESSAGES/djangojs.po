@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: localwiki\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-19 00:26-0600\n"
+"POT-Creation-Date: 2015-04-07 23:16-0500\n"
 "PO-Revision-Date: 2015-01-19 06:27+0000\n"
 "Last-Translator: Philip Neustrom <philip@localwiki.org>\n"
-"Language-Team: Catalan (http://www.transifex.com/projects/p/localwiki/language/ca/)\n"
+"Language-Team: Catalan (http://www.transifex.com/localwiki/localwiki/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,29 +32,29 @@ msgstr ""
 msgid "Comments:"
 msgstr ""
 
-#: maps/static/olwidget/js/sapling_utils.js:211
+#: maps/static/olwidget/js/sapling_utils.js:290
 msgid " for "
 msgstr "per"
 
-#: maps/static/olwidget/js/sapling_utils.js:256
+#: maps/static/olwidget/js/sapling_utils.js:335
 msgid ""
 "You've made changes but haven't saved.  Are you sure you want to leave this "
 "page?"
 msgstr "No has guardat els teus canvis. Segur que vols sortir de la pàgina?"
 
-#: maps/static/olwidget/js/sapling_utils.js:367
+#: maps/static/olwidget/js/sapling_utils.js:446
 msgid "Things on this map:"
 msgstr "Coses en el mapa:"
 
-#: maps/static/olwidget/js/sapling_utils.js:383
+#: maps/static/olwidget/js/sapling_utils.js:462
 msgid "Things inside "
 msgstr "Coses adins"
 
-#: maps/static/olwidget/js/sapling_utils.js:397
+#: maps/static/olwidget/js/sapling_utils.js:476
 msgid "Things near "
 msgstr "Coses a prop"
 
-#: maps/static/olwidget/js/sapling_utils.js:635
+#: maps/static/olwidget/js/sapling_utils.js:714
 msgid "Add marker for lat, lon \"{{ value }}\""
 msgstr ""
 
