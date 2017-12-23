@@ -17,28 +17,27 @@
     </tr>
   </tfoot>
   <tbody>
-{% for version in versions_list %}
-{% with version.version_info as version_info %}
-  <tr>
-    <td>
-      <label for="id_version_{{ forloop.revcounter }}">
-      <span class="version_checkbox">
-        {% if version_info.type_verbose == 'Deleted' or version_info.type == 'Reverted/Deleted' or version_info.type == 'Reverted/Deleted via cascade' %}
-        &nbsp;
-        {% else %}
-        <input type="checkbox" name="version" value="{{ forloop.revcounter }}" id="id_version_{{ forloop.revcounter }}"/>
-      {% endif %}
-      </span>
-      {# We assume a standard url format here. #}
-      <a href="{{ forloop.revcounter }}" class="date" rel="nofollow">{{ version_info.date }}</a>
-      {% block type_and_by %}
-      <span class="type_and_by">{% with version_info.type_verbose as type %}{% trans type %}{% endwith %} {% trans "by" %} {{ version_info.user_link|safe }}</span>
-      {% endblock %}
-      <span class="comment">{% block version_info_extras %}{% endblock %}</span>
-      </label>
-    </td>
-  </tr>
-{% endwith %}
+
+{% for vitem in versions_list %}
+   <tr>
+     <td>
+       <label for="id_version_{{ forloop.revcounter }}">
+       <span class="version_checkbox">
+         {% if vitem.version_info.type_verbose == 'Deleted' or vitem.version_info.type == 'Reverted/Deleted' or vitem.version_info.type == 'Reverted/Deleted via cascade' %}
+         &nbsp;
+         {% else %}
+         <input type="checkbox" name="version" value="{{ forloop.revcounter }}" id="id_version_{{ forloop.revcounter }}"/>
+       {% endif %}
+       </span>
+       {# We assume a standard url format here. #}
+       <a href="{{ forloop.revcounter }}" class="date" rel="nofollow">{{ vitem.version_info.date }}</a>
+       {% block type_and_by %}
+       <span class="type_and_by">{% with vitem.version_info.type_verbose as type %}{% trans type %}{% endwith %} {% trans "by" %} {{ vitem.version_info.user_link|safe }}</span>
+       {% endblock %}
+       <span class="comment">{% block version_info_extras %}{% endblock %}</span>
+       </label>
+     </td>
+   </tr>
 {% endfor %}
   </tbody>
 </table>
