@@ -40,6 +40,10 @@
 {{ form.subscribed.errors }}
 {{ form.subscribed }} {{ form.subscribed.label_tag }}
 </p>
+<p>
+{{ form.captcha.errors }}
+{{ form.captcha }}
+</p>
 <input type="submit" value="{% trans 'login' %}" />
 </form>
 {% endblock %}
