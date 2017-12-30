@@ -235,7 +235,7 @@ MIDDLEWARE_CLASSES = (
     'django_hosts.middleware.HostsMiddlewareResponse',
 )
 
-XSESSION_FILENAME = '_utils/xsession_loader.js'
+XSESSION_FILENAME = '_utils/xsession_loader'
 SESSION_COOKIE_AGE = 15552000  # 6 months
 
 PASSWORD_HASHERS = (
