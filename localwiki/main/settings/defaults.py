@@ -138,9 +138,7 @@ USERS_DEFAULT_PERMISSIONS = {'auth.group':
                                      ['delete_redirect', 'redirects', 'redirect'],
                                     ]
                                  },
-                                  'permissions':
-                                    []
-                                 },
+                                 {'name': USERS_ANONYMOUS_GROUP, 'permissions': []}
                                 ]
                             }
 USER_REGION_ADMIN_CAN_MANAGE = [
@@ -299,6 +297,7 @@ INSTALLED_APPS = (
     'endless_pagination',
     'follow',
     'block_ip',
+    'captcha',
     'static_sitemaps',
     'djcelery_email',
     'actstream',

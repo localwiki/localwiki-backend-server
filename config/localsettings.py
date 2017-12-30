@@ -51,6 +51,10 @@ VARNISH_SECRET = '{{ varnish_secret }}'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+RECAPTCHA_PUBLIC_KEY = '{{ recaptcha_public_key }}'
+RECAPTCHA_PRIVATE_KEY = '{{ recaptcha_private_key }}'
+NOCAPTCHA = True
+
 # For Sentry error logging
 RAVEN_CONFIG = {
     'dsn': '{{ sentry_secret_url }}',

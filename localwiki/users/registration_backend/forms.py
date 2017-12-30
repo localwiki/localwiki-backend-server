@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.utils.safestring import mark_safe
 
+from captcha.fields import ReCaptchaField
+
 from users.models import UserProfile
 
 attrs_dict = {'class': 'required'}
@@ -50,6 +52,7 @@ class RegistrationForm(forms.Form):
 
     subscribed = UserProfile._meta.get_field('subscribed').formfield()
 
+    captcha = ReCaptchaField()
 
     def clean_username(self):
         """
