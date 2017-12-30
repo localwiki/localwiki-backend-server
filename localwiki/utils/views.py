@@ -12,6 +12,7 @@ from django.views.generic import View, RedirectView, TemplateView
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.core.cache import cache
+from django.utils.http import urlquote
 from django.views.decorators.csrf import requires_csrf_token
 from django.template import (Context, loader, TemplateDoesNotExist)
 from django.utils.cache import get_max_age
@@ -174,8 +175,7 @@ class PermissionRequiredMixin(object):
     """
     permission = None
     forbidden_message = _('Sorry, you are not allowed to perform this action.')
-    forbidden_message_anon = _('Anonymous users may not perform this action. '
-                              'Please <a href="/Users/login/">log in</a>.')
+    forbidden_message_anon = _('Please <a class="button" style="margin-left: 0.25em; display: inline-block; float: none;" href="/Users/login/?next=%(next_url)s">log in</a> or <a class="button" style="margin-left: 0.25em; display: inline-block; float: none;" href="/Users/_register/?next=%(next_url)s">create an account</a>')
 
     def get_protected_object(self):
         """
@@ -217,7 +217,7 @@ class PermissionRequiredMixin(object):
                 if request.user.is_authenticated():
                     msg = self.forbidden_message
                 else:
-                    msg = self.forbidden_message_anon
+                    msg = self.forbidden_message_anon % {'next_url': urlquote(request.get_host() + request.path)}
                 html = render_to_string('403.html', {'message': msg},
                                        RequestContext(request))
                 return HttpResponseForbidden(html)

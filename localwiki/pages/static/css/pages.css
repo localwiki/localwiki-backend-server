@@ -201,8 +201,8 @@ a[href*='localwiki.org']:before, a[href*='localwiki.org']:before,
 a[href*='localhost']:before, a[href*='localhost']:before {
     content: none;
 }
-a[href*='localwiki.org'], a[href*='localwiki.org']
-a[href*='localhost'], a[href*='localhost'] {
+a[href*='localwiki.org']:not(.button), a[href*='localwiki.org']:not(.button)
+a[href*='localhost']:not(.button), a[href*='localhost']:not(.button) {
     padding-left: 0;
 }
 
