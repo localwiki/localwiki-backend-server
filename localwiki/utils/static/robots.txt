@@ -2,6 +2,9 @@ User-agent: *
 Disallow: /*/_history/*
 
 User-agent: *
+Disallow: /_activity/users/*
+
+User-agent: *
 Disallow: /*/_edit$
 
 User-agent: *
